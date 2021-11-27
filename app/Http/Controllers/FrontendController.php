@@ -11,7 +11,7 @@ class FrontendController extends Controller
     {
         $coming_soon = true;
         $years = 2021;
-        $months = 11;
+        $months = 12;
         $dates = 12;
         $date_coming_soon = $years.'/'.$months.'/'.$dates;
         $date_now = date("Y/m/d");
