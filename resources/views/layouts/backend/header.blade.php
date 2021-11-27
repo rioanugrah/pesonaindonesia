@@ -52,7 +52,11 @@
           <div class="p-1">
             <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
               <div class="me-3">
+                @if(auth()->user()->profile != null)
                 <img class="wd-30 ht-30 rounded-circle" src="{{ url(auth()->user()->profile) }}" alt="userr">
+                @else
+                <img class="wd-30 ht-30 rounded-circle" src="" alt="userr">
+                @endif
               </div>
               <div class="d-flex justify-content-between flex-grow-1">
                 <div class="me-4">
@@ -64,7 +68,11 @@
             </a>
             <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
               <div class="me-3">
+                @if(auth()->user()->profile != null)
                 <img class="wd-30 ht-30 rounded-circle" src="{{ url(auth()->user()->profile) }}" alt="userr">
+                @else
+                <img class="wd-30 ht-30 rounded-circle" src="" alt="userr">
+                @endif
               </div>
               <div class="d-flex justify-content-between flex-grow-1">
                 <div class="me-4">
@@ -76,7 +84,11 @@
             </a>
             <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
               <div class="me-3">
+                @if(auth()->user()->profile != null)
                 <img class="wd-30 ht-30 rounded-circle" src="{{ url(auth()->user()->profile) }}" alt="userr">
+                @else
+                <img class="wd-30 ht-30 rounded-circle" src="" alt="userr">
+                @endif
               </div>
               <div class="d-flex justify-content-between flex-grow-1">
                 <div class="me-4">
@@ -88,7 +100,11 @@
             </a>
             <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
               <div class="me-3">
+                @if(auth()->user()->profile != null)
                 <img class="wd-30 ht-30 rounded-circle" src="{{ url(auth()->user()->profile) }}" alt="userr">
+                @else
+                <img class="wd-30 ht-30 rounded-circle" src="" alt="userr">
+                @endif
               </div>
               <div class="d-flex justify-content-between flex-grow-1">
                 <div class="me-4">
@@ -100,7 +116,11 @@
             </a>
             <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
               <div class="me-3">
+                @if(auth()->user()->profile != null)
                 <img class="wd-30 ht-30 rounded-circle" src="{{ url(auth()->user()->profile) }}" alt="userr">
+                @else
+                <img class="wd-30 ht-30 rounded-circle" src="" alt="userr">
+                @endif
               </div>
               <div class="d-flex justify-content-between flex-grow-1">
                 <div class="me-4">
@@ -149,7 +169,11 @@
             </a>
             <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
               <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                @if(auth()->user()->profile != null)
                 <img class="wd-30 ht-30 rounded-circle" src="{{ url(auth()->user()->profile) }}" alt="userr">
+                @else
+                <img class="wd-30 ht-30 rounded-circle" src="" alt="userr">
+                @endif
               </div>
               <div class="flex-grow-1 me-2">
                 <p>New customer registered</p>
@@ -182,12 +206,20 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          @if(auth()->user()->profile != null)
           <img class="wd-30 ht-30 rounded-circle" src="{{ url(auth()->user()->profile) }}" alt="profile">
+          @else
+          <img class="wd-30 ht-30 rounded-circle" src="" alt="profile">
+          @endif
         </a>
         <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
           <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
             <div class="mb-3">
+              @if(auth()->user()->profile != null)
               <img class="wd-80 ht-80 rounded-circle" src="{{ url(auth()->user()->profile) }}" alt="">
+              @else
+              <img class="wd-80 ht-80 rounded-circle" src="" alt="">
+              @endif
             </div>
             <div class="text-center">
               <p class="tx-16 fw-bolder">{{ auth()->user()->name }}</p>
