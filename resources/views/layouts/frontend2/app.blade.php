@@ -67,7 +67,8 @@
 @yield('content')
 
 {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> --}}
-<a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float back-to-top" target="_blank">
+{{-- <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float back-to-top" target="_blank"> --}}
+<a href="https://api.whatsapp.com/send?phone={{ $whatsapp['nomor'] }}&text={{ $whatsapp['message'] }}" class="float back-to-top" target="_blank">
 <i class="fa fa-whatsapp my-float"></i>
 </a>
 <a href="#" class="back-to-top1 d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

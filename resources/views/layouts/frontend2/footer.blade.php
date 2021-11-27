@@ -26,10 +26,10 @@
             <div class="col-lg-3 col-md-4">
                 <h5>KONTAK KAMI</h5>
                 <address>
-                    PESONA PLESIRAN INDONESIA.<br>
+                    PESONA PLESIRAN INDONESIA<br>
                     30 Aarhus, Denmark<br>
                     Phone: 123 456 7890<br>
-                    <a href="#">info@pesonaindonesia.com</a>
+                    <a href="mailto:info@pesonaindonesia.com">info@pesonaindonesia.com</a>
                 </address>
             </div>
             <div class="col-12">
@@ -41,7 +41,7 @@
                 </ul>
             </div>
             <!-- end col-12 -->
-            <div class="col-12"> <span class="copyright">&copy; PESONA PLESIRAN INDONESIA</span> </div>
+            <div class="col-12"> <span class="copyright">&copy; {{ date('Y') }} PESONA PLESIRAN INDONESIA</span> </div>
             <!-- end col-12 -->
         </div>
         <!-- end row -->

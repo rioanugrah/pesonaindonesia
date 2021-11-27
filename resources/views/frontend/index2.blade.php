@@ -411,25 +411,24 @@
                             maecenas vitae urna aced magna facilisis porttitor.</p>
                     </div>
                     <!-- end col-12 -->
-                    <div class="col-lg-3 col-md-6">
+                    {{-- <div class="col-lg-3 col-md-6">
                         <div class="contact-box">
                             <figure><img src="frontend/assets2/images/contact-icon1.png" alt="Image"></figure>
                             <h5>MEDIA CONTACT</h5>
                             <span style="font-size: 14px"><a href="#">media@plesiranindonesia.com</a></span>
                         </div>
-                        <!-- end contact-box -->
-                    </div>
+                    </div> --}}
                     <!-- end col-3 -->
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <div class="contact-box">
                             <figure><img src="frontend/assets2/images/contact-icon2.png" alt="Image"></figure>
-                            <h5>SUPPORT CONTACT</h5>
-                            <span style="font-size: 14px"><a href="#">support@plesiranindonesia.com</a></span>
+                            <h5>CONTACT</h5>
+                            <span style="font-size: 14px"><a href="mailto:{{ $informasi }}">{{ $informasi }}</a></span>
                         </div>
                         <!-- end contact-box -->
                     </div>
                     <!-- end col-3 -->
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <div class="contact-box">
                             <figure><img src="frontend/assets2/images/contact-icon3.png" alt="Image"></figure>
                             <h5>PHONE</h5>
@@ -438,7 +437,7 @@
                         <!-- end contact-box -->
                     </div>
                     <!-- end col-3 -->
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <div class="contact-box no-border">
                             <figure><img src="frontend/assets2/images/contact-icon4.png" alt="Image"></figure>
                             <h5>SOCIAL</h5>

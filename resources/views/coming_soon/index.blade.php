@@ -7,7 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Pesona Plesiran Indonesia">
     <meta name="author" content="Pesona Plesiran Indonesia">
-    <title>Coming Soon</title>
+    <title>Coming Soon | Pesona Plesiran Indonesia</title>
+
+    <link href="{{ url('frontend/assets2/images/favicon.png') }}" rel="shortcut icon">
 
     <link rel="stylesheet" href="{{ url('coming_soon/css/base.css') }}">
     <link rel="stylesheet" href="{{ url('coming_soon/css/vendor.css') }}">
@@ -28,7 +30,7 @@
     <header class="s-header">
 
         <div class="header-logo">
-            <a class="site-logo" href="index.html">
+            <a class="site-logo" href="{{ url('/') }}">
                 <img src="{{ url('coming_soon/images/logo_plesiran.png') }}" alt="Homepage">
             </a>
         </div>
