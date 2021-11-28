@@ -10,9 +10,9 @@ class FrontendController extends Controller
     public function index()
     {
         $coming_soon = true;
-        $years = 2021;
-        $months = 12;
-        $dates = 12;
+        $years = 2022;
+        $months = 01;
+        $dates = 01;
         $date_coming_soon = $years.'/'.$months.'/'.$dates;
         $date_now = date("Y/m/d");
         // dd($date);
@@ -27,7 +27,7 @@ class FrontendController extends Controller
                 [ 'image' => 'team01.png', 'name' => 'Tri Joko P.', 'posisi' => 'Chief Marketing Officer' ],
                 [ 'image' => 'faqeh.jpeg', 'name' => 'Muhammad Arsys', 'posisi' => 'Chief Marketing Officer' ],
                 [ 'image' => 'rio.jpg', 'name' => 'Rio Anugrah A.S A.Md.T', 'posisi' => 'Chief Technology Officer' ],
-                [ 'image' => 'team01.png', 'name' => 'Kemal Izzuddin A.Md.T', 'posisi' => 'Chief Technology Officer' ],
+                // [ 'image' => 'team01.png', 'name' => 'Kemal Izzuddin A.Md.T', 'posisi' => 'Chief Technology Officer' ],
                 [ 'image' => 'tasya.jpg', 'name' => 'Tasya Ayu S.', 'posisi' => 'Chief Finance Officer' ],
             ];
             // $data['wallpaper'] = [
