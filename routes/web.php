@@ -54,5 +54,6 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::any('/{page?}',function(){
-    return View::make('pages.error.404');
+    return View::make('layouts.status.404');
+    // return View::make('pages.error.404');
 })->where('page','.*');
