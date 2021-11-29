@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
     Route::get('tiket_wisata/{id}/{created_at}', 'TiketWisataController@cekTiket')->name('detail_tiket_wisata')->middleware('verified');
+
+    
 });
 
 Route::any('/{page?}',function(){
