@@ -20,13 +20,13 @@
 </head>
 
 <body id="top">
-    <div id="preloader">
+    {{-- <div id="preloader">
         <div id="loader" class="dots-fade">
             <div></div>
             <div></div>
             <div></div>
         </div>
-    </div>
+    </div> --}}
     <header class="s-header">
 
         <div class="header-logo">

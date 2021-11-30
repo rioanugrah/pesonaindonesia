@@ -95,7 +95,7 @@
                         <div class="card-body p-4">
                             <div class="">
                                 <div class="text-center">
-                                    <a href="index.html" class="">
+                                    <a href="{{ url('/') }}" class="">
                                         <img src="{{ asset('backend/assets/images/logo-light.png') }}" alt="" height="24" class="auth-logo logo-dark mx-auto">
                                         <img src="{{ asset('backend/assets/images/logo-light.png') }}" alt="" height="24" class="auth-logo logo-light mx-auto">
                                     </a>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Pesona Plesiran Indonesia</title>
-<meta name="author" content="GFX Partner">
+<meta name="author" content="Pesona Plesiran Indonesia">
 <meta name="description" content="Pesona Plesiran Indonesia">
 <meta name="keywords" content="tour, ice, trip, travel, agency, life, vacation, treking, boat, walking, climbing, transition, svg, html, css">
 
