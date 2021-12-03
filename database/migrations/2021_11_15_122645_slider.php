@@ -15,7 +15,7 @@ class Slider extends Migration
     {
         Schema::create('slider', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_slider');
+            $table->string('nama_slider')->nullable();
             $table->string('image');
             $table->enum('status', array('Y','N'));
             $table->timestamps();

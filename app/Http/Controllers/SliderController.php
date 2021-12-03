@@ -48,14 +48,13 @@ class SliderController extends Controller
     public function simpan(Request $request)
     {
         $rules = [
-            'nama_slider'  => 'required',
-            'image'  => 'required',
+            'image'  => 'required|file|max:2048',
             'status'  => 'required',
         ];
  
         $messages = [
-            'nama_slider.required'  => 'Nama Slider wajib diisi.',
             'image.required'  => 'Upload Gambar wajib diisi.',
+            'image.max'  => 'Upload Gambar Max 2MB.',
             'status.required'   => 'Status wajib diisi.',
         ];
 

@@ -1,22 +1,20 @@
 <!doctype html>
-<html lang="zxx">
+<html lang="id">
 <head>
-<!-- META TAGS -->
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Pesona Plesiran Indonesia</title>
 <meta name="author" content="Pesona Plesiran Indonesia">
 <meta name="description" content="Pesona Plesiran Indonesia">
-<meta name="keywords" content="tour, ice, trip, travel, agency, life, vacation, treking, boat, walking, climbing, transition, svg, html, css">
+<meta name="keywords" content="tour, ice, trip, travel, agency, life, vacation, treking, boat, walking, climbing, transition, svg, html, css, wisata, pesona, plesiran, indonesia">
 
-<!-- FAVICON FILES -->
-{{-- <link href="frontend/assets2/ico/apple-touch-icon-144-precomposed.png" rel="apple-touch-icon" sizes="144x144">
-<link href="frontend/assets2/ico/apple-touch-icon-114-precomposed.png" rel="apple-touch-icon" sizes="114x114">
-<link href="frontend/assets2/ico/apple-touch-icon-72-precomposed.png" rel="apple-touch-icon" sizes="72x72">
-<link href="frontend/assets2/ico/apple-touch-icon-57-precomposed.png" rel="apple-touch-icon"> --}}
+<link href="{{ url('frontend/assets2/images/favicon.png') }}" rel="apple-touch-icon" sizes="144x144">
+<link href="{{ url('frontend/assets2/images/favicon.png') }}" rel="apple-touch-icon" sizes="114x114">
+<link href="{{ url('frontend/assets2/images/favicon.png') }}" rel="apple-touch-icon" sizes="72x72">
+<link href="{{ url('frontend/assets2/images/favicon.png') }}" rel="apple-touch-icon">
 <link href="{{ url('frontend/assets2/images/favicon.png') }}" rel="shortcut icon">
 
-<!-- CSS FILES -->
 <link rel="stylesheet" href="{{ url('frontend/assets2/css/swiper.min.css') }}">
 <link rel="stylesheet" href="{{ url('frontend/assets2/css/daterangepicker.css') }}">
 <link rel="stylesheet" href="{{ url('frontend/assets2/css/font-awesome.css') }}">
@@ -66,8 +64,6 @@
 <!-- end header -->
 @yield('content')
 
-{{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> --}}
-{{-- <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float back-to-top" target="_blank"> --}}
 <a href="https://api.whatsapp.com/send?phone={{ $whatsapp['nomor'] }}&text={{ $whatsapp['message'] }}" class="float back-to-top" target="_blank">
 <i class="fa fa-whatsapp my-float"></i>
 </a>
@@ -75,7 +71,6 @@
 
 @include('layouts.frontend2.footer')
 
-<!-- JS FILES -->
 <script
   src="{{ url('frontend/assets2/js/jquery-3.4.1.min.js') }}"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -83,7 +78,6 @@
 <script src="{{ url('frontend/assets2/js/moment.min.js') }}"></script>
 <script src="{{ url('frontend/assets2/js/daterangepicker.min.js') }}"></script>
 <script>
-	// PRELOADER
 		(function($) {
 			$(window).on("load", function(){
 				$("body").addClass("page-loaded");
@@ -97,6 +91,5 @@
 <script src="{{ url('frontend/assets2/js/wow.min.js') }}"></script>
 <script src="{{ url('frontend/assets2/js/odometer.min.js') }}"></script>
 <script src="{{ url('frontend/assets2/js/scripts.js') }}"></script>
-
 </body>
 </html>

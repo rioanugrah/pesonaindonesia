@@ -26,6 +26,17 @@ Route::get('ticket', function(){
 
 Auth::routes(['verify' => true]);
 
+Route::domain('{account}.localhost.com')->group(function () {
+    // Route::get('user/{id}', function ($account, $id) {
+    //     //
+    // });
+    Route::get('/', function($account){
+        return response()->json([
+            'status' => true
+        ]);
+    });
+});
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
     Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
@@ -52,9 +63,39 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
     Route::get('tiket_wisata/{id}/{created_at}', 'TiketWisataController@cekTiket')->name('detail_tiket_wisata')->middleware('verified');
     
-    Route::get('chat', 'ChatController@chat')->name('chat')->middleware('verified');
+    // Route::get('chat', 'ChatController@chat')->name('chat')->middleware('verified');
     
 });
+
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
+//     Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
+//     Route::post('wisata/simpan', 'WisataController@simpan')->name('wisata.simpan')->middleware('verified');
+    
+//     Route::get('cooperation', 'CooperationController@index')->name('cooperation')->middleware('verified');
+//     Route::post('cooperation/simpan', 'CooperationController@simpan')->name('cooperation.simpan')->middleware('verified');
+//     Route::post('cooperation/kab_kota', 'CooperationController@select_kab_kota')->middleware('verified');
+    
+//     Route::get('pengguna', 'UsersController@index')->name('pengguna')->middleware('verified');
+//     Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');
+//     Route::get('pengguna/delete/{id}', 'UsersController@delete')->middleware('verified');
+//     Route::post('pengguna/simpan', 'UsersController@simpan')->name('pengguna.simpan')->middleware('verified');
+//     Route::post('pengguna/update', 'UsersController@update')->name('pengguna.update')->middleware('verified');
+    
+//     Route::get('roles', 'RolesController@index')->name('roles')->middleware('verified');
+
+//     Route::get('status', 'StatusController@index')->name('status')->middleware('verified');
+//     Route::post('status/simpan', 'StatusController@simpan')->name('status.simpan')->middleware('verified');
+    
+//     Route::get('slider', 'SliderController@index')->name('slider')->middleware('verified');
+//     Route::post('slider/simpan', 'SliderController@simpan')->name('slider.simpan')->middleware('verified');
+    
+//     Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
+//     Route::get('tiket_wisata/{id}/{created_at}', 'TiketWisataController@cekTiket')->name('detail_tiket_wisata')->middleware('verified');
+    
+//     // Route::get('chat', 'ChatController@chat')->name('chat')->middleware('verified');
+    
+// });
 
 Route::any('/{page?}',function(){
     return View::make('layouts.status.404');

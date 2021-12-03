@@ -18,9 +18,35 @@
        {{-- <span class="search-btn"><i class="fa fa-search"></i></span> --}}
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">BERANDA</a></li>
+          <li class="nav-item dropdown"><a class="nav-link">PROFILE</a>
+            <ul class="dropdown-menu">
+              <li><a>Identitas Perusahaan</a>
+                <ul class="sub-dropdown-menu">
+                  <li><a href="#team">Tentang Kami</a></li>
+                  <li><a href="#">Struktur Organisasi</a></li>
+                  <li><a href="#visi">Visi & Misi</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link" href="#team">TEAM KAMI</a></li>
-          <li class="nav-item"><a class="nav-link" href="#tentang">TENTANG KAMI</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">KONTAK KAMI</a></li>
+          @guest
+          <li class="nav-item"><a class="nav-link btn btn-secondary" href="{{ route('login') }}">LOGIN</a></li>
+            @if (Route::has('register'))
+              <li class="nav-item"><a class="nav-link btn btn-secondary" style="text-transform: uppercase" href="javascript::void">Register</a></li>
+            @endif
+          @else
+          <li class="nav-item dropdown"><a class="nav-link" style="text-transform: uppercase">{{ auth()->user()->name }}</a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">Logout</a></li>
+            </ul>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf
+            </form>
+          </li>
+          @endguest
         </ul>
       </nav>
       <!-- end navbar -->

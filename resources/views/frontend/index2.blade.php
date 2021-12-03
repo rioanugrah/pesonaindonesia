@@ -423,7 +423,7 @@
                         <div class="contact-box">
                             <figure><img src="frontend/assets2/images/contact-icon2.png" alt="Image"></figure>
                             <h5>CONTACT</h5>
-                            <span style="font-size: 14px"><a href="mailto:{{ $informasi }}">{{ $informasi }}</a></span>
+                            <span style="font-size: 14px"><a href="mailto:contact@plesiranindonesia.com">contact@plesiranindonesia.com</a></span>
                         </div>
                         <!-- end contact-box -->
                     </div>

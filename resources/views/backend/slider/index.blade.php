@@ -53,6 +53,16 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        function disable() {
+            // document.getElementById("input_slider").disabled = true;
+            // $("#input_slider").hide();
+            document.getElementById("button").style.display = "none";
+        }
+        function enable() {
+            document.getElementById("input_slider").style.display = "block";
+            document.getElementById("button").style.display = "none";
+        }
         var table = $('.datatable').DataTable({
             processing: true,
             serverSide: true,
@@ -113,6 +123,8 @@
                         });
                         this.reset();
                         table.ajax.reload();
+                        document.getElementById("button").style.display = "block";
+                        document.getElementById("input_slider").style.display = "none";
                     }else{
                         iziToast.error({
                             title: result.success,

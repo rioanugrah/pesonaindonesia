@@ -24,8 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['total_users'] = User::count();
-        return view('backend.home.index', $data);
+        if(auth()->user()->role != 2){
+            return redirect('/');
+        }else{
+            $data['total_users'] = User::count();
+            return view('backend.home.index', $data);
+        }
         // return view('backend.home.home2');
     }
 }

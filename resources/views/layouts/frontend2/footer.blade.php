@@ -1,35 +1,16 @@
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-4">
-                <h5>TENTANG KAMI</h5>
-                <ul class="footer-menu">
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Training & Safety</a></li>
-                    <li><a href="#">Our Guides</a></li>
-                    <li><a href="#">Office Team</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-            <!-- end col-3 -->
-            <div class="col-lg-3 col-md-4">
-                <h5>USEFUL INFO</h5>
-                <ul class="footer-menu">
-                    <li><a href="#">Pickup Locations</a></li>
-                    <li><a href="#">Terms of Payment</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Difficulty Levels</a></li>
-                    <li><a href="#">Where to Find Us</a></li>
-                </ul>
-            </div>
-            <!-- end col-3 -->
-            <div class="col-lg-3 col-md-4">
+            <div class="col-lg-12 col-md-12">
                 <h5>KONTAK KAMI</h5>
                 <address>
-                    PESONA PLESIRAN INDONESIA<br>
-                    30 Aarhus, Denmark<br>
+                    {{-- PESONA PLESIRAN INDONESIA<br> --}}
+                    <img src="{{ url('frontend/assets2/images/logo-light.png') }}" alt="Image"><br>
+                    Jl. Raya Tlogowaru No. 3, Tlogowaru
+                    Kec. Kedungkandang, Kota Malang
+                    Jawa Timur<br>
                     Phone: 123 456 7890<br>
-                    <a href="mailto:info@pesonaindonesia.com">info@pesonaindonesia.com</a>
+                    <a href="mailto:contact@pesonaindonesia.com">contact@pesonaindonesia.com</a>
                 </address>
             </div>
             <div class="col-12">
