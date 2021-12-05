@@ -1,7 +1,14 @@
+@if (Request::url() == url('/'))
 <header class="header-denmark">
+@else
+<header class="header-int">
+@endif
     <div class="container">
+      @if (Request::url() == url('/'))
       <nav class="navbar"> <a href="{{ url('/') }}" class="navbar-brand"><img src="{{ url('frontend/assets2/images/logo_plesiran.png') }}" alt="Image"></a>
-  
+      @else
+      <nav class="navbar dark"> <a href="{{ url('/') }}" class="navbar-brand"><img src="{{ url('frontend/assets2/images/logo_plesiran_grey.png') }}" alt="Image"></a>
+      @endif
           <div class="menu-btn">
             <div class="menu-circle-wrap">
               <div class="wave"></div>
@@ -18,19 +25,19 @@
        {{-- <span class="search-btn"><i class="fa fa-search"></i></span> --}}
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">BERANDA</a></li>
-          <li class="nav-item dropdown"><a class="nav-link">PROFILE</a>
+          <li class="nav-item dropdown"><a class="nav-link">PROFIL</a>
             <ul class="dropdown-menu">
               <li><a>Identitas Perusahaan</a>
                 <ul class="sub-dropdown-menu">
-                  <li><a href="#team">Tentang Kami</a></li>
-                  <li><a href="#">Struktur Organisasi</a></li>
-                  <li><a href="#visi">Visi & Misi</a></li>
+                  <li><a href="{{ route('tentang_kami') }}">Tentang Kami</a></li>
+                  <li><a href="{{ route('struktur') }}">Struktur Organisasi</a></li>
+                  <li><a href="{{ route('visi_misi') }}">Visi & Misi</a></li>
                 </ul>
               </li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="#team">TEAM KAMI</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">KONTAK KAMI</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('tim_kami') }}">TIM KAMI</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('kontak') }}">KONTAK KAMI</a></li>
           @guest
           <li class="nav-item"><a class="nav-link btn btn-secondary" href="{{ route('login') }}">LOGIN</a></li>
             @if (Route::has('register'))
@@ -39,6 +46,7 @@
           @else
           <li class="nav-item dropdown"><a class="nav-link" style="text-transform: uppercase">{{ auth()->user()->name }}</a>
             <ul class="dropdown-menu">
+              <li><a href="{{ url('home') }}">Home</a></li>
               <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">Logout</a></li>
             </ul>
@@ -52,24 +60,8 @@
       <!-- end navbar -->
     </div>
     <!-- end container -->
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        @foreach ($wallpaper as $wp)
-        <div class="swiper-slide">
-         <div class="slide-inner bg-image" data-background="frontend/assets2/images/wallpaper/{{ $wp['image'] }}">
-          <div class="container">
-            <h2 data-swiper-parallax="-300">{{ $wp['nama_slider'] }}</h2>
-            {{-- <a href="#" class="link" data-swiper-parallax="-100"><img src="{{ $wp['arrow'] }}" alt="Image">LEARN MORE</a> --}}
-          </div>
-          <!-- end container -->
-          </div>
-          <!-- end slide-inner -->
-        </div>
-        @endforeach
-      </div>
-      <!-- end swiper-wrapper -->
-      {{-- <div class="swiper-custom-pagination"></div> --}}
-      <!-- end swiper-custom-pagination -->
-    </div>
+    @if (Request::url() == url('/'))
+    @yield('slider')
+    @endif
     <!-- end swiper-container -->
   </header>

@@ -7,6 +7,23 @@ use App\Models\Slider;
 use \Carbon\Carbon;
 class FrontendController extends Controller
 {
+    public function __construct()
+    {
+        $this->whatsapp = ['nomor' => '-', 'message' => 'Hello'];
+        $this->teams = [
+            [ 'image' => 'team01.png', 'name' => 'Prasetyo Aji Prakoso S.E, M.M', 'posisi' => 'Advisor' ],
+            [ 'image' => 'wahid.jpg', 'name' => 'Nurwahid A.', 'posisi' => 'Chief Executive Officer' ],
+            [ 'image' => 'dani.jpg', 'name' => 'Fabrizio D.K', 'posisi' => 'Chief Operational Officer' ],
+            [ 'image' => 'bima.jpg', 'name' => 'Bima Gani S. A.Md', 'posisi' => 'Chief Operational Officer' ],
+            [ 'image' => 'adit.jpg', 'name' => 'Rio Ramadhan', 'posisi' => 'Chief Operational Officer' ],
+            [ 'image' => 'joko.jpg', 'name' => 'Tri Joko P.', 'posisi' => 'Chief Marketing Officer' ],
+            [ 'image' => 'faqeh.jpeg', 'name' => 'Muhammad Arsys', 'posisi' => 'Chief Marketing Officer' ],
+            [ 'image' => 'rio.jpg', 'name' => 'Rio Anugrah A.S A.Md.T', 'posisi' => 'Chief Technology Officer' ],
+            // [ 'image' => 'team01.png', 'name' => 'Kemal Izzuddin A.Md.T', 'posisi' => 'Chief Technology Officer' ],
+            [ 'image' => 'tasya.jpg', 'name' => 'Tasya Ayu S.', 'posisi' => 'Chief Finance Officer' ],
+        ];
+        // protected $data['whatsapp'] = ['nomor' => '-', 'message' => 'Hello'];
+    }
     public function index()
     {
         $coming_soon = true;
@@ -18,18 +35,7 @@ class FrontendController extends Controller
         // dd($date);
 
         if($date_now >= $date_coming_soon){
-            $data['teams'] = [
-                [ 'image' => 'team01.png', 'name' => 'Prasetyo Aji Prakoso S.E, M.M', 'posisi' => 'Advisor' ],
-                [ 'image' => 'wahid.jpg', 'name' => 'Nurwahid A.', 'posisi' => 'Chief Executive Officer' ],
-                [ 'image' => 'dani.jpg', 'name' => 'Fabrizio D.K', 'posisi' => 'Chief Operational Officer' ],
-                [ 'image' => 'bima.jpg', 'name' => 'Bima Gani S. A.Md', 'posisi' => 'Chief Operational Officer' ],
-                [ 'image' => 'adit.jpg', 'name' => 'Rio Ramadhan', 'posisi' => 'Chief Operational Officer' ],
-                [ 'image' => 'team01.png', 'name' => 'Tri Joko P.', 'posisi' => 'Chief Marketing Officer' ],
-                [ 'image' => 'faqeh.jpeg', 'name' => 'Muhammad Arsys', 'posisi' => 'Chief Marketing Officer' ],
-                [ 'image' => 'rio.jpg', 'name' => 'Rio Anugrah A.S A.Md.T', 'posisi' => 'Chief Technology Officer' ],
-                // [ 'image' => 'team01.png', 'name' => 'Kemal Izzuddin A.Md.T', 'posisi' => 'Chief Technology Officer' ],
-                [ 'image' => 'tasya.jpg', 'name' => 'Tasya Ayu S.', 'posisi' => 'Chief Finance Officer' ],
-            ];
+            $data['teams'] = $this->teams;
             // $data['wallpaper'] = [
             //     ['image' => 'frontend/assets2/images/wallpaper/bromo.png', 'arrow' => 'frontend/assets2/images/arrow-link.png', 'title' => 'Wisata Gunung Bromo'],
             //     ['image' => 'frontend/assets2/images/wallpaper/batubengkung.png', 'arrow' => 'frontend/assets2/images/arrow-link.png', 'title' => 'Wisata Pantai Batu Bengkung'],
@@ -73,5 +79,33 @@ class FrontendController extends Controller
         //     $data['date'] = 12;
         //     return view('coming_soon.index', $data);
         // }
+    }
+
+    public function struktur()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        return view('frontend.struktur_organisasi', $data);
+    }
+    public function tentang_kami()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        return view('frontend.tentang_kami', $data);
+    }
+    public function visimisi()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        return view('frontend.visi_misi', $data);
+    }
+    public function tim()
+    {
+        $data['teams'] = $this->teams;
+        $data['whatsapp'] = $this->whatsapp;
+        return view('frontend.tim_kami', $data);
+    }
+
+    public function kontak()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        return view('frontend.kontak', $data);
     }
 }

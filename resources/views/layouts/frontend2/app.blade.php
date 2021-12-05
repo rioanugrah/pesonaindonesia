@@ -4,7 +4,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Pesona Plesiran Indonesia</title>
+<title>@yield('title')</title>
 <meta name="author" content="Pesona Plesiran Indonesia">
 <meta name="description" content="Pesona Plesiran Indonesia">
 <meta name="keywords" content="tour, ice, trip, travel, agency, life, vacation, treking, boat, walking, climbing, transition, svg, html, css, wisata, pesona, plesiran, indonesia">
@@ -64,10 +64,17 @@
 <!-- end header -->
 @yield('content')
 
+@if (Request::url() == url('/'))
 <a href="https://api.whatsapp.com/send?phone={{ $whatsapp['nomor'] }}&text={{ $whatsapp['message'] }}" class="float back-to-top" target="_blank">
 <i class="fa fa-whatsapp my-float"></i>
 </a>
 <a href="#" class="back-to-top1 d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+@else
+<a href="https://api.whatsapp.com/send?phone={{ $whatsapp['nomor'] }}&text={{ $whatsapp['message'] }}" class="float" target="_blank">
+  <i class="fa fa-whatsapp my-float"></i>
+</a>
+<a href="#" class="back-to-top1 d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+@endif
 
 @include('layouts.frontend2.footer')
 

@@ -18,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 //     // return view('welcome');
 // });
 Route::get('/', 'FrontendController@index')->name('frontend');
+Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');
+Route::get('tentang-kami', 'FrontendController@tentang_kami')->name('tentang_kami');
+Route::get('visi-misi', 'FrontendController@visimisi')->name('visi_misi');
+Route::get('tim-kami', 'FrontendController@tim')->name('tim_kami');
+Route::get('kontak', 'FrontendController@kontak')->name('kontak');
 // Route::get('#/wisata', 'FrontendController@index');
 Route::get('ticket', function(){
     return view('backend.ticket.tiket_wisata');
@@ -63,7 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
     Route::get('tiket_wisata/{id}/{created_at}', 'TiketWisataController@cekTiket')->name('detail_tiket_wisata')->middleware('verified');
     
-    // Route::get('chat', 'ChatController@chat')->name('chat')->middleware('verified');
+    Route::get('testing', 'ChatController@chat')->name('chat')->middleware('verified');
     
 });
 

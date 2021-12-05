@@ -1,114 +1,33 @@
 @extends('layouts.frontend2.app')
 
+@section('title')
+    Pesona Plesiran Indonesia
+@endsection
+
+@section('slider')
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            @foreach ($wallpaper as $wp)
+                <div class="swiper-slide">
+                    <div class="slide-inner bg-image"
+                        data-background="frontend/assets2/images/wallpaper/{{ $wp['image'] }}">
+                        <div class="container">
+                            <h2 data-swiper-parallax="-300">{{ $wp['nama_slider'] }}</h2>
+                            {{-- <a href="#" class="link" data-swiper-parallax="-100"><img src="{{ $wp['arrow'] }}" alt="Image">LEARN MORE</a> --}}
+                        </div>
+                        <!-- end container -->
+                    </div>
+                    <!-- end slide-inner -->
+                </div>
+            @endforeach
+            <!-- end swiper-wrapper -->
+            {{-- <div class="swiper-custom-pagination"></div> --}}
+            <!-- end swiper-custom-pagination -->
+        </div>
+    </div>
+@endsection
+
 @section('content')
-    <section class="our-history" id="tentang">
-        <div class="container">
-            <div class="row no-gutters">
-                <div class="col-lg-6">
-                    <div class="section-title">
-                        <h2>Tentang Kami</h2>
-                        <img src="frontend/assets2/images/title-seperator.png" alt="Image">
-                    </div>
-                    <!-- end section-title -->
-                </div>
-                <!-- end col-6 -->
-                <div class="col-lg-6">
-                    <p class="section-desc">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang
-                        menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi,
-                        Destinasi, Restoran Transportasi, Travel dan MICE se Indonesia.</p>
-                </div>
-                <!-- end col-6 -->
-                <div class="col-12">
-                    <div class="wrapper">
-                        <div class="content">
-                            <div class="inner">
-                                <h4>Guidong with Passion Since 1988</h4>
-                                <img src="frontend/assets2/images/title-seperator.png" alt="Image">
-                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. In erat est viverra fringilla
-                                    euismod in fermentum sed augue. Nullam consectetur ligula id elementum hendrerit
-                                    suspendisse potenti. Nulla facilisi sed sque lectus venenatis quam venenatis euntum
-                                    lectus molestie. </p>
-                                <a href="#" class="read-more"><span>READ MORE</span></a>
-                            </div>
-                            <!-- end inner -->
-                        </div>
-                        <!-- end content -->
-                        <figure><img src="frontend/assets2/images/history01.jpg" alt="Image"></figure>
-                    </div>
-                    <!-- end wrapper -->
-                    <div class="wrapper">
-                        <figure><img src="frontend/assets2/images/history02.jpg" alt="Image"></figure>
-                        <div class="content">
-                            <div class="inner">
-                                <h4>The Highest Safety Standards</h4>
-                                <img src="frontend/assets2/images/title-seperator.png" alt="Image">
-                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. In erat est viverra fringilla
-                                    euismod in fermentum sed augue. Nullam consectetur ligula id elementum hendrerit
-                                    suspendisse potenti. Nulla facilisi sed sque lectus venenatis quam venenatis euntum
-                                    lectus molestie. </p>
-                                <a href="#" class="read-more"><span>READ MORE</span></a>
-                            </div>
-                            <!-- end inner -->
-                        </div>
-                        <!-- end content -->
-                    </div>
-                    <!-- end wrapper -->
-                    <div class="wrapper">
-                        <div class="content">
-                            <div class="inner">
-                                <h4>Protecting world’s Environment</h4>
-                                <img src="frontend/assets2/images/title-seperator.png" alt="Image">
-                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. In erat est viverra fringilla
-                                    euismod in fermentum sed augue. Nullam consectetur ligula id elementum hendrerit
-                                    suspendisse potenti. Nulla facilisi sed sque lectus venenatis quam venenatis euntum
-                                    lectus molestie. </p>
-                                <a href="#" class="read-more"><span>READ MORE</span></a>
-                            </div>
-                            <!-- end inner -->
-                        </div>
-                        <!-- end content -->
-                        <figure><img src="frontend/assets2/images/history03.jpg" alt="Image"></figure>
-                    </div>
-                    <!-- end wrapper -->
-                </div>
-                <!-- end col-12 -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-
-    <section class="about-us-desc">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <div class="section-title">
-                        <h2>VISI & MISI</h2>
-                        <img src="frontend/assets2/images/title-seperator.png" alt="Image">
-                    </div>
-                    <!-- end section-title -->
-                </div>
-                <!-- end col-12 -->
-                <div class="col-lg-6">
-                    <h4>Visi</h4>
-                    <span>Menjadi Plesiran Malang sebagai pusat informasi dan reservasi industri pariwisata kreatif berbasis Digital Marketing yang inovatif.</span>
-                </div>
-                <!-- end col-6 -->
-                <div class="col-lg-6">
-                    <h4>Misi</h4>
-                    <ol>
-                        <li style="margin-bottom: 1rem">Memberikan kemudahan dan kenyamanan bagi setiap pelanggan yang membutuhkan informasi dan reservasi untuk kegiatan pariwisata.</li>
-                        <li style="margin-bottom: 1rem">Membuat platform digital marketing yang mudah digunakan oleh pelanggan untuk mengetahui informasi dan reservasi hal-hal yang berhubungan dengan pariwisata.</li>
-                        <li style="margin-bottom: 1rem">Menjalin kerjasama pemasaran dan informasi dengan seluruh industri pariwisata berskala lokal, nasional, dan internasional.</li>
-                    </ol>
-                </div>
-                <!-- end col-6 -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-
     <section class="adventure-activities">
         <div class="container">
             <div class="row">
@@ -248,8 +167,7 @@
                             </div>
                             <!-- end swiper-slide -->
                             <div class="swiper-slide">
-                                <div class="review"> <i class="fa fa-star"></i> <i
-                                        class="fa fa-star"></i>
+                                <div class="review"> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                         class="fa fa-star"></i>
                                     <h4>A truly amazing experience!</h4>
@@ -289,7 +207,8 @@
                 <!-- end col-12 -->
                 <div class="col-lg-4">
                     <div class="blog-post">
-                        <figure class="post-image"> <img src="frontend/assets2/images/blog-thumb01.jpg" alt="Image"> </figure>
+                        <figure class="post-image"> <img src="frontend/assets2/images/blog-thumb01.jpg" alt="Image">
+                        </figure>
                         <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
                             <a href="blog-single.html">
                                 <h3>An Enchanted Ice Cave in Midst of Denmark</h3>
@@ -303,7 +222,8 @@
                 <!-- end col-4  -->
                 <div class="col-lg-4">
                     <div class="blog-post">
-                        <figure class="post-image"> <img src="frontend/assets2/images/blog-thumb02.jpg" alt="Image"> </figure>
+                        <figure class="post-image"> <img src="frontend/assets2/images/blog-thumb02.jpg" alt="Image">
+                        </figure>
                         <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
                             <a href="blog-single.html">
                                 <h3>Laugavegur Trek Classic (Huts) for Camping</h3>
@@ -317,7 +237,8 @@
                 <!-- end col-4  -->
                 <div class="col-lg-4">
                     <div class="blog-post">
-                        <figure class="post-image"> <img src="frontend/assets2/images/blog-thumb03.jpg" alt="Image"> </figure>
+                        <figure class="post-image"> <img src="frontend/assets2/images/blog-thumb03.jpg" alt="Image">
+                        </figure>
                         <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
                             <a href="blog-single.html">
                                 <h3>How to Reach the Peak Without Exhausting</h3>
@@ -354,47 +275,6 @@
         </div>
         <!-- end container -->
     </section>
-    <section class="our-team" id="team" style="padding-top: 2rem">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h2>Team Office</h2>
-                        <img src="frontend/assets2/images/title-seperator.png" alt="Image">
-                    </div>
-                    <!-- end section-title -->
-                </div>
-                <!-- end col-12 -->
-                <div class="col-12">
-                    <ul class="team-list">
-                        @foreach ($teams as $team)
-                            <li>
-                                <div class="team-member">
-                                    <figure><img src="frontend/assets2/images/team/{{ $team['image'] }}" alt="Image">
-                                        <figcaption>
-                                            <h6>{{ $team['name'] }}</h6>
-                                            <span>{{ $team['posisi'] }}</span>
-                                            {{-- <ul class="social-media">
-                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            </ul> --}}
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                                <!-- end team-member -->
-                            </li>
-                        @endforeach
-                        <!-- end li -->
-                    </ul>
-                    <!-- end team-list -->
-                </div>
-                <!-- end col-12 -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
     <section class="contact" id="contact">
         <div class="content">
             <div class="container">
@@ -423,7 +303,8 @@
                         <div class="contact-box">
                             <figure><img src="frontend/assets2/images/contact-icon2.png" alt="Image"></figure>
                             <h5>CONTACT</h5>
-                            <span style="font-size: 14px"><a href="mailto:contact@plesiranindonesia.com">contact@plesiranindonesia.com</a></span>
+                            <span style="font-size: 14px"><a
+                                    href="mailto:contact@plesiranindonesia.com">contact@plesiranindonesia.com</a></span>
                         </div>
                         <!-- end contact-box -->
                     </div>
