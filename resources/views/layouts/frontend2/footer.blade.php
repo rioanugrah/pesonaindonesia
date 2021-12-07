@@ -9,8 +9,8 @@
                     Jl. Raya Tlogowaru No. 3, Tlogowaru
                         Kec. Kedungkandang, Kota Malang
                         Jawa Timur<br>
-                    Phone: 123 456 7890<br>
-                    <a href="mailto:contact@pesonaindonesia.com">contact@pesonaindonesia.com</a>
+                    <i class="fa fa-whatsapp"></i> 123 456 7890<br>
+                    <a href="mailto:contact@pesonaindonesia.com"><i class="fa fa-envelope-o"></i> contact@pesonaindonesia.com</a>
                 </address>
             </div>
             <div class="col-lg-3 col-md-4">
@@ -20,10 +20,14 @@
                     <li><a href="{{ route('tim_kami') }}">Tim Kami</a></li>
                 </ul>
             </div>
-            <div class="col-lg-3 col-md-4">
+            <div class="col-lg-6 col-md-4">
                 <h5>INFORMASI</h5>
+                <ul class="footer-menu">
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Tim Kami</a></li>
+                </ul>
             </div>
-            <div class="col-lg-3 col-md-4">
+            <div class="col-lg-12 col-md-4">
                 <ul class="social-media">
                     <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
                     <li><a href="#"><i class="fa fa-instagram"></i></a></li>
@@ -32,7 +36,7 @@
                 </ul>
             </div>
             <!-- end col-12 -->
-            <div class="col-12"> <span class="copyright">&copy; {{ date('Y') }} PESONA PLESIRAN INDONESIA</span> </div>
+            <div class="col-12"> <span class="copyright">Copyright &copy; {{ date('Y') }} CV PESONA PLESIRAN INDONESIA.</span> </div>
             <!-- end col-12 -->
         </div>
         <!-- end row -->

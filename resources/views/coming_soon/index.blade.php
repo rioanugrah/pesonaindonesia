@@ -11,6 +11,7 @@
 
     <link href="{{ url('frontend/assets2/images/favicon.png') }}" rel="shortcut icon">
 
+    <link rel="stylesheet" href="{{ url('frontend/assets2/css/scroll.css') }}">
     <link rel="stylesheet" href="{{ url('coming_soon/css/base.css') }}">
     <link rel="stylesheet" href="{{ url('coming_soon/css/vendor.css') }}">
     <link rel="stylesheet" href="{{ url('coming_soon/css/main.css') }}">

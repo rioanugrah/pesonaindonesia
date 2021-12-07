@@ -1,5 +1,9 @@
 @extends('layouts.frontend2.app')
 
+@section('title')
+    Tentang Kami
+@endsection
+
 @section('content')
     <section class="about-us-header">
         <div class="container">

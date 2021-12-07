@@ -14,11 +14,11 @@ class FrontendController extends Controller
             [ 'image' => 'team01.png', 'name' => 'Prasetyo Aji Prakoso S.E, M.M', 'posisi' => 'Advisor' ],
             [ 'image' => 'wahid.jpg', 'name' => 'Nurwahid A.', 'posisi' => 'Chief Executive Officer' ],
             [ 'image' => 'dani.jpg', 'name' => 'Fabrizio D.K', 'posisi' => 'Chief Operational Officer' ],
-            [ 'image' => 'bima.jpg', 'name' => 'Bima Gani S. A.Md', 'posisi' => 'Chief Operational Officer' ],
+            [ 'image' => 'bima.jpg', 'name' => 'Bima Gani S, A.Md', 'posisi' => 'Chief Operational Officer' ],
             [ 'image' => 'adit.jpg', 'name' => 'Rio Ramadhan', 'posisi' => 'Chief Operational Officer' ],
             [ 'image' => 'joko.jpg', 'name' => 'Tri Joko P.', 'posisi' => 'Chief Marketing Officer' ],
             [ 'image' => 'faqeh.jpeg', 'name' => 'Muhammad Arsys', 'posisi' => 'Chief Marketing Officer' ],
-            [ 'image' => 'rio.jpg', 'name' => 'Rio Anugrah A.S A.Md.T', 'posisi' => 'Chief Technology Officer' ],
+            [ 'image' => 'rio.jpg', 'name' => 'Rio Anugrah A.S, A.Md.T', 'posisi' => 'Chief Technology Officer' ],
             // [ 'image' => 'team01.png', 'name' => 'Kemal Izzuddin A.Md.T', 'posisi' => 'Chief Technology Officer' ],
             [ 'image' => 'tasya.jpg', 'name' => 'Tasya Ayu S.', 'posisi' => 'Chief Finance Officer' ],
         ];

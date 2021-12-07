@@ -39,10 +39,16 @@
           <li class="nav-item"><a class="nav-link" href="{{ route('tim_kami') }}">TIM KAMI</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('kontak') }}">KONTAK KAMI</a></li>
           @guest
-          <li class="nav-item"><a class="nav-link btn btn-secondary" href="{{ route('login') }}">LOGIN</a></li>
+          <li class="nav-item">
+            <div class="btn-group">
+              <a href="{{ route('login') }}" class="nav-link btn btn-secondary text-white">LOGIN</a>
+              <a href="{{ route('register') }}" class="nav-link btn btn-secondary text-white">REGISTER</a>
+            </div>
+          </li>
+          {{-- <li class="nav-item"><a class="nav-link btn btn-secondary" href="{{ route('login') }}">LOGIN</a></li>
             @if (Route::has('register'))
               <li class="nav-item"><a class="nav-link btn btn-secondary" style="text-transform: uppercase" href="javascript::void">Register</a></li>
-            @endif
+            @endif --}}
           @else
           <li class="nav-item dropdown"><a class="nav-link" style="text-transform: uppercase">{{ auth()->user()->name }}</a>
             <ul class="dropdown-menu">

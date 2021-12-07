@@ -142,7 +142,14 @@
 
 
     // SLIDER
-    var menu = ['WHO WE ARE<span>OUR PASSION</span>', 'NOTHERN LIGHTS<span>SPECIAL OFFER</span>', 'BEST SELLING<span>ICE CLIMBING</span>', 'THE FAMOUS<span>HIKING TRAILS</span>'];
+    // function handleInput(e) {
+    //     data[e.name] = e.value;
+    // }
+    // $('.dataInput').change(function(e) {
+    //     data[e.name] = e.value;
+    // })
+    // var menu = data.fname;
+    var menu = ['NOTHERN LIGHTS<span>SPECIAL OFFER</span>'];
     var interleaveOffset = 0.5;
     var swiperOptions = {
         loop: true,

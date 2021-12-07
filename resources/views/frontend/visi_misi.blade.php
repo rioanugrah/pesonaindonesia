@@ -1,5 +1,9 @@
 @extends('layouts.frontend2.app')
 
+@section('title')
+    Visi & Misi
+@endsection
+
 @section('content')
 <section class="about-us-desc">
     <div class="container">

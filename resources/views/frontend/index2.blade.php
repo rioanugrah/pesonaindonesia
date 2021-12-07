@@ -5,50 +5,43 @@
 @endsection
 
 @section('slider')
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            @foreach ($wallpaper as $wp)
-                <div class="swiper-slide">
-                    <div class="slide-inner bg-image"
-                        data-background="frontend/assets2/images/wallpaper/{{ $wp['image'] }}">
-                        <div class="container">
-                            <h2 data-swiper-parallax="-300">{{ $wp['nama_slider'] }}</h2>
-                            {{-- <a href="#" class="link" data-swiper-parallax="-100"><img src="{{ $wp['arrow'] }}" alt="Image">LEARN MORE</a> --}}
-                        </div>
-                        <!-- end container -->
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        @foreach ($wallpaper as $wp)
+            <div class="swiper-slide">
+                <div class="slide-inner bg-image"
+                    data-background="frontend/assets2/images/wallpaper/{{ $wp['image'] }}">
+                    <div class="container">
+                        <h2 data-swiper-parallax="-300">{{ $wp['nama_slider'] }}</h2>
+                        {{-- <a href="#" class="link" data-swiper-parallax="-100"><img src="{{ $wp['arrow'] }}" alt="Image">LEARN MORE</a> --}}
                     </div>
-                    <!-- end slide-inner -->
                 </div>
-            @endforeach
-            <!-- end swiper-wrapper -->
-            {{-- <div class="swiper-custom-pagination"></div> --}}
-            <!-- end swiper-custom-pagination -->
-        </div>
+            </div>
+        @endforeach
+        <!-- end swiper-wrapper -->
+        <div class="swiper-custom-pagination"></div>
+        <!-- end swiper-custom-pagination -->
     </div>
+</div>
 @endsection
 
 @section('content')
     <section class="adventure-activities">
         <div class="container">
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-6">
                     <div class="section-title">
-                        <h2>Adventure Activities</h2>
+                        <h2>Wisata</h2>
                         <img src="frontend/assets2/images/title-seperator.png" alt="Image">
                     </div>
-                    <!-- end section-title -->
                 </div>
-                <!-- end col-6 -->
-                <!-- end row -->
 
-                <div class="col-lg-5">
+                <div class="col-lg-6">
                     <p class="section-desc">Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus
                         mus. Cras eleifend tellus sed congue consectetur, velit turpis faucibus odio eget volutpat odio
                         lectus eu erat.</p>
                 </div>
-                <!-- end col-6 -->
             </div>
-            <!-- end container -->
             <div class="col-12">
                 <div class="activities-carousel">
                     <div class="swiper-carousel">
@@ -63,7 +56,6 @@
                                 </div>
                             @endforeach
                         </div>
-                        <!-- end  swiper-wrapper -->
                         <div class="swiper-button-prev">
                             <div class="arrow-left"></div>
                         </div>
@@ -71,17 +63,12 @@
                             <div class="arrow-right"></div>
                         </div>
                     </div>
-                    <!-- end swiper-carousel -->
                 </div>
-                <!-- end activities carousel -->
             </div>
-            <!-- end col-12 -->
             <div class="col-12  text-center"> <a href="#" class="site-btn">LOAD MORE</a> </div>
-            <!-- end col-12 -->
         </div>
 
     </section>
-    <!-- end adventure-activities -->
     <section class="reviews">
         <div class="container">
             <div class="row">
@@ -90,9 +77,7 @@
                         <h2>Customer Reviews</h2>
                         <img src="frontend/assets2/images/title-seperator.png" alt="Image">
                     </div>
-                    <!-- end section-title -->
                 </div>
-                <!-- end col-12 -->
                 <div class="col-12">
                     <div class="swiper-reviews">
                         <div class="swiper-wrapper">
@@ -107,9 +92,7 @@
                                     <figure><img src="frontend/assets2/images/guide01.png" alt="Image"></figure>
                                     <small>JACK, USA</small>
                                 </div>
-                                <!-- end review -->
                             </div>
-                            <!-- end swiper-slide -->
                             <div class="swiper-slide">
                                 <div class="review"> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -121,9 +104,7 @@
                                     <figure><img src="frontend/assets2/images/guide02.png" alt="Image"></figure>
                                     <small>KATE, GER</small>
                                 </div>
-                                <!-- end review -->
                             </div>
-                            <!-- end swiper-slide -->
                             <div class="swiper-slide">
                                 <div class="review"> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -135,9 +116,7 @@
                                     <figure><img src="frontend/assets2/images/guide03.png" alt="Image"></figure>
                                     <small>JACK MC'CARTY, USA</small>
                                 </div>
-                                <!-- end review -->
                             </div>
-                            <!-- end swiper-slide -->
                             <div class="swiper-slide">
                                 <div class="review"> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -149,9 +128,7 @@
                                     <figure><img src="frontend/assets2/images/guide04.png" alt="Image"></figure>
                                     <small>JANE, AUS</small>
                                 </div>
-                                <!-- end review -->
                             </div>
-                            <!-- end swiper-slide -->
                             <div class="swiper-slide">
                                 <div class="review"> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -163,9 +140,7 @@
                                     <figure><img src="frontend/assets2/images/guide05.png" alt="Image"></figure>
                                     <small>JACK, USA</small>
                                 </div>
-                                <!-- end review -->
                             </div>
-                            <!-- end swiper-slide -->
                             <div class="swiper-slide">
                                 <div class="review"> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -177,23 +152,14 @@
                                     <figure><img src="frontend/assets2/images/guide06.png" alt="Image"></figure>
                                     <small>KATE, GER</small>
                                 </div>
-                                <!-- end review -->
                             </div>
-                            <!-- end swiper-slide -->
                         </div>
-                        <!-- end swiper-wrapper -->
                         <div class="swiper-pagination"></div>
-                        <!-- end swiper-pagination -->
                     </div>
-                    <!-- end swiper-reviews -->
                 </div>
-                <!-- end col-12-->
             </div>
-            <!-- end row -->
         </div>
-        <!-- end container -->
     </section>
-    <!-- end reviews -->
     <section class="recent-blog">
         <div class="container">
             <div class="row">
@@ -202,9 +168,7 @@
                         <h2>Recent Blog Posts</h2>
                         <img src="frontend/assets2/images/title-seperator.png" alt="Image">
                     </div>
-                    <!-- end section-title -->
                 </div>
-                <!-- end col-12 -->
                 <div class="col-lg-4">
                     <div class="blog-post">
                         <figure class="post-image"> <img src="frontend/assets2/images/blog-thumb01.jpg" alt="Image">
@@ -215,11 +179,8 @@
                             </a>
                             <a href="blog-single.html" class="read-more">READ MORE</a>
                         </div>
-                        <!-- end post-content -->
                     </div>
-                    <!-- end blog-post -->
                 </div>
-                <!-- end col-4  -->
                 <div class="col-lg-4">
                     <div class="blog-post">
                         <figure class="post-image"> <img src="frontend/assets2/images/blog-thumb02.jpg" alt="Image">
@@ -230,11 +191,8 @@
                             </a>
                             <a href="blog-single.html" class="read-more">READ MORE</a>
                         </div>
-                        <!-- end post-content -->
                     </div>
-                    <!-- end blog-post -->
                 </div>
-                <!-- end col-4  -->
                 <div class="col-lg-4">
                     <div class="blog-post">
                         <figure class="post-image"> <img src="frontend/assets2/images/blog-thumb03.jpg" alt="Image">
@@ -245,19 +203,12 @@
                             </a>
                             <a href="blog-single.html" class="read-more">READ MORE</a>
                         </div>
-                        <!-- end post-content -->
                     </div>
-                    <!-- end blog-post -->
                 </div>
-                <!-- end col-4  -->
                 <div class="col-12 text-center"> <a href="#" class="site-btn">VISIT OUR BLOG</a> </div>
-                <!-- end col-12 -->
             </div>
-            <!-- end row -->
         </div>
-        <!-- end container -->
     </section>
-    <!-- end recent-blog -->
     <section class="quote bg-image" data-background="frontend/assets2/images/jatimpark2.jpg">
         <div class="container">
             <div class="row">
@@ -269,76 +220,9 @@
                         fermentum sed augue nullam consectetur ligula id elementum.</p>
                     <a href="#" class="site-btn">LEARN MORE</a>
                 </div>
-                <!-- end col-12 -->
             </div>
-            <!-- end row -->
         </div>
-        <!-- end container -->
     </section>
-    <section class="contact" id="contact">
-        <div class="content">
-            <div class="container">
-                <div class="row no-gutters">
-                    <div class="col-12">
-                        <div class="section-title">
-                            <h2>Office Locations</h2>
-                            <img src="frontend/assets2/images/title-seperator.png" alt="Image">
-                        </div>
-                        <!-- end section-title -->
-                        <p>Pellentesque vestibulum fermentum velit non placerat aecenas in hendrerit justo quisque quis
-                            rhoncus exeget semper semlam at lobortis velit. Vestibulum ante ipsum primis in faucibus orcie
-                            luctus et ultrices posuere cubilia curae ed dignissim leo lorema intum mauris vestibulum et
-                            maecenas vitae urna aced magna facilisis porttitor.</p>
-                    </div>
-                    <!-- end col-12 -->
-                    {{-- <div class="col-lg-3 col-md-6">
-                        <div class="contact-box">
-                            <figure><img src="frontend/assets2/images/contact-icon1.png" alt="Image"></figure>
-                            <h5>MEDIA CONTACT</h5>
-                            <span style="font-size: 14px"><a href="#">media@plesiranindonesia.com</a></span>
-                        </div>
-                    </div> --}}
-                    <!-- end col-3 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="contact-box">
-                            <figure><img src="frontend/assets2/images/contact-icon2.png" alt="Image"></figure>
-                            <h5>CONTACT</h5>
-                            <span style="font-size: 14px"><a
-                                    href="mailto:contact@plesiranindonesia.com">contact@plesiranindonesia.com</a></span>
-                        </div>
-                        <!-- end contact-box -->
-                    </div>
-                    <!-- end col-3 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="contact-box">
-                            <figure><img src="frontend/assets2/images/contact-icon3.png" alt="Image"></figure>
-                            <h5>PHONE</h5>
-                            <span style="font-size: 14px">+123 456 7890</span>
-                        </div>
-                        <!-- end contact-box -->
-                    </div>
-                    <!-- end col-3 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="contact-box no-border">
-                            <figure><img src="frontend/assets2/images/contact-icon4.png" alt="Image"></figure>
-                            <h5>SOCIAL</h5>
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                        <!-- end contact-box -->
-                    </div>
-                    <!-- end col-3 -->
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </div>
-        <!-- end content -->
-    </section>
-    <!-- end contact -->
 @endsection
 
 @section('js')

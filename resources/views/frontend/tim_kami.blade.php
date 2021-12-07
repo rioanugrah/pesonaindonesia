@@ -25,16 +25,17 @@
             <div class="col-12">
                 <ul class="team-list">
                     @foreach ($teams as $team)
-                    <li><div class="team-member">
-                        <figure><img src="{{ asset('frontend/assets2/images/team/'.$team['image']) }}" alt="Image">
-                        <figcaption>
-                            <h6>{{ $team['name'] }}</h6>
-                            <span>{{ $team['posisi'] }}</span>
-                        </figcaption>
-                        </figure>
-                    </div>
-                    @endforeach
+                    <li>
+                        <div class="team-member">
+                            <figure><img src="{{ asset('frontend/assets2/images/team/'.$team['image']) }}" alt="Image">
+                            <figcaption>
+                                <h6>{{ $team['name'] }}</h6>
+                                <span>{{ $team['posisi'] }}</span>
+                            </figcaption>
+                            </figure>
+                        </div>
                     </li>
+                    @endforeach
                 </ul>
                 <!-- end team-list -->
             </div>
