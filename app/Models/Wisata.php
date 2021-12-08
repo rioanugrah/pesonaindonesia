@@ -28,5 +28,8 @@ class Wisata extends Model
         'longitude',
         'price',
         'image',
+        'diskon',
+        'periode_awal',
+        'periode_akhir',
     ];
 }

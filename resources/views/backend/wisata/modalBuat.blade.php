@@ -31,24 +31,24 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label class="form-label">Fasilitas</label>
-                            <table class="table" id="dynamic_field_fasilitas">
+                            {{-- <table class="table" id="dynamic_field_fasilitas">
                                 <tr>
                                     <td><input type="text" name="fasilitas[]" placeholder="Fasilitas" class="form-control fasilitas_list"></td>
                                     <td><button type="button" name="add" id="add1" class="btn btn-success"><span class="fa fa-plus"></span></button></td>
                                 </tr>
-                            </table>
-                            {{-- <input name="fasilitas" class="fasilitas" type="text" placeholder="Fasilitas" /> --}}
+                            </table> --}}
+                            <input name="fasilitas" class="fasilitas" type="text" placeholder="Fasilitas" />
                         </div>
                         <div class="col">
                             <label class="form-label">Rencana Perjalanan</label>
-                            <table class="table" id="dynamic_field_timeline">
+                            {{-- <table class="table" id="dynamic_field_timeline">
                                 <tr>
                                     <td style="width: 25%"><input type="text" name="waktu" class="form-control waktu_list" placeholder="Pukul"></td>
                                     <td><input type="text" name="timeline" class="form-control timeline_list" placeholder="Rencana Perjalanan 1"></td>
                                     <td><button type="button" name="add" id="add2" class="btn btn-success"><span class="fa fa-plus"></span></button></td>
                                 </tr>
-                            </table>
-                            {{-- <textarea name="timeline" class="form-control" cols="30" rows="10"></textarea> --}}
+                            </table> --}}
+                            <textarea name="timeline" class="form-control" cols="30" rows="10"></textarea>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -67,7 +67,7 @@
                             <textarea name="info_tambahan" class="form-control" cols="30" rows="10"></textarea>
                         </div>
                         <div class="col">
-                            <label class="form-label">Highligh</label>
+                            <label class="form-label">Highlight</label>
                             <textarea name="highlight" class="form-control" cols="30" rows="10"></textarea>
                         </div>
                         <div class="col">

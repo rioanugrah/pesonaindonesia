@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Wisata;
+use Notification;
+// use Illuminate\Notifications\Notification;
 use DataTables;
 use Validator;
+use App\User;
+use App\Notifications\WisataNotification;
+use App\Events\WisataEvent;
 class WisataController extends Controller
 {
     public function index(Request $request)
@@ -91,50 +96,21 @@ class WisataController extends Controller
         if ($validator->passes()) {
             $input = $request->all();
             $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
-            // $request->image->move(public_path('image'), $input['image']);
+            $request->image->move(public_path('image'), $input['image']);
             // $request->foto->move(storage_path('app/public/image'), $input['image']);
+
+            $wisata = Wisata::create($input);
+            // dd($input);
+            $userSchema = User::where('id',auth()->user()->id)->first();
+            // $userSchema = auth()->user()->id;
+            $offerData = [
+                'message' => $input['nama_wisata'].' Berhasil Ditambah',
+                // 'icons' => 'fa fa-envelope',
+                // 'url' => 'lihat_tiket/'.$tiketDetail->tiket_id,
+            ];
+            Notification::send($userSchema, new WisataNotification($offerData));
+            new WisataEvent($offerData['message']);
             
-            $fasilitas = array($request->fasilitas);
-            // $input['fasilitas'] = json_encode($fasilitas);
-            foreach($fasilitas as $key => $value) {
-                $input['fasilitas'] = [
-                    'data' => $value,
-                    // 'data' => json_encode($value),
-                ];
-            }
-
-            $waktu = array($request->waktu);
-            $timeline = array($request->timeline);
-
-            foreach([$timeline,$waktu] as $key => $value) {
-                $input['timeline'] = [
-                    'data' => [
-                        'pukul' => $value,
-                        'data' => $value
-                    ]
-                ];
-            }
-
-            // for ($i=0; $i < $request->fasilitas ; $i++) { 
-            //     $input['fasilitas'] = [
-            //         'data' => [
-            //             'nama_fasilitas' => 1
-            //         ]
-            //     ];
-            // }
-            
-            // $input['fasilitas'] = $fasilitas;
-
-            // foreach($request->timeline as $key => $value) {
-            //     $input['timeline'] = [
-            //         'pukul' => $value['pukul'][$key],
-            //         'rencana' => $value[$key],
-            //     ];
-            // }
-            dd($input);
-
-            // $wisata = Wisata::create($input);
-
             if($wisata){
                 $message_title="Berhasil !";
                 $message_content="Wisata Berhasil Disimpan";

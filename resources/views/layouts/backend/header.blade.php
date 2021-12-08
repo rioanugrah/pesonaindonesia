@@ -136,19 +136,40 @@
           </div>
         </div>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown dropdown-notifications">
         <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i data-feather="bell"></i>
-          <div class="indicator">
+          <i data-count="{{ auth()->user()->unreadNotifications->count() }}" data-feather="bell"></i>
+          @if (auth()->user()->unreadNotifications->count() != 0)
+            <div class="indicator">
+              <div class="circle"></div>
+            </div>
+          @endif
+          {{-- <div class="indicator">
             <div class="circle"></div>
-          </div>
+          </div> --}}
         </a>
         <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
           <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
-            <p>6 New Notifications</p>
+            <p><span class="notif-count">0</span> Notifications</p>
             <a href="javascript:;" class="text-muted">Clear all</a>
           </div>
-          <div class="p-1">
+          <div class="p-1"></div>
+          {{-- <div class="p-1">
+            @forelse(auth()->user()->unreadNotifications->take(5) as $notification)
+            <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+              <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                <i class="icon-sm text-white" data-feather="gift"></i>
+              </div>
+              <div class="flex-grow-1 me-2">
+                <p>New Order Recieved</p>
+                <p class="tx-12 text-muted">{{ $notification->created_at->diffForHumans() }}</p>
+              </div>	
+            </a>
+            @empty
+                There are no new notifications
+            @endforelse
+          </div> --}}
+          {{-- <div class="p-1">
             <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
               <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
                 <i class="icon-sm text-white" data-feather="gift"></i>
@@ -198,7 +219,7 @@
                 <p class="tx-12 text-muted">6 hrs ago</p>
               </div>	
             </a>
-          </div>
+          </div> --}}
           <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
             <a href="javascript:;">View all</a>
           </div>

@@ -42,6 +42,11 @@ Route::domain('{account}.localhost.com')->group(function () {
     });
 });
 
+Route::get('send-notif/{name}', function ($name) {
+    event(new \App\Events\WisataEvent($name));
+    return "Event has been sent!";
+});
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
     Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
