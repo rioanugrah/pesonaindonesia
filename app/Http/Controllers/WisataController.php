@@ -37,17 +37,19 @@ class WisataController extends Controller
                         //             <i class="bx bx-trash-alt font-size-16 align-middle mr-2"></i> Delete
                         //         </button>';
                         // $btn = $btn.'</div>';
-                        $btn = '<a href=wisata/'.$row->created_at.' type="button" class="btn btn-success btn-icon">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href='.$row->created_at.' type="button" class="btn btn-warning btn-icon">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <button type="button" class="btn btn-danger btn-icon">
-                                    <i class="fa fa-trash"></i>
-                                </button>';
-                        //    $btn = '<button onclick="show('.$row->id.')" class="btn btn-warning dim"><i class="fa fa-edit"></i></button>';
-                        //    $btn = $btn.'<button class="btn btn-danger dim" onclick="hapus('.$row->id.')"><i class="fa fa-trash"></i></button>';
+
+                        // $btn = '<a href=wisata/'.$row->created_at.' type="button" class="btn btn-success btn-icon">
+                        //             <i class="fa fa-eye"></i>
+                        //         </a>
+                        //         <a href='.$row->created_at.' type="button" class="btn btn-warning btn-icon">
+                        //             <i class="fa fa-edit"></i>
+                        //         </a>
+                        //         <button type="button" class="btn btn-danger btn-icon">
+                        //             <i class="fa fa-trash"></i>
+                        //         </button>';
+
+                           $btn = '<button onclick="show('.$row->id.')" class="btn btn-warning dim"><i class="fa fa-edit"></i></button>';
+                           $btn = $btn.'<button class="btn btn-danger dim" onclick="hapus('.$row->id.')"><i class="fa fa-trash"></i></button>';
          
                         return $btn;
                     })
@@ -55,7 +57,7 @@ class WisataController extends Controller
                     ->make(true);
         }
         // return view('backend.wisata.index2');
-        return view('backend.wisata.index');
+        return view('backend.wisata.index2');
     }
 
     public function simpan(Request $request)
@@ -108,8 +110,9 @@ class WisataController extends Controller
                 // 'icons' => 'fa fa-envelope',
                 // 'url' => 'lihat_tiket/'.$tiketDetail->tiket_id,
             ];
-            Notification::send($userSchema, new WisataNotification($offerData));
-            new WisataEvent($offerData['message']);
+            
+            // Notification::send($userSchema, new WisataNotification($offerData));
+            // new WisataEvent($offerData['message']);
             
             if($wisata){
                 $message_title="Berhasil !";

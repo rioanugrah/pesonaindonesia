@@ -19,21 +19,27 @@
           <span class="link-title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item {{ Request::is('wisata') ? 'active' : '' }}">
+      <li class="nav-item {{ Request::is('wisata*') ? 'active' : '' }}">
         <a href="{{ route('wisata') }}" class="nav-link">
           <i class="link-icon" data-feather="box"></i>
           <span class="link-title">Wisata</span>
         </a>
       </li>
+      <li class="nav-item {{ Request::is('hotel*') ? 'active' : '' }}">
+        <a href="{{ route('hotel') }}" class="nav-link">
+          <i class="link-icon" data-feather="box"></i>
+          <span class="link-title">Hotel</span>
+        </a>
+      </li>
       <li class="nav-item nav-category">Tiket</li>
-      <li class="nav-item {{ Request::is('tiket_wisata') ? 'active' : '' }}">
+      <li class="nav-item {{ Request::is('tiket_wisatas*') ? 'active' : '' }}">
         <a href="{{ route('tiket_wisata') }}" class="nav-link">
           <i class="link-icon" data-feather="box"></i>
           <span class="link-title">Tiket Wisata</span>
         </a>
       </li>
-      <li class="nav-item {{ Request::is('tiket_hotel') ? 'active' : '' }}">
-        <a href="{{ url('tiket_hotel') }}" class="nav-link">
+      <li class="nav-item {{ Request::is('tiket_hotels*') ? 'active' : '' }}">
+        <a href="{{ url('tiket_hotels') }}" class="nav-link">
           <i class="link-icon" data-feather="box"></i>
           <span class="link-title">Tiket Hotel</span>
         </a>

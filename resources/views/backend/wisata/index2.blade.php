@@ -34,13 +34,19 @@
 
                 <table class="table table-bordered dt-responsive nowrap datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
-                        <tr>
+                        {{-- <tr>
                             <th>Name</th>
                             <th>Position</th>
                             <th>Office</th>
                             <th>Age</th>
                             <th>Start date</th>
                             <th>Salary</th>
+                        </tr> --}}
+                        <tr>
+                            <th>Wisata</th>
+                            <th>Alamat</th>
+                            <th>Harga</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody></tbody>

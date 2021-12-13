@@ -70,8 +70,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('slider', 'SliderController@index')->name('slider')->middleware('verified');
     Route::post('slider/simpan', 'SliderController@simpan')->name('slider.simpan')->middleware('verified');
     
-    Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
+    Route::get('b/tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
     Route::get('tiket_wisata/{id}/{created_at}', 'TiketWisataController@cekTiket')->name('detail_tiket_wisata')->middleware('verified');
+    
+    Route::get('b/hotel', 'HotelController@index')->name('hotel')->middleware('verified');
+    Route::post('b/hotel/simpan', 'HotelController@simpan')->name('hotel.simpan')->middleware('verified');
+    Route::get('b/hotel/{id}', 'HotelController@detail')->name('hotel.detail')->middleware('verified');
+    Route::get('b/hotel/{id}/kamar', 'KamarHotelController@index')->name('kamar')->middleware('verified');
+    Route::post('b/hotel/kamar/simpan', 'KamarHotelController@simpan')->name('kamar.simpan')->middleware('verified');
+    Route::get('b/hotel/delete/{id}', 'HotelController@destroy')->name('hotel.hapus')->middleware('verified');
     
     Route::get('testing', 'ChatController@chat')->name('chat')->middleware('verified');
     
