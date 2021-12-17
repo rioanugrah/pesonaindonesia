@@ -5,9 +5,9 @@
 @endif
     <div class="container">
       @if (Request::url() == url('/'))
-      <nav class="navbar"> <a href="{{ url('/') }}" class="navbar-brand"><img src="{{ url('frontend/assets2/images/logo_plesiran.png') }}" alt="Image"></a>
+      <nav class="navbar"> <a href="{{ url('/') }}" class="navbar-brand"><img src="{{ url('frontend/assets2/images/logo_plesiran_new_white.png') }}" alt="Image"></a>
       @else
-      <nav class="navbar dark"> <a href="{{ url('/') }}" class="navbar-brand"><img src="{{ url('frontend/assets2/images/logo_plesiran_grey.png') }}" alt="Image"></a>
+      <nav class="navbar dark"> <a href="{{ url('/') }}" class="navbar-brand"><img src="{{ url('frontend/assets2/images/logo_plesiran_new_grey.png') }}" alt="Image"></a>
       @endif
           <div class="menu-btn">
             <div class="menu-circle-wrap">

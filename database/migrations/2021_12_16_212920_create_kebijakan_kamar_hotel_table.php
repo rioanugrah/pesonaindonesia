@@ -14,13 +14,12 @@ class CreateKebijakanKamarHotelTable extends Migration
     public function up()
     {
         Schema::create('kebijakan_kamar_hotel', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('kamar_hotel_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('kamar_hotel_id')->index('kebijakan_kamar_hotel_kamar_hotel_id_foreign');
             $table->string('judul_kebijakan_kamar');
             $table->text('deskripsi_kebijakan_kamar');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('kamar_hotel_id')->references(['id'])->on('kamar_hotel');
         });
     }
 

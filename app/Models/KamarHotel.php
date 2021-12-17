@@ -16,5 +16,6 @@ class KamarHotel extends Model
         'hotel_id',
         'nama_kamar',
         'deskripsi_kamar',
+        'price',
     ];
 }

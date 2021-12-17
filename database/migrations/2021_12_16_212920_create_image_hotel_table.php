@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImageKamarHotelTable extends Migration
+class CreateImageHotelTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateImageKamarHotelTable extends Migration
      */
     public function up()
     {
-        Schema::create('image_kamar_hotel', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('kamar_hotel_id')->unsigned();
+        Schema::create('image_hotel', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('hotel_id')->index('image_hotel_hotel_id_foreign');
             $table->string('image');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('kamar_hotel_id')->references(['id'])->on('kamar_hotel');
         });
     }
 
@@ -30,6 +29,6 @@ class CreateImageKamarHotelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('image_kamar_hotel');
+        Schema::dropIfExists('image_hotel');
     }
 }

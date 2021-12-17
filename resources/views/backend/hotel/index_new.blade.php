@@ -47,7 +47,6 @@
                             <tr>
                                 <th>Nama Hotel</th>
                                 <th>Alamat</th>
-                                <th>Harga</th>
                                 <th>Kamar</th>
                                 <th>Action</th>
                             </tr>
@@ -98,10 +97,6 @@
                 {
                     data: 'alamat',
                     name: 'alamat'
-                },
-                {
-                    data: 'price',
-                    name: 'price'
                 },
                 {
                     data: 'kamar',

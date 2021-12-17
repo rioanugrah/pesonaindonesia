@@ -9,7 +9,7 @@ class KamarHotelPopuler extends Model
 {
     use SoftDeletes;
     
-    public $table = 'fasilitas_kamar_hotel_populer';
+    public $table = 'fasilitas_populer_kamar_hotel';
     protected $dates = ['deleted_at'];
     public $fillable = [
         'id',

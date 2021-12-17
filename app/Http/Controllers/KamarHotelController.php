@@ -11,6 +11,7 @@ use App\Models\FasilitasKamarHotel;
 use App\Models\ImageKamarHotel;
 use DataTables;
 use Validator;
+use Input;
 
 class KamarHotelController extends Controller
 {
@@ -20,6 +21,9 @@ class KamarHotelController extends Controller
             $data = KamarHotel::where('hotel_id',$id)->get();
             return DataTables::of($data)
                     ->addIndexColumn()
+                    ->addColumn('price', function($row){
+                        return 'Rp. '.number_format($row->price,2,".", ",");
+                    })
                     ->addColumn('action', function($row){
                         $btn = '<a href='.route('hotel.detail', ['id' => $row->id]).' class="btn btn-success btn-sm" title="Detail">
                                     <i class="fas fa-eye"></i>
@@ -32,7 +36,7 @@ class KamarHotelController extends Controller
                                 </button>';
                         return $btn;
                     })
-                    ->rawColumns(['action','kamar'])
+                    ->rawColumns(['action'])
                     ->make(true);
         }
         $data['hotel'] = Hotel::find($id);
@@ -44,6 +48,7 @@ class KamarHotelController extends Controller
         $rules = [
             'nama_kamar'  => 'required',
             'deskripsi_kamar'  => 'required',
+            'price'  => 'required',
             // 'fasilitas_kamar_populer'  => 'required',
             // 'fasilitas_kamar_populer_detail'  => 'required',
             // 'fasilitas_kamar'  => 'required',
@@ -55,6 +60,7 @@ class KamarHotelController extends Controller
         $messages = [
             'nama_kamar.required'  => 'Kamar Hotel Wajib Diisi.',
             'deskripsi_kamar.required'  => 'Deskripsi Kamar Hotel Wajib Diisi.',
+            'price.required'  => 'Harga Kamar Hotel Wajib Diisi.',
             // 'fasilitas_kamar_populer.required'  => 'Fasilitas Kamar Populer Wajib Diisi.',
             // 'fasilitas_kamar.required'  => 'Fasilitas Kamar Hotel Wajib Diisi.',
             // 'judul_kebijakan_kamar.required'  => 'Judul Kebijakan Kamar Hotel Wajib Diisi.',
@@ -67,14 +73,15 @@ class KamarHotelController extends Controller
         
         if($validator->passes()){
             // $input = $request->all();
-            $hotel_id = Hotel::select('id')->where('id',$request['id_hotel'])->first();
-            $input['hotel_id'] = $hotel_id->id ;
+            // $hotel_id = Hotel::select('id')->where('id',$request['id_hotel'])->first();
+            $input['hotel_id'] = $request['id_hotel'];
             $input['nama_kamar'] = $request->nama_kamar;
             $input['deskripsi_kamar'] = $request->deskripsi_kamar;
+            $input['price'] = $request->price;
 
             $kamar_hotel = KamarHotel::create($input);
 
-            // foreach ($fasilitas_kamar_hotel_populer as $key => $fkhp) {
+            // foreach ($request->fasilitas_kamar_hotel_populer as $key => $fkhp) {
             //     KamarHotelPopuler::create([
             //         'kamar_hotel_id' => $kamar_hotel->id,
             //         'fasilitas_kamar_populer' => $fkhp['fasilitas_kamar_populer'],
@@ -82,14 +89,14 @@ class KamarHotelController extends Controller
             //     ]);
             // }
 
-            // foreach ($fasilitas_kamar_hotel as $key => $fkh) {
+            // foreach ($request->fasilitas_kamar_hotel as $key => $fkh) {
             //     FasilitasKamarHotel::create([
             //         'kamar_hotel_id' => $kamar_hotel->id,
             //         'fasilitas_kamar' => $fkh['fasilitas_kamar'],
             //     ]);
             // }
 
-            // foreach ($kebijakan_kamar_hotel as $key => $kkh) {
+            // foreach ($request->kebijakan_kamar_hotel as $key => $kkh) {
             //     KebijakanKamarHotel::create([
             //         'kamar_hotel_id' => $kamar_hotel->id,
             //         'judul_kebijakan_kamar' => $kkh['judul_kebijakan_kamar'],
@@ -97,14 +104,23 @@ class KamarHotelController extends Controller
             //     ]);
             // }
 
-            // foreach ($foto_kamar_hotel as $key => $fkh) {
-            //     $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
-            //     $request->image->move(public_path('backend/assets2/images/kamar_hotel'), $input['image']);
-            //     ImageKamarHotel::create([
-            //         'kamar_hotel_id' => $kamar_hotel->id,
-            //         'image' => $kkh['image'],
-            //     ]);
+            // foreach ($request->foto_kamar_hotel as $key => $fkh) {
+            //     // $fkh['image'] = Input::file($fkh['image']);
+            //     $inputImage = $fkh['image'];
+            //     $fkh['image'] = time().'.'.$inputImage->guessExtension();
+            //     $fkh['image']->move(public_path('backend/assets2/images/kamar_hotel'), $fkh['image']);
+            //     // ImageKamarHotel::create([
+            //     //     'kamar_hotel_id' => $kamar_hotel->id,
+            //     //     'image' => $fkh['image'],
+            //     // ]);
+            //     $image[] = $fkh['image'];
             // }
+            // dd($image);
+
+
+            // dd($input['image'] = time().'.'.$request->image->getClientOriginalExtension());
+            
+            // dd($request->foto_kamar_hotel);
 
             // $hotel = Hotel::find($request['id_hotel']);
             // dd($input);

@@ -7,6 +7,7 @@ use App\Models\Hotel;
 use App\Models\FasilitasHotel;
 use App\Models\FasilitasUmumHotel;
 use App\Models\KebijakanHotel;
+use App\Models\KamarHotel;
 use DataTables;
 use Validator;
 class HotelController extends Controller
@@ -14,12 +15,10 @@ class HotelController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
+            // $data = Hotel::join('kamar_hotel', 'kamar_hotel.hotel_id', '=', 'hotel.id')->get();
             $data = Hotel::all();
             return DataTables::of($data)
                     ->addIndexColumn()
-                    ->addColumn('price', function($row){
-                        return 'Rp. '.number_format($row->price,2,',','.');
-                    })
                     ->addColumn('kamar', function($row){
                         $btn = '<a href='.route('kamar', ['id' => $row->id]).' class="btn btn-success btn-sm" title="Kamar">
                                     <i class="fas fa-bed"></i>

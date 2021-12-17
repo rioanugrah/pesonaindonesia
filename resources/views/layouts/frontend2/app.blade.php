@@ -7,7 +7,7 @@
 <title>@yield('title')</title>
 <meta name="author" content="Pesona Plesiran Indonesia">
 <meta name="description" content="Pesona Plesiran Indonesia">
-<meta name="keywords" content="tour, ice, trip, travel, agency, life, vacation, treking, boat, walking, climbing, transition, svg, html, css, wisata, pesona, plesiran, indonesia">
+<meta name="keywords" content="tour, trip, travel, agency, life, vacation, climbing, wisata, pesona, plesiran, indonesia">
 
 <link href="{{ url('frontend/assets2/images/favicon.png') }}" rel="apple-touch-icon" sizes="144x144">
 <link href="{{ url('frontend/assets2/images/favicon.png') }}" rel="apple-touch-icon" sizes="114x114">

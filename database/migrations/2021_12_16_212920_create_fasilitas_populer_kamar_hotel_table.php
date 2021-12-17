@@ -14,13 +14,12 @@ class CreateFasilitasPopulerKamarHotelTable extends Migration
     public function up()
     {
         Schema::create('fasilitas_populer_kamar_hotel', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('kamar_hotel_id')->unsigned();
-            $table->string('fasilitas_kamar_popiler');
-            $table->string('fasilitas_kamar_popiler_detail');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('kamar_hotel_id')->index('fasilitas_populer_kamar_hotel_kamar_hotel_id_foreign');
+            $table->string('fasilitas_kamar_populer');
+            $table->string('fasilitas_kamar_populer_detail');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('kamar_hotel_id')->references(['id'])->on('kamar_hotel');
         });
     }
 

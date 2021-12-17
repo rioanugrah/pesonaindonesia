@@ -48,6 +48,7 @@
                         <tr>
                             <th>Kamar Hotel</th>
                             <th>Deskripsi</th>
+                            <th>Harga</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -78,6 +79,8 @@
     
     <script src="{{ asset('backend/assets2/js/iziToast.min.js') }}"></script>
     <script src="{{ asset('backend/assets2/libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
+    <script src="{{ asset('backend/assets2/libs/jquery-steps/build/jquery.steps.min.js') }}"></script>
+    {{-- <script src="{{ asset('backend/assets2/js/app.js') }}"></script> --}}
 
     <script>
         $.ajaxSetup({
@@ -97,6 +100,10 @@
                 {
                     data: 'deskripsi_kamar',
                     name: 'deskripsi_kamar'
+                },
+                {
+                    data: 'price',
+                    name: 'price'
                 },
                 {
                     data: 'action',
@@ -140,7 +147,7 @@
             table.ajax.reload();
         }
 
-        $('#upload-form').submit(function(e) {
+        $('.upload-form').submit(function(e) {
             e.preventDefault();
             let formData = new FormData(this);
             $.ajax({

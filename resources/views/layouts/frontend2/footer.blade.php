@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-4">
                 <h5>
-                    <img src="{{ url('frontend/assets2/images/logo-light.png') }}" alt="Image">
+                    <img src="{{ url('frontend/assets2/images/logo_plesiran_new_black.png') }}" alt="Image">
                 </h5>
                 <address>
                     Jl. Raya Tlogowaru No. 3, Tlogowaru
@@ -36,7 +36,7 @@
                 </ul>
             </div>
             <!-- end col-12 -->
-            <div class="col-12"> <span class="copyright">Copyright &copy; {{ date('Y') }} CV PESONA PLESIRAN INDONESIA.</span> </div>
+            <div class="col-12"> <span class="copyright">Copyright &copy; {{ date('Y') }} CV PESONA PLESIRAN INDONESIA</span> </div>
             <!-- end col-12 -->
         </div>
         <!-- end row -->

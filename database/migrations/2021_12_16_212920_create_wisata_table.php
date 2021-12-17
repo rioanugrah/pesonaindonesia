@@ -19,7 +19,7 @@ class CreateWisataTable extends Migration
             $table->text('deskripsi');
             $table->text('alamat');
             $table->text('fasilitas')->nullable();
-            $table->text('hightlight');
+            $table->text('highlight');
             $table->text('timeline')->nullable();
             $table->text('tukar_tiket');
             $table->text('sk');

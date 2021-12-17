@@ -32,7 +32,7 @@
 
         <div class="header-logo">
             <a class="site-logo" href="{{ url('/') }}">
-                <img src="{{ url('coming_soon/images/logo_plesiran.png') }}" alt="Homepage">
+                <img src="{{ url('coming_soon/images/logo_plesiran_new_white.png') }}" alt="Homepage">
             </a>
         </div>
 
@@ -65,7 +65,7 @@
 
                     <h3>Coming Soon</h3>
                     
-                    <h1>
+                    <h1 style="font-family: Poppins;">
                         {{ $content }}
                     </h1>
 
@@ -109,8 +109,6 @@
             <li><a href="#0"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
             <li><a href="#0"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
             <li><a href="#0"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-            <li><a href="#0"><i class="fab fa-dribbble" aria-hidden="true"></i></a></li>
-            <li><a href="#0"><i class="fab fa-behance" aria-hidden="true"></i></a></li>
         </ul>
 
     </section>
