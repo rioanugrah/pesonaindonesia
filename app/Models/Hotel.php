@@ -19,6 +19,5 @@ class Hotel extends Model
         'alamat',
         'deskripsi',
         'layanan',
-        'price',
     ];
 }

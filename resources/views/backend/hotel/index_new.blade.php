@@ -14,6 +14,7 @@
 
 @section('content')
 @include('backend.hotel.modalBuat')
+@include('backend.hotel.modalEdit')
     <div class="page-title-box">
         <div class="row align-items-center">
             <div class="col-md-8">
@@ -24,7 +25,7 @@
                 </ol>
             </div>
             <div class="col-md-4">
-                <div class="float-end d-none d-md-block">
+                <div class="float-end d-md-block">
                     <div class="btn-group">
                         <button class="btn btn-primary" onclick="buat()">
                             <i class="mdi mdi-plus"></i> Buat
@@ -78,6 +79,9 @@
     
     <script src="{{ asset('backend/assets2/js/iziToast.min.js') }}"></script>
     <script src="{{ asset('backend/assets2/libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
+
+    <script src="{{ asset('backend/assets2/js/jquery.steps.min.js') }}"></script>
+    {{-- <script src="{{ asset('backend/assets2/js/form-wizard.init.js') }}"></script> --}}
     {{-- <script src="{{ asset('backend/assets2/js/app.js') }}"></script> --}}
     
     <script>
@@ -144,6 +148,30 @@
             });
         });
 
+        function edit(id) {
+            // const data = id;
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/hotel') }}"+'/'+id+'/edit',
+                // url: "{{ route('hotel.edit', ['id' => "+data+"]) }}",
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    // alert(result.hotel.id);
+                    document.getElementById('edit_modal_title').innerHTML = 'Hotel '+result.hotel.nama_hotel;
+                    $('#edit_id').val(result.hotel.id);
+                    $('#edit_nama_hotel').val(result.hotel.nama_hotel);
+                    $('#edit_alamat_hotel').val(result.hotel.alamat);
+                    $('#edit_deskripsi_hotel').val(result.hotel.deskripsi);
+                    $('#edit_layanan').val(result.hotel.layanan);
+
+                    $('#modal_edit').modal('show');
+                    // $('#edit_nama_akses').val(result.data.role);
+                    // $('#edit').modal('show');
+                }
+            })
+        }
+
         function hapus(id) {
             $.ajax({
                 type: 'GET',
@@ -160,12 +188,106 @@
             })
         }
 
-        $('#upload-form').submit(function(e) {
+        // $('a[href$="#finish"]').click(function(e) {
+        //     alert('Test');
+        // })
+
+        // $(".number-tab-steps").steps({
+        //     headerTag: "h6",
+        //     bodyTag: "fieldset",
+        //     transitionEffect: "fade",
+        //     titleTemplate: '#index# #title#',
+        //     labels: {
+        //         finish: 'Submit'
+        //     },
+        //     onFinished: function (event, currentIndex) {
+        //         alert("Form submitted.");
+        //     }
+        // });
+
+        $(".number-tab-steps").steps({
+            headerTag: "h3",
+            bodyTag: "fieldset",
+            transitionEffect: "slide",
+            // titleTemplate: '#index# #title#',
+            labels: {
+                finish: 'Submit'
+            },
+            onFinished: function (event, currentIndex) {
+                // alert("Form submitted.");
+                event.preventDefault();
+                let formData = new FormData(this);
+                $.ajax({
+                    type:'POST',
+                    url: "{{ route('hotel.simpan') }}",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: (result) => {
+                        if(result.success != false){
+                            iziToast.success({
+                                title: result.message_title,
+                                message: result.message_content
+                            });
+                            this.reset();
+                            table.ajax.reload();
+                        }else{
+                            iziToast.error({
+                                title: result.success,
+                                message: result.error
+                            });
+                        }
+                    },
+                    error: function (request, status, error) {
+                        iziToast.error({
+                            title: 'Error',
+                            message: error,
+                        });
+                    }
+                });
+            }
+        });
+
+        // $('#upload-form').click(function(e) {
+        //     e.preventDefault();
+        //     let formData = new FormData(this);
+        //     $.ajax({
+        //         type:'POST',
+        //         url: "{{ route('hotel.simpan') }}",
+        //         data: formData,
+        //         contentType: false,
+        //         processData: false,
+        //         success: (result) => {
+        //             if(result.success != false){
+        //                 iziToast.success({
+        //                     title: result.message_title,
+        //                     message: result.message_content
+        //                 });
+        //                 this.reset();
+        //                 table.ajax.reload();
+        //             }else{
+        //                 iziToast.error({
+        //                     title: result.success,
+        //                     message: result.error
+        //                 });
+        //             }
+        //         },
+        //         error: function (request, status, error) {
+        //             iziToast.error({
+        //                 title: 'Error',
+        //                 message: error,
+        //             });
+        //         }
+        //     });
+        // });
+
+        $('#edit-upload-form').submit(function(e) {
             e.preventDefault();
             let formData = new FormData(this);
+            $('#image-input-error').text('');
             $.ajax({
                 type:'POST',
-                url: "{{ route('hotel.simpan') }}",
+                url: "{{ route('hotel.update') }}",
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -175,12 +297,12 @@
                             title: result.message_title,
                             message: result.message_content
                         });
-                        this.reset();
+                        $('#modal_edit').modal('hide');
                         table.ajax.reload();
                     }else{
                         iziToast.error({
-                            title: result.success,
-                            message: result.error
+                            title: result.message_title,
+                            message: result.message_content
                         });
                     }
                 },

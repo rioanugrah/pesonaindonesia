@@ -30,7 +30,14 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                          Copyright © <script>document.write(new Date().getFullYear())</script> <span>Pesona Plesiran Indonesia</span>
+                            Copyright ©
+                            @if (date('Y')>2021)
+                            2021
+                            @else
+                            2021 - {{ date('Y') }}
+                            @endif
+                            CV PESONA PLESIRAN INDONESIA
+                          {{-- Copyright © <script>document.write(new Date().getFullYear())</script> <span>Pesona Plesiran Indonesia</span> --}}
                         </div>
                     </div>
                 </div>

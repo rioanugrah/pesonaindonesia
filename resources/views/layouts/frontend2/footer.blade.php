@@ -36,7 +36,14 @@
                 </ul>
             </div>
             <!-- end col-12 -->
-            <div class="col-12"> <span class="copyright">Copyright &copy; {{ date('Y') }} CV PESONA PLESIRAN INDONESIA</span> </div>
+            <div class="col-12"> <span class="copyright">Copyright &copy; 
+                @if (date('Y')>2021)
+                2021
+                @else
+                2021 - {{ date('Y') }}
+                @endif
+                CV PESONA PLESIRAN INDONESIA</span>
+            </div>
             <!-- end col-12 -->
         </div>
         <!-- end row -->

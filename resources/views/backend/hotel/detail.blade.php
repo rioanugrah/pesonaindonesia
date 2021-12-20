@@ -29,8 +29,15 @@
                         <h5>Map</h5>
                     </div>
                 </div>
+
+                
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+    <script src="https://themesbrand.com/veltrix/layouts/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="https://themesbrand.com/veltrix/layouts/assets/js/pages/form-wizard.init.js"></script>
 @endsection

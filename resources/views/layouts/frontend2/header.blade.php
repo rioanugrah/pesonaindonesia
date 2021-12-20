@@ -30,7 +30,6 @@
               <li><a>Identitas Perusahaan</a>
                 <ul class="sub-dropdown-menu">
                   <li><a href="{{ route('tentang_kami') }}">Tentang Kami</a></li>
-                  <li><a href="{{ route('struktur') }}">Struktur Organisasi</a></li>
                   <li><a href="{{ route('visi_misi') }}">Visi & Misi</a></li>
                 </ul>
               </li>
@@ -52,7 +51,7 @@
           @else
           <li class="nav-item dropdown"><a class="nav-link" style="text-transform: uppercase">{{ auth()->user()->name }}</a>
             <ul class="dropdown-menu">
-              <li><a href="{{ url('home') }}">Home</a></li>
+              <li><a href="{{ route('home') }}">Home</a></li>
               <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">Logout</a></li>
             </ul>

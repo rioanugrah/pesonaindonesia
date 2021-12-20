@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Perusahaan extends Model
+{
+    use SoftDeletes;
+    
+    public $table = 'perusahaan';
+    protected $dates = ['deleted_at'];
+    public $fillable = [
+        'id',
+        'nama_perusahaan',
+        'alamat_perusahaan',
+        'penanggung_jawab',
+        'jabatan',
+        'status',
+    ];
+
+    public function roles()
+    {
+        return $this->belongsTo(\App\Models\Roles::class, 'jabatan');
+    }
+}

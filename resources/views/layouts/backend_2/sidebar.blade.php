@@ -13,6 +13,8 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li class="menu-title">Executive Officer</li>
+                <li class="menu-title">Marketing Officer</li>
                 <li>
                     <a href="{{ route('wisata') }}" class="waves-effect">
                         <i class="ti-package"></i>
@@ -24,6 +26,39 @@
                         <i class="ti-package"></i>
                         <span>Hotel</span>
                     </a>
+                </li>
+                <li class="menu-title">Operational Officer</li>
+                <li class="{{ Request::is('b/cooperation*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('cooperation') }}" class="waves-effect">
+                        <i class="ti-package"></i>
+                        <span>Kerjasama</span>
+                    </a>
+                </li>
+                <li class="menu-title">Information Technology</li>
+                <li class="{{ Request::is('b/perusahaan*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('perusahaan') }}" class="waves-effect">
+                        <i class="ti-package"></i>
+                        <span>Perusahaan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ti-email"></i>
+                        <span>Frontend</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('slider') }}">Slider</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ti-email"></i>
+                        <span>Akses User</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('roles') }}">Roles</a></li>
+                        <li><a href="{{ route('pengguna') }}">Users</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>

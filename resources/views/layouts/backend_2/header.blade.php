@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="{{ route('home') }}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ asset('backend/assets2/images/logo_plesiran.png') }}" alt="" height="22">
+                        <img src="{{ asset('backend/assets2/images/logo_plesiran_new_white.png') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('backend/assets2/images/logo_plesiran.png') }}" alt="" height="17">
+                        <img src="{{ asset('backend/assets2/images/logo_plesiran_new_white.png') }}" alt="" height="17">
                     </span>
                 </a>
 
                 <a href="{{ route('home') }}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ asset('backend/assets2/images/logo_plesiran.png') }}" alt="" height="22">
+                        <img src="{{ asset('backend/assets2/images/logo_plesiran_new_white.png') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('backend/assets2/images/logo_plesiran.png') }}" alt="" height="28">
+                        <img src="{{ asset('backend/assets2/images/logo_plesiran_new_white.png') }}" alt="" height="40">
                     </span>
                 </a>
             </div>

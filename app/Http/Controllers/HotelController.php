@@ -38,9 +38,9 @@ class HotelController extends Controller
                         $btn = '<a href='.route('hotel.detail', ['id' => $row->id]).' class="btn btn-success btn-sm" title="Detail">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a class="btn btn-warning btn-sm" title="Edit">
+                                <button onclick="edit('.$row->id.')" class="btn btn-warning btn-sm" title="Edit">
                                     <i class="fas fa-pencil-alt"></i>
-                                </a>
+                                </button>
                                 <button onclick="hapus('.$row->id.')" class="btn btn-danger btn-sm" title="Hapus">
                                     <i class="fas fa-trash"></i>
                                 </button>';
@@ -66,7 +66,7 @@ class HotelController extends Controller
             'alamat_hotel'  => 'required',
             'deskripsi_hotel'  => 'required',
             'layanan'  => 'required',
-            'price'  => 'required',
+            // 'price'  => 'required',
             // 'nama_fasilitas'  => 'required',
             // 'icon'  => 'required',
             // 'nama_fasilitas_umum'  => 'required',
@@ -79,7 +79,7 @@ class HotelController extends Controller
             'alamat_hotel.required'  => 'Alamat Hotel Wajib Diisi.',
             'deskripsi_hotel.required'  => 'Deskripsi Hotel Wajib Diisi.',
             'layanan.required'  => 'Layanan Hotel Wajib Diisi.',
-            'price.required'  => 'Harga Tiket Wajib Diisi.',
+            // 'price.required'  => 'Harga Tiket Wajib Diisi.',
             // 'nama_fasilitas.required'  => 'Fasilitas Populer Wajib Diisi.',
             // 'icon.required'  => 'Icon Wajib Diisi.',
             // 'nama_fasilitas_umum.required'  => 'Fasilitas Umum Wajib Diisi.',
@@ -95,65 +95,76 @@ class HotelController extends Controller
             $input['alamat'] = $request->alamat_hotel;
             $input['deskripsi'] = $request->deskripsi_hotel;
             $input['layanan'] = $request->layanan;
-            $input['price'] = $request->price;
+            // $input['price'] = $request->price;
 
-            $hotel = Hotel::create($input);
+            if(auth()->user()->role == 1){
+                $array_message = array(
+                    'success' => false,
+                    'message_title' => 'Access Denied',
+                    'message_content' => 'Anda Tidak Memiliki Akses',
+                    'message_type' => "error",
+                );
+                return response()->json($array_message);
+            }else{
+                $hotel = Hotel::create($input);
 
-            foreach ($request->fasilitas_populer as $key => $fp) {
-                // $inputFasilitasPopular[] = [
-                //     'hotel_id' => $hotel->id,
-                //     'nama_fasilitas' => $fp['nama_fasilitas'],
-                //     'icon' => $fp['icon'],
-                // ];
-                FasilitasHotel::create([
-                    'hotel_id' => $hotel->id,
-                    'nama_fasilitas' => $fp['nama_fasilitas'],
-                    'icon' => $fp['icon'],
-                ]);
-
+                foreach ($request->fasilitas_populer as $key => $fp) {
+                    // $inputFasilitasPopular[] = [
+                    //     'hotel_id' => $hotel->id,
+                    //     'nama_fasilitas' => $fp['nama_fasilitas'],
+                    //     'icon' => $fp['icon'],
+                    // ];
+                    FasilitasHotel::create([
+                        'hotel_id' => $hotel->id,
+                        'nama_fasilitas' => $fp['nama_fasilitas'],
+                        'icon' => $fp['icon'],
+                    ]);
+    
+                }
+    
+                foreach ($request->fasilitas_umum as $key => $fu) {
+                    // $inputFasilitasPopular[] = [
+                    //     'hotel_id' => $hotel->id,
+                    //     'nama_fasilitas' => $fp['nama_fasilitas'],
+                    //     'icon' => $fp['icon'],
+                    // ];
+                    FasilitasUmumHotel::create([
+                        'hotel_id' => $hotel->id,
+                        'nama_fasilitas_umum' => $fu['nama_fasilitas_umum'],
+                    ]);
+    
+                }
+    
+                foreach ($request->kebijakan_hotel as $key => $kh) {
+                    // $inputFasilitasPopular[] = [
+                    //     'hotel_id' => $hotel->id,
+                    //     'nama_fasilitas' => $fp['nama_fasilitas'],
+                    //     'icon' => $fp['icon'],
+                    // ];
+                    KebijakanHotel::create([
+                        'hotel_id' => $hotel->id,
+                        'judul' => $kh['judul_kebijakan'],
+                        'deskripsi' => $kh['deskripsi_kebijakan'],
+                    ]);
+    
+                }
+    
+                if($hotel){
+                    $message_title="Berhasil !";
+                    $message_content="Hotel ".$request->nama_hotel." Berhasil Ditambah";
+                    $message_type="success";
+                    $message_succes = true;
+                }
+    
+                $array_message = array(
+                    'success' => $message_succes,
+                    'message_title' => $message_title,
+                    'message_content' => $message_content,
+                    'message_type' => $message_type,
+                );
+                return response()->json($array_message);
             }
 
-            foreach ($request->fasilitas_umum as $key => $fu) {
-                // $inputFasilitasPopular[] = [
-                //     'hotel_id' => $hotel->id,
-                //     'nama_fasilitas' => $fp['nama_fasilitas'],
-                //     'icon' => $fp['icon'],
-                // ];
-                FasilitasUmumHotel::create([
-                    'hotel_id' => $hotel->id,
-                    'nama_fasilitas_umum' => $fu['nama_fasilitas_umum'],
-                ]);
-
-            }
-
-            foreach ($request->kebijakan_hotel as $key => $kh) {
-                // $inputFasilitasPopular[] = [
-                //     'hotel_id' => $hotel->id,
-                //     'nama_fasilitas' => $fp['nama_fasilitas'],
-                //     'icon' => $fp['icon'],
-                // ];
-                KebijakanHotel::create([
-                    'hotel_id' => $hotel->id,
-                    'judul' => $kh['judul_kebijakan'],
-                    'deskripsi' => $kh['deskripsi_kebijakan'],
-                ]);
-
-            }
-
-            if($hotel){
-                $message_title="Berhasil !";
-                $message_content="Hotel ".$request->nama_hotel." Berhasil Terinput";
-                $message_type="success";
-                $message_succes = true;
-            }
-
-            $array_message = array(
-                'success' => $message_succes,
-                'message_title' => $message_title,
-                'message_content' => $message_content,
-                'message_type' => $message_type,
-            );
-            return response()->json($array_message);
         }
 
         return response()->json(
@@ -168,6 +179,80 @@ class HotelController extends Controller
     {
         $data['hotel'] = Hotel::find($id);
         return view('backend.hotel.detail', $data);
+    }
+
+    public function edit($id)
+    {
+        $data['hotel'] = Hotel::find($id);
+        // $data['fasilitas_hotel'] = FasilitasHotel::where('hotel_id',$id)->get();
+        // $data['fasilitas_umum_hotel'] = FasilitasUmumHotel::where('hotel_id',$id)->get();
+        // $data['kebijakan_hotel'] = KebijakanHotel::where('hotel_id',$id)->get();
+        return response()->json($data);
+    }
+
+    public function update(Request $request)
+    {
+        $rules = [
+            'edit_nama_hotel'  => 'required',
+            'edit_alamat_hotel'  => 'required',
+            'edit_deskripsi_hotel'  => 'required',
+            'edit_layanan'  => 'required',
+            // 'nama_fasilitas'  => 'required',
+            // 'icon'  => 'required',
+            // 'nama_fasilitas_umum'  => 'required',
+            // 'judul_kebijakan'  => 'required',
+            // 'deskripsi_kebijakan'  => 'required',
+        ];
+ 
+        $messages = [
+            'nama_hotel.required'  => 'Judul Hotel Wajib Diisi.',
+            'alamat_hotel.required'  => 'Alamat Hotel Wajib Diisi.',
+            'deskripsi_hotel.required'  => 'Deskripsi Hotel Wajib Diisi.',
+            'layanan.required'  => 'Layanan Hotel Wajib Diisi.',
+            // 'nama_fasilitas.required'  => 'Fasilitas Populer Wajib Diisi.',
+            // 'icon.required'  => 'Icon Wajib Diisi.',
+            // 'nama_fasilitas_umum.required'  => 'Fasilitas Umum Wajib Diisi.',
+            // 'judul_kebijakan.required'  => 'Judul Kebijakan Wajib Diisi.',
+            // 'deskripsi_kebijakan.required'  => 'Deskripsi Kebijakan Hotel Wajib Diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+            $input = $request->all();
+            $input['nama_hotel'] = $request->edit_nama_hotel;
+            $input['alamat'] = $request->edit_alamat_hotel;
+            $input['deskripsi'] = $request->edit_deskripsi_hotel;
+            $input['layanan'] = $request->edit_layanan;
+            
+            if(auth()->user()->role == 1){
+                $array_message = array(
+                    'success' => false,
+                    'message_title' => 'Access Denied',
+                    'message_content' => 'Anda Tidak Memiliki Akses',
+                    'message_type' => "error",
+                );
+                return response()->json($array_message);
+            }
+            else{
+                $hotel = Hotel::find($request->edit_id)->update($input);
+    
+                if($hotel){
+                    $message_title="Berhasil !";
+                    $message_content="Data Hotel ".$request->edit_nama_hotel." Berhasil Update";
+                    $message_type="success";
+                    $message_succes = true;
+                }
+    
+                $array_message = array(
+                    'success' => $message_succes,
+                    'message_title' => $message_title,
+                    'message_content' => $message_content,
+                    'message_type' => $message_type,
+                );
+                return response()->json($array_message);
+            }
+        }
     }
 
     public function destroy($id)

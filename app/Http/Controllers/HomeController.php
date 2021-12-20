@@ -28,6 +28,7 @@ class HomeController extends Controller
             return redirect('/');
         }else{
             $data['total_users'] = User::count();
+            // return view('layouts.backend_3.app', $data);
             return view('backend.home.index_new', $data);
         }
         // return view('backend.home.home2');
