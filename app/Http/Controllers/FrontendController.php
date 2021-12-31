@@ -32,7 +32,7 @@ class FrontendController extends Controller
     public function index()
     {
         $coming_soon = true;
-        $years = 2021;
+        $years = 2022;
         $months = 01;
         $dates = 01;
         $date_coming_soon = $years.'/'.$months.'/'.$dates;
