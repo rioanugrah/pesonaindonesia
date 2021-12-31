@@ -17,8 +17,9 @@ class CreateBookingHotelDetailTable extends Migration
             $table->id();
             $table->bigInteger('booking_hotel_id')->unsigned();
             $table->string('no_kamar')->nullable();
-            $table->string('nama_kamar');
-            $table->double('harga');
+            $table->string('nama_kamar')->nullable();
+            $table->integer('jumlah_kamar')->nullable();
+            $table->double('harga')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign(['booking_hotel_id'])->references(['id'])->on('booking_hotel');

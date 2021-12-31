@@ -32,14 +32,14 @@ class FrontendController extends Controller
     public function index()
     {
         $coming_soon = true;
-        $years = 2022;
+        $years = 2021;
         $months = 01;
         $dates = 01;
         $date_coming_soon = $years.'/'.$months.'/'.$dates;
         $date_now = date("Y/m/d");
         // dd($date);
 
-        if($date_now >= $date_coming_soon){
+        if($date_now > $date_coming_soon){
             $data['teams'] = $this->teams;
             // $data['wallpaper'] = [
             //     ['image' => 'frontend/assets2/images/wallpaper/bromo.png', 'arrow' => 'frontend/assets2/images/arrow-link.png', 'title' => 'Wisata Gunung Bromo'],

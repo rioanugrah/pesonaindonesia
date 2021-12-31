@@ -159,12 +159,12 @@ class PaymentController extends Controller
         $data1 = '
             {
                 "partner_tx_id":"'.time().'",
-                "description":"Pembayaran Tiket Hotel",
-                "notes":"notes",
-                "sender_name":"Rio Anugrah Adam Saputra",
-                "amount":50000,
-                "email":"rioanugrah999@gmail.com",
-                "phone_number":"",
+                "description":"'.$request->description.'",
+                "notes":"",
+                "sender_name":"'.$request->name_booking.'",
+                "amount":"'.$request->amount.'",
+                "email":"'.$request->email_booking.'",
+                "phone_number":"'.$request->phone_booking.'",
                 "is_open":false,
                 "step":"input-amount",
                 "include_admin_fee":true,

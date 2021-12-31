@@ -15,7 +15,8 @@ class CreatePaymentTable extends Migration
     {
         Schema::create('payment', function (Blueprint $table) {
             $table->id();
-            $table->string('partner_tx_idd');
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->string('partner_tx_id');
             $table->string('description');
             $table->string('notes');
             $table->string('sender_name');
@@ -23,8 +24,10 @@ class CreatePaymentTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('is_open');
-            $table->string('step');
-            $table->timestamps();
+            $table->dateTime('expiration');
+            $table->dateTime('due_date');
+            $table->foreign(['user_id'])->references(['id'])->on('users');
+            // $table->timestamps();
         });
     }
 

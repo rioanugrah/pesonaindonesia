@@ -292,7 +292,12 @@
                         </div>
                         <div class="widget-bg booking-form-wrap">
                             <h4 class="bg-title">Booking</h4>
-                            <form class="booking-form">
+                            <form action="{{ route('booking_hotel.simpan') }}" method="post" class="booking-form">
+                                @csrf
+                                <input type="hidden" name="hotel" value="{{ $kamar_hotels->hotel->nama_hotel }}">
+                                <input type="hidden" name="kamar" value="{{ $kamar_hotels->nama_kamar }}">
+                                <input type="hidden" name="description" value="{{ $kamar_hotels->hotel->nama_hotel.' '.$kamar_hotels->nama_kamar }}">
+                                <input type="hidden" name="amount" value="{{ $kamar_hotels->price }}">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
@@ -311,7 +316,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <input class="input-date-picker" type="text" name="s" autocomplete="off"
+                                            <input class="input-date-picker" type="text" name="booking_date" autocomplete="off"
                                                 readonly="readonly" placeholder="Date">
                                         </div>
                                     </div>

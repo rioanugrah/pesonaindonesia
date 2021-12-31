@@ -110,6 +110,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('payment/balance', 'PaymentController@balance')->name('payment.balance')->middleware('verified');
     Route::post('payment/checkout', 'PaymentController@checkout')->name('payment')->middleware('verified');
 
+    Route::get('booking_hotel', 'BookingHotelController@index')->name('booking_hotel')->middleware('verified');
+    Route::post('booking_hotel/simpan', 'BookingHotelController@simpan')->name('booking_hotel.simpan')->middleware('verified');
+
 });
 
 // Route::group(['middleware' => 'auth'], function () {
