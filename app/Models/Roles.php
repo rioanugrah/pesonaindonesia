@@ -15,6 +15,7 @@ class Roles extends Model
 
     public $fillable = [
         'id',
+        'slug',
         'role',
     ];
 }

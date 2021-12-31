@@ -14,6 +14,7 @@
 
 @section('content')
 @include('backend.perusahaan.modalBuat')
+@include('backend.perusahaan.modalEdit')
 <div class="page-title-box">
     <div class="row align-items-center">
         <div class="col-md-8">
@@ -49,6 +50,8 @@
                             <th>Alamat</th>
                             <th>Penanggung Jawab</th>
                             <th>Jabatan</th>
+                            <th>Siup</th>
+                            <th>Npwp</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -93,7 +96,6 @@
                     data: 'nama_perusahaan',
                     name: 'nama_perusahaan'
                 },
-                // {data: 'barcode', name: 'barcode'},
                 {
                     data: 'alamat_perusahaan',
                     name: 'alamat_perusahaan'
@@ -105,6 +107,14 @@
                 {
                     data: 'jabatan',
                     name: 'jabatan'
+                },
+                {
+                    data: 'siup',
+                    name: 'siup'
+                },
+                {
+                    data: 'npwp',
+                    name: 'npwp'
                 },
                 {
                     data: 'status',
@@ -125,6 +135,56 @@
 
         function reload() {
             table.ajax.reload();
+        }
+
+        function edit(id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/perusahaan') }}"+'/'+id+'/edit',
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    document.getElementById('edit_modal_title').innerHTML = result.perusahaan.nama_perusahaan;
+                    $('#edit_id').val(result.perusahaan.id);
+                    $('#edit_nama_perusahaan').val(result.perusahaan.nama_perusahaan);
+                    $('#edit_alamat_perusahaan').val(result.perusahaan.alamat_perusahaan);
+                    $('#edit_penanggung_jawab').val(result.perusahaan.penanggung_jawab);
+                    $('#edit_jabatan').val(result.perusahaan.jabatan);
+                    $('#edit_siup').val(result.perusahaan.siup);
+                    $('#edit_npwp').val(result.perusahaan.npwp);
+
+                    $('#edit').modal('show');
+                }
+            })
+        }
+
+        function hapus(id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/perusahaan/delete') }}"+'/'+id,
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    if(result.success != false){
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                        table.ajax.reload();
+                    }else{
+                        iziToast.error({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                    }
+                },
+                error: function (request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            })
         }
 
         $('#upload-form').submit(function(e) {
@@ -149,6 +209,40 @@
                         iziToast.error({
                             title: result.success,
                             message: result.error
+                        });
+                    }
+                },
+                error: function (request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            });
+        });
+
+        $('#edit-upload-form').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $('#image-input-error').text('');
+            $.ajax({
+                type:'POST',
+                url: "{{ route('perusahaan.update') }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    if(result.success != false){
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                        $('#modal_edit').modal('hide');
+                        table.ajax.reload();
+                    }else{
+                        iziToast.error({
+                            title: result.message_title,
+                            message: result.message_content
                         });
                     }
                 },

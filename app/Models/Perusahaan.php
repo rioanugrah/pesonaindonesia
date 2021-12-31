@@ -18,6 +18,8 @@ class Perusahaan extends Model
         'penanggung_jawab',
         'jabatan',
         'status',
+        'siup',
+        'npwp',
     ];
 
     public function roles()

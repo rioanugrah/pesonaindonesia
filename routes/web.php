@@ -23,11 +23,17 @@ Route::get('tentang-kami', 'FrontendController@tentang_kami')->name('tentang_kam
 Route::get('visi-misi', 'FrontendController@visimisi')->name('visi_misi');
 Route::get('tim-kami', 'FrontendController@tim')->name('tim_kami');
 Route::get('kontak', 'FrontendController@kontak')->name('kontak');
+Route::post('kontak/simpan', 'FrontendController@kontak_simpan')->name('kontak.simpan');
+
+Route::get('hotel', 'FrontendController@hotel')->name('frontend.hotel');
+Route::get('hotel/{slug}', 'FrontendController@hotel_detail')->name('frontend.hotelDetail');
+Route::get('hotel/{slug}/kamar/{slug_kamar}', 'FrontendController@kamar_hotel_detail')->name('frontend.kamarHotelDetail');
 // Route::get('#/wisata', 'FrontendController@index');
 Route::get('ticket', function(){
     return view('backend.ticket.tiket_wisata');
 });
 
+Route::get('partnership', 'FrontendController@partnership')->name('frontend.partnership');
 
 Auth::routes(['verify' => true]);
 
@@ -50,6 +56,9 @@ Route::get('send-notif/{name}', function ($name) {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('b/home', 'HomeController@index')->name('home')->middleware('verified');
     Route::get('b/wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
+
+    Route::get('country/simpan', 'CountryController@simpan');
+
     Route::post('wisata/simpan', 'WisataController@simpan')->name('wisata.simpan')->middleware('verified');
     
     Route::get('b/cooperation', 'CooperationController@index')->name('cooperation')->middleware('verified');
@@ -64,6 +73,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('pengguna/update', 'UsersController@update')->name('pengguna.update')->middleware('verified');
     
     Route::get('b/roles', 'RolesController@index')->name('roles')->middleware('verified');
+    Route::post('b/roles/simpan', 'RolesController@simpan')->name('roles.simpan')->middleware('verified');
+    Route::get('b/roles/{id}/edit', 'RolesController@edit')->name('roles.edit')->middleware('verified');
+    Route::get('b/roles/{slug}', 'RolesController@detail')->name('roles.detail')->middleware('verified');
+    Route::post('b/roles/update', 'RolesController@update')->name('roles.update')->middleware('verified');
 
     Route::get('b/status', 'StatusController@index')->name('status')->middleware('verified');
     Route::post('status/simpan', 'StatusController@simpan')->name('status.simpan')->middleware('verified');
@@ -76,17 +89,25 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::get('b/hotel', 'HotelController@index')->name('hotel')->middleware('verified');
     Route::post('b/hotel/simpan', 'HotelController@simpan')->name('hotel.simpan')->middleware('verified');
+    Route::post('b/hotel/upload_image', 'HotelController@upload_image')->name('hotel.upload_image')->middleware('verified');
     Route::post('b/hotel/update', 'HotelController@update')->name('hotel.update')->middleware('verified');
+    Route::get('b/hotel/{id}/image', 'HotelController@detail_image')->middleware('verified');
     Route::get('b/hotel/{id}', 'HotelController@detail')->name('hotel.detail')->middleware('verified');
     Route::get('b/hotel/{id}/edit', 'HotelController@edit')->name('hotel.edit')->middleware('verified');
     Route::get('b/hotel/{id}/kamar', 'KamarHotelController@index')->name('kamar')->middleware('verified');
-    Route::post('b/hotel/kamar/simpan', 'KamarHotelController@simpan')->name('kamar.simpan')->middleware('verified');
+    Route::post('b/hotel/kamar/simpan', 'KamarHotelController@simpan1')->name('kamar.simpan')->middleware('verified');
     Route::get('b/hotel/delete/{id}', 'HotelController@destroy')->name('hotel.hapus')->middleware('verified');
     
     Route::get('testing', 'ChatController@chat')->name('chat')->middleware('verified');
     
     Route::get('b/perusahaan', 'PerusahaanController@index')->name('perusahaan')->middleware('verified');
     Route::post('b/perusahaan/simpan', 'PerusahaanController@simpan')->name('perusahaan.simpan')->middleware('verified');
+    Route::get('b/perusahaan/{id}/edit', 'PerusahaanController@edit')->name('perusahaan.edit')->middleware('verified');
+    Route::post('b/perusahaan/update', 'PerusahaanController@update')->name('perusahaan.update')->middleware('verified');
+    Route::get('b/perusahaan/delete/{id}', 'PerusahaanController@destroy')->name('perusahaan.hapus')->middleware('verified');
+
+    Route::get('payment', 'PaymentController@payment')->middleware('verified');
+
 });
 
 // Route::group(['middleware' => 'auth'], function () {

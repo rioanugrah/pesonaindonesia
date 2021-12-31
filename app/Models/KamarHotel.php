@@ -14,8 +14,13 @@ class KamarHotel extends Model
     public $fillable = [
         'id',
         'hotel_id',
+        'slug',
         'nama_kamar',
         'deskripsi_kamar',
         'price',
     ];
+    public function hotel()
+    {
+        return $this->belongsTo(\App\Models\Hotel::class, 'hotel_id');
+    }
 }

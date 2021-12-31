@@ -48,7 +48,9 @@
                         <tr>
                             <th>Kamar Hotel</th>
                             <th>Deskripsi</th>
+                            <th>Jumlah Kamar</th>
                             <th>Harga</th>
+                            <th>Upload Kamar Hotel</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -102,8 +104,16 @@
                     name: 'deskripsi_kamar'
                 },
                 {
+                    data: 'kamar',
+                    name: 'kamar'
+                },
+                {
                     data: 'price',
                     name: 'price'
+                },
+                {
+                    data: 'gambar_kamar_hotel',
+                    name: 'gambar_kamar_hotel'
                 },
                 {
                     data: 'action',
@@ -147,9 +157,33 @@
             table.ajax.reload();
         }
 
+        var i = 0;
+       
+        $("#addImage").click(function(){
+    
+            ++i;
+    
+            $("#dynamicImages").append('<div1 class="row mb-3">'+
+                                            '<label class="col-sm-2 col-form-label">'+'Upload Foto Kamar'+'</label>'+
+                                            '<div class="col-sm-8">'+
+                                                '<input type="file" name="addimage['+i+'][image]" class="form-control">'+
+                                            '</div>'+
+                                            '<div class="col-sm-2 align-self-center">'+
+                                                '<div class="d-grid">'+
+                                                    '<button type="button" class="btn btn-danger btn-sm mb-2 remove-div">Remove</button>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</div1>');
+        });
+    
+        $(document).on('click', '.remove-div', function(){  
+            $(this).parents('div1').remove();
+        });  
+
         $('.upload-form').submit(function(e) {
             e.preventDefault();
-            let formData = new FormData(this);
+            var form = $(this);
+            var formData = new FormData(this);
             $.ajax({
                 type:'POST',
                 url: "{{ route('kamar.simpan') }}",

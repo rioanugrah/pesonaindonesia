@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cooperation;
 use App\Models\KabupatenKota;
+use App\Models\Perusahaan;
 use App\Models\Provinsi;
+use App\Models\Country;
 use PDF;
 use DataTables;
 use Validator;
@@ -40,6 +42,7 @@ class CooperationController extends Controller
         }
         $data['kabupaten_kotas'] = KabupatenKota::all();
         $data['provinsis'] = Provinsi::pluck('nama','id');
+        $data['countrys'] = Country::select('nama_negara')->get();
         $data['kategoris'] = [
             [
                 'nama_kategori' => 'Pribadi'
@@ -135,6 +138,7 @@ class CooperationController extends Controller
     public function download($id)
     {
         $data['cooperation'] = Cooperation::find($id);
+        $data['perusahaan'] = Perusahaan::where('status','Y')->first();
         if(auth()->user()->role == 1){
             $array_message = array(
                 'success' => false,

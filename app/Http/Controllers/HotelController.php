@@ -8,6 +8,7 @@ use App\Models\FasilitasHotel;
 use App\Models\FasilitasUmumHotel;
 use App\Models\KebijakanHotel;
 use App\Models\KamarHotel;
+use App\Models\ImageHotel;
 use DataTables;
 use Validator;
 class HotelController extends Controller
@@ -35,7 +36,10 @@ class HotelController extends Controller
                         //         <button type="button" class="btn btn-danger btn-icon">
                         //             <i class="fa fa-trash"></i>
                         //         </button>';
-                        $btn = '<a href='.route('hotel.detail', ['id' => $row->id]).' class="btn btn-success btn-sm" title="Detail">
+                        $btn = '<button onclick="gambar('.$row->id.')" class="btn btn-success btn-sm" title="Upload Gambar Hotel">
+                                    <i class="fas fa-upload"></i> Upload Gambar Hotel
+                                </button>
+                                <a href='.route('hotel.detail', ['id' => $row->id]).' class="btn btn-success btn-sm" title="Detail">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <button onclick="edit('.$row->id.')" class="btn btn-warning btn-sm" title="Edit">
@@ -173,6 +177,62 @@ class HotelController extends Controller
                 'error' => $validator->errors()->all()
             ]
         );
+    }
+
+    public function upload_image(Request $request)
+    {
+        $rules = [
+            'image'  => 'required',
+        ];
+ 
+        $messages = [
+            'image.required'  => 'Upload Gambar Hotel Wajib Diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if($validator->passes()){
+            if(auth()->user()->role == 1){
+                $array_message = array(
+                    'success' => false,
+                    'message_title' => 'Access Denied',
+                    'message_content' => 'Anda Tidak Memiliki Akses',
+                    'message_type' => "error",
+                );
+                return response()->json($array_message);
+            }else{
+                $image = $request->file('image');
+                $extension = time().'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path('backend/assets2/images/hotel');
+                $image->move($destinationPath, $extension);
+
+                $input['hotel_id'] = $request->image_id;
+                $input['image'] = $extension;
+                $imageHotel = ImageHotel::create($input);
+    
+                if($imageHotel){
+                    $message_title="Berhasil !";
+                    $message_content="Hotel ".$request->nama_hotel." Berhasil Ditambah";
+                    $message_type="success";
+                    $message_succes = true;
+                }
+    
+                $array_message = array(
+                    'success' => $message_succes,
+                    'message_title' => $message_title,
+                    'message_content' => $message_content,
+                    'message_type' => $message_type,
+                );
+                return response()->json($array_message);
+            }
+        }
+    }
+
+    public function detail_image($id)
+    {
+        $data['hotel'] = Hotel::find($id);
+        return response()->json($data);
+        // return view('backend.hotel.detail', $data);
     }
 
     public function detail($id)

@@ -15,6 +15,7 @@
 @section('content')
 @include('backend.hotel.modalBuat')
 @include('backend.hotel.modalEdit')
+@include('backend.hotel.modalUploadImage')
     <div class="page-title-box">
         <div class="row align-items-center">
             <div class="col-md-8">
@@ -148,6 +149,24 @@
             });
         });
 
+        function gambar(id) {
+            // const data = id;
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/hotel') }}"+'/'+id+'/image',
+                // url: "{{ route('hotel.edit', ['id' => "+data+"]) }}",
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    // alert(result.hotel.id);
+                    document.getElementById('image_title').innerHTML = 'Hotel '+result.hotel.nama_hotel;
+                    $('#image_id').val(result.hotel.id);
+
+                    $('#modal_image').modal('show');
+                }
+            })
+        }
+
         function edit(id) {
             // const data = id;
             $.ajax({
@@ -166,8 +185,6 @@
                     $('#edit_layanan').val(result.hotel.layanan);
 
                     $('#modal_edit').modal('show');
-                    // $('#edit_nama_akses').val(result.data.role);
-                    // $('#edit').modal('show');
                 }
             })
         }
@@ -204,6 +221,38 @@
         //         alert("Form submitted.");
         //     }
         // });
+        $('#upload-image').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $.ajax({
+                type:'POST',
+                url: "{{ route('hotel.upload_image') }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    if(result.success != false){
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                        this.reset();
+                        table.ajax.reload();
+                    }else{
+                        iziToast.error({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                    }
+                },
+                error: function (request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            });
+        });
 
         $(".number-tab-steps").steps({
             headerTag: "h3",

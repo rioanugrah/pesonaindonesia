@@ -48,9 +48,17 @@ class WisataController extends Controller
                         //             <i class="fa fa-trash"></i>
                         //         </button>';
 
-                           $btn = '<button onclick="show('.$row->id.')" class="btn btn-warning dim"><i class="fa fa-edit"></i></button>';
-                           $btn = $btn.'<button class="btn btn-danger dim" onclick="hapus('.$row->id.')"><i class="fa fa-trash"></i></button>';
-         
+                        //    $btn = '<button onclick="show('.$row->id.')" class="btn btn-warning dim"><i class="fa fa-edit"></i></button>';
+                        //    $btn = $btn.'<button class="btn btn-danger dim" onclick="hapus('.$row->id.')"><i class="fa fa-trash"></i></button>';
+                        $btn = '<a href="" class="btn btn-success btn-sm" title="Detail">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <button onclick="edit('.$row->id.')" class="btn btn-warning btn-sm" title="Edit">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
+                                <button onclick="hapus('.$row->id.')" class="btn btn-danger btn-sm" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>';
                         return $btn;
                     })
                     ->rawColumns(['action'])

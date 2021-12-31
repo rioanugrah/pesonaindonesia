@@ -32,6 +32,15 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col">
+                            <label class="form-label">Negara</label>
+                            <select name="negara" class="form-control select2" id="">
+                                <option>-- Pilih Negara --</option>
+                                @foreach ($countrys as $country)
+                                    <option value="{{ $country->nama_negara }}">{{ $country->nama_negara }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col">

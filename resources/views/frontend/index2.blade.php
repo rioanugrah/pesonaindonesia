@@ -4,6 +4,10 @@
     Pesona Plesiran Indonesia
 @endsection
 
+@section('css')
+{{-- <link href="{{ asset('backend/assets2/search/css/main.css') }}" rel="stylesheet" /> --}}
+@endsection
+
 @section('slider')
 <div class="swiper-container">
     <div class="swiper-wrapper">
@@ -26,31 +30,32 @@
 @endsection
 
 @section('content')
+{{-- @include('frontend.search') --}}
     <section class="adventure-activities">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="section-title">
-                        <h2>Wisata</h2>
-                        <img src="frontend/assets2/images/title-seperator.png" alt="Image">
+                        <h2>Hotel</h2>
+                        <img src="{{ asset('frontend/assets2/images/title-seperator.png') }}" alt="Image">
                     </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <p class="section-desc">Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus
-                        mus. Cras eleifend tellus sed congue consectetur, velit turpis faucibus odio eget volutpat odio
-                        lectus eu erat.</p>
                 </div>
             </div>
             <div class="col-12">
                 <div class="activities-carousel">
                     <div class="swiper-carousel">
                         <div class="swiper-wrapper">
-                            @foreach ($adventure as $ad)
+                            @foreach ($hotels as $hotel)
+                            <?php $imageHotel = \App\Models\ImageHotel::where('hotel_id',$hotel->id)->first(); ?>
                                 <div class="swiper-slide">
                                     <a href="attractions-single.html">
-                                        <figure class="activity-box"> <img src="{{ $ad['image'] }}" alt="Image">
-                                            <figcaption>{{ $ad['title'] }}</figcaption>
+                                        <figure class="activity-box">
+                                            @if ($imageHotel == null)
+                                            <img src="{{ asset('frontend/assets2/images/tour-thumb01.jpg') }}" style="width: 382px; height: 452px; object-fit: cover;" alt="Image">
+                                            @else
+                                            <img src="{{ asset('backend/assets2/images/hotel/'.$imageHotel['image']) }}" style="width: 382px; height: 452px; object-fit: cover;" alt="Image">
+                                            @endif
+                                            <figcaption>{{ $hotel->nama_hotel}}</figcaption>
                                         </figure>
                                     </a>
                                 </div>
@@ -226,6 +231,38 @@
 @endsection
 
 @section('js')
+{{-- <script src="{{ asset('backend/assets2/search/js/extention/choices.js') }}"></script>
+<script>
+    const choices = new Choices('[data-trigger]',
+    {
+      searchEnabled: false,
+      itemSelectText: '',
+    });
+
+</script>
+<script src="{{ asset('backend/assets2/search/js/extention/flatpickr.js') }}"></script> --}}
+<script>
+    flatpickr(".datepicker",
+    {
+      dateFormat: "m/d/y"
+    });
+    var btnTypes = document.querySelectorAll('.travel-type-wrap .item')
+    var mainForm = document.getElementById('main-form')
+    for (let i = 0; i < btnTypes.length; i++)
+    {
+      btnTypes[i].addEventListener('click', function()
+      {
+        for (let i = 0; i < btnTypes.length; i++)
+        {
+          btnTypes[i].classList.remove('active')
+        }
+        btnTypes[i].classList.add('active')
+        let className = 'type' + i
+        mainForm.className = `${className} main-form`
+      })
+    }
+
+  </script>
     <script>
         $(".datepicker__input").daterangepicker({
             autoUpdateInput: false,

@@ -27,6 +27,18 @@
                         </div>
                     </div>
                     <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">SIUP</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="siup" type="text" id="" placeholder="SIUP">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">NPWP</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="npwp" type="text" id="" placeholder="NPWP">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Jabatan</label>
                         <div class="col-sm-10">
                             <select name="jabatan" class="form-control" id="">

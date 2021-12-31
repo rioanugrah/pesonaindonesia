@@ -15,6 +15,7 @@ class Hotel extends Model
 
     public $fillable = [
         'id',
+        'slug',
         'nama_hotel',
         'alamat',
         'deskripsi',

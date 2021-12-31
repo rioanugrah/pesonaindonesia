@@ -73,7 +73,7 @@
 @endsection --}}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,8 +96,8 @@
                             <div class="">
                                 <div class="text-center">
                                     <a href="{{ url('/') }}" class="">
-                                        <img src="{{ asset('backend/assets/images/logo-light.png') }}" alt="" height="24" class="auth-logo logo-dark mx-auto">
-                                        <img src="{{ asset('backend/assets/images/logo-light.png') }}" alt="" height="24" class="auth-logo logo-light mx-auto">
+                                        <img src="{{ asset('backend/assets3/icon/logo_plesiran_new_black.png') }}" alt="" height="48" class="auth-logo logo-dark mx-auto">
+                                        <img src="{{ asset('backend/assets3/icon/logo_plesiran_new_black.png') }} alt="" height="48" class="auth-logo logo-light mx-auto">
                                     </a>
                                 </div>
                                 <h4 class="font-size-18 text-muted mt-2 text-center">Login</h4>
@@ -151,7 +151,7 @@
                     </div>
                     <div class="mt-5 text-center">
                         <p class="text-white-50">Don't have an account ? <a href="{{ route('register') }}" class="fw-medium text-primary"> Register </a> </p>
-                        <p class="text-white-50">© <script>document.write(new Date().getFullYear())</script> Pesona Plesiran Indonesia</p>
+                        <p class="text-white-50">© <script>document.write(new Date().getFullYear())</script> CV Pesona Plesiran Indonesia</p>
                     </div>
                 </div>
             </div>

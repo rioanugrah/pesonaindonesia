@@ -24,19 +24,7 @@
           <!-- end menu-btn -->
        {{-- <span class="search-btn"><i class="fa fa-search"></i></span> --}}
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">BERANDA</a></li>
-          <li class="nav-item dropdown"><a class="nav-link">PROFIL</a>
-            <ul class="dropdown-menu">
-              <li><a>Identitas Perusahaan</a>
-                <ul class="sub-dropdown-menu">
-                  <li><a href="{{ route('tentang_kami') }}">Tentang Kami</a></li>
-                  <li><a href="{{ route('visi_misi') }}">Visi & Misi</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('tim_kami') }}">TIM KAMI</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('kontak') }}">KONTAK KAMI</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('frontend.hotel') }}">HOTEL</a></li>
           @guest
           <li class="nav-item">
             <div class="btn-group">

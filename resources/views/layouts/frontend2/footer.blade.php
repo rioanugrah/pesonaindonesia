@@ -18,13 +18,14 @@
                 <ul class="footer-menu">
                     <li><a href="{{ route('tentang_kami') }}">Tentang Kami</a></li>
                     <li><a href="{{ route('tim_kami') }}">Tim Kami</a></li>
+                    <li><a href="{{ route('visi_misi') }}">Visi & Misi</a></li>
+                    <li><a href="{{ route('kontak') }}">Kontak Kami</a></li>
                 </ul>
             </div>
             <div class="col-lg-6 col-md-4">
                 <h5>INFORMASI</h5>
                 <ul class="footer-menu">
                     <li><a href="#">Kebijakan Privasi</a></li>
-                    <li><a href="#">Tim Kami</a></li>
                 </ul>
             </div>
             <div class="col-lg-12 col-md-4">

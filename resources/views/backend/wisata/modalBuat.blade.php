@@ -21,7 +21,7 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label class="form-label">Deskripsi</label>
-                            <textarea name="deskripsi" class="form-control" cols="30" rows="10" placeholder="Deskripsi"></textarea>
+                            <textarea name="deskripsi" class="form-control" cols="30" rows="5" placeholder="Deskripsi"></textarea>
                         </div>
                         <div class="col">
                             <label class="form-label">Alamat</label>

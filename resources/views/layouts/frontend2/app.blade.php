@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="id">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 
 <meta charset="utf-8">
@@ -7,7 +7,8 @@
 <title>@yield('title')</title>
 <meta name="author" content="Pesona Plesiran Indonesia">
 <meta name="description" content="Pesona Plesiran Indonesia">
-<meta name="keywords" content="tour, trip, travel, agency, life, vacation, climbing, wisata, pesona, plesiran, indonesia">
+<meta name="theme-color" content="#ff7b00">
+<meta name="keywords" content="tour, trip, travel, agency, life, vacation, climbing, wisata, pesona, plesiran, indonesia, pesona plesiran indonesia, pesona indonesia">
 
 <link href="{{ url('frontend/assets2/images/favicon.png') }}" rel="apple-touch-icon" sizes="144x144">
 <link href="{{ url('frontend/assets2/images/favicon.png') }}" rel="apple-touch-icon" sizes="114x114">
@@ -24,6 +25,7 @@
 <link rel="stylesheet" href="{{ url('frontend/assets2/css/scroll.css') }}">
 <link href="{{ url('frontend/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
 
+@yield('css')
 </head>
 <body>
 <div class="preloader">

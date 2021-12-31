@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Perjanjian Kerjasama CV Pesona Plesiran Indonesia - {{ $cooperation->nama_perusahaan }}</title>
+    <title>Perjanjian Kerjasama {{ $perusahaan->nama_perusahaan }} - {{ $cooperation->nama_perusahaan }}</title>
 
     <style>
         @page {
@@ -76,7 +76,7 @@
             </tr>
         </table>
         <hr>
-        <p>Dan <b>CV Pesona Plesiran Indonesia</b>, sebuah penyedia layanan online melakukan usaha yaitu PLESIRANINDONESIA.COM, dengan nama domain terdaftar yang tidak terbatas www.plesiranindonesia.com (selanjutnya disebut “Pesona Plesiran Indonesia”, “kami”, “milik kami”). CV Pesona Plesiran Indonesia terdaftar di bawah <b>SIUP: -</b> dan <b>NPWP: -</b>, Grand Slipi Tower Lt. 39 Unit G Jl Letjend. S. Parman Kav. 22-24, Jakarta 11480, Indonesia.</p>
+        <p>Dan <b>{{ $perusahaan->nama_perusahaan }}</b>, sebuah penyedia layanan online melakukan usaha yaitu PLESIRANINDONESIA.COM, dengan nama domain terdaftar yang tidak terbatas www.plesiranindonesia.com (selanjutnya disebut “Pesona Plesiran Indonesia”, “kami”, “milik kami”). {{ $perusahaan->nama_perusahaan }} terdaftar di bawah <b>SIUP: {{ $perusahaan->siup }}</b> dan <b>NPWP: {{ $perusahaan->npwp }}</b>, {{ $perusahaan->alamat_perusahaan }}.</p>
         <p>Pelaksanaan Perjanjian ini dan/atau penggunaan Layanan menunjukkan Pengakuan dan penerimaan tanpa syarat dari semua persyaratan dan ketentuan yang ditetapkan di dalamnya. Untuk menghindari keraguan, istilah “hotel” di dalam Perjanjian ini dapat merujuk pada segala jenis properti akomodasi.</p>
         <h5>LAYANAN KAMI</h5>
         <p>
