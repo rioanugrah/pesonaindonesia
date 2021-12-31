@@ -123,6 +123,9 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'oy_username' => env('OY_INDONESIA_APP_USERNAME'),
+    'oy_api_key' => env('OY_INDONESIA_APP_KEY'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

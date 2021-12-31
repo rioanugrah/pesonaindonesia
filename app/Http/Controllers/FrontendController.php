@@ -196,4 +196,10 @@ class FrontendController extends Controller
         // dd($data);
         return view('frontend.frontend2.kamar_hotel_detail',$data);
     }
+
+    public function payment()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        return view('frontend.frontend2.payment',$data);
+    }
 }

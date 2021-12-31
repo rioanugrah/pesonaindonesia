@@ -106,7 +106,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('b/perusahaan/update', 'PerusahaanController@update')->name('perusahaan.update')->middleware('verified');
     Route::get('b/perusahaan/delete/{id}', 'PerusahaanController@destroy')->name('perusahaan.hapus')->middleware('verified');
 
-    Route::get('payment', 'PaymentController@payment')->middleware('verified');
+    Route::get('payment', 'FrontendController@payment')->middleware('verified');
+    Route::post('payment/balance', 'PaymentController@balance')->name('payment.balance')->middleware('verified');
+    Route::post('payment/checkout', 'PaymentController@checkout')->name('payment')->middleware('verified');
 
 });
 
