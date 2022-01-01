@@ -61,9 +61,9 @@
                                     </td>
                                     <td data-column="Quantity" class="count-input">
                                         <div>
-                                            <a class="minus-btn" href="#"><i class="fa fa-minus"></i></a>
-                                            <input class="quantity" type="text" id="jumlah_kamar">
-                                            <a class="plus-btn" href="#"><i class="fa fa-plus"></i></a>
+                                            <a class="minus-btn1"><i class="fa fa-minus"></i></a>
+                                            <input class="quantity1" type="text" id="jumlah_kamar">
+                                            <a class="plus-btn1"><i class="fa fa-plus"></i></a>
                                         </div>
                                     </td>
                                     <td data-column="Sub Total" class="sub_total"></td>
@@ -100,8 +100,8 @@
         let counterDisplayElem = document.querySelector('.sub_total');
         let counterDisplayTotalSemua = document.querySelector('.total_semua');
         let counterDisplayTotalSemua2 = document.querySelector('.grandTotal');
-        let counterMinusElem = document.querySelector('.minus-btn');
-        let counterPlusElem = document.querySelector('.plus-btn');
+        let counterMinusElem = document.querySelector('.minus-btn1');
+        let counterPlusElem = document.querySelector('.plus-btn1');
         let count = 0;
 
         updateDisplay();
@@ -132,7 +132,7 @@
             counterDisplayTotalSemua.innerHTML = 'IDR '+rupiah;
             counterDisplayTotalSemua2.innerHTML = 'IDR '+rupiah;
             $('.subs_total').val(rupiah);
-            $('.quantity').val(count);
+            $('.quantity1').val(count);
             // counterDisplayElem.innerHTML = count;
         };
 

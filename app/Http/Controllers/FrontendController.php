@@ -16,7 +16,7 @@ class FrontendController extends Controller
     {
         $this->whatsapp = ['nomor' => '-', 'message' => 'Hello'];
         $this->teams = [
-            [ 'image' => 'team01.png', 'name' => 'Prasetyo Aji Prakoso S.E, M.M', 'posisi' => 'Advisor' ],
+            [ 'image' => 'pras.jpg', 'name' => 'Prasetyo Aji Prakoso S.E, M.M', 'posisi' => 'Advisor' ],
             [ 'image' => 'wahid.jpg', 'name' => 'Nurwahid A.', 'posisi' => 'Chief Executive Officer' ],
             [ 'image' => 'dani.jpg', 'name' => 'Fabrizio D.K', 'posisi' => 'Chief Operational Officer' ],
             [ 'image' => 'bima.jpg', 'name' => 'Bima Gani S, A.Md', 'posisi' => 'Chief Operational Officer' ],
