@@ -110,7 +110,7 @@
                 </div>
                 <div class="col-md-5">
                     <div class="copy-right text-right">
-                        Copyright © @if (date('Y')>2021)
+                        Copyright © @if (date('Y')<2021)
                         2021
                         @else
                         2021 - {{ date('Y') }}
