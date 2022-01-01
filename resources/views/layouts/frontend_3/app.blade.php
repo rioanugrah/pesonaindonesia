@@ -67,7 +67,7 @@
 </body>
 <?php $js = asset('frontend/assets3/'); ?>
 <script src="{{ $js . '/js/jquery.js' }}""></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
 <script src="{{ $js . '/vendors/bootstrap/js/bootstrap.min.js' }}"></script>
 <script src="{{ $js . '/vendors/jquery-ui/jquery-ui.min.js' }}"></script>
 <script src="{{ $js . '/vendors/countdown-date-loop-counter/loopcounter.js' }}"></script>
