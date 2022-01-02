@@ -188,11 +188,11 @@ class FrontendController extends Controller
     public function kamar_hotel_detail($slug,$slug_kamar)
     {
         $data['whatsapp'] = $this->whatsapp;
-        $data['kamar_hotels'] = KamarHotel::join('room_hotel','room_hotel.kamar_hotel_id','kamar_hotel.id')
-                                ->select('kamar_hotel.hotel_id','kamar_hotel.slug','kamar_hotel.nama_kamar','kamar_hotel.deskripsi_kamar','kamar_hotel.price','room_hotel.jumlah_kamar')
-                                ->where('kamar_hotel.slug',$slug_kamar)
-                                ->first();
-        // $data['kamar_hotels'] = KamarHotel::where('slug',$slug_kamar)->first();
+        // $data['kamar_hotels'] = KamarHotel::join('room_hotel','room_hotel.kamar_hotel_id','kamar_hotel.id')
+        //                         ->select('kamar_hotel.hotel_id','kamar_hotel.slug','kamar_hotel.nama_kamar','kamar_hotel.deskripsi_kamar','kamar_hotel.price','room_hotel.jumlah_kamar')
+        //                         ->where('kamar_hotel.slug',$slug_kamar)
+        //                         ->first();
+        $data['kamar_hotels'] = KamarHotel::where('slug',$slug_kamar)->first();
         // dd($data);
         return view('frontend.frontend2.kamar_hotel_detail',$data);
     }

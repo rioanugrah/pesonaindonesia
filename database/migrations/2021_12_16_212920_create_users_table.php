@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('id_unique')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('socialite_id')->nullable();
@@ -27,10 +28,6 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
-            $table->string('avatar');
-            $table->string('messenger_color')->default('#2180f3');
-            $table->boolean('dark_mode')->default(false);
-            $table->boolean('active_status')->default(false);
         });
     }
 

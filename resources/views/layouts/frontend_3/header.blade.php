@@ -44,6 +44,7 @@
                 <a href="{{ route('login') }}" class="button-primary">LOGIN</a>
                 <a href="{{ route('register') }}" class="button-primary">REGISTER</a>
                 @else
+                <a href="{{ route('cart') }}" class="button-primary"><i class="fas fa-shopping-cart"></i></a>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();" class="button-primary" style="text-transform: uppercase">{{ auth()->user()->name }}</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

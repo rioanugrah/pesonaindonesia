@@ -24,19 +24,13 @@ class KamarHotelController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('price', function($row){
-                        return 'Rp. '.number_format($row->price,2,".", ",");
+                        return 'Rp. '.number_format($row->price,0,",",".");
                     })
                     ->addColumn('gambar_kamar_hotel', function($row){
                         $btn = '<button onclick="kamar('.$row->id.')" class="btn btn-primary btn-sm" title="Upload Gambar Kamar">
                                     <i class="fas fa-upload"></i> Upload Gambar Kamar
                                 </button>';
                         return $btn;
-                    })
-                    ->addColumn('kamar', function($row){
-                        $room_hotel = RoomHotel::where('kamar_hotel_id',$row->id)->first();
-                        return $room_hotel->jumlah_kamar;
-                        // dd($row->rooms);
-                        // return $row->rooms->jumlah_kamar;
                     })
                     ->addColumn('action', function($row){
                         $btn = '<a href='.route('hotel.detail', ['id' => $row->id]).' class="btn btn-success btn-sm" title="Detail">
@@ -105,10 +99,10 @@ class KamarHotelController extends Controller
             $input['price'] = $request->price;
 
             $kamar_hotel = KamarHotel::firstOrCreate($input);
-            $room_hotel = RoomHotel::firstOrCreate([
-                'kamar_hotel_id' => $kamar_hotel->id,
-                'jumlah_kamar' => $request->jumlah_kamar
-            ]);
+            // $room_hotel = RoomHotel::firstOrCreate([
+            //     'kamar_hotel_id' => $kamar_hotel->id,
+            //     'jumlah_kamar' => $request->jumlah_kamar
+            // ]);
 
             foreach ($request->fasilitas_kamar_hotel_populer as $key => $fkhp) {
                 KamarHotelPopuler::create([

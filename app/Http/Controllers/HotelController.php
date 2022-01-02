@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Hotel;
 use App\Models\FasilitasHotel;
 use App\Models\FasilitasUmumHotel;
@@ -99,6 +100,7 @@ class HotelController extends Controller
             $input['alamat'] = $request->alamat_hotel;
             $input['deskripsi'] = $request->deskripsi_hotel;
             $input['layanan'] = $request->layanan;
+            $input['slug'] = Str::slug($request->nama_hotel);
             // $input['price'] = $request->price;
 
             if(auth()->user()->role == 1){

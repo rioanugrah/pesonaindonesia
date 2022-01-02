@@ -30,7 +30,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="package-wrap">
                                 <figure class="feature-image">
-                                    <a href="#">
+                                    <a href="{{ route('frontend.kamarHotelDetail', ['slug' => $hotels->slug , 'slug_kamar' => $km->slug]) }}">
                                         @if ($imageKamarHotel == null)
                                         <img src="{{ asset('frontend/assets2/images/tour-thumb01.jpg') }}" alt="">
                                         @else
@@ -51,11 +51,11 @@
                                                 <i class="far fa-clock"></i>
                                                 7D/6N
                                             </li> --}}
-                                            <li>
+                                            {{-- <li>
                                                 <i class="fas fa-user-friends"></i>
                                                 <?php $rooms = \App\Models\RoomHotel::select('jumlah_kamar')->where('kamar_hotel_id',$km->id)->first(); ?>
                                                 Sisa Kamar: {{ $rooms->jumlah_kamar }}
-                                            </li>
+                                            </li> --}}
                                             <li>
                                                 <i class="fas fa-map-marker-alt"></i>
                                                 Indonesia
@@ -74,7 +74,7 @@
                                         </div> --}}
                                         <p>{{ $km->deskripsi }}</p>
                                         <div class="btn-wrap">
-                                            <a href="#" class="button-text width-6">Booking<i
+                                            <a href="{{ route('frontend.kamarHotelDetail', ['slug' => $hotels->slug , 'slug_kamar' => $km->slug]) }}" class="button-text width-6">Booking<i
                                                     class="fas fa-arrow-right"></i></a>
                                             {{-- <a href="#" class="button-text width-6">Wish List<i
                                                     class="far fa-heart"></i></a> --}}

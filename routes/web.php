@@ -27,7 +27,7 @@ Route::post('kontak/simpan', 'FrontendController@kontak_simpan')->name('kontak.s
 
 Route::get('hotel', 'FrontendController@hotel')->name('frontend.hotel');
 Route::get('hotel/{slug}', 'FrontendController@hotel_detail')->name('frontend.hotelDetail');
-Route::get('hotel/{slug}/kamar/{slug_kamar}', 'FrontendController@kamar_hotel_detail')->name('frontend.kamarHotelDetail');
+Route::get('hotel/{slug}/{slug_kamar}', 'FrontendController@kamar_hotel_detail')->name('frontend.kamarHotelDetail');
 // Route::get('#/wisata', 'FrontendController@index');
 Route::get('ticket', function(){
     return view('backend.ticket.tiket_wisata');
@@ -95,7 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('b/hotel/{id}', 'HotelController@detail')->name('hotel.detail')->middleware('verified');
     Route::get('b/hotel/{id}/edit', 'HotelController@edit')->name('hotel.edit')->middleware('verified');
     Route::get('b/hotel/{id}/kamar', 'KamarHotelController@index')->name('kamar')->middleware('verified');
-    Route::post('b/hotel/kamar/simpan', 'KamarHotelController@simpan1')->name('kamar.simpan')->middleware('verified');
+    Route::post('b/hotel/kamar/simpan', 'KamarHotelController@simpan')->name('kamar.simpan')->middleware('verified');
     Route::get('b/hotel/delete/{id}', 'HotelController@destroy')->name('hotel.hapus')->middleware('verified');
     
     Route::get('testing', 'ChatController@chat')->name('chat')->middleware('verified');
@@ -110,8 +110,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('payment/balance', 'PaymentController@balance')->name('payment.balance')->middleware('verified');
     Route::post('payment/checkout', 'PaymentController@checkout')->name('payment')->middleware('verified');
 
-    Route::get('booking_hotel', 'BookingHotelController@index')->name('booking_hotel')->middleware('verified');
-    Route::post('booking_hotel/simpan', 'BookingHotelController@simpan')->name('booking_hotel.simpan')->middleware('verified');
+    Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
+    Route::post('cart/simpan', 'CartController@simpan')->name('cart.simpan')->middleware('verified');
+    Route::post('checkout', 'CartController@checkout')->name('checkout')->middleware('verified');
 
 });
 

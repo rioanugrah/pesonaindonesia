@@ -48,7 +48,6 @@
                         <tr>
                             <th>Kamar Hotel</th>
                             <th>Deskripsi</th>
-                            <th>Jumlah Kamar</th>
                             <th>Harga</th>
                             <th>Upload Kamar Hotel</th>
                             <th>Action</th>
@@ -102,10 +101,6 @@
                 {
                     data: 'deskripsi_kamar',
                     name: 'deskripsi_kamar'
-                },
-                {
-                    data: 'kamar',
-                    name: 'kamar'
                 },
                 {
                     data: 'price',

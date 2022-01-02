@@ -284,17 +284,19 @@
                             <h5 class="price">
                                 <span>IDR {{ number_format($kamar_hotels->price,0,",",".") }}</span> / per kamar
                             </h5>
-                            <div class="start-wrap">
+                            {{-- <div class="start-wrap">
                                 <div class="rating-start" title="Rated 5 out of 5">
                                     <span style="width: 60%"></span>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="widget-bg booking-form-wrap">
                             <h4 class="bg-title">Booking</h4>
-                            <form action="{{ route('booking_hotel.simpan') }}" method="post" class="booking-form">
+                            <form action="{{ route('cart.simpan') }}" method="post" class="booking-form">
                                 @csrf
-                                <input type="hidden" name="hotel" value="{{ $kamar_hotels->hotel->nama_hotel }}">
+                                <input type="hidden" name="price" value="{{ $kamar_hotels->price }}">
+                                <input type="hidden" name="nama_item" value="{{ $kamar_hotels->hotel->nama_hotel }} - {{ $kamar_hotels->nama_kamar }}">
+                                {{-- <input type="hidden" name="hotel" value="{{ $kamar_hotels->hotel->nama_hotel }}">
                                 <input type="hidden" name="kamar" value="{{ $kamar_hotels->nama_kamar }}">
                                 <input type="hidden" name="description" value="{{ $kamar_hotels->hotel->nama_hotel.' '.$kamar_hotels->nama_kamar }}">
                                 <input type="hidden" name="amount" value="{{ $kamar_hotels->price }}">
@@ -325,6 +327,11 @@
                                             <input type="submit" name="submit" value="Booking Now">
                                         </div>
                                     </div>
+                                </div> --}}
+                                {{-- <div class="col-sm-12">
+                                </div> --}}
+                                <div class="form-group submit-btn">
+                                    <input type="submit" value="Booking Now" style="width: 100%">
                                 </div>
                             </form>
                         </div>

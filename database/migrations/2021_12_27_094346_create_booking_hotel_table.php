@@ -18,11 +18,7 @@ class CreateBookingHotelTable extends Migration
             $table->string('kode_booking', 255);
             $table->bigInteger('hotel_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->string('name_booking');
-            $table->string('email_booking');
-            $table->string('phone_booking');
-            $table->string('booking_date');
-            $table->double('total');
+            $table->double('total')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign(['hotel_id'])->references(['id'])->on('hotel');
@@ -39,6 +35,24 @@ class CreateBookingHotelTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign(['booking_hotel_id'])->references(['id'])->on('booking_hotel');
+        });
+
+        Schema::create('pemesanan_hotel', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('booking_hotel_detail_id')->unsigned();
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('email');
+            $table->string('confirmation_email');
+            $table->string('phone');
+            $table->string('negara');
+            $table->string('alamat_1');
+            $table->string('city');
+            $table->string('state');
+            $table->text('information');
+            $table->timestamps();
+            $table->softDeletes();
+            $table->foreign(['booking_hotel_detail_id'])->references(['id'])->on('booking_hotel_detail');
         });
     }
 

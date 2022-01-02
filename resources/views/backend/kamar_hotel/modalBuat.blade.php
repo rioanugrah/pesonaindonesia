@@ -25,11 +25,6 @@
                                 rows="5"></textarea></td>
                         </tr>
                         <tr>
-                            <td>Jumlah Kamar</td>
-                            <td>:</td>
-                            <td><input class="form-control" name="jumlah_kamar" type="number" id="" placeholder="Jumlah Kamar"></td>
-                        </tr>
-                        <tr>
                             <td>Harga Kamar</td>
                             <td>:</td>
                             <td><input class="form-control" name="price" type="number" id="" placeholder="Harga Kamar"></td>

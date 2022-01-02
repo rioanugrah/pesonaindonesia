@@ -20,7 +20,6 @@ class CreateHotelTable extends Migration
             $table->text('alamat');
             $table->text('deskripsi');
             $table->string('layanan');
-            $table->double('price');
             $table->timestamps();
             $table->softDeletes();
         });

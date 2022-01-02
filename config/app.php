@@ -168,7 +168,7 @@ return [
         /*
          * Package Service Providers...
          */
-        \Chatify\ChatifyServiceProvider::class,
+        // \Chatify\ChatifyServiceProvider::class,
         Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
         Reliese\Coders\CodersServiceProvider::class,
         /*
@@ -231,7 +231,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Chatify' => Chatify\Facades\ChatifyMessenger::class,
+        // 'Chatify' => Chatify\Facades\ChatifyMessenger::class,
     ],
 
 ];

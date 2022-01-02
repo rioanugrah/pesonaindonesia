@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Cart extends Model
+{
+    // use SoftDeletes;
+
+    public $table = 'cart';
+
+    public $incrementing = false;
+    protected $primaryKey = 'id';
+    protected $dates = ['deleted_at'];
+    public $timestamps = false;
+
+    public $fillable = [
+        'id',
+        'user_id',
+        'kode_booking',
+        'price',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(\App\User::class, 'user_id');
+    }
+}

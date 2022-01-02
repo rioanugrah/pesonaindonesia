@@ -15,9 +15,11 @@ class CreateKamarHotelTable extends Migration
     {
         Schema::create('kamar_hotel', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('slug');
             $table->unsignedBigInteger('hotel_id')->index('kamar_hotel_hotel_id_foreign');
             $table->string('nama_kamar');
             $table->string('deskripsi_kamar');
+            $table->double('price');
             $table->timestamps();
             $table->softDeletes();
         });
