@@ -169,7 +169,7 @@ return [
          * Package Service Providers...
          */
         // \Chatify\ChatifyServiceProvider::class,
-        Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
+        // Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
         Reliese\Coders\CodersServiceProvider::class,
         /*
          * Application Service Providers...
