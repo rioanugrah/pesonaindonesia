@@ -28,7 +28,7 @@
                             <div class="section-disc">
                                 <p>Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang
                                     menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi,
-                                    Destinasi, Restoran Transportasi, Travel dan MICE se Indonesia.</p>
+                                    Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.</p>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                                     <img src="{{ asset('frontend/assets3/images/icon16.png') }}" alt="">
                                 </div>
                                 <div class="about-service-content">
-                                    <h4>DESTINATION</h4>
+                                    <h4>DESTINASI</h4>
                                     <p></p>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                             </div>
                             <div class="counter-content">
                                 <span class="counter-no">
-                                    <span class="counter">0</span>K+
+                                    <span class="counter">0</span>
                                 </span>
                                 <span class="counter-text">
                                     Mitra
@@ -151,7 +151,7 @@
                            </div>
                            <div class="counter-content">
                               <span class="counter-no">
-                                 <span class="counter">0</span>K+
+                                 <span class="counter">0</span>
                               </span>
                               <span class="counter-text">
                                  Awards Achieve
@@ -166,7 +166,7 @@
                             </div>
                             <div class="counter-content">
                                 <span class="counter-no">
-                                    <span class="counter">0</span>K+
+                                    <span class="counter">0</span>
                                 </span>
                                 <span class="counter-text">
                                     Anggota Aktif
@@ -181,7 +181,7 @@
                             </div>
                             <div class="counter-content">
                                 <span class="counter-no">
-                                    <span class="counter">0</span>K+
+                                    <span class="counter">0</span>
                                 </span>
                                 <span class="counter-text">
                                     Tujuan Wisata

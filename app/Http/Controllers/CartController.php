@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class CartController extends Controller
 {
     public function __construct(){
-        $this->whatsapp = ['nomor' => '-', 'message' => 'Hello'];
+        $this->whatsapp = ['nomor' => env('WA_BUSINESS'), 'message' => env('WA_MESSAGE')];
     }
 
     public function index()

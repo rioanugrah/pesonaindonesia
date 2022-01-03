@@ -60,6 +60,7 @@
                                                 <div class="card-header" id="heading{{ $key }}">
                                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ $key }}" aria-expanded="true" aria-controls="collapse{{ $key }}">
                                                     {{ $cart->kode_booking }}
+                                                    <input type="hidden" name="kode_booking" value="{{ $cart->kode_booking }}">
                                                    </button>
                                                 </div>
                                                 <div id="collapse{{ $key }}" class="collapse" aria-labelledby="heading{{ $key }}" data-parent="#accordion{{ $key }}">

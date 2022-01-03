@@ -10,7 +10,7 @@
                         <div class="textwidget widget-text">
                             Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang
                             menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi,
-                            Destinasi, Restoran Transportasi, Travel dan MICE se Indonesia.
+                            Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.
                         </div>
                         <div class="award-img">
                             <a href="#"><img src="assets/images/logo6.png" alt=""></a>
@@ -26,7 +26,7 @@
                                 <li>
                                     <a href="#">
                                         <i class="fas fa-phone-alt"></i>
-                                        -
+                                        0813-3112-6991
                                     </a>
                                 </li>
                                 <li>
@@ -54,7 +54,7 @@
                                     <a href="{{ route('tentang_kami') }}">Tentang Kami</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('tim_kami') }}">Tim Kami</a>
+                                    <a href="{{ route('tim_kami') }}">Our Team</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('visi_misi') }}">Visi & Misi</a>

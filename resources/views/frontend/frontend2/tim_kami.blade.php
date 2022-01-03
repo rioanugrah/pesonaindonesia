@@ -1,7 +1,7 @@
 @extends('layouts.frontend_3.app')
 
 @section('title')
-    Tim Kami
+Our Team
 @endsection
 
 @section('content')

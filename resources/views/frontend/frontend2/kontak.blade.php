@@ -27,7 +27,6 @@
                     <div class="col-md-6">
                         <div class="contact-from-wrap">
                             <div class="section-heading">
-                                <h5 class="dash-style">GET IN TOUCH</h5>
                                 <h2>HUBUNGI KAMI UNTUK MENDAPATKAN INFO LEBIH LANJUT</h2>
                             </div>
                             <form id="upload-form" class="contact-from" enctype="multipart/form-data">
@@ -52,7 +51,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="contact-detail-wrap">
-                            <h3>Need help ?? Feel free to contact us !</h3>
+                            <h3>Butuh Bantuan? Silahkan Menghubungi Kami di</h3>
                             <div class="details-list">
                                 <ul>
                                     <li>
@@ -60,7 +59,7 @@
                                             <i class="fas fa-map-signs"></i>
                                         </span>
                                         <div class="details-content">
-                                            <h4>Location Address</h4>
+                                            <h4>Alamat</h4>
                                             <span>Jl. Raya Tlogowaru No. 3, Tlogowaru Kec. Kedungkandang, Kota Malang, Jawa Timur</span>
                                         </div>
                                     </li>
@@ -69,7 +68,7 @@
                                             <i class="fas fa-envelope-open-text"></i>
                                         </span>
                                         <div class="details-content">
-                                            <h4>Email Address</h4>
+                                            <h4>Email</h4>
                                             <span><a href="mailto:business@plesiranindonesia.com">business@plesiranindonesia.com</a></span>
                                         </div>
                                     </li>
@@ -78,8 +77,8 @@
                                             <i class="fas fa-phone-volume"></i>
                                         </span>
                                         <div class="details-content">
-                                            <h4>Phone Number</h4>
-                                            <span>Telephone: -</span>
+                                            <h4>Nomor Telepon</h4>
+                                            <span>Whatsapp: 0813-3112-6991</span>
                                         </div>
                                     </li>
                                 </ul>

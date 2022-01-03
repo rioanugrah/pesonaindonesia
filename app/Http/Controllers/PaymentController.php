@@ -139,7 +139,7 @@ class PaymentController extends Controller
         return $response;
     }
 
-    public function checkout(Request $request)
+    public function checkout1(Request $request)
     {
         $url = $this->payment_testing."payment-checkout/create-v2";
         $curl = curl_init($url);
@@ -158,22 +158,40 @@ class PaymentController extends Controller
 
         $data1 = '
             {
-                "partner_tx_id":"'.time().'",
-                "description":"'.$request->description.'",
+                "partner_tx_id":"H-49220220101",
+                "description":"",
                 "notes":"",
-                "sender_name":"'.$request->name_booking.'",
-                "amount":"'.$request->amount.'",
-                "email":"'.$request->email_booking.'",
-                "phone_number":"'.$request->phone_booking.'",
+                "sender_name":"Rio Anugrah",
+                "amount":"1704450",
+                "email":"rioanugrah999@gmail.com",
+                "phone_number":"082233684670",
                 "is_open":false,
                 "step":"input-amount",
                 "include_admin_fee":true,
                 "list_disabled_payment_methods":"",
                 "list_enabled_banks":"",
-                "expiration":"'.Carbon::now()->addHour(1).'",
-                "due_date":"'.Carbon::now()->addHour(1).'",
-                "va_display_name":"Display Name on VA"
+                "expiration":"'.Carbon::now()->addHour().'",
+                "due_date":"'.Carbon::now().'",
+                "va_display_name":"Display Name on VA",
             }';
+        // $data1 = '
+        //     {
+        //         "partner_tx_id":"'.$request->kode_booking.'",
+        //         "description":"",
+        //         "notes":"",
+        //         "sender_name":"'.$request->firstname_booking." ".$request->lastname_booking.'",
+        //         "amount":"'.$request->amount.'",
+        //         "email":"'.$request->email_booking.'",
+        //         "phone_number":"'.$request->phone_booking.'",
+        //         "is_open":false,
+        //         "step":"input-amount",
+        //         "include_admin_fee":true,
+        //         "list_disabled_payment_methods":"",
+        //         "list_enabled_banks":"",
+        //         "expiration":"'.Carbon::now()->addHour().'",
+        //         "due_date":"'.Carbon::now().'",
+        //         "va_display_name":"Display Name on VA",
+        //     }';
         // $data1 = "";
 
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data1);
@@ -187,11 +205,19 @@ class PaymentController extends Controller
 
         // return $resp->getBody();
         return $resp;
+
+        // return $request->all();
+
         // return response()->json($resp->message);
         // var_dump($resp);
 
         // dd($url);
 
+        
+    }
+
+    public function checkout(Request $request)
+    {
         
     }
 }
