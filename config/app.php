@@ -170,7 +170,7 @@ return [
          */
         // \Chatify\ChatifyServiceProvider::class,
         // Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
-        Reliese\Coders\CodersServiceProvider::class,
+        // Reliese\Coders\CodersServiceProvider::class,
         /*
          * Application Service Providers...
          */
