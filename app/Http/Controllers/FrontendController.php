@@ -165,6 +165,10 @@ class FrontendController extends Controller
 
     public function partnership()
     {
+        $coming_soon = true;
+        if($coming_soon == true){
+            return view('frontend.frontend2.segera_hadir');
+        }
         return view('frontend.frontend2.partnership');
     }
 

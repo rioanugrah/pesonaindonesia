@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Transaksi;
 use \Carbon\Carbon;
+use Illuminate\Support\Str;
+use HTTP_Request2;
 
 class PaymentController extends Controller
 {
     public function __construct(){
         $this->username = config('app.oy_username');
         $this->app_key = config('app.oy_api_key');
+        $this->whatsapp = ['nomor' => '-', 'message' => 'Hello'];
         $this->payment_production = 'https://partner.oyindonesia.com/api/';
         $this->payment_testing = 'https://api-stg.oyindonesia.com/api/';
     }
@@ -218,6 +222,195 @@ class PaymentController extends Controller
 
     public function checkout(Request $request)
     {
+        // require_once 'HTTP/Request2.php';
+        // return $request->all();
+
+        $input = $request->all();
+
+        $request = new HTTP_Request2();
+        $request->setUrl('https://api-stg.oyindonesia.com/api/payment-checkout/create-v2');
+        $request->setMethod(HTTP_Request2::METHOD_POST);
+        $request->setConfig(array(
+        'follow_redirects' => TRUE
+        ));
+        $request->setHeader(array(
+        'Content-Type' => 'application/json',
+        'Accept: application/json',
+        'x-oy-username' => $this->username,
+        'x-api-key' => $this->app_key
+        ));
+        $data1 = '
+            {
+                "partner_tx_id":"'.$input['kode_booking'].'",
+                "notes":"",
+                "sender_name":"'.$input['firstname_booking']." ".$input['lastname_booking'].'",
+                "amount":"'.$input['amount'].'",
+                "email":"'.$input['email_booking'].'",
+                "phone_number":"'.$input['phone_booking'].'",
+                "is_open":"false",
+                "step":"input-amount",
+                "include_admin_fee":true,
+                "list_disabled_payment_methods":"",
+                "list_enabled_banks":"",
+                "full_name" : "'.$input['firstname_booking']." ".$input['lastname_booking'].'",
+                "is_va_lifetime": false,
+                "expiration":"'.Carbon::now()->addHour(2).'",
+                "due_date":"'.Carbon::now().'",
+                "va_display_name":"Display Name on VA"
+            }';
         
+        $request->setBody($data1);
+        try {
+        $response = $request->send();
+        if ($response->getStatus() == 200) {
+            // if()
+            $r = $response->getBody();
+            // return $this->filter($r);
+            echo $response->getBody();
+        }
+        else {
+            echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+            $response->getReasonPhrase();
+        }
+        }
+        catch(HTTP_Request2_Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    public function getSaldo()
+    {
+        $request = new HTTP_Request2();
+        $request->setUrl($this->payment_testing.'balance');
+        $request->setMethod(HTTP_Request2::METHOD_GET);
+        $request->setConfig(array(
+        'follow_redirects' => TRUE
+        ));
+        $request->setHeader(array(
+        'x-oy-username' => $this->username,
+        'x-api-key' => $this->app_key,
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json'
+        ));
+        try {
+        $response = $request->send();
+        if ($response->getStatus() == 200) {
+            echo $response->getBody();
+        }
+        else {
+            echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+            $response->getReasonPhrase();
+        }
+        }
+        catch(HTTP_Request2_Exception $e) {
+        echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    public function createInvoice(Request $request)
+    {
+        $input = $request->all();
+        $id_random = rand(1,9999);
+
+        $request = new HTTP_Request2();
+        $request->setUrl($this->payment_testing.'payment-checkout/create-invoice');
+        $request->setMethod(HTTP_Request2::METHOD_POST);
+        $request->setConfig(array(
+        'follow_redirects' => TRUE
+        ));
+        $request->setHeader(array(
+        'Content-Type' => 'application/json',
+        'Accept: application/json',
+        'x-oy-username' => $this->username,
+        'x-api-key' => $this->app_key
+        ));
+        $data1 = '
+            {
+                "partner_tx_id":"'.$input['kode_booking'].'",
+                "description":"",
+                "notes":"",
+                "sender_name":"'.$input['firstname_booking']." ".$input['lastname_booking'].'",
+                "amount":"50000",
+                "email":"'.$input['email_booking'].'",
+                "phone_number":"'.$input['phone_booking'].'",
+                "is_open":"false",
+                "step":"input-amount",
+                "include_admin_fee":true,
+                "list_disabled_payment_methods":"",
+                "list_enabled_banks":"",
+                "full_name" : "'.$input['firstname_booking']." ".$input['lastname_booking'].'",
+                "is_va_lifetime": false,
+                "expiration":"'.Carbon::now()->addHour(2).'",
+                "due_date":"'.Carbon::now().'",
+                "partner_user_id":"'.auth()->user()->id_unique.'", 
+                "invoice_items": [
+                    {
+                      "item":"'.$input['description'].'", 
+                      "description":"", 
+                      "quantity": '.$input['qty'].', 
+                      "date_of_purchase":"'.Carbon::parse($input['date_purchase'])->format('Y-m-d').'", 
+                      "price_per_item": '.$input['amount'].'  
+                    }
+                ]
+            }';
+        
+        $request->setBody($data1);
+        try {
+        $response = $request->send();
+        if ($response->getStatus() == 200) {
+            // if()
+            $r['data'] = json_decode($response->getBody(),true);
+            $r['whatsapp'] = $this->whatsapp;
+            $r['input'] = $input;
+
+            if($r['data']['status'] == true){
+                $transaksi = Transaksi::firstOrCreate(['partner_tx_id' => $input['kode_booking']],[
+                    'id' => Str::uuid()->toString(),
+                    'nama_penerima' => $input['firstname_booking']." ".$input['lastname_booking'],
+                    'total' => 50000,
+                    'created_at' => Carbon::parse($input['date_purchase']),
+                    'updated_at' => Carbon::parse($input['date_purchase'])
+                ]);
+            }else{
+                $r['url'] = $this->payment_testing.'payment-checkout/'.$input['kode_booking'];
+            }
+            // return $this->filter($r);
+            // echo $response->getBody();
+
+            // $c = json_decode($r['data'],true);
+            // dd($c['message']);
+            // return redirect($r['data']['url']);
+            return view('frontend.frontend2.confirmation',$r);
+        }
+        else {
+            echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+            $response->getReasonPhrase();
+        }
+        }
+        catch(HTTP_Request2_Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    public function checkout2(Request $request)
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        // $data['message'] = [
+        //     'status' => true,
+        //     'title' => 'PAYMENT CONFIRMED',
+        //     'message' => 'Thank you, your payment has been successful and your booking is now confirmed.A confirmation
+        //     email has been sent to info@travele.com.'
+        // ];
+        $input = $request->all();
+        // dd($input);
+        return view('frontend.frontend2.confirmation',$data,$input)->with([
+            'title' => 'PAYMENT CONFIRMED',
+            'message' => 'Thank you, your payment has been successful and your booking is now confirmed.A confirmation email has been sent to info@travele.com.'
+        ]);
+    }
+
+    public function cekInvoice()
+    {
+        # code...
     }
 }

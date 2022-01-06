@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Cart extends Model
+class Transaksi extends Model
 {
     // use SoftDeletes;
 
-    public $table = 'cart';
+    public $table = 'transaksi';
 
     public $incrementing = false;
     protected $primaryKey = 'id';
@@ -18,16 +18,10 @@ class Cart extends Model
 
     public $fillable = [
         'id',
-        'user_id',
-        'kode_booking',
-        'price',
-        'is_cart',
+        'nama_penerima',
+        'partner_tx_id',
+        'total',
         'created_at',
         'updated_at',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(\App\User::class, 'user_id');
-    }
 }

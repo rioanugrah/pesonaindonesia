@@ -49,6 +49,7 @@
                             </thead>
                             <tbody>
                                 @forelse ($carts as $key => $cart)
+                                @if ($cart->is_cart != 'S')
                                 <tr>
                                     <td class="">
                                         <button class="close" onclick="hapus({{ $cart->id }})" data-dismiss="alert" aria-label="Close"><span
@@ -77,6 +78,7 @@
                                     </td>
                                     <td data-column="Price">IDR {{ number_format($cartItem->price,0,",",".") }}
                                     <input type="hidden" class="price" name="price" value="{{ $cartItem->price }}">
+                                    <input type="hidden" name="created_at" value="{{ $cartItem->created_at }}">
                                     </td>
                                     <td data-column="Quantity" class="count-input">
                                         <div>
@@ -88,6 +90,7 @@
                                     <td data-column="Sub Total" class="sub_total"></td>
                                     <input type="hidden" name="sub_total" class="subs_total">
                                 </tr>
+                                @endif
                                 @empty
                                 <tr>
                                     <td colspan="5" class="text-center">Data Tidak Tersedia</td>

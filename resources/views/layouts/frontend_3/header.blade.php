@@ -6,7 +6,7 @@
                     <div class="header-contact-info">
                         <ul>
                             <li>
-                                <a href="#"><i class="fas fa-phone-alt"></i> -</a>
+                                <a href="#"><i class="fas fa-phone-alt"></i>0813-3112-6991</a>
                             </li>
                             <li>
                                 <a href="mailto:business@plesiranindonesia.com"><i class="fas fa-envelope"></i>

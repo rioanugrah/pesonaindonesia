@@ -33,6 +33,8 @@ class CartController extends Controller
             $inputItem['cart_id'] = $cart->id;
             $inputItem['nama_item'] = $request->nama_item;
             $inputItem['price'] = $request->price;
+            $inputItem['created_at'] = $request->created_at;
+            $inputItem['updated_at'] = $request->updated_at;
             
             $cartItem = CartItem::create($inputItem);
             

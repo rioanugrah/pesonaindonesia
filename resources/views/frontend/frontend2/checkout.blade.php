@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-lg-6 right-sidebar">
                 {{-- <form action="{{ route('payment') }}" method="post" enctype="multipart/form-data"> --}}
-                <form action="javascript:void" id="upload-form" method="post">
+                <form action="{{ route('payment') }}" method="post">
                     @csrf
                     <div class="booking-form-wrap">
                         <div class="booking-content">
@@ -98,8 +98,10 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <strong>{{ $data['item_detail'] }} </strong>
+                                            <strong>{{ $data['qty'] }}x {{ $data['item_detail'] }} </strong>
+                                            <input type="hidden" name="qty" value="{{ $data['qty'] }}">
                                             <input type="hidden" name="description" value="{{ $data['item_detail'] }}">
+                                            <input type="hidden" name="date_purchase" value="{{ $data['created_at'] }}">
                                         </td>
                                         <td class="text-right">
                                             IDR {{ number_format($data['price'],0,",",".") }}
@@ -123,6 +125,8 @@
             </div>
         </div>
     </div>
+
+    {{-- {{ dd(auth()->user()->id_unique) }} --}}
 @endsection
 
 @section('js')

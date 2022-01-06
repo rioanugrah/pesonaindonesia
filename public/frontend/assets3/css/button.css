@@ -31,9 +31,9 @@
 }
 
 .fourth {
-    border-color: #f1c40f;
+    border-color: #f38f39;
     color: #fff;
-    background-image: linear-gradient(45deg, #f1c40f 50%, transparent 50%);
+    background-image: linear-gradient(45deg, #f38f39 50%, transparent 50%);
     background-position: 100%;
     background-size: 400%;
     transition: background 300ms ease-in-out;

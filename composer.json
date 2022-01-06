@@ -20,6 +20,7 @@
         "laravel/ui": "2.4",
         "midtrans/midtrans-php": "^2.4",
         "milon/barcode": "^7.0",
+        "pear/http_request2": "^2.5",
         "pusher/pusher-php-server": "~7.0",
         "reliese/laravel": "^1.1",
         "xendit/xendit-php": "^2.10",

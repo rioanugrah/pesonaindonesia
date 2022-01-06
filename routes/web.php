@@ -108,7 +108,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('payment', 'FrontendController@payment')->middleware('verified');
     Route::post('payment/balance', 'PaymentController@balance')->name('payment.balance')->middleware('verified');
-    Route::post('payment/checkout', 'PaymentController@checkout')->name('payment')->middleware('verified');
+    Route::post('payment/checkout', 'PaymentController@createInvoice')->name('payment')->middleware('verified');
+    Route::get('balance', 'PaymentController@getSaldo')->middleware('verified');
 
     Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
     Route::post('cart/simpan', 'CartController@simpan')->name('cart.simpan')->middleware('verified');
