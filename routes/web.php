@@ -44,7 +44,7 @@ Route::domain('{account}.localhost.com')->group(function () {
         ]);
     });
 });
-Route::domain('plesiranmalang.'.env('APP_URL'))->group(function () {
+Route::domain('testing.'.env('APP_URL'))->group(function () {
     Route::get('/', function(){
         echo 'Plesiran Malang';
         // return response()->json([
