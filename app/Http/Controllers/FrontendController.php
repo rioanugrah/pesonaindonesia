@@ -153,7 +153,7 @@ class FrontendController extends Controller
             $input = $request->all();
             $contact_us = ContactUs::create($input);
 
-            if($roles){
+            if($contact_us){
                 $message_title="Berhasil !";
                 $message_content="Terima Kasih ".$input['name']." Telah Mengirim Pesan ke Kami";
                 $message_type="success";

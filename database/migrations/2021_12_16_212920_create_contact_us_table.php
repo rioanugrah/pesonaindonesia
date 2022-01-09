@@ -14,7 +14,7 @@ class CreateContactUsTable extends Migration
     public function up()
     {
         Schema::create('contact_us', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id();
             $table->string('name', 75);
             $table->string('email');
             $table->string('subject');
