@@ -39,7 +39,7 @@
             <div class="main-navigation d-none d-lg-block">
                 @include('layouts.frontend_3.menu')
             </div>
-            <div class="header-btn">
+            {{-- <div class="header-btn">
                 @guest
                 <a href="{{ route('login') }}" class="button-primary">LOGIN</a>
                 <a href="{{ route('register') }}" class="button-primary">REGISTER</a>
@@ -51,7 +51,7 @@
                 @csrf
                 </form>
                 @endguest
-            </div>
+            </div> --}}
         </div>
     </div>
     <div class="mobile-menu-container"></div>

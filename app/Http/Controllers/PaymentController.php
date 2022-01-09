@@ -359,28 +359,35 @@ class PaymentController extends Controller
         $response = $request->send();
         if ($response->getStatus() == 200) {
             // if()
-            $r['data'] = json_decode($response->getBody(),true);
-            $r['whatsapp'] = $this->whatsapp;
+            // $r['data'] = json_decode($response->getBody(),true);
+            // $r['whatsapp'] = $this->whatsapp;
             $r['input'] = $input;
 
-            if($r['data']['status'] == true){
-                $transaksi = Transaksi::firstOrCreate(['partner_tx_id' => $input['kode_booking']],[
-                    'id' => Str::uuid()->toString(),
-                    'nama_penerima' => $input['firstname_booking']." ".$input['lastname_booking'],
-                    'total' => 50000,
-                    'created_at' => Carbon::parse($input['date_purchase']),
-                    'updated_at' => Carbon::parse($input['date_purchase'])
-                ]);
-            }else{
-                $r['url'] = $this->payment_testing.'payment-checkout/'.$input['kode_booking'];
-            }
+            // if($r['data']['status'] == true){
+            //     $transaksi = Transaksi::firstOrCreate(['partner_tx_id' => $input['kode_booking']],[
+            //         'id' => Str::uuid()->toString(),
+            //         'nama_penerima' => $input['firstname_booking']." ".$input['lastname_booking'],
+            //         'total' => 50000,
+            //         'created_at' => Carbon::parse($input['date_purchase']),
+            //         'updated_at' => Carbon::parse($input['date_purchase'])
+            //     ]);
+            // }else{
+            //     $r['url'] = $this->payment_testing.'payment-checkout/'.$input['kode_booking'];
+            // }
             // return $this->filter($r);
-            // echo $response->getBody();
+            $transaksi = Transaksi::firstOrCreate(['partner_tx_id' => $input['kode_booking']],[
+                'id' => Str::uuid()->toString(),
+                'nama_penerima' => $input['firstname_booking']." ".$input['lastname_booking'],
+                'total' => $input['amount'],
+                'created_at' => Carbon::parse($input['date_purchase']),
+                'updated_at' => Carbon::parse($input['date_purchase'])
+            ]);
+            echo $response->getBody();
 
             // $c = json_decode($r['data'],true);
             // dd($c['message']);
             // return redirect($r['data']['url']);
-            return view('frontend.frontend2.confirmation',$r);
+            // return view('frontend.frontend2.confirmation',$r);
         }
         else {
             echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .

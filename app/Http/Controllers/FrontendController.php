@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\Hotel;
 use App\Models\KamarHotel;
+use App\Models\FasilitasUmumHotel;
 use App\Models\ContactUs;
 use \Carbon\Carbon;
 use Validator;
+use DB;
 
 class FrontendController extends Controller
 {
@@ -48,16 +50,24 @@ class FrontendController extends Controller
             // ];
             $data['wallpaper'] = Slider::where('status','Y')->get();
             $data['adventure'] = [
-                ['image' => 'frontend/assets2/images/bromo_vertikal.jpg', 'title' => 'Gunung Bromo'],
-                ['image' => 'frontend/assets2/images/batubengkung_vertikal.jpg', 'title' => 'Pantai Batu Bengkung'],
-                ['image' => 'frontend/assets2/images/jatimpark2_vertikal.jpg', 'title' => 'Jatim Park 2'],
+                ['image' => 'frontend/assets4/images/bromo_vertikal.jpg', 'title' => 'Gunung Bromo'],
+                ['image' => 'frontend/assets4/images/batubengkung_vertikal.jpg', 'title' => 'Pantai Batu Bengkung'],
+                ['image' => 'frontend/assets4/images/jatimpark2_vertikal.jpg', 'title' => 'Jatim Park 2'],
             ];
             $data['hotels'] = Hotel::paginate(9);
             $data['informasi'] = 'info@plesiranindonesia.com';
             $data['whatsapp'] = $this->whatsapp;
             $data['jumlah_hotel'] = Hotel::count();
-            // return view('frontend.index2', $data);
-            return view('frontend.frontend2.index',$data);
+            $searchTermJawa = 'Jawa';
+            $searchTermJogja = 'Di Yogyakarta';
+            $data['provinsis'] = DB::table('provinsi')
+                                    ->select('nama AS provinsi')
+                                    ->where('nama','LIKE',"%{$searchTermJawa}%")
+                                    ->orWhere('nama','LIKE',"%{$searchTermJogja}%")->get();
+            // dd($data['whatsapp']);
+            return view('frontend.frontend4.index', $data);
+            // return view('layouts.frontend_4.app',$data);
+            // return view('frontend.frontend2.index',$data);
         }else{
             $data['email'] = 'info@plesiranindonesia.com';
             $data['content'] = 'Get ready everyone at Pesona Plesiran Indonesia.';
@@ -98,7 +108,9 @@ class FrontendController extends Controller
     public function tentang_kami()
     {
         $data['whatsapp'] = $this->whatsapp;
-        return view('frontend.frontend2.tentang_kami', $data);
+        $data['jumlah_hotel'] = Hotel::count();
+        // return view('frontend.frontend2.tentang_kami', $data);
+        return view('frontend.frontend4.tentang_kami', $data);
     }
     public function visimisi()
     {
@@ -109,12 +121,14 @@ class FrontendController extends Controller
     {
         $data['teams'] = $this->teams;
         $data['whatsapp'] = $this->whatsapp;
-        return view('frontend.frontend2.tim_kami', $data);
+        // return view('frontend.frontend2.tim_kami', $data);
+        return view('frontend.frontend4.teams', $data);
     }
     public function kontak()
     {
         $data['whatsapp'] = $this->whatsapp;
-        return view('frontend.frontend2.kontak', $data);
+        // return view('frontend.frontend2.kontak', $data);
+        return view('frontend.frontend4.kontak', $data);
     }
 
     public function kontak_simpan(Request $request)
@@ -178,15 +192,19 @@ class FrontendController extends Controller
         $data['hotels'] = Hotel::paginate(18);
 
         // dd($data['hotelss']);
-        return view('frontend.frontend2.hotel', $data);
+        // return view('frontend.frontend2.hotel', $data);
+        return view('frontend.frontend4.hotel', $data);
+
     }
     public function hotel_detail($slug)
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['hotels'] = Hotel::where('slug',$slug)->first();
+        $data['fasilitas_popular'] = FasilitasUmumHotel::where('hotel_id',$data['hotels']['id'])->get();
         $data['kamar_hotels'] = KamarHotel::where('hotel_id',$data['hotels']['id'])->get();
         // dd($data['kamar_hotels']);
-        return view('frontend.frontend2.hotelDetail', $data);
+        // return view('frontend.frontend2.hotelDetail', $data);
+        return view('frontend.frontend4.hotelDetail', $data);
     }
 
     public function kamar_hotel_detail($slug,$slug_kamar)

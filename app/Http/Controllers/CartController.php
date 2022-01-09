@@ -50,7 +50,17 @@ class CartController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['data'] = $request->all();
+        // dd($data['data']);
         // dd($request->all());
         return view('frontend.frontend2.checkout', $data);
+    }
+
+    public function delete($id)
+    {
+        $cart = Cart::find($id)->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'Data Berhasil Dihapus'
+        ]);
     }
 }

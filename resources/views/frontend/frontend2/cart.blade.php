@@ -51,9 +51,8 @@
                                 @forelse ($carts as $key => $cart)
                                 @if ($cart->is_cart != 'S')
                                 <tr>
-                                    <td class="">
-                                        <button class="close" onclick="hapus({{ $cart->id }})" data-dismiss="alert" aria-label="Close"><span
-                                                aria-hidden="true">×</span></button>
+                                    <td>
+                                        <button type="button" class="close" onclick="hapus('{{ $cart->id }}')"><span>×</span></button>
                                     </td>
                                     <td data-column="Kode Booking">
                                         <div class="accordion" id="accordion{{ $key }}">
@@ -152,13 +151,27 @@
             }
             counterDisplayElem.innerHTML = 'IDR '+rupiah;
             counterDisplayTotalSemua2.innerHTML = 'IDR '+rupiah;
-            $('.subs_total').val(rupiah);
+            $('.subs_total').val(bilangan);
             $('.quantity1').val(count);
             // counterDisplayElem.innerHTML = count;
         };
 
         function hapus(id) {
-            location.reload();
+            $.ajax({
+                url: "{{ url('cart/delete') }}"+'/'+id,
+                type: 'GET',
+                success: function(result) {
+                    if(result.status == true){
+                        alert(result.message);
+                        location.reload();
+                    }else{
+                        alert(result.message);
+                    }
+                    // Do something with the result
+                }
+            });
+            // alert(id);
+            // location.reload();
         }
     </script>
 @endsection

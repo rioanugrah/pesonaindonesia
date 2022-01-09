@@ -3,6 +3,22 @@
         <li>
             <a href="{{ route('frontend.hotel') }}">Hotel</a>
         </li>
+        @guest
+        <li><a href="{{ route('login') }}">Login</a></li>
+        <li><a href="{{ route('register') }}">Daftar</a></li>
+        @else
+        <li>
+            <a href="{{ route('cart') }}"><i class="fas fa-shopping-cart"></i></a>
+        </li>
+        <li class="menu-item-has-children">
+            <a>{{ auth()->user()->name }}</a>
+            <ul>
+                <li>
+                    <a href="#">Wishlist</a>
+                </li>
+            </ul>
+        </li>
+        @endguest
         {{-- <li class="menu-item-has-children">
             <a href="#">Tour</a>
             <ul>

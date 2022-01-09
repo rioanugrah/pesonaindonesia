@@ -1,0 +1,115 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 17/06/2016 10:46
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-circle:before { content: "\f100"; }
+.flaticon-close:before { content: "\f101"; }
+.flaticon-favorite:before { content: "\f102"; }
+.flaticon-help:before { content: "\f103"; }
+.flaticon-people:before { content: "\f104"; }
+.flaticon-round:before { content: "\f105"; }
+.flaticon-suntour-adult:before { content: "\f106"; }
+.flaticon-suntour-airplane:before { content: "\f107"; }
+.flaticon-suntour-arrow:before { content: "\f108"; }
+.flaticon-suntour-bed:before { content: "\f109"; }
+.flaticon-suntour-calendar:before { content: "\f10a"; }
+.flaticon-suntour-car:before { content: "\f10b"; }
+.flaticon-suntour-check:before { content: "\f10c"; }
+.flaticon-suntour-check-1:before { content: "\f10d"; }
+.flaticon-suntour-children:before { content: "\f10e"; }
+.flaticon-suntour-comment:before { content: "\f10f"; }
+.flaticon-suntour-cross:before { content: "\f110"; }
+.flaticon-suntour-email:before { content: "\f111"; }
+.flaticon-suntour-fireworks:before { content: "\f112"; }
+.flaticon-suntour-hotel:before { content: "\f113"; }
+.flaticon-suntour-left:before { content: "\f114"; }
+.flaticon-suntour-loading:before { content: "\f115"; }
+.flaticon-suntour-map:before { content: "\f116"; }
+.flaticon-suntour-mark:before { content: "\f117"; }
+.flaticon-suntour-mobile-phone:before { content: "\f118"; }
+.flaticon-suntour-phone:before { content: "\f119"; }
+.flaticon-suntour-photo:before { content: "\f11a"; }
+.flaticon-suntour-play:before { content: "\f11b"; }
+.flaticon-suntour-quote:before { content: "\f11c"; }
+.flaticon-suntour-right:before { content: "\f11d"; }
+.flaticon-suntour-search:before { content: "\f11e"; }
+.flaticon-suntour-shapes:before { content: "\f11f"; }
+.flaticon-suntour-share:before { content: "\f120"; }
+.flaticon-suntour-ship:before { content: "\f121"; }
+.flaticon-suntour-tag:before { content: "\f122"; }
+.flaticon-suntour-world:before { content: "\f123"; }
+.flaticon-technology:before { content: "\f124"; }
+.flaticon-warning:before { content: "\f125"; }
+    
+    $font-Flaticon-circle: "\f100";
+    $font-Flaticon-close: "\f101";
+    $font-Flaticon-favorite: "\f102";
+    $font-Flaticon-help: "\f103";
+    $font-Flaticon-people: "\f104";
+    $font-Flaticon-round: "\f105";
+    $font-Flaticon-suntour-adult: "\f106";
+    $font-Flaticon-suntour-airplane: "\f107";
+    $font-Flaticon-suntour-arrow: "\f108";
+    $font-Flaticon-suntour-bed: "\f109";
+    $font-Flaticon-suntour-calendar: "\f10a";
+    $font-Flaticon-suntour-car: "\f10b";
+    $font-Flaticon-suntour-check: "\f10c";
+    $font-Flaticon-suntour-check-1: "\f10d";
+    $font-Flaticon-suntour-children: "\f10e";
+    $font-Flaticon-suntour-comment: "\f10f";
+    $font-Flaticon-suntour-cross: "\f110";
+    $font-Flaticon-suntour-email: "\f111";
+    $font-Flaticon-suntour-fireworks: "\f112";
+    $font-Flaticon-suntour-hotel: "\f113";
+    $font-Flaticon-suntour-left: "\f114";
+    $font-Flaticon-suntour-loading: "\f115";
+    $font-Flaticon-suntour-map: "\f116";
+    $font-Flaticon-suntour-mark: "\f117";
+    $font-Flaticon-suntour-mobile-phone: "\f118";
+    $font-Flaticon-suntour-phone: "\f119";
+    $font-Flaticon-suntour-photo: "\f11a";
+    $font-Flaticon-suntour-play: "\f11b";
+    $font-Flaticon-suntour-quote: "\f11c";
+    $font-Flaticon-suntour-right: "\f11d";
+    $font-Flaticon-suntour-search: "\f11e";
+    $font-Flaticon-suntour-shapes: "\f11f";
+    $font-Flaticon-suntour-share: "\f120";
+    $font-Flaticon-suntour-ship: "\f121";
+    $font-Flaticon-suntour-tag: "\f122";
+    $font-Flaticon-suntour-world: "\f123";
+    $font-Flaticon-technology: "\f124";
+    $font-Flaticon-warning: "\f125";
