@@ -116,13 +116,13 @@
             <div class="features-tours-item">
                 <div class="features-media">
                     @if ($provinsi->provinsi == 'Jawa Barat')
-                    <img src="{{ $asset.'/img/image/jabar.jpg' }}" style="width: 350px; height: 350px; object-fit: cover;" alt>
+                    <img src="{{ $asset.'/img/image/jabar.jpg' }}" style="width: 480px; height: 350px; object-fit: cover;" alt>
                     @elseif ($provinsi->provinsi == 'Jawa Tengah')
-                    <img src="{{ $asset.'/img/image/jateng.jpg' }}" style="width: 350px; height: 350px; object-fit: cover;" alt>
+                    <img src="{{ $asset.'/img/image/jateng.jpg' }}" style="width: 480px; height: 350px; object-fit: cover;" alt>
                     @elseif ($provinsi->provinsi == 'Di Yogyakarta')
-                    <img src="{{ $asset.'/img/image/jogja.jpg' }}" style="width: 350px; height: 350px; object-fit: cover;" alt>
+                    <img src="{{ $asset.'/img/image/jogja.jpg' }}" style="width: 480px; height: 350px; object-fit: cover;" alt>
                     @elseif ($provinsi->provinsi == 'Jawa Timur')
-                    <img src="{{ $asset.'/img/image/jatim.jpg' }}" style="width: 350px; height: 350px; object-fit: cover;" alt>
+                    <img src="{{ $asset.'/img/image/jatim.jpg' }}" style="width: 480px; height: 350px; object-fit: cover;" alt>
                     {{-- @elseif() --}}
                     @else
                     <img src="{{ $asset.'/pic/tours/1.jpg' }}" data-at2x="{{ $asset.'/pic/tours/1.jpg' }}" alt>
