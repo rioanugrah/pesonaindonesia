@@ -46,7 +46,7 @@ Route::domain('{account}.localhost.com')->group(function () {
 });
 Route::domain('plesiranmalang.'.env('APP_URL'))->group(function () {
     Route::get('/', function(){
-        return 'Plesiran Malang';
+        echo 'Plesiran Malang';
         // return response()->json([
         //     'status' => true
         // ]);
