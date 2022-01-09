@@ -18,7 +18,7 @@
         <div class="full-wrapper relative clearfix container">
             <div class="nav-logo-wrap local-scroll"><a href="{{ route('frontend') }}" class="logo"><img
                         src="{{ $asset . '/img/logo_plesiran_new_black.png' }}"
-                        data-at2x="{{ $asset . '/img/logo_plesiran_new_black.png' }}" alt></a></div>
+                        data-at2x="{{ $asset . '/img/logo_plesiran_new_black.png' }}" width="250" alt></a></div>
             <div class="inner-nav desktop-nav">
                 <ul class="clearlist">
                     <li><a href="{{ url('/') }}" class="mn-has-sub active">Home</a>

@@ -38,13 +38,18 @@ Route::get('partnership', 'FrontendController@partnership')->name('frontend.part
 Auth::routes(['verify' => true]);
 
 Route::domain('{account}.localhost.com')->group(function () {
-    // Route::get('user/{id}', function ($account, $id) {
-    //     //
-    // });
     Route::get('/', function($account){
         return response()->json([
             'status' => true
         ]);
+    });
+});
+Route::domain('plesiranmalang.'.env('APP_URL'))->group(function () {
+    Route::get('/', function(){
+        return 'Plesiran Malang';
+        // return response()->json([
+        //     'status' => true
+        // ]);
     });
 });
 

@@ -127,10 +127,10 @@
                     @else
                     <img src="{{ $asset.'/pic/tours/1.jpg' }}" data-at2x="{{ $asset.'/pic/tours/1.jpg' }}" alt>
                     @endif
-                    <div class="features-info-top">
+                    {{-- <div class="features-info-top">
                         <div class="info-price font-4"><span>start per night</span> IDR 0</div>
                         <div class="info-temp font-4"><span>local temperature</span> 30° / 86°</div>
-                    </div>
+                    </div> --}}
                     <div class="features-info-bot">
                         <h4 class="title"><span class="font-4">Indonesia</span>
                             {{ $provinsi->provinsi }}</h4>
