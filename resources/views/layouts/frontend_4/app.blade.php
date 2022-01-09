@@ -14,6 +14,7 @@
     <meta name="keywords"
         content="tour, trip, travel, agency, life, vacation, climbing, wisata, pesona, plesiran, indonesia, pesona plesiran indonesia, pesona indonesia">
     <?php $css = asset('frontend/assets4/'); ?>
+    <link href="{{ url('frontend/assets4/img/favicon.png') }}" rel="shortcut icon">
     <link rel="stylesheet" href="{{ $css . '/css/reset.css' }}">
     <link rel="stylesheet" href="{{ $css . '/css/bootstrap.css' }}">
     <link rel="stylesheet" href="{{ $css . '/css/font-awesome.css' }}">
