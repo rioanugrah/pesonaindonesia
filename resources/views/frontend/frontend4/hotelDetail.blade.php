@@ -134,8 +134,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <form action="{{ route('cart.simpan') }}" method="post">
+                        @csrf
                         @forelse ($kamar_hotels as $km)
                         <?php $imageKamarHotel = \App\Models\ImageKamarHotel::select('image')->where('kamar_hotel_id', $km->id)->first(); ?>
+                        <input type="hidden" name="price" value="{{ $km->price }}">
+                        <input type="hidden" name="nama_item" value="{{ $km->hotel->nama_hotel }} - {{ $km->nama_kamar }}">
                         <tr>
                             <td>
                                 @if ($imageKamarHotel == null)
@@ -162,13 +166,14 @@
                                 </ul>
                             </td>
                             <td class="room-price">IDR {{ number_format($km->price,0,",",".") }}</td>
-                            <td> <a href="#" class="cws-button alt gray">Book now</a></td>
+                            <td> <button type="submit" class="cws-button alt gray">Book now</button></td>
                         </tr>
                         @empty
                         <tr>
                             <td colspan="5">Data Belum Tersedia</td>
                         </tr>
                         @endforelse
+                        </form>
                     </tbody>
                 </table>
             </div>

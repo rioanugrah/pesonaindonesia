@@ -10,6 +10,9 @@ use App\Models\FasilitasUmumHotel;
 use App\Models\KebijakanHotel;
 use App\Models\KamarHotel;
 use App\Models\ImageHotel;
+use App\Models\Provinsi;
+use App\Models\KabupatenKota;
+use App\Models\Kecamatan;
 use DataTables;
 use Validator;
 class HotelController extends Controller
@@ -61,6 +64,8 @@ class HotelController extends Controller
             ['icon' => 'restaurant.png', 'value' => 'Restoran'],
             ['icon' => 'meeting.png', 'value' => 'Ruang Rapat'],
         ];
+        $data['provinsis'] = Provinsi::pluck('nama','id');
+        // dd($data['provinsis']);
         return view('backend.hotel.index_new', $data);
     }
 
@@ -100,6 +105,9 @@ class HotelController extends Controller
             $input['alamat'] = $request->alamat_hotel;
             $input['deskripsi'] = $request->deskripsi_hotel;
             $input['layanan'] = $request->layanan;
+            $input['provinsi'] = $request->provinsi;
+            $input['kota_kabupaten'] = $request->kota_kabupaten;
+            $input['kecamatan'] = $request->kecamatan;
             $input['slug'] = Str::slug($request->nama_hotel);
             // $input['price'] = $request->price;
 
@@ -179,6 +187,21 @@ class HotelController extends Controller
                 'error' => $validator->errors()->all()
             ]
         );
+    }
+
+    public function select_kab_kota(Request $request)
+    {
+        $get_id = (int)$request->id;
+        $select_kab_kota = KabupatenKota::where('id_provinsi', $get_id)->pluck('nama', 'id');
+
+        return response()->json($select_kab_kota);
+    }
+    public function select_kecamatan(Request $request)
+    {
+        $get_id = (int)$request->id;
+        $select_kecamatan = Kecamatan::where('id_kota', $get_id)->pluck('nama', 'id');
+
+        return response()->json($select_kecamatan);
     }
 
     public function upload_image(Request $request)
@@ -285,7 +308,12 @@ class HotelController extends Controller
             $input['nama_hotel'] = $request->edit_nama_hotel;
             $input['alamat'] = $request->edit_alamat_hotel;
             $input['deskripsi'] = $request->edit_deskripsi_hotel;
+            $input['provinsi'] = $request->edit_provinsi;
+            $input['kota_kabupaten'] = $request->edit_kota_kabupaten;
+            $input['kecamatan'] = $request->edit_kecamatan;
             $input['layanan'] = $request->edit_layanan;
+
+            // dd($input);
             
             if(auth()->user()->role == 1){
                 $array_message = array(

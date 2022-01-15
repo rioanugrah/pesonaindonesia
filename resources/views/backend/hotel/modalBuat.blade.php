@@ -23,6 +23,31 @@
                         </div>
                     </div>
                     <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Provinsi</label>
+                        <div class="col-sm-10">
+                            <select name="provinsi" class="form-control provinsi" id="provinsi">
+                                <option>-- Pilih Provinsi --</option>
+                                @foreach ($provinsis as $id => $provinsi)
+                                    <option value="{{ $id }}">{{ $provinsi }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Kota/Kabupaten</label>
+                        <div class="col-sm-10">
+                            <select name="kota_kabupaten" class="form-control kota_kabupaten" id="kota_kabupaten">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Kecamatan</label>
+                        <div class="col-sm-10">
+                            <select name="kecamatan" class="form-control kecamatan" id="kecamatan">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Deskripsi Hotel</label>
                         <div class="col-sm-10">
                             <textarea name="deskripsi_hotel" class="form-control" id="" cols="30"

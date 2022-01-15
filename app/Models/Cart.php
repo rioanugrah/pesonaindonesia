@@ -20,6 +20,7 @@ class Cart extends Model
         'id',
         'user_id',
         'kode_booking',
+        'is_cart',
         'price',
         'is_cart',
         'created_at',

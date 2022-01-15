@@ -239,7 +239,7 @@
                                 @endif
                             </div>
                         </a>
-                        <div class="location"><i class="flaticon-suntour-map"></i> Indonesia
+                        <div class="location"><i class="flaticon-suntour-map"></i> {{ $hotel->kotas->nama }}, {{ $hotel->provinsis->nama }}
                         </div>
                     </div>
                     <!-- Recomended Content-->

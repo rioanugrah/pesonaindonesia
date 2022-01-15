@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="google-site-verification" content="-agNXAZvJ7uHctHQlEr7t7q9VoOHxdpZJIDOv9womR4" />
+    <meta name="google-site-verification" content="FINya1A7o0a-hHiPA1CXl0OFffJkaIeMdfwp_YNpFu0" />
+    {{-- <meta name="google-site-verification" content="-agNXAZvJ7uHctHQlEr7t7q9VoOHxdpZJIDOv9womR4" /> --}}
     <meta name="author" content="Pesona Plesiran Indonesia">
     <meta name="description" content="Pesona Plesiran Indonesia">
     <meta name="theme-color" content="#ff7b00">

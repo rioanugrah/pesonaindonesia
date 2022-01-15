@@ -7,7 +7,7 @@
                     <div class="footer-logo"><a href="{{ url('/') }}"><img src="{{ $asset . '/img/logo_plesiran_new_white.png' }}"
                                 data-at2x="{{ $asset . '/img/logo_plesiran_new_white.png' }}" width="220" alt></a></div>
                 </div>
-                <p class="color-g2 mt-10">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang
+                <p class="color-g2 mt-10" style="text-align: justify">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang
                     menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi,
                     Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.</p>
                 <!-- social-->

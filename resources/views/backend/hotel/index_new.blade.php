@@ -82,6 +82,8 @@
     <script src="{{ asset('backend/assets2/libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
 
     <script src="{{ asset('backend/assets2/js/jquery.steps.min.js') }}"></script>
+    <script src="{{ asset('backend/assets2/js/axios.min.js') }}"></script>
+    
     {{-- <script src="{{ asset('backend/assets2/js/form-wizard.init.js') }}"></script> --}}
     {{-- <script src="{{ asset('backend/assets2/js/app.js') }}"></script> --}}
     
@@ -329,6 +331,26 @@
         //         }
         //     });
         // });
+        $('.provinsi').on('change',function(){
+            axios.post('{{ url('hotel/kab_kota') }}', {id: $(this).val()})
+            .then(function (response) {
+                $('.kota_kabupaten').empty();
+
+                $.each(response.data, function (id, nama) {
+                    $('.kota_kabupaten').append(new Option(nama, id))
+                })
+            });
+        });
+        $('.kota_kabupaten').on('change',function(){
+            axios.post('{{ url('hotel/kecamatan') }}', {id: $(this).val()})
+            .then(function (response) {
+                $('.kecamatan').empty();
+
+                $.each(response.data, function (id, nama) {
+                    $('.kecamatan').append(new Option(nama, id))
+                })
+            });
+        });
 
         $('#edit-upload-form').submit(function(e) {
             e.preventDefault();

@@ -20,6 +20,8 @@ class CartItem extends Model
         'nama_item',
         'qty',
         'price',
+        'created_at',
+        'updated_at',
     ];
 
     public function user()

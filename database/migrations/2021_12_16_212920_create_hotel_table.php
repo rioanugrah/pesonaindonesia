@@ -19,6 +19,10 @@ class CreateHotelTable extends Migration
             $table->string('nama_hotel');
             $table->text('alamat');
             $table->text('deskripsi');
+            $table->string('provinsi');
+            $table->string('kota_kabupaten');
+            $table->string('kecamatan');
+            $table->string('kode_pos')->nullable();
             $table->string('layanan');
             $table->timestamps();
             $table->softDeletes();

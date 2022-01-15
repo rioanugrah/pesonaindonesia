@@ -103,7 +103,7 @@
                                             <strong>{{ $data['qty'] }}x {{ $data['item_detail'] }} </strong>
                                             <input type="hidden" name="qty" value="{{ $data['qty'] }}">
                                             <input type="hidden" name="description" value="{{ $data['item_detail'] }}">
-                                            <input type="hidden" name="date_purchase" value="{{ $data['created_at'] }}">
+                                            {{-- <input type="hidden" name="date_purchase" value="{{ $data['created_at'] }}"> --}}
                                         </td>
                                         <td class="text-right sub_total">
                                             
@@ -115,7 +115,7 @@
                                         </td>
                                         <td class="text-right">
                                             <strong class="sub_total1"></strong>
-                                            <input type="hidden" name="amount" id="total" value="{{ $data['sub_total'] }}">
+                                            {{-- <input type="hidden" name="amount" id="total" value="{{ $data['sub_total'] }}"> --}}
                                         </td>
                                     </tr>
                                 </tbody>
