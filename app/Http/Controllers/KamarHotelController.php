@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Hotel;
 use App\Models\KamarHotel;
 use App\Models\KamarHotelPopuler;
@@ -95,6 +96,7 @@ class KamarHotelController extends Controller
             // $hotel_id = Hotel::select('id')->where('id',$request['id_hotel'])->first();
             $input['hotel_id'] = $request['id_hotel'];
             $input['nama_kamar'] = $request->nama_kamar;
+            $input['slug'] = Str::slug($request->nama_kamar);
             $input['deskripsi_kamar'] = $request->deskripsi_kamar;
             $input['price'] = $request->price;
 

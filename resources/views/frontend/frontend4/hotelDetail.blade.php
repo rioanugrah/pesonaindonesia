@@ -135,6 +135,7 @@
                     </thead>
                     <tbody>
                         <form action="{{ route('cart.simpan') }}" method="post">
+                        <input type="hidden" name="jppn" value="{{ $hotels->ppn }}" readonly>
                         @csrf
                         @forelse ($kamar_hotels as $km)
                         <?php $imageKamarHotel = \App\Models\ImageKamarHotel::select('image')->where('kamar_hotel_id', $km->id)->first(); ?>

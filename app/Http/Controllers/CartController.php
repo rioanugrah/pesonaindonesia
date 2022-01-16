@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Country;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -28,20 +29,26 @@ class CartController extends Controller
         $input['id'] = Str::uuid()->toString();
         $input['kode_booking'] = 'H-'.rand(100,999).date('Ymd');
         $input['user_id'] = auth()->user()->id;
-        $input['is_cart'] = 'P';
+        $input['is_cart'] = 'W';
+        $input['jppn'] = $request->jppn;
         $input['created_at'] = Carbon::now();
 
+        // dd($input);
+
         $cek_cart = Cart::where('user_id',auth()->user()->id)
+                        ->where('is_cart','W')
                         ->select('user_id')->first();
         if($cek_cart){
             return redirect()->route('cart')->with('danger','Selesaikan Booking Anda');
         }else{
+            // dd($inputItem['qty'] = $request->qty);
             $cart = Cart::create($input);
     
             if($cart){
                 $inputItem['cart_id'] = $cart->id;
                 $inputItem['nama_item'] = $request->nama_item;
                 $inputItem['price'] = $request->price;
+                $inputItem['qty'] = $request->qty;
                 $inputItem['created_at'] = Carbon::now();
                 $inputItem['updated_at'] = $request->updated_at;
                 
@@ -54,13 +61,34 @@ class CartController extends Controller
         // dd($input);
     }
 
+    public function status($kode_booking)
+    {
+        Cart::where('kode_booking',$kode_booking)->update([
+            'is_cart' => 'S'
+        ]);
+        return response()->json([
+            'status' => true
+        ]);
+    }
+
     public function checkout(Request $request)
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['data'] = $request->all();
+        $data['data']['jmlppn'] = $request->jppn;
+        $cekCart = Cart::where('kode_booking',$request->kode_booking)->first();
+        $data['data']['created_at'] = $cekCart->created_at;
+        $cart = Cart::where('kode_booking',$cekCart->kode_booking)->update([
+            'price' => $request->order_total
+        ]);
+        $cartItem = CartItem::where('cart_id',$cekCart->id)->update([
+            'qty' => $request->qty
+        ]);
+        // $data['country'] = $request->all();
         // dd($data['data']);
+        // dd($cart);
         // dd($request->all());
-        return view('frontend.frontend2.checkout', $data);
+        return view('frontend.frontend4.checkout', $data);
     }
 
     public function delete($id)

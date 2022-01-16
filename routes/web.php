@@ -34,6 +34,8 @@ Route::get('ticket', function(){
 });
 
 Route::get('partnership', 'FrontendController@partnership')->name('frontend.partnership');
+Route::get('wistlist', 'FrontendController@wistlist')->name('frontend.wistlist');
+Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('frontend.search.wistlist');
 
 Auth::routes(['verify' => true]);
 
@@ -136,6 +138,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
     Route::post('cart/simpan', 'CartController@simpan')->name('cart.simpan')->middleware('verified');
     Route::get('cart/delete/{id}', 'CartController@delete')->name('cart.delete')->middleware('verified');
+    Route::get('cart/status/{kode_booking}', 'CartController@status')->name('cart.status')->middleware('verified');
     Route::post('checkout', 'CartController@checkout')->name('checkout')->middleware('verified');
 
 });

@@ -8,6 +8,7 @@ use App\Models\Hotel;
 use App\Models\KamarHotel;
 use App\Models\FasilitasUmumHotel;
 use App\Models\ContactUs;
+use App\Models\Transaksi;
 use \Carbon\Carbon;
 use Validator;
 use DB;
@@ -223,5 +224,18 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         return view('frontend.frontend2.payment',$data);
+    }
+
+    public function wistlist()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        return view('frontend.frontend4.wistlist',$data);
+    }
+    public function search_wistlist(Request $request)
+    {
+        $search = Transaksi::where('partner_tx_id','like',"%".$request->s."%")->get();
+        return response()->json([
+            'data' => $search
+        ]);
     }
 }

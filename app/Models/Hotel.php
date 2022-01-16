@@ -21,6 +21,7 @@ class Hotel extends Model
         'deskripsi',
         'layanan',
         'provinsi',
+        'ppn',
         'kota_kabupaten',
         'kecamatan',
     ];

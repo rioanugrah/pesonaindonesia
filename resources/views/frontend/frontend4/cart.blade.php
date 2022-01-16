@@ -90,7 +90,7 @@
                                 @endif
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="text-center">Data Tidak Tersedia</td>
+                                        <td colspan="5" class="text-center">Data Tidak Tersedia</td>
                                     </tr>
                                 @endforelse
                                 <tr>

@@ -34,7 +34,7 @@
                     <li><a href="#" class="mn-has-sub">{{ auth()->user()->name }}</a>
                         <ul class="mn-sub">
                             <li>
-                                <a href="#">Wistlish</a>
+                                <a href="{{ route('frontend.wistlist') }}">Wistlish</a>
                             </li>
                             <li>
                                 <form id="logout-form" action="{{ url('/logout') }}" method="POST"
