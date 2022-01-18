@@ -91,8 +91,8 @@ src="{{ $js . '/rs-plugin/js/extensions/revolution.extension.layeranimation.min.
 <script type="text/javascript" src="{{ $js . '/js/jquery.tweet.js' }}"></script>
 <script type="text/javascript" src="{{ $js . '/js/jquery.scrollTo.min.js' }}"></script>
 <script type="text/javascript" src="{{ $js . '/js/jquery.flexslider.js' }}"></script>
-<script type="text/javascript" src="{{ $js . '/tuner/js/colorpicker.js' }}"></script>
-<script type="text/javascript" src="{{ $js . '/tuner/js/scripts.js' }}"></script>
+{{-- <script type="text/javascript" src="{{ $js . '/tuner/js/colorpicker.js' }}"></script>
+<script type="text/javascript" src="{{ $js . '/tuner/js/scripts.js' }}"></script> --}}
 <script type="text/javascript" src="{{ $js . '/js/retina.min.js' }}"></script>
 @yield('js')
 

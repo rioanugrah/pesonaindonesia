@@ -56,10 +56,10 @@ Route::domain('testing.'.env('APP_URL'))->group(function () {
 });
 
 Route::prefix('plesiranmalang')->group(function () {
-    Route::get('/', function () {
-        echo 'Plesiran Malang';
-        // Matches The "/admin/users" URL
-    });
+    Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg')->middleware('verified');
+    Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
+    Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
+
 });
 
 Route::get('send-notif/{name}', function ($name) {
@@ -71,6 +71,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('b')->group(function () {
         Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
         Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
+        
+        Route::get('kategori_kota', 'KategoriKotaController@index')->name('ktkota')->middleware('verified');
+        Route::post('kategori_kota/simpan', 'KategoriKotaController@simpan')->name('ktkota.simpan')->middleware('verified');
         
         Route::get('cooperation', 'CooperationController@index')->name('cooperation')->middleware('verified');
         Route::get('cooperation/{id}/download', 'CooperationController@download')->name('cooperation.download')->middleware('verified');

@@ -41,6 +41,12 @@
                         <span>Perusahaan</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('b/kategori_kota*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('ktkota') }}" class="waves-effect">
+                        <i class="ti-package"></i>
+                        <span>Kategori Kota</span>
+                    </a>
+                </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ti-email"></i>

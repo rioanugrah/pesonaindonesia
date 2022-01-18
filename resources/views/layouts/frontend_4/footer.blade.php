@@ -7,15 +7,17 @@
                     <div class="footer-logo"><a href="{{ url('/') }}"><img src="{{ $asset . '/img/logo_plesiran_new_white.png' }}"
                                 data-at2x="{{ $asset . '/img/logo_plesiran_new_white.png' }}" width="220" alt></a></div>
                 </div>
-                <p class="color-g2 mt-10" style="text-align: justify">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang
+                <h4>PARTNER PEMBAYARAN</h4>
+                <br class="mb-sm-30">
+                <img src="{{ $asset.'/img/logo_payment/bca.png' }}" style="margin:1%;" width="60" alt="" srcset="">
+                <img src="{{ $asset.'/img/logo_payment/bni.png' }}" style="margin:1%;" width="60" alt="" srcset="">
+                <img src="{{ $asset.'/img/logo_payment/bri.png' }}" style="margin:1%;" width="60" alt="" srcset="">
+                <img src="{{ $asset.'/img/logo_payment/mandiri.png' }}" style="margin:1%;" width="60" alt="" srcset="">
+                <img src="{{ $asset.'/img/logo_payment/jenius.png' }}" style="margin:1%;" width="60" alt="" srcset="">
+                {{-- <p class="color-g2 mt-10" style="text-align: justify">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang
                     menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi,
-                    Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.</p>
+                    Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.</p> --}}
                 <!-- social-->
-                <div class="social-link dark"><a href="#" class="cws-social fa fa-twitter"></a><a href="#"
-                        class="cws-social fa fa-facebook"></a><a href="#"
-                        class="cws-social fa fa-google-plus"></a><a href="#"
-                        class="cws-social fa fa-linkedin"></a></div>
-                <!-- ! social-->
             </div>
             <div class="col-md-3 col-sm-3">
                 <div class="widget-footer">
