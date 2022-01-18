@@ -56,7 +56,7 @@ Route::domain('testing.'.env('APP_URL'))->group(function () {
 });
 
 Route::prefix('plesiranmalang')->group(function () {
-    Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg')->middleware('verified');
+    Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
     Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
     Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
 
