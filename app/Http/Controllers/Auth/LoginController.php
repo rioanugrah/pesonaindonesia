@@ -57,11 +57,14 @@ class LoginController extends Controller
 
             if($user != null){
                 auth()->login($user, true);
+                $user->profile = $user_google->getAvatar();
+                $user->update();
                 return redirect()->route('home');
             }else{
                 $create = User::Create([
                     'email'             => $user_google->getEmail(),
                     'name'              => $user_google->getName(),
+                    'profile'              => $user_google->getAvatar(),
                     'password'          => 0,
                     'email_verified_at' => now()
                 ]);
