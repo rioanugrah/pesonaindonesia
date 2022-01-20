@@ -67,8 +67,10 @@ Route::get('send-notif/{name}', function ($name) {
     return "Event has been sent!";
 });
 
-Route::get('auth/google', 'Auth\LoginController@redirectToProvider')->name('login_google');
-Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login_google');
+Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
+// Route::get('auth/google', 'Auth\LoginController@redirectToProvider')->name('login_google');
+// Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('b')->group(function () {

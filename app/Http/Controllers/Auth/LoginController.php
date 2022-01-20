@@ -40,15 +40,15 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function redirectToProvider()
+    public function redirectToProvider($driver)
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver($driver)->redirect();
     }
 
-    public function handleProviderCallback(\Request $request)
+    public function handleProviderCallback($driver)
     {
         try {
-            $user_google    = Socialite::driver('google')->user();
+            $user_google    = Socialite::driver($driver)->user();
             $user           = User::where('email', $user_google->getEmail())->first();
 
             //jika user ada maka langsung di redirect ke halaman home
@@ -57,6 +57,8 @@ class LoginController extends Controller
 
             if($user != null){
                 auth()->login($user, true);
+                $user->socialite_name = $driver;
+                $user->socialite_id = $user_google->getId();
                 $user->profile = $user_google->getAvatar();
                 $user->update();
                 return redirect()->route('home');

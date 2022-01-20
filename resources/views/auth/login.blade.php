@@ -142,7 +142,7 @@
                                             </div>
                                             <div class="d-grid mt-4">
                                                 <button class="btn btn-primary waves-effect waves-light" type="submit">Login</button>
-                                                <a class="btn btn-danger" href="{{ route('login_google') }}">Google</a>
+                                                <a class="btn btn-danger" href="{{ route('login_google','google') }}">Google</a>
                                             </div>
                                         </div>
                                     </div>
