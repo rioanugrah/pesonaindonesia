@@ -13,6 +13,7 @@
 
 @section('content')
     @include('backend.slider.modalBuat')
+    @include('backend.slider.modalEdit')
     <div class="page-title-box">
         <div class="row align-items-center">
             <div class="col-md-8">
@@ -142,6 +143,33 @@
             table.ajax.reload();
         }
 
+        function edit(id) {
+            $.ajax({
+                type: 'GET',
+                // url: "{{ route('slider.edit',['id' => "+id+"]) }}",
+                url: "{{ url('b/slider') }}"+'/'+id+'/edit',
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    // document.getElementById('edit_modal_title').innerHTML = result.perusahaan.nama_perusahaan;
+                    $('#edit_id').val(result.slider.id);
+                    $('#edit_nama_slider').val(result.slider.nama_slider);
+                    $('#edit_status').val(result.slider.status);
+                    // $('#edit_nama_perusahaan').val(result.perusahaan.nama_perusahaan);
+                    // $('#edit_alamat_perusahaan').val(result.perusahaan.alamat_perusahaan);
+                    // $('#edit_penanggung_jawab').val(result.perusahaan.penanggung_jawab);
+                    // $('#edit_jabatan').val(result.perusahaan.jabatan);
+                    // $('#edit_siup').val(result.perusahaan.siup);
+                    // $('#edit_npwp').val(result.perusahaan.npwp);
+
+                    $('#edit').modal('show');
+                    // alert(result);
+                    // console.table(result.slider);
+                }
+            })
+            // alert(id);
+        }
+
         $('#upload-form').submit(function(e) {
             e.preventDefault();
             let formData = new FormData(this);
@@ -161,6 +189,40 @@
                         table.ajax.reload();
                         document.getElementById("button").style.display = "block";
                         document.getElementById("input_slider").style.display = "none";
+                    }else{
+                        iziToast.error({
+                            title: result.success,
+                            message: result.error
+                        });
+                    }
+                },
+                error: function (request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            });
+        });
+
+        $('#edit-upload-form').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $.ajax({
+                type:'POST',
+                url: "{{ route('slider.update') }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    if(result.success != false){
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                        this.reset();
+                        $('#edit').modal('hide');
+                        table.ajax.reload();
                     }else{
                         iziToast.error({
                             title: result.success,

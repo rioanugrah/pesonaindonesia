@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Slider;
 use DataTables;
 use Validator;
+use File;
 class SliderController extends Controller
 {
     public function index(Request $request)
@@ -15,12 +16,9 @@ class SliderController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href='.$row->created_at.' type="button" class="btn btn-success btn-icon">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href='.$row->created_at.' type="button" class="btn btn-warning btn-icon">
+                        $btn = '<button type="button" onclick="edit('.$row->id.')" class="btn btn-warning btn-icon">
                                     <i class="fa fa-edit"></i>
-                                </a>
+                                </button>
                                 <button type="button" class="btn btn-danger btn-icon">
                                     <i class="fa fa-trash"></i>
                                 </button>';
@@ -30,7 +28,7 @@ class SliderController extends Controller
                         return $btn;
                     })
                     ->addColumn('image', function($row){
-                        return "<img src='frontend/assets2/images/wallpaper/".$row->image."' />";
+                        return "<img src='".url('frontend/assets4/img/wallpaper/'.$row->image)."' width='250' />";
                     })
                     ->addColumn('status', function($row){
                         if($row->status == 'Y'){
@@ -63,7 +61,7 @@ class SliderController extends Controller
         if ($validator->passes()) {
             $input = $request->all();
             $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('frontend/assets2/images/wallpaper'), $input['image']);
+            $request->image->move(public_path('frontend/assets4/img/wallpaper'), $input['image']);
             // $request->foto->move(storage_path('app/public/image'), $input['image']);
     
            $slider = Slider::create($input);
@@ -82,6 +80,93 @@ class SliderController extends Controller
                 'message_type' => $message_type,
             );
             return response()->json($array_message);
+        }
+
+        return response()->json(
+            [
+                'success' => false,
+                'error' => $validator->errors()->all()
+            ]
+        );
+    }
+
+    public function edit($id)
+    {
+        $data['slider'] = Slider::find($id);
+        
+        if(auth()->user()->role == 1){
+            $array_message = array(
+                'success' => false,
+                'message_title' => 'Access Denied',
+                'message_content' => 'Anda Tidak Memiliki Akses',
+                'message_type' => "error",
+            );
+            return response()->json($array_message);
+        }else{
+            return response()->json($data);
+        }
+    }
+
+    public function update(Request $request)
+    {
+        $rules = [
+            'edit_image'  => 'required|file|max:2048',
+            'edit_status'  => 'required',
+        ];
+ 
+        $messages = [
+            'edit_image.required'  => 'Upload Gambar wajib diisi.',
+            'edit_image.max'  => 'Upload Gambar Max 2MB.',
+            'edit_status.required'   => 'Status wajib diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+            // $input = $request->all();
+            // $input['image'] = time().'.'.$request->edit_image->getClientOriginalExtension();
+            // $request->image->move(public_path('frontend/assets4/img/wallpaper'), $input['image']);
+
+            if(auth()->user()->role == 1){
+                $array_message = array(
+                    'success' => false,
+                    'message_title' => 'Access Denied',
+                    'message_content' => 'Anda Tidak Memiliki Akses',
+                    'message_type' => "error",
+                );
+                return response()->json($array_message);
+            }
+            else{
+                // dd($input);
+                $slider = Slider::find($request->edit_id);
+            
+                $file = $request->file('edit_image');
+                $fileName = time().$file->getClientOriginalName();
+                $file->move(public_path('frontend/assets4/img/wallpaper'), $fileName);
+                $image_path = public_path('frontend/assets4/img/wallpaper');
+                File::delete($image_path);
+                
+                $slider->image = $fileName;
+                $slider->nama_slider = $request->edit_slider;
+                $slider->status = $request->edit_status;
+                $slider->update();
+                // $perusahaan = Perusahaan::find($request->edit_id)->update($input);
+    
+                if($slider){
+                    $message_title="Berhasil !";
+                    $message_content="Data Slider Berhasil Update";
+                    $message_type="success";
+                    $message_succes = true;
+                }
+    
+                $array_message = array(
+                    'success' => $message_succes,
+                    'message_title' => $message_title,
+                    'message_content' => $message_content,
+                    'message_type' => $message_type,
+                );
+                return response()->json($array_message);
+            }
         }
 
         return response()->json(

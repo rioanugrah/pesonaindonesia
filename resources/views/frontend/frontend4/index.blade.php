@@ -19,7 +19,7 @@
                     data-transform_in="x:-150px;opacity:0;s:1500;e:Power3.easeInOut;"
                     data-transform_out="x:150px;opacity:0;s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
                     data-start="400" class="tp-caption sl-content">
-                    <div class="sl-title-top">Welcome to</div>
+                    {{-- <div class="sl-title-top">Welcome to</div> --}}
                     <div class="sl-title">{{ $wp->nama_slider }}</div>
                     {{-- <div class="sl-title-bot">Starting <span>$105</span> per night</div> --}}
                 </div>

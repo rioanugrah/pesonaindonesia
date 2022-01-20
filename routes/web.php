@@ -89,6 +89,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('status', 'StatusController@index')->name('status')->middleware('verified');
         
         Route::get('slider', 'SliderController@index')->name('slider')->middleware('verified');
+        Route::get('slider/{id}/edit', 'SliderController@edit')->name('slider.edit')->middleware('verified');
+        Route::post('slider/update', 'SliderController@update')->name('slider.update')->middleware('verified');
         
         Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
        
