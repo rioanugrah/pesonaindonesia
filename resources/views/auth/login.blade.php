@@ -141,8 +141,10 @@
                                                 </div>
                                             </div>
                                             <div class="d-grid mt-4">
-                                                <button class="btn btn-primary waves-effect waves-light" type="submit">Login</button>
-                                                <a class="btn btn-danger" href="{{ route('login_google','google') }}">Google</a>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-primary waves-effect waves-light" type="submit">Login</button>
+                                                    <a class="btn btn-secondary waves-effect waves-light" href="{{ route('login_google','google') }}"><i class="fab fa-google"></i> Google</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
