@@ -19,7 +19,7 @@ class SliderController extends Controller
                         $btn = '<button type="button" onclick="edit('.$row->id.')" class="btn btn-warning btn-icon">
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <button type="button" class="btn btn-danger btn-icon">
+                                <button type="button" onclick="hapus('.$row->id.')" class="btn btn-danger btn-icon">
                                     <i class="fa fa-trash"></i>
                                 </button>';
                         //    $btn = '<button onclick="show('.$row->id.')" class="btn btn-warning dim"><i class="fa fa-edit"></i></button>';
@@ -143,7 +143,7 @@ class SliderController extends Controller
                 $file = $request->file('edit_image');
                 $fileName = time().$file->getClientOriginalName();
                 $file->move(public_path('frontend/assets4/img/wallpaper'), $fileName);
-                $image_path = public_path('frontend/assets4/img/wallpaper');
+                $image_path = public_path('frontend/assets4/img/wallpaper/'.$slider->image);
                 File::delete($image_path);
                 
                 $slider->image = $fileName;
@@ -173,6 +173,34 @@ class SliderController extends Controller
             [
                 'success' => false,
                 'error' => $validator->errors()->all()
+            ]
+        );
+    }
+
+    public function delete($id)
+    {
+        $slider = Slider::find($id);
+        if(!empty($slider)){
+            $message_title="Berhasil !";
+            $message_content="Data Slider Berhasil Dihapus";
+            $message_type="success";
+            $message_succes = true;
+            $image_path = public_path('frontend/assets4/img/wallpaper/'.$slider->image);
+            File::delete($image_path);
+            $slider->delete();
+            
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return response()->json($array_message);
+        }
+        return response()->json(
+            [
+                'success' => false,
+                'error' => 'Data Tidak Berhasil Dihapus'
             ]
         );
     }

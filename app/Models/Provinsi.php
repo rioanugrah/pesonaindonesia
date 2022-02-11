@@ -14,7 +14,7 @@ class Provinsi extends Model
     protected $dates = ['deleted_at'];
 
     public $fillable = [
-        // 'id',
+        'id',
         'nama',
     ];
 }

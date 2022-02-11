@@ -14,6 +14,11 @@
                             <input class="form-control" name="nama" type="text" placeholder="Nama">
                         </div>
                         <div class="col">
+                            <label class="form-label">Email</label>
+                            <input class="form-control" name="email" type="email" placeholder="Email">
+                            <span class="text-muted">* Email digunakan untuk menerima notifikasi</span>
+                        </div>
+                        <div class="col">
                             <label class="form-label">Logo Perusahaan</label>
                             <input class="form-control" name="logo_perusahaan" type="file">
                         </div>

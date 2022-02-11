@@ -310,11 +310,18 @@ class PaymentController extends Controller
 
     public function createInvoice(Request $request)
     {
+        $production = false;
+        $linkVA = 'generate-static-va';
+
         $input = $request->all();
         $id_random = rand(1,9999);
 
         $request = new HTTP_Request2();
-        $request->setUrl($this->payment_testing.'payment-checkout/create-invoice');
+        if($production == true){
+            $request->setUrl($this->payment_production.'generate-static-va');
+        }else{
+            $request->setUrl($this->payment_testing.'generate-static-va');
+        }
         $request->setMethod(HTTP_Request2::METHOD_POST);
         $request->setConfig(array(
         'follow_redirects' => TRUE
@@ -325,44 +332,97 @@ class PaymentController extends Controller
         'x-oy-username' => $this->username,
         'x-api-key' => $this->app_key
         ));
-        $data1 = '
-            {
-                "partner_tx_id":"'.$input['kode_booking'].'",
-                "description":"",
-                "notes":"'.$input['order_total'].'",
-                "sender_name":"'.$input['firstname_booking']." ".$input['lastname_booking'].'",
-                "amount":"'.$input['order_total'].'",
-                "email":"'.$input['email_booking'].'",
-                "phone_number":"'.$input['phone_booking'].'",
-                "is_open":"false",
-                "step":"input-amount",
-                "include_admin_fee":true,
-                "list_disabled_payment_methods":"",
-                "list_enabled_banks":"",
-                "full_name" : "'.$input['firstname_booking']." ".$input['lastname_booking'].'",
-                "is_va_lifetime": false,
-                "expiration":"'.Carbon::now()->addHour(2).'",
-                "due_date":"'.Carbon::now().'",
-                "partner_user_id":"'.auth()->user()->id_unique.'", 
-                "invoice_items": [
-                    {
-                      "item":"'.$input['description'].'", 
-                      "description":"", 
-                      "quantity": '.$input['qty'].', 
-                      "date_of_purchase":"'.Carbon::parse($input['date_purchase'])->format('Y-m-d').'", 
-                      "price_per_item": '.$input['price'].'  
-                    },
-                    {
-                      "item":"PPn 10%", 
-                      "description":"", 
-                      "quantity": "1", 
-                      "date_of_purchase":"'.Carbon::parse($input['date_purchase'])->format('Y-m-d').'", 
-                      "price_per_item": '.$input['ppn'].'  
-                    }
-                ]
-            }';
-        
-        $request->setBody($data1);
+        // $data1 = '
+        //     {
+        //         "partner_tx_id":"'.$input['kode_booking'].'",
+        //         "description":"",
+        //         "notes":"'.$input['order_total'].'",
+        //         "sender_name":"'.$input['firstname_booking']." ".$input['lastname_booking'].'",
+        //         "amount":"'.$input['order_total'].'",
+        //         "email":"'.$input['email_booking'].'",
+        //         "phone_number":"'.$input['phone_booking'].'",
+        //         "is_open":"false",
+        //         "step":"input-amount",
+        //         "include_admin_fee":true,
+        //         "list_disabled_payment_methods":"",
+        //         "list_enabled_banks":"",
+        //         "full_name" : "'.$input['firstname_booking']." ".$input['lastname_booking'].'",
+        //         "is_va_lifetime": false,
+        //         "expiration":"'.Carbon::now()->addHour(2).'",
+        //         "due_date":"'.Carbon::now().'",
+        //         "partner_user_id":"'.auth()->user()->id_unique.'", 
+        //         "invoice_items": [
+        //             {
+        //               "item":"'.$input['description'].'", 
+        //               "description":"", 
+        //               "quantity": '.$input['qty'].', 
+        //               "date_of_purchase":"'.Carbon::parse($input['date_purchase'])->format('Y-m-d').'", 
+        //               "price_per_item": '.$input['price'].'  
+        //             },
+        //             {
+        //               "item":"PPn 10%", 
+        //               "description":"", 
+        //               "quantity": "1", 
+        //               "date_of_purchase":"'.Carbon::parse($input['date_purchase'])->format('Y-m-d').'", 
+        //               "price_per_item": '.$input['ppn'].'  
+        //             }
+        //         ]
+        //     }';
+
+        // $data1[] = [
+        //     "partner_tx_id"=> $input['kode_booking'],
+        //     "description"=>"",
+        //     "notes"=> "",
+        //     "sender_name"=> $input['firstname_booking']." ".$input['lastname_booking'],
+        //     "amount"=>$input['order_total'],
+        //     "email"=>$input['email_booking'],
+        //     "phone_number"=>$input['phone_booking'],
+        //     "is_open"=>false,
+        //     "step"=>"input-amount",
+        //     "include_admin_fee"=>true,
+        //     "list_disabled_payment_methods"=>"",
+        //     "list_enabled_banks"=>"",
+        //     "full_name" => $input['firstname_booking']." ".$input['lastname_booking'],
+        //     "is_va_lifetime"=> false,
+        //     "expiration"=>Carbon::now()->addHour(2),
+        //     "due_date"=>Carbon::now(),
+        //     "partner_user_id"=>auth()->user()->id_unique, 
+        // ];
+
+        // $data1[] = [
+        //     "partner_user_id"=>auth()->user()->id_unique, 
+        //     "bank_code"=>"002",
+        //     "amount"=>$input['order_total'],
+        //     "is_open"=>false,
+        //     "is_single_use" => false,
+        //     "is_lifetime" => false,
+        //     "expiration_time"=>Carbon::now()->addHour(2),
+        //     "username_display" => "va name",
+        //     "email"=>$input['email_booking'],
+        //     "trx_expiration_time" => "5",
+        //     "partner_tx_id"=> $input['kode_booking'],
+        //     "trx_counter" => "1"
+        // ];
+
+        $data[] = [
+            "partner_user_id"=>auth()->user()->id_unique, 
+            "bank_code"=>"002",
+            "amount"=>$input['order_total'],
+            "is_open"=>false,
+            "is_single_use" => false,
+            "is_lifetime" => false,
+            "expiration_time"=>5,
+            "username_display" => "va name",
+            "email"=>$input['email_booking'],
+            "trx_expiration_time" => 5,
+            "partner_tx_id"=> $input['kode_booking'],
+            "trx_counter" => 1
+        ];
+
+        // $data1 = json_encode($data);
+        // dd($data1);
+        // $request->setBody($data1);
+        $request->setBody('"{\n\"partner_user_id\":\"5120010121\",\n\"bank_code\": \"002\",\n\"amount\": 50000,\n\"is_open\": true,\n\"is_single_use\" : false,\n\"is_lifetime\": false,\n\"expiration_time\": 5,\n\"username_display\": \"va name\",\n\"email\": \"email@mail.com\",\n\"trx_expiration_time\": 5,\n\"partner_trx_id\": \"TRX0001\",\n\"trx_counter\" : 1\n}"');
         try {
         $response = $request->send();
         if ($response->getStatus() == 200) {
@@ -371,14 +431,16 @@ class PaymentController extends Controller
             $r['whatsapp'] = $this->whatsapp;
             $r['input'] = $input;
 
+            echo $r['data'];
+
             if($r['data']['status'] == true){
-                $transaksi = Transaksi::firstOrCreate(['partner_tx_id' => $input['kode_booking']],[
-                    'id' => Str::uuid()->toString(),
-                    'nama_penerima' => $input['firstname_booking']." ".$input['lastname_booking'],
-                    'total' => $input['order_total'],
-                    'created_at' => Carbon::parse($input['date_purchase']),
-                    'updated_at' => Carbon::parse($input['date_purchase'])
-                ]);
+                // $transaksi = Transaksi::firstOrCreate(['partner_tx_id' => $input['kode_booking']],[
+                //     'id' => Str::uuid()->toString(),
+                //     'nama_penerima' => $input['firstname_booking']." ".$input['lastname_booking'],
+                //     'total' => $input['order_total'],
+                //     'created_at' => Carbon::parse($input['date_purchase']),
+                //     'updated_at' => Carbon::parse($input['date_purchase'])
+                // ]);
             }else{
                 $r['url'] = $this->payment_testing.'payment-checkout/'.$input['kode_booking'];
             }
@@ -396,7 +458,8 @@ class PaymentController extends Controller
             // dd($c['message']);
             // return redirect($r['data']['url']);
             // return $r;
-            return view('frontend.frontend4.confirmation',$r);
+
+            // return view('frontend.frontend4.confirmation',$r);
         }
         else {
             echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .

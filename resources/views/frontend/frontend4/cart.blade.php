@@ -83,7 +83,7 @@
                                                 value="{{ $cartItem->price }}">
                                             <span class="amount" id="amounts{{ $key }}">IDR 0</span>
                                         </td>
-                                        <td class="product-remove text-center"><a href="#" title="Remove this item"
+                                        <td class="product-remove text-center"><a href="{{ route('cart.delete', ['id' => $cart->id]) }}" title="Remove this item"
                                                 class="remove"></a>
                                         </td>
                                     </tr>

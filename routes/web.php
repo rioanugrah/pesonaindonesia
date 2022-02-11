@@ -59,7 +59,6 @@ Route::prefix('plesiranmalang')->group(function () {
     Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
     Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
     Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
-
 });
 
 Route::get('send-notif/{name}', function ($name) {
@@ -75,13 +74,18 @@ Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('b')->group(function () {
         Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
+        Route::get('home/balance', 'HomeController@balance')->name('home.balance')->middleware('verified');
         Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
         
         Route::get('kategori_kota', 'KategoriKotaController@index')->name('ktkota')->middleware('verified');
         Route::post('kategori_kota/simpan', 'KategoriKotaController@simpan')->name('ktkota.simpan')->middleware('verified');
         
         Route::get('cooperation', 'CooperationController@index')->name('cooperation')->middleware('verified');
+        Route::get('cooperation/notif', 'CooperationController@notif')->middleware('verified');
         Route::get('cooperation/{id}/download', 'CooperationController@download')->name('cooperation.download')->middleware('verified');
+        Route::get('cooperation/{id}', 'CooperationController@detail')->middleware('verified');
+        Route::post('cooperation/upload', 'CooperationController@upload_berkas')->name('cooperation.upload_berkas')->middleware('verified');
+        Route::post('cooperation/data/upload', 'CooperationController@berkas')->name('cooperation.berkas')->middleware('verified');
         
         Route::get('pengguna', 'UsersController@index')->name('pengguna')->middleware('verified');
         
@@ -96,6 +100,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('slider', 'SliderController@index')->name('slider')->middleware('verified');
         Route::get('slider/{id}/edit', 'SliderController@edit')->name('slider.edit')->middleware('verified');
         Route::post('slider/update', 'SliderController@update')->name('slider.update')->middleware('verified');
+        Route::get('slider/{id}/hapus', 'SliderController@delete')->name('slider.hapus')->middleware('verified');
         
         Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
        
@@ -142,14 +147,16 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::get('payment', 'FrontendController@payment')->middleware('verified');
     Route::post('payment/balance', 'PaymentController@balance')->name('payment.balance')->middleware('verified');
-    Route::post('payment/checkout', 'PaymentController@createInvoice')->name('payment')->middleware('verified');
+    Route::post('checkout/payment', 'PaymentController@createInvoice')->name('payment')->middleware('verified');
     Route::get('balance', 'PaymentController@getSaldo')->middleware('verified');
 
     Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
     Route::post('cart/simpan', 'CartController@simpan')->name('cart.simpan')->middleware('verified');
-    Route::get('cart/delete/{id}', 'CartController@delete')->name('cart.delete')->middleware('verified');
+    Route::get('cart/{id}/delete', 'CartController@delete')->name('cart.delete')->middleware('verified');
     Route::get('cart/status/{kode_booking}', 'CartController@status')->name('cart.status')->middleware('verified');
     Route::post('checkout', 'CartController@checkout')->name('checkout')->middleware('verified');
+    Route::get('checkout/{id}', 'CartController@chart')->name('checkout.id')->middleware('verified');
+    Route::post('checkout/{id}/delete', 'CartController@delete')->name('checkout.delete')->middleware('verified');
 
 });
 

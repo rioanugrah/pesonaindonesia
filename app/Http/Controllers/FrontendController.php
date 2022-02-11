@@ -9,6 +9,7 @@ use App\Models\KamarHotel;
 use App\Models\FasilitasUmumHotel;
 use App\Models\ContactUs;
 use App\Models\Transaksi;
+use App\Models\Provinsi;
 use \Carbon\Carbon;
 use Validator;
 use DB;
@@ -60,11 +61,13 @@ class FrontendController extends Controller
             $data['whatsapp'] = $this->whatsapp;
             $data['jumlah_hotel'] = Hotel::count();
             $searchTermJawa = 'Jawa';
-            $searchTermJogja = 'Di Yogyakarta';
-            $data['provinsis'] = DB::table('provinsi')
-                                    ->select('nama AS provinsi')
-                                    ->where('nama','LIKE',"%{$searchTermJawa}%")
-                                    ->orWhere('nama','LIKE',"%{$searchTermJogja}%")->get();
+            // $searchTermJogja = 'Di Yogyakarta';
+            // $data['provinsis'] = Provinsi::select('nama AS provinsi','id')
+            //                         ->where('nama','LIKE',"%{$searchTermJawa}%")
+            //                         // ->orWhere('nama','LIKE',"%{$searchTermJogja}%")
+            //                         ->get();
+
+            $data['provinsis'] = Provinsi::all();
             // dd($data['whatsapp']);
             return view('frontend.frontend4.index', $data);
             // return view('layouts.frontend_4.app',$data);

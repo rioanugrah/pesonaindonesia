@@ -14,6 +14,8 @@
 
 @section('content')
 @include('backend.cooperation.modalBuat')
+@include('backend.cooperation.modalUpload')
+@include('backend.cooperation.modalDetail')
 <div class="page-title-box">
     <div class="row align-items-center">
         <div class="col-md-8">
@@ -48,6 +50,7 @@
                             <th>Perusahaan</th>
                             <th>Alamat</th>
                             <th>Status</th>
+                            {{-- <th>Upload Berkas</th> --}}
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -104,6 +107,10 @@
                     data: 'status',
                     name: 'status'
                 },
+                // {
+                //     data: 'berkas',
+                //     name: 'berkas'
+                // },
                 {
                     data: 'action',
                     name: 'action',
@@ -129,68 +136,6 @@
                 $('#modalBarcode').modal('show');
                 e.preventDefault();
             };
-        });
-
-        $(function() {
-            'use strict';
-
-            $('.fasilitas').tagsInput({
-                'width': '100%',
-                'height': '75%',
-                'interactive': true,
-                'defaultText': 'Add More',
-                'removeWithBackspace': true,
-                'minChars': 0,
-                'maxChars': 20,
-                'placeholderColor': '#666666'
-            });
-        });
-
-        $(function() {
-            'use strict';
-            $('.upload').dropify();
-        });
-
-        $(function() {
-            'use strict';
-
-            //Tinymce editor
-            if ($(".editor").length) {
-                tinymce.init({
-                    selector: '.editor',
-                    height: 400,
-                    default_text_color: 'red',
-                    plugins: [
-                        'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                        'searchreplace wordcount visualblocks visualchars code fullscreen',
-                    ],
-                    toolbar1: 'bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
-                    toolbar2: 'print preview media | forecolor backcolor emoticons | codesample help',
-                    image_advtab: true,
-                    templates: [{
-                            title: 'Test template 1',
-                            content: 'Test 1'
-                        },
-                        {
-                            title: 'Test template 2',
-                            content: 'Test 2'
-                        }
-                    ],
-                    content_css: []
-                });
-            }
-
-        });
-
-        $(function() {
-        'use strict'
-
-        if ($(".js-example-basic-single").length) {
-            $(".js-example-basic-single").select2();
-        }
-        if ($(".js-example-basic-multiple").length) {
-            $(".js-example-basic-multiple").select2();
-        }
         });
 
         $('#provinsi').on('change',function(){
@@ -229,6 +174,87 @@
                             message: result.message_content
                         });
                         this.reset();
+                        table.ajax.reload();
+                    }else{
+                        iziToast.error({
+                            title: result.success,
+                            message: result.error
+                        });
+                    }
+                },
+                error: function (request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            });
+        });
+
+        function berkas(id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/cooperation') }}"+'/'+id,
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    document.getElementById('berkas_modal_title').innerHTML = result.cooperation.nama_perusahaan;
+                    document.getElementById('berkas_nama').innerHTML = result.cooperation.nama;
+                    document.getElementById('berkas_nama_perusahaan').innerHTML = result.cooperation.nama_perusahaan;
+                    document.getElementById('berkas_alamat_perusahaan').innerHTML = result.cooperation.alamat_perusahaan;
+                    $('#berkas_id').val(result.cooperation.id);
+                    // $('#berkas_nama_perusahaan').val(result.cooperation.nama_perusahaan);
+                    // $('#edit_alamat_perusahaan').val(result.perusahaan.alamat_perusahaan);
+                    // $('#edit_penanggung_jawab').val(result.perusahaan.penanggung_jawab);
+                    // $('#edit_jabatan').val(result.perusahaan.jabatan);
+                    // $('#edit_siup').val(result.perusahaan.siup);
+                    // $('#edit_npwp').val(result.perusahaan.npwp);
+
+                    $('#upload').modal('show');
+                }
+            })
+        }
+
+        function detail(id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/cooperation') }}"+'/'+id,
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    // document.getElementById('berkas_modal_title').innerHTML = result.cooperation.nama_perusahaan;
+                    // document.getElementById('detail_nama_perusahaan').innerHTML = result.cooperation.nama_perusahaan;
+                    $('#detail_nama').val(result.cooperation.nama);
+                    $('#detail_email').val(result.cooperation.email);
+                    $('#detail_nama_perusahaan').val(result.cooperation.nama_perusahaan);
+                    $('#detail_alamat_perusahaan').val(result.cooperation.alamat_perusahaan);
+                    // document.getElementById('berkas_nama_perusahaan').innerHTML = result.cooperation.nama_perusahaan;
+                    // document.getElementById('berkas_alamat_perusahaan').innerHTML = result.cooperation.alamat_perusahaan;
+
+                    $('#detail').modal('show');
+                }
+            })
+        }
+
+        $('#berkas-form').submit(function(e) {
+            // alert('coba');
+            e.preventDefault();
+            let formData = new FormData(this);
+            // $('#image-input-error').text('');
+            $.ajax({
+                type:'POST',
+                url: "{{ route('cooperation.upload_berkas') }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    if(result.success != false){
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                        // this.reset();
+                        $('#upload').modal('hide');
                         table.ajax.reload();
                     }else{
                         iziToast.error({

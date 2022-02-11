@@ -18,4 +18,9 @@ class KabupatenKota extends Model
         'id_provinsi',
         'nama',
     ];
+
+    public function provinsi()
+    {
+        return $this->belongsTo(\App\Models\Provinsi::class, 'id_provinsi');
+    }
 }

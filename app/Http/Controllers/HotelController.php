@@ -31,15 +31,6 @@ class HotelController extends Controller
                         return $btn;
                     })
                     ->addColumn('action', function($row){
-                        // $btn = '<a href='.$row->created_at.' type="button" class="btn btn-success btn-icon">
-                        //             <i class="fa fa-eye"></i>
-                        //         </a>
-                        //         <a href='.$row->created_at.' type="button" class="btn btn-warning btn-icon">
-                        //             <i class="fa fa-edit"></i>
-                        //         </a>
-                        //         <button type="button" class="btn btn-danger btn-icon">
-                        //             <i class="fa fa-trash"></i>
-                        //         </button>';
                         $btn = '<button onclick="gambar('.$row->id.')" class="btn btn-success btn-sm" title="Upload Gambar Hotel">
                                     <i class="fas fa-upload"></i> Upload Gambar Hotel
                                 </button>
@@ -66,6 +57,7 @@ class HotelController extends Controller
         ];
         $data['provinsis'] = Provinsi::pluck('nama','id');
         // dd($data['provinsis']);
+        // return view('backend.hotel.hotel', $data);
         return view('backend.hotel.index_new', $data);
     }
 

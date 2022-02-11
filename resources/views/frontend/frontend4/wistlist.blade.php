@@ -6,6 +6,10 @@
 
 <?php $asset = asset('frontend/assets4/'); ?>
 
+@section('css')
+<link rel="stylesheet" href="{{ $asset . '/css/loading.css'}}">
+@endsection
+
 @section('breadcum')
     <section style="background-image:url({{ asset('frontend/assets4/img/hotel.jpg') }});" class="breadcrumbs">
         <div class="container">
@@ -34,7 +38,30 @@
                 </div>
             </div>
             <div class="element-section">
-                <div id="result"></div>
+                <div class="container1">
+                    <div class="post">
+                        <div class="avatar"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="post">
+                        <div class="avatar"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="post">
+                        <div class="avatar"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="post">
+                        <div class="avatar"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+                {{-- <div id="loading"></div> --}}
+                <div class="toggle style-2" id="result"></div>
             </div>
         </div>
     </div>
@@ -43,6 +70,9 @@
 @section('js')
 <script src="{{ asset('backend/assets2/js/axios.min.js') }}"></script>
     <script>
+        $(document).ajaxSend(function() {
+            $(".container1").fadeIn(300);　
+        });
         $('#search').submit(function(e) {
             e.preventDefault();
             let formData = new FormData(this);
@@ -65,10 +95,17 @@
                         // txt = "<tr>"+txt+
                         //         "<td>"+value.partner_tx_id+"</td>"+
                         //       "</tr>";
-                        txt = txt+"<div class='col-md-12'>"+
-                                    "<h5 class='mb-20'>"+value.partner_tx_id+"</h5>"+
-                                    "<p>"+value.nama_penerima+"</p>"+
+                        txt = txt+"<div class='content-title active'>"+
+                                        "<span>"+
+                                            value.partner_tx_id+
+                                        "</span>"+
+                                    "</div>"+
+                            "<div class='content'>"+value.nama_penerima+
                                 "</div>";
+                        // txt = txt+"<div class='col-md-12'>"+
+                        //             "<h5 class='mb-20'>"+value.partner_tx_id+"</h5>"+
+                        //             "<p>"+value.nama_penerima+"</p>"+
+                        //         "</div>";
                         // txt = "<div>"+value.nip+"</div>";
                     }
                     document.getElementById('result').innerHTML = txt;
@@ -79,6 +116,10 @@
                         message: error,
                     });
                 }
+            }).done(function() {
+                setTimeout(function(){
+                    $(".container1").fadeOut(100);
+                },100);
             });
         });
     </script>

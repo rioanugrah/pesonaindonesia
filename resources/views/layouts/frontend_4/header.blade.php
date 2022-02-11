@@ -1,4 +1,11 @@
 <header>
+    <div class="banner">
+        <div class="banner__content">
+            <div class="banner__text">
+                <strong style="color: #f38f39">Reminder :</strong> Waspada Penyebaran <strong style="color: #f38f39">Varian Omicron</strong>
+            </div>
+        </div>
+    </div>
     <div class="site-top-panel">
         <div class="container p-relative">
             <div class="row">

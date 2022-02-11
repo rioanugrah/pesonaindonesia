@@ -16,6 +16,7 @@ class CreateCooperationTable extends Migration
         Schema::create('cooperation', function (Blueprint $table) {
             $table->bigInteger('id')->primary();
             $table->string('nama')->nullable();
+            $table->string('email');
             $table->string('nama_perusahaan')->nullable();
             $table->string('logo_perusahaan')->nullable();
             $table->enum('kategori', ['Pribadi', 'Bisnis'])->nullable();
@@ -28,6 +29,7 @@ class CreateCooperationTable extends Migration
             $table->string('telp_selular');
             $table->string('no_fax')->nullable();
             $table->integer('status')->nullable();
+            $table->string('berkas')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -113,28 +113,20 @@
     <div class="features-tours-full-width">
         <div class="features-tours-wrap clearfix">
             @forelse ($provinsis as $provinsi)
+            <?php $kotas = \App\Models\KabupatenKota::where('id_provinsi',$provinsi->id)->get() ?>
             <div class="features-tours-item">
                 <div class="features-media">
-                    @if ($provinsi->provinsi == 'Jawa Barat')
-                    <img src="{{ $asset.'/img/image/jabar.jpg' }}" style="width: 480px; height: 350px; object-fit: cover;" alt>
-                    @elseif ($provinsi->provinsi == 'Jawa Tengah')
-                    <img src="{{ $asset.'/img/image/jateng.jpg' }}" style="width: 480px; height: 350px; object-fit: cover;" alt>
-                    @elseif ($provinsi->provinsi == 'Di Yogyakarta')
-                    <img src="{{ $asset.'/img/image/jogja.jpg' }}" style="width: 480px; height: 350px; object-fit: cover;" alt>
-                    @elseif ($provinsi->provinsi == 'Jawa Timur')
-                    <img src="{{ $asset.'/img/image/jatim.jpg' }}" style="width: 480px; height: 350px; object-fit: cover;" alt>
-                    {{-- @elseif() --}}
-                    @else
-                    <img src="{{ $asset.'/pic/tours/1.jpg' }}" data-at2x="{{ $asset.'/pic/tours/1.jpg' }}" alt>
+                    @if ($provinsi->nama == 'Jawa Timur')
+                        @foreach ($kotas as $kota)
+                            @if ($kota->nama == 'Kota Malang')
+                            <img src="{{ $asset.'/img/image/jatim.jpg' }}" style="width: 480px; height: 350px; object-fit: cover;" alt>
+                            <div class="features-info-bot">
+                                <h4 class="title"><span class="font-4">{{ $provinsi->nama }} - Indonesia</span>
+                                    {{ $kota->nama }}</h4>
+                            </div>
+                            @endif
+                        @endforeach
                     @endif
-                    {{-- <div class="features-info-top">
-                        <div class="info-price font-4"><span>start per night</span> IDR 0</div>
-                        <div class="info-temp font-4"><span>local temperature</span> 30° / 86°</div>
-                    </div> --}}
-                    <div class="features-info-bot">
-                        <h4 class="title"><span class="font-4">Indonesia</span>
-                            {{ $provinsi->provinsi }}</h4>
-                    </div>
                 </div>
             </div>
             @empty

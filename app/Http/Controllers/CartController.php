@@ -24,6 +24,16 @@ class CartController extends Controller
         return view('frontend.frontend4.cart',$data);
     }
 
+    public function chart($id)
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['carts'] = Cart::where('id',$id)->
+                                where('user_id',auth()->user()->id)->first();
+        $data['cart_detail'] = CartItem::where('cart_id',$id)->first();
+
+        return view('frontend.frontend4.checkout',$data);
+    }
+
     public function simpan(Request $request)
     {
         $input['id'] = Str::uuid()->toString();
@@ -37,9 +47,9 @@ class CartController extends Controller
 
         $cek_cart = Cart::where('user_id',auth()->user()->id)
                         ->where('is_cart','W')
-                        ->select('user_id')->first();
+                        ->select('id','user_id')->first();
         if($cek_cart){
-            return redirect()->route('cart')->with('danger','Selesaikan Booking Anda');
+            return redirect()->route('checkout.id', ['id'=>$cek_cart->id])->with('danger','Selesaikan Booking Anda');
         }else{
             // dd($inputItem['qty'] = $request->qty);
             $cart = Cart::create($input);
@@ -54,7 +64,7 @@ class CartController extends Controller
                 
                 $cartItem = CartItem::create($inputItem);
                 
-                return redirect()->route('cart');
+                return redirect()->route('checkout.id', $input['id']);
             }
         }
 
@@ -93,10 +103,17 @@ class CartController extends Controller
 
     public function delete($id)
     {
-        $cart = Cart::find($id)->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'Data Berhasil Dihapus'
-        ]);
+        $cart = Cart::find($id);
+        if(!empty($cart)){
+            $cartItem = CartItem::where('cart_id',$cart->id)->delete();
+            $cart->delete();
+            return redirect()->route('cart');
+        }else{
+            return redirect('/');
+        }
+        // return response()->json([
+        //     'status' => true,
+        //     'message' => 'Data Berhasil Dihapus'
+        // ]);
     }
 }

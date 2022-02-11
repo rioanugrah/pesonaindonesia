@@ -17,6 +17,7 @@ class Cooperation extends Model
     public $fillable = [
         'id',
         'nama',
+        'email',
         'nama_perusahaan',
         'logo_perusahaan',
         'kategori',
@@ -29,5 +30,6 @@ class Cooperation extends Model
         'telp_selular',
         'no_fax',
         'status',
+        'berkas',
     ];
 }
