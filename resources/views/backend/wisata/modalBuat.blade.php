@@ -25,7 +25,7 @@
                         </div>
                         <div class="col">
                             <label class="form-label">Alamat</label>
-                            <textarea name="alamat" class="form-control" cols="30" rows="10" placeholder="Alamat"></textarea>
+                            <textarea name="alamat" class="form-control" cols="30" rows="5" placeholder="Alamat"></textarea>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -37,7 +37,7 @@
                                     <td><button type="button" name="add" id="add1" class="btn btn-success"><span class="fa fa-plus"></span></button></td>
                                 </tr>
                             </table> --}}
-                            <input name="fasilitas" class="fasilitas" type="text" placeholder="Fasilitas" />
+                            <input name="fasilitas" class="form-control fasilitas" type="text" placeholder="Fasilitas" />
                         </div>
                         <div class="col">
                             <label class="form-label">Rencana Perjalanan</label>
@@ -48,27 +48,27 @@
                                     <td><button type="button" name="add" id="add2" class="btn btn-success"><span class="fa fa-plus"></span></button></td>
                                 </tr>
                             </table> --}}
-                            <textarea name="timeline" class="form-control" cols="30" rows="10"></textarea>
+                            <textarea name="timeline" class="form-control" cols="30" rows="5"></textarea>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col">
                             <label class="form-label">Penukaran Tiket</label>
-                            <textarea name="tukar_tiket" class="form-control" cols="30" rows="10"></textarea>
+                            <textarea name="tukar_tiket" class="form-control" cols="30" rows="5"></textarea>
                         </div>
                         <div class="col">
                             <label class="form-label">Syarat & Ketentuan</label>
-                            <textarea name="sk" class="form-control" cols="30" rows="10"></textarea>
+                            <textarea name="sk" class="form-control" cols="30" rows="5"></textarea>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col">
                             <label class="form-label">Informasi Tambahan</label>
-                            <textarea name="info_tambahan" class="form-control" cols="30" rows="10"></textarea>
+                            <textarea name="info_tambahan" class="form-control" cols="30" rows="5"></textarea>
                         </div>
                         <div class="col">
                             <label class="form-label">Highlight</label>
-                            <textarea name="highlight" class="form-control" cols="30" rows="10"></textarea>
+                            <textarea name="highlight" class="form-control" cols="30" rows="5"></textarea>
                         </div>
                         <div class="col">
                             <label class="form-label">Upload Image</label>

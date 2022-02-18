@@ -82,7 +82,18 @@ class CooperationController extends Controller
 
     public function detail($id)
     {
-        $data['cooperation'] = Cooperation::find($id);
+        $cooperations = Cooperation::find($id);
+        $data['cooperation'] = [
+            'id' => $cooperations['id'],
+            'nama' => $cooperations['nama'],
+            'email' => $cooperations['email'],
+            'nama_perusahaan' => $cooperations['nama_perusahaan'],
+            'alamat_perusahaan' => $cooperations['alamat_perusahaan'],
+            'kab_kota' => $cooperations['kota']['nama'],
+            'provinsi' => $cooperations['provinsis']['nama'],
+            'kode_pos' => $cooperations['kode_pos'],
+            'berkas' => $cooperations['berkas'],
+        ];
         
         if(auth()->user()->role == 1){
             $array_message = array(

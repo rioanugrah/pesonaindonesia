@@ -39,57 +39,59 @@
                 <div class="search-tours-content">
                     <div data-tours-cat="tab-cat-3" class="tours-container active">
                         <div class="hotels-box active">
+                            <form method="get" action="{{ route('frontend.hotel_search') }}" class="form search">
                             <div class="hotels-search">
-                                <form method="post" class="form search">
                                     <div class="search-wrap">
                                         <input type="text"
-                                            placeholder="Destination, hotel name, airport, train station, landmark or address"
+                                            name="search_hotel"
+                                            placeholder="Nama Hotel, Alamat Hotel"
                                             class="form-control search-field"><i
                                             class="flaticon-suntour-map search-icon"></i>
                                     </div>
-                                </form>
                             </div>
                             <div class="hotels-select">
                                 <div class="tours-calendar divider-skew">
-                                    <input placeholder="Check in" type="text" onfocus="(this.type='date')"
-                                        onblur="(this.type='text')" class="calendar-default textbox-n"><i
+                                    <input placeholder="Check in" type="text" name="in" onfocus="(this.type='date')"
+                                        class="calendar-default textbox-n"><i
                                         class="flaticon-suntour-calendar calendar-icon"></i>
                                 </div>
                                 <div class="tours-calendar divider-skew">
-                                    <input placeholder="Check out" type="text" onfocus="(this.type='date')"
-                                        onblur="(this.type='text')" class="calendar-default textbox-n"><i
+                                    <input placeholder="Check out" type="text" name="out" onfocus="(this.type='date')"
+                                        class="calendar-default textbox-n"><i
                                         class="flaticon-suntour-calendar calendar-icon"></i>
                                 </div>
                                 <div class="selection-box divider-skew"><i
                                         class="flaticon-suntour-bed box-icon"></i>
-                                    <select>
+                                    <select name="room">
                                         <option>Rooms</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
                                     </select>
                                 </div>
                                 <div class="selection-box divider-skew"><i
                                         class="flaticon-suntour-adult box-icon"></i>
-                                    <select>
+                                    <select name="adult">
                                         <option>Adults</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
                                     </select>
                                 </div>
                                 <div class="selection-box"><i class="flaticon-suntour-children box-icon"></i>
-                                    <select>
+                                    <select name="children">
                                         <option>Children</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
                                     </select>
                                 </div>
-                                <div class="button-search">Search</div>
+                                <button class="button-search" style="background-color: rgba(255, 255, 0, 0); border: rgba(255, 255, 0, 0);" type="submit">Search</button>
+                                {{-- <div class="button-search">Search</div> --}}
+                            </form>
                             </div>
                         </div>
                     </div>
@@ -114,21 +116,23 @@
         <div class="features-tours-wrap clearfix">
             @forelse ($provinsis as $provinsi)
             <?php $kotas = \App\Models\KabupatenKota::where('id_provinsi',$provinsi->id)->get() ?>
-            <div class="features-tours-item">
-                <div class="features-media">
-                    @if ($provinsi->nama == 'Jawa Timur')
+            <a href="{{ url('plesiranmalang') }}">
+                <div class="features-tours-item">
+                    <div class="features-media">
+                        @if ($provinsi->nama == 'Jawa Timur')
                         @foreach ($kotas as $kota)
-                            @if ($kota->nama == 'Kota Malang')
-                            <img src="{{ $asset.'/img/image/jatim.jpg' }}" style="width: 480px; height: 350px; object-fit: cover;" alt>
-                            <div class="features-info-bot">
-                                <h4 class="title"><span class="font-4">{{ $provinsi->nama }} - Indonesia</span>
-                                    {{ $kota->nama }}</h4>
-                            </div>
-                            @endif
+                        @if ($kota->nama == 'Kota Malang')
+                        <img src="{{ $asset.'/img/image/jatim.jpg' }}" style="width: 480px; height: 350px; object-fit: cover;" alt>
+                        <div class="features-info-bot">
+                            <h4 class="title"><span class="font-4">{{ $provinsi->nama }} - Indonesia</span>
+                                {{ $kota->nama }}</h4>
+                        </div>
+                        @endif
                         @endforeach
-                    @endif
+                        @endif
+                    </div>
                 </div>
-            </div>
+            </a>
             @empty
             <p>Segera Hadir</p>
             @endforelse
@@ -205,7 +209,7 @@
         </div>
     </div>
 </section>
-<section class="small-section bg-gray">
+{{-- <section class="small-section bg-gray">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -215,7 +219,6 @@
             <div class="col-md-4"><i class="flaticon-suntour-hotel title-icon"></i></div>
         </div>
         <div class="row">
-            <!-- Recomended item-->
             @forelse ($hotels as $hotel)
             <?php $imageHotel = \App\Models\ImageHotel::where('hotel_id', $hotel->id)->first(); ?>
             <div class="col-md-6">
@@ -234,7 +237,6 @@
                         <div class="location"><i class="flaticon-suntour-map"></i> {{ $hotel->kotas->nama }}, {{ $hotel->provinsis->nama }}
                         </div>
                     </div>
-                    <!-- Recomended Content-->
                     <div class="recom-item-body"><a href="{{ route('frontend.hotelDetail', ['slug' => $hotel->slug]) }}">
                             <h6 class="blog-title">{{ $hotel->nama_hotel }}</h6>
                         </a>
@@ -243,9 +245,7 @@
                         <p class="mb-30">{{ substr(strip_tags($hotel->deskripsi), 0, 50) }}
                         </p><a href="{{ route('frontend.hotelDetail', ['slug' => $hotel->slug]) }}" class="recom-button">Read more</a><a
                             href="{{ route('frontend.hotelDetail', ['slug' => $hotel->slug]) }}" class="cws-button small alt">Book now</a>
-                        {{-- <div class="action font-2">20%</div> --}}
                     </div>
-                    <!-- Recomended Image-->
                 </div>
             </div>
             @empty
@@ -253,5 +253,9 @@
             @endforelse
         </div>
     </div>
-</section>
+</section> --}}
+@endsection
+
+@section('js')
+    
 @endsection

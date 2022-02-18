@@ -32,4 +32,12 @@ class Cooperation extends Model
         'status',
         'berkas',
     ];
+    public function kota()
+    {
+        return $this->belongsTo(\App\Models\KabupatenKota::class, 'kab_kota');
+    }
+    public function provinsis()
+    {
+        return $this->belongsTo(\App\Models\Provinsi::class, 'provinsi');
+    }
 }

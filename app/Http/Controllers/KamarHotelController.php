@@ -69,6 +69,7 @@ class KamarHotelController extends Controller
             'nama_kamar'  => 'required',
             'deskripsi_kamar'  => 'required',
             'price'  => 'required',
+            'qty'  => 'required',
             // 'fasilitas_kamar_populer'  => 'required',
             // 'fasilitas_kamar_populer_detail'  => 'required',
             // 'fasilitas_kamar'  => 'required',
@@ -81,6 +82,7 @@ class KamarHotelController extends Controller
             'nama_kamar.required'  => 'Kamar Hotel Wajib Diisi.',
             'deskripsi_kamar.required'  => 'Deskripsi Kamar Hotel Wajib Diisi.',
             'price.required'  => 'Harga Kamar Hotel Wajib Diisi.',
+            'qty.required'  => 'Jumlah Kamar Wajib Diisi.',
             // 'fasilitas_kamar_populer.required'  => 'Fasilitas Kamar Populer Wajib Diisi.',
             // 'fasilitas_kamar.required'  => 'Fasilitas Kamar Hotel Wajib Diisi.',
             // 'judul_kebijakan_kamar.required'  => 'Judul Kebijakan Kamar Hotel Wajib Diisi.',
@@ -99,6 +101,7 @@ class KamarHotelController extends Controller
             $input['slug'] = Str::slug($request->nama_kamar);
             $input['deskripsi_kamar'] = $request->deskripsi_kamar;
             $input['price'] = $request->price;
+            $input['qty'] = $request->qty;
 
             $kamar_hotel = KamarHotel::firstOrCreate($input);
             // $room_hotel = RoomHotel::firstOrCreate([

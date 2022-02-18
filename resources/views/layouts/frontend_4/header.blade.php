@@ -2,7 +2,8 @@
     <div class="banner">
         <div class="banner__content">
             <div class="banner__text">
-                <strong style="color: #f38f39">Reminder :</strong> Waspada Penyebaran <strong style="color: #f38f39">Varian Omicron</strong>
+                <strong style="color: #f38f39">Reminder :</strong> Waspada Penyebaran Virus <strong
+                    style="color: #f38f39">Varian Omicron</strong>
             </div>
         </div>
     </div>
@@ -16,6 +17,23 @@
                         <span>/</span>
                         <div class="tel-top"><a href="tel:081331126991"> <i
                                     class="flaticon-suntour-phone"></i>0813-3112-6991</a></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-5 text-right">
+                    <div class="top-right-wrap">
+                        <div class="lang-wrap dropdown">
+                            <div>
+                                <ul>
+                                    <li><a href="#" class="lang-sel icl-en">Language <i
+                                                class="fa fa-angle-down"></i></a>
+                                        <ul>
+                                            <li><a href="{{ url('en') }}"><img src="{{ asset('frontend/assets4/img/flags/us_flag.jpg') }}" alt="Flag EN" width="20" srcset=""> EN</a></li>
+                                            <li><a href="{{ url('id') }}"><img src="{{ asset('frontend/assets4/img/flags/id_flag.png') }}" alt="Flag ID" width="20" srcset=""> ID</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,10 +82,10 @@
                             data-at2x="{{ $asset . '/img/logo_plesiran_new_black.png' }}" width="250" alt></a></div>
                 <div class="inner-nav desktop-nav">
                     <ul class="clearlist">
-                        <li><a href="{{ url('/') }}" class="mn-has-sub active">Home</a>
+                        <li class="{{ Request::is('home') ? 'active' : '' }}"><a href="{{ url('/') }}" class="mn-has-sub active">Home</a>
                         </li>
                         <li class="slash">/</li>
-                        <li><a href="{{ route('frontend.hotel') }}" class="mn-has-sub">Hotel</a>
+                        <li class="{{ Request::is('hotel*') ? 'active' : '' }}"><a href="{{ route('frontend.hotel') }}" class="mn-has-sub">Hotel</a>
                         </li>
                         <li class="slash">/</li>
                         @guest

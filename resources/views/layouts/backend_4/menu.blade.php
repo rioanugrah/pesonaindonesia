@@ -404,6 +404,7 @@ $menu = [
 
 <li class="navigation-header"><a class="navigation-header-text">Operating Officer</a><i class="navigation-header-icon material-icons">more_horiz</i>
 </li>
+
 <li class="{{ Request::is('b/cooperation*') ? 'active' : '' }} bold"><a class="waves-effect waves-cyan {{ Request::is('b/cooperation*') ? 'active' : '' }} " href="{{route('cooperation')}}"><i class="material-icons">business_center</i><span class="menu-title" data-i18n="Cooperation">Kerjasama</span></a>
 </li>
 
@@ -423,6 +424,8 @@ $menu = [
     <div class="collapsible-body">
         <ul class="collapsible collapsible-sub" data-collapsible="accordion">
             <li><a href="{{ route('roles') }}"><i class="material-icons">people_outline</i><span data-i18n="Roles">Roles</span></a>
+            </li>
+            <li><a href=""><i class="material-icons">people_outline</i><span data-i18n="Log">Log</span></a>
             </li>
             <li><a href="{{ route('pengguna') }}"><i class="material-icons">people_outline</i><span data-i18n="Users">Users</span></a>
             </li>

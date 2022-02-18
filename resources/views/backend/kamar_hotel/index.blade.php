@@ -49,6 +49,7 @@
                             <th>Kamar Hotel</th>
                             <th>Deskripsi</th>
                             <th>Harga</th>
+                            <th>Jumlah Kamar</th>
                             <th>Upload Kamar Hotel</th>
                             <th>Action</th>
                         </tr>
@@ -105,6 +106,10 @@
                 {
                     data: 'price',
                     name: 'price'
+                },
+                {
+                    data: 'qty',
+                    name: 'qty'
                 },
                 {
                     data: 'gambar_kamar_hotel',

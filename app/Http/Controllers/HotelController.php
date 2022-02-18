@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Hotel;
+use App\Models\CheckRoom;
 use App\Models\FasilitasHotel;
 use App\Models\FasilitasUmumHotel;
 use App\Models\KebijakanHotel;
@@ -13,6 +14,12 @@ use App\Models\ImageHotel;
 use App\Models\Provinsi;
 use App\Models\KabupatenKota;
 use App\Models\Kecamatan;
+
+use App\Exports\HotelExport;
+use App\Imports\HotelImport;
+use Maatwebsite\Excel\Facades\Excel;
+use \Carbon\Carbon;
+
 use DataTables;
 use Validator;
 class HotelController extends Controller
@@ -33,6 +40,9 @@ class HotelController extends Controller
                     ->addColumn('action', function($row){
                         $btn = '<button onclick="gambar('.$row->id.')" class="btn btn-success btn-sm" title="Upload Gambar Hotel">
                                     <i class="fas fa-upload"></i> Upload Gambar Hotel
+                                </button>
+                                <button onclick="room('.$row->id.')" class="btn btn-primary btn-sm" title="Upload Gambar Hotel">
+                                    <i class="fas fa-bed"></i> Check Room
                                 </button>
                                 <a href='.route('hotel.detail', ['id' => $row->id]).' class="btn btn-success btn-sm" title="Detail">
                                     <i class="fas fa-eye"></i>
@@ -374,4 +384,103 @@ class HotelController extends Controller
         );
 
     }
+
+    public function checkRoom($id, Request $request)
+    {
+        // $checkRoom = CheckRoom::where('hotel_id',$id)->get();
+        
+        // foreach ($checkRoom as $key => $value) {
+        //     $checkDataRoom[] = [
+        //         'kode_booking' => $value->kode_booking,
+        //         'kamar' => $value->kamar->nama_kamar,
+        //         'check_in' => Carbon::parse($value->check_in)->isoFormat('LLLL'),
+        //         'check_out' => Carbon::parse($value->check_out)->isoFormat('LLLL'),
+        //     ];
+        // }
+        
+        // return response()->json([
+        //     'status' => true,
+        //     'data' => $checkDataRoom
+        // ],201);
+
+        if ($request->ajax()) {
+            // $data = Hotel::join('kamar_hotel', 'kamar_hotel.hotel_id', '=', 'hotel.id')->get();
+            $data = CHeckRoom::where('hotel_id',$id)->get();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('kamar', function($row){
+                        return $row->kamar->nama_kamar;
+                    })
+                    ->addColumn('kode_booking', function($row){
+                        return '<b>'.$row->kode_booking.'</b>';
+                    })
+                    ->addColumn('check_in', function($row){
+                        if($row->check_in != null){
+                            return $row->check_in;
+                        }else{
+                            return '-';
+                        }
+                    })
+                    ->addColumn('check_out', function($row){
+                        if($row->check_out != null){
+                            return $row->check_out;
+                        }else{
+                            return '-';
+                        }
+                    })
+                    ->addColumn('status', function($row){
+                        if($row->check_in != null && $row->check_out != null){
+                            return '<span class="text-danger"><b>CHECK OUT</b></span>';
+                        }elseif($row->check_in != null){
+                            return '<span class="text-success"><b>CHECK IN</b></span>';
+                        }
+                        // if($row->check_in){
+                        //     return '<span class="text-success">IN</span>';
+                        // }elseif($row->check_in != null && $row->check_out != null){
+                        //     return '<span class="text-danger">OUT</span>';
+                        // }
+                    })
+                    // ->addColumn('action', function($row){
+                    //     $btn = '<button onclick="gambar('.$row->id.')" class="btn btn-success btn-sm" title="Upload Gambar Hotel">
+                    //                 <i class="fas fa-upload"></i> Upload Gambar Hotel
+                    //             </button>
+                    //             <button onclick="room('.$row->id.')" class="btn btn-primary btn-sm" title="Upload Gambar Hotel">
+                    //                 <i class="fas fa-bed"></i> Check Room
+                    //             </button>
+                    //             <a href='.route('hotel.detail', ['id' => $row->id]).' class="btn btn-success btn-sm" title="Detail">
+                    //                 <i class="fas fa-eye"></i>
+                    //             </a>
+                    //             <button onclick="edit('.$row->id.')" class="btn btn-warning btn-sm" title="Edit">
+                    //                 <i class="fas fa-pencil-alt"></i>
+                    //             </button>
+                    //             <button onclick="hapus('.$row->id.')" class="btn btn-danger btn-sm" title="Hapus">
+                    //                 <i class="fas fa-trash"></i>
+                    //             </button>';
+                    //     return $btn;
+                    // })
+                    ->rawColumns(
+                        [
+                            // 'action',
+                            'kamar','status','kode_booking'
+                        ]
+                    )
+                    ->make(true);
+        }
+    }
+
+    public function export() 
+    {
+        // dd('test');
+        $export = Carbon::now()->isoFormat('LL').' - Hotels.xlsx';
+        return Excel::download(new HotelExport, $export);
+        // return redirect()->back();
+    }
+
+    public function import() 
+    {
+        Excel::import(new HotelImport,request()->file('upload_excel'));
+        return redirect()->back();
+    }
+
+    
 }

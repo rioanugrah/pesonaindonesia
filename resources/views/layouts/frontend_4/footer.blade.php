@@ -24,7 +24,7 @@
                     <h4>CONTACT PERSON</h4>
                     <ul class="text-white">
                         <li class="text-white">
-                            <a href="#"><i class="fas fa-phone-alt"></i> 0813-3112-6991</a>
+                            <a href="tel:081331126991"><i class="fas fa-phone-alt"></i> 0813-3112-6991</a>
                         </li>
                         <li class="text-white">
                             <a href="mailto:business@plesiranindonesia.com"><i class="fas fa-envelope"></i> business@plesiranindonesia.com</a>

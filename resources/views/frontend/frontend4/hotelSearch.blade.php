@@ -25,45 +25,45 @@
                         <div class="tours-box">
                             <form method="get" action="{{ route('frontend.hotel_search') }}" class="form search divider-skew">
                             <div class="tours-search mb-20">
-                                    <div class="search-wrap">
-                                        <input type="text" placeholder="Destination" class="form-control search-field"><i
-                                            class="flaticon-suntour-map search-icon"></i>
-                                    </div>
-                                <div class="tours-calendar divider-skew">
-                                    <input placeholder="Check In" type="text" onfocus="(this.type='date')"
-                                        onblur="(this.type='text')" class="calendar-default textbox-n"><i
-                                        class="flaticon-suntour-calendar calendar-icon"></i>
+                                <div class="search-wrap">
+                                    <input type="text" value="{{ $search['search_hotel'] }}" placeholder="Destination" class="form-control search-field"><i
+                                        class="flaticon-suntour-map search-icon"></i>
                                 </div>
                                 <div class="tours-calendar divider-skew">
                                     <input placeholder="Check Out" type="text" onfocus="(this.type='date')"
-                                        onblur="(this.type='text')" class="calendar-default textbox-n"><i
+                                        onblur="(this.type='text')" value="{{ $search['out'] }}" class="calendar-default textbox-n"><i
+                                        class="flaticon-suntour-calendar calendar-icon"></i>
+                                </div>
+                                <div class="tours-calendar divider-skew">
+                                    <input placeholder="Check In" type="text" onfocus="(this.type='date')"
+                                        onblur="(this.type='text')" value="{{ $search['in'] }}" class="calendar-default textbox-n"><i
                                         class="flaticon-suntour-calendar calendar-icon"></i>
                                 </div>
                                 <div class="selection-box divider-skew"><i class="flaticon-suntour-adult box-icon"></i>
-                                    <select>
+                                    <select name="adult" value="{{ $search['adult'] }}">
                                         <option>Adult</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                        <option {{ $search['adult'] == 1 ? 'selected' : '' }} value="1">1</option>
+                                        <option {{ $search['adult'] == 2 ? 'selected' : '' }} value="2">2</option>
+                                        <option {{ $search['adult'] == 3 ? 'selected' : '' }} value="3">3</option>
+                                        <option {{ $search['adult'] == 4 ? 'selected' : '' }} value="4">4</option>
                                     </select>
                                 </div>
                                 <div class="selection-box divider-skew"><i class="flaticon-suntour-children box-icon"></i>
-                                    <select>
+                                    <select name="children">
                                         <option>Child</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                        <option {{ $search['children'] == 1 ? 'selected' : '' }} value="1">1</option>
+                                        <option {{ $search['children'] == 2 ? 'selected' : '' }} value="2">2</option>
+                                        <option {{ $search['children'] == 3 ? 'selected' : '' }} value="3">3</option>
+                                        <option {{ $search['children'] == 4 ? 'selected' : '' }} value="4">4</option>
                                     </select>
                                 </div>
                                 <div class="selection-box"><i class="flaticon-suntour-bed box-icon"></i>
-                                    <select>
+                                    <select name="room">
                                         <option>Room</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                        <option {{ $search['room'] == 1 ? 'selected' : '' }} value="1">1</option>
+                                        <option {{ $search['room'] == 2 ? 'selected' : '' }} value="2">2</option>
+                                        <option {{ $search['room'] == 3 ? 'selected' : '' }} value="3">3</option>
+                                        <option {{ $search['room'] == 4 ? 'selected' : '' }} value="4">4</option>
                                     </select>
                                 </div>
                             </div>

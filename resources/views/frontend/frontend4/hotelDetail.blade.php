@@ -151,10 +151,14 @@
                                 <h6>{{ $km->nama_kamar }}</h6>
                             </td>
                             <td>
-                                <div class="table-icon"><i class="flaticon-people"></i><i class="flaticon-people"></i><i
-                                        class="flaticon-people"></i><i class="flaticon-people"></i><i
-                                        class="flaticon-people alt"></i></div>
-                                <p>4 guest</p>
+                                <div class="table-icon">
+                                    <i class="flaticon-people"></i>
+                                    <i class="flaticon-people"></i>
+                                    <i class="flaticon-people"></i>
+                                    <i class="flaticon-people"></i>
+                                    <i class="flaticon-people alt"></i>
+                                </div>
+                                <p>{{ $km->qty }} Room</p>
                             </td>
                             <td>
                                 <ul class="style-1">

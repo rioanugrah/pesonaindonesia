@@ -17,6 +17,26 @@ use Illuminate\Support\Facades\Route;
 //     // return view('frontend.index');
 //     // return view('welcome');
 // });
+
+// Route::group(['prefix' => '{locale}', 'middleware' => 'locale'], function ($locale) {
+//     Route::get('/', 'FrontendController@index')->name('frontend');
+//     Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');
+//     Route::get('tentang-kami', 'FrontendController@tentang_kami')->name('tentang_kami');
+//     Route::get('visi-misi', 'FrontendController@visimisi')->name('visi_misi');
+//     Route::get('tim-kami', 'FrontendController@tim')->name('tim_kami');
+//     Route::get('kontak', 'FrontendController@kontak')->name('kontak');
+//     Route::post('kontak/simpan', 'FrontendController@kontak_simpan')->name('kontak.simpan');
+
+//     Route::get('hotel', 'FrontendController@hotel')->name('frontend.hotel');
+//     Route::get('hotel/search', 'FrontendController@search_hotel')->name('frontend.hotel_search');
+//     Route::get('hotel/{slug}', 'FrontendController@hotel_detail')->name('frontend.hotelDetail');
+//     Route::get('hotel/{slug}/{slug_kamar}', 'FrontendController@kamar_hotel_detail')->name('frontend.kamarHotelDetail');
+
+//     Route::get('partnership', 'FrontendController@partnership')->name('frontend.partnership');
+//     Route::get('wistlist', 'FrontendController@wistlist')->name('frontend.wistlist');
+//     Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('frontend.search.wistlist');
+// });
+
 Route::get('/', 'FrontendController@index')->name('frontend');
 Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');
 Route::get('tentang-kami', 'FrontendController@tentang_kami')->name('tentang_kami');
@@ -26,6 +46,7 @@ Route::get('kontak', 'FrontendController@kontak')->name('kontak');
 Route::post('kontak/simpan', 'FrontendController@kontak_simpan')->name('kontak.simpan');
 
 Route::get('hotel', 'FrontendController@hotel')->name('frontend.hotel');
+Route::get('hotel/search', 'FrontendController@search_hotel')->name('frontend.hotel_search');
 Route::get('hotel/{slug}', 'FrontendController@hotel_detail')->name('frontend.hotelDetail');
 Route::get('hotel/{slug}/{slug_kamar}', 'FrontendController@kamar_hotel_detail')->name('frontend.kamarHotelDetail');
 // Route::get('#/wisata', 'FrontendController@index');
@@ -114,13 +135,23 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('hotel/{id}/kamar', 'KamarHotelController@index')->name('kamar')->middleware('verified');
         Route::post('hotel/kamar/simpan', 'KamarHotelController@simpan')->name('kamar.simpan')->middleware('verified');
         Route::get('hotel/delete/{id}', 'HotelController@destroy')->name('hotel.hapus')->middleware('verified');
+        Route::post('hotel/export', 'HotelController@export')->name('hotel.export')->middleware('verified');
+        Route::post('hotel/import', 'HotelController@import')->name('hotel.import')->middleware('verified');
+        Route::get('hotel/checkroom/{id}', 'HotelController@checkRoom')->name('hotel.checkroom')->middleware('verified');
+        // Route::get('hotel/importExportView', 'DemoController@importExportView');
         
         Route::get('perusahaan', 'PerusahaanController@index')->name('perusahaan')->middleware('verified');
         Route::post('perusahaan/simpan', 'PerusahaanController@simpan')->name('perusahaan.simpan')->middleware('verified');
         Route::get('perusahaan/{id}/edit', 'PerusahaanController@edit')->name('perusahaan.edit')->middleware('verified');
         Route::post('perusahaan/update', 'PerusahaanController@update')->name('perusahaan.update')->middleware('verified');
         Route::get('perusahaan/delete/{id}', 'PerusahaanController@destroy')->name('perusahaan.hapus')->middleware('verified');
+
+        Route::get('log', 'LogController@index')->name('log')->middleware('verified');
     });
+
+    // Route::get('hotel/export', function(){
+    //     return 'Export Hotel';
+    // });
 
     Route::get('country/simpan', 'CountryController@simpan');
 
@@ -147,7 +178,8 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::get('payment', 'FrontendController@payment')->middleware('verified');
     Route::post('payment/balance', 'PaymentController@balance')->name('payment.balance')->middleware('verified');
-    Route::post('checkout/payment', 'PaymentController@createInvoice')->name('payment')->middleware('verified');
+    Route::get('checkout/payment', 'CartController@cek')->name('payment')->middleware('verified');
+    // Route::post('checkout/payment', 'PaymentController@createInvoice')->name('payment')->middleware('verified');
     Route::get('balance', 'PaymentController@getSaldo')->middleware('verified');
 
     Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');

@@ -228,6 +228,11 @@
                     $('#detail_email').val(result.cooperation.email);
                     $('#detail_nama_perusahaan').val(result.cooperation.nama_perusahaan);
                     $('#detail_alamat_perusahaan').val(result.cooperation.alamat_perusahaan);
+                    $('#detail_provinsi').val(result.cooperation.provinsi);
+                    $('#detail_kabkota').val(result.cooperation.kab_kota);
+                    $('#detail_kodepos').val(result.cooperation.kode_pos);
+                    // document.getElementById('pdfViewer').innerHTML = '<iframe src="https://view.officeapps.live.com/op/view.aspx?src={{ asset("backend/berkas/coorporate") }}/'+result.cooperation.berkas+'" frameborder="0" style="width: 100%; height: 560px"></iframe>'
+                    document.getElementById('pdfViewer').innerHTML = '<iframe src="{{ asset("backend/berkas/coorporate") }}/'+result.cooperation.berkas+'" frameborder="0" style="width: 100%; height: 560px"></iframe>'
                     // document.getElementById('berkas_nama_perusahaan').innerHTML = result.cooperation.nama_perusahaan;
                     // document.getElementById('berkas_alamat_perusahaan').innerHTML = result.cooperation.alamat_perusahaan;
 

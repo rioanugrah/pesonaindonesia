@@ -28,9 +28,9 @@
                             class="alert-icon flaticon-warning"></i>{{ $message }}
                     </div>
                 @endif
-                <form name="checkout" method="post" action="{{ route('payment') }}" enctype="multipart/form-data"
+                <form name="checkout" method="get" action="{{ route('payment') }}" enctype="multipart/form-data"
                     class="checkout woocommerce-checkout">
-                    @csrf
+                    {{-- @csrf --}}
                     <div id="customer_details" class="col2-set">
                         <div class="col-1 mb-sm-50">
                             <h3 class="mt-0 mb-30">Billing Details</h3>

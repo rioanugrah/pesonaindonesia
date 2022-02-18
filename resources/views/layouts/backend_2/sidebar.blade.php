@@ -62,6 +62,7 @@
                         <span>Akses User</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('log') }}">Log</a></li>
                         <li><a href="{{ route('roles') }}">Roles</a></li>
                         <li><a href="{{ route('pengguna') }}">Users</a></li>
                     </ul>

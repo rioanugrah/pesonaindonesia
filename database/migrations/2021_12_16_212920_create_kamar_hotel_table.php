@@ -19,6 +19,7 @@ class CreateKamarHotelTable extends Migration
             $table->unsignedBigInteger('hotel_id')->index('kamar_hotel_hotel_id_foreign');
             $table->string('nama_kamar');
             $table->string('deskripsi_kamar');
+            $table->integer('qty')->nullable();
             $table->double('price');
             $table->timestamps();
             $table->softDeletes();

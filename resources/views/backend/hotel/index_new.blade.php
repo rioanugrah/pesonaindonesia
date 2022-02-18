@@ -15,7 +15,9 @@
 @section('content')
 @include('backend.hotel.modalBuat')
 @include('backend.hotel.modalEdit')
+@include('backend.hotel.modalImport')
 @include('backend.hotel.modalUploadImage')
+@include('backend.hotel.modalCheckRoom')
     <div class="page-title-box">
         <div class="row align-items-center">
             <div class="col-md-8">
@@ -28,6 +30,18 @@
             <div class="col-md-4">
                 <div class="float-end d-md-block">
                     <div class="btn-group">
+                        <form action="" method="post">
+                            @csrf
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target=".import">
+                                <i class="far fa-file-excel"></i> Import
+                            </button>
+                        </form>
+                        <form action="{{ route('hotel.export') }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-success">
+                                <i class="far fa-file-excel"></i> Export
+                            </button>
+                        </form>
                         <button class="btn btn-primary" onclick="buat()">
                             <i class="mdi mdi-plus"></i> Buat
                         </button>
@@ -49,6 +63,7 @@
                             <tr>
                                 <th>Nama Hotel</th>
                                 <th>Alamat</th>
+                                {{-- <th>Check Room</th> --}}
                                 <th>Kamar</th>
                                 <th>Action</th>
                             </tr>
@@ -118,6 +133,8 @@
             ]
         });
 
+        // $('.datatable_check_room').DataTable();
+
         function buat() {
             $('#modal_buat').modal('show');
         };
@@ -150,6 +167,37 @@
                 }
             });
         });
+
+        function room(id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/hotel/checkroom') }}"+'/'+id,
+                // url: "{{ route('hotel.edit', ['id' => "+data+"]) }}",
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+
+                    const hasilData = result.data;
+                    var text = "";
+                    hasilData.forEach(checkData);
+
+                    function checkData(value,index) {
+                        text = '<tr>'+text+
+                                '<td>'+value.kode_booking+'</td>'+
+                                '<td>'+value.kamar+'</td>'+
+                                '<td>'+value.check_in+'</td>'+
+                                '<td>'+value.check_out+'</td>'+
+                                '<td>'+value.status+'</td>'+
+                                '</tr>';
+                    }
+                    document.getElementById("data_check").innerHTML = text;
+                    
+                    $('#modal_check_room').modal('show');
+                }
+            }).done( function(data) {
+                
+            })
+        }
 
         function gambar(id) {
             // const data = id;

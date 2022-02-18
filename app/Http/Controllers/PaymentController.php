@@ -421,8 +421,8 @@ class PaymentController extends Controller
 
         // $data1 = json_encode($data);
         // dd($data1);
-        // $request->setBody($data1);
-        $request->setBody('"{\n\"partner_user_id\":\"5120010121\",\n\"bank_code\": \"002\",\n\"amount\": 50000,\n\"is_open\": true,\n\"is_single_use\" : false,\n\"is_lifetime\": false,\n\"expiration_time\": 5,\n\"username_display\": \"va name\",\n\"email\": \"email@mail.com\",\n\"trx_expiration_time\": 5,\n\"partner_trx_id\": \"TRX0001\",\n\"trx_counter\" : 1\n}"');
+        $request->setBody($data1);
+        // $request->setBody('"{\n\"partner_user_id\":\"5120010121\",\n\"bank_code\": \"002\",\n\"amount\": 50000,\n\"is_open\": true,\n\"is_single_use\" : false,\n\"is_lifetime\": false,\n\"expiration_time\": 5,\n\"username_display\": \"va name\",\n\"email\": \"email@mail.com\",\n\"trx_expiration_time\": 5,\n\"partner_trx_id\": \"TRX0001\",\n\"trx_counter\" : 1\n}"');
         try {
         $response = $request->send();
         if ($response->getStatus() == 200) {

@@ -10,6 +10,7 @@ use App\Models\FasilitasUmumHotel;
 use App\Models\ContactUs;
 use App\Models\Transaksi;
 use App\Models\Provinsi;
+use App\Models\CheckRoom;
 use \Carbon\Carbon;
 use Validator;
 use DB;
@@ -102,6 +103,66 @@ class FrontendController extends Controller
         //     $data['date'] = 12;
         //     return view('coming_soon.index', $data);
         // }
+    }
+
+    public function search_hotel(Request $request)
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['search'] = $request->all();
+        
+        if($request->in != null){
+            $checkIn = $request->in;
+        }else{
+            $checkIn = null;
+        }
+
+        if($request->out != null){
+            $checkOut = $request->out;
+        }else{
+            $checkOut = null;
+        }
+
+        $data['hotels'] = Hotel::where('nama_hotel','LIKE',"%{$request->search_hotel}%")
+                                ->orWhere('alamat','LIKE',"%{$request->search_hotel}%")
+                                ->get();
+
+        // if(!$request->search_hotel){
+        //     $data['hotels'] = Hotel::where('nama_hotel','LIKE',"%{$request->search_hotel}%")
+        //                             ->orWhere('alamat','LIKE',"%{$request->search_hotel}%")
+        //                             ->get();
+        // }else{
+        //     $data['hotels'] = Hotel::join('check_room','check_room.hotel_id','>=','hotel.id')
+        //                             ->select([
+        //                                 'hotel.id',
+        //                                 'hotel.slug',
+        //                                 'hotel.nama_hotel',
+        //                                 'hotel.alamat',
+        //                                 'hotel.deskripsi',
+        //                                 'hotel.provinsi',
+        //                                 'hotel.kota_kabupaten',
+        //                                 'hotel.kecamatan'
+        //                             ])
+        //                             ->where('nama_hotel','LIKE',"%{$request->search_hotel}%")
+        //                             ->orWhere('alamat','LIKE',"%{$request->search_hotel}%")
+        //                             ->get();
+        // }
+                                // $data['hotels'] = CheckRoom::join('hotel','hotel.id','check_room.hotel_id')
+                                //                         ->select('hotel.nama_hotel','hotel.alamat')
+                                //                         ->where('hotel_id',$data['search_hotels']['id'])
+                                //                         // where('kode_booking','H-16620220116')
+                                //                         // ->orWhere('hotel_id',$data['search_hotels']['id'])
+                                //                         // ->where('hotel.nama_hotel','LIKE',"%{$request->search_hotel}%")
+                                //                         // ->orWhere('hotel.alamat','LIKE',"%{$request->search_hotel}%")
+                                //                         ->orWhereDate('check_in','=',$checkIn)
+                                //                         ->orWhereDate('check_out','=',$checkOut)
+                                //                         // ->whereDate('check_in','>=',Carbon::parse($checkIn)->format('Y-m-d'))
+                                //                         // ->whereDate('check_out','>=',Carbon::parse($checkOut)->format('Y-m-d'))
+                                //                         ->get();
+
+        // dd($data['hotels']);
+        // dd($checkIn);
+        // dd(Carbon::parse($checkIn)->format('Y-m-d'));
+        return view('frontend.frontend4.hotelSearch', $data);
     }
 
     public function struktur()

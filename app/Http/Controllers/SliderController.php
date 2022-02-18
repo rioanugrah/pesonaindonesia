@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Slider;
+use Spatie\Activitylog\Models\Activity;
 use DataTables;
 use Validator;
 use File;
+use Auth;
 class SliderController extends Controller
 {
     public function index(Request $request)
@@ -139,6 +141,7 @@ class SliderController extends Controller
             else{
                 // dd($input);
                 $slider = Slider::find($request->edit_id);
+                $user = Auth::user();
             
                 $file = $request->file('edit_image');
                 $fileName = time().$file->getClientOriginalName();
@@ -147,16 +150,33 @@ class SliderController extends Controller
                 File::delete($image_path);
                 
                 $slider->image = $fileName;
-                $slider->nama_slider = $request->edit_slider;
+                $slider->nama_slider = $request->edit_nama_slider;
                 $slider->status = $request->edit_status;
                 $slider->update();
                 // $perusahaan = Perusahaan::find($request->edit_id)->update($input);
-    
+                
+                // $slider = Slider::find($request->edit_id);
+
                 if($slider){
                     $message_title="Berhasil !";
                     $message_content="Data Slider Berhasil Update";
                     $message_type="success";
                     $message_succes = true;
+
+                    activity('slider')
+                    ->performedOn($slider)
+                    ->causedBy($user)
+                    ->withProperties(
+                        [
+                            'attributes' => [
+                                'nama_slider' => $request->edit_nama_slider
+                            ],
+                            'old' => [
+                                'nama_slider' => $slider->nama_slider
+                            ]
+                        ])
+                    ->log('Slider update by ' . $user->name);
+
                 }
     
                 $array_message = array(

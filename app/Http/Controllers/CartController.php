@@ -24,7 +24,7 @@ class CartController extends Controller
         return view('frontend.frontend4.cart',$data);
     }
 
-    public function chart($id)
+    public function chart($id, Request $request)
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['carts'] = Cart::where('id',$id)->
@@ -115,5 +115,15 @@ class CartController extends Controller
         //     'status' => true,
         //     'message' => 'Data Berhasil Dihapus'
         // ]);
+    }
+
+    public function cek(Request $request)
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['request'] = $request->all();
+        $data['carts'] = Cart::where('kode_booking',$request['kode_booking'])->where('user_id',auth()->user()->id)->first();
+        $data['cart_detail'] = CartItem::where('cart_id',$data['carts']['id'])->first();
+        return view('frontend.frontend4.checkout1',$data);
+        // return response()->json($data, 200);
     }
 }
