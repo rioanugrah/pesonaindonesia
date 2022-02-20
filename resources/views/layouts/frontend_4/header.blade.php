@@ -88,6 +88,9 @@
                         <li class="{{ Request::is('hotel*') ? 'active' : '' }}"><a href="{{ route('frontend.hotel') }}" class="mn-has-sub">Hotel</a>
                         </li>
                         <li class="slash">/</li>
+                        <li class="{{ Request::is('event*') ? 'active' : '' }}"><a href="{{ route('frontend.event') }}" class="mn-has-sub">Event</a>
+                        </li>
+                        <li class="slash">/</li>
                         @guest
                             <li><a href="{{ route('login') }}" class="mn-has-sub">Login</a></li>
                             <li><a href="{{ route('register') }}" class="mn-has-sub">Register</a></li>

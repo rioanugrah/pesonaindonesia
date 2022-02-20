@@ -151,15 +151,6 @@
                 </div>
             </div>
             <div class="col-md-2 col-xs-6 mb-md-30">
-                <div class="counter-block with-divider"><i
-                        class="counter-icon flaticon-suntour-fireworks"></i>
-                    <div class="counter-name-wrap">
-                        <div data-count="0" class="counter">0</div>
-                        <div class="counter-name">Holidays</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 col-xs-6 mb-md-30">
                 <div class="counter-block with-divider"><i class="counter-icon flaticon-suntour-hotel"></i>
                     <div class="counter-name-wrap">
                         <div data-count="{{ $jumlah_hotel }}" class="counter">{{ $jumlah_hotel }}</div>
@@ -188,6 +179,14 @@
                     <div class="counter-name-wrap">
                         <div data-count="0" class="counter">0</div>
                         <div class="counter-name">Cars</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-xs-6">
+                <div class="counter-block with-divider"><i class="counter-icon fas fa-bullhorn"></i>
+                    <div class="counter-name-wrap">
+                        <div data-count="0" class="counter">{{ $event }}</div>
+                        <div class="counter-name">Event</div>
                     </div>
                 </div>
             </div>

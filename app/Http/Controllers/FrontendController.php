@@ -11,6 +11,7 @@ use App\Models\ContactUs;
 use App\Models\Transaksi;
 use App\Models\Provinsi;
 use App\Models\CheckRoom;
+use App\Models\Events;
 use \Carbon\Carbon;
 use Validator;
 use DB;
@@ -61,6 +62,7 @@ class FrontendController extends Controller
             $data['informasi'] = 'info@plesiranindonesia.com';
             $data['whatsapp'] = $this->whatsapp;
             $data['jumlah_hotel'] = Hotel::count();
+            $data['event'] = Events::count();
             $searchTermJawa = 'Jawa';
             // $searchTermJogja = 'Di Yogyakarta';
             // $data['provinsis'] = Provinsi::select('nama AS provinsi','id')
@@ -301,5 +303,22 @@ class FrontendController extends Controller
         return response()->json([
             'data' => $search
         ]);
+    }
+
+    public function event()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['events'] = Events::orderBy('id','desc')->paginate(10);
+
+        return view('frontend.frontend4.events',$data);
+    }
+
+    public function eventDetail($slug)
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['event'] = Events::where('slug',$slug)->first();
+
+        return view('frontend.frontend4.eventsDetail',$data);
+
     }
 }

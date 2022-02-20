@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col-12">
                             Copyright ©
-                            @if (date('Y')>2021)
+                            @if (date('Y')<2021)
                             2021
                             @else
                             2021 - {{ date('Y') }}

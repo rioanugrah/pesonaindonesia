@@ -58,6 +58,9 @@ Route::get('partnership', 'FrontendController@partnership')->name('frontend.part
 Route::get('wistlist', 'FrontendController@wistlist')->name('frontend.wistlist');
 Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('frontend.search.wistlist');
 
+Route::get('events', 'FrontendController@event')->name('frontend.event');
+Route::get('events/{slug}', 'FrontendController@eventDetail')->name('frontend.eventDetail');
+
 Auth::routes(['verify' => true]);
 
 Route::domain('{account}.localhost.com')->group(function () {
@@ -147,6 +150,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('perusahaan/delete/{id}', 'PerusahaanController@destroy')->name('perusahaan.hapus')->middleware('verified');
 
         Route::get('log', 'LogController@index')->name('log')->middleware('verified');
+        
+        Route::get('events', 'EventsController@index')->name('events')->middleware('verified');
+        Route::post('events/simpan', 'EventsController@simpan')->name('events.simpan')->middleware('verified');
     });
 
     // Route::get('hotel/export', function(){
