@@ -117,6 +117,7 @@
                     });
                 }
             }).done(function() {
+                document.getElementById('result').innerHTML = '<div>Data Tidak Ditemukan</div>';
                 setTimeout(function(){
                     $(".container1").fadeOut(100);
                 },100);

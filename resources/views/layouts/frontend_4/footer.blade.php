@@ -18,8 +18,9 @@
                     menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi,
                     Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.</p> --}}
                 <!-- social-->
+                <a href="{{ route('frontend.partnership') }}" class="button-btn fourth mt-sm-30"><img src="{{ asset('frontend/assets4/img/team.png') }}" alt="" srcset=""></a>
             </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-3 col-sm-3 mb-sm-30">
                 <div class="widget-footer">
                     <h4>CONTACT PERSON</h4>
                     <ul class="text-white">
@@ -34,10 +35,17 @@
                             Kec. Kedungkandang, Kota Malang,
                             Jawa Timur
                         </li>
+                        <li>
+                            <iframe
+                            src="https://maps.google.com/maps?q=Jl. Raya Tlogowaru No. 3, Tlogowaru
+                            Kec. Kedungkandang, Kota Malang,
+                            Jawa Timur&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                            allowfullscreen=""></iframe>
+                        </li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-3 col-sm-3 mb-sm-30">
                 <div class="widget-footer">
                     <h4>PERUSAHAAN</h4>
                     <ul class="text-white">
@@ -52,9 +60,21 @@
                         </li>
                     </ul>
                 </div>
-                <a href="{{ route('frontend.partnership') }}" class="button-btn fourth"><img src="{{ asset('frontend/assets4/img/team.png') }}" alt="" srcset=""></a>
             </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-3 col-sm-3 mb-sm-30">
+                <div class="widget-footer">
+                    <h4>PRODUK</h4>
+                    <ul class="text-white">
+                        <li class="text-white">
+                            <a href="{{ route('frontend.hotel') }}">Hotel</a>
+                        </li>
+                        <li class="text-white">
+                            <a href="{{ route('frontend.event') }}">Event</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 mb-sm-30">
                 <div class="widget-footer">
                     <h4>LAINNYA</h4>
                     <ul class="text-white">
