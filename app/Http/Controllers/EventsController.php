@@ -20,7 +20,7 @@ class EventsController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('image', function($row){
-                        return "<img src='".url('frontend/assets4/img/events/'.$row->image)."' width='150' />";
+                        return "<a href='".url('frontend/assets4/img/events/'.$row->image)."' target='_blank'><img src='".url('frontend/assets4/img/events/'.$row->image)."' class='img-thumbnail' width='150' /></a>";
                     })
                     ->addColumn('is_event', function($row){
                         if($row->is_event == 'W'){
@@ -32,7 +32,7 @@ class EventsController extends Controller
                     })
                     ->addColumn('finish_event', function($row){
                         if($row->finish_event == null){
-                            return '<span class="text-success"><b>Selesai</b></span>';
+                            return '<span class="text-success"><b>Sampai Selesai</b></span>';
                         }else{
                             return Carbon::parse($row->finish_event)->isoFormat('llll');
                         }
@@ -79,6 +79,7 @@ class EventsController extends Controller
         if ($validator->passes()){
             $input = $request->all();
             $input['slug'] = Str::slug($request->title);
+            $input['is_event'] = 'W';
             $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
             $request->image->move(public_path('frontend/assets4/img/events'), $input['image']);
 
@@ -106,5 +107,62 @@ class EventsController extends Controller
                 'error' => $validator->errors()->all()
             ]
         );
+    }
+
+    public function detail($id)
+    {
+        $events = Events::find($id);
+
+        if (!empty($events)) {
+            return response()->json([
+                'status' => true,
+                'data' => $events
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'error' => 'Data Events Tidak Ditemukan'
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $events = Events::find($id);
+
+        if (!empty($events)) {
+            $user = Auth::user();
+            $image_path = public_path('frontend/assets4/img/events/'.$events->image);
+            File::delete($image_path);
+            $events->delete();
+
+            $message_title="Berhasil !";
+            $message_content="Event ".$events->title." Berhasil Dihapus";
+            $message_type="success";
+            $message_succes = true;
+
+            activity('events')
+                    ->performedOn($events)
+                    ->causedBy($user)
+                    ->withProperties(
+                        [
+                            'old' => [
+                                'title' => $events->title
+                            ]
+                        ])
+                    ->log('Events delete by ' . $user->name);
+
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return response()->json($array_message);
+        }
+        return response()->json([
+            'status' => false,
+            'error' => 'Data Event Tidak Ditemukan'
+        ]);
     }
 }

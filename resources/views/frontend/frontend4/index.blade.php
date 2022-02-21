@@ -166,7 +166,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-xs-6">
+            <div class="col-md-2 col-xs-6 mb-md-30">
                 <div class="counter-block with-divider"><i class="counter-icon flaticon-suntour-airplane"></i>
                     <div class="counter-name-wrap">
                         <div data-count="0" class="counter">0</div>
@@ -174,7 +174,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-xs-6">
+            <div class="col-md-2 col-xs-6 mb-md-30">
                 <div class="counter-block with-divider"><i class="counter-icon flaticon-suntour-car"></i>
                     <div class="counter-name-wrap">
                         <div data-count="0" class="counter">0</div>
@@ -182,11 +182,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-xs-6">
+            <div class="col-md-2 col-xs-6 mb-md-30">
                 <div class="counter-block with-divider"><i class="counter-icon fas fa-bullhorn"></i>
                     <div class="counter-name-wrap">
-                        <div data-count="0" class="counter">{{ $event }}</div>
-                        <div class="counter-name">Event</div>
+                        <div data-count="{{ $event }}" class="counter">{{ $event }}</div>
+                        <div class="counter-name">Events</div>
                     </div>
                 </div>
             </div>

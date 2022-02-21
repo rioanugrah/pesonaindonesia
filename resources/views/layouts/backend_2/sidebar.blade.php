@@ -34,6 +34,12 @@
                         <span>Kerjasama</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('b/events*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('events') }}" class="waves-effect">
+                        <i class="ti-package"></i>
+                        <span>Events</span>
+                    </a>
+                </li>
                 <li class="menu-title">Information Technology</li>
                 <li class="{{ Request::is('b/perusahaan*') ? 'mm-active' : '' }}">
                     <a href="{{ route('perusahaan') }}" class="waves-effect">

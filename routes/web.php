@@ -153,6 +153,8 @@ Route::group(['middleware' => 'auth'], function () {
         
         Route::get('events', 'EventsController@index')->name('events')->middleware('verified');
         Route::post('events/simpan', 'EventsController@simpan')->name('events.simpan')->middleware('verified');
+        Route::get('events/{id}', 'EventsController@detail')->name('events.detail')->middleware('verified');
+        Route::get('events/delete/{id}', 'EventsController@destroy')->name('events.delete')->middleware('verified');
     });
 
     // Route::get('hotel/export', function(){

@@ -21,7 +21,11 @@
         <div class="row">
             <div class="col-md-12 mb-60">
                 <div class="blog-item alt pb-20">
-                    <div class="pic"><img src="{{ asset('frontend/assets4/img/events/'.$event->image) }}" style="width: 770px; height: 370px; object-fit: cover;" data-at2x="{{ asset('frontend/assets4/img/events/'.$event->image) }}" alt></div>
+                    <div class="pic">
+                        <a href="{{ asset('frontend/assets4/img/events/'.$event->image) }}" target="_blank">
+                            <img src="{{ asset('frontend/assets4/img/events/'.$event->image) }}" style="width: 770px; height: 370px; object-fit: cover;" data-at2x="{{ asset('frontend/assets4/img/events/'.$event->image) }}" alt>
+                        </a>
+                    </div>
                     <div class="blog-item-data clearfix">
                         <h3 class="blog-title">{{ $event->title }}</h3>
                         <p class="post-info">Tanggal dibuat : {{ \Carbon\Carbon::parse($event->created_at)->isoFormat('LLLL') }}</p>

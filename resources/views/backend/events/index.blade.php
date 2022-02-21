@@ -15,6 +15,7 @@
 
 @section('content')
 @include('backend.events.modalBuat')
+@include('backend.events.modalEdit')
 <div class="page-title-box">
     <div class="row align-items-center">
         <div class="col-md-8">
@@ -134,6 +135,54 @@
 
         function reload() {
             table.ajax.reload();
+        }
+
+        function edit(id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/events') }}"+'/'+id,
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    $('#edit_id').val(result.data.id);
+                    $('#edit_title').val(result.data.title);
+                    $('#edit_deskripsi').val(result.data.deskripsi);
+                    $('#edit_location').val(result.data.location);
+                    $('#edit_start_event').val(result.data.start_event);
+                    $('#edit_finish_event').val(result.data.finish_event);
+                    // $('#edit_nama_slider').val(result.slider.nama_slider);
+                    // $('#edit_status').val(result.slider.status);
+                    $('#modal_edit').modal('show');
+                },
+                error: function (request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            })
+        }
+
+        function hapus(id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/events/delete') }}"+'/'+id,
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    iziToast.success({
+                        title: result.message_title,
+                        message: result.message_content
+                    });
+                    table.ajax.reload();
+                },
+                error: function (request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            })
         }
 
         $('#upload-form').submit(function(e) {
