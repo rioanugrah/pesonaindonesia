@@ -35,13 +35,6 @@
                             Kec. Kedungkandang, Kota Malang,
                             Jawa Timur
                         </li>
-                        <li>
-                            <iframe
-                            src="https://maps.google.com/maps?q=Jl. Raya Tlogowaru No. 3, Tlogowaru
-                            Kec. Kedungkandang, Kota Malang,
-                            Jawa Timur&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                            allowfullscreen=""></iframe>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -73,8 +66,6 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="col-md-3 col-sm-3 mb-sm-30">
                 <div class="widget-footer">
                     <h4>LAINNYA</h4>
                     <ul class="text-white">
