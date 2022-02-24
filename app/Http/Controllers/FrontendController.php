@@ -389,7 +389,7 @@ class FrontendController extends Controller
                     'title' => 'Konfirmasi Pendaftaran '.$events->title,
                     'body' => 'Terima kasih Bapak/Ibu/Saudara '.$request->first_name.' '.$request->last_name.' telah melakukan pendaftaran event '.$events->title.'. Kode tiket anda '.$input['kode_tiket'].'. '
                 ];
-                // \Mail::to($input['email'])->send(new \App\Mail\RegisterEvent($details));
+                \Mail::to($input['email'])->send(new \App\Mail\RegisterEvent($details));
                 // $offerData = [
                 //     'message' => 'Terima kasih Bapak/Ibu/Saudara "'.$request->first_name.'" telah melakukan pendaftaran event "'.$events->title.'". Kode tiket anda "'.$input['kode_tiket'].'". ',
                 // ];
