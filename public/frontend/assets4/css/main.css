@@ -9625,7 +9625,7 @@ aside .cws-widget {
     background: #f0f4f7;
     background-position: 50%;
     background-repeat: repeat;
-    background-image: url(../img/pattern5.png);
+    /* background-image: url(../img/pattern5.png); */
 }
 
 .widget-search form,

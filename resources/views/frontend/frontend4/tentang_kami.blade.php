@@ -66,10 +66,10 @@
                         </div>
                     </div>
                     <div class="col-xs-6">
-                        <div class="counter-block"><i class="counter-icon flaticon-suntour-car"></i>
+                        <div class="counter-block"><i class="counter-icon fas fa-bullhorn"></i>
                             <div class="counter-name-wrap">
-                                <div data-count="0" class="counter">0</div>
-                                <div class="counter-name">Cars</div>
+                                <div data-count="{{ $event }}" class="counter">{{ $event }}</div>
+                                <div class="counter-name">Events</div>
                             </div>
                         </div>
                     </div>

@@ -60,6 +60,7 @@ Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('fron
 
 Route::get('events', 'FrontendController@event')->name('frontend.event');
 Route::get('events/{slug}', 'FrontendController@eventDetail')->name('frontend.eventDetail');
+Route::post('event_register', 'FrontendController@eventRegister')->name('frontend.eventRegister');
 
 Auth::routes(['verify' => true]);
 
@@ -154,6 +155,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('events', 'EventsController@index')->name('events')->middleware('verified');
         Route::post('events/simpan', 'EventsController@simpan')->name('events.simpan')->middleware('verified');
         Route::get('events/{id}', 'EventsController@detail')->name('events.detail')->middleware('verified');
+        Route::get('events/{id}/register', 'EventsController@detailEventRegister')->name('events.detailRegister')->middleware('verified');
         Route::get('events/delete/{id}', 'EventsController@destroy')->name('events.delete')->middleware('verified');
     });
 

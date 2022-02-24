@@ -12,7 +12,12 @@ use App\Models\Transaksi;
 use App\Models\Provinsi;
 use App\Models\CheckRoom;
 use App\Models\Events;
+use App\Models\EventRegister;
 use \Carbon\Carbon;
+
+// use App\Notifications\WisataNotification;
+use App\Events\EventRegisterEvent;
+
 use Validator;
 use DB;
 
@@ -176,6 +181,7 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['jumlah_hotel'] = Hotel::count();
+        $data['event'] = Events::count();
         // return view('frontend.frontend2.tentang_kami', $data);
         return view('frontend.frontend4.tentang_kami', $data);
     }
@@ -321,4 +327,75 @@ class FrontendController extends Controller
         return view('frontend.frontend4.eventsDetail',$data);
 
     }
+
+    public function eventRegister(Request $request)
+    {
+        $rules = [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'kategori_asal' => 'required',
+            'asal' => 'required',
+            'alamat' => 'required',
+        ];
+ 
+        $messages = [
+            'first_name.required' => 'Nama Depan wajib diisi.',
+            'last_name.required' => 'Nama Belakang wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'kategori_asal.required' => 'Berasal Dari wajib diisi.',
+            'asal.required' => 'Asal SMK/SMA, Kampus, Instansi  wajib diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()){
+            $events = Events::where('slug',$request->slug)->first();
+            $input['event_id'] = $events->id;
+            $input['kode_tiket'] = 'ETIKET-'.rand(10000,99999);
+            $input['first_name'] = $request->first_name;
+            $input['last_name'] = $request->last_name;
+            $input['email'] = $request->email;
+            $input['kategori_asal'] = $request->kategori_asal;
+            $input['asal'] = $request->asal;
+            $input['no_telp'] = $request->no_telp;
+            $input['alamat'] = $request->alamat;
+            $input['is_event_register'] = 'W';
+
+            $eventRegister = EventRegister::create($input);
+
+            if($eventRegister){
+                $details = [
+                    'title' => 'Konfirmasi Pendaftaran '.$events->title,
+                    'body' => 'Terima kasih Bapak/Ibu/Saudara '.$request->first_name.' '.$request->last_name.' telah melakukan pendaftaran event '.$events->title.'. Kode tiket anda '.$input['kode_tiket'].'. '
+                ];
+                \Mail::to($input['email'])->send(new \App\Mail\RegisterEvent($details));
+                // $offerData = [
+                //     'message' => 'Terima kasih Bapak/Ibu/Saudara "'.$request->first_name.'" telah melakukan pendaftaran event "'.$events->title.'". Kode tiket anda "'.$input['kode_tiket'].'". ',
+                // ];
+                // new EventRegisterEvent($offerData['message']);
+
+                $message_title = "Pendaftaran Berhasil";
+                $message_content = "Terima kasih telah melakukan pendaftaran event. Silahkan cek email kembali";
+                $message_type = "success";
+                $message_succes = true;
+            }
+
+            $array_message = array(
+                'success' => $message_succes,
+                'title' => $message_title,
+                'text' => $message_content,
+                'icon' => $message_type,
+            );
+            return response()->json($array_message);
+        }
+
+        return response()->json(
+            [
+                'success' => false,
+                'error' => $validator->errors()->all()
+            ]
+        );
+    }
+
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Events;
+use App\Models\EventRegister;
 use \Carbon\Carbon;
 use DataTables;
 use Validator;
@@ -40,6 +41,9 @@ class EventsController extends Controller
                     ->addColumn('action', function($row){
                         $btn = '<a class="btn btn-success btn-sm" title="Detail">
                                     <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="'.route('events.detailRegister',['id' => $row->id]).'" class="btn btn-success btn-sm" target="_blank">
+                                    <i class="fas fa-eye"></i> Pendaftaran Event
                                 </a>
                                 <button onclick="edit('.$row->id.')" class="btn btn-warning btn-sm" title="Edit">
                                     <i class="fas fa-pencil-alt"></i>
@@ -124,6 +128,34 @@ class EventsController extends Controller
             'status' => false,
             'error' => 'Data Events Tidak Ditemukan'
         ]);
+    }
+
+    public function detailEventRegister(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            // $data = Hotel::join('kamar_hotel', 'kamar_hotel.hotel_id', '=', 'hotel.id')->get();
+            $data = EventRegister::where('event_id',$id)->get();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('name', function($row){
+                        return $row->first_name.' '.$row->last_name;
+                    })
+                    ->addColumn('action', function($row){
+                        $btn = '<a class="btn btn-success btn-sm" title="Detail">
+                                    <i class="fas fa-eye"></i>
+                                </a>';
+                        return $btn;
+                    })
+                    ->rawColumns(
+                        [
+                            'action',
+                        ])
+                    ->make(true);
+        }
+        $data['event'] = Events::find($id);
+        return view('backend.events.eventRegisterDetail',$data);
+        // $eventsRegister = EventRegister::where('event_id',$id)->get();
+        // return $eventsRegister;
     }
 
     public function destroy($id)
