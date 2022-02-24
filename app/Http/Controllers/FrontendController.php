@@ -351,6 +351,22 @@ class FrontendController extends Controller
 
         if ($validator->passes()){
             $events = Events::where('slug',$request->slug)->first();
+            
+            if($events->kuota == 149){
+                $message_title = "Kuota Pendaftaran Penuh";
+                $message_content = "Mohon maaf kuota event ".$events->title." sudah terpenuhi. Silahkan coba lagi di event selanjutnya. Terima Kasih 😊";
+                $message_type = "success";
+                $message_succes = true;
+
+                $array_message = array(
+                    'success' => $message_succes,
+                    'title' => $message_title,
+                    'text' => $message_content,
+                    'icon' => $message_type,
+                );
+                return response()->json($array_message);
+            }
+            
             $input['event_id'] = $events->id;
             $input['kode_tiket'] = 'ETIKET-'.rand(10000,99999);
             $input['first_name'] = $request->first_name;
@@ -364,12 +380,16 @@ class FrontendController extends Controller
 
             $eventRegister = EventRegister::create($input);
 
+            $stockEvent = (int)$events->kuota - 1;
+            $events->kuota = $stockEvent;
+            $events->save();
+
             if($eventRegister){
                 $details = [
                     'title' => 'Konfirmasi Pendaftaran '.$events->title,
                     'body' => 'Terima kasih Bapak/Ibu/Saudara '.$request->first_name.' '.$request->last_name.' telah melakukan pendaftaran event '.$events->title.'. Kode tiket anda '.$input['kode_tiket'].'. '
                 ];
-                \Mail::to($input['email'])->send(new \App\Mail\RegisterEvent($details));
+                // \Mail::to($input['email'])->send(new \App\Mail\RegisterEvent($details));
                 // $offerData = [
                 //     'message' => 'Terima kasih Bapak/Ibu/Saudara "'.$request->first_name.'" telah melakukan pendaftaran event "'.$events->title.'". Kode tiket anda "'.$input['kode_tiket'].'". ',
                 // ];

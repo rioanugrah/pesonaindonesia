@@ -20,5 +20,6 @@ class Events extends Model
         'finish_event',
         'image',
         'is_event',
+        'kuota',
     ];
 }

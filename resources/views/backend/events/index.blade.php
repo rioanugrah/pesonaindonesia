@@ -53,6 +53,7 @@
                             <th>Start Event</th>
                             <th>Finish Event</th>
                             <th>Image</th>
+                            <th>Kuota</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -115,6 +116,10 @@
                 {
                     data: 'image',
                     name: 'image'
+                },
+                {
+                    data: 'kuota',
+                    name: 'kuota'
                 },
                 {
                     data: 'is_event',

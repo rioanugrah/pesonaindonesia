@@ -27,8 +27,8 @@
                                     <li><a href="#" class="lang-sel icl-en">Language <i
                                                 class="fa fa-angle-down"></i></a>
                                         <ul>
-                                            <li><a href="{{ url('en') }}"><img src="{{ asset('frontend/assets4/img/flags/us_flag.jpg') }}" alt="Flag EN" width="20" srcset=""> EN</a></li>
-                                            <li><a href="{{ url('id') }}"><img src="{{ asset('frontend/assets4/img/flags/id_flag.png') }}" alt="Flag ID" width="20" srcset=""> ID</a></li>
+                                            <li><a href="#">EN</a></li>
+                                            <li> <a href="#">ID</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -82,13 +82,17 @@
                             data-at2x="{{ $asset . '/img/logo_plesiran_new_black.png' }}" width="250" alt></a></div>
                 <div class="inner-nav desktop-nav">
                     <ul class="clearlist">
-                        <li class="{{ Request::is('home') ? 'active' : '' }}"><a href="{{ url('/') }}" class="mn-has-sub active">Home</a>
+                        <li ><a href="{{ url('/') }}" class="mn-has-sub {{ Request::is('/') ? 'active' : '' }}">Home</a>
                         </li>
                         <li class="slash">/</li>
-                        <li class="{{ Request::is('hotel*') ? 'active' : '' }}"><a href="{{ route('frontend.hotel') }}" class="mn-has-sub">Hotel</a>
+                        <li class="{{ Request::is('hotel*') ? 'active-li' : '' }}"><a
+                                href="{{ route('frontend.hotel') }}"
+                                class="mn-has-sub {{ Request::is('hotel') ? 'active' : '' }}">Hotel</a>
                         </li>
                         <li class="slash">/</li>
-                        <li class="{{ Request::is('event*') ? 'active' : '' }}"><a href="{{ route('frontend.event') }}" class="mn-has-sub">Event</a>
+                        <li class="{{ Request::is('event*') ? 'active-li' : '' }}"><a
+                                href="{{ route('frontend.event') }}"
+                                class="mn-has-sub {{ Request::is('event') ? 'active' : '' }}">Event</a>
                         </li>
                         <li class="slash">/</li>
                         @guest
@@ -117,5 +121,4 @@
             @endif
         </div>
     </nav>
-    @yield('breadcum')
 </header>

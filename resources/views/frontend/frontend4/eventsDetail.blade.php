@@ -125,28 +125,13 @@
                         this.reset();
                         table.ajax.reload();
                     } else {
-                        // alert(result.title);
-                        Swal.fire({
-                            title: 'Error',
-                            text: error,
-                            icon: 'danger',
-                        })
-                        // iziToast.error({
-                        //     title: result.title,
-                        //     message: result.text
-                        // });
+                        iziToast.error({
+                            title: result.title,
+                            message: result.text
+                        });
                     }
                 },
                 error: function(request, status, error) {
-                    alert(error);
-                    // Swal.fire({
-                    //     title: 'Error',
-                    //     text: error,
-                    //     icon: 'danger',
-                    //     showCancelButton: !0,
-                    //     confirmButtonColor: "#556ee6",
-                    //     cancelButtonColor: "#f46a6a"
-                    // })
                     iziToast.error({
                         title: 'Error',
                         message: error,

@@ -41,6 +41,12 @@
                         </div>
                     </div>
                     <div class="row mb-3">
+                        <label for="example-text-input" class="col-sm-2 col-form-label">Kuota</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="kuota" type="number" placeholder="Kuota">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <label for="example-text-input" class="col-sm-2 col-form-label">Upload Image</label>
                         <div class="col-sm-10">
                             <input class="form-control" name="image" type="file">

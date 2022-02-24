@@ -21,5 +21,6 @@ class EventRegister extends Model
         'asal',
         'alamat',
         'is_event_register',
+        'no_telp',
     ];
 }

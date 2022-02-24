@@ -22,6 +22,7 @@ class CreateEventTable extends Migration
             $table->dateTime('start_event')->nullable();
             $table->dateTime('finish_event')->nullable();
             $table->string('image')->nullable();
+            $table->integer('kuota');
             $table->enum('is_event',array('W','C','R'))->nullable();
             $table->timestamps();
             $table->softDeletes();

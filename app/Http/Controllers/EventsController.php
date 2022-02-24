@@ -163,9 +163,10 @@ class EventsController extends Controller
         $events = Events::find($id);
 
         if (!empty($events)) {
-            $user = Auth::user();
+            $user = \Auth::user();
             $image_path = public_path('frontend/assets4/img/events/'.$events->image);
             File::delete($image_path);
+            EventRegister::where('event_id',$id)->delete();
             $events->delete();
 
             $message_title="Berhasil !";
