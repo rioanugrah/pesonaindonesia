@@ -1689,7 +1689,7 @@ header .main-nav.transparent li.search:after {
     width: 200%;
     height: 100%;
     top: 0;
-    background: #f38f39;
+    /* background: #f38f39; */
 }
 
 header .transparent .inner-nav:after {
