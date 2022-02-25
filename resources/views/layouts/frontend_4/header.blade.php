@@ -2,8 +2,8 @@
     <div class="banner">
         <div class="banner__content">
             <div class="banner__text">
-                <strong style="color: #f38f39">Reminder :</strong> Waspada Penyebaran Virus <strong
-                    style="color: #f38f39">Varian Omicron</strong>
+                <strong style="color: #f38f39">Reminder :</strong> Waspada Penyebaran Virus Varian Omicron, <strong
+                    style="color: #f38f39"><a href="{{ route('frontend.info') }}">Kebijakan Pemesanan</a></strong> selama COVID-19.
             </div>
         </div>
     </div>

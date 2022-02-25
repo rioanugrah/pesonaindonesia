@@ -62,6 +62,8 @@ Route::get('events', 'FrontendController@event')->name('frontend.event');
 Route::get('events/{slug}', 'FrontendController@eventDetail')->name('frontend.eventDetail');
 Route::post('event_register', 'FrontendController@eventRegister')->name('frontend.eventRegister');
 
+Route::get('info/kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
+
 Auth::routes(['verify' => true]);
 
 Route::domain('{account}.localhost.com')->group(function () {

@@ -57,7 +57,7 @@ class FrontendController extends Controller
             //     ['image' => 'frontend/assets2/images/wallpaper/batubengkung.png', 'arrow' => 'frontend/assets2/images/arrow-link.png', 'title' => 'Wisata Pantai Batu Bengkung'],
             //     ['image' => 'frontend/assets2/images/wallpaper/museum_angkut.png', 'arrow' => 'frontend/assets2/images/arrow-link.png', 'title' => 'Wisata Museum Angkut'],
             // ];
-            $data['wallpaper'] = Slider::where('status','Y')->get();
+            $data['wallpaper'] = Slider::where('status','Y')->inRandomOrder()->get();
             $data['adventure'] = [
                 ['image' => 'frontend/assets4/images/bromo_vertikal.jpg', 'title' => 'Gunung Bromo'],
                 ['image' => 'frontend/assets4/images/batubengkung_vertikal.jpg', 'title' => 'Pantai Batu Bengkung'],
@@ -202,6 +202,12 @@ class FrontendController extends Controller
         $data['whatsapp'] = $this->whatsapp;
         // return view('frontend.frontend2.kontak', $data);
         return view('frontend.frontend4.kontak', $data);
+    }
+
+    public function info()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        return view('frontend.frontend4.informasi', $data);
     }
 
     public function kontak_simpan(Request $request)
@@ -352,7 +358,7 @@ class FrontendController extends Controller
         if ($validator->passes()){
             $events = Events::where('slug',$request->slug)->first();
             
-            if($events->kuota == 149){
+            if($events->kuota == 0){
                 $message_title = "Kuota Pendaftaran Penuh";
                 $message_content = "Mohon maaf kuota event ".$events->title." sudah terpenuhi. Silahkan coba lagi di event selanjutnya. Terima Kasih 😊";
                 $message_type = "success";
@@ -387,7 +393,7 @@ class FrontendController extends Controller
             if($eventRegister){
                 $details = [
                     'title' => 'Konfirmasi Pendaftaran '.$events->title,
-                    'body' => 'Terima kasih Bapak/Ibu/Saudara '.$request->first_name.' '.$request->last_name.' telah melakukan pendaftaran event '.$events->title.'. Kode tiket anda '.$input['kode_tiket'].'. '
+                    'body' => 'Terima kasih Bapak/Ibu/Saudara/i '.$request->first_name.' '.$request->last_name.' telah melakukan pendaftaran event '.$events->title.'. Kode tiket anda '.$input['kode_tiket'].'. '
                 ];
                 \Mail::to($input['email'])->send(new \App\Mail\RegisterEvent($details));
 
