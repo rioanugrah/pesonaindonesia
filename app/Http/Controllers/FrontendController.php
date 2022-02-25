@@ -330,6 +330,13 @@ class FrontendController extends Controller
         $data['whatsapp'] = $this->whatsapp;
         $data['event'] = Events::where('slug',$slug)->first();
 
+        $carbon = Carbon::parse($data['event']['start_event']);
+        $setCarbon = Carbon::setTestNow($carbon);
+
+        $data['pendaftaran_terakhir'] = Carbon::yesterday()->isoFormat('LLLL');
+        // dd($data); 
+        // dd(Carbon::parse($data['event']['start_event']));
+
         return view('frontend.frontend4.eventsDetail',$data);
 
     }
@@ -357,10 +364,15 @@ class FrontendController extends Controller
 
         if ($validator->passes()){
             $events = Events::where('slug',$request->slug)->first();
-            
-            if($events->kuota == 0){
-                $message_title = "Kuota Pendaftaran Penuh";
-                $message_content = "Mohon maaf kuota event ".$events->title." sudah terpenuhi. Silahkan coba lagi di event selanjutnya. Terima Kasih 😊";
+
+            $carbon = Carbon::parse($events->start_event);
+            $setCarbon = Carbon::setTestNow($carbon);
+
+            $pendaftaran_terakhir = Carbon::yesterday()->isoFormat('LLLL');
+
+            if($pendaftaran_terakhir <= Carbon::now()->isoFormat('LLLL')){
+                $message_title = "Waktu Pendaftaran Habis";
+                $message_content = "Mohon maaf waktu pendaftaran telah habis. Silahkan coba lagi di event selanjutnya. Terima Kasih 😊";
                 $message_type = "success";
                 $message_succes = true;
 
@@ -372,44 +384,61 @@ class FrontendController extends Controller
                 );
                 return response()->json($array_message);
             }
-            
-            $input['event_id'] = $events->id;
-            $input['kode_tiket'] = 'ETIKET-'.rand(10000,99999);
-            $input['first_name'] = $request->first_name;
-            $input['last_name'] = $request->last_name;
-            $input['email'] = $request->email;
-            $input['kategori_asal'] = $request->kategori_asal;
-            $input['asal'] = $request->asal;
-            $input['no_telp'] = $request->no_telp;
-            $input['alamat'] = $request->alamat;
-            $input['is_event_register'] = 'W';
-
-            $eventRegister = EventRegister::create($input);
-
-            $stockEvent = (int)$events->kuota - 1;
-            $events->kuota = $stockEvent;
-            $events->save();
-
-            if($eventRegister){
-                $details = [
-                    'title' => 'Konfirmasi Pendaftaran '.$events->title,
-                    'body' => 'Terima kasih Bapak/Ibu/Saudara/i '.$request->first_name.' '.$request->last_name.' telah melakukan pendaftaran event '.$events->title.'. Kode tiket anda '.$input['kode_tiket'].'. '
-                ];
-                \Mail::to($input['email'])->send(new \App\Mail\RegisterEvent($details));
-
-                $message_title = "Pendaftaran Berhasil";
-                $message_content = "Terima kasih telah melakukan pendaftaran event. Silahkan cek email kembali";
-                $message_type = "success";
-                $message_succes = true;
+            else{
+                if($events->kuota == 0){
+                    $message_title = "Kuota Pendaftaran Penuh";
+                    $message_content = "Mohon maaf kuota event ".$events->title." sudah terpenuhi. Silahkan coba lagi di event selanjutnya. Terima Kasih 😊";
+                    $message_type = "success";
+                    $message_succes = true;
+    
+                    $array_message = array(
+                        'success' => $message_succes,
+                        'title' => $message_title,
+                        'text' => $message_content,
+                        'icon' => $message_type,
+                    );
+                    return response()->json($array_message);
+                }
+                
+                $input['event_id'] = $events->id;
+                $input['kode_tiket'] = 'ETIKET-'.rand(10000,99999);
+                $input['first_name'] = $request->first_name;
+                $input['last_name'] = $request->last_name;
+                $input['email'] = $request->email;
+                $input['kategori_asal'] = $request->kategori_asal;
+                $input['asal'] = $request->asal;
+                $input['no_telp'] = $request->no_telp;
+                $input['alamat'] = $request->alamat;
+                $input['is_event_register'] = 'W';
+    
+                $eventRegister = EventRegister::create($input);
+    
+                $stockEvent = (int)$events->kuota - 1;
+                $events->kuota = $stockEvent;
+                $events->save();
+    
+                if($eventRegister){
+                    $details = [
+                        'title' => 'Konfirmasi Pendaftaran '.$events->title,
+                        'body' => 'Terima kasih Bapak/Ibu/Saudara/i '.$request->first_name.' '.$request->last_name.' telah melakukan pendaftaran event '.$events->title.'. Kode tiket anda '.$input['kode_tiket'].'. '
+                    ];
+                    \Mail::to($input['email'])->send(new \App\Mail\RegisterEvent($details));
+    
+                    $message_title = "Pendaftaran Berhasil";
+                    $message_content = "Terima kasih telah melakukan pendaftaran event. Silahkan cek email kembali";
+                    $message_type = "success";
+                    $message_succes = true;
+                }
+    
+                $array_message = array(
+                    'success' => $message_succes,
+                    'title' => $message_title,
+                    'text' => $message_content,
+                    'icon' => $message_type,
+                );
+                return response()->json($array_message);
             }
-
-            $array_message = array(
-                'success' => $message_succes,
-                'title' => $message_title,
-                'text' => $message_content,
-                'icon' => $message_type,
-            );
-            return response()->json($array_message);
+            
         }
 
         return response()->json(

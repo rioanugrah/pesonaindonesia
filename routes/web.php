@@ -45,11 +45,22 @@ Route::get('tim-kami', 'FrontendController@tim')->name('tim_kami');
 Route::get('kontak', 'FrontendController@kontak')->name('kontak');
 Route::post('kontak/simpan', 'FrontendController@kontak_simpan')->name('kontak.simpan');
 
-Route::get('hotel', 'FrontendController@hotel')->name('frontend.hotel');
-Route::get('hotel/search', 'FrontendController@search_hotel')->name('frontend.hotel_search');
-Route::get('hotel/{slug}', 'FrontendController@hotel_detail')->name('frontend.hotelDetail');
-Route::get('hotel/{slug}/{slug_kamar}', 'FrontendController@kamar_hotel_detail')->name('frontend.kamarHotelDetail');
+// Route::get('hotel', 'FrontendController@hotel')->name('frontend.hotel');
+// Route::get('hotel/search', 'FrontendController@search_hotel')->name('frontend.hotel_search');
+// Route::get('hotel/{slug}', 'FrontendController@hotel_detail')->name('frontend.hotelDetail');
+// Route::get('hotel/{slug}/{slug_kamar}', 'FrontendController@kamar_hotel_detail')->name('frontend.kamarHotelDetail');
 // Route::get('#/wisata', 'FrontendController@index');
+Route::prefix('hotel')->group(function () {
+    Route::get('/', 'FrontendController@hotel')->name('frontend.hotel');
+    Route::get('search', 'FrontendController@search_hotel')->name('frontend.hotel_search');
+    Route::get('{slug}', 'FrontendController@hotel_detail')->name('frontend.hotelDetail');
+    Route::get('{slug}/{slug_kamar}', 'FrontendController@kamar_hotel_detail')->name('frontend.kamarHotelDetail');
+});
+Route::prefix('events')->group(function () {
+    Route::get('/', 'FrontendController@event')->name('frontend.event');
+    Route::get('{slug}', 'FrontendController@eventDetail')->name('frontend.eventDetail');
+});
+
 Route::get('ticket', function(){
     return view('backend.ticket.tiket_wisata');
 });
@@ -58,11 +69,12 @@ Route::get('partnership', 'FrontendController@partnership')->name('frontend.part
 Route::get('wistlist', 'FrontendController@wistlist')->name('frontend.wistlist');
 Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('frontend.search.wistlist');
 
-Route::get('events', 'FrontendController@event')->name('frontend.event');
-Route::get('events/{slug}', 'FrontendController@eventDetail')->name('frontend.eventDetail');
 Route::post('event_register', 'FrontendController@eventRegister')->name('frontend.eventRegister');
 
-Route::get('info/kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
+Route::prefix('info')->group(function () {
+    Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
+});
+
 
 Auth::routes(['verify' => true]);
 

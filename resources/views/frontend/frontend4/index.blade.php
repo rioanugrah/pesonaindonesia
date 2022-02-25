@@ -104,8 +104,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <h6 class="title-section-top font-4">Special offers</h6>
-                <h2 class="title-section"><span>Popular</span> Destinations</h2>
+                {{-- <h6 class="title-section-top font-4">Special offers</h6> --}}
+                <h2 class="title-section"><span>Produk</span> Kami</h2>
                 <div class="cws_divider mb-25 mt-5"></div>
             </div>
             <div class="col-md-4"><img src="pic/promo-1.png" data-at2x="pic/promo-1@2x.png" alt

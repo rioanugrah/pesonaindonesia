@@ -46,6 +46,7 @@
                                 {{ \Carbon\Carbon::parse($event->start_event)->isoFormat('LLLL') }}
                             @endif
                         </div>
+                        <div>Pendaftaran Terakhir : {{ $pendaftaran_terakhir }}</div>
                         </p>
                         <div class="quote alt-2 clearfix mb-30 mt-20">
                             <p>Lokasi : {{ $event->location }}</p>
@@ -124,7 +125,7 @@
                         })
                         this.reset();
                         table.ajax.reload();
-                    } else {
+                    }else {
                         iziToast.error({
                             title: result.title,
                             message: result.text
