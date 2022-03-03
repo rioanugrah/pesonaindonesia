@@ -13,7 +13,9 @@
     <meta name="description" content="Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi, Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.">
     <meta name="theme-color" content="#ff7b00">
     <meta name="keywords"
-        content="tour, trip, travel, agency, life, vacation, climbing, wisata, pesona, plesiran, indonesia, pesona plesiran indonesia, pesona indonesia">
+        content="@yield('keywords')">
+    {{-- <meta name="keywords"
+        content="tour, trip, travel, agency, life, vacation, climbing, wisata, pesona, plesiran, indonesia, pesona plesiran indonesia, pesona indonesia"> --}}
     <?php $css = asset('frontend/assets4/'); ?>
     <link href="{{ url('frontend/assets4/img/favicon.png') }}" rel="shortcut icon">
     <link rel="stylesheet" href="{{ $css . '/css/banner.css' }}">

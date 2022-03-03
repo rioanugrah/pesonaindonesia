@@ -90,9 +90,9 @@
                                 class="mn-has-sub {{ Request::is('hotel') ? 'active' : '' }}">Hotel</a>
                         </li>
                         <li class="slash">/</li>
-                        <li class="{{ Request::is('event*') ? 'active-li' : '' }}"><a
+                        <li class="{{ Request::is('events*') ? 'active-li' : '' }}"><a
                                 href="{{ route('frontend.event') }}"
-                                class="mn-has-sub {{ Request::is('event') ? 'active' : '' }}">Event</a>
+                                class="mn-has-sub {{ Request::is('events') ? 'active' : '' }}">Event</a>
                         </li>
                         <li class="slash">/</li>
                         @guest

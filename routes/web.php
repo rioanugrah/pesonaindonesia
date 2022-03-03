@@ -71,9 +71,9 @@ Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('fron
 
 Route::post('event_register', 'FrontendController@eventRegister')->name('frontend.eventRegister');
 
-Route::prefix('info')->group(function () {
-    Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
-});
+// Route::prefix('info')->group(function () {
+// });
+Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
 
 
 Auth::routes(['verify' => true]);
