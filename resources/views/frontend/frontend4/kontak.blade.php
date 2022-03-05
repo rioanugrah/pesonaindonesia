@@ -8,6 +8,8 @@
 <link href="{{ asset('backend/assets2/css/iziToast.min.css') }}" rel="stylesheet" />
 @endsection
 
+@section('canonical'){{ route('kontak') }}@endsection
+
 @section('breadcum')
     <section style="background-image:url({{ asset('frontend/assets4/img/teams.jpg') }});" class="breadcrumbs">
         <div class="container">
