@@ -4,6 +4,8 @@
     Hotel
 @endsection
 
+@section('canonical'){{ url('hotel') }}@endsection
+
 @section('breadcum')
     <section style="background-image:url({{ asset('frontend/assets4/img/hotel.jpg') }});" class="breadcrumbs">
         <div class="container">

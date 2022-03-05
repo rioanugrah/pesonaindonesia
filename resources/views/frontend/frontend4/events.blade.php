@@ -4,6 +4,8 @@
     Events
 @endsection
 
+@section('canonical'){{ url('event') }}@endsection
+
 @section('breadcum')
     <section style="background-image:url({{ asset('frontend/assets4/img/hotel.jpg') }});" class="breadcrumbs">
         <div class="container">

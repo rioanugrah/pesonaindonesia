@@ -4,6 +4,8 @@
     Hotel {{ $hotels->nama_hotel }}
 @endsection
 
+@section('canonical'){{ route('frontend.hotelDetail', ['slug' => $hotels->slug]) }}@endsection
+
 <?php $asset = asset('frontend/assets4/'); ?>
 
 @section('breadcum')

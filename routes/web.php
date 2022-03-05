@@ -58,7 +58,7 @@ Route::prefix('hotel')->group(function () {
     Route::get('{slug}', 'FrontendController@hotel_detail')->name('frontend.hotelDetail');
     Route::get('{slug}/{slug_kamar}', 'FrontendController@kamar_hotel_detail')->name('frontend.kamarHotelDetail');
 });
-Route::prefix('events')->group(function () {
+Route::prefix('event')->group(function () {
     Route::get('/', 'FrontendController@event')->name('frontend.event');
     Route::get('{slug}', 'FrontendController@eventDetail')->name('frontend.eventDetail');
 });
