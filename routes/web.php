@@ -44,6 +44,8 @@ Route::get('visi-misi', 'FrontendController@visimisi')->name('visi_misi');
 Route::get('tim-kami', 'FrontendController@tim')->name('tim_kami');
 Route::get('kontak', 'FrontendController@kontak')->name('kontak');
 Route::post('kontak/simpan', 'FrontendController@kontak_simpan')->name('kontak.simpan');
+Route::get('sitemap', 'SitemapController@index')->name('sitemap');
+Route::get('sitemap/create', 'SitemapController@create');
 
 // Route::get('hotel', 'FrontendController@hotel')->name('frontend.hotel');
 // Route::get('hotel/search', 'FrontendController@search_hotel')->name('frontend.hotel_search');

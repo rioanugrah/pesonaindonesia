@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOauthPersonalAccessClientsTable extends Migration
+class CreatePostTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateOauthPersonalAccessClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('oauth_personal_access_clients', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('client_id');
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('slug');
+            $table->longText('body');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateOauthPersonalAccessClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('oauth_personal_access_clients');
+        Schema::dropIfExists('posts');
     }
 }

@@ -170,6 +170,12 @@ class HotelController extends Controller
                     $message_content="Hotel ".$request->nama_hotel." Berhasil Ditambah";
                     $message_type="success";
                     $message_succes = true;
+
+                    $sitemap = \App\Models\Post::create([
+                        'title' => route('frontend.hotelDetail',['slug' => Str::slug($request->nama_hotel)]),
+                        'slug' => Str::slug($request->nama_hotel),
+                        'body' => $request->deskripsi_hotel
+                    ]);
                 }
     
                 $array_message = array(

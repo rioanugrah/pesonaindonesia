@@ -4,6 +4,10 @@
     Pesona Plesiran Indonesia
 @endsection
 
+@section('keywords')tour, trip, travel, agency, life, vacation, climbing, wisata, pesona, plesiran, indonesia, pesona plesiran indonesia, pesona indonesia @endsection
+
+@section('canonical'){{ url('/') }}@endsection
+
 @section('content')
 <?php $asset = asset('frontend/assets4/'); ?>
 <div class="tp-banner-container">

@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-site-verification" content="FINya1A7o0a-hHiPA1CXl0OFffJkaIeMdfwp_YNpFu0" />
     {{-- <meta name="google-site-verification" content="-agNXAZvJ7uHctHQlEr7t7q9VoOHxdpZJIDOv9womR4" /> --}}
     <meta name="author" content="Pesona Plesiran Indonesia">
     <meta name="description" content="Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi, Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.">
     <meta name="theme-color" content="#ff7b00">
-    <meta name="keywords"
-        content="@yield('keywords')">
+    <meta name="keywords" content="@yield('keywords')">
+    <link rel="canonical" href="@yield('canonical')">
+    <link rel="shortlink" href="{{ url('/') }}">
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:standard"/>
     {{-- <meta name="keywords"
         content="tour, trip, travel, agency, life, vacation, climbing, wisata, pesona, plesiran, indonesia, pesona plesiran indonesia, pesona indonesia"> --}}
     <?php $css = asset('frontend/assets4/'); ?>
