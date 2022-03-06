@@ -94,11 +94,13 @@
                                 href="{{ route('frontend.event') }}"
                                 class="mn-has-sub {{ Request::is('events') ? 'active' : '' }}">Event</a>
                         </li>
+                        @if (Request::is('kontak'))
                         <li class="slash">/</li>
                         <li><a
                                 href="{{ route('kontak') }}"
                                 class="mn-has-sub {{ Request::is('kontak') ? 'active' : '' }}">Kontak</a>
                         </li>
+                        @endif
                         <li class="slash">/</li>
                         @guest
                             <li><a href="{{ route('login') }}" class="mn-has-sub">Login</a></li>
