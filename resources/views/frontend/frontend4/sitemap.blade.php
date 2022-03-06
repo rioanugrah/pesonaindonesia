@@ -6,8 +6,12 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
         <url>
             <loc>{{ url($post->title) }}</loc>
             <lastmod>{{ $post->updated_at->tz('UTC')->toAtomString() }}</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>1.0</priority>
+            @if ($post->freq != '-')
+            <changefreq>{{ $post->freq }}</changefreq>
+            @endif
+            @if ($post->priority != '-')
+            <priority>{{ $post->priority }}</priority>
+            @endif
         </url>
     @endforeach
 </urlset>

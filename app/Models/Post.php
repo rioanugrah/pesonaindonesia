@@ -15,5 +15,7 @@ class Post extends Model
         'title',
         'slug',
         'body',
+        'freq',
+        'priority',
     ];
 }
