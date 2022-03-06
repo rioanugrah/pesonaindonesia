@@ -85,14 +85,19 @@
                         <li ><a href="{{ url('/') }}" class="mn-has-sub {{ Request::is('/') ? 'active' : '' }}">Home</a>
                         </li>
                         <li class="slash">/</li>
-                        <li class="{{ Request::is('hotel*') ? 'active-li' : '' }}"><a
+                        <li><a
                                 href="{{ route('frontend.hotel') }}"
                                 class="mn-has-sub {{ Request::is('hotel') ? 'active' : '' }}">Hotel</a>
                         </li>
                         <li class="slash">/</li>
-                        <li class="{{ Request::is('events*') ? 'active-li' : '' }}"><a
+                        <li><a
                                 href="{{ route('frontend.event') }}"
                                 class="mn-has-sub {{ Request::is('events') ? 'active' : '' }}">Event</a>
+                        </li>
+                        <li class="slash">/</li>
+                        <li><a
+                                href="{{ route('kontak') }}"
+                                class="mn-has-sub {{ Request::is('kontak') ? 'active' : '' }}">Kontak</a>
                         </li>
                         <li class="slash">/</li>
                         @guest
