@@ -23,6 +23,9 @@ Route::post('register', 'API\UserController@register');
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('home', 'API\HomeController@index');
+    Route::prefix('hotel')->group(function () {
+        Route::get('/', 'API\HotelController@index')->name('api.hotel');
+    });
     Route::post('details', 'API\UserController@details');
     Route::post('logout', 'API\UserController@logout');
 });

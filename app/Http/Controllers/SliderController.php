@@ -62,8 +62,16 @@ class SliderController extends Controller
 
         if ($validator->passes()) {
             $input = $request->all();
-            $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('frontend/assets4/img/wallpaper'), $input['image']);
+
+            $image = $request->file('image');
+            $img = \Image::make($image->path());
+            $img = $img->encode('webp', 75);
+            $input['image'] = time().'.webp';
+            $img->save(public_path('frontend/assets4/img/wallpaper/').$input['image']);
+            // $img->save(public_path('frontend/assets4/img/wallpaper/').time().'.webp');
+
+            // $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
+            // $request->image->move(public_path('frontend/assets4/img/wallpaper'), $input['image']);
             // $request->foto->move(storage_path('app/public/image'), $input['image']);
     
            $slider = Slider::create($input);
@@ -144,12 +152,18 @@ class SliderController extends Controller
                 $user = Auth::user();
             
                 $file = $request->file('edit_image');
-                $fileName = time().$file->getClientOriginalName();
-                $file->move(public_path('frontend/assets4/img/wallpaper'), $fileName);
+                // $fileName = time().$file->getClientOriginalName();
+                // $file->move(public_path('frontend/assets4/img/wallpaper'), $fileName);
+                $img = \Image::make($file->path());
+                $img = $img->encode('webp', 75);
+                $input['edit_image'] = time().'.webp';
+                $img->save(public_path('frontend/assets4/img/wallpaper/').$input['edit_image']);
+                
                 $image_path = public_path('frontend/assets4/img/wallpaper/'.$slider->image);
                 File::delete($image_path);
                 
-                $slider->image = $fileName;
+                $slider->image = $input['edit_image'];
+                // $slider->image = $fileName;
                 $slider->nama_slider = $request->edit_nama_slider;
                 $slider->status = $request->edit_status;
                 $slider->update();
