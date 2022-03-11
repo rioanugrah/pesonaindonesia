@@ -9,7 +9,7 @@
     <meta name="google-site-verification" content="FINya1A7o0a-hHiPA1CXl0OFffJkaIeMdfwp_YNpFu0" />
     {{-- <meta name="google-site-verification" content="-agNXAZvJ7uHctHQlEr7t7q9VoOHxdpZJIDOv9womR4" /> --}}
     <meta name="author" content="Pesona Plesiran Indonesia">
-    <meta name="description" content="Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi, Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.">
+    <meta name="description" content="@yield('description')">
     <meta name="theme-color" content="#ff7b00">
     <meta name="keywords" content="@yield('keywords')">
     <link rel="canonical" href="@yield('canonical')">
@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ $css . '/css/jquery.fancybox.css' }}">
     <link rel="stylesheet" href="{{ $css . '/fonts/fi/flaticon.css' }}">
     <link rel="stylesheet" href="{{ $css . '/css/flexslider.css' }}">
+    <link rel="stylesheet" href="{{ $css . '/css/payment.css' }}">
     <link rel="stylesheet" href="{{ $css . '/fontawesome/css/all.min.css' }}">
     <link rel="stylesheet" href="{{ $css . '/css/main.css' }}">
     <link rel="stylesheet" href="{{ $css . '/css/indent.css' }}">

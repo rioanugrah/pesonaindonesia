@@ -9,11 +9,13 @@
                 </div>
                 <h4>PARTNER PEMBAYARAN</h4>
                 <br class="mb-sm-30">
-                <img src="{{ $asset.'/img/logo_payment/bca.png' }}" style="margin:1%;" width="60" alt="" srcset="">
-                <img src="{{ $asset.'/img/logo_payment/bni.png' }}" style="margin:1%;" width="60" alt="" srcset="">
-                <img src="{{ $asset.'/img/logo_payment/bri.png' }}" style="margin:1%;" width="60" alt="" srcset="">
-                <img src="{{ $asset.'/img/logo_payment/mandiri.png' }}" style="margin:1%;" width="60" alt="" srcset="">
-                <img src="{{ $asset.'/img/logo_payment/jenius.png' }}" style="margin:1%;" width="60" alt="" srcset="">
+                <div class="grid-payment">
+                    <img src="{{ $asset.'/img/logo_payment/bca.png' }}" class="item1" alt="" srcset="">
+                    <img src="{{ $asset.'/img/logo_payment/bni.png' }}" class="item2" alt="" srcset="">
+                    <img src="{{ $asset.'/img/logo_payment/bri.png' }}" class="item3" alt="" srcset="">
+                    <img src="{{ $asset.'/img/logo_payment/mandiri.png' }}" class="item4" alt="" srcset="">
+                    <img src="{{ $asset.'/img/logo_payment/jenius.png' }}" class="item5" alt="" srcset="">
+                </div>
                 {{-- <p class="color-g2 mt-10" style="text-align: justify">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang
                     menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi,
                     Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.</p> --}}

@@ -8,7 +8,11 @@
 <link href="{{ asset('backend/assets2/css/iziToast.min.css') }}" rel="stylesheet" />
 @endsection
 
+@section('keywords')partner pesona plesiran indonesia, partner plesiran indonesia @endsection
+
 @section('canonical'){{ route('kontak') }}@endsection
+
+@section('description')Partner Pesona Plesiran Indonesia @endsection
 
 @section('breadcum')
     <section style="background-image:url({{ asset('frontend/assets4/img/teams.jpg') }});" class="breadcrumbs">

@@ -4,7 +4,11 @@
     Hotel
 @endsection
 
+@section('keywords')hotel plesiran, hotel, hotel murah, hotel terjangkau, penginapan, cari hotel @endsection
+
 @section('canonical'){{ url('hotel') }}@endsection
+
+@section('description')Hotel Pesona Plesiran Indonesia @endsection
 
 @section('breadcum')
     <section style="background-image:url({{ asset('frontend/assets4/img/hotel.jpg') }});" class="breadcrumbs">
