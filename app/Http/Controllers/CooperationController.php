@@ -11,6 +11,7 @@ use App\Models\Perusahaan;
 use App\Models\Provinsi;
 use App\Models\Country;
 use Illuminate\Support\Facades\Mail;
+use Auth;
 use PDF;
 use File;
 use DataTables;
@@ -30,8 +31,10 @@ class CooperationController extends Controller
                             return '<span class="badge bg-info">Process</span>';
                         }elseif($row->status == 2){
                             return '<span class="badge bg-success">Success</span>';
+                        }elseif($row->status == 3){
+                            return '<span class="badge bg-danger">Not Approved</span>';
                         }else{
-                            return '<span class="alert alert-danger">Rejected</span>';
+                            return '<span class="alert alert-danger">Cancelled</span>';
                         }
                     })
                     // ->addColumn('berkas', function($row){
@@ -40,7 +43,7 @@ class CooperationController extends Controller
                     ->addColumn('action', function($row){
                         $btn = '
                                 <a href="'.route('cooperation.download',['id' => $row->id]).'" class="btn btn-primary btn-sm" title="Download File" target="_blank">
-                                    <i class="fas fa-print"></i> Download File
+                                    <i class="fas fa-print"></i> View File
                                 </a>
                                 <button onclick="berkas('.$row->id.')" class="btn btn-primary btn-sm" title="Upload Berkas">
                                     <i class="fas fa-upload"></i> Upload Berkas
@@ -48,12 +51,15 @@ class CooperationController extends Controller
                                 <button onclick="detail('.$row->id.')" class="btn btn-success btn-sm" title="Detail">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button onclick="edit('.$row->id.')" class="btn btn-warning btn-sm" title="Edit">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </button>
-                                <button onclick="hapus('.$row->id.')" class="btn btn-danger btn-sm" title="Hapus">
-                                    <i class="fas fa-trash"></i>
-                                </button>';
+                                ';
+                                if(auth()->user()->role == 2){
+                                    $btn = $btn.'<button onclick="edit('.$row->id.')" class="btn btn-warning btn-sm" title="Edit">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </button>
+                                            <button onclick="hapus('.$row->id.')" class="btn btn-danger btn-sm" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>';
+                                }
                         // <a href='.route('cooperation.download', ['id' => $row->id]).' class="btn btn-primary btn-sm" title="Download" target="_blank">
                         //     <i class="fas fa-print"></i> Download File
                         // </a>
@@ -175,6 +181,54 @@ class CooperationController extends Controller
                 'error' => $validator->errors()->all()
             ]
         );
+    }
+
+    public function status(Request $request)
+    {
+        $status = Cooperation::find($request->detail_id);
+        $user = Auth::user();
+        if($status){
+            $status->status = $request->status;
+            $status->update();
+
+            $message_title="Berhasil !";
+            $message_content="Status Kerjasama Berhasil Disimpan";
+            $message_type="success";
+            $message_succes = true;
+
+            if($request->status == 2){
+                activity('cooperation')
+                        ->performedOn($status)
+                        ->causedBy($user)
+                        ->withProperties(
+                            [
+                                'attributes' => [
+                                    'status_cooperation' => 'Disetujui'
+                                ]
+                            ])
+                        ->log('Status cooperation by ' . $user->name);
+            }elseif($request->status == 3){
+                activity('cooperation')
+                        ->performedOn($status)
+                        ->causedBy($user)
+                        ->withProperties(
+                            [
+                                'attributes' => [
+                                    'status_cooperation' => 'Ditolak'
+                                ]
+                            ])
+                        ->log('Status cooperation by ' . $user->name);
+            }
+
+
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return response()->json($array_message);
+        }
     }
 
     public function upload_berkas(Request $request)

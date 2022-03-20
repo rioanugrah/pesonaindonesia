@@ -113,5 +113,39 @@
             table.ajax.reload();
         }
 
+        $('#upload-form').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            // $('#image-input-error').text('');
+            $.ajax({
+                type:'POST',
+                url: "{{ route('wisata.simpan') }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    if(result.success != false){
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                        this.reset();
+                        table.ajax.reload();
+                    }else{
+                        iziToast.error({
+                            title: result.success,
+                            message: result.error
+                        });
+                    }
+                },
+                error: function (request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            });
+        });
+
     </script>
 @endsection

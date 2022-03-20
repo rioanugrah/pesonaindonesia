@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\User;
 use App\Models\Roles;
 use DataTables;
@@ -53,6 +54,7 @@ class UsersController extends Controller
 
         if ($validator->passes()) {
             $input = $request->all();
+            $input['id_unique'] = Str::uuid()->toString();
             $input['password'] = Hash::make('default123');
             $user = User::create($input);
 

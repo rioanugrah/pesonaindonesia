@@ -96,7 +96,7 @@ Route::domain('testing.'.env('APP_URL'))->group(function () {
     });
 });
 
-Route::prefix('plesiranmalang')->group(function () {
+Route::prefix('plesiran-malang')->group(function () {
     Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
     Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
     Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
@@ -121,12 +121,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('kategori_kota', 'KategoriKotaController@index')->name('ktkota')->middleware('verified');
         Route::post('kategori_kota/simpan', 'KategoriKotaController@simpan')->name('ktkota.simpan')->middleware('verified');
         
-        Route::get('cooperation', 'CooperationController@index')->name('cooperation')->middleware('verified');
-        Route::get('cooperation/notif', 'CooperationController@notif')->middleware('verified');
-        Route::get('cooperation/{id}/download', 'CooperationController@download')->name('cooperation.download')->middleware('verified');
-        Route::get('cooperation/{id}', 'CooperationController@detail')->middleware('verified');
-        Route::post('cooperation/upload', 'CooperationController@upload_berkas')->name('cooperation.upload_berkas')->middleware('verified');
-        Route::post('cooperation/data/upload', 'CooperationController@berkas')->name('cooperation.berkas')->middleware('verified');
+        Route::prefix('cooperation')->group(function() {
+            Route::get('/', 'CooperationController@index')->name('cooperation')->middleware('verified');
+            Route::get('notif', 'CooperationController@notif')->middleware('verified');
+            Route::get('{id}/download', 'CooperationController@download')->name('cooperation.download')->middleware('verified');
+            Route::get('{id}', 'CooperationController@detail')->middleware('verified');
+            Route::post('upload', 'CooperationController@upload_berkas')->name('cooperation.upload_berkas')->middleware('verified');
+            Route::post('data/upload', 'CooperationController@berkas')->name('cooperation.berkas')->middleware('verified');
+            Route::post('status', 'CooperationController@status')->name('cooperation.status')->middleware('verified');
+        });
         
         Route::get('pengguna', 'UsersController@index')->name('pengguna')->middleware('verified');
         

@@ -61,7 +61,7 @@ class HomeController extends Controller
     }
     public function index()
     {
-        if(auth()->user()->role != 2){
+        if(auth()->user()->role == 1){
             return redirect('/');
         }else{
             $data['total_users'] = User::count();

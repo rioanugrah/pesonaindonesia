@@ -191,6 +191,40 @@
             });
         });
 
+        $('#status-form').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $('#image-input-error').text('');
+            $.ajax({
+                type:'POST',
+                url: "{{ route('cooperation.status') }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    if(result.success != false){
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                        $('#detail').modal('hide');
+                        table.ajax.reload();
+                    }else{
+                        iziToast.error({
+                            title: result.success,
+                            message: result.error
+                        });
+                    }
+                },
+                error: function (request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            });
+        });
+
         function berkas(id) {
             $.ajax({
                 type: 'GET',
@@ -224,6 +258,7 @@
                 success: function(result){
                     // document.getElementById('berkas_modal_title').innerHTML = result.cooperation.nama_perusahaan;
                     // document.getElementById('detail_nama_perusahaan').innerHTML = result.cooperation.nama_perusahaan;
+                    $('#detail_id').val(result.cooperation.id);
                     $('#detail_nama').val(result.cooperation.nama);
                     $('#detail_email').val(result.cooperation.email);
                     $('#detail_nama_perusahaan').val(result.cooperation.nama_perusahaan);

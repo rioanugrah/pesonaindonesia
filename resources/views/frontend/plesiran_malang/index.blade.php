@@ -4,6 +4,12 @@
     Plesiran Malang - Pesona Plesiran Indonesia
 @endsection
 
+@section('keywords')plesiran malang, plesiran indonesia @endsection
+
+@section('description') @endsection
+
+@section('canonical'){{ route('plmlg') }}@endsection
+
 @section('content')
 <?php $asset = asset('frontend/assets4/'); ?>
 

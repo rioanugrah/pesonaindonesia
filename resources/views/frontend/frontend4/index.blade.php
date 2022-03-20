@@ -121,7 +121,7 @@
         <div class="features-tours-wrap clearfix">
             @forelse ($provinsis as $provinsi)
             <?php $kotas = \App\Models\KabupatenKota::where('id_provinsi',$provinsi->id)->get() ?>
-            <a href="{{ url('plesiranmalang') }}">
+            <a href="{{ url('plesiran-malang') }}">
                 <div class="features-tours-item">
                     <div class="features-media">
                         @if ($provinsi->nama == 'Jawa Timur')
@@ -198,7 +198,7 @@
         </div>
     </div>
 </section>
-<section class="small-section cws_prlx_section bg-gray-40"><img src="{{ $asset.'/img/wallpaper/caribbean-wood-beach.jpg' }}" alt
+<section class="small-section cws_prlx_section bg-gray-40"><img src="{{ $asset.'/img/wallpaper/caribbean-wood-beach1.webp' }}" alt
         class="cws_prlx_layer">
     <div class="container">
         <div class="row">

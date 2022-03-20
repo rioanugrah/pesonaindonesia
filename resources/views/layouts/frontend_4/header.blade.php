@@ -1,12 +1,12 @@
 <header>
-    <div class="banner">
+    {{-- <div class="banner">
         <div class="banner__content">
             <div class="banner__text">
                 <strong style="color: #f38f39">Reminder :</strong> Waspada Penyebaran Virus Varian Omicron, <strong
                     style="color: #f38f39"><a href="{{ route('frontend.info') }}">Kebijakan Pemesanan</a></strong> selama COVID-19.
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="site-top-panel">
         <div class="container p-relative">
             <div class="row">
@@ -41,7 +41,7 @@
     </div>
     <nav class="main-nav js-stick">
         <div class="full-wrapper relative clearfix container">
-            @if (Request::is('plesiranmalang*'))
+            @if (Request::is('plesiran-malang*'))
                 <div class="nav-logo-wrap local-scroll"><a href="{{ route('plmlg') }}" class="logo"><img
                             src="{{ $asset . '/img/logo_plesiran_malang.png' }}"
                             data-at2x="{{ $asset . '/img/logo_plesiran_malang.png' }}" width="210" alt></a></div>
@@ -78,8 +78,8 @@
                 </div>
             @else
                 <div class="nav-logo-wrap local-scroll"><a href="{{ route('frontend') }}" class="logo"><img
-                            src="{{ $asset . '/img/logo_plesiran_new_black.png' }}"
-                            data-at2x="{{ $asset . '/img/logo_plesiran_new_black.png' }}" width="250" alt></a></div>
+                            src="{{ $asset . '/img/logo_plesiran_new_black2.webp' }}"
+                            data-at2x="{{ $asset . '/img/logo_plesiran_new_black2.webp' }}" width="250" alt></a></div>
                 <div class="inner-nav desktop-nav">
                     <ul class="clearlist">
                         <li ><a href="{{ url('/') }}" class="mn-has-sub {{ Request::is('/') ? 'active' : '' }}">Home</a>
