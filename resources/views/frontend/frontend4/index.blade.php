@@ -32,7 +32,7 @@
             @endforeach
         </ul>
     </div>
-    <div class="search-tours-form">
+    {{-- <div class="search-tours-form">
         <div class="container">
             <div class="search-tours-wrap">
                 <div class="search-tours-tabs">
@@ -95,7 +95,6 @@
                                     </select>
                                 </div>
                                 <button class="button-search" style="background-color: rgba(255, 255, 0, 0); border: rgba(255, 255, 0, 0);" type="submit">Search</button>
-                                {{-- <div class="button-search">Search</div> --}}
                             </form>
                             </div>
                         </div>
@@ -103,14 +102,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 <section class="page-section pb-0">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
                 {{-- <h6 class="title-section-top font-4">Special offers</h6> --}}
-                <h2 class="title-section"><span>Produk</span> Kami</h2>
+                <h2 class="title-section"><span>Partner</span> Kami</h2>
                 <div class="cws_divider mb-25 mt-5"></div>
             </div>
             <div class="col-md-4"><img src="pic/promo-1.png" data-at2x="pic/promo-1@2x.png" alt
@@ -121,7 +120,7 @@
         <div class="features-tours-wrap clearfix">
             @forelse ($provinsis as $provinsi)
             <?php $kotas = \App\Models\KabupatenKota::where('id_provinsi',$provinsi->id)->get() ?>
-            <a href="{{ url('plesiran-malang') }}">
+            <a href="{{ route('plmlg') }}">
                 <div class="features-tours-item">
                     <div class="features-media">
                         @if ($provinsi->nama == 'Jawa Timur')

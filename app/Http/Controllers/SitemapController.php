@@ -15,17 +15,17 @@ class SitemapController extends Controller
 	  ])->header('Content-Type', 'text/xml');
     }
 
-    public function create()
-    {
-        $create_sitemap = \App\Models\Post::create([
-            'title' => url('hotel'),
-            'slug' => '-',
-            'body' => '-'
-        ]);
+    // public function create()
+    // {
+    //     $create_sitemap = \App\Models\Post::create([
+    //         'title' => url('hotel'),
+    //         'slug' => '-',
+    //         'body' => '-'
+    //     ]);
 
-        return response()->json([
-            'success' => true,
-            'data' => $create_sitemap
-        ]);
-    }
+    //     return response()->json([
+    //         'success' => true,
+    //         'data' => $create_sitemap
+    //     ]);
+    // }
 }

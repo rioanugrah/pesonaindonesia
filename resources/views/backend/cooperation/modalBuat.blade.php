@@ -10,8 +10,8 @@
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col">
-                            <label class="form-label">Nama</label>
-                            <input class="form-control" name="nama" type="text" placeholder="Nama">
+                            <label class="form-label">Nama Pemilik</label>
+                            <input class="form-control" name="nama" type="text" placeholder="Nama Pemilik">
                         </div>
                         <div class="col">
                             <label class="form-label">Email</label>
@@ -29,15 +29,15 @@
                             <input type="text" name="nama_perusahaan" class="form-control" id="" placeholder="Nama Perusahaan">
                         </div>
                         <div class="col">
-                            <label class="form-label">Kategori</label>
+                            <label class="form-label">Kategori Perusahaan</label>
                             <select name="kategori" class="form-control" id="">
-                                <option>-- Pilih Kategori --</option>
+                                <option>-- Pilih Kategori Perusahaan --</option>
                                 @foreach ($kategoris as $kategori)
                                     <option value="{{ $kategori['nama_kategori'] }}">{{ $kategori['nama_kategori'] }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col">
+                        {{-- <div class="col">
                             <label class="form-label">Negara</label>
                             <select name="negara" class="form-control select2" id="">
                                 <option>-- Pilih Negara --</option>
@@ -45,7 +45,7 @@
                                     <option value="{{ $country->nama_negara }}">{{ $country->nama_negara }}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="row mb-3">
                         <div class="col">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Perusahaan;
 use App\Models\Roles;
 use DataTables;
@@ -15,9 +16,9 @@ class PerusahaanController extends Controller
             $data = Perusahaan::all();
             return DataTables::of($data)
                     ->addIndexColumn()
-                    ->addColumn('jabatan', function($row){
-                        return $row->roles->role;
-                    })
+                    // ->addColumn('jabatan', function($row){
+                    //     return $row->roles->role;
+                    // })
                     ->addColumn('status', function($row){
                         if($row->status == 'Y'){
                             return 'Aktif';
@@ -47,7 +48,7 @@ class PerusahaanController extends Controller
             'nama_perusahaan'  => 'required',
             'alamat_perusahaan'  => 'required',
             'penanggung_jawab'  => 'required',
-            'jabatan'  => 'required',
+            // 'jabatan'  => 'required',
             'status'  => 'required',
         ];
  
@@ -55,7 +56,7 @@ class PerusahaanController extends Controller
             'nama_perusahaan.required'  => 'Nama Perusahaan wajib diisi.',
             'alamat_perusahaan.required'   => 'Alamat Perusahaan wajib diisi.',
             'penanggung_jawab.required'   => 'Penanggung Jawab wajib diisi.',
-            'jabatan.required'   => 'Jabatan wajib diisi.',
+            // 'jabatan.required'   => 'Jabatan wajib diisi.',
             'status.required'   => 'Status Perusahaan wajib diisi.',
         ];
 
@@ -63,6 +64,7 @@ class PerusahaanController extends Controller
 
         if($validator->passes()){
             $input = $request->all();
+            $input['id'] = Str::uuid()->toString();
             $perusahaan = Perusahaan::create($input);
 
             if($perusahaan){

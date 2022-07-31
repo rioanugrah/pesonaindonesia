@@ -13,6 +13,9 @@ use App\Models\Provinsi;
 use App\Models\CheckRoom;
 use App\Models\Events;
 use App\Models\EventRegister;
+use App\Models\Wisata;
+
+use App\Models\KabupatenKota;
 use \Carbon\Carbon;
 
 // use App\Notifications\WisataNotification;
@@ -447,6 +450,13 @@ class FrontendController extends Controller
                 'error' => $validator->errors()->all()
             ]
         );
+    }
+
+    public function wisata()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['wisatas'] = Wisata::all();
+        return view('frontend.frontend4.wisata',$data);
     }
 
 }

@@ -14,7 +14,7 @@ class CreateCooperationTable extends Migration
     public function up()
     {
         Schema::create('cooperation', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->uuid('id')->primary();
             $table->string('nama')->nullable();
             $table->string('email');
             $table->string('nama_perusahaan')->nullable();

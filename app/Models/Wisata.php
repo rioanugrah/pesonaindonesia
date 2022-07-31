@@ -10,26 +10,32 @@ class Wisata extends Model
     use SoftDeletes;
 
     public $table = 'wisata';
-    // protected $primaryKey = 'kode_barang';
 
     protected $dates = ['deleted_at'];
 
     public $fillable = [
+        'id',
+        'slug',
         'nama_wisata',
-        'deskripsi',
         'alamat',
-        'fasilitas',
-        'highlight',
-        'timeline',
-        'tukar_tiket',
-        'sk',
-        'info_tambahan',
-        'latitude',
-        'longitude',
-        'price',
-        'image',
-        'diskon',
-        'periode_awal',
-        'periode_akhir',
+        'deskripsi',
+        'layanan',
+        'provinsi',
+        'kota_kabupaten',
+        'kecamatan',
+        'images',
     ];
+
+    public function provinsis()
+    {
+        return $this->belongsTo(\App\Models\Provinsi::class, 'provinsi');
+    }
+    public function kotas()
+    {
+        return $this->belongsTo(\App\Models\KabupatenKota::class, 'kota_kabupaten');
+    }
+    public function kecamatans()
+    {
+        return $this->belongsTo(\App\Models\Kecamatan::class, 'kecamatan');
+    }
 }

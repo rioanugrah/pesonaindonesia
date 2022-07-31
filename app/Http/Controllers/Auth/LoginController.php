@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Http\Request;
 use App\User;
 
 class LoginController extends Controller
@@ -38,6 +39,15 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function validateLogin(Request $request)
+    {
+        $this->validate($request ,[
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
+            'g-recaptcha-response' => 'required|captcha',
+        ]);
     }
 
     public function redirectToProvider($driver)

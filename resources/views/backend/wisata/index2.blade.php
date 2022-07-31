@@ -45,7 +45,7 @@
                         <tr>
                             <th>Wisata</th>
                             <th>Alamat</th>
-                            <th>Harga</th>
+                            <th>Gambar</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -71,6 +71,7 @@
 <script src="{{ asset('backend/assets2/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
 
 <script src="{{ asset('backend/assets2/js/pages/datatables.init.js') }}"></script>
+<script src="{{ asset('backend/assets2/js/axios.min.js') }}"></script>
 
 <script src="{{ asset('backend/assets2/js/iziToast.min.js') }}"></script>
     <script>
@@ -93,8 +94,8 @@
                     name: 'alamat'
                 },
                 {
-                    data: 'price',
-                    name: 'price'
+                    data: 'images',
+                    name: 'images'
                 },
                 {
                     data: 'action',
@@ -112,6 +113,17 @@
         function reload() {
             table.ajax.reload();
         }
+
+        $('#provinsi').on('change',function(){
+            axios.post('{{ url('cooperation/kab_kota') }}', {id: $(this).val()})
+            .then(function (response) {
+                $('#kab_kota').empty();
+
+                $.each(response.data, function (id, nama) {
+                    $('#kab_kota').append(new Option(nama, id))
+                })
+            });
+        });
 
         $('#upload-form').submit(function(e) {
             e.preventDefault();

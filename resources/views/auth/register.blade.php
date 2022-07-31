@@ -86,6 +86,7 @@
     <link href="{{ asset('backend/assets_new/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend/assets_new/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend/assets_new/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+    {!! NoCaptcha::renderJs() !!}
 </head>
 <body class="bg-pattern">
     <div class="bg-overlay"></div>
@@ -138,6 +139,15 @@
                                         <div class="mb-4">
                                             <label class="form-label" for="userpasswordconfirm">Konfirmasi Password</label>
                                             <input type="password" class="form-control" name="password_confirmation" id="userpasswordconfirm" placeholder="Konfirmasi Password" required autocomplete="new-password">
+                                        </div>
+                                        <div class="mb-4 {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                                            {{-- <label class="form-label" for="userpassword">Captcha</label> --}}
+                                            {!! app('captcha')->display() !!}
+                                            @if ($errors->has('g-recaptcha-response'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="term-conditionCheck">

@@ -49,7 +49,7 @@
                             <th>Perusahaan</th>
                             <th>Alamat</th>
                             <th>Penanggung Jawab</th>
-                            <th>Jabatan</th>
+                            {{-- <th>Jabatan</th> --}}
                             <th>Siup</th>
                             <th>Npwp</th>
                             <th>Status</th>
@@ -104,10 +104,10 @@
                     data: 'penanggung_jawab',
                     name: 'penanggung_jawab'
                 },
-                {
-                    data: 'jabatan',
-                    name: 'jabatan'
-                },
+                // {
+                //     data: 'jabatan',
+                //     name: 'jabatan'
+                // },
                 {
                     data: 'siup',
                     name: 'siup'

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Post;
 use DataTables;
 use Validator;
@@ -14,8 +15,8 @@ class PostController extends Controller
             $data = Post::all();
             return DataTables::of($data)
                     ->addIndexColumn()
-                    ->addColumn('title', function($row){
-                        return url($row->title);
+                    ->addColumn('link', function($row){
+                        return url($row->slug);
                     })
                     // ->addColumn('status', function($row){
                     //     if($row->status == 'Y'){
@@ -45,8 +46,10 @@ class PostController extends Controller
 
     public function simpan(Request $request)
     {
-        $input['slug'] = '-';
-        $input['body'] = '-';
+        $input['id'] = Str::uuid()->toString();
+        $input['slug'] = Str::slug($request->title);
+        $input['freq'] = $request->freq;
+        $input['priority'] = $request->priority;
         $input['title'] = $request->title;
 
         $posting = Post::create($input);

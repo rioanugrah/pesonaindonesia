@@ -14,17 +14,16 @@ class CreatePerusahaanTable extends Migration
     public function up()
     {
         Schema::create('perusahaan', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('nama_perusahaan');
             $table->string('alamat_perusahaan');
             $table->string('penanggung_jawab');
             $table->string('siup');
             $table->string('npwp');
-            $table->bigInteger('jabatan')->unsigned();
             $table->enum('status', array('Y','N'));
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign(['jabatan'])->references(['id'])->on('roles');
+            // $table->foreign(['jabatan'])->references(['id'])->on('roles');
         });
     }
 

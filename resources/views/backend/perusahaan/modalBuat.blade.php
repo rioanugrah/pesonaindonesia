@@ -38,7 +38,7 @@
                             <input class="form-control" name="npwp" type="text" id="" placeholder="NPWP">
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Jabatan</label>
                         <div class="col-sm-10">
                             <select name="jabatan" class="form-control" id="">
@@ -48,7 +48,7 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Status Perusahaan</label>
                         <div class="col-sm-10">

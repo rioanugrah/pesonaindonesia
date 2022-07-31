@@ -82,7 +82,7 @@
     <link href="{{ asset('backend/assets_new/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend/assets_new/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend/assets_new/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-
+    {!! NoCaptcha::renderJs() !!}
     <title>Login</title>
 </head>
 <body class="bg-pattern">
@@ -123,6 +123,15 @@
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
+                                            </div>
+                                            <div class="mb-4 {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                                                {{-- <label class="form-label" for="userpassword">Captcha</label> --}}
+                                                {!! app('captcha')->display() !!}
+                                                @if ($errors->has('g-recaptcha-response'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                                    </span>
+                                                @endif
                                             </div>
 
                                             <div class="row">

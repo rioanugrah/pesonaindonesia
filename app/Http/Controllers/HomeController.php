@@ -61,11 +61,11 @@ class HomeController extends Controller
     }
     public function index()
     {
-        if(auth()->user()->role == 1){
+        if(auth()->user()->role == 'Administrator'){
             return redirect('/');
         }else{
             $data['total_users'] = User::count();
-            $data['wisata'] = Wisata::count();
+            // $data['wisata'] = Wisata::count();
             $data['hotel'] = Hotel::count();
             try {
                 $data['balances'] = json_decode((new HomeController)->balance(),true);

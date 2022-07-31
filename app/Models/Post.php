@@ -14,7 +14,7 @@ class Post extends Model
         'id',
         'title',
         'slug',
-        'body',
+        // 'body',
         'freq',
         'priority',
     ];

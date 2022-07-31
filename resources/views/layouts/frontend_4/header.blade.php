@@ -41,7 +41,8 @@
     </div>
     <nav class="main-nav js-stick">
         <div class="full-wrapper relative clearfix container">
-            @if (Request::is('plesiran-malang*'))
+            {{-- @if (Request::is('plesiranmalang*')) --}}
+            {{-- @if (Route::current('plmlg'))
                 <div class="nav-logo-wrap local-scroll"><a href="{{ route('plmlg') }}" class="logo"><img
                             src="{{ $asset . '/img/logo_plesiran_malang.png' }}"
                             data-at2x="{{ $asset . '/img/logo_plesiran_malang.png' }}" width="210" alt></a></div>
@@ -77,55 +78,57 @@
                     </ul>
                 </div>
             @else
-                <div class="nav-logo-wrap local-scroll"><a href="{{ route('frontend') }}" class="logo"><img
-                            src="{{ $asset . '/img/logo_plesiran_new_black2.webp' }}"
-                            data-at2x="{{ $asset . '/img/logo_plesiran_new_black2.webp' }}" width="250" alt></a></div>
-                <div class="inner-nav desktop-nav">
-                    <ul class="clearlist">
-                        <li ><a href="{{ url('/') }}" class="mn-has-sub {{ Request::is('/') ? 'active' : '' }}">Home</a>
+            @endif --}}
+            <div class="nav-logo-wrap local-scroll"><a href="{{ route('frontend') }}" class="logo"><img
+                        src="{{ $asset . '/img/logo_plesiran_new_black2.webp' }}"
+                        data-at2x="{{ $asset . '/img/logo_plesiran_new_black2.webp' }}" width="250" alt></a></div>
+            <div class="inner-nav desktop-nav">
+                <ul class="clearlist">
+                    <li ><a href="{{ url('/') }}" class="mn-has-sub {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                    </li>
+                    <li ><a href="{{ url('wisata') }}" class="mn-has-sub {{ Request::is('wisata') ? 'active' : '' }}">Wisata</a>
+                    </li>
+                    {{-- <li class="slash">/</li>
+                    <li><a
+                            href="{{ route('frontend.hotel') }}"
+                            class="mn-has-sub {{ Request::is('hotel') ? 'active' : '' }}">Hotel</a>
+                    </li>
+                    <li class="slash">/</li>
+                    <li><a
+                            href="{{ route('frontend.event') }}"
+                            class="mn-has-sub {{ Request::is('events') ? 'active' : '' }}">Event</a>
+                    </li> --}}
+                    @if (Request::is('kontak'))
+                    <li class="slash">/</li>
+                    <li><a
+                            href="{{ route('kontak') }}"
+                            class="mn-has-sub {{ Request::is('kontak') ? 'active' : '' }}">Kontak</a>
+                    </li>
+                    @endif
+                    <li class="slash">/</li>
+                    @guest
+                        <li><a href="{{ route('login') }}" class="mn-has-sub">Login</a></li>
+                        <li><a href="{{ route('register') }}" class="mn-has-sub">Register</a></li>
+                    @else
+                        <li><a href="#" class="mn-has-sub">{{ auth()->user()->name }}</a>
+                            <ul class="mn-sub">
+                                <li>
+                                    <a href="{{ route('frontend.wistlist') }}">Wistlish</a>
+                                </li>
+                                <li>
+                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log
+                                        Out</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="slash">/</li>
-                        <li><a
-                                href="{{ route('frontend.hotel') }}"
-                                class="mn-has-sub {{ Request::is('hotel') ? 'active' : '' }}">Hotel</a>
-                        </li>
-                        <li class="slash">/</li>
-                        <li><a
-                                href="{{ route('frontend.event') }}"
-                                class="mn-has-sub {{ Request::is('events') ? 'active' : '' }}">Event</a>
-                        </li>
-                        @if (Request::is('kontak'))
-                        <li class="slash">/</li>
-                        <li><a
-                                href="{{ route('kontak') }}"
-                                class="mn-has-sub {{ Request::is('kontak') ? 'active' : '' }}">Kontak</a>
-                        </li>
-                        @endif
-                        <li class="slash">/</li>
-                        @guest
-                            <li><a href="{{ route('login') }}" class="mn-has-sub">Login</a></li>
-                            <li><a href="{{ route('register') }}" class="mn-has-sub">Register</a></li>
-                        @else
-                            <li><a href="#" class="mn-has-sub">{{ auth()->user()->name }}</a>
-                                <ul class="mn-sub">
-                                    <li>
-                                        <a href="{{ route('frontend.wistlist') }}">Wistlish</a>
-                                    </li>
-                                    <li>
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                        </form>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log
-                                            Out</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            @endif
+                    @endguest
+                </ul>
+            </div>
         </div>
     </nav>
 </header>

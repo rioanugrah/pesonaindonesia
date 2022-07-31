@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Wisata;
+use App\Models\Provinsi;
 use Notification;
 // use Illuminate\Notifications\Notification;
 use DataTables;
@@ -19,9 +21,6 @@ class WisataController extends Controller
             $data = Wisata::all();
             return DataTables::of($data)
                     ->addIndexColumn()
-                    ->addColumn('price', function($row){
-                        return 'Rp. '.number_format($row->price,2,',','.');
-                    })
                     ->addColumn('action', function($row){
                         // $btn = '<div class="button-items">';
                         // $btn = $btn.'<a href="'.url('item/download_barcode/'.$row->kode_barang).'" class="btn btn-success waves-effect waves-light">
@@ -64,8 +63,9 @@ class WisataController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
+        $data['provinsis'] = Provinsi::pluck('nama','id');
         // return view('backend.wisata.index2');
-        return view('backend.wisata.index2');
+        return view('backend.wisata.index2',$data);
     }
 
     public function simpan(Request $request)
@@ -74,28 +74,14 @@ class WisataController extends Controller
             'nama_wisata'  => 'required',
             'deskripsi'  => 'required',
             'alamat'  => 'required',
-            'fasilitas'  => 'required',
-            'highlight'  => 'required',
-            'timeline'  => 'required',
-            'tukar_tiket'  => 'required',
-            'sk'  => 'required',
-            'info_tambahan'  => 'required',
-            'image'  => 'required',
-            'price'  => 'required',
+            'images'  => 'required',
         ];
  
         $messages = [
-            'nama_wisata.required'  => 'Kode Barang wajib diisi.',
-            'deskripsi.required'  => 'Deskripsi wajib diisi.',
+            'nama_wisata.required'  => 'Nama Wisata wajib diisi.',
+            'deskripsi.required'  => 'Deskripsi Wisata wajib diisi.',
             'alamat.required'   => 'Alamat wajib diisi.',
-            'fasilitas.required'   => 'Fasilitas wajib diisi.',
-            'highlight.required'   => 'Highlight wajib diisi.',
-            'timeline.required'   => 'Rencana Perjalanan wajib diisi.',
-            'tukar_tiket.required'   => 'Penukaran Tiket wajib diisi.',
-            'sk.required'   => 'Syarat & Ketentuan wajib diisi.',
-            'info_tambahan.required'   => 'Informasi Tambahan wajib diisi.',
-            'image.required'   => 'Upload Foto wajib diisi.',
-            'price.required'   => 'Harga wajib diisi.',
+            'images.required'   => 'Upload Gambar wajib diisi.',
         ];
 
         // $fasilitas = [];
@@ -105,8 +91,15 @@ class WisataController extends Controller
 
         if ($validator->passes()) {
             $input = $request->all();
-            $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('image'), $input['image']);
+            $input['id'] = Str::uuid()->toString();
+            $input['slug'] = Str::slug($request->nama_wisata);
+            $image = $request->file('images');
+            $img = \Image::make($image->path());
+            $img = $img->encode('webp', 75);
+            $input['images'] = time().'.webp';
+            $img->save(public_path('frontend/assets4/img/wisata/').$input['images']);
+            // $input['images'] = time().'.'.$request->images->getClientOriginalExtension();
+            // $request->image->move(public_path('image'), $input['image']);
             // $request->foto->move(storage_path('app/public/image'), $input['image']);
 
             $wisata = Wisata::create($input);

@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-4 col-md-6">
+    {{-- <div class="col-xl-4 col-md-6">
         <div class="card mini-stat bg-primary text-white">
             <div class="card-body">
                 <div class="mb-4">
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="col-xl-4 col-md-6">
         <div class="card mini-stat bg-primary text-white">
             <div class="card-body">

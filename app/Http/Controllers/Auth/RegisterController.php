@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'g-recaptcha-response' => 'required|captcha',
         ]);
     }
 
@@ -66,9 +67,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'id' => Str::uuid()->toString(),
             'name' => $data['name'],
             'email' => $data['email'],
-            'id_unique' => Str::uuid()->toString(),
             'password' => Hash::make($data['password']),
         ]);
     }

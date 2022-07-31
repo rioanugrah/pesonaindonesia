@@ -54,7 +54,7 @@ class UsersController extends Controller
 
         if ($validator->passes()) {
             $input = $request->all();
-            $input['id_unique'] = Str::uuid()->toString();
+            $input['id'] = Str::uuid()->toString();
             $input['password'] = Hash::make('default123');
             $user = User::create($input);
 

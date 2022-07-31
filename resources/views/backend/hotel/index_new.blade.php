@@ -13,11 +13,6 @@
 @endsection
 
 @section('content')
-@include('backend.hotel.modalBuat')
-@include('backend.hotel.modalEdit')
-@include('backend.hotel.modalImport')
-@include('backend.hotel.modalUploadImage')
-@include('backend.hotel.modalCheckRoom')
     <div class="page-title-box">
         <div class="row align-items-center">
             <div class="col-md-8">

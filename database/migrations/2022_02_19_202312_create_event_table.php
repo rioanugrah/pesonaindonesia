@@ -14,7 +14,7 @@ class CreateEventTable extends Migration
     public function up()
     {
         Schema::create('event', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('slug');
             $table->string('title', 150);
             $table->text('deskripsi')->nullable();

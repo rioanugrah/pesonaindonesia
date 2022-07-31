@@ -36,8 +36,43 @@ use Illuminate\Support\Facades\Route;
 //     Route::get('wistlist', 'FrontendController@wistlist')->name('frontend.wistlist');
 //     Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('frontend.search.wistlist');
 // });
+Route::group(['domain' => 'api.localhost'], function () {
+    Route::get('/', function () {
+        // return view('auth.login');
+        return "This will respond to requests for 'api.localhost/'";
+    });
+});
+
+Route::group(['domain' => 'app.localhost'], function () {
+    Route::get('/', 'Apps\HomeController@index');
+    // {
+        // return view('auth.login');
+        // return "This will respond to requests for 'admin.localhost/'";
+    // });
+    Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
+    Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
+    Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
+    
+    Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
+    Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
+    Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
+});
+
+Route::group(['domain' => 'plesiranmalang.localhost'], function () {
+    Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
+    Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
+    Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
+});
+
+Route::group(['domain' => 'partner.localhost'], function () {
+    Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
+});
 
 Route::get('/', 'FrontendController@index')->name('frontend');
+// Route::get('login', function(){
+//     return view('auth.login');
+// });
+Route::get('wisata', 'FrontendController@wisata')->name('struktur');
 Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');
 Route::get('tentang-kami', 'FrontendController@tentang_kami')->name('tentang_kami');
 Route::get('visi-misi', 'FrontendController@visimisi')->name('visi_misi');
@@ -67,7 +102,6 @@ Route::get('ticket', function(){
     return view('backend.ticket.tiket_wisata');
 });
 
-Route::get('partnership', 'FrontendController@partnership')->name('frontend.partnership');
 Route::get('wistlist', 'FrontendController@wistlist')->name('frontend.wistlist');
 Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('frontend.search.wistlist');
 
@@ -96,11 +130,11 @@ Route::domain('testing.'.env('APP_URL'))->group(function () {
     });
 });
 
-Route::prefix('plesiran-malang')->group(function () {
-    Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
-    Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
-    Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
-});
+// Route::prefix('plesiran-malang')->group(function () {
+//     Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
+//     Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
+//     Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
+// });
 
 Route::get('send-notif/{name}', function ($name) {
     event(new \App\Events\WisataEvent($name));
@@ -114,6 +148,9 @@ Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->
 
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('b')->group(function () {
+        Route::get('testing', function(){
+            return view('layouts.backend_5.app');
+        });
         Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
         Route::get('home/balance', 'HomeController@balance')->name('home.balance')->middleware('verified');
         Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');

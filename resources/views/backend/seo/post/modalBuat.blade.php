@@ -9,9 +9,37 @@
                 @csrf
                 <div class="modal-body">
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Link</label>
+                        <label class="col-sm-2 col-form-label">Title</label>
                         <div class="col-sm-10">
-                            <input class="form-control" name="title" type="text" id="" placeholder="Link">
+                            <input class="form-control" name="title" type="text" id="" placeholder="Title">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Freq</label>
+                        <div class="col-sm-10">
+                            <select name="freq" id="" class="form-control">
+                                <option>-- Pilih Freq --</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Priority</label>
+                        <div class="col-sm-10">
+                            <select name="priority" id="" class="form-control">
+                                <option>-- Pilih Priority --</option>
+                                @for ($i = 1; $i <= 10; $i++)
+                                @if ($i == 10)
+                                <option value="1">1.0</option>
+                                @else
+                                <option value="{{ '0.'.$i }}">{{ '0.'.$i }}</option>
+                                @endif
+                                @endfor
+                                {{-- <option value="daily">Daily</option>
+                                {{-- <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option> --}}
+                            </select>
                         </div>
                     </div>
                 </div>

@@ -55,7 +55,7 @@
             
             @yield('content')         
         </main>
-        @if (!Request::is('partnership'))
+        {{-- @if (!Request::is('partnership'))
         @include('layouts.frontend_3.footer')
         <a href="https://api.whatsapp.com/send?phone={{ $whatsapp['nomor'] }}&text={{ $whatsapp['message'] }}" class="float" target="_blank">
             <i class="fab fa-whatsapp my-float"></i>
@@ -63,7 +63,7 @@
         <a id="backTotop" href="#" class="to-top-icon">
             <i class="fas fa-chevron-up"></i>
         </a>
-        @endif
+        @endif --}}
     </div>
 </body>
 <?php $js = asset('frontend/assets3/'); ?>

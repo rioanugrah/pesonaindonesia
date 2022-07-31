@@ -46,9 +46,8 @@
                     style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
+                            <th>Title</th>
                             <th>Link</th>
-                            <th>Slug</th>
-                            <th>Body</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -92,12 +91,8 @@
                     name: 'title'
                 },
                 {
-                    data: 'slug',
-                    name: 'slug'
-                },
-                {
-                    data: 'body',
-                    name: 'body',
+                    data: 'link',
+                    name: 'link',
                     orderable: false,
                     searchable: false
                 },

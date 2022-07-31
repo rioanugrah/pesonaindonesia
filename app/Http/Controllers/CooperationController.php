@@ -9,7 +9,7 @@ use App\Mail\CooperationMail;
 use App\Models\KabupatenKota;
 use App\Models\Perusahaan;
 use App\Models\Provinsi;
-use App\Models\Country;
+// use App\Models\Country;
 use Illuminate\Support\Facades\Mail;
 use Auth;
 use PDF;
@@ -73,7 +73,7 @@ class CooperationController extends Controller
         }
         $data['kabupaten_kotas'] = KabupatenKota::all();
         $data['provinsis'] = Provinsi::pluck('nama','id');
-        $data['countrys'] = Country::select('nama_negara')->get();
+        // $data['countrys'] = Country::select('nama_negara')->get();
         $data['kategoris'] = [
             [
                 'nama_kategori' => 'Pribadi'
@@ -150,7 +150,7 @@ class CooperationController extends Controller
 
         if ($validator->passes()) {
             $input = $request->all();
-            $input['id'] = rand(1,9999);
+            $input['id'] = Str::uuid()->toString();
             $input['negara'] = 'Indonesia';
             $input['status'] = 0;
             $input['logo_perusahaan'] = 'logo-'.Str::slug($request->nama_perusahaan).'.'.$request->logo_perusahaan->getClientOriginalExtension();
