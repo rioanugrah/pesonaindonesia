@@ -13,6 +13,7 @@
 
 @section('content')
     <div class="container page">
+        <h3>Wisata</h3>
         @forelse ($wisatas as $wisata)
         <div class="col-md-6">
             <div class="recom-item border">

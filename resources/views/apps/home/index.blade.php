@@ -63,7 +63,54 @@
                 </div>
             </div>
             @empty
-                
+            <div class="row g-2 rtl-flex-d-row-r">
+                <div class="col-12">
+                    <div class="card catagory-card">
+                        <div class="card-body px-2"><span>Data Belum Tersedia</span></div>
+                    </div>
+                </div>
+            </div>
+            @endforelse
+            <div class="section-heading d-flex align-items-center justify-content-between dir-rtl mt-4">
+                <h6>Wisata</h6><a class="btn p-0" href="shop-grid.html">View All<i
+                        class="ms-1 fa-solid fa-arrow-right-long"></i></a>
+            </div>
+            @forelse ($wisatas as $wisata)
+            <div class="col-6 col-md-4">
+                <div class="card product-card">
+                    <div class="card-body">
+                        <span class="badge rounded-pill badge-warning">Sale</span>
+                        <<a class="wishlist-btn" href="#"><i
+                                class="fa-solid fa-heart"> </i></a>
+                        <a class="product-thumbnail d-block" href="{{ route('apps.detail',['slug' => $wisata->slug]) }}">
+                            <img class="mb-2" src="{{ asset('frontend/assets4/img/tour-thumb01.jpg') }}" alt="">
+                            <!-- Offer Countdown Timer: Please use event time this format: YYYY/MM/DD hh:mm:ss -->
+                            <ul class="offer-countdown-timer d-flex align-items-center shadow-sm"
+                                data-countdown="2023/12/31 23:59:59">
+                                <li><span class="days">0</span>d</li>
+                                <li><span class="hours">0</span>h</li>
+                                <li><span class="minutes">0</span>m</li>
+                                <li><span class="seconds">0</span>s</li>
+                            </ul>
+                        </a>
+                        <a class="product-title" href="{{ route('apps.detail',['slug' => $wisata->slug]) }}">{{ $wisata->nama_wisata }}</a>
+                        {{-- <p class="sale-price">Rp.<span>$42</span></p> --}}
+                        <div class="product-rating"><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        {{-- <a class="btn btn-success btn-sm" href="#"><i
+                                class="fa-solid fa-plus"></i></a> --}}
+                    </div>
+                </div>
+            </div>
+            @empty
+            <div class="row g-2 rtl-flex-d-row-r">
+                <div class="col-12">
+                    <div class="card catagory-card">
+                        <div class="card-body px-2"><span>Data Belum Tersedia</span></div>
+                    </div>
+                </div>
+            </div>
             @endforelse
             {{-- <!-- Product Card -->
             <div class="col-6 col-md-4">
@@ -219,7 +266,8 @@
     </div>
 </div>
 <!-- CTA Area -->
-<div class="container">
+
+{{-- <div class="container">
     <div class="cta-text dir-rtl p-4 p-lg-5">
         <div class="row">
             <div class="col-9">
@@ -229,9 +277,11 @@
             </div>
         </div><img src="{{ $link }}/img/bg-img/make-up.png" alt="">
     </div>
-</div>
+</div> --}}
+
 <!-- Weekly Best Sellers-->
-<div class="weekly-best-seller-area py-3">
+
+{{-- <div class="weekly-best-seller-area py-3">
     <div class="container">
         <div class="section-heading d-flex align-items-center justify-content-between dir-rtl">
             <h6>Weekly Best Sellers</h6><a class="btn p-0" href="shop-list.html">
@@ -332,9 +382,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+
 <!-- Discount Coupon Card-->
-<div class="container">
+
+{{-- <div class="container">
     <div class="discount-coupon-card p-4 p-lg-5 dir-rtl">
         <div class="d-flex align-items-center">
             <div class="discountIcon"><img class="w-100" src="{{ $link }}/img/core-img/discount.png" alt="">
@@ -346,9 +398,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+
 <!-- Featured Products Wrapper-->
-<div class="featured-products-wrapper py-3">
+
+{{-- <div class="featured-products-wrapper py-3">
     <div class="container">
         <div class="section-heading d-flex align-items-center justify-content-between dir-rtl">
             <h6>Featured Products</h6><a class="btn p-0" href="featured-products.html">View All<i
@@ -471,8 +525,8 @@
             </div>
         </div>
     </div>
-</div>
-<div class="pb-3">
+</div> --}}
+{{-- <div class="pb-3">
     <div class="container">
         <div class="section-heading d-flex align-items-center justify-content-between dir-rtl">
             <h6>Collections</h6><a class="btn p-0" href="#">
@@ -512,5 +566,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection

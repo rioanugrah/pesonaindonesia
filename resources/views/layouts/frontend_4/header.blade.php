@@ -84,9 +84,10 @@
                         data-at2x="{{ $asset . '/img/logo_plesiran_new_black2.webp' }}" width="250" alt></a></div>
             <div class="inner-nav desktop-nav">
                 <ul class="clearlist">
-                    <li ><a href="{{ url('/') }}" class="mn-has-sub {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                    <li><a href="{{ url('/') }}" class="mn-has-sub {{ Request::is('/') ? 'active' : '' }}">Home</a>
                     </li>
-                    <li ><a href="{{ url('wisata') }}" class="mn-has-sub {{ Request::is('wisata') ? 'active' : '' }}">Wisata</a>
+                    <li><a href="{{ url('wisata') }}"
+                            class="mn-has-sub {{ Request::is('wisata') ? 'active' : '' }}">Wisata</a>
                     </li>
                     {{-- <li class="slash">/</li>
                     <li><a
@@ -99,11 +100,10 @@
                             class="mn-has-sub {{ Request::is('events') ? 'active' : '' }}">Event</a>
                     </li> --}}
                     @if (Request::is('kontak'))
-                    <li class="slash">/</li>
-                    <li><a
-                            href="{{ route('kontak') }}"
-                            class="mn-has-sub {{ Request::is('kontak') ? 'active' : '' }}">Kontak</a>
-                    </li>
+                        <li class="slash">/</li>
+                        <li><a href="{{ route('kontak') }}"
+                                class="mn-has-sub {{ Request::is('kontak') ? 'active' : '' }}">Kontak</a>
+                        </li>
                     @endif
                     <li class="slash">/</li>
                     @guest
