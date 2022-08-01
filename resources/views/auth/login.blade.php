@@ -96,8 +96,8 @@
                             <div class="">
                                 <div class="text-center">
                                     <a href="{{ url('/') }}" class="">
-                                        <img src="{{ asset('backend/assets3/icon/logo_plesiran_new_black.png') }}" alt="" height="48" class="auth-logo logo-dark mx-auto">
-                                        <img src="{{ asset('backend/assets3/icon/logo_plesiran_new_black.png') }} alt="" height="48" class="auth-logo logo-light mx-auto">
+                                        <img src="{{ asset('backend/assets_new/icon/logo_plesiran_new_black.png') }}" alt="" height="48" class="auth-logo logo-dark mx-auto">
+                                        <img src="{{ asset('backend/assets_new/icon/logo_plesiran_new_black.png') }} alt="" height="48" class="auth-logo logo-light mx-auto">
                                     </a>
                                 </div>
                                 <h4 class="font-size-18 text-muted mt-2 text-center">Login</h4>

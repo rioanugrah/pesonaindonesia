@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'id' => Str::uuid()->toString(),
             'name' => $data['name'],
             'email' => $data['email'],
-            'role' => '3fbdf3fa-1bb1-4a61-9c82-a0836ba4ee12',
+            // 'role' => '3fbdf3fa-1bb1-4a61-9c82-a0836ba4ee12',
             'password' => Hash::make($data['password']),
         ]);
     }
