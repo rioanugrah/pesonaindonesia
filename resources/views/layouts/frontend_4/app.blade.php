@@ -58,6 +58,7 @@
             <i class="fab fa-whatsapp my-float"></i>
         </a>
     @endif
+    {{-- Testing --}}
     <div id="scroll-top"><i class="fa fa-angle-up"></i></div>
 </body>
 <?php $js = asset('frontend/assets4/'); ?>
