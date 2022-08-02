@@ -58,9 +58,12 @@ Route::group(['domain' => 'api.localhost'], function () {
 //     Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
 // });
 
-Route::domain('app.' . env('APP_URL'))->group(function () {
+Route::domain('app.plesiranindonesia.com')->group(function () {
     Route::get('/', 'Apps\HomeController@index');
 });
+// Route::domain('app.' . env('APP_URL'))->group(function () {
+//     Route::get('/', 'Apps\HomeController@index');
+// });
 
 Route::group(['domain' => 'plesiranmalang.localhost'], function () {
     Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
