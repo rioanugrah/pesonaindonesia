@@ -36,30 +36,27 @@ use Illuminate\Support\Facades\Route;
 //     Route::get('wistlist', 'FrontendController@wistlist')->name('frontend.wistlist');
 //     Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('frontend.search.wistlist');
 // });
+Route::group(['domain' => 'api.localhost'], function () {
+    Route::get('/', function () {
+        // return view('auth.login');
+        return "This will respond to requests for 'api.localhost/'";
+    });
+});
 
-Auth::routes(['verify' => true]);
-
-// Route::group(['domain' => 'api.localhost'], function () {
-//     Route::get('/', function () {
-//         // return view('auth.login');
-//         return "This will respond to requests for 'api.localhost/'";
-//     });
-// });
-
-// Route::group(['domain' => 'app.localhost'], function () {
-//     Route::get('/', 'Apps\HomeController@index');
-//     // {
-//         // return view('auth.login');
-//         // return "This will respond to requests for 'admin.localhost/'";
-//     // });
-//     Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
-//     Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
-//     Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
+Route::group(['domain' => 'app.localhost'], function () {
+    Route::get('/', 'Apps\HomeController@index');
+    // {
+        // return view('auth.login');
+        // return "This will respond to requests for 'admin.localhost/'";
+    // });
+    Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
+    Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
+    Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
     
-//     Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
-//     Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
-//     Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
-// });
+    Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
+    Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
+    Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
+});
 
 // Route::domain('app.plesiranindonesia.com')->group(function () {
 //     Route::get('/', 'Apps\HomeController@index');
@@ -74,9 +71,9 @@ Route::group(['domain' => 'plesiranmalang.localhost'], function () {
     Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
 });
 
-// Route::group(['domain' => 'partner.localhost'], function () {
-//     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
-// });
+Route::group(['domain' => 'partner.localhost'], function () {
+    Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
+});
 
 Route::get('/', 'FrontendController@index')->name('frontend');
 // Route::get('login', function(){
@@ -121,6 +118,9 @@ Route::post('event_register', 'FrontendController@eventRegister')->name('fronten
 // });
 Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
 
+
+Auth::routes(['verify' => true]);
+
 Route::domain('{account}.localhost.com')->group(function () {
     Route::get('/', function($account){
         return response()->json([
@@ -128,20 +128,20 @@ Route::domain('{account}.localhost.com')->group(function () {
         ]);
     });
 });
-// Route::domain('testing.'.env('APP_URL'))->group(function () {
-//     Route::get('/', function(){
-//         echo 'Plesiran Malang';
-//         // return response()->json([
-//         //     'status' => true
-//         // ]);
-//     });
-// });
-
-Route::prefix('plesiran-malang')->group(function () {
-    Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
-    Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
-    Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
+Route::domain('testing.'.env('APP_URL'))->group(function () {
+    Route::get('/', function(){
+        echo 'Plesiran Malang';
+        // return response()->json([
+        //     'status' => true
+        // ]);
+    });
 });
+
+// Route::prefix('plesiran-malang')->group(function () {
+//     Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
+//     Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
+//     Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
+// });
 
 Route::get('send-notif/{name}', function ($name) {
     event(new \App\Events\WisataEvent($name));
@@ -154,76 +154,75 @@ Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->
 // Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('testing', function(){
-        return view('layouts.backend_5.app');
-    });
-    Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
-    Route::get('home/balance', 'HomeController@balance')->name('home.balance')->middleware('verified');
-    Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
-    
-    Route::get('kategori_kota', 'KategoriKotaController@index')->name('ktkota')->middleware('verified');
-    Route::post('kategori_kota/simpan', 'KategoriKotaController@simpan')->name('ktkota.simpan')->middleware('verified');
-    
-    Route::prefix('cooperation')->group(function() {
-        Route::get('/', 'CooperationController@index')->name('cooperation')->middleware('verified');
-        Route::get('notif', 'CooperationController@notif')->middleware('verified');
-        Route::get('{id}/download', 'CooperationController@download')->name('cooperation.download')->middleware('verified');
-        Route::get('{id}', 'CooperationController@detail')->middleware('verified');
-        Route::post('upload', 'CooperationController@upload_berkas')->name('cooperation.upload_berkas')->middleware('verified');
-        Route::post('data/upload', 'CooperationController@berkas')->name('cooperation.berkas')->middleware('verified');
-        Route::post('status', 'CooperationController@status')->name('cooperation.status')->middleware('verified');
-    });
-    
-    Route::get('pengguna', 'UsersController@index')->name('pengguna')->middleware('verified');
-    
-    Route::get('roles', 'RolesController@index')->name('roles')->middleware('verified');
-    Route::post('roles/simpan', 'RolesController@simpan')->name('roles.simpan')->middleware('verified');
-    Route::get('roles/{id}/edit', 'RolesController@edit')->name('roles.edit')->middleware('verified');
-    Route::get('roles/{slug}', 'RolesController@detail')->name('roles.detail')->middleware('verified');
-    Route::post('roles/update', 'RolesController@update')->name('roles.update')->middleware('verified');
-   
-    Route::get('status', 'StatusController@index')->name('status')->middleware('verified');
-    
-    Route::get('slider', 'SliderController@index')->name('slider')->middleware('verified');
-    Route::get('slider/{id}/edit', 'SliderController@edit')->name('slider.edit')->middleware('verified');
-    Route::post('slider/update', 'SliderController@update')->name('slider.update')->middleware('verified');
-    Route::get('slider/{id}/hapus', 'SliderController@delete')->name('slider.hapus')->middleware('verified');
-    
-    Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
-   
-    Route::get('hotel', 'HotelController@index')->name('hotel')->middleware('verified');
-    Route::post('hotel/simpan', 'HotelController@simpan')->name('hotel.simpan')->middleware('verified');
-    Route::post('hotel/upload_image', 'HotelController@upload_image')->name('hotel.upload_image')->middleware('verified');
-    Route::post('hotel/update', 'HotelController@update')->name('hotel.update')->middleware('verified');
-    Route::get('hotel/{id}/image', 'HotelController@detail_image')->middleware('verified');
-    Route::get('hotel/{id}', 'HotelController@detail')->name('hotel.detail')->middleware('verified');
-    Route::get('hotel/{id}/edit', 'HotelController@edit')->name('hotel.edit')->middleware('verified');
-    Route::get('hotel/{id}/kamar', 'KamarHotelController@index')->name('kamar')->middleware('verified');
-    Route::post('hotel/kamar/simpan', 'KamarHotelController@simpan')->name('kamar.simpan')->middleware('verified');
-    Route::get('hotel/delete/{id}', 'HotelController@destroy')->name('hotel.hapus')->middleware('verified');
-    Route::post('hotel/export', 'HotelController@export')->name('hotel.export')->middleware('verified');
-    Route::post('hotel/import', 'HotelController@import')->name('hotel.import')->middleware('verified');
-    Route::get('hotel/checkroom/{id}', 'HotelController@checkRoom')->name('hotel.checkroom')->middleware('verified');
-    // Route::get('hotel/importExportView', 'DemoController@importExportView');
-    
-    Route::get('perusahaan', 'PerusahaanController@index')->name('perusahaan')->middleware('verified');
-    Route::post('perusahaan/simpan', 'PerusahaanController@simpan')->name('perusahaan.simpan')->middleware('verified');
-    Route::get('perusahaan/{id}/edit', 'PerusahaanController@edit')->name('perusahaan.edit')->middleware('verified');
-    Route::post('perusahaan/update', 'PerusahaanController@update')->name('perusahaan.update')->middleware('verified');
-    Route::get('perusahaan/delete/{id}', 'PerusahaanController@destroy')->name('perusahaan.hapus')->middleware('verified');
-
-    Route::get('log', 'LogController@index')->name('log')->middleware('verified');
-    
-    Route::get('events', 'EventsController@index')->name('events')->middleware('verified');
-    Route::post('events/simpan', 'EventsController@simpan')->name('events.simpan')->middleware('verified');
-    Route::get('events/{id}', 'EventsController@detail')->name('events.detail')->middleware('verified');
-    Route::get('events/{id}/register', 'EventsController@detailEventRegister')->name('events.detailRegister')->middleware('verified');
-    Route::get('events/delete/{id}', 'EventsController@destroy')->name('events.delete')->middleware('verified');
-
-    Route::get('post', 'PostController@index')->name('post')->middleware('verified');
-    Route::post('post/simpan', 'PostController@simpan')->name('post.simpan')->middleware('verified');
-    
     Route::prefix('b')->group(function () {
+        Route::get('testing', function(){
+            return view('layouts.backend_5.app');
+        });
+        Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
+        Route::get('home/balance', 'HomeController@balance')->name('home.balance')->middleware('verified');
+        Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
+        
+        Route::get('kategori_kota', 'KategoriKotaController@index')->name('ktkota')->middleware('verified');
+        Route::post('kategori_kota/simpan', 'KategoriKotaController@simpan')->name('ktkota.simpan')->middleware('verified');
+        
+        Route::prefix('cooperation')->group(function() {
+            Route::get('/', 'CooperationController@index')->name('cooperation')->middleware('verified');
+            Route::get('notif', 'CooperationController@notif')->middleware('verified');
+            Route::get('{id}/download', 'CooperationController@download')->name('cooperation.download')->middleware('verified');
+            Route::get('{id}', 'CooperationController@detail')->middleware('verified');
+            Route::post('upload', 'CooperationController@upload_berkas')->name('cooperation.upload_berkas')->middleware('verified');
+            Route::post('data/upload', 'CooperationController@berkas')->name('cooperation.berkas')->middleware('verified');
+            Route::post('status', 'CooperationController@status')->name('cooperation.status')->middleware('verified');
+        });
+        
+        Route::get('pengguna', 'UsersController@index')->name('pengguna')->middleware('verified');
+        
+        Route::get('roles', 'RolesController@index')->name('roles')->middleware('verified');
+        Route::post('roles/simpan', 'RolesController@simpan')->name('roles.simpan')->middleware('verified');
+        Route::get('roles/{id}/edit', 'RolesController@edit')->name('roles.edit')->middleware('verified');
+        Route::get('roles/{slug}', 'RolesController@detail')->name('roles.detail')->middleware('verified');
+        Route::post('roles/update', 'RolesController@update')->name('roles.update')->middleware('verified');
+       
+        Route::get('status', 'StatusController@index')->name('status')->middleware('verified');
+        
+        Route::get('slider', 'SliderController@index')->name('slider')->middleware('verified');
+        Route::get('slider/{id}/edit', 'SliderController@edit')->name('slider.edit')->middleware('verified');
+        Route::post('slider/update', 'SliderController@update')->name('slider.update')->middleware('verified');
+        Route::get('slider/{id}/hapus', 'SliderController@delete')->name('slider.hapus')->middleware('verified');
+        
+        Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
+       
+        Route::get('hotel', 'HotelController@index')->name('hotel')->middleware('verified');
+        Route::post('hotel/simpan', 'HotelController@simpan')->name('hotel.simpan')->middleware('verified');
+        Route::post('hotel/upload_image', 'HotelController@upload_image')->name('hotel.upload_image')->middleware('verified');
+        Route::post('hotel/update', 'HotelController@update')->name('hotel.update')->middleware('verified');
+        Route::get('hotel/{id}/image', 'HotelController@detail_image')->middleware('verified');
+        Route::get('hotel/{id}', 'HotelController@detail')->name('hotel.detail')->middleware('verified');
+        Route::get('hotel/{id}/edit', 'HotelController@edit')->name('hotel.edit')->middleware('verified');
+        Route::get('hotel/{id}/kamar', 'KamarHotelController@index')->name('kamar')->middleware('verified');
+        Route::post('hotel/kamar/simpan', 'KamarHotelController@simpan')->name('kamar.simpan')->middleware('verified');
+        Route::get('hotel/delete/{id}', 'HotelController@destroy')->name('hotel.hapus')->middleware('verified');
+        Route::post('hotel/export', 'HotelController@export')->name('hotel.export')->middleware('verified');
+        Route::post('hotel/import', 'HotelController@import')->name('hotel.import')->middleware('verified');
+        Route::get('hotel/checkroom/{id}', 'HotelController@checkRoom')->name('hotel.checkroom')->middleware('verified');
+        // Route::get('hotel/importExportView', 'DemoController@importExportView');
+        
+        Route::get('perusahaan', 'PerusahaanController@index')->name('perusahaan')->middleware('verified');
+        Route::post('perusahaan/simpan', 'PerusahaanController@simpan')->name('perusahaan.simpan')->middleware('verified');
+        Route::get('perusahaan/{id}/edit', 'PerusahaanController@edit')->name('perusahaan.edit')->middleware('verified');
+        Route::post('perusahaan/update', 'PerusahaanController@update')->name('perusahaan.update')->middleware('verified');
+        Route::get('perusahaan/delete/{id}', 'PerusahaanController@destroy')->name('perusahaan.hapus')->middleware('verified');
+
+        Route::get('log', 'LogController@index')->name('log')->middleware('verified');
+        
+        Route::get('events', 'EventsController@index')->name('events')->middleware('verified');
+        Route::post('events/simpan', 'EventsController@simpan')->name('events.simpan')->middleware('verified');
+        Route::get('events/{id}', 'EventsController@detail')->name('events.detail')->middleware('verified');
+        Route::get('events/{id}/register', 'EventsController@detailEventRegister')->name('events.detailRegister')->middleware('verified');
+        Route::get('events/delete/{id}', 'EventsController@destroy')->name('events.delete')->middleware('verified');
+
+        Route::get('post', 'PostController@index')->name('post')->middleware('verified');
+        Route::post('post/simpan', 'PostController@simpan')->name('post.simpan')->middleware('verified');
     });
 
     // Route::get('hotel/export', function(){
