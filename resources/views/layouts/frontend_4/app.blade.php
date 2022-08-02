@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
-    <meta name="google-site-verification" content="FINya1A7o0a-hHiPA1CXl0OFffJkaIeMdfwp_YNpFu0" />
+    <meta name="google-site-verification" content="-agNXAZvJ7uHctHQlEr7t7q9VoOHxdpZJIDOv9womR4" />
+    {{-- <meta name="google-site-verification" content="FINya1A7o0a-hHiPA1CXl0OFffJkaIeMdfwp_YNpFu0" /> --}}
     {{-- <meta name="google-site-verification" content="-agNXAZvJ7uHctHQlEr7t7q9VoOHxdpZJIDOv9womR4" /> --}}
     <meta name="author" content="Pesona Plesiran Indonesia">
     <meta name="description" content="@yield('description')">
