@@ -45,7 +45,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-        $this->mapSubRoutes();
+        // $this->mapSubRoutes();
 
         //
     }
@@ -64,13 +64,13 @@ class RouteServiceProvider extends ServiceProvider
              ->group(base_path('routes/web.php'));
     }
 
-    protected function mapSubRoutes()
-    {
-        Route::domain('app.plesiranindonesia.com')
-             ->middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
-    }
+    // protected function mapSubRoutes()
+    // {
+    //     Route::domain('app.plesiranindonesia.com')
+    //          ->middleware('web')
+    //          ->namespace($this->namespace)
+    //          ->group(base_path('routes/web.php'));
+    // }
 
     /**
      * Define the "api" routes for the application.
