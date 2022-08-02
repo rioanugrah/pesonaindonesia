@@ -43,7 +43,7 @@ Route::group(['domain' => 'api.localhost'], function () {
     });
 });
 
-Route::group(['domain' => 'app.localhost'], function () {
+Route::group(['domain' => 'app.'.env('APP_URL')], function () {
     Route::get('/', 'Apps\HomeController@index');
     // {
         // return view('auth.login');
