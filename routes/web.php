@@ -60,7 +60,7 @@ Route::middleware('web')->domain('app.'.env('APP_URL'))->group(function(){
     Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
 });
 
-Route::any('/{page?}',function(){
-    return View::make('layouts.status.404');
-    // return View::make('pages.error.404');
-})->where('page','.*');
+// Route::any('/{page?}',function(){
+//     return View::make('layouts.status.404');
+//     // return View::make('pages.error.404');
+// })->where('page','.*');
