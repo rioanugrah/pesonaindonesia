@@ -23,7 +23,7 @@ Auth::routes(['verify' => true]);
 Route::middleware('web')->domain(env('APP_URL'))->group(function(){
     Route::get('/', 'FrontendController@index')->name('frontend');
     Route::get('wisata', 'FrontendController@wisata')->name('struktur');
-    Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');
+    // Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');
     Route::get('tentang-kami', 'FrontendController@tentang_kami')->name('tentang_kami');
     Route::get('visi-misi', 'FrontendController@visimisi')->name('visi_misi');
     Route::get('tim-kami', 'FrontendController@tim')->name('tim_kami');
@@ -59,6 +59,9 @@ Route::middleware('web')->domain('app.'.env('APP_URL'))->group(function(){
     Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
     Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
 });
+
+Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login_google');
+Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
 
 // Route::any('/{page?}',function(){
 //     return View::make('layouts.status.404');
