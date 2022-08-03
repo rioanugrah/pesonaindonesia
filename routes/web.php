@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     // return view('frontend.index');
 //     // return view('welcome');
 // });
+$url = url('/');
 
 Auth::routes(['verify' => true]);
 
@@ -51,7 +52,7 @@ Route::middleware('web')->domain(env('APP_URL'))->group(function(){
 Route::middleware('web')->domain('partner.'.env('APP_URL'))->group(function(){
     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
 });
-Route::middleware('web')->domain('app.'.env('APP_URL'))->group(function(){
+Route::middleware('web')->domain('app.'.$url)->group(function(){
     Route::get('/', 'Apps\HomeController@index');
     Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
     Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
