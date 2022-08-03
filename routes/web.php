@@ -43,20 +43,20 @@ Route::group(['domain' => 'api.localhost'], function () {
     });
 });
 
-// Route::group(['domain' => 'app.localhost'], function () {
-//     // Route::get('/', 'Apps\HomeController@index');
-//     // {
-//         // return view('auth.login');
-//         // return "This will respond to requests for 'admin.localhost/'";
-//     // });
-//     Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
-//     Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
-//     Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
+Route::group(['domain' => 'app.localhost'], function () {
+    // Route::get('/', 'Apps\HomeController@index');
+    // {
+        // return view('auth.login');
+        // return "This will respond to requests for 'admin.localhost/'";
+    // });
+    Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
+    Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
+    Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
     
-//     Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
-//     Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
-//     Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
-// });
+    Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
+    Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
+    Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
+});
 
 // Route::domain('app.plesiranindonesia.com')->group(function () {
 //     Route::get('/', 'Apps\HomeController@index');

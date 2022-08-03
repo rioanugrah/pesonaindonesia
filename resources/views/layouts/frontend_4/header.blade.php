@@ -108,7 +108,7 @@
                     <li class="slash">/</li>
                     @guest
                         <li><a href="{{ route('login') }}" class="mn-has-sub">Login</a></li>
-                        <li><a href="{{ route('register') }}" class="mn-has-sub">Register</a></li>
+                        {{-- <li><a href="{{ route('register') }}" class="mn-has-sub">Register</a></li> --}}
                     @else
                         <li><a href="#" class="mn-has-sub">{{ auth()->user()->name }}</a>
                             <ul class="mn-sub">
