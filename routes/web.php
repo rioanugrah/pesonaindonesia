@@ -47,10 +47,12 @@ Route::middleware('web')->domain(env('APP_URL'))->group(function(){
     });
 });
 
-Route::middleware('web')->domain('partner.'.env('APP_URL'))->group(function(){
+// Route::middleware('web')->domain('partner.'.env('APP_URL'))->group(function(){
+Route::middleware('web')->domain('partner.plesiranindonesia.com')->group(function(){
     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
 });
-Route::middleware('web')->domain('app.'.env('APP_URL'))->group(function(){
+// Route::middleware('web')->domain('app.'.env('APP_URL'))->group(function(){
+Route::middleware('web')->domain('app.plesiranindonesia.com')->group(function(){
     Route::get('/', 'Apps\HomeController@index');
     Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
     Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
