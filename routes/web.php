@@ -49,7 +49,7 @@ Route::middleware('web')->domain(env('APP_URL'))->group(function(){
     });
 });
 
-Route::middleware('web')->domain('partner.'.env('APP_URL'))->group(function(){
+Route::middleware('web')->domain('partner.'.$url)->group(function(){
     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
 });
 Route::middleware('web')->domain('app.'.$url)->group(function(){
