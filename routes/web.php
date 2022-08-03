@@ -53,8 +53,15 @@ Route::middleware('web')->domain('partner.'.env('APP_URL'))->group(function(){
 });
 Route::middleware('web')->domain('app.'.env('APP_URL'))->group(function(){
     Route::get('/', 'Apps\HomeController@index');
+    Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
+    Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
+    Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
+    
+    Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
+    Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
+    Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
 });
-Route::middleware('web')->domain('app.'.env('APP_URL'))->group(function(){
+Route::middleware('web')->domain('hotel.'.env('APP_URL'))->group(function(){
     Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
     Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
     Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
