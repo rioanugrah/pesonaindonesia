@@ -19,7 +19,7 @@
                     src="rs-plugin/assets/loader.gif" data-lazyload="{{ asset($asset.'/img/wallpaper/'.$wp->image) }}"
                     data-bgposition="center" alt="" data-kenburns="on" data-duration="30000"
                     data-ease="Linear.easeNone" data-scalestart="0" data-scaleend="0" data-rotatestart="0"
-                    data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="10">
+                    data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="-20">
                 <div data-x="['center','center','center','center']" data-y="center"
                     data-transform_in="x:-150px;opacity:0;s:1500;e:Power3.easeInOut;"
                     data-transform_out="x:150px;opacity:0;s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
