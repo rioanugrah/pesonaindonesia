@@ -35,6 +35,8 @@ Route::middleware('web')->domain(env('APP_URL'))->group(function(){
     Route::post('event_register', 'FrontendController@eventRegister')->name('frontend.eventRegister');
     Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
 
+    Route::get('instagram', 'InstagramController@index');
+
     Route::prefix('hotel')->group(function () {
         Route::get('/', 'FrontendController@hotel')->name('frontend.hotel');
         Route::get('search', 'FrontendController@search_hotel')->name('frontend.hotel_search');

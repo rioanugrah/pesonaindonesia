@@ -18,7 +18,7 @@
             <li data-masterspeed="700" data-slotamount="7" data-transition="fade"><img
                     src="rs-plugin/assets/loader.gif" data-lazyload="{{ asset($asset.'/img/wallpaper/'.$wp->image) }}"
                     data-bgposition="center" alt="" data-kenburns="on" data-duration="30000"
-                    data-ease="Linear.easeNone" data-scalestart="100" data-scaleend="120" data-rotatestart="0"
+                    data-ease="Linear.easeNone" data-scalestart="0" data-scaleend="0" data-rotatestart="0"
                     data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="10">
                 <div data-x="['center','center','center','center']" data-y="center"
                     data-transform_in="x:-150px;opacity:0;s:1500;e:Power3.easeInOut;"
