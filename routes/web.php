@@ -50,9 +50,6 @@ Route::middleware('web')->domain(env('APP_URL'))->group(function(){
 
     Route::group(['middleware' => 'auth'], function () {
         Route::prefix('b')->group(function () {
-            Route::get('testing', function(){
-                return view('layouts.backend_5.app');
-            });
             Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
             Route::get('home/balance', 'HomeController@balance')->name('home.balance')->middleware('verified');
             Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
