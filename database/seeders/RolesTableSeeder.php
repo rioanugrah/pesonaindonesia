@@ -17,21 +17,28 @@ class RolesTableSeeder extends Seeder
 
         $roles = [
             [
-              'id' => Str::uuid()->toString(),
+              // 'id' => Str::uuid()->toString(),
               'slug' => Str::slug('Administrator'),
               'role' => 'Administrator',
               'created_at' => Carbon::now(),
               'updated_at' => Carbon::now(),
             ],
             [
-              'id' => Str::uuid()->toString(),
+              // 'id' => Str::uuid()->toString(),
+              'slug' => Str::slug('Admin'),
+              'role' => 'Admin',
+              'created_at' => Carbon::now(),
+              'updated_at' => Carbon::now(),
+            ],
+            [
+              // 'id' => Str::uuid()->toString(),
               'slug' => Str::slug('Agen'),
               'role' => 'Agen',
               'created_at' => Carbon::now(),
               'updated_at' => Carbon::now(),
             ],
             [
-              'id' => Str::uuid()->toString(),
+              // 'id' => Str::uuid()->toString(),
               'slug' => Str::slug('User'),
               'role' => 'User',
               'created_at' => Carbon::now(),
