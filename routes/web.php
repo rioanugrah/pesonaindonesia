@@ -78,6 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
         
         Route::get('slider', 'SliderController@index')->name('slider')->middleware('verified');
         Route::get('slider/{id}/edit', 'SliderController@edit')->name('slider.edit')->middleware('verified');
+        Route::post('slider/simpan', 'SliderController@simpan')->name('slider.simpan')->middleware('verified');
         Route::post('slider/update', 'SliderController@update')->name('slider.update')->middleware('verified');
         Route::get('slider/{id}/hapus', 'SliderController@delete')->name('slider.hapus')->middleware('verified');
         
