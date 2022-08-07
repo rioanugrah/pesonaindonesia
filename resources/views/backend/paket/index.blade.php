@@ -16,6 +16,7 @@
 
 @section('content')
     @include('backend.paket.modalBuat')
+    @include('backend.paket.modalUploadImage')
     <div class="page-title-box">
         <div class="row align-items-center">
             <div class="col-md-8">
@@ -49,7 +50,7 @@
                             <thead>
                                 <tr>
                                     <th>Paket</th>
-                                    <th>Deskripsi</th>
+                                    {{-- <th>Deskripsi</th> --}}
                                     <th>Harga</th>
                                     <th>Action</th>
                                 </tr>
@@ -80,9 +81,9 @@
 
     <script src="{{ asset('backend/assets2/js/iziToast.min.js') }}"></script>
 
-    <script src="{{ asset('backend/assets2/libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
+    {{-- <script src="{{ asset('backend/assets2/libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
 
-    <script src="{{ asset('backend/assets2/js/pages/form-repeater.int.js') }}"></script>
+    <script src="{{ asset('backend/assets2/js/pages/form-repeater.int.js') }}"></script> --}}
     <script src="{{ asset('backend/assets2/libs/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('backend/assets2/js/pages/form-editor.init.js') }}"></script>
 
@@ -101,10 +102,10 @@
                     name: 'nama_paket'
                 },
                 // {data: 'barcode', name: 'barcode'},
-                {
-                    data: 'deskripsi',
-                    name: 'deskripsi'
-                },
+                // {
+                //     data: 'deskripsi',
+                //     name: 'deskripsi'
+                // },
                 {
                     data: 'price',
                     name: 'price'
@@ -126,15 +127,20 @@
             table.ajax.reload();
         }
 
-        $(document).ready(function() {
-            $(".btn-success").click(function() {
-                var lsthmtl = $(".clone").html();
-                $(".increment").after(lsthmtl);
-            });
-            $("body").on("click", ".btn-danger", function() {
-                $(this).parents(".hdtuto control-group lst").remove();
-            });
-        });
+        function upload(id) {
+            // alert(id);
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/paket') }}"+'/'+id+'/paket_images',
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    // alert(result.data);
+                    $('#upload_paket_id').val(result.data.id);
+                    $('#modalUploadImages').modal('show');
+                }
+            })
+        }
 
         $('#upload-form').submit(function(e) {
             e.preventDefault();
@@ -142,6 +148,39 @@
             $.ajax({
                 type: 'POST',
                 url: "{{ route('paket.simpan') }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    if (result.success != false) {
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                        this.reset();
+                        table.ajax.reload();
+                    } else {
+                        iziToast.error({
+                            title: result.success,
+                            message: result.error
+                        });
+                    }
+                },
+                error: function(request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            });
+        });
+
+        $('#upload-paket').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('paket.simpan_imageUpload') }}",
                 data: formData,
                 contentType: false,
                 processData: false,

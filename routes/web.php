@@ -73,6 +73,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::prefix('paket')->group(function(){
             Route::get('/', 'PaketController@index')->name('paket')->middleware('verified');
             Route::post('simpan', 'PaketController@simpan')->name('paket.simpan')->middleware('verified');
+            Route::get('{id}/paket_images', 'PaketController@detail_upload')->name('paket.imageUpload')->middleware('verified');
+            Route::post('upload/paket_images', 'PaketController@simpan_image')->name('paket.simpan_imageUpload')->middleware('verified');
         });
 
         Route::get('pengguna', 'UsersController@index')->name('pengguna')->middleware('verified');
@@ -95,9 +97,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('{id}/hapus', 'SliderController@delete')->name('slider.hapus')->middleware('verified');
         });
 
-        Route::prefix('paket')->group(function(){
+        // Route::prefix('paket')->group(function(){
 
-        });
+        // });
 
         Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
         

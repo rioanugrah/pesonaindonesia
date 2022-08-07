@@ -1,5 +1,5 @@
 <div class="modal fade" id="buat" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">DATA PAKET WISATA</h5>
@@ -60,7 +60,9 @@
                         <label class="form-label">Harga Paket</label>
                         <input type="text" class="form-control" name="price" placeholder="Harga Paket">
                     </div>
-                    <div class="mb-3 lst">
+
+                    
+                    {{-- <div class="mb-3 lst">
                         <label class="form-label">Upload Paket</label>
                         <div class="input-group hdtuto control-group lst increment">
                             <input type="file" name="filenames[]" class="myfrm form-control">
@@ -78,12 +80,11 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <input type="file" class="form-control" name="images[]" multiple> --}}
-                    </div>
+                    </div> --}}
                     {{-- <div data-repeater-list="outer-group" class="outer">
                         <div data-repeater-item class="outer">
                             <div class="inner-repeater mb-4">
-                                <div data-repeater-list="inner-group" class="inner mb-3">
+                                <div data-repeater-list="images" class="inner mb-3">
                                     <label class="form-label">Upload Design Paket :</label>
                                     <div data-repeater-item class="inner mb-3 row">
                                         <div class="col-md-10 col-sm-8">
@@ -94,7 +95,6 @@
                                                 <input data-repeater-delete type="button" class="btn btn-primary inner mt-2 mt-sm-0" value="Delete">
                                             </div>    
                                         </div>
-                                        
                                     </div>
                                 </div>
                                 <input data-repeater-create type="button" class="btn btn-success inner" value="+ Add Images">
