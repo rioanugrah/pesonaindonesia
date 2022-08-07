@@ -14,6 +14,7 @@ use App\Models\CheckRoom;
 use App\Models\Events;
 use App\Models\EventRegister;
 use App\Models\Wisata;
+use App\Models\Paket;
 
 use App\Models\KabupatenKota;
 use \Carbon\Carbon;
@@ -457,6 +458,13 @@ class FrontendController extends Controller
         $data['whatsapp'] = $this->whatsapp;
         $data['wisatas'] = Wisata::all();
         return view('frontend.frontend4.wisata',$data);
+    }
+
+    public function paket()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['pakets'] = Paket::all();
+        return view('frontend.frontend4.paket',$data);
     }
 
 }

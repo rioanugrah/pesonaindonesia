@@ -34,6 +34,8 @@ Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('fron
 Route::post('event_register', 'FrontendController@eventRegister')->name('frontend.eventRegister');
 Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
 
+Route::get('paket', 'FrontendController@paket')->name('frontend.paket');
+
 Route::get('instagram', 'InstagramController@index');
 
 Route::prefix('hotel')->group(function () {
@@ -51,7 +53,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('b')->group(function () {
         Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
         Route::get('home/balance', 'HomeController@balance')->name('home.balance')->middleware('verified');
+        
         Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
+        Route::post('wisata/simpan', 'WisataController@simpan')->name('wisata.simpan')->middleware('verified');
         
         Route::get('kategori_kota', 'KategoriKotaController@index')->name('ktkota')->middleware('verified');
         Route::post('kategori_kota/simpan', 'KategoriKotaController@simpan')->name('ktkota.simpan')->middleware('verified');
@@ -65,23 +69,36 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('data/upload', 'CooperationController@berkas')->name('cooperation.berkas')->middleware('verified');
             Route::post('status', 'CooperationController@status')->name('cooperation.status')->middleware('verified');
         });
-        
+
+        Route::prefix('paket')->group(function(){
+            Route::get('/', 'PaketController@index')->name('paket')->middleware('verified');
+            Route::post('simpan', 'PaketController@simpan')->name('paket.simpan')->middleware('verified');
+        });
+
         Route::get('pengguna', 'UsersController@index')->name('pengguna')->middleware('verified');
         
-        Route::get('roles', 'RolesController@index')->name('roles')->middleware('verified');
-        Route::post('roles/simpan', 'RolesController@simpan')->name('roles.simpan')->middleware('verified');
-        Route::get('roles/{id}/edit', 'RolesController@edit')->name('roles.edit')->middleware('verified');
-        Route::get('roles/{slug}', 'RolesController@detail')->name('roles.detail')->middleware('verified');
-        Route::post('roles/update', 'RolesController@update')->name('roles.update')->middleware('verified');
+        Route::prefix('roles')->group(function(){
+            Route::get('/', 'RolesController@index')->name('roles')->middleware('verified');
+            Route::post('simpan', 'RolesController@simpan')->name('roles.simpan')->middleware('verified');
+            Route::get('{id}/edit', 'RolesController@edit')->name('roles.edit')->middleware('verified');
+            Route::get('{slug}', 'RolesController@detail')->name('roles.detail')->middleware('verified');
+            Route::post('update', 'RolesController@update')->name('roles.update')->middleware('verified');
+        });
         
         Route::get('status', 'StatusController@index')->name('status')->middleware('verified');
         
-        Route::get('slider', 'SliderController@index')->name('slider')->middleware('verified');
-        Route::get('slider/{id}/edit', 'SliderController@edit')->name('slider.edit')->middleware('verified');
-        Route::post('slider/simpan', 'SliderController@simpan')->name('slider.simpan')->middleware('verified');
-        Route::post('slider/update', 'SliderController@update')->name('slider.update')->middleware('verified');
-        Route::get('slider/{id}/hapus', 'SliderController@delete')->name('slider.hapus')->middleware('verified');
-        
+        Route::prefix('slider')->group(function(){
+            Route::get('/', 'SliderController@index')->name('slider')->middleware('verified');
+            Route::get('{id}/edit', 'SliderController@edit')->name('slider.edit')->middleware('verified');
+            Route::post('simpan', 'SliderController@simpan')->name('slider.simpan')->middleware('verified');
+            Route::post('update', 'SliderController@update')->name('slider.update')->middleware('verified');
+            Route::get('{id}/hapus', 'SliderController@delete')->name('slider.hapus')->middleware('verified');
+        });
+
+        Route::prefix('paket')->group(function(){
+
+        });
+
         Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
         
         Route::get('hotel', 'HotelController@index')->name('hotel')->middleware('verified');
@@ -116,10 +133,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('post', 'PostController@index')->name('post')->middleware('verified');
         Route::post('post/simpan', 'PostController@simpan')->name('post.simpan')->middleware('verified');
 
-            Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');
-    Route::get('pengguna/delete/{id}', 'UsersController@delete')->middleware('verified');
-    Route::post('pengguna/simpan', 'UsersController@simpan')->name('pengguna.simpan')->middleware('verified');
-    Route::post('pengguna/update', 'UsersController@update')->name('pengguna.update')->middleware('verified');
+        Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');
+        Route::get('pengguna/delete/{id}', 'UsersController@delete')->middleware('verified');
+        Route::post('pengguna/simpan', 'UsersController@simpan')->name('pengguna.simpan')->middleware('verified');
+        Route::post('pengguna/update', 'UsersController@update')->name('pengguna.update')->middleware('verified');
     });
 });
 

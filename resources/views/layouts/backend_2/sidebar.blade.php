@@ -15,16 +15,22 @@
                 </li>
                 <li class="menu-title">Executive Officer</li>
                 <li class="menu-title">Marketing Officer</li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('wisata') }}" class="waves-effect">
                         <i class="ti-package"></i>
                         <span>Wisata</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="{{ Request::is('b/hotel*') ? 'mm-active' : '' }}">
                     <a href="{{ route('hotel') }}" class="waves-effect">
                         <i class="ti-package"></i>
                         <span>Hotel</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('b/paket*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('paket') }}" class="waves-effect">
+                        <i class="ti-package"></i>
+                        <span>Paket Wisata</span>
                     </a>
                 </li>
                 <li class="menu-title">Operational Officer</li>

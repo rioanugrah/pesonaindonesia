@@ -86,6 +86,9 @@
                 <ul class="clearlist">
                     <li><a href="{{ url('/') }}" class="mn-has-sub {{ Request::is('/') ? 'active' : '' }}">Home</a>
                     </li>
+                    <li><a href="{{ route('frontend.paket') }}"
+                            class="mn-has-sub {{ Request::is('paket') ? 'active' : '' }}">Paket</a>
+                    </li>
                     <li><a href="{{ url('wisata') }}"
                             class="mn-has-sub {{ Request::is('wisata') ? 'active' : '' }}">Wisata</a>
                     </li>
