@@ -36,6 +36,9 @@ Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('f
 
 Route::get('paket', 'FrontendController@paket')->name('frontend.paket');
 
+Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
+
+
 Route::get('instagram', 'InstagramController@index');
 
 Route::prefix('hotel')->group(function () {
@@ -47,6 +50,10 @@ Route::prefix('hotel')->group(function () {
 Route::prefix('event')->group(function () {
     Route::get('/', 'FrontendController@event')->name('frontend.event');
     Route::get('{slug}', 'FrontendController@eventDetail')->name('frontend.eventDetail');
+});
+
+Route::prefix('partner')->group(function(){
+    Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -63,6 +70,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::prefix('cooperation')->group(function() {
             Route::get('/', 'CooperationController@index')->name('cooperation')->middleware('verified');
             Route::get('notif', 'CooperationController@notif')->middleware('verified');
+            Route::post('simpan', 'CooperationController@simpan')->name('cooperation.simpan')->middleware('verified');
+            Route::post('kab_kota', 'CooperationController@select_kab_kota')->middleware('verified');
             Route::get('{id}/download', 'CooperationController@download')->name('cooperation.download')->middleware('verified');
             Route::get('{id}', 'CooperationController@detail')->middleware('verified');
             Route::post('upload', 'CooperationController@upload_berkas')->name('cooperation.upload_berkas')->middleware('verified');
@@ -142,9 +151,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
-Route::middleware('web')->domain('partner.'.env('APP_URL'))->group(function(){
-    Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
-});
+// Route::middleware('web')->domain('partner.'.env('APP_URL'))->group(function(){
+//     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
+// });
 Route::middleware('web')->domain('app.'.env('APP_URL'))->group(function(){
     Route::get('/', 'Apps\HomeController@index');
     Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');

@@ -11,7 +11,8 @@ class Cooperation extends Model
 
     public $table = 'cooperation';
     protected $primaryKey = 'id';
-
+    public $incrementing = false;
+    
     protected $dates = ['deleted_at'];
 
     public $fillable = [

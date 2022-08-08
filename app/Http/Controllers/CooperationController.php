@@ -400,7 +400,7 @@ class CooperationController extends Controller
     {
         $data['cooperation'] = Cooperation::find($id);
         $data['perusahaan'] = Perusahaan::where('status','Y')->first();
-        if(auth()->user()->role == 1){
+        if(auth()->user()->role == 4){
             $array_message = array(
                 'success' => false,
                 'message_title' => 'Access Denied',

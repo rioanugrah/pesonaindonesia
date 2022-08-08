@@ -92,6 +92,7 @@
                     <li><a href="{{ url('wisata') }}"
                             class="mn-has-sub {{ Request::is('wisata') ? 'active' : '' }}">Wisata</a>
                     </li>
+                    
                     {{-- <li class="slash">/</li>
                     <li><a
                             href="{{ route('frontend.hotel') }}"
@@ -109,6 +110,9 @@
                         </li>
                     @endif
                     <li class="slash">/</li>
+                    <li><a href="{{ url('partner') }}"
+                            class="mn-has-sub {{ Request::is('partner') ? 'active' : '' }}">Partnership</a>
+                    </li>
                     @guest
                         <li><a href="{{ route('login') }}" class="mn-has-sub">Login</a></li>
                         {{-- <li><a href="{{ route('register') }}" class="mn-has-sub">Register</a></li> --}}

@@ -1,11 +1,11 @@
 <nav id="navigation" class="navigation">
     <ul>
         <li>
-            <a href="{{ route('frontend.hotel') }}">Hotel</a>
+            <a href="{{ route('frontend.partnership') }}">Home</a>
         </li>
         @guest
-        <li><a href="{{ route('login') }}">Login</a></li>
-        <li><a href="{{ route('register') }}">Daftar</a></li>
+        {{-- <li><a href="{{ route('login') }}">Login</a></li>
+        <li><a href="{{ route('register') }}">Daftar</a></li> --}}
         @else
         <li>
             <a href="{{ route('cart') }}"><i class="fas fa-shopping-cart"></i></a>
