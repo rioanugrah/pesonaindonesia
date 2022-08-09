@@ -7,9 +7,9 @@
         {{-- <li><a href="{{ route('login') }}">Login</a></li>
         <li><a href="{{ route('register') }}">Daftar</a></li> --}}
         @else
-        <li>
+        {{-- <li>
             <a href="{{ route('cart') }}"><i class="fas fa-shopping-cart"></i></a>
-        </li>
+        </li> --}}
         <li class="menu-item-has-children">
             <a>{{ auth()->user()->name }}</a>
             <ul>

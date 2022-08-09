@@ -262,7 +262,7 @@ class FrontendController extends Controller
 
     public function partnership()
     {
-        $coming_soon = true;
+        $coming_soon = false;
         if($coming_soon == true){
             return view('frontend.frontend2.segera_hadir');
         }

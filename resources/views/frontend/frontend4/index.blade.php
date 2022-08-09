@@ -9,6 +9,10 @@
 @section('canonical'){{ url('/') }}@endsection
 @section('description')Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi, Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.@endsection
 
+@section('css')
+<link rel="canonical" href="{{ asset('frontend/assets4/google944b26bed799388c.html') }}">
+@endsection
+
 @section('content')
 <?php $asset = asset('frontend/assets4/'); ?>
 <div class="tp-banner-container">

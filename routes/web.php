@@ -173,7 +173,7 @@ Route::middleware('web')->domain('plesiranmalang.'.env('APP_URL'))->group(functi
 Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login_google');
 Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
 
-// Route::any('/{page?}',function(){
-//     return View::make('layouts.status.404');
-//     // return View::make('pages.error.404');
-// })->where('page','.*');
+Route::any('{page?}',function(){
+    return View::make('layouts.status.404');
+    // return View::make('pages.error.404');
+})->where('page','.*');
