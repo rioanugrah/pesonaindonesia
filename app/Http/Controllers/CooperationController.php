@@ -45,18 +45,18 @@ class CooperationController extends Controller
                                 <a href="'.route('cooperation.download',['id' => $row->id]).'" class="btn btn-primary btn-sm" title="Download File" target="_blank">
                                     <i class="fas fa-print"></i> View File
                                 </a>
-                                <button onclick="berkas('.$row->id.')" class="btn btn-primary btn-sm" title="Upload Berkas">
+                                <button onclick="berkas(`'.$row->id.'`)" class="btn btn-primary btn-sm" title="Upload Berkas">
                                     <i class="fas fa-upload"></i> Upload Berkas
                                 </button>
-                                <button onclick="detail('.$row->id.')" class="btn btn-success btn-sm" title="Detail">
+                                <button onclick="detail(`'.$row->id.'`)" class="btn btn-success btn-sm" title="Detail">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 ';
-                                if(auth()->user()->role == 2){
-                                    $btn = $btn.'<button onclick="edit('.$row->id.')" class="btn btn-warning btn-sm" title="Edit">
+                                if(auth()->user()->role == 1){
+                                    $btn = $btn.'<button onclick="edit(`'.$row->id.'`)" class="btn btn-warning btn-sm" title="Edit">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </button>
-                                            <button onclick="hapus('.$row->id.')" class="btn btn-danger btn-sm" title="Hapus">
+                                            <button onclick="hapus(`'.$row->id.'`)" class="btn btn-danger btn-sm" title="Hapus">
                                                 <i class="fas fa-trash"></i>
                                             </button>';
                                 }
@@ -101,7 +101,7 @@ class CooperationController extends Controller
             'berkas' => $cooperations['berkas'],
         ];
         
-        if(auth()->user()->role == 1){
+        if(auth()->user()->role != 1){
             $array_message = array(
                 'success' => false,
                 'message_title' => 'Access Denied',
@@ -245,7 +245,7 @@ class CooperationController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if($validator->passes()){
-            if(auth()->user()->role == 1){
+            if(auth()->user()->role != 1){
                 $array_message = array(
                     'success' => false,
                     'message_title' => 'Access Denied',
@@ -382,9 +382,14 @@ class CooperationController extends Controller
         );
     }
 
+    // public function select_kab_kota($id)
     public function select_kab_kota(Request $request)
     {
+        // $get_id = $id;
+        // dd($request->all());
+        // $get_id = (int)$request->provinsi;
         $get_id = (int)$request->id;
+        // dd($get_id);
         $select_kab_kota = KabupatenKota::where('id_provinsi', $get_id)->pluck('nama', 'id');
         // foreach ($select_kab_kota as $key => $kb) {
         //     $data[] = [
@@ -431,5 +436,67 @@ class CooperationController extends Controller
             ->send(new CooperationMail());
  
 		return "Email telah dikirim";
+    }
+
+    public function simpan_frontend(Request $request)
+    {
+        $rules = [
+            'nama'  => 'required',
+            'nama_perusahaan'  => 'required',
+            'email'  => 'required',
+            'kategori'  => 'required',
+            'alamat_perusahaan'  => 'required',
+            'kab_kota'  => 'required',
+            'provinsi'  => 'required',
+            'kode_pos'  => 'required',
+            'telp_selular'  => 'required',
+        ];
+ 
+        $messages = [
+            'nama.required'  => 'Nama wajib diisi.',
+            'nama_perusahaan.required'  => 'Nama Perusahaan wajib diisi.',
+            'email.required'  => 'Email wajib diisi.',
+            'kategori.required'   => 'Kategori wajib diisi.',
+            'alamat_perusahaan.required'   => 'Alamat Perusahaan wajib diisi.',
+            'kab_kota.required'   => 'Kabupaten / Kota wajib diisi.',
+            'provinsi.required'   => 'Provinsi wajib diisi.',
+            'kode_pos.required'   => 'Kode Pos wajib diisi.',
+            'telp_selular.required'   => 'Telpon Selular wajib diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+            $input = $request->all();
+            $input['id'] = Str::uuid()->toString();
+            $input['status'] = 0;
+            // $input['logo_perusahaan'] = 'logo-'.Str::slug($request->nama_perusahaan).'.'.$request->logo_perusahaan->getClientOriginalExtension();
+            // $request->logo_perusahaan->move(public_path('backend/berkas/coorporate'), $input['logo_perusahaan']);
+            // $request->foto->move(storage_path('app/public/image'), $input['image']);
+    
+           $cooperation = Cooperation::create($input);
+
+           if($cooperation){
+                $message_title="Berhasil !";
+                $message_content="Terima kasih ".$request->nama_perusahaan." telah melakukan pendaftaran kerjasama kami. Data anda akan kami proses lebih lanjut";
+                $message_type="success";
+                $message_succes = true;
+            }
+
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return response()->json($array_message);
+        }
+
+        return response()->json(
+            [
+                'success' => false,
+                'error' => $validator->errors()->all()
+            ]
+        );
     }
 }

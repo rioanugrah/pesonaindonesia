@@ -54,6 +54,7 @@ Route::prefix('event')->group(function () {
 
 Route::prefix('partner')->group(function(){
     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
+    Route::post('simpan', 'CooperationController@simpan_frontend')->name('frontend.partnership.simpan');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -71,7 +72,6 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', 'CooperationController@index')->name('cooperation')->middleware('verified');
             Route::get('notif', 'CooperationController@notif')->middleware('verified');
             Route::post('simpan', 'CooperationController@simpan')->name('cooperation.simpan')->middleware('verified');
-            Route::post('kab_kota', 'CooperationController@select_kab_kota')->middleware('verified');
             Route::get('{id}/download', 'CooperationController@download')->name('cooperation.download')->middleware('verified');
             Route::get('{id}', 'CooperationController@detail')->middleware('verified');
             Route::post('upload', 'CooperationController@upload_berkas')->name('cooperation.upload_berkas')->middleware('verified');
@@ -150,6 +150,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('pengguna/update', 'UsersController@update')->name('pengguna.update')->middleware('verified');
     });
 });
+
+Route::post('cooperation/kab_kota', 'CooperationController@select_kab_kota')->name('select.kota');
 
 // Route::middleware('web')->domain('partner.'.env('APP_URL'))->group(function(){
 //     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');

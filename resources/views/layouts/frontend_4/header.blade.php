@@ -109,10 +109,6 @@
                                 class="mn-has-sub {{ Request::is('kontak') ? 'active' : '' }}">Kontak</a>
                         </li>
                     @endif
-                    <li class="slash">/</li>
-                    <li><a href="{{ url('partner') }}"
-                            class="mn-has-sub {{ Request::is('partner') ? 'active' : '' }}">Partnership</a>
-                    </li>
                     @guest
                         <li><a href="{{ route('login') }}" class="mn-has-sub">Login</a></li>
                         {{-- <li><a href="{{ route('register') }}" class="mn-has-sub">Register</a></li> --}}

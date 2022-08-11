@@ -266,7 +266,9 @@ class FrontendController extends Controller
         if($coming_soon == true){
             return view('frontend.frontend2.segera_hadir');
         }
-        return view('frontend.frontend2.partnership');
+        // $data['kabupaten_kotas'] = KabupatenKota::all();
+        $data['provinsis'] = Provinsi::pluck('nama','id');
+        return view('frontend.frontend2.partnership',$data);
     }
 
     public function hotel()

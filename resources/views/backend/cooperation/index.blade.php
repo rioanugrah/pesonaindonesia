@@ -82,8 +82,8 @@
     <script src="{{ asset('backend/assets2/js/iziToast.min.js') }}"></script>
     {{-- <script src="{{ asset('backend/assets2/js/pages/form-advanced.init.js') }}"></script> --}}
     
-    <script src="{{ asset('backend/assets2/js/axios.min.js') }}"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> --}}
+    {{-- <script src="{{ asset('backend/assets2/js/axios.min.js') }}"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         $.ajaxSetup({
             headers: {
