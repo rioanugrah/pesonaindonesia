@@ -192,34 +192,15 @@ class CooperationController extends Controller
             $status->update();
 
             $message_title="Berhasil !";
-            $message_content="Status Kerjasama Berhasil Disimpan";
+            $message_content="Status ".$status->nama_perusahaan." Kerjasama Berhasil Diupdate";
             $message_type="success";
             $message_succes = true;
 
-            if($request->status == 2){
-                activity('cooperation')
-                        ->performedOn($status)
-                        ->causedBy($user)
-                        ->withProperties(
-                            [
-                                'attributes' => [
-                                    'status_cooperation' => 'Disetujui'
-                                ]
-                            ])
-                        ->log('Status cooperation by ' . $user->name);
-            }elseif($request->status == 3){
-                activity('cooperation')
-                        ->performedOn($status)
-                        ->causedBy($user)
-                        ->withProperties(
-                            [
-                                'attributes' => [
-                                    'status_cooperation' => 'Ditolak'
-                                ]
-                            ])
-                        ->log('Status cooperation by ' . $user->name);
-            }
-
+            // if($request->status == 3){
+            //     if(File::exists(public_path('backend/berkas/coorporate/'.$status->berkas))){
+            //         File::delete(public_path('backend/berkas/coorporate/'.$status->berkas));
+            //     }
+            // }
 
             $array_message = array(
                 'success' => $message_succes,
@@ -271,7 +252,7 @@ class CooperationController extends Controller
                 if($cooperation->status == 2){
                     return response()->json(
                         [
-                            'success' => false,
+                            'success' => true,
                             'error' => 'Berkas Telah Terverifikasi'
                         ]
                     );
@@ -337,7 +318,7 @@ class CooperationController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if($validator->passes()){
-            if(auth()->user()->role == 1){
+            if(auth()->user()->role != 1){
                 $array_message = array(
                     'success' => false,
                     'message_title' => 'Access Denied',
@@ -405,7 +386,7 @@ class CooperationController extends Controller
     {
         $data['cooperation'] = Cooperation::find($id);
         $data['perusahaan'] = Perusahaan::where('status','Y')->first();
-        if(auth()->user()->role == 4){
+        if(auth()->user()->role != 1){
             $array_message = array(
                 'success' => false,
                 'message_title' => 'Access Denied',
