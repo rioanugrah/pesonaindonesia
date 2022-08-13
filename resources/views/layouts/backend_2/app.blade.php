@@ -24,6 +24,7 @@
             <div class="page-content">
                 <div class="container-fluid">
                     @yield('content')
+                    <div class="internet-connection-status" id="internetStatus"></div>
                 </div>
             </div>
             <footer class="footer">
@@ -58,6 +59,7 @@
     <script src="{{ asset('backend/assets2/js/pages/dashboard.init.js') }}"></script>
 
     <script src="{{ asset('backend/assets2/js/app.js') }}"></script>
+    <script src="{{ asset('backend/assets2/js/no-internet.js') }}"></script>
 
     @yield('js')
 </html>

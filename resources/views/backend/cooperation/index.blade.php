@@ -16,6 +16,7 @@
 @include('backend.cooperation.modalBuat')
 @include('backend.cooperation.modalUpload')
 @include('backend.cooperation.modalDetail')
+@include('backend.cooperation.modalEdit')
 <div class="page-title-box">
     <div class="row align-items-center">
         <div class="col-md-8">
@@ -272,6 +273,41 @@
                     // document.getElementById('berkas_alamat_perusahaan').innerHTML = result.cooperation.alamat_perusahaan;
 
                     $('#detail').modal('show');
+                }
+            })
+        }
+
+        function edit(id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/cooperation') }}"+'/'+id+'/edit',
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    // document.getElementById('berkas_modal_title').innerHTML = result.cooperation.nama_perusahaan;
+                    // document.getElementById('detail_nama_perusahaan').innerHTML = result.cooperation.nama_perusahaan;
+                    $('#edit_id').val(result.cooperation.id);
+                    $('#edit_nama').val(result.cooperation.nama);
+                    $('#edit_email').val(result.cooperation.email);
+                    $('#edit_nama_perusahaan').val(result.cooperation.nama_perusahaan);
+                    $('#edit_alamat_perusahaan').val(result.cooperation.alamat_perusahaan);
+                    $('#edit_kategori').val(result.cooperation.kategori);
+                    $('.edit_provinsi').val(result.cooperation.provinsi);
+                    $('.edit_kabkota').val(result.cooperation.kab_kota);
+                    $('#edit_kodepos').val(result.cooperation.kode_pos);
+                    $('#edit_telp_kantor').val(result.cooperation.telp_kantor);
+                    $('#edit_telp_selular').val(result.cooperation.telp_selular);
+                    $('#edit_no_fax').val(result.cooperation.no_fax);
+                    
+                    document.getElementById('edit_title').innerHTML = result.cooperation.nama_perusahaan;
+                    // $('#edit_nama').val(result.cooperation.nama);
+                    
+                    // document.getElementById('pdfViewer').innerHTML = '<iframe src="https://view.officeapps.live.com/op/view.aspx?src={{ asset("backend/berkas/coorporate") }}/'+result.cooperation.berkas+'" frameborder="0" style="width: 100%; height: 560px"></iframe>'
+                    // document.getElementById('pdfViewer').innerHTML = '<iframe src="{{ asset("backend/berkas/coorporate") }}/'+result.cooperation.berkas+'" frameborder="0" style="width: 100%; height: 560px"></iframe>'
+                    // document.getElementById('berkas_nama_perusahaan').innerHTML = result.cooperation.nama_perusahaan;
+                    // document.getElementById('berkas_alamat_perusahaan').innerHTML = result.cooperation.alamat_perusahaan;
+
+                    $('#edit').modal('show');
                 }
             })
         }

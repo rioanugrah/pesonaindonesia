@@ -114,6 +114,26 @@ class CooperationController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $cooperations = Cooperation::find($id);
+        
+        if(auth()->user()->role != 1){
+            $array_message = array(
+                'success' => false,
+                'message_title' => 'Access Denied',
+                'message_content' => 'Anda Tidak Memiliki Akses',
+                'message_type' => "error",
+            );
+            return response()->json($array_message);
+        }else{
+            return response()->json([
+                'status' => true,
+                'cooperation' => $cooperations
+            ]);
+        }
+    }
+
     public function simpan(Request $request)
     {
         $rules = [
