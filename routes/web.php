@@ -87,7 +87,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('upload/paket_images', 'PaketController@simpan_image')->name('paket.simpan_imageUpload')->middleware('verified');
         });
 
-        Route::get('pengguna', 'UsersController@index')->name('pengguna')->middleware('verified');
+        Route::prefix('pengguna')->group(function(){
+            Route::get('/', 'UsersController@index')->name('pengguna')->middleware('verified');
+            Route::get('{id}', 'UsersController@detail')->name('pengguna.detail')->middleware('verified');
+            Route::get('{id}/reset', 'UsersController@reset')->name('pengguna.reset')->middleware('verified');
+        });
+
         
         Route::prefix('roles')->group(function(){
             Route::get('/', 'RolesController@index')->name('roles')->middleware('verified');
@@ -192,7 +197,8 @@ Route::get('appss', 'Apps\HomeController@index');
 //     Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
 //     Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
 // });
-Route::any('{page?}',function(){
-    return View::make('layouts.status.404');
-    // return View::make('pages.error.404');
-})->where('page','.*');
+
+// Route::any('{page?}',function(){
+//     return View::make('layouts.status.404');
+//     // return View::make('pages.error.404');
+// })->where('page','.*');

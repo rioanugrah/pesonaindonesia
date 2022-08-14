@@ -10,7 +10,8 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;
-
+    protected $primaryKey = 'id';
+    public $incrementing = false;
     /**
      * The attributes that are mass assignable.
      *

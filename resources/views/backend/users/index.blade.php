@@ -219,11 +219,11 @@
         function edit(id) {
             $.ajax({
                 type:'GET',
-                url: "{{ url('pengguna') }}"+'/'+id,
+                url: "{{ url('b/pengguna') }}"+'/'+id,
                 contentType: "application/json;  charset=utf-8",
                 cache: false,
                 success: (result) => {
-                    // alert(id);
+                    // alert(result);
                     $('#edit').modal('show');
                     document.getElementById('edit_pengguna').innerHTML = 'Edit - '+result.data.name;
                     $('#edit_id').val(result.data.id);
@@ -274,10 +274,39 @@
             });
         });
 
+        function reset(id) {
+            $.ajax({
+                type:'GET',
+                url: "{{ url('b/pengguna') }}"+'/'+id+'/reset',
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: (result) => {
+                    if(result.success != false){
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message
+                        });
+                        table.ajax.reload();
+                    }else{
+                        iziToast.error({
+                            title: result.success,
+                            message: result.error
+                        });
+                    }
+                },
+                error: function (request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            });
+        }
+
         function hapus(id) {
             $.ajax({
                 type:'GET',
-                url: "{{ url('pengguna') }}"+'/delete/'+id,
+                url: "{{ url('b/pengguna') }}"+'/delete/'+id,
                 contentType: "application/json;  charset=utf-8",
                 cache: false,
                 success: (result) => {

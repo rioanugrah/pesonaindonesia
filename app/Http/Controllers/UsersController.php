@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 use App\User;
 use App\Models\Roles;
+use App\Mail\UserMail;
 use DataTables;
 use Hash;
 use Validator;
@@ -21,10 +23,13 @@ class UsersController extends Controller
                         return $row->roles->role;
                     })
                     ->addColumn('action', function($row){
-                        $btn = '<button type="button" onclick="edit('.$row->id.')" class="btn btn-warning btn-icon">
+                        $btn = '<button type="button" onclick="reset(`'.$row->id.'`)" class="btn btn-primary btn-icon">
+                                    <i class="fas fa-undo-alt"></i> Reset Password
+                                </button>
+                                <button type="button" onclick="edit(`'.$row->id.'`)" class="btn btn-warning btn-icon">
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <button type="button" onclick="hapus('.$row->id.')" class="btn btn-danger btn-icon">
+                                <button type="button" onclick="hapus(`'.$row->id.'`)" class="btn btn-danger btn-icon">
                                     <i class="fa fa-trash"></i>
                                 </button>';
                         return $btn;
@@ -173,5 +178,44 @@ class UsersController extends Controller
             ]
         );
 
+    }
+
+    public function reset($id)
+    {
+        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        $users = User::find($id);
+        if($users){
+            $new_password = substr(str_shuffle(str_repeat($pool, 5)), 0, 8);
+            $users->password = Hash::make($new_password);
+            $users->update();
+    
+            $details = [
+                'title' => 'Reset Password',
+                'nama' => $users->name,
+                'body' => 'Kami menerima permintaan untuk mengatur ulang kata sandi untuk akun Anda. Password Anda : '.$new_password
+            ];
+
+            Mail::to($users->email)
+                ->send(new UserMail($details));
+
+            $array_message = array(
+                'success' => true,
+                'message_title' => 'Berhasil',
+                'message_content' => 'Reset Password berhasil terkirim',
+                'message_type' => "success",
+            );
+            return response()->json($array_message);
+        }else{
+            $array_message = array(
+                'success' => false,
+                'message_title' => 'Gagal',
+                'message_content' => 'Reset Password tidak berhasil terkirim',
+                'message_type' => "error",
+            );
+            return response()->json($array_message);
+        }
+            
+        // return substr(str_shuffle(str_repeat($pool, 5)), 0, 8);
     }
 }
