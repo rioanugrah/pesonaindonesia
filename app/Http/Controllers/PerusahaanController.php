@@ -27,10 +27,10 @@ class PerusahaanController extends Controller
                         }
                     })
                     ->addColumn('action', function($row){
-                        $btn = '<button onclick="edit('.$row->id.')" class="btn btn-warning btn-sm" title="Edit">
+                        $btn = '<button onclick="edit(`'.$row->id.'`)" class="btn btn-warning btn-sm" title="Edit">
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
-                                <button onclick="hapus('.$row->id.')" class="btn btn-danger btn-sm" title="Hapus">
+                                <button onclick="hapus(`'.$row->id.'`)" class="btn btn-danger btn-sm" title="Hapus">
                                     <i class="fas fa-trash"></i>
                                 </button>';
                         return $btn;
@@ -95,7 +95,7 @@ class PerusahaanController extends Controller
     {
         $data['perusahaan'] = Perusahaan::find($id);
         
-        if(auth()->user()->role == 1){
+        if(auth()->user()->role == 4){
             $array_message = array(
                 'success' => false,
                 'message_title' => 'Access Denied',

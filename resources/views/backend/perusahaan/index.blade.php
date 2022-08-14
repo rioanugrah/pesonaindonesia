@@ -42,22 +42,24 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <table id="datatable" class="table table-bordered dt-responsive nowrap"
-                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                    <thead>
-                        <tr>
-                            <th>Perusahaan</th>
-                            <th>Alamat</th>
-                            <th>Penanggung Jawab</th>
-                            {{-- <th>Jabatan</th> --}}
-                            <th>Siup</th>
-                            <th>Npwp</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Perusahaan</th>
+                                <th>Alamat</th>
+                                <th>Penanggung Jawab</th>
+                                {{-- <th>Jabatan</th> --}}
+                                <th>Siup</th>
+                                <th>Npwp</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -152,6 +154,7 @@
                     $('#edit_jabatan').val(result.perusahaan.jabatan);
                     $('#edit_siup').val(result.perusahaan.siup);
                     $('#edit_npwp').val(result.perusahaan.npwp);
+                    $('#edit_status').val(result.perusahaan.status);
 
                     $('#edit').modal('show');
                 }

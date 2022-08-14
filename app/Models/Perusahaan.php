@@ -11,6 +11,9 @@ class Perusahaan extends Model
     
     public $table = 'perusahaan';
     protected $dates = ['deleted_at'];
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    
     public $fillable = [
         'id',
         'nama_perusahaan',
