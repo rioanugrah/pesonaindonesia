@@ -34,12 +34,18 @@
                                 <h6 class="blog-title">{{ $paket->nama_paket }}</h6>
                             </a>
                             <div class="stars stars-4"></div>
+                            @if ($paket->diskon != null)
+                            <div class="recom-price"><span class="font-4">Rp. {{ number_format($paket->price-($paket->diskon/100)*$paket->price,2,",",".") }}</span></div>
+                            @else
                             <div class="recom-price"><span class="font-4">Rp. {{ number_format($paket->price,2,",",".") }}</span></div>
+                            @endif
                             {{-- <p class="mb-30">Quisque egestas a est in convallis. Maecenas pellentesque.</p> --}}
                             <a
                                 href="#" class="recom-button">Selengkapnya</a><a href="#"
                                 class="cws-button small alt">Book now</a>
-                            {{-- <div class="action font-2">20%</div> --}}
+                            @if ($paket->diskon != null)
+                            <div class="action font-2">{{ $paket->diskon }}%</div>
+                            @endif
                         </div>
                     </div>
                 </div>

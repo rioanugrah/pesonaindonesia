@@ -49,6 +49,7 @@
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
+                                <th>Kode Perusahaan</th>
                                 <th>Perusahaan</th>
                                 <th>Alamat</th>
                                 <th>Status</th>
@@ -97,7 +98,12 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('cooperation') }}",
-            columns: [{
+            columns: [
+                {
+                    data: 'kode_corporate',
+                    name: 'kode_corporate'
+                },
+                {
                     data: 'nama_perusahaan',
                     name: 'nama_perusahaan'
                 },
@@ -275,6 +281,29 @@
                     // document.getElementById('berkas_alamat_perusahaan').innerHTML = result.cooperation.alamat_perusahaan;
 
                     $('#detail').modal('show');
+                }
+            })
+        }
+
+        function hapus(id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/cooperation') }}"+'/'+id+'/hapus',
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    if(result.success != false){
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                        table.ajax.reload();
+                    }else{
+                        iziToast.error({
+                            title: result.success,
+                            message: result.error
+                        });
+                    }
                 }
             })
         }

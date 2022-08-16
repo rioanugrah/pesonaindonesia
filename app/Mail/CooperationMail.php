@@ -18,9 +18,11 @@ class CooperationMail extends Mailable
      */
     // private $offerData;
     // public function __construct($offerData)
-    public function __construct()
+    public $details;
+
+    public function __construct($details)
     {
-        // $this->offerData = $offerData;
+        $this->details = $details;
     }
 
     /**
@@ -31,13 +33,13 @@ class CooperationMail extends Mailable
     public function build()
     {
         // return $this->view('view.name');
-        return $this->from(env('MAIL_FROM_ADDRESS'))
-                   ->view('backend.cooperation.email')
-                   ->subject('Kerjasama CV Pesona Plesiran Indonesia -')
-                   ->with(
-                    [
-                        'nama' => 'Pesona Plesiran Indonesia',
-                        'website' => 'www.plesiranindonesia.com',
-                    ]);
+        return $this->subject($this->details['title'])
+                    ->from(env('MAIL_FROM_ADDRESS'),$this->details['title'])
+                    ->view('email.konfirmasi');
+                    // ->with(
+                    // [
+                    //     // 'nama' => 'Diki Alfarabi Hadi',
+                    //     // 'website' => 'www.malasngoding.com',
+                    // ]);
     }
 }

@@ -17,6 +17,7 @@ class Cooperation extends Model
 
     public $fillable = [
         'id',
+        'kode_corporate',
         'nama',
         'email',
         'nama_perusahaan',

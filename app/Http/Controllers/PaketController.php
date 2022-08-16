@@ -24,6 +24,12 @@ class PaketController extends Controller
                     ->addColumn('price', function($row){
                         return 'Rp. '.number_format($row->price,2,",",".");
                     })
+                    ->addColumn('diskon', function($row){
+                        return $row->diskon.'%';
+                    })
+                    ->addColumn('total_harga', function($row){
+                        return 'Rp. '.number_format($row->price-($row->diskon/100)*$row->price,2,",",".");
+                    })
                     // ->addColumn('status', function($row){
                     //     if($row->status == 'Y'){
                     //         return 'Aktif';
@@ -54,6 +60,7 @@ class PaketController extends Controller
         $rules = [
             'nama_paket'  => 'required',
             'price'  => 'required',
+            'diskon'  => 'required',
             // 'deskripsi'  => 'required',
             // 'images'  => 'required|file|max:2048',
         ];
@@ -63,6 +70,7 @@ class PaketController extends Controller
             // 'images.max'  => 'Upload Gambar Max 2MB.',
             'nama_paket.required'   => 'Nama Paket wajib diisi.',
             'price.required'   => 'Harga wajib diisi.',
+            'diskon.required'   => 'Diskon Harga wajib diisi.',
             // 'deskripsi.required'   => 'Deskripsi wajib diisi.',
         ];
 

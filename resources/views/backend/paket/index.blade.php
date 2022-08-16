@@ -52,6 +52,8 @@
                                     <th>Paket</th>
                                     {{-- <th>Deskripsi</th> --}}
                                     <th>Harga</th>
+                                    <th>Diskon</th>
+                                    <th>Total Harga</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -109,6 +111,14 @@
                 {
                     data: 'price',
                     name: 'price'
+                },
+                {
+                    data: 'diskon',
+                    name: 'diskon'
+                },
+                {
+                    data: 'total_harga',
+                    name: 'total_harga'
                 },
                 {
                     data: 'action',

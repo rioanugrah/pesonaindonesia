@@ -15,6 +15,7 @@ class CreateCooperationTable extends Migration
     {
         Schema::create('cooperation', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('kode_corporate');
             $table->string('nama')->nullable();
             $table->string('email');
             $table->string('nama_perusahaan')->nullable();

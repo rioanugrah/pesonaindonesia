@@ -9,11 +9,13 @@ use App\Mail\CooperationMail;
 use App\Models\KabupatenKota;
 use App\Models\Perusahaan;
 use App\Models\Provinsi;
+use App\User;
 // use App\Models\Country;
 use Illuminate\Support\Facades\Mail;
 use Auth;
 use PDF;
 use File;
+use Hash;
 use DataTables;
 use Validator;
 class CooperationController extends Controller
@@ -173,6 +175,7 @@ class CooperationController extends Controller
             $input['id'] = Str::uuid()->toString();
             $input['negara'] = 'Indonesia';
             $input['status'] = 0;
+            $input['kode_corporate'] = 'C-'.rand(10000,99999);
             $input['logo_perusahaan'] = 'logo-'.Str::slug($request->nama_perusahaan).'.'.$request->logo_perusahaan->getClientOriginalExtension();
             $request->logo_perusahaan->move(public_path('backend/berkas/coorporate'), $input['logo_perusahaan']);
             // $request->foto->move(storage_path('app/public/image'), $input['image']);
@@ -203,13 +206,88 @@ class CooperationController extends Controller
         );
     }
 
+    public function hapus($id)
+    {
+        $cooperations = Cooperation::find($id);
+        if(auth()->user()->role == 1){
+            if($cooperations){
+                $cooperations->delete();
+                if(File::exists(public_path('backend/berkas/coorporate/'.$cooperations->berkas))){
+                    File::delete(public_path('backend/berkas/coorporate/'.$cooperations->berkas));
+                }
+                // File::delete(public_path('backend/berkas/coorporate/'.$cooperations->berkas));
+    
+                $message_title="Berhasil !";
+                $message_content="Kerjasama ".$cooperations->nama_perusahaan." Berhasil Dihapus";
+                $message_type="success";
+                $message_succes = true;
+    
+                $array_message = array(
+                    'success' => $message_succes,
+                    'message_title' => $message_title,
+                    'message_content' => $message_content,
+                    'message_type' => $message_type,
+                );
+                return response()->json($array_message);
+            }
+        }else{
+            $message_title="Access Denied !";
+            $message_content="Anda tidak memiliki akses";
+            $message_type="danger";
+            $message_succes = false;
+    
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return response()->json($array_message);
+        }
+
+    }
+
     public function status(Request $request)
     {
         $status = Cooperation::find($request->detail_id);
-        $user = Auth::user();
+        // $user = Auth::user();
         if($status){
             $status->status = $request->status;
             $status->update();
+
+            if($request->status == 1){
+                $details = [
+                    'title' => 'Persetujuan Kerjasama',
+                    'nama' => $status->nama_perusahaan,
+                    'body' => 'Terima Kasih telah melakukan pendaftaran kerjasama dengan kami. Status kerjasama masih dalam proses dengan tim kami.'
+                ];
+            }
+            elseif($request->status == 2){
+                $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $new_password = substr(str_shuffle(str_repeat($pool, 5)), 0, 8);
+                $user = User::create([
+                    'id' => Str::uuid()->toString(),
+                    'name' => $status->nama_perusahaan,
+                    'email' => $status->email,
+                    'password' => Hash::make($new_password),
+                    'role' => 3,
+                ]);
+                $details = [
+                    'title' => 'Persetujuan Kerjasama',
+                    'nama' => $status->nama_perusahaan,
+                    'body' => 'Terima Kasih telah melakukan pendaftaran kerjasama dengan kami. Status kerjasama telah diterima. Email : '.$user->email.' Password : '.$new_password
+                ];
+            }
+            elseif($request->status == 3){
+                $details = [
+                    'title' => 'Persetujuan Kerjasama',
+                    'nama' => $status->nama_perusahaan,
+                    'body' => 'Terima Kasih telah melakukan pendaftaran kerjasama dengan kami. Status kerjasama ditolak. Silahkan dicoba lagi.'
+                ];
+            }
+
+            Mail::to($status->email)
+                ->send(new CooperationMail($details));
 
             $message_title="Berhasil !";
             $message_content="Status ".$status->nama_perusahaan." Kerjasama Berhasil Diupdate";
@@ -471,6 +549,7 @@ class CooperationController extends Controller
             $input = $request->all();
             $input['id'] = Str::uuid()->toString();
             $input['status'] = 0;
+            $input['kode_corporate'] = 'C-'.rand(10000,99999);
             // $input['logo_perusahaan'] = 'logo-'.Str::slug($request->nama_perusahaan).'.'.$request->logo_perusahaan->getClientOriginalExtension();
             // $request->logo_perusahaan->move(public_path('backend/berkas/coorporate'), $input['logo_perusahaan']);
             // $request->foto->move(storage_path('app/public/image'), $input['image']);

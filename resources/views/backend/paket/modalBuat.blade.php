@@ -52,7 +52,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Deskripsi</label>
-                        <textarea name="deskripsi" class="form-control area" id="elm1" cols="30" rows="2"></textarea>
+                        <textarea name="deskripsi" class="form-control" cols="30" rows="10"></textarea>
                         {{-- <input type="email" class="form-control" id="formemail" placeholder="Enter your Email..."> --}}
                     </div>
 
@@ -61,7 +61,11 @@
                         <input type="text" class="form-control" name="price" placeholder="Harga Paket">
                     </div>
 
-                    
+                    <div class="mb-3 col-2">
+                        <label class="form-label">Diskon</label>
+                        <input type="text" class="form-control" name="diskon" placeholder="Diskon">
+                    </div>
+
                     {{-- <div class="mb-3 lst">
                         <label class="form-label">Upload Paket</label>
                         <div class="input-group hdtuto control-group lst increment">

@@ -21,6 +21,7 @@ class Paket extends Model
         'nama_paket',
         'price',
         'deskripsi',
+        'diskon',
         // 'images',
     ];
 }

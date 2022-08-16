@@ -34,12 +34,15 @@ Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('fron
 Route::post('event_register', 'FrontendController@eventRegister')->name('frontend.eventRegister');
 Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
 
-Route::get('paket', 'FrontendController@paket')->name('frontend.paket');
 
 Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
 
 
 Route::get('instagram', 'InstagramController@index');
+
+Route::prefix('paket')->group(function () {
+    Route::get('/', 'FrontendController@paket')->name('frontend.paket');
+});
 
 Route::prefix('hotel')->group(function () {
     Route::get('/', 'FrontendController@hotel')->name('frontend.hotel');
@@ -75,6 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('{id}/download', 'CooperationController@download')->name('cooperation.download')->middleware('verified');
             Route::get('{id}', 'CooperationController@detail')->middleware('verified');
             Route::get('{id}/edit', 'CooperationController@edit')->middleware('verified');
+            Route::get('{id}/hapus', 'CooperationController@hapus')->middleware('verified');
             Route::post('upload', 'CooperationController@upload_berkas')->name('cooperation.upload_berkas')->middleware('verified');
             Route::post('data/upload', 'CooperationController@berkas')->name('cooperation.berkas')->middleware('verified');
             Route::post('status', 'CooperationController@status')->name('cooperation.status')->middleware('verified');
@@ -181,8 +185,17 @@ Route::middleware('web')->domain('plesiranmalang.'.env('APP_URL'))->group(functi
 Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login_google');
 Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
 
+Route::prefix('app')->group(function () {
+    Route::get('/', 'Apps\HomeController@index')->name('apps');
+    
+    Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
+    Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
+    Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
 
-Route::get('appss', 'Apps\HomeController@index');
+    Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
+    Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
+    Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
+});
 // Route::group(['domain' => 'app.localhost'], function () {
 //     Route::get('/', 'Apps\HomeController@index');
 //     // {
