@@ -1,16 +1,10 @@
 <header>
-    {{-- <div class="banner">
-        <div class="banner__content">
-            <div class="banner__text">
-                <strong style="color: #f38f39">Reminder :</strong> Waspada Penyebaran Virus Varian Omicron, <strong
-                    style="color: #f38f39"><a href="{{ route('frontend.info') }}">Kebijakan Pemesanan</a></strong> selama COVID-19.
-            </div>
-        </div>
-    </div> --}}
+    <!-- site top panel-->
     <div class="site-top-panel">
         <div class="container p-relative">
             <div class="row">
                 <div class="col-md-6 col-sm-7">
+                    <!-- lang select wrapper-->
                     <div class="top-left-wrap font-3">
                         <div class="mail-top"><a href="mailto:business@plesiranindonesia.com"> <i
                                     class="flaticon-suntour-email"></i>business@plesiranindonesia.com</a></div>
@@ -18,120 +12,67 @@
                         <div class="tel-top"><a href="tel:081331126991"> <i
                                     class="flaticon-suntour-phone"></i>0813-3112-6991</a></div>
                     </div>
+                    <!-- ! lang select wrapper-->
                 </div>
                 <div class="col-md-6 col-sm-5 text-right">
                     <div class="top-right-wrap">
+                        @guest
+                            <li><a href="{{ route('login') }}" class="mn-has-sub">Login</a></li>
+                            <li class="slash">|</li>
+                            <li><a href="{{ route('register') }}" class="mn-has-sub">Daftar Akun</a></li>
+                        @else
                         <div class="lang-wrap dropdown">
                             <div>
                                 <ul>
-                                    <li><a href="#" class="lang-sel icl-en">Language <i
+                                    <li><a href="#" class="lang-sel icl-en">{{ auth()->user()->name }} <i
                                                 class="fa fa-angle-down"></i></a>
                                         <ul>
-                                            <li><a href="#">EN</a></li>
-                                            <li> <a href="#">ID</a></li>
+                                            <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                            </form>
+                                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
                         </div>
+                        {{-- <div class="top-login"><a href="#">My Account</a></div> --}}
+                        @endguest
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- ! site top panel-->
+    <!-- Navigation panel-->
     <nav class="main-nav js-stick">
         <div class="full-wrapper relative clearfix container">
-            {{-- @if (Request::is('plesiranmalang*')) --}}
-            {{-- @if (Route::current('plmlg'))
-                <div class="nav-logo-wrap local-scroll"><a href="{{ route('plmlg') }}" class="logo"><img
-                            src="{{ $asset . '/img/logo_plesiran_malang.png' }}"
-                            data-at2x="{{ $asset . '/img/logo_plesiran_malang.png' }}" width="210" alt></a></div>
-                <div class="inner-nav desktop-nav">
-                    <ul class="clearlist">
-                        <li><a href="{{ url('/') }}" class="mn-has-sub active">Home</a>
-                        </li>
-                        <li class="slash">/</li>
-                        <li><a href="{{ route('plmlg.hotel') }}" class="mn-has-sub">Hotel</a>
-                        </li>
-                        <li class="slash">/</li>
-                        @guest
-                            <li><a href="{{ route('login') }}" class="mn-has-sub">Login</a></li>
-                            <li><a href="{{ route('register') }}" class="mn-has-sub">Register</a></li>
-                        @else
-                            <li><a href="#" class="mn-has-sub">{{ auth()->user()->name }}</a>
-                                <ul class="mn-sub">
-                                    <li>
-                                        <a href="{{ route('frontend.wistlist') }}">Wistlish</a>
-                                    </li>
-                                    <li>
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                        </form>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log
-                                            Out</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            @else
-            @endif --}}
-            <div class="nav-logo-wrap local-scroll"><a href="{{ route('frontend') }}" class="logo"><img
-                        src="{{ $asset . '/img/logo_plesiran_new_black2.webp' }}"
-                        data-at2x="{{ $asset . '/img/logo_plesiran_new_black2.webp' }}" width="250" alt></a></div>
+            <!-- Logo ( * your text or image into link tag *)-->
+            <div class="nav-logo-wrap local-scroll"><a href="{{ route('frontend') }}" class="logo"><img src="{{ $asset . '/img/logo_plesiran_new_black2.webp' }}"
+                        data-at2x="{{ $asset . '/img/logo_plesiran_new_black2.webp' }}" width="200" alt></a></div>
+            <!-- Main Menu-->
             <div class="inner-nav desktop-nav">
                 <ul class="clearlist">
-                    <li><a href="{{ url('/') }}" class="mn-has-sub {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                    <!-- Item With Sub-->
+                    <li><a href="{{ route('frontend') }}" class="mn-has-sub active">Home</a>
                     </li>
-                    <li><a href="{{ route('frontend.paket') }}"
-                            class="mn-has-sub {{ Request::is('paket') ? 'active' : '' }}">Paket</a>
-                    </li>
-                    <li><a href="{{ url('wisata') }}"
-                            class="mn-has-sub {{ Request::is('wisata') ? 'active' : '' }}">Wisata</a>
-                    </li>
-                    
-                    {{-- <li class="slash">/</li>
-                    <li><a
-                            href="{{ route('frontend.hotel') }}"
-                            class="mn-has-sub {{ Request::is('hotel') ? 'active' : '' }}">Hotel</a>
+                    <!-- End Item With Sub-->
+                    <li class="slash">/</li>
+                    <!-- Item With Sub-->
+                    <li><a href="{{ route('frontend.paket') }}" class="mn-has-sub">Paket</a>
                     </li>
                     <li class="slash">/</li>
-                    <li><a
-                            href="{{ route('frontend.event') }}"
-                            class="mn-has-sub {{ Request::is('events') ? 'active' : '' }}">Event</a>
-                    </li> --}}
-                    @if (Request::is('kontak'))
-                        <li class="slash">/</li>
-                        <li><a href="{{ route('kontak') }}"
-                                class="mn-has-sub {{ Request::is('kontak') ? 'active' : '' }}">Kontak</a>
-                        </li>
-                    @endif
-                    @guest
-                        <li><a href="{{ route('login') }}" class="mn-has-sub">Login</a></li>
-                        {{-- <li><a href="{{ route('register') }}" class="mn-has-sub">Register</a></li> --}}
-                    @else
-                        <li><a href="#" class="mn-has-sub">{{ auth()->user()->name }}</a>
-                            <ul class="mn-sub">
-                                <li>
-                                    <a href="{{ route('frontend.wistlist') }}">Wistlish</a>
-                                </li>
-                                <li>
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                    </form>
-                                    <a href="{{ route('logout') }}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log
-                                        Out</a>
-                                </li>
-                            </ul>
-                        </li>
-                    @endguest
+                    <li><a href="{{ route('frontend.wisata') }}" class="mn-has-sub">Wisata</a>
+                    </li>
+                    <!-- End Item With Sub-->
                 </ul>
             </div>
+            <!-- End Main Menu-->
         </div>
     </nav>
+    <!-- End Navigation panel-->
+    <!-- breadcrumbs start-->
+    @yield('header')
+    <!-- ! breadcrumbs end-->
 </header>

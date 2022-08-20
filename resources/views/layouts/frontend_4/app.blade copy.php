@@ -20,7 +20,7 @@
     <meta property="og:title" content="Pesona Plesiran Indonesia">
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:site_name" content="Pesona Plesiran Indonesia">
-    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:standard" />
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:standard"/>
     {{-- <meta name="keywords"
         content="tour, trip, travel, agency, life, vacation, climbing, wisata, pesona, plesiran, indonesia, pesona plesiran indonesia, pesona indonesia"> --}}
     <?php $css = asset('frontend/assets4/'); ?>
@@ -43,8 +43,8 @@
     <link rel="stylesheet" href="{{ $css . '/rs-plugin/css/navigation.css' }}">
     <link rel="stylesheet" href="{{ $css . '/tuner/css/colorpicker.css' }}">
     <link rel="stylesheet" href="{{ $css . '/tuner/css/styles.css' }}">
-    <link rel="stylesheet" href="{{ $css . '/css/button.css' }}">
-    <link rel="stylesheet" href="{{ $css . '/css/scroll.css' }}">
+    <link rel="stylesheet" href="{{ $css . '/css/button.css'}}">
+    <link rel="stylesheet" href="{{ $css . '/css/scroll.css'}}">
     @yield('css')
 </head>
 
@@ -54,9 +54,8 @@
         @yield('content')
     </div>
     @include('layouts.frontend_4.footer')
-    @if (!Request::is('partnership'))
-        <a href="https://api.whatsapp.com/send?phone={{ $whatsapp['nomor'] }}&text={{ $whatsapp['message'] }}"
-            class="float" target="_blank">
+        @if (!Request::is('partnership'))
+        <a href="https://api.whatsapp.com/send?phone={{ $whatsapp['nomor'] }}&text={{ $whatsapp['message'] }}" class="float" target="_blank">
             <i class="fab fa-whatsapp my-float"></i>
         </a>
     @endif
@@ -79,13 +78,15 @@
 <script type="text/javascript" src="{{ $js . '/rs-plugin/js/jquery.themepunch.revolution.min.js' }}"></script>
 <script type="text/javascript" src="{{ $js . '/rs-plugin/js/extensions/revolution.extension.slideanims.min.js' }}">
 </script>
-<script type="text/javascript" src="{{ $js . '/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js' }}">
+<script type="text/javascript"
+src="{{ $js . '/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js' }}">
 </script>
 <script type="text/javascript" src="{{ $js . '/rs-plugin/js/extensions/revolution.extension.navigation.min.js' }}">
 </script>
 <script type="text/javascript" src="{{ $js . '/rs-plugin/js/extensions/revolution.extension.parallax.min.js' }}">
 </script>
-<script type="text/javascript" src="{{ $js . '/rs-plugin/js/extensions/revolution.extension.video.min.js' }}"></script>
+<script type="text/javascript" src="{{ $js . '/rs-plugin/js/extensions/revolution.extension.video.min.js' }}">
+</script>
 <script type="text/javascript" src="{{ $js . '/rs-plugin/js/extensions/revolution.extension.actions.min.js' }}">
 </script>
 <script type="text/javascript" src="{{ $js . '/rs-plugin/js/extensions/revolution.extension.kenburn.min.js' }}">
@@ -101,8 +102,8 @@
 <script type="text/javascript" src="{{ $js . '/js/jquery.tweet.js' }}"></script>
 <script type="text/javascript" src="{{ $js . '/js/jquery.scrollTo.min.js' }}"></script>
 <script type="text/javascript" src="{{ $js . '/js/jquery.flexslider.js' }}"></script>
-<script type="text/javascript" src="{{ $js . '/tuner/js/colorpicker.js' }}"></script>
-<script type="text/javascript" src="{{ $js . '/tuner/js/scripts.js' }}"></script>
+{{-- <script type="text/javascript" src="{{ $js . '/tuner/js/colorpicker.js' }}"></script>
+<script type="text/javascript" src="{{ $js . '/tuner/js/scripts.js' }}"></script> --}}
 <script type="text/javascript" src="{{ $js . '/js/retina.min.js' }}"></script>
 @yield('js')
 

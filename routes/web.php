@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'FrontendController@index')->name('frontend');
-Route::get('wisata', 'FrontendController@wisata')->name('struktur');
+Route::get('wisata', 'FrontendController@wisata')->name('frontend.wisata');
 // Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');
 Route::get('tentang-kami', 'FrontendController@tentang_kami')->name('tentang_kami');
 Route::get('visi-misi', 'FrontendController@visimisi')->name('visi_misi');
@@ -42,6 +42,7 @@ Route::get('instagram', 'InstagramController@index');
 
 Route::prefix('paket')->group(function () {
     Route::get('/', 'FrontendController@paket')->name('frontend.paket');
+    Route::get('{slug}', 'FrontendController@paket_detail')->name('frontend.paket.detail');
 });
 
 Route::prefix('hotel')->group(function () {
@@ -88,6 +89,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', 'PaketController@index')->name('paket')->middleware('verified');
             Route::post('simpan', 'PaketController@simpan')->name('paket.simpan')->middleware('verified');
             Route::get('{id}/paket_images', 'PaketController@detail_upload')->name('paket.imageUpload')->middleware('verified');
+            Route::get('{id}/list', 'PaketController@paket_list')->name('paket.list')->middleware('verified');
+            Route::post('{id}/list/simpan', 'PaketController@paket_list_simpan')->name('paket.list.simpan')->middleware('verified');
             Route::post('upload/paket_images', 'PaketController@simpan_image')->name('paket.simpan_imageUpload')->middleware('verified');
         });
 

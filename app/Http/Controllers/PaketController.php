@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Paket;
+use App\Models\PaketList;
 use App\Models\PaketImages;
 use DataTables;
 use Validator;
@@ -41,6 +42,9 @@ class PaketController extends Controller
                         $btn = '<button onclick="upload(`'.$row->id.'`)" class="btn btn-primary btn-sm" title="Upload Gambar Paket">
                                     <i class="fas fa-upload"></i> Upload Gambar Paket
                                 </button>
+                                <a href='.route('paket.list',['id' => $row->id]).' class="btn btn-secondary btn-sm" title="Paket List">
+                                    <i class="fas fa-list"></i> Paket List
+                                </a>
                                 <button onclick="edit(`'.$row->id.'`)" class="btn btn-warning btn-sm" title="Edit">
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
@@ -164,6 +168,94 @@ class PaketController extends Controller
             if($paketImages){
                 $message_title="Berhasil !";
                 $message_content="Upload Paket Berhasil Disimpan";
+                $message_type="success";
+                $message_succes = true;
+            }
+
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return response()->json($array_message);
+        }
+
+        return response()->json(
+            [
+                'success' => false,
+                'error' => $validator->errors()->all()
+            ]
+        );
+    }
+
+    public function paket_list(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $data = PaketList::where('paket_id',$id)->get();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('price', function($row){
+                        return 'Rp. '.number_format($row->price,2,",",".");
+                    })
+                    // ->addColumn('deskripsi', function($row){
+                    //     return substr($row->deskripsi, 0, 50);
+                    // })
+                    ->addColumn('action', function($row){
+                        $btn = '<button onclick="edit(`'.$row->id.'`)" class="btn btn-warning btn-sm" title="Edit">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
+                                <button onclick="hapus(`'.$row->id.'`)" class="btn btn-danger btn-sm" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>';
+                        return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        $data['pakets'] = Paket::find($id);
+        return view('backend.paket.list.index',$data);
+    }
+
+    public function paket_list_simpan(Request $request, $id)
+    {
+        $rules = [
+            'nama_paket'  => 'required',
+            'price'  => 'required',
+            'jumlah_paket'  => 'required',
+            // 'diskon'  => 'required',
+            // 'deskripsi'  => 'required',
+            // 'images'  => 'required|file|max:2048',
+        ];
+ 
+        $messages = [
+            // 'images.required'  => 'Upload Gambar wajib diisi.',
+            // 'images.max'  => 'Upload Gambar Max 2MB.',
+            'nama_paket.required'   => 'Nama Paket wajib diisi.',
+            'price.required'   => 'Harga wajib diisi.',
+            'jumlah_paket.required'   => 'Jumlah Paket wajib diisi.',
+            // 'deskripsi.required'   => 'Deskripsi wajib diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        // dd($request['outer-group'][0]['images']);
+        // dd($request->all());
+        if ($validator->passes()) {
+            $input = $request->all();
+            $input['id'] = 'PK-'.rand(1000,9999);
+            $input['paket_id'] = $id;
+
+            $image = $request->file('images');
+            $img = \Image::make($image->path());
+            $img = $img->encode('webp', 75);
+            $input['images'] = time().'.webp';
+            $img->save(public_path('frontend/assets4/img/paket/list/').$input['images']);
+
+            $paket_list = PaketList::create($input);
+
+            if($paket_list){
+                $message_title="Berhasil !";
+                $message_content="Paket ".$input['nama_paket']." Berhasil Disimpan";
                 $message_type="success";
                 $message_succes = true;
             }

@@ -15,6 +15,7 @@ use App\Models\Events;
 use App\Models\EventRegister;
 use App\Models\Wisata;
 use App\Models\Paket;
+use App\Models\PaketList;
 
 use App\Models\KabupatenKota;
 use \Carbon\Carbon;
@@ -467,6 +468,15 @@ class FrontendController extends Controller
         $data['whatsapp'] = $this->whatsapp;
         $data['pakets'] = Paket::all();
         return view('frontend.frontend4.paket',$data);
+    }
+
+    public function paket_detail($slug)
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['pakets'] = Paket::where('slug',$slug)->first();
+        $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->get();
+        // dd($data);
+        return view('frontend.frontend4.paket_detail',$data);
     }
 
 }

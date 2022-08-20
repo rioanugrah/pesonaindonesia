@@ -61,10 +61,13 @@
                     <h4>PRODUK</h4>
                     <ul class="text-white">
                         <li class="text-white">
-                            <a href="{{ route('frontend.hotel') }}">Hotel</a>
+                            <a href="{{ route('frontend.paket') }}">Paket</a>
                         </li>
+                        {{-- <li class="text-white">
+                            <a href="{{ route('frontend.hotel') }}">Hotel</a>
+                        </li> --}}
                         <li class="text-white">
-                            <a href="{{ route('frontend.event') }}">Event</a>
+                            <a href="{{ route('frontend.wisata') }}">Wisata</a>
                         </li>
                     </ul>
                 </div>
