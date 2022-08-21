@@ -17,9 +17,9 @@
                 <div class="col-md-6 col-sm-5 text-right">
                     <div class="top-right-wrap">
                         @guest
-                            <li><a href="{{ route('login') }}" class="mn-has-sub">Login</a></li>
+                            {{-- <li><a href="{{ route('login') }}" class="mn-has-sub">Login</a></li>
                             <li class="slash">|</li>
-                            <li><a href="{{ route('register') }}" class="mn-has-sub">Daftar Akun</a></li>
+                            <li><a href="{{ route('register') }}" class="mn-has-sub">Daftar Akun</a></li> --}}
                         @else
                         <div class="lang-wrap dropdown">
                             <div>
@@ -57,13 +57,14 @@
                     <!-- Item With Sub-->
                     <li><a href="{{ route('frontend') }}" class="mn-has-sub active">Home</a>
                     </li>
-                    <!-- End Item With Sub-->
                     <li class="slash">/</li>
-                    <!-- Item With Sub-->
-                    <li><a href="{{ route('frontend.paket') }}" class="mn-has-sub">Paket</a>
+                    <li><a href="{{ route('frontend.paket') }}" class="mn-has-sub">Paket Wisata</a>
                     </li>
                     <li class="slash">/</li>
                     <li><a href="{{ route('frontend.wisata') }}" class="mn-has-sub">Wisata</a>
+                    </li>
+                    <li class="slash">/</li>
+                    <li><a href="javascript:void()" onclick="alert('Fitur dalam proses pengembangan!')" class="mn-has-sub">Dokumentasi</a>
                     </li>
                     <!-- End Item With Sub-->
                 </ul>

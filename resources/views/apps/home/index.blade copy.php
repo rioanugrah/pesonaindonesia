@@ -11,25 +11,54 @@
 
 @section('content')
 @include('layouts.apps.category')
-
+<!-- Dark Mode -->
+<div class="container">
+    <div class="dark-mode-wrapper mt-3 bg-img p-4 p-lg-5">
+        <p class="text-white">You can change your display to a dark background using a dark mode.</p>
+        <div class="form-check form-switch mb-0">
+            <label class="form-check-label text-white h6 mb-0" for="darkSwitch">Switch to Dark Mode</label>
+            <input class="form-check-input" id="darkSwitch" type="checkbox" role="switch">
+        </div>
+    </div>
+</div>
 <!-- Top Products -->
 <div class="top-products-area py-3">
     <div class="container">
         <div class="section-heading d-flex align-items-center justify-content-between dir-rtl">
-            <h6>Paket Wisata</h6><a class="btn p-0" href="shop-grid.html">View All<i
+            <h6>Hotel</h6><a class="btn p-0" href="shop-grid.html">View All<i
                     class="ms-1 fa-solid fa-arrow-right-long"></i></a>
         </div>
         <div class="row g-2">
-            @forelse ($pakets as $paket)
+            @forelse ($hotels as $hotel)
+            <?php $imageHotel = \App\Models\ImageHotel::where('hotel_id',$hotel->id)->first(); ?>
             <div class="col-6 col-md-4">
                 <div class="card product-card">
                     <div class="card-body">
-                        {{-- <span class="badge rounded-pill badge-warning">Sale</span> --}}
-                        <a href="#" class="wishlist-btn">
-                            <i class="fa-solid fa-heart"></i>
+                        <span class="badge rounded-pill badge-warning">Sale</span>
+                        <<a class="wishlist-btn" href="#"><i
+                                class="fa-solid fa-heart"> </i></a>
+                        <a class="product-thumbnail d-block" href="{{ route('apps.detail',['slug' => $hotel->slug]) }}">
+                            @if ($imageHotel == null)
+                            <img class="mb-2" src="{{ asset('frontend/assets4/img/tour-thumb01.jpg') }}" alt="">
+                            @else
+                            <img class="mb-2" src="{{ asset('backend/assets2/images/hotel/'.$imageHotel['image']) }}" alt="">
+                            @endif
+                            <!-- Offer Countdown Timer: Please use event time this format: YYYY/MM/DD hh:mm:ss -->
+                            <ul class="offer-countdown-timer d-flex align-items-center shadow-sm"
+                                data-countdown="2023/12/31 23:59:59">
+                                <li><span class="days">0</span>d</li>
+                                <li><span class="hours">0</span>h</li>
+                                <li><span class="minutes">0</span>m</li>
+                                <li><span class="seconds">0</span>s</li>
+                            </ul>
                         </a>
-                        <a class="product-title" href="#">{{ $paket->nama_paket }}</a>
-                        <p class="sale-price">Rp. {{ number_format($paket->price,2,",",".") }}</p>
+                        <a class="product-title" href="{{ route('apps.detail',['slug' => $hotel->slug]) }}">{{ $hotel->nama_hotel }}</a>
+                        {{-- <p class="sale-price">Rp.<span>$42</span></p> --}}
+                        <div class="product-rating"><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        {{-- <a class="btn btn-success btn-sm" href="#"><i
+                                class="fa-solid fa-plus"></i></a> --}}
                     </div>
                 </div>
             </div>
@@ -42,6 +71,196 @@
                 </div>
             </div>
             @endforelse
+            <div class="section-heading d-flex align-items-center justify-content-between dir-rtl mt-4">
+                <h6>Wisata</h6><a class="btn p-0" href="shop-grid.html">View All<i
+                        class="ms-1 fa-solid fa-arrow-right-long"></i></a>
+            </div>
+            @forelse ($wisatas as $wisata)
+            <div class="col-6 col-md-4">
+                <div class="card product-card">
+                    <div class="card-body">
+                        <span class="badge rounded-pill badge-warning">Sale</span>
+                        <<a class="wishlist-btn" href="#"><i
+                                class="fa-solid fa-heart"> </i></a>
+                        <a class="product-thumbnail d-block" href="{{ route('apps.detail',['slug' => $wisata->slug]) }}">
+                            <img class="mb-2" src="{{ asset('frontend/assets4/img/tour-thumb01.jpg') }}" alt="">
+                            <ul class="offer-countdown-timer d-flex align-items-center shadow-sm"
+                                data-countdown="2023/12/31 23:59:59">
+                                <li><span class="days">0</span>d</li>
+                                <li><span class="hours">0</span>h</li>
+                                <li><span class="minutes">0</span>m</li>
+                                <li><span class="seconds">0</span>s</li>
+                            </ul>
+                        </a>
+                        <a class="product-title" href="{{ route('apps.detail',['slug' => $wisata->slug]) }}">{{ $wisata->nama_wisata }}</a>
+                        {{-- <p class="sale-price">Rp.<span>$42</span></p> --}}
+                        <div class="product-rating"><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        {{-- <a class="btn btn-success btn-sm" href="#"><i
+                                class="fa-solid fa-plus"></i></a> --}}
+                    </div>
+                </div>
+            </div>
+            @empty
+            <div class="row g-2 rtl-flex-d-row-r">
+                <div class="col-12">
+                    <div class="card catagory-card">
+                        <div class="card-body px-2"><span>Data Belum Tersedia</span></div>
+                    </div>
+                </div>
+            </div>
+            @endforelse
+            {{-- <!-- Product Card -->
+            <div class="col-6 col-md-4">
+                <div class="card product-card">
+                    <div class="card-body">
+                        <!-- Badge--><span class="badge rounded-pill badge-warning">Sale</span>
+                        <!-- Wishlist Button--><a class="wishlist-btn" href="#"><i
+                                class="fa-solid fa-heart"> </i></a>
+                        <!-- Thumbnail --><a class="product-thumbnail d-block" href="single-product.html"><img
+                                class="mb-2" src="{{ $link }}/img/product/11.png" alt="">
+                            <!-- Offer Countdown Timer: Please use event time this format: YYYY/MM/DD hh:mm:ss -->
+                            <ul class="offer-countdown-timer d-flex align-items-center shadow-sm"
+                                data-countdown="2023/12/31 23:59:59">
+                                <li><span class="days">0</span>d</li>
+                                <li><span class="hours">0</span>h</li>
+                                <li><span class="minutes">0</span>m</li>
+                                <li><span class="seconds">0</span>s</li>
+                            </ul>
+                        </a>
+                        <!-- Product Title --><a class="product-title" href="single-product.html">Beach
+                            Cap</a>
+                        <!-- Product Price -->
+                        <p class="sale-price">$13<span>$42</span></p>
+                        <!-- Rating -->
+                        <div class="product-rating"><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <!-- Add to Cart --><a class="btn btn-success btn-sm" href="#"><i
+                                class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Card -->
+            <div class="col-6 col-md-4">
+                <div class="card product-card">
+                    <div class="card-body">
+                        <!-- Badge--><span class="badge rounded-pill badge-success">New</span>
+                        <!-- Wishlist Button--><a class="wishlist-btn" href="#"><i
+                                class="fa-solid fa-heart"> </i></a>
+                        <!-- Thumbnail --><a class="product-thumbnail d-block" href="single-product.html"><img
+                                class="mb-2" src="{{ $link }}/img/product/5.png" alt=""></a>
+                        <!-- Product Title --><a class="product-title" href="single-product.html">Wooden
+                            Sofa</a>
+                        <!-- Product Price -->
+                        <p class="sale-price">$74<span>$99</span></p>
+                        <!-- Rating -->
+                        <div class="product-rating"><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <!-- Add to Cart --><a class="btn btn-success btn-sm" href="#"><i
+                                class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Card -->
+            <div class="col-6 col-md-4">
+                <div class="card product-card">
+                    <div class="card-body">
+                        <!-- Badge--><span class="badge rounded-pill badge-success">Sale</span>
+                        <!-- Wishlist Button--><a class="wishlist-btn" href="#"><i
+                                class="fa-solid fa-heart"> </i></a>
+                        <!-- Thumbnail --><a class="product-thumbnail d-block" href="single-product.html"><img
+                                class="mb-2" src="{{ $link }}/img/product/6.png" alt=""></a>
+                        <!-- Product Title --><a class="product-title" href="single-product.html">Roof
+                            Lamp</a>
+                        <!-- Product Price -->
+                        <p class="sale-price">$99<span>$113</span></p>
+                        <!-- Rating -->
+                        <div class="product-rating"><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <!-- Add to Cart --><a class="btn btn-success btn-sm" href="#"><i
+                                class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Card -->
+            <div class="col-6 col-md-4">
+                <div class="card product-card">
+                    <div class="card-body">
+                        <!-- Badge--><span class="badge rounded-pill badge-danger">-18%</span>
+                        <!-- Wishlist Button--><a class="wishlist-btn" href="#"><i
+                                class="fa-solid fa-heart"> </i></a>
+                        <!-- Thumbnail --><a class="product-thumbnail d-block" href="single-product.html"><img
+                                class="mb-2" src="{{ $link }}/img/product/9.png" alt="">
+                            <!-- Offer Countdown Timer: Please use event time this format: YYYY/MM/DD hh:mm:ss -->
+                            <ul class="offer-countdown-timer d-flex align-items-center shadow-sm"
+                                data-countdown="2022/12/23 00:21:29">
+                                <li><span class="days">0</span>d</li>
+                                <li><span class="hours">0</span>h</li>
+                                <li><span class="minutes">0</span>m</li>
+                                <li><span class="seconds">0</span>s</li>
+                            </ul>
+                        </a>
+                        <!-- Product Title --><a class="product-title" href="single-product.html">Sneaker
+                            Shoes</a>
+                        <!-- Product Price -->
+                        <p class="sale-price">$87<span>$92</span></p>
+                        <!-- Rating -->
+                        <div class="product-rating"><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <!-- Add to Cart --><a class="btn btn-success btn-sm" href="#"><i
+                                class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Card -->
+            <div class="col-6 col-md-4">
+                <div class="card product-card">
+                    <div class="card-body">
+                        <!-- Badge--><span class="badge rounded-pill badge-danger">-11%</span>
+                        <!-- Wishlist Button--><a class="wishlist-btn" href="#"><i
+                                class="fa-solid fa-heart"></i></a>
+                        <!-- Thumbnail --><a class="product-thumbnail d-block" href="single-product.html"><img
+                                class="mb-2" src="{{ $link }}/img/product/8.png" alt=""></a>
+                        <!-- Product Title --><a class="product-title" href="single-product.html">Wooden
+                            Chair</a>
+                        <!-- Product Price -->
+                        <p class="sale-price">$21<span>$25</span></p>
+                        <!-- Rating -->
+                        <div class="product-rating"><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <!-- Add to Cart --><a class="btn btn-success btn-sm" href="#"><i
+                                class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Card -->
+            <div class="col-6 col-md-4">
+                <div class="card product-card">
+                    <div class="card-body">
+                        <!-- Badge--><span class="badge rounded-pill badge-warning">On Sale</span>
+                        <!-- Wishlist Button--><a class="wishlist-btn" href="#"><i
+                                class="fa-solid fa-heart"></i></a>
+                        <!-- Thumbnail --><a class="product-thumbnail d-block" href="single-product.html"><img
+                                class="mb-2" src="{{ $link }}/img/product/4.png" alt=""></a>
+                        <!-- Product Title --><a class="product-title" href="single-product.html">Polo
+                            Shirts</a>
+                        <!-- Product Price -->
+                        <p class="sale-price">$38<span>$41</span></p>
+                        <!-- Rating -->
+                        <div class="product-rating"><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <!-- Add to Cart --><a class="btn btn-success btn-sm" href="#"><i
+                                class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
+            </div> --}}
         </div>
     </div>
 </div>

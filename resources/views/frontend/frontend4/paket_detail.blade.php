@@ -55,7 +55,7 @@
                             {{-- <p>{{ $paket_list->jumlah_paket }}</p> --}}
                         </td>
                         <td class="room-price">Rp. {{ number_format($paket_list->price,2,",",".") }}</td>
-                        <td> <a href="#" class="cws-button alt gray">Buy</a></td>
+                        <td> <a href="{{ route('frontend.paket.cart',['slug' => $pakets->slug,'id' => $paket_list->id]) }}" class="cws-button alt gray">Buy</a></td>
                     </tr>
                     @empty
                     <tr>

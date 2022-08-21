@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Paket;
 use App\Models\PaketList;
+use App\Models\PaketOrder;
 use App\Models\PaketImages;
 use DataTables;
 use Validator;
@@ -275,5 +276,76 @@ class PaketController extends Controller
                 'error' => $validator->errors()->all()
             ]
         );
+    }
+
+    public function paket_list_order(Request $request,$slug,$id)
+    {
+        $rules = [
+            'first_name'  => 'required',
+            'last_name'  => 'required',
+            'alamat'  => 'required',
+            'email'  => 'required',
+            'phone'  => 'required',
+        ];
+ 
+        $messages = [
+            // 'images.required'  => 'Upload Gambar wajib diisi.',
+            // 'images.max'  => 'Upload Gambar Max 2MB.',
+            'first_name.required'   => 'Nama Pertama wajib diisi.',
+            'last_name.required'   => 'Nama Terakhir wajib diisi.',
+            'alamat.required'   => 'Alamat wajib diisi.',
+            'email.required'   => 'Email wajib diisi.',
+            'phone.required'   => 'No. Telpon wajib diisi.',
+            // 'deskripsi.required'   => 'Deskripsi wajib diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->passes()) {
+            $data['pakets'] = Paket::where('slug',$slug)->first();
+            $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->first();
+            // $input = $request;
+            $input['id'] = 'INV-'.rand(1000,9999);
+            $data['order'] = [
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'alamat' => $request->alamat,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'jumlah' => $request->qty,
+            ];
+            $input['nama_paket'] = $data['paket_lists']['nama_paket'];
+            $input['pemesan'] = json_encode([
+                'order' => $data['order']
+            ]);
+            $input['qty'] = $request->qty;
+            $input['price'] = $data['paket_lists']['price'];
+            $input['status'] = 1;
+
+            $paket_order = PaketOrder::create($input);
+            
+            if($paket_order){
+                $message_title="Berhasil !";
+                $message_content="Orderan Berhasil";
+                $message_type="success";
+                $message_succes = true;
+            }
+
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return response()->json($array_message);
+            // return $input;
+        }
+
+        return response()->json(
+            [
+                'success' => false,
+                'error' => $validator->errors()->all()
+            ]
+        );
+        // return $data;
     }
 }

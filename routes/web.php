@@ -33,6 +33,7 @@ Route::get('wistlist', 'FrontendController@wistlist')->name('frontend.wistlist')
 Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('frontend.search.wistlist');
 Route::post('event_register', 'FrontendController@eventRegister')->name('frontend.eventRegister');
 Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
+Route::get('tracking_order', 'FrontendController@tracking_order')->name('frontend.tracking');
 
 
 Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
@@ -43,6 +44,8 @@ Route::get('instagram', 'InstagramController@index');
 Route::prefix('paket')->group(function () {
     Route::get('/', 'FrontendController@paket')->name('frontend.paket');
     Route::get('{slug}', 'FrontendController@paket_detail')->name('frontend.paket.detail');
+    Route::get('{slug}/{id}/order', 'FrontendController@paket_cart')->name('frontend.paket.cart');
+    Route::post('{slug}/{id}/checkout', 'PaketController@paket_list_order')->name('frontend.paket.checkout');
 });
 
 Route::prefix('hotel')->group(function () {

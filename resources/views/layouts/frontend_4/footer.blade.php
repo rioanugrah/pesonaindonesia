@@ -61,7 +61,7 @@
                     <h4>PRODUK</h4>
                     <ul class="text-white">
                         <li class="text-white">
-                            <a href="{{ route('frontend.paket') }}">Paket</a>
+                            <a href="{{ route('frontend.paket') }}">Paket Wisata</a>
                         </li>
                         {{-- <li class="text-white">
                             <a href="{{ route('frontend.hotel') }}">Hotel</a>
@@ -79,6 +79,9 @@
                         </li>
                         <li class="text-white">
                             <a href="#">Syarat & Ketentuan</a>
+                        </li>
+                        <li class="text-white">
+                            <a href="{{ route('frontend.tracking') }}">Cari Pesanan</a>
                         </li>
                     </ul>
                 </div>
