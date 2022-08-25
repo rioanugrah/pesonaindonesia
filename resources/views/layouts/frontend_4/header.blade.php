@@ -67,7 +67,7 @@
                     <li><a href="javascript:void()" onclick="alert('Fitur dalam proses pengembangan!')" class="mn-has-sub">Dokumentasi</a>
                     </li>
                     <li class="slash">|</li>
-                    <li><a href="{{ route('frontend.tracking') }}" onclick="alert('Fitur dalam proses pengembangan!')" class="mn-has-sub">Cek Tiket</a>
+                    <li><a href="{{ route('frontend.tracking') }}" class="mn-has-sub">Cek Tiket</a>
                     </li>
                     <!-- End Item With Sub-->
                 </ul>
