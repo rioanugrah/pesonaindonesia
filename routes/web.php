@@ -34,6 +34,7 @@ Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('fron
 Route::post('event_register', 'FrontendController@eventRegister')->name('frontend.eventRegister');
 Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
 Route::get('tracking_order', 'FrontendController@tracking_order')->name('frontend.tracking');
+Route::post('tracking_order/cari', 'FrontendController@tracking_order_search')->name('frontend.tracking.cari');
 
 
 Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');

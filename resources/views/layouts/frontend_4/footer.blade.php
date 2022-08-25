@@ -81,7 +81,7 @@
                             <a href="#">Syarat & Ketentuan</a>
                         </li>
                         <li class="text-white">
-                            <a href="{{ route('frontend.tracking') }}">Cari Pesanan</a>
+                            <a href="{{ route('frontend.tracking') }}">Cek Tiket</a>
                         </li>
                     </ul>
                 </div>

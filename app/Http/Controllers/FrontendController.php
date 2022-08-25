@@ -16,6 +16,7 @@ use App\Models\EventRegister;
 use App\Models\Wisata;
 use App\Models\Paket;
 use App\Models\PaketList;
+use App\Models\PaketOrder;
 
 use App\Models\KabupatenKota;
 use \Carbon\Carbon;
@@ -494,6 +495,42 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         return view('frontend.frontend4.tracking_order',$data);
+    }
+
+    public function tracking_order_search(Request $request)
+    {
+        $input_kode_tracking = $request->kode_tracking;
+        $tracking = PaketOrder::where('id',$input_kode_tracking)->get();
+        if(empty($tracking)){
+            return response()->json([
+                'status' => false,
+                'message' => 'Kode Tracking Tidak Ditemukan'
+            ],201);
+        }
+        foreach ($tracking as $key => $value) {
+            // $dataTracking = $tracking;
+            // foreach ($value['pemesan'] as $vp) {
+            //     $dataPemesan = $vp;
+            // }
+            $dataTracking[] = [
+                'id' => $value->id,
+                'nama_paket' => $value->nama_paket,
+                'price' => $value->price,
+                'qty' => $value->qty,
+                // 'nama_pemesan' => $dataPemesan
+            ];
+        }
+        return response()->json([
+            'status' => true,
+            // 'data' => [
+            //     'id' => $tracking->id,
+            //     'nama_paket' => $tracking->nama_paket,
+            //     'price' => $tracking->price,
+            //     'qty' => $tracking->qty,
+            //     'nama_pemesan' => $tracking->pemesan['order']['firstname']
+            // ],
+            'data' => $dataTracking
+        ]);
     }
 
 }
