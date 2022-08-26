@@ -24,6 +24,7 @@ use \Carbon\Carbon;
 // use App\Notifications\WisataNotification;
 use App\Events\EventRegisterEvent;
 
+use DNS1D;
 use Validator;
 use DB;
 
@@ -509,14 +510,20 @@ class FrontendController extends Controller
         }
         foreach ($tracking as $key => $value) {
             // $dataTracking = $tracking;
-            // foreach ($value['pemesan'] as $vp) {
-            //     $dataPemesan = $vp;
-            // }
+            foreach (json_decode($value->pemesan) as $key => $vp) {
+                $pemesan = $vp;
+            }
             $dataTracking[] = [
                 'id' => $value->id,
                 'nama_paket' => $value->nama_paket,
                 'price' => $value->price,
                 'qty' => $value->qty,
+                'nama_pemesan' => $pemesan->first_name.' '.$pemesan->last_name,
+                // json_decode(json_encode($value->pemesan),true),
+                // 'pemesan' => $dataPemesan[0]['firstname'],
+                // 'pemesan' => json_decode($value->pemesan,true),
+                // json_decode($value->pemesan['order']['firstname'],false),
+                'barcode' => DNS1D::getBarcodeHTML($value->id, 'C39', 1.7,33)
                 // 'nama_pemesan' => $dataPemesan
             ];
         }
