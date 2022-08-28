@@ -94,8 +94,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('simpan', 'PaketController@simpan')->name('paket.simpan')->middleware('verified');
             Route::get('{id}/paket_images', 'PaketController@detail_upload')->name('paket.imageUpload')->middleware('verified');
             Route::get('{id}/list', 'PaketController@paket_list')->name('paket.list')->middleware('verified');
+            // Route::get('{id}/order', 'PaketController@paket_order')->name('paket.order')->middleware('verified');
             Route::post('{id}/list/simpan', 'PaketController@paket_list_simpan')->name('paket.list.simpan')->middleware('verified');
             Route::post('upload/paket_images', 'PaketController@simpan_image')->name('paket.simpan_imageUpload')->middleware('verified');
+        });
+        Route::prefix('paket_order')->group(function(){
+            Route::get('/', 'PaketOrderController@index')->name('paket.order')->middleware('verified');
         });
 
         Route::prefix('pengguna')->group(function(){

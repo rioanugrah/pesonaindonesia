@@ -14,6 +14,7 @@
                     <div id="customer_details" class="col2-set">
                         <div class="col-1 mb-sm-50">
                             <h3 class="mt-0 mb-30">Billing Details</h3>
+                            <input type="hidden" id="detail_maksimal" value="{{ $paket_lists->jumlah_paket }}">
                             {{-- <p class="mb-20">Returning customer? <a href="#">Click here to login</a></p> --}}
                             <div class="billing-wrapper">
                                 <div class="woocommerce-billing-fields">
@@ -55,13 +56,54 @@
                                     <div class="clear"></div>
                                     <p id="billing_qty_field"
                                         class="form-row form-row-last validate-required validate-phone">
-                                        <label for="billing_phone">Jumlah<abbr title="required"
+                                        <label for="billing_qty">Jumlah<abbr title="required"
                                                 class="required">*</abbr></label>
-                                        <input id="billing_phone" type="text" name="qty" placeholder=""
-                                            value="" class="input-text">
+                                        <div class="input-group">
+                                            <input id="jumlah" type="text" name="qty" placeholder=""
+                                                value="" class="input-text">
+                                            {{-- <button type="button" name="add" id="add" class="cws-button alt"><i class="fa fa-plus"></i></button> --}}
+                                        </div>
+                                    </p>
+                                    <p id="billing_qty_field"
+                                        class="form-row form-row-last validate-required validate-phone">
+                                        {{-- <label for="billing_qty">Tambah Anggota</label> --}}
+                                        {{-- <div id="tambah_anggota"></div> --}}
+                                        <button type="button" name="add" id="add" class="cws-button alt"><i class="fa fa-plus"></i> Tambah Anggota</button>
                                     </p>
                                 </div>
                             </div>
+                            {{-- <div id="data_anggota" style="display: none"> --}}
+                                <h3 class="mt-50 mb-30">Data Anggota</h3>
+                                <div class="billing-wrapper" id="survey_options">
+                                    {{-- <div class="woocommerce-billing-fields">
+                                        <p id="billing_first_name_field" class="form-row form-row-first validate-required">
+                                            <label for="billing_first_name">First Name<abbr title="required"
+                                                    class="required">*</abbr></label>
+                                            <input id="billing_first_name" type="text" name="anggota_firstname[]" placeholder="Firstname"
+                                                value="" class="input-text survey_options">
+                                        </p>
+                                        <p id="billing_last_name_field" class="form-row form-row-last validate-required">
+                                            <label for="billing_last_name">Last Name<abbr title="required"
+                                                    class="required">*</abbr></label>
+                                            <input id="billing_last_name" type="text" name="anggota_lastname[]" placeholder="Lastname"
+                                                value="" class="input-text survey_options">
+                                        </p>
+                                        <div class="clear"></div>
+                                        <div class="controls">
+                                            <a href="javascript:void()" id="add_more_fields"><i class="fa fa-plus"></i> Add More</a>
+                                            <a href="javascript:void()" id="remove_fields"><i class="fa fa-plus"></i> Remove Field</a>
+                                        </div>
+                                    </div> --}}
+                                    <div class="woocommerce-billing-fields">
+                                        <table class="table" id="dynamic_field">  
+                                            {{-- <tr>  
+                                                <td><input type="text" name="nama_anggota[]" placeholder="Nama Anggota 1" class="form-control name_list" /></td>  
+                                                <td><button type="button" name="add" id="add" class="cws-button full-width alt"><i class="fa fa-plus"></i></button></td>  
+                                            </tr>   --}}
+                                        </table> 
+                                    </div>
+                                </div>
+                            {{-- </div> --}}
                         </div>
                         <div class="col-2">
                             <h3 id="order_review_heading" class="mt-0 mb-30">Your order</h3>
@@ -152,4 +194,53 @@
 @endsection
 
 @section('js')
+<script>
+    $('#jumlah').change(function(){
+        if($('#jumlah').val() > $('#detail_maksimal').val()){
+            alert('Jumlah anggota melebihi batas yang ditentukan');
+            $('#jumlah').val('')
+        }
+
+        
+        // const box = document.getElementById('tambah_anggota');
+        // // const anggota = document.getElementById('data_anggota');
+        // if($('#jumlah').val() > 1){
+        //     box.style.display = 'block';
+        //     // anggota.style.display = 'block';
+        //     box.innerHTML = '<button type="button" name="add" id="add" class="cws-button alt"><i class="fa fa-plus"></i> Tambah Anggota</button>';
+        // }else{
+        //     box.style.display = 'none';
+        //     // anggota.style.display = 'none';
+        // }
+
+
+        // const jumlah = $('#jumlah').val();
+        // for (let index = 0; index < array.length; index++) {
+        //     const element = array[index];
+            
+        // }
+        // for (let j = 1; j < jumlah; j++) {
+        //     // const element = array[j];   
+        //     $('#dynamic_field').append('<tr id="row'+j+'" class="dynamic-added"><td><input type="text" name="nama_anggota[]" placeholder="Nama Anggota '+j+'" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+j+'" class="cws-button full-width alt btn_remove">X</button></td></tr>'); 
+        //     // j--; 
+        // }
+        
+    })
+    // const qty = $('#jumlah').val();
+    $(document).ready(function(){
+        var i=1;  
+        $('#add').click(function(){  
+            if(i < $('#jumlah').val()){
+                $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="nama_anggota[]" placeholder="Nama Anggota '+i+'" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="cws-button full-width alt btn_remove">X</button></td></tr>');  
+                i++;  
+            }
+        });  
+
+        $(document).on('click', '.btn_remove', function(){  
+            var button_id = $(this).attr("id");   
+            $('#row'+button_id+'').remove();  
+            i--;
+        });  
+    })
+</script>
 @endsection

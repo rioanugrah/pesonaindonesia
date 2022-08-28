@@ -17,6 +17,7 @@ use App\Models\Wisata;
 use App\Models\Paket;
 use App\Models\PaketList;
 use App\Models\PaketOrder;
+use App\Models\PaketOrderList;
 
 use App\Models\KabupatenKota;
 use \Carbon\Carbon;
@@ -513,17 +514,29 @@ class FrontendController extends Controller
             foreach (json_decode($value->pemesan) as $key => $vp) {
                 $pemesan = $vp;
             }
+            $anggotas = PaketOrderList::select('order_paket_id','pemesan','qty')
+                                    ->where('order_paket_id', $value->id)->get();
+            foreach ($anggotas as $key => $a) {
+                $anggota[] = [
+                    'nama' => $a->pemesan
+                ];
+            }
             $dataTracking[] = [
                 'id' => $value->id,
                 'nama_paket' => $value->nama_paket,
                 'price' => $value->price,
                 'qty' => $value->qty,
+                // 'nama_pemesan' => $pemesan->first_name,
+                // 'pemesan' => $pemesan,
                 'nama_pemesan' => $pemesan->first_name.' '.$pemesan->last_name,
+                // 'anggota' => $anggota,
+                'anggota' => $anggotas,
+                'tanggal_pembelian' => Carbon::parse($value->created_at)->isoFormat('dddd, D MMMM Y'),
                 // json_decode(json_encode($value->pemesan),true),
                 // 'pemesan' => $dataPemesan[0]['firstname'],
                 // 'pemesan' => json_decode($value->pemesan,true),
                 // json_decode($value->pemesan['order']['firstname'],false),
-                'barcode' => DNS1D::getBarcodeHTML($value->id, 'C39', 1.7,33)
+                'barcode' => DNS1D::getBarcodeHTML($value->id, 'C39', 1.18,33)
                 // 'nama_pemesan' => $dataPemesan
             ];
         }

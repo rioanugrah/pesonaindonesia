@@ -33,6 +33,12 @@
                         <span>Paket Wisata</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('b/paket_order*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('paket.order') }}" class="waves-effect">
+                        <i class="ti-package"></i>
+                        <span>Paket Order</span>
+                    </a>
+                </li>
                 <li class="menu-title">Operational Officer</li>
                 <li class="{{ Request::is('b/cooperation*') ? 'mm-active' : '' }}">
                     <a href="{{ route('cooperation') }}" class="waves-effect">

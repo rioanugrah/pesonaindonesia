@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\Paket;
 use App\Models\PaketList;
 use App\Models\PaketOrder;
+use App\Models\PaketOrderList;
 use App\Models\PaketImages;
 use DataTables;
 use Validator;
@@ -23,12 +24,12 @@ class PaketController extends Controller
                     ->addColumn('deskripsi', function($row){
                         return substr($row->deskripsi, 0, 50);
                     })
-                    ->addColumn('price', function($row){
-                        return 'Rp. '.number_format($row->price,2,",",".");
-                    })
-                    ->addColumn('diskon', function($row){
-                        return $row->diskon.'%';
-                    })
+                    // ->addColumn('price', function($row){
+                    //     return 'Rp. '.number_format($row->price,2,",",".");
+                    // })
+                    // ->addColumn('diskon', function($row){
+                    //     return $row->diskon.'%';
+                    // })
                     ->addColumn('total_harga', function($row){
                         return 'Rp. '.number_format($row->price-($row->diskon/100)*$row->price,2,",",".");
                     })
@@ -304,7 +305,7 @@ class PaketController extends Controller
             $data['pakets'] = Paket::where('slug',$slug)->first();
             $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->first();
             // $input = $request;
-            $input['id'] = 'INV-'.rand(1000,9999);
+            $input['id'] = 'TIKET-'.rand(1000000,9999999);
             $data['order'] = [
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -313,9 +314,23 @@ class PaketController extends Controller
                 'phone' => $request->phone,
                 'jumlah' => $request->qty,
             ];
+            if($request->qty > 1){
+                foreach ($request->nama_anggota as $key => $value) {
+                    // $data['anggota']['team'] = [
+                    //     'nama' => $value,
+                    //     'jumlah' => 1
+                    // ];
+                    PaketOrderList::create([
+                        // 'id' => rand(10000,99999),
+                        'order_paket_id' => $input['id'],
+                        'pemesan' => $value,
+                        'qty' => 1
+                    ]);
+                }
+            }
             $input['nama_paket'] = $data['paket_lists']['nama_paket'];
             $input['pemesan'] = json_encode([
-                'order' => $data['order']
+                $data['order']
             ]);
             $input['qty'] = $request->qty;
             $input['price'] = $data['paket_lists']['price'];
@@ -348,4 +363,6 @@ class PaketController extends Controller
         );
         // return $data;
     }
+
+    
 }

@@ -104,9 +104,7 @@
                         const hasilData = result.data;
                         var text = "";
                         hasilData.forEach(checkData);
-                        
                         // const pemesan = result.data.order;
-                        var text2 = "";
                         // alert(result.data.order);
                         // pemesan.forEach(checkPemesan);
 
@@ -127,6 +125,8 @@
                                 rupiah += separator + ribuan.join('.');
                             }
 
+                            // console.table(value.anggota);
+
                             // text = text + '<section class="small-section bg-gray">'+
                             //                 '<div class="container">'+
                             //                     '<div class="col-md-12">'+
@@ -146,6 +146,25 @@
                             //                     '</div>'+
                             //                 '</div>'+
                             //                 '</section>';
+                            const hasilAnggota = value.anggota;
+                            var text2 = "";
+                            hasilAnggota.forEach(checkAnggota);
+
+                            function checkAnggota(value, index) {
+                                var i = index+1;
+                                text2 = text2+'<div class="details">'+
+                                                    '<div class="item">'+
+                                                        '<span>Nama Anggota '+i+'</span>'+
+                                                        '<h4>'+value.pemesan+'</h4>'+
+                                                    '</div>'+
+                                                    '<div class="item">'+
+                                                        '<span>Jumlah</span>'+
+                                                        '<h4>'+value.qty+'</h4>'+
+                                                    '</div>'+
+                                                '</div>';
+                                i++;
+                            }
+
                             text = text + '<main class="ticket-system">'+
                                                 '<div class="body">'+
                                                     '<div class="top">'+
@@ -157,12 +176,20 @@
                                                         '<div class="receipt">'+
                                                             '<img src="{{ asset("frontend/assets4/img/logo_plesiran_new_black2.webp") }}" width="150" alt="" srcset="">'+
                                                             '<div class="route">'+
-                                                                '<h2>Invoice</h2>'+
-                                                                '<h2>#'+value.id+'</h2>'+
+                                                                '<h4>Invoice</h4>'+
+                                                                '<h4>'+value.id+'</h4>'+
                                                             '</div>'+
                                                             '<div class="details">'+
+                                                                // '<div class="item">'+
+                                                                //     '<span>Invoice</span>'+
+                                                                //     '<h4>'+value.id+'</h4>'+
+                                                                // '</div>'+
                                                                 '<div class="item">'+
-                                                                    '<span>Paket</span>'+
+                                                                    '<span>Tanggal Pembelian</span>'+
+                                                                    '<h4>'+value.tanggal_pembelian+'</h4>'+
+                                                                '</div>'+
+                                                                '<div class="item">'+
+                                                                    '<span>Nama Paket</span>'+
                                                                     '<h4>'+value.nama_paket+'</h4>'+
                                                                 '</div>'+
                                                                 '<div class="item">'+
@@ -177,19 +204,9 @@
                                                                     '<span>Harga</span>'+
                                                                     '<h4>Rp. '+rupiah+'</h4>'+
                                                                 '</div>'+
-                                                                // '<div class="item">'+
-                                                                //     '<span>Nama Pemesan</span>'+
-                                                                //     '<h3>Rp. '+value.order.firstname+'</h3>'+
-                                                                // '</div>'+
-                                                                // '<div class="item">'+
-                                                                //     '<span>Luggage</span>'+
-                                                                //     '<h3>Hand Luggage</h3>'+
-                                                                // '</div>'+
-                                                                // '<div class="item">'+
-                                                                //     '<span>Seat</span>'+
-                                                                //     '<h3>69P</h3>'+
-                                                                // '</div>'+
                                                             '</div>'+
+                                                            text2+
+                                                            // '<div id="hasil2">'+'</div>'+
                                                         '</div>'+
                                                         '<div class="receipt qr-code">'+
                                                             value.barcode+
@@ -202,6 +219,10 @@
                                                     '</div>'+
                                                 '</div>'+
                                             '</main>';
+
+                            // alert(text2);
+                            // document.getElementById("hasil2").innerHTML = text2;
+                            // document.getElementById("hasil_anggota").innerHTML = text2;
                             // text = text + '<div class="col-md-6">'+
                             //                 '<div class="recom-item">'+
                             //                   '<div class="recom-item-body">'+

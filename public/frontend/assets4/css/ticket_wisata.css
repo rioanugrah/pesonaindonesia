@@ -24,8 +24,8 @@
 
 .ticket-system {
     /* justify-content: center; */
-    max-width: 385px;
-    /* max-width: 100%; */
+    /* max-width: 385px; */
+    max-width: 100%;
     /* max-width: 1385px; */
 }
 
@@ -33,6 +33,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    max-width: 385px;
 }
 
 .ticket-system .top .title {
@@ -56,6 +57,7 @@
     overflow: hidden;
     margin-top: -10px;
     padding-bottom: 10px;
+    width: 100%;
 }
 
 .ticket-system .receipts {
@@ -88,7 +90,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 30px 0;
+    margin: 10px 0;
 }
 
 .ticket-system .receipts .receipt .route .plane-icon {
@@ -170,7 +172,7 @@
 
 @keyframes print {
     0% {
-        transform: translateY(-1010px);
+        transform: translateY(-1500px);
     }
     35% {
         transform: translateY(-495px);
