@@ -27,12 +27,15 @@ class PaketOrderController extends Controller
                     })
                     ->addColumn('status', function($row){
                         if($row->status == 0){
-                            return '<span class="btn btn-danger btn-xs">Menunggu Pembayaran</span>';
+                            return '<span class="btn btn-danger btn-xs">Batal</span>';
                         }
                         elseif($row->status == 1){
-                            return '<span class="btn btn-warning btn-xs">Menunggu Pembayaran</span>';
+                            return '<span class="btn btn-secondary btn-xs">Menunggu Pembayaran</span>';
                         }
                         elseif($row->status == 2){
+                            return '<span class="btn btn-warning btn-xs">Sedang Diproses</span>';
+                        }
+                        elseif($row->status == 3){
                             return '<span class="btn btn-success btn-xs">Pembayaran Sukses</span>';
                         }
                     })

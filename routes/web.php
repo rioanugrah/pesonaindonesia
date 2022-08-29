@@ -47,6 +47,7 @@ Route::prefix('paket')->group(function () {
     Route::get('{slug}', 'FrontendController@paket_detail')->name('frontend.paket.detail');
     Route::get('{slug}/{id}/order', 'FrontendController@paket_cart')->name('frontend.paket.cart');
     Route::post('{slug}/{id}/checkout', 'PaketController@paket_list_order')->name('frontend.paket.checkout');
+    Route::get('{id}/payment', 'FrontendController@paket_list_order_payment')->name('frontend.paket.payment');
 });
 
 Route::prefix('hotel')->group(function () {

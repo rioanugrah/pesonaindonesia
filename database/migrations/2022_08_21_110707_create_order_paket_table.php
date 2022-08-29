@@ -17,6 +17,7 @@ class CreateOrderPaketTable extends Migration
             $table->uuid('id')->primary();
             $table->string('nama_paket');
             $table->text('pemesan');
+            $table->text('bank');
             $table->integer('qty');
             $table->string('price');
             $table->integer('status');

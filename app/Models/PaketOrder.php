@@ -19,6 +19,7 @@ class PaketOrder extends Model
         'id',
         'nama_paket',
         'pemesan',
+        'bank',
         'qty',
         'price',
         'status',

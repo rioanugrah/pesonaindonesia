@@ -9,6 +9,7 @@ use App\Models\PaketList;
 use App\Models\PaketOrder;
 use App\Models\PaketOrderList;
 use App\Models\PaketImages;
+use App\Models\Bank;
 use DataTables;
 use Validator;
 use DB;
@@ -303,9 +304,11 @@ class PaketController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->passes()) {
             $data['pakets'] = Paket::where('slug',$slug)->first();
+            $data['banks'] = Bank::where('nama_bank',$request->payment_method)->first();
+            // dd($banks->nama_bank);
             $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->first();
             // $input = $request;
-            $input['id'] = 'TIKET-'.rand(1000000,9999999);
+            $input['id'] = 'INV-'.rand(0000001,9999999);
             $data['order'] = [
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -314,6 +317,14 @@ class PaketController extends Controller
                 'phone' => $request->phone,
                 'jumlah' => $request->qty,
             ];
+            // $input['bank'] = [
+            //     'nama_bank' => $banks->nama_bank,
+            // ];
+            // foreach ($data['banks'] as $key => $bk) {
+            //     $data['bank'] = [
+            //         'bank' => $bk
+            //     ];
+            // }
             if($request->qty > 1){
                 foreach ($request->nama_anggota as $key => $value) {
                     // $data['anggota']['team'] = [
@@ -328,10 +339,28 @@ class PaketController extends Controller
                     ]);
                 }
             }
+            // foreach ($banks as $key => $bk) {
+            //     $input['bank'] = [
+            //         'nama_bank' => $bk['nama_bank'],
+            //         'nama_penerima' => $bk['nama_penerima'],
+            //         'nomor_rekening' => $bk['nomor_rekening'],
+            //     ];
+            // }
             $input['nama_paket'] = $data['paket_lists']['nama_paket'];
             $input['pemesan'] = json_encode([
                 $data['order']
             ]);
+            $input['bank'] = json_encode(
+                [
+                    [
+                        'nama_bank' => $data['banks']['nama_bank'],
+                        'nama_penerima' => $data['banks']['nama_penerima'],
+                        'nomor_rekening' => $data['banks']['nomor_rekening'],
+                    ]
+                ]
+            );
+            // $input['bank'] = $bank;
+
             $input['qty'] = $request->qty;
             $input['price'] = $data['paket_lists']['price'];
             $input['status'] = 1;
@@ -351,18 +380,17 @@ class PaketController extends Controller
                 'message_content' => $message_content,
                 'message_type' => $message_type,
             );
-            return response()->json($array_message);
+            return redirect(route('frontend.paket.payment',['id' => $input['id']]));
+            // return response()->json($array_message);
             // return $input;
         }
 
-        return response()->json(
-            [
-                'success' => false,
-                'error' => $validator->errors()->all()
-            ]
-        );
+        // return response()->json(
+        //     [
+        //         'success' => false,
+        //         'error' => $validator->errors()->all()
+        //     ]
+        // );
         // return $data;
     }
-
-    
 }

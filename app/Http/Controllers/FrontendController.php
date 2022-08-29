@@ -493,6 +493,37 @@ class FrontendController extends Controller
         return view('frontend.frontend4.paket_cart',$data);
     }
 
+    public function paket_list_order_payment($id)
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['paket'] = PaketOrder::find($id);
+        $data['anggotas'] = PaketOrderList::select('order_paket_id','pemesan','qty')
+                                    ->where('order_paket_id', $data['paket']['id'])->get();
+        foreach (json_decode($data['paket']['pemesan']) as $key => $p) {
+            // dd($p);
+            $data['pemesan'] = $p;
+            // dd($data['pemesan']);
+        }
+        foreach (json_decode($data['paket']['bank']) as $key => $bk) {
+            // dd($p);
+            $data['bank'] = $bk;
+            // dd($data['pemesan']);
+        }
+
+        if($data['paket']['status'] == 1){
+            $data['status'] = 'Menunggu Pembayaran';
+        }
+        elseif($data['paket']['status'] == 2){
+            $data['status'] = 'Sedang Diproses';
+        }
+        elseif($data['paket']['status'] == 3){
+            $data['status'] = 'Pembayaran Sukses';
+        }else{
+            $data['status'] = 'Pembayaran Ditolak';
+        }
+        return view('frontend.frontend4.payment_paket',$data);
+    }
+
     public function tracking_order()
     {
         $data['whatsapp'] = $this->whatsapp;

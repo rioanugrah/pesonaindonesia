@@ -133,9 +133,16 @@
                                         </tr>
                                     </tfoot>
                                 </table>
+                                <h3 id="order_review_heading" class="mt-30 mb-30">Metode Pembayaran</h3>
                                 <div id="payment" class="woocommerce-checkout-payment">
                                     <div class="payment_methods methods">
                                         <div class="payment_method_bacs">
+                                            <input id="payment_method_bacs" type="radio" name="payment_method"
+                                                value="BRI" data-order_button_text=""
+                                                class="input-radio">
+                                            <label for="payment_method_bacs">BRI</label>
+                                        </div>
+                                        {{-- <div class="payment_method_bacs">
                                             <input id="payment_method_bacs" type="radio" name="payment_method"
                                                 value="bacs" checked="checked" data-order_button_text=""
                                                 class="input-radio">
@@ -151,8 +158,8 @@
                                                     <li>Aliquam turpis nibh, dictum eu consequat </li>
                                                 </ul>
                                             </div>
-                                        </div>
-                                        <div class="payment_method_cheque">
+                                        </div> --}}
+                                        {{-- <div class="payment_method_cheque">
                                             <input id="payment_method_cheque" type="radio" name="payment_method"
                                                 value="cheque" data-order_button_text="" class="input-radio">
                                             <label for="payment_method_cheque">Cheque Payment</label>
@@ -175,7 +182,7 @@
                                                 <p>Pay via PayPal; you can pay with your credit card if you don’t have a
                                                     PayPal account.</p>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="place-order mt-20">
                                         <input id="place_order" type="submit" name="woocommerce_checkout_place_order"
