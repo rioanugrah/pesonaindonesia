@@ -1,5 +1,8 @@
 @extends('layouts.frontend_4.app')
 <?php $asset = asset('frontend/assets4/'); ?>
+@section('css')
+    <link href="{{ asset('backend/assets2/css/iziToast.min.css') }}" rel="stylesheet" />
+@endsection
 @section('title')
     Payment - {{ $paket->id }}
 @endsection
@@ -7,9 +10,9 @@
 <div class="container page pt-50">
     <div class="row">
         <div class="col-md-12">
-            {{-- <form method="post" action="{{ route('frontend.paket.checkout',['slug' => $pakets->slug, 'id' => $paket_lists->id]) }}" enctype="multipart/form-data"
+            <form method="post" id="bukti_transfer" enctype="multipart/form-data"
                 class="checkout woocommerce-checkout">
-                @csrf --}}
+                @csrf
                 <div class="col-12">
                     <h3 id="order_review_heading" class="mt-0 mb-30">Pemesanan Anda #{{ $paket->id }}</h3>
                     <div id="order_review" class="woocommerce-checkout-review-order">
@@ -70,12 +73,60 @@
                                     <td class="product-name">Status Pembayaran : <b>{{ $status }}</b></td>
                                     <td></td>
                                 </tr>
+                                @if ($paket->status <= 1)
+                                <tr class="cart_item">
+                                    <td class="product-name">Upload Bukti Transfer : <input type="file" name="images" id=""><button type="submit" class="cws-button alt">Kirim</button></td>
+                                    <td></td>
+                                </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
                 </div>
-            {{-- </form> --}}
+            </form>
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script src="{{ asset('backend/assets2/js/iziToast.min.js') }}"></script>
+    <script>
+        $('#bukti_transfer').submit(function(e) {
+            // alert('testing');
+            e.preventDefault();
+            let formData = new FormData(this);
+            $.ajax({
+                type:'POST',
+                url: "{{ route('frontend.paket.transfer',['id' => $paket->id]) }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    if(result.success != false){
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                        setTimeout(location.reload(), 8000);
+                        // this.reset();
+                        // table.ajax.reload();
+                        // document.getElementById("button").style.display = "block";
+                        // document.getElementById("input_slider").style.display = "none";
+                    }else{
+                        iziToast.error({
+                            title: result.success,
+                            message: result.error
+                        });
+                    }
+                },
+                error: function (request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            });
+        });
+    </script>
 @endsection

@@ -10,9 +10,11 @@ use App\Models\PaketOrder;
 use App\Models\PaketOrderList;
 use App\Models\PaketImages;
 use App\Models\Bank;
+use App\Models\BuktiPembayaran;
 use DataTables;
 use Validator;
 use DB;
+use File;
 
 class PaketController extends Controller
 {
@@ -392,5 +394,39 @@ class PaketController extends Controller
         //     ]
         // );
         // return $data;
+    }
+
+    public function paket_bukti_pembayaran(Request $request, $id)
+    {
+        $image = $request->file('images');
+        $img = \Image::make($image->path());
+        $img = $img->encode('webp', 75);
+        $input['id'] = $id;
+        $input['images'] = $id.'.webp';
+        $img->save(public_path('frontend/assets4/img/tf/').$input['images']);
+
+        $bukti_pembayaran = BuktiPembayaran::firstOrCreate($input);
+        PaketOrder::where('id',$id)->update([
+            'status' => 2
+        ]);
+        if($bukti_pembayaran){
+            $message_title="Berhasil !";
+            $message_content="Bukti pembayaran berhasil dikirim. Silahkan menunggu konfirmasi";
+            $message_type="success";
+            $message_succes = true;
+        }else{
+            $message_title="Gagal !";
+            $message_content="Bukti pembayaran gagal dikirim. Silahkan dicoba lagi";
+            $message_type="danger";
+            $message_succes = true;
+        }
+
+        $array_message = array(
+            'success' => $message_succes,
+            'message_title' => $message_title,
+            'message_content' => $message_content,
+            'message_type' => $message_type,
+        );
+        return response()->json($array_message);
     }
 }

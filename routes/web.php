@@ -48,6 +48,7 @@ Route::prefix('paket')->group(function () {
     Route::get('{slug}/{id}/order', 'FrontendController@paket_cart')->name('frontend.paket.cart');
     Route::post('{slug}/{id}/checkout', 'PaketController@paket_list_order')->name('frontend.paket.checkout');
     Route::get('{id}/payment', 'FrontendController@paket_list_order_payment')->name('frontend.paket.payment');
+    Route::post('{id}/upload', 'PaketController@paket_bukti_pembayaran')->name('frontend.paket.transfer');
 });
 
 Route::prefix('hotel')->group(function () {
@@ -101,6 +102,8 @@ Route::group(['middleware' => 'auth'], function () {
         });
         Route::prefix('paket_order')->group(function(){
             Route::get('/', 'PaketOrderController@index')->name('paket.order')->middleware('verified');
+            Route::get('{id}/bukti_pembayaran', 'PaketOrderController@bukti_pembayaran')->name('paket.order.bukti_pembayaran')->middleware('verified');
+            Route::post('bukti_pembayaran/update', 'PaketOrderController@bukti_pembayaran_update')->name('paket.order.bukti_pembayaran.update')->middleware('verified');
         });
 
         Route::prefix('pengguna')->group(function(){

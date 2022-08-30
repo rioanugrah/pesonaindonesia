@@ -517,7 +517,7 @@ class FrontendController extends Controller
             $data['status'] = 'Sedang Diproses';
         }
         elseif($data['paket']['status'] == 3){
-            $data['status'] = 'Pembayaran Sukses';
+            $data['status'] = 'Pembayaran Berhasil';
         }else{
             $data['status'] = 'Pembayaran Ditolak';
         }
