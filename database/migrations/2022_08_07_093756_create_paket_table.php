@@ -18,8 +18,8 @@ class CreatePaketTable extends Migration
             $table->string('slug');
             $table->string('nama_paket');
             $table->text('deskripsi');
-            $table->string('price')->nullable();
-            $table->integer('diskon')->nullable();
+            // $table->string('price')->nullable();
+            // $table->integer('diskon')->nullable();
             // $table->text('images')->nullable();
             $table->timestamps();
             $table->softDeletes();

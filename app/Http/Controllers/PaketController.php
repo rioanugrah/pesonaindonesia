@@ -68,8 +68,8 @@ class PaketController extends Controller
     {
         $rules = [
             'nama_paket'  => 'required',
-            'price'  => 'required',
-            'diskon'  => 'required',
+            // 'price'  => 'required',
+            // 'diskon'  => 'required',
             // 'deskripsi'  => 'required',
             // 'images'  => 'required|file|max:2048',
         ];
@@ -78,8 +78,8 @@ class PaketController extends Controller
             // 'images.required'  => 'Upload Gambar wajib diisi.',
             // 'images.max'  => 'Upload Gambar Max 2MB.',
             'nama_paket.required'   => 'Nama Paket wajib diisi.',
-            'price.required'   => 'Harga wajib diisi.',
-            'diskon.required'   => 'Diskon Harga wajib diisi.',
+            // 'price.required'   => 'Harga wajib diisi.',
+            // 'diskon.required'   => 'Diskon Harga wajib diisi.',
             // 'deskripsi.required'   => 'Deskripsi wajib diisi.',
         ];
 

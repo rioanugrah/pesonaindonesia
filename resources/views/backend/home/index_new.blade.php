@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+@include('backend.paket.order.modalBuat')
 <div class="page-title-box">
     <div class="row align-items-center">
         <div class="col-md-8">
@@ -29,7 +30,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xl-4 col-md-6">
+    {{-- <div class="col-xl-4 col-md-6">
         <div class="card mini-stat bg-primary text-white">
             <div class="card-body">
                 <div class="mb-4">
@@ -45,7 +46,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+
     {{-- <div class="col-xl-4 col-md-6">
         <div class="card mini-stat bg-primary text-white">
             <div class="card-body">
@@ -63,7 +65,8 @@
             </div>
         </div>
     </div> --}}
-    <div class="col-xl-4 col-md-6">
+
+    {{-- <div class="col-xl-4 col-md-6">
         <div class="card mini-stat bg-primary text-white">
             <div class="card-body">
                 <div class="mb-4">
@@ -79,6 +82,84 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Data Transaksi</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Paket</th>
+                                <th>Pemesan</th>
+                                <th>Bank</th>
+                                <th>Jumlah</th>
+                                <th>Harga</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($orders as $order)
+                                @foreach (json_decode($order->pemesan) as $p)
+                                    <?php $pemesan = $p; ?>
+                                @endforeach
+                                @foreach (json_decode($order->bank) as $b)
+                                    <?php $bank = $b; ?>
+                                @endforeach
+                                <tr>
+                                    @if ($order->status == 0)
+                                    <td><span class="badge bg-danger">{{ $order->id }}</span></td>
+                                    @elseif ($order->status == 1)
+                                    <td><span class="badge bg-secondary">{{ $order->id }}</span></td>
+                                    @elseif ($order->status == 2)
+                                    <td><span class="badge bg-warning">{{ $order->id }}</span></td>
+                                    @elseif ($order->status == 3)
+                                    <td><span class="badge bg-success">{{ $order->id }}</span></td>
+                                    @endif
+                                    <td>{{ $order->nama_paket }}</td>
+                                    <td>{{ $pemesan->first_name.' '.$pemesan->last_name }}</td>
+                                    <td>{{ $bank->nama_bank.' : '.$bank->nama_penerima }}</td>
+                                    <td>{{ $order->qty }}</td>
+                                    <td>Rp. {{ number_format($order->price,2,",",".") }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button onclick="bukti_pembayaran(`{{ $order->id }}`)" class="btn btn-primary btn-sm" title="Bukti Pembayaran">
+                                                <i class="fas fa-file-alt"></i> Bukti Pembayaran
+                                            </button>
+                                            <a href="javascript:void()" onclick="alert('Fitur dalam pengembangan')" class="btn btn-success btn-sm" title="Invoice">
+                                                <i class="fas fa-file-pdf"></i> Invoice
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                {{ $orders->links() }}
+            </div>
+        </div>
     </div>
 </div>
+@endsection
+@section('js')
+    <script>
+        function bukti_pembayaran(id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/paket_order') }}"+'/'+id+'/bukti_pembayaran',
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    // alert(result.data);
+                    $('#bukti_id').val(id);
+                    $('#uploaded_image').html(result.data.images);
+                    $('#tf').modal('show');
+                }
+            })
+        }
+    </script>
 @endsection

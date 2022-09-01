@@ -1,5 +1,5 @@
 <div class="modal fade" id="buat" tabindex="-1">
-    <div class="modal-dialog modal-fullscreen">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">DATA PAKET WISATA</h5>
@@ -56,7 +56,7 @@
                         {{-- <input type="email" class="form-control" id="formemail" placeholder="Enter your Email..."> --}}
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label class="form-label">Harga Paket</label>
                         <input type="text" class="form-control" name="price" placeholder="Harga Paket">
                     </div>
@@ -64,7 +64,7 @@
                     <div class="mb-3 col-2">
                         <label class="form-label">Diskon</label>
                         <input type="text" class="form-control" name="diskon" placeholder="Diskon">
-                    </div>
+                    </div> --}}
 
                     {{-- <div class="mb-3 lst">
                         <label class="form-label">Upload Paket</label>

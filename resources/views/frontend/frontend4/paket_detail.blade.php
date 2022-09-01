@@ -30,7 +30,7 @@
                 <thead>
                     <tr>
                         <th>Paket</th>
-                        <th>Sisa</th>
+                        <th>Pax</th>
                         <th>Harga</th>
                         <th></th>
                     </tr>
@@ -38,8 +38,11 @@
                 <tbody>
                     @forelse ($paket_lists as $paket_list)
                     <tr>
-                        <td> <img src="{{ asset('frontend/assets4/img/paket/list/'.$paket_list->images) }}" style="width: 190px; height: 130px; object-fit: cover;" data-at2x="{{ asset('frontend/assets4/img/paket/list/'.$paket_list->images) }}" alt="{{ $paket_list->nama_paket }}">
+                        <td>
+                            <a href="javascript:void()" onclick="alert('Fitur dalam pengembangan')">
+                            <img src="{{ asset('frontend/assets4/img/paket/list/'.$paket_list->images) }}" style="width: 190px; height: 130px; object-fit: cover;" data-at2x="{{ asset('frontend/assets4/img/paket/list/'.$paket_list->images) }}" alt="{{ $paket_list->nama_paket }}">
                             <h6>{{ $paket_list->nama_paket }}</h6>
+                            </a>
                             {{-- <p class="mb-0">(Extra beds available: Crib, <br> Rollaway bed)</p> --}}
                         </td>
                         <td>
@@ -55,7 +58,7 @@
                             {{-- <p>{{ $paket_list->jumlah_paket }}</p> --}}
                         </td>
                         <td class="room-price">Rp. {{ number_format($paket_list->price,2,",",".") }}</td>
-                        <td> <a href="{{ route('frontend.paket.cart',['slug' => $pakets->slug,'id' => $paket_list->id]) }}" class="cws-button alt gray">Buy</a></td>
+                        <td> <a href="{{ route('frontend.paket.cart',['slug' => $pakets->slug,'id' => $paket_list->id]) }}" class="cws-button alt">Buy</a></td>
                     </tr>
                     @empty
                     <tr>
