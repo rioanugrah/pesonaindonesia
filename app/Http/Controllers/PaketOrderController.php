@@ -9,6 +9,9 @@ use App\Models\PaketOrderList;
 use App\Models\BuktiPembayaran;
 use DataTables;
 
+use App\Mail\Pembayaran;
+use Mail;
+
 class PaketOrderController extends Controller
 {
     public function index(Request $request)
@@ -84,20 +87,67 @@ class PaketOrderController extends Controller
 
     public function bukti_pembayaran_update(Request $request)
     {
-        $bukti_pembayaran = PaketOrder::where('id',$request->bukti_id);
+        $bukti_pembayaran = PaketOrder::where('id',$request->bukti_id)->first();
         if($bukti_pembayaran){
             $bukti_pembayaran->update([
                 'status' => $request->bukti_status
             ]);
-            $message_title="Berhasil !";
-            $message_content="Bukti Pembayaran Berhasil Diterima";
-            $message_type="success";
-            $message_succes = true;
+
+            foreach (json_decode($bukti_pembayaran->pemesan) as $key => $p) {
+                $pemesan = $p;
+                // return $p->first_name.' '.$p->last_name;
+            }
+
+            if($bukti_pembayaran->status == 3){
+                $message_title="Berhasil !";
+                $message_content="Bukti Pembayaran Berhasil Diterima";
+                $message_type="success";
+                $message_succes = true;
+                
+                $details = [
+                    'title' => 'Pembayaran '.$bukti_pembayaran->id.' Sukses',
+                    'email' => env('MAIL_FROM_ADDRESS'),
+                    'body' => 'Terima kasih '.$pemesan->first_name.' telah pembelian tiket kami. Kode tiket anda '.$bukti_pembayaran->id,
+                    'nama_pembayaran' => $pemesan->first_name,
+                    'bukti_pembayaran' => null
+                ];
+                // dd($details);
+            }elseif($bukti_pembayaran->status == 0){
+                $message_title="Tolak !";
+                $message_content="Bukti Pembayaran Ditolak";
+                $message_type="success";
+                $message_succes = true;
+
+                $details = [
+                    'title' => 'Pembayaran '.$bukti_pembayaran->id.' Ditolak',
+                    'email' => env('MAIL_FROM_ADDRESS'),
+                    'body' => 'Terima kasih '.$pemesan->first_name.' telah pembelian tiket kami. Mohon maaf bukti pembayaran kami tolak. Silahkan kirim bukti pembayaran ulang melalui klik tombol ini.',
+                    'nama_pembayaran' => null,
+                    'bukti_pembayaran' => route('frontend.paket.payment',['id' => $request->bukti_id])
+                ];
+            }
+
+            Mail::to($pemesan->email)->send(new Pembayaran($details));
+
         }else{
             $message_title="Tolak !";
             $message_content="Bukti Pembayaran Ditolak";
             $message_type="success";
-            $message_succes = false;
+            $message_succes = success;
+
+            // foreach (json_decode($bukti_pembayaran->pemesan) as $key => $p) {
+            //     $pemesan = $p;
+            //     // return $p->first_name.' '.$p->last_name;
+            // }
+
+            // $details = [
+            //     'title' => 'Pembayaran '.$bukti_pembayaran->id.' Ditolak',
+            //     'email' => env('MAIL_FROM_ADDRESS'),
+            //     'body' => 'Terima kasih '.$pemesan->first_name.' telah pembelian tiket kami. Mohon maaf bukti pembayaran kami tolak. Silahkan kirim bukti pembayaran melalui klik tombol ini.',
+            //     'nama_pembayaran' => null,
+            //     'bukti_pembayaran' => route('frontend.paket.payment',['id' => $request->bukti_id])
+            // ];
+            // Mail::to($pemesan->email)->send(new Pembayaran($details));
         }
         $array_message = array(
             'success' => $message_succes,

@@ -16,6 +16,9 @@ use Validator;
 use DB;
 use File;
 
+use App\Mail\Pembayaran;
+use Mail;
+
 class PaketController extends Controller
 {
     public function index(Request $request)
@@ -292,6 +295,7 @@ class PaketController extends Controller
             'alamat'  => 'required',
             'email'  => 'required',
             'phone'  => 'required',
+            'tanggal_berangkat'  => 'required',
         ];
  
         $messages = [
@@ -302,6 +306,7 @@ class PaketController extends Controller
             'alamat.required'   => 'Alamat wajib diisi.',
             'email.required'   => 'Email wajib diisi.',
             'phone.required'   => 'No. Telpon wajib diisi.',
+            'tanggal_berangkat.required'   => 'Tanggal berangkat wajib diisi.',
             // 'deskripsi.required'   => 'Deskripsi wajib diisi.',
         ];
 
@@ -320,6 +325,7 @@ class PaketController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'jumlah' => $request->qty,
+                'tanggal_berangkat' => $request->tanggal_berangkat,
             ];
             // $input['bank'] = [
             //     'nama_bank' => $banks->nama_bank,
@@ -408,9 +414,24 @@ class PaketController extends Controller
         $img->save(public_path('frontend/assets4/img/tf/').$input['images']);
 
         $bukti_pembayaran = BuktiPembayaran::firstOrCreate($input);
+        
+        $email_marketing = 'marketing@plesiranindonesia.com';
+        $details = [
+            'title' => 'Pembayaran ',
+            'email' => $request->email_payment,
+            'body' => null,
+            'nama_pembayaran' => $request->nama_pembayaran,
+            'bukti_pembayaran' => asset('frontend/assets4/img/tf/'.$input['images'])
+            // 'url' => 'https://www.itsolutionstuff.com'
+        ];
+
+        // Mail::send(new Pembayaran($details));
+        Mail::to($email_marketing)->send(new Pembayaran($details));
+        
         PaketOrder::where('id',$id)->update([
             'status' => 2
         ]);
+        
         if($bukti_pembayaran){
             $message_title="Berhasil !";
             $message_content="Bukti pembayaran berhasil dikirim. Silahkan menunggu konfirmasi";

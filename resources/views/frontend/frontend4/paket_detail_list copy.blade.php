@@ -14,9 +14,6 @@
             <a href="{{ route('frontend.paket.detail',['slug' => $paket_lists->pakets->slug]) }}">{{ $paket_lists->pakets->nama_paket }}</a><i>/</i>
             <a href="#" class="last">{{ $paket_lists->nama_paket }}</a>
             <h2><span>{{ $paket_lists->nama_paket }}</span>
-                {{-- <span class="stars stars-4">
-                    <span>4 stars</span>
-                </span> --}}
             </h2>
         </div>
     </div>
@@ -55,6 +52,7 @@
         </div>
     </div>
 @endsection
+
 @section('js')
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ env('ADSENSE_CLIENT_ID') }}"
 crossorigin="anonymous"></script>

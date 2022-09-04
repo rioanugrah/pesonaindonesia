@@ -39,16 +39,15 @@ Route::post('tracking_order/cari', 'FrontendController@tracking_order_search')->
 
 Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
 
-
 Route::get('instagram', 'InstagramController@index');
 
 Route::prefix('paket')->group(function () {
     Route::get('/', 'FrontendController@paket')->name('frontend.paket');
     Route::get('{slug}', 'FrontendController@paket_detail')->name('frontend.paket.detail');
-    Route::get('{slug}/{id}', 'FrontendController@paket_detail_list')->name('frontend.paket.detail.list');
+    // Route::get('{slug}/{id}', 'FrontendController@paket_detail_list')->name('frontend.paket.detail.list');
     Route::get('{slug}/{id}/order', 'FrontendController@paket_cart')->name('frontend.paket.cart');
     Route::post('{slug}/{id}/checkout', 'PaketController@paket_list_order')->name('frontend.paket.checkout');
-    Route::get('{id}/payment', 'FrontendController@paket_list_order_payment')->name('frontend.paket.payment');
+    Route::get('payment/{id}', 'FrontendController@paket_list_order_payment')->name('frontend.paket.payment');
     Route::post('{id}/upload', 'PaketController@paket_bukti_pembayaran')->name('frontend.paket.transfer');
 });
 
@@ -201,17 +200,17 @@ Route::middleware('web')->domain('plesiranmalang.'.env('APP_URL'))->group(functi
 Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login_google');
 Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
 
-Route::prefix('app')->group(function () {
-    Route::get('/', 'Apps\HomeController@index')->name('apps');
+// Route::prefix('app')->group(function () {
+//     Route::get('/', 'Apps\HomeController@index')->name('apps');
     
-    Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
-    Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
-    Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
+//     Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
+//     Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
+//     Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
 
-    Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
-    Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
-    Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
-});
+//     Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
+//     Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
+//     Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
+// });
 // Route::group(['domain' => 'app.localhost'], function () {
 //     Route::get('/', 'Apps\HomeController@index');
 //     // {

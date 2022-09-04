@@ -201,6 +201,10 @@
                                                                     '<h4>'+value.nama_pemesan+'</h4>'+
                                                                 '</div>'+
                                                                 '<div class="item">'+
+                                                                    '<span>Tanggal Berangkat</span>'+
+                                                                    '<h4>'+value.tanggal_berangkat+'</h4>'+
+                                                                '</div>'+
+                                                                '<div class="item">'+
                                                                     '<span>Harga</span>'+
                                                                     '<h4>Rp. '+rupiah+'</h4>'+
                                                                 '</div>'+

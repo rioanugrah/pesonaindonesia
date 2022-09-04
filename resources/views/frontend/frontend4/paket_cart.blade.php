@@ -53,9 +53,18 @@
                                         <input id="billing_phone" type="text" name="phone" placeholder=""
                                             value="" class="input-text">
                                     </p>
+                                    <p id="billing_tgl_field"
+                                        class="form-row form-row-last validate-required">
+                                        <label for="billing_qty">Tanggal Berangkat<abbr title="required"
+                                                class="required">*</abbr></label>
+                                        <div class="input-group">
+                                            <input type="date" name="tanggal_berangkat" class="form-control" placeholder=""
+                                                value="" class="input-text">
+                                        </div>
+                                    </p>
                                     <div class="clear"></div>
                                     <p id="billing_qty_field"
-                                        class="form-row form-row-last validate-required validate-phone">
+                                        class="form-row form-row-last validate-required">
                                         <label for="billing_qty">Jumlah<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <div class="input-group">

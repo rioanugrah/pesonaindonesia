@@ -25,6 +25,9 @@ use \Carbon\Carbon;
 // use App\Notifications\WisataNotification;
 use App\Events\EventRegisterEvent;
 
+use App\Mail\Pembayaran;
+use Mail;
+
 use DNS1D;
 use Validator;
 use DB;
@@ -482,12 +485,13 @@ class FrontendController extends Controller
         return view('frontend.frontend4.paket_detail',$data);
     }
 
-    public function paket_detail_list($slug,$id)
+    public function paket_detail_list($id)
     {
         $data['whatsapp'] = $this->whatsapp;
-        $data['paket_lists'] = PaketList::where('id',$id)->first();
+        $data['paket'] = Paket::where('slug',$id)->first();
+        $data['paket_lists'] = PaketList::where('paket_id',$data['paket']['id'])->first();
         // dd($data);
-        return view('frontend.frontend4.paket_detail_list',$data);
+        return view('frontend.frontend4.pakets_detail_list',$data);
     }
 
     public function paket_cart($slug,$id)
@@ -569,13 +573,14 @@ class FrontendController extends Controller
                 // 'pemesan' => $pemesan,
                 'nama_pemesan' => $pemesan->first_name.' '.$pemesan->last_name,
                 // 'anggota' => $anggota,
+                'tanggal_berangkat' => Carbon::parse($pemesan->tanggal_berangkat)->format('d-m-Y'),
                 'anggota' => $anggotas,
                 'tanggal_pembelian' => Carbon::parse($value->created_at)->isoFormat('dddd, D MMMM Y'),
                 // json_decode(json_encode($value->pemesan),true),
                 // 'pemesan' => $dataPemesan[0]['firstname'],
                 // 'pemesan' => json_decode($value->pemesan,true),
                 // json_decode($value->pemesan['order']['firstname'],false),
-                'barcode' => DNS1D::getBarcodeHTML($value->id, 'C39', 1.18,33)
+                'barcode' => DNS1D::getBarcodeHTML($value->id, 'C39', 1.32,33)
                 // 'nama_pemesan' => $dataPemesan
             ];
         }

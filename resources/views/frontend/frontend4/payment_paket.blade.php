@@ -13,6 +13,8 @@
             <form method="post" id="bukti_transfer" enctype="multipart/form-data"
                 class="checkout woocommerce-checkout">
                 @csrf
+                <input type="hidden" name="email_payment" value="{{ $pemesan->email }}" id="">
+                <input type="hidden" name="nama_pembayaran" value="{{ $pemesan->first_name.' '.$pemesan->last_name }}" id="">
                 <div class="col-12">
                     <h3 id="order_review_heading" class="mt-0 mb-30">Pemesanan Anda #{{ $paket->id }}</h3>
                     <div id="order_review" class="woocommerce-checkout-review-order">
@@ -33,7 +35,7 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td class="product-name">1. {{ $pemesan->first_name.' '.$pemesan->last_name }}</td>
+                                    <td class="product-name">1. {{ $pemesan->first_name.' '.$pemesan->last_name.' | '.$pemesan->email }} </td>
                                     <td></td>
                                 </tr>
                                 @foreach ($anggotas as $key => $anggota)
