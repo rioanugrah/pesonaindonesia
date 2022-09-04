@@ -20,7 +20,7 @@ class CreatePaketTable extends Migration
             $table->text('deskripsi');
             // $table->string('price')->nullable();
             // $table->integer('diskon')->nullable();
-            // $table->text('images')->nullable();
+            $table->text('images')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

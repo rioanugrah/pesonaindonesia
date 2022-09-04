@@ -56,6 +56,11 @@
                         {{-- <input type="email" class="form-control" id="formemail" placeholder="Enter your Email..."> --}}
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label">Upload Images</label>
+                        <input type="file" class="form-control" name="images">
+                    </div>
+
                     {{-- <div class="mb-3">
                         <label class="form-label">Harga Paket</label>
                         <input type="text" class="form-control" name="price" placeholder="Harga Paket">

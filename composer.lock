@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca165fc56c11e7d20080cea9a016d529",
+    "content-hash": "b503cf9ddcc43251953839e15d2082c6",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -3277,6 +3277,74 @@
                 "source": "https://github.com/MarkBaker/PHPMatrix/tree/3.0.0"
             },
             "time": "2021-07-01T19:01:15+00:00"
+        },
+        {
+            "name": "martinbutt/laravel-adsense",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/martinbutt/laravel-adsense.git",
+                "reference": "f2e76d3c2160e02ec071ec896580d69c95a9bf54"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/martinbutt/laravel-adsense/zipball/f2e76d3c2160e02ec071ec896580d69c95a9bf54",
+                "reference": "f2e76d3c2160e02ec071ec896580d69c95a9bf54",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/view": "^6.0||^7.0||^8.0",
+                "php": "^7.2||^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "orchestra/testbench": "^4.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MartinButt\\Laravel\\Adsense\\Providers\\AdsenseServiceProvider"
+                    ],
+                    "aliases": {
+                        "Adsense": "MartinButt\\Laravel\\Adsense\\Facades\\AdsenseFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MartinButt\\Laravel\\Adsense\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Butt",
+                    "homepage": "https://www.martinbutt.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Crypto Technology srl",
+                    "email": "admin@cryptotech.srl",
+                    "homepage": "https://cryptotech.srl",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Display Adsense ads easily in Laravel 6.x, 7.x and 8.x",
+            "keywords": [
+                "ads",
+                "adsense",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/martinbutt/laravel-adsense/issues",
+                "source": "https://github.com/martinbutt/laravel-adsense/"
+            },
+            "time": "2021-08-20T21:38:49+00:00"
         },
         {
             "name": "midtrans/midtrans-php",

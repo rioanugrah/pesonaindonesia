@@ -19,9 +19,9 @@ class Paket extends Model
         'id',
         'slug',
         'nama_paket',
-        'price',
         'deskripsi',
-        'diskon',
-        // 'images',
+        'images',
+        // 'price',
+        // 'diskon',
     ];
 }

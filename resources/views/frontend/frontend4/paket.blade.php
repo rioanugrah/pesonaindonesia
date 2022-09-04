@@ -21,11 +21,11 @@
             </div>
             <div class="row">
                 @forelse ($pakets as $paket)
-                <?php $images = \App\Models\PaketImages::where('paket_id',$paket->id)->orderBy('id','asc')->first() ?>
+                {{-- <?php $images = \App\Models\PaketImages::where('paket_id',$paket->id)->orderBy('id','asc')->first() ?> --}}
                 <div class="col-md-6">
                     <div class="recom-item">
                         <div class="recom-media"><a href="{{ route('frontend.paket.detail',['slug' => $paket->slug]) }}">
-                                <div class="pic"><img src="{{ asset('frontend/assets4/img/paket/'.$images->images) }}" style="width: 770px; height: 240px; object-fit: cover;" data-at2x="{{ asset('frontend/assets4/img/paket/'.$images->images) }}" alt>
+                                <div class="pic"><img src="{{ asset('frontend/assets4/img/paket/'.$paket->images) }}" style="width: 770px; height: 240px; object-fit: cover;" data-at2x="{{ asset('frontend/assets4/img/paket/'.$paket->images) }}" alt>
                                 </div>
                             </a>
                             {{-- <div class="location"><i class="flaticon-suntour-map"></i> Istanbul, Turkey</div> --}}

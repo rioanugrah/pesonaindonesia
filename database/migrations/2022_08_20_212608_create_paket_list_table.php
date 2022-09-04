@@ -22,6 +22,7 @@ class CreatePaketListTable extends Migration
             $table->integer('diskon')->nullable();
             $table->text('deskripsi');
             $table->string('images');
+            $table->enum('status',array(1,0))->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

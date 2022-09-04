@@ -24,5 +24,11 @@ class PaketList extends Model
         'diskon',
         'deskripsi',
         'images',
+        'status',
     ];
+
+    public function pakets()
+    {
+        return $this->belongsTo(\App\Models\Paket::class, 'paket_id');
+    }
 }

@@ -44,10 +44,7 @@ class PaketController extends Controller
                     //     }
                     // })
                     ->addColumn('action', function($row){
-                        $btn = '<button onclick="upload(`'.$row->id.'`)" class="btn btn-primary btn-sm" title="Upload Gambar Paket">
-                                    <i class="fas fa-upload"></i> Upload Gambar Paket
-                                </button>
-                                <a href='.route('paket.list',['id' => $row->id]).' class="btn btn-secondary btn-sm" title="Paket List">
+                        $btn = '<a href='.route('paket.list',['id' => $row->id]).' class="btn btn-secondary btn-sm" title="Paket List">
                                     <i class="fas fa-list"></i> Paket List
                                 </a>
                                 <button onclick="edit(`'.$row->id.'`)" class="btn btn-warning btn-sm" title="Edit">
@@ -71,12 +68,12 @@ class PaketController extends Controller
             // 'price'  => 'required',
             // 'diskon'  => 'required',
             // 'deskripsi'  => 'required',
-            // 'images'  => 'required|file|max:2048',
+            'images'  => 'required|file|max:2048',
         ];
  
         $messages = [
-            // 'images.required'  => 'Upload Gambar wajib diisi.',
-            // 'images.max'  => 'Upload Gambar Max 2MB.',
+            'images.required'  => 'Upload Gambar wajib diisi.',
+            'images.max'  => 'Upload Gambar Max 2MB.',
             'nama_paket.required'   => 'Nama Paket wajib diisi.',
             // 'price.required'   => 'Harga wajib diisi.',
             // 'diskon.required'   => 'Diskon Harga wajib diisi.',
@@ -91,6 +88,11 @@ class PaketController extends Controller
             $input['id'] = Str::uuid()->toString();
             $input['slug'] = Str::slug($request->nama_paket);
             // $image = $request->file('images');
+            $image = $request->file('images');
+            $img = \Image::make($image->path());
+            $img = $img->encode('webp', 75);
+            $input['images'] = time().'.webp';
+            $img->save(public_path('frontend/assets4/img/paket/').$input['images']);
             // foreach ($request['outer-group'][0] as $imagefile) {
             //     $name=$imagefile->getClientOriginalName();
             //     $imagefile->move(public_path('frontend/assets4/img/paket/'),$name);

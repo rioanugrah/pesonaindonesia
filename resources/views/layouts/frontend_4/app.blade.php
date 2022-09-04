@@ -46,6 +46,7 @@
     <link rel="stylesheet" href="{{ $css . '/css/button.css' }}">
     <link rel="stylesheet" href="{{ $css . '/css/scroll.css' }}">
     @yield('css')
+    @yield('head')
 </head>
 
 <body>

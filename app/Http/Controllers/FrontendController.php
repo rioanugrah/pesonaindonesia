@@ -482,6 +482,14 @@ class FrontendController extends Controller
         return view('frontend.frontend4.paket_detail',$data);
     }
 
+    public function paket_detail_list($slug,$id)
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['paket_lists'] = PaketList::where('id',$id)->first();
+        // dd($data);
+        return view('frontend.frontend4.paket_detail_list',$data);
+    }
+
     public function paket_cart($slug,$id)
     {
         $data['whatsapp'] = $this->whatsapp;

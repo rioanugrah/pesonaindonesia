@@ -39,7 +39,7 @@
                     @forelse ($paket_lists as $paket_list)
                     <tr>
                         <td>
-                            <a href="javascript:void()" onclick="alert('Fitur dalam pengembangan')">
+                            <a href="{{ route('frontend.paket.detail.list',['slug' => $pakets->slug, 'id' => $paket_list->id]) }}" onclick="alert('Fitur dalam pengembangan')">
                             <img src="{{ asset('frontend/assets4/img/paket/list/'.$paket_list->images) }}" style="width: 190px; height: 130px; object-fit: cover;" data-at2x="{{ asset('frontend/assets4/img/paket/list/'.$paket_list->images) }}" alt="{{ $paket_list->nama_paket }}">
                             <h6>{{ $paket_list->nama_paket }}</h6>
                             </a>
