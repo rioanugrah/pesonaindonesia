@@ -351,20 +351,20 @@
                                             style="width:520px;max-width:520px; margin-top:25px">
                                             <tr>
                                                 <td class="center-text" Simpli align="center"
-                                                    style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:12px;line-height:24px;font-weight:900;font-style:normal;color:#ff9019;text-decoration:none;letter-spacing:2px;text-transform: uppercase;">
+                                                    style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:12px;line-height:24px;font-weight:900;font-style:normal;color:#ff9019;text-decoration:none;letter-spacing:2px;">
                                                     <singleline>
                                                         <div mc:edit Simpli>
-                                                            HEY, {{ $details['nama_pembayaran'] }}
+                                                            HEY, MARIA!
                                                         </div>
                                                     </singleline>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="center-text" Simpli align="center"
-                                                    style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:24px;font-weight:700;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
+                                                    style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:24px;line-height:54px;font-weight:700;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
                                                     <singleline>
                                                         <div mc:edit Simpli>
-                                                            {{ $details['body'] }}
+                                                            Terima kasih atas pesanan Anda!
                                                         </div>
                                                     </singleline>
                                                 </td>
@@ -413,7 +413,7 @@
                                                                             <singleline>
                                                                                 <div mc:edit Simpli>
                                                                                     <strong
-                                                                                        style="color:#FFFFFF;">{{ $details['invoice'] }}</strong>
+                                                                                        style="color:#FFFFFF;">WR#5TB5@QXZ</strong>
                                                                                 </div>
                                                                             </singleline>
                                                                         </td>

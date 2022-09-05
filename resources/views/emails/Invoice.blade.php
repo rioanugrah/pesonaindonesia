@@ -321,9 +321,9 @@
                     </tr>
                     <tr>
                         <td align="center" class="center-text">
-                            <img style="width:180px;border:0px;display: inline!important;"
-                                src="{{ asset('frontend/assets4/img/logo_plesiran_new_black.png') }}" width="180"
-                                border="0" editable="true" Simpli data-image-edit Simpli alt="logo">
+                            <img style="width:180px;border:0px;display: inline!important;" src="{{ asset('frontend/assets4/img/logo_plesiran_new_black.png') }}"
+                                width="180" border="0" editable="true" Simpli data-image-edit Simpli
+                                alt="logo">
                         </td>
                     </tr>
                     <tr>
@@ -339,32 +339,91 @@
                     <tr>
                         <td align="center">
 
-                            <table border="0" align="center" cellpadding="0" cellspacing="0" role="presentation"
-                                class="row container-padding25" width="600" style="width:600px;max-width:600px;">
+                            <table border="0" align="center" cellpadding="0" cellspacing="0"
+                                class="row container-padding10" role="presentation" width="640"
+                                style="width:640px;max-width:640px;">
+                                <!-- bg-image -->
+                                <tr>
+                                    <td align="center" Simpli bgcolor="#F4F4F4" style="border-radius: 36px;">
+
+                                        <!--[if (gte mso 9)|(IE)]><v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:640px;">
+<v:fill type="frame" src="images/header-13.jpg" color="#F4F4F4" />
+<v:textbox style="mso-fit-shape-to-text:true;" inset="0,0,0,0"><![endif]-->
+
+                                        <div>
+                                            <!-- simpli-header-bg-image -->
+                                            <table border="0" align="center" cellpadding="0" cellspacing="0"
+                                                role="presentation" width="100%" style="width:100%;max-width:100%;">
+                                                <tr>
+                                                    <td align="center" background="{{ asset('frontend/email/images/header-21.jpg') }}" data-bg-image
+                                                        style="background-size:cover;background-position:center top; border-radius: 36px;">
+
+                                                        <!-- Content -->
+                                                        <table border="0" align="center" cellpadding="0"
+                                                            cellspacing="0" role="presentation" class="row"
+                                                            width="600" style="width:600px;max-width:600px;">
+                                                            <tr>
+                                                                <td height="640" valign="bottom"
+                                                                    class="container-padding"
+                                                                    style="font-size:640px;line-height:640px;" Simpli>
+
+                                                                    <table border="0" align="center"
+                                                                        cellpadding="0" cellspacing="0"
+                                                                        role="presentation" width="100%"
+                                                                        style="width:100%;max-width:100%;">
+                                                                        <tr>
+                                                                            <td align="center" Simpli
+                                                                                bgcolor="#FFFFFF" height="40"
+                                                                                style="height:40px;font-size:40px;line-height:36px;border-radius:36px 36px 0 0;"
+                                                                                class="container-padding">&nbsp;</td>
+                                                                        </tr>
+                                                                    </table>
+
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <!-- Content -->
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <!-- simpli-header-bg-image -->
+                                        </div>
+
+                                        <!--[if (gte mso 9)|(IE)]></v:textbox></v:rect><![endif]-->
+
+                                    </td>
+                                </tr>
+                                <!-- bg-image -->
+                            </table>
+
+                            <table border="0" align="center" cellpadding="0" cellspacing="0"
+                                role="presentation" class="row container-padding25" width="600"
+                                style="width:600px;max-width:600px;">
                                 <!-- basic-info -->
                                 <tr>
                                     <td align="center" Simpli bgcolor="#FFFFFF"
-                                        style="border-radius:36px 36px 36px 36px; border-bottom:solid 6px #DDDDDD;">
+                                        style="border-radius:0 0 36px 36px; border-bottom:solid 6px #DDDDDD;">
                                         <!-- content -->
                                         <table border="0" align="center" cellpadding="0" cellspacing="0"
                                             role="presentation" class="row container-padding" width="520"
-                                            style="width:520px;max-width:520px; margin-top:25px">
+                                            style="width:520px;max-width:520px;">
                                             <tr>
                                                 <td class="center-text" Simpli align="center"
-                                                    style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:12px;line-height:24px;font-weight:900;font-style:normal;color:#ff9019;text-decoration:none;letter-spacing:2px;text-transform: uppercase;">
+                                                    style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:12px;line-height:24px;font-weight:900;font-style:normal;color:#ff9019;text-decoration:none;letter-spacing:2px;">
                                                     <singleline>
                                                         <div mc:edit Simpli>
-                                                            HEY, {{ $details['nama_pembayaran'] }}
+                                                            Hallo, {{ $details['nama_pembayaran'] }}
                                                         </div>
                                                     </singleline>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="center-text" Simpli align="center"
-                                                    style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:24px;font-weight:700;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
+                                                    style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:48px;line-height:54px;font-weight:700;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
                                                     <singleline>
                                                         <div mc:edit Simpli>
-                                                            {{ $details['body'] }}
+                                                            Terima kasih atas pesanan Anda!
                                                         </div>
                                                     </singleline>
                                                 </td>
@@ -378,8 +437,7 @@
                                                     style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
                                                     <singleline>
                                                         <div mc:edit Simpli>
-                                                            Kami akan mengirimkan informasi pelacakan segera setelah
-                                                            pesanan Anda dikirimkan.
+                                                            Kami akan mengirimkan informasi pelacakan segera setelah pesanan Anda dikirimkan.
                                                         </div>
                                                     </singleline>
                                                 </td>
@@ -412,8 +470,8 @@
                                                                             style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:22px;line-height:26px;font-weight:400;font-style:normal;color:#FFFFFF;text-decoration:none;letter-spacing:0px;">
                                                                             <singleline>
                                                                                 <div mc:edit Simpli>
-                                                                                    <strong
-                                                                                        style="color:#FFFFFF;">{{ $details['invoice'] }}</strong>
+                                                                                    ORDER: <strong
+                                                                                        style="color:#FFFFFF;">WR#5TB5@QXZ</strong>
                                                                                 </div>
                                                                             </singleline>
                                                                         </td>
@@ -432,7 +490,7 @@
                                                 </td>
                                             </tr>
 
-                                            {{-- <tr>
+                                            <tr>
                                                 <td align="center">
                                                     <!-- Content -->
                                                     <table border="0" align="center" cellpadding="0"
@@ -524,7 +582,7 @@
                                                     </table>
                                                     <!-- Content -->
                                                 </td>
-                                            </tr> --}}
+                                            </tr>
 
                                             <tr>
                                                 <td height="40" style="font-size:40px;line-height:40px;" Simpli>
@@ -540,6 +598,379 @@
                         </td>
                     </tr>
                     <!-- simpli-header-13 -->
+                </table>
+
+                <table border="0" align="center" cellpadding="0" cellspacing="0" role="presentation"
+                    class="row container-padding25" width="600" style="width:600px;max-width:600px;" Simpli>
+                    <!-- content-3A -->
+                    <tr>
+                        <td height="40" style="font-size:40px;line-height:40px;" Simpli>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="center-text" Simpli align="center"
+                            style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:12px;line-height:24px;font-weight:900;font-style:normal;color:#ff9019;text-decoration:none;letter-spacing:2px;">
+                            <singleline>
+                                <div mc:edit Simpli>
+                                    WHAT'S INSIDE
+                                </div>
+                            </singleline>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="center-text" Simpli align="center"
+                            style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:28px;line-height:34px;font-weight:700;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
+                            <singleline>
+                                <div mc:edit Simpli>
+                                    Your Member
+                                </div>
+                            </singleline>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="20" style="font-size:20px;line-height:20px;" Simpli>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="center" Simpli bgcolor="#FFFFFF" style="border-radius:36px 36px 0 0;">
+                            <!-- content -->
+                            <table border="0" align="center" cellpadding="0" cellspacing="0"
+                                role="presentation" class="row container-padding" width="520"
+                                style="width:520px;max-width:520px;">
+                                <tr>
+                                    <td height="40" style="font-size:40px;line-height:40px;" Simpli>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="center-text" Simpli align="left"
+                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:20px;line-height:24px;font-weight:700;font-style:normal;color:#ff9019;text-decoration:none;letter-spacing:0px;">
+                                        <singleline>
+                                            <div mc:edit Simpli>
+                                                Product Name
+                                            </div>
+                                        </singleline>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="5" style="font-size:5px;line-height:5px;" Simpli>
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="center-text" Simpli align="left"
+                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;font-weight:400;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
+                                        <singleline>
+                                            <div mc:edit Simpli>
+                                                Lorem ipsum dolor sit amet, consec tetur adipisicing elit,
+                                                sed do eiusmod tempor ut labore et dolore.
+                                            </div>
+                                        </singleline>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10" style="font-size:10px;line-height:10px;" Simpli>
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="center-text" Simpli align="left"
+                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;font-weight:400;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
+                                        <singleline>
+                                            <div mc:edit Simpli>
+                                                <strong>Color:</strong> white
+                                            </div>
+                                        </singleline>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="center-text" Simpli align="left"
+                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;font-weight:400;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
+                                        <singleline>
+                                            <div mc:edit Simpli>
+                                                <strong>Qty:</strong> 1
+                                            </div>
+                                        </singleline>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="center-text" Simpli align="left"
+                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;font-weight:400;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
+                                        <singleline>
+                                            <div mc:edit Simpli>
+                                                <strong>Price:</strong> $199.99
+                                            </div>
+                                        </singleline>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="20" style="font-size:20px;line-height:20px;" Simpli>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <!-- content -->
+                        </td>
+                    </tr>
+                    <!-- content-3A -->
+                </table>
+
+                <table border="0" align="center" cellpadding="0" cellspacing="0" role="presentation"
+                    class="row container-padding25" width="600" style="width:600px;max-width:600px;" Simpli>
+                    <!-- content-3C -->
+                    <tr>
+                        <td align="center" Simpli bgcolor="#FFFFFF"
+                            style="border-radius:0 0 36px 36px; border-bottom:solid 6px #DDDDDD;">
+                            <!-- content -->
+                            <table border="0" align="center" cellpadding="0" cellspacing="0"
+                                role="presentation" class="row container-padding" width="520"
+                                style="width:520px;max-width:520px;">
+                                <tr>
+                                    <td height="15"
+                                        style="border-bottom: 4px dotted #E4E4E4;font-size:15px;line-height:15px;">
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="30" style="font-size:30px;line-height:30px;" Simpli>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <!--[if (gte mso 9)|(IE)]><table border="0" cellpadding="0" cellspacing="0"><tr><td><![endif]-->
+                                        <!-- Content -->
+                                        <table border="0" align="left" cellpadding="0" cellspacing="0"
+                                            role="presentation" width="100%" style="width:100%;max-width:100%;">
+                                            <tr>
+                                                <td>
+                                                    <!--[if (gte mso 9)|(IE)]><table border="0" cellpadding="0" cellspacing="0"><tr><td><![endif]-->
+                                                    <!-- column -->
+                                                    <table border="0" align="left" cellpadding="0"
+                                                        cellspacing="0" role="presentation" class="row"
+                                                        width="240" style="width:240px;max-width:240px;">
+                                                        <tr>
+                                                            <td class="center-text" Simpli align="left"
+                                                                style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:20px;line-height:24px;font-weight:700;font-style:normal;color:#00000c;text-decoration:none;letter-spacing:0px;">
+                                                                <singleline>
+                                                                    <div mc:edit Simpli>
+                                                                        Metode Pembayaran
+                                                                    </div>
+                                                                </singleline>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center-text" Simpli align="left"
+                                                                style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:40px;font-weight:400;font-style:normal;color:#666666;text-decoration:none;letter-spacing:0px;">
+                                                                <singleline>
+                                                                    <div mc:edit Simpli>
+                                                                        Mastercard ending in 4097
+                                                                    </div>
+                                                                </singleline>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <!-- column -->
+                                                    <!--[if (gte mso 9)|(IE)]></td><td><![endif]-->
+                                                    <!-- gap -->
+                                                    <table border="0" align="left" cellpadding="0"
+                                                        cellspacing="0" role="presentation" class="row"
+                                                        width="30" style="width:30px;max-width:30px;">
+                                                        <tr>
+                                                            <td height="30"
+                                                                style="font-size:30px;line-height:30px;">&nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                    <!-- gap -->
+                                                    <!--[if (gte mso 9)|(IE)]></td><td><![endif]-->
+                                                    <!-- column -->
+                                                    <table border="0" align="left" cellpadding="0"
+                                                        cellspacing="0" role="presentation"
+                                                        class="row m-padding-top20" width="250"
+                                                        style="width:250px;max-width:250px;">
+                                                        <tr>
+                                                            <td align="center">
+                                                                <!-- row -->
+                                                                <table border="0" align="right" cellpadding="0"
+                                                                    cellspacing="0" role="presentation"
+                                                                    class="center-float">
+                                                                    <tr>
+                                                                        <td align="center">
+                                                                            <!--[if (gte mso 9)|(IE)]><table border="0" cellpadding="0" cellspacing="0"><tr><td><![endif]-->
+                                                                            <!-- column -->
+                                                                            <table border="0" align="left"
+                                                                                cellpadding="0" cellspacing="0"
+                                                                                role="presentation" width="100"
+                                                                                style="width:100px;max-width:100px;">
+                                                                                <tr>
+                                                                                    <td Simpli align="right"
+                                                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:20px;line-height:30px;font-weight:700;font-style:normal;color:#00000c;text-decoration:none;letter-spacing:0px;">
+                                                                                        <singleline>
+                                                                                            <div mc:edit Simpli>
+                                                                                                Subtotal:
+                                                                                            </div>
+                                                                                        </singleline>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                {{-- <tr>
+                                                                                    <td Simpli align="right"
+                                                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:20px;line-height:30px;font-weight:700;font-style:normal;color:#00000c;text-decoration:none;letter-spacing:0px;">
+                                                                                        <singleline>
+                                                                                            <div mc:edit Simpli>
+                                                                                                Tax:
+                                                                                            </div>
+                                                                                        </singleline>
+                                                                                    </td>
+                                                                                </tr> --}}
+                                                                            </table>
+                                                                            <!-- column -->
+                                                                            <!--[if (gte mso 9)|(IE)]></td><td><![endif]-->
+                                                                            <!-- gap -->
+                                                                            <table border="0" align="left"
+                                                                                cellpadding="0" cellspacing="0"
+                                                                                role="presentation" width="20"
+                                                                                style="width:20px;max-width:20px;">
+                                                                                <tr>
+                                                                                    <td height="20"
+                                                                                        style="font-size:20px;line-height:20px;">
+                                                                                        &nbsp;</td>
+                                                                                </tr>
+                                                                            </table>
+                                                                            <!-- gap -->
+                                                                            <!--[if (gte mso 9)|(IE)]></td><td><![endif]-->
+                                                                            <!-- column -->
+                                                                            <table border="0" align="left"
+                                                                                cellpadding="0" cellspacing="0"
+                                                                                role="presentation" width="70"
+                                                                                style="width:70px;max-width:70px;">
+                                                                                <tr>
+                                                                                    <td Simpli align="left"
+                                                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:20px;line-height:30px;font-weight:400;font-style:normal;color:#00000c;text-decoration:none;letter-spacing:0px;">
+                                                                                        <singleline>
+                                                                                            <div mc:edit Simpli>
+                                                                                                Rp. 1.500.000
+                                                                                            </div>
+                                                                                        </singleline>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                {{-- <tr>
+                                                                                    <td Simpli align="left"
+                                                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:20px;line-height:30px;font-weight:400;font-style:normal;color:#00000c;text-decoration:none;letter-spacing:0px;">
+                                                                                        <singleline>
+                                                                                            <div mc:edit Simpli>
+                                                                                                $96.00
+                                                                                            </div>
+                                                                                        </singleline>
+                                                                                    </td>
+                                                                                </tr> --}}
+                                                                            </table>
+                                                                            <!-- column -->
+                                                                            <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                                <!-- row -->
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <!-- column -->
+                                                    <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="20" style="font-size:20px;line-height:20px;">&nbsp;
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!-- Content -->
+                                        <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <!-- Order number -->
+                                        <table border="0" align="center" cellpadding="0" cellspacing="0"
+                                            role="presentation" class="row" width="520"
+                                            style="width:520px;max-width:520px;">
+                                            <tr>
+                                                <td align="center" height="80" Simpli
+                                                    style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:24px;line-height:32px;font-weight:700;font-style:normal;color:#FFFFFF;text-decoration:none;letter-spacing:0px;height:80px;border-radius: 80px;"
+                                                    bgcolor="#ff9019">
+                                                    <singleline>
+                                                        <div mc:edit Simpli>
+                                                            TOTAL: Rp. 1.500.000
+                                                        </div>
+                                                    </singleline>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!-- Order number -->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="20" style="font-size:20px;line-height:20px;" Simpli>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="15"
+                                        style="border-bottom: 4px dotted #E4E4E4;font-size:15px;line-height:15px;">
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="20" style="font-size:20px;line-height:20px;" Simpli>&nbsp;</td>
+                                </tr>
+                                {{-- <tr>
+                                    <td align="center">
+                                        <!-- Paragraphs -->
+                                        <table border="0" cellspacing="0" cellpadding="0" role="presentation"
+                                            align="center" class="row" width="480"
+                                            style="width:480px;max-width:480px;">
+                                            <tr>
+                                                <td class="center-text" Simpli align="center"
+                                                    style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:14px;line-height:26px;font-weight:400;font-style:italic;color:#333333;text-decoration:none;letter-spacing:0px;">
+                                                    <singleline>
+                                                        <div mc:edit Simpli>
+                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                                                            aliqua.
+                                                        </div>
+                                                    </singleline>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!-- Paragraphs -->
+                                    </td>
+                                </tr> --}}
+                                <tr>
+                                    <td height="20" style="font-size:20px;line-height:20px;" Simpli>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <!-- Button -->
+                                        <table border="0" cellspacing="0" cellpadding="0" role="presentation"
+                                            align="center" class="center-float">
+                                            <tr>
+                                                <td align="center" Simpli bgcolor="#ff7775"
+                                                    style="border-radius: 6px;">
+                                                    <!--[if (gte mso 9)|(IE)]>
+              <table border="0" cellpadding="0" cellspacing="0" align="center">
+                <tr>
+                  <td align="center" width="35"></td>
+                  <td align="center" height="50" style="height:50px;">
+                  <![endif]-->
+                                                    <singleline>
+                                                        <a href="#" target="_blank" mc:edit
+                                                            style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:20px;font-weight:700;font-style:normal;color:#FFFFFF;text-decoration:none;letter-spacing:0px;padding: 15px 35px 15px 35px;display: inline-block;"><span>VIEW
+                                                                MY ORDER</span></a>
+                                                    </singleline>
+                                                    <!--[if (gte mso 9)|(IE)]>
+                  </td>
+                  <td align="center" width="35"></td>
+                </tr>
+              </table>
+            <![endif]-->
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!-- Buttons -->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="30" style="font-size:30px;line-height:30px;" Simpli>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <!-- content -->
+                        </td>
+                    </tr>
+                    <!-- content-3C -->
                 </table>
 
                 <table border="0" align="center" cellpadding="0" cellspacing="0" role="presentation"
@@ -783,8 +1214,7 @@
                                                     style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:14px;line-height:24px;font-weight:480;font-style:normal;color:#666666;text-decoration:none;letter-spacing:0px;">
                                                     <multiline>
                                                         <div mc:edit Simpli>
-                                                            {{ date('Y') }} Pesona Plesiran Indonesia. All Rights
-                                                            Reserved.<br>
+                                                            {{ date('Y') }} Pesona Plesiran Indonesia. All Rights Reserved.<br>
                                                             {{-- Address name St. 24, City Name, State, Country Name<br><br>
                                                             You received this email because you signed up for Simpli - a
                                                             productivity tool that keep things organized. --}}
@@ -801,9 +1231,8 @@
                                 <tr>
                                     <td align="center" class="center-text">
                                         <img style="width:120px;border:0px;display: inline!important;"
-                                            src="{{ asset('frontend/assets4/img/logo_plesiran_new_black.png') }}"
-                                            width="120" border="0" editable="true" Simpli data-image-edit
-                                            Simpli alt="logo">
+                                            src="{{ asset('frontend/assets4/img/logo_plesiran_new_black.png') }}" width="120" border="0"
+                                            editable="true" Simpli data-image-edit Simpli alt="logo">
                                     </td>
                                 </tr>
                                 <tr>

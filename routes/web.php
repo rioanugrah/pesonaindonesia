@@ -36,6 +36,9 @@ Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('f
 Route::get('tracking_order', 'FrontendController@tracking_order')->name('frontend.tracking');
 Route::post('tracking_order/cari', 'FrontendController@tracking_order_search')->name('frontend.tracking.cari');
 
+Route::get('testingemail', function(){
+    return view('email.testingOrder');
+});
 
 Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
 
