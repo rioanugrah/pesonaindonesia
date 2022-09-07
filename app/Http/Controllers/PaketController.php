@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\KategoriPaket;
 use App\Models\Paket;
 use App\Models\PaketList;
 use App\Models\PaketOrder;
@@ -38,6 +39,9 @@ class PaketController extends Controller
                     // })
                     ->addColumn('total_harga', function($row){
                         return 'Rp. '.number_format($row->price-($row->diskon/100)*$row->price,2,",",".");
+                    })
+                    ->addColumn('kategori_paket_id', function($row){
+                        return $row->kategoriPaket->kategori_paket;
                     })
                     // ->addColumn('status', function($row){
                     //     if($row->status == 'Y'){
@@ -208,6 +212,9 @@ class PaketController extends Controller
                     ->addColumn('price', function($row){
                         return 'Rp. '.number_format($row->price,2,",",".");
                     })
+                    ->addColumn('kategori_paket_id', function($row){
+                        return $row->kategoriPaket->kategori_paket;
+                    })
                     // ->addColumn('deskripsi', function($row){
                     //     return substr($row->deskripsi, 0, 50);
                     // })
@@ -252,8 +259,10 @@ class PaketController extends Controller
         // dd($request->all());
         if ($validator->passes()) {
             $input = $request->all();
+            $paket = Paket::find($id);
             $input['id'] = 'PK-'.rand(1000,9999);
             $input['paket_id'] = $id;
+            $input['kategori_paket_id'] = $paket->kategori_paket_id;
 
             $image = $request->file('images');
             $img = \Image::make($image->path());
@@ -372,7 +381,7 @@ class PaketController extends Controller
             // $input['bank'] = $bank;
 
             $input['qty'] = $request->qty;
-            $input['price'] = $data['paket_lists']['price'];
+            $input['price'] = $request->orderTotal;
             $input['status'] = 1;
 
             $paket_order = PaketOrder::create($input);

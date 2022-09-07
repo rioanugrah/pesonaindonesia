@@ -50,6 +50,7 @@
                             <thead>
                                 <tr>
                                     <th>Paket</th>
+                                    <th>Kategori Paket</th>
                                     {{-- <th>Deskripsi</th> --}}
                                     {{-- <th>Harga</th>
                                     <th>Diskon</th>
@@ -104,10 +105,10 @@
                     name: 'nama_paket'
                 },
                 // {data: 'barcode', name: 'barcode'},
-                // {
-                //     data: 'deskripsi',
-                //     name: 'deskripsi'
-                // },
+                {
+                    data: 'kategori_paket_id',
+                    name: 'kategori_paket_id'
+                },
                 // {
                 //     data: 'price',
                 //     name: 'price'

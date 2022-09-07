@@ -113,7 +113,7 @@
                                     @if ($order->status == 0)
                                     <td><span class="badge bg-danger">{{ $order->id }}</span></td>
                                     @elseif ($order->status == 1)
-                                    <td><span class="badge bg-secondary">{{ $order->id }}</span></td>
+                                    <td><span class="badge bg-primary">{{ $order->id }}</span></td>
                                     @elseif ($order->status == 2)
                                     <td><span class="badge bg-warning">{{ $order->id }}</span></td>
                                     @elseif ($order->status == 3)

@@ -17,6 +17,7 @@ class PaketList extends Model
 
     public $fillable = [
         'id',
+        'kategori_paket_id',
         'paket_id',
         'nama_paket',
         'jumlah_paket',
@@ -30,5 +31,9 @@ class PaketList extends Model
     public function pakets()
     {
         return $this->belongsTo(\App\Models\Paket::class, 'paket_id');
+    }
+    public function kategoriPaket()
+    {
+        return $this->belongsTo(\App\Models\KategoriPaket::class, 'kategori_paket_id');
     }
 }

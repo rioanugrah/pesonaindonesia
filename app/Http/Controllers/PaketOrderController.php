@@ -34,7 +34,7 @@ class PaketOrderController extends Controller
                             return '<span class="badge bg-danger">Tolak</span>';
                         }
                         elseif($row->status == 1){
-                            return '<span class="badge bg-secondary">Menunggu Pembayaran</span>';
+                            return '<span class="badge bg-primary">Menunggu Pembayaran</span>';
                         }
                         elseif($row->status == 2){
                             return '<span class="badge bg-warning">Sedang Diproses</span>';

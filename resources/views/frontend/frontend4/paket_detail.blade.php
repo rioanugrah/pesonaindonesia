@@ -30,6 +30,7 @@
                 <thead>
                     <tr>
                         <th>Paket</th>
+                        <th>Deskripsi</th>
                         <th>Pax</th>
                         <th>Harga</th>
                         <th></th>
@@ -46,6 +47,9 @@
                             {{-- <p class="mb-0">(Extra beds available: Crib, <br> Rollaway bed)</p> --}}
                         </td>
                         <td>
+                            <p>{{ $paket_list->deskripsi }}</p>
+                        </td>
+                        <td>
                             <div class="table-icon">
                                 @for ($i = 0; $i < $paket_list->jumlah_paket; $i++)
                                 <i class="flaticon-people"></i>
@@ -58,7 +62,13 @@
                             {{-- <p>{{ $paket_list->jumlah_paket }}</p> --}}
                         </td>
                         <td class="room-price">Rp. {{ number_format($paket_list->price,2,",",".") }}</td>
-                        <td> <a href="{{ route('frontend.paket.cart',['slug' => $pakets->slug,'id' => $paket_list->id]) }}" class="cws-button alt">Buy</a></td>
+                        <td>
+                            @if ($paket_list->status == 1)
+                            <a href="{{ route('frontend.paket.cart',['slug' => $pakets->slug,'id' => $paket_list->id]) }}" class="cws-button alt">Buy</a>                                
+                            @else
+                            <a href="javascript:void()" class="cws-button alt gray">Sold Out</a>                                
+                            @endif
+                        </td>
                     </tr>
                     @empty
                     <tr>

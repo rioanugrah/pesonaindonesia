@@ -15,6 +15,7 @@ class CreatePaketTable extends Migration
     {
         Schema::create('paket', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->integer('kategori_paket_id');
             $table->string('slug');
             $table->string('nama_paket');
             $table->text('deskripsi');

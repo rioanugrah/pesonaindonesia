@@ -19,6 +19,8 @@ use App\Models\PaketList;
 use App\Models\PaketOrder;
 use App\Models\PaketOrderList;
 
+use App\Models\KategoriPaket;
+
 use App\Models\KabupatenKota;
 use \Carbon\Carbon;
 

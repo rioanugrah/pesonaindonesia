@@ -48,6 +48,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Paket</th>
+                                <th>Kategori Paket</th>
                                 {{-- <th>Deskripsi</th> --}}
                                 <th>Jumlah Paket</th>
                                 <th>Harga</th>
@@ -100,6 +101,10 @@
             {
                 data: 'nama_paket',
                 name: 'nama_paket'
+            },
+            {
+                data: 'kategori_paket_id',
+                name: 'kategori_paket_id'
             },
             {
                 data: 'jumlah_paket',

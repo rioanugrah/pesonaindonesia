@@ -68,8 +68,8 @@
                                         <label for="billing_qty">Jumlah<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <div class="input-group">
-                                            <input id="jumlah" type="text" name="qty" placeholder=""
-                                                value="" class="input-text">
+                                            <input id="" type="text" name="qty" placeholder=""
+                                                value="" class="input-text jumlah">
                                             {{-- <button type="button" name="add" id="add" class="cws-button alt"><i class="fa fa-plus"></i></button> --}}
                                         </div>
                                     </p>
@@ -127,18 +127,28 @@
                                     </thead>
                                     <tbody>
                                         <tr class="cart_item">
-                                            <td class="product-name">{{ $paket_lists->nama_paket }}</td>
-                                            <td><span class="amount">Rp. {{ number_format($paket_lists->price,2,",",".") }}</span></td>
+                                            <td class="product-name">{{ $paket_lists->nama_paket }} <span id="jumlah_order"></span></td>
+                                            <td>
+                                                <span class="amount">Rp. {{ number_format($paket_lists->price,0,",",".") }}</span>
+                                                {{-- <input type="text" value="{{ $paket_lists->price }}" id="price"> --}}
+                                            </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr class="cart-subtotal">
                                             <td>Cart Subtotal</td>
-                                            <td><span class="amount">Rp. {{ number_format($paket_lists->price,2,",",".") }}</span></td>
+                                            <td>
+                                                <span class="amount" id="subTotal"></span>
+                                                {{-- <span class="amount">Rp. {{ number_format($paket_lists->price,2,",",".") }}</span> --}}
+                                            </td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <th><span class="amount">Rp. {{ number_format($paket_lists->price,2,",",".") }}</span></th>
+                                            <th>
+                                                <span class="amount" id="orderTotal"></span>
+                                                {{-- <span class="amount">Rp. {{ number_format($paket_lists->price,2,",",".") }}</span> --}}
+                                                <input type="hidden" name="orderTotal" id="order_total">
+                                            </th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -207,14 +217,56 @@
             </div>
         </div>
     </div>
+    {{-- {{ $paket_lists->kategori_paket_id }} --}}
 @endsection
 
 @section('js')
 <script>
-    $('#jumlah').change(function(){
-        if($('#jumlah').val() > $('#detail_maksimal').val()){
+    $('.jumlah').change(function(){
+        if($('.jumlah').val() > $('#detail_maksimal').val()){
             alert('Jumlah anggota melebihi batas yang ditentukan');
-            $('#jumlah').val('')
+            $('.jumlah').val('');
+        }else{
+            if({{ $paket_lists->kategori_paket_id }} == 2){
+                var price = {{ $paket_lists->price }};
+                var penjumlahan = $('.jumlah').val() * price;
+    
+                var bilangan = penjumlahan;
+        
+                var	number_string = bilangan.toString(),
+                    sisa 	= number_string.length % 3,
+                    rupiah 	= number_string.substr(0, sisa),
+                    ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
+                        
+                if (ribuan) {
+                    separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+    
+                document.getElementById('jumlah_order').innerHTML = ' - '+$('.jumlah').val()+'x';
+                document.getElementById('subTotal').innerHTML = 'Rp. '+rupiah;
+                document.getElementById('orderTotal').innerHTML = 'Rp. '+rupiah;
+                $('#order_total').val(penjumlahan);
+            }else if({{ $paket_lists->kategori_paket_id }} == 1){
+                var price = {{ $paket_lists->price }};
+    
+                var bilangan = price;
+        
+                var	number_string = bilangan.toString(),
+                    sisa 	= number_string.length % 3,
+                    rupiah 	= number_string.substr(0, sisa),
+                    ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
+                        
+                if (ribuan) {
+                    separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+    
+                document.getElementById('jumlah_order').innerHTML = ' - '+$('.jumlah').val()+' pax';
+                document.getElementById('subTotal').innerHTML = 'Rp. '+rupiah;
+                document.getElementById('orderTotal').innerHTML = 'Rp. '+rupiah;
+                $('#order_total').val(price);
+            }
         }
 
         
@@ -246,11 +298,14 @@
     $(document).ready(function(){
         var i=1;  
         $('#add').click(function(){  
-            if(i < $('#jumlah').val()){
+            if(i < $('.jumlah').val()){
                 $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="nama_anggota[]" placeholder="Nama Anggota '+i+'" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="cws-button full-width alt btn_remove">X</button></td></tr>');  
                 i++;  
             }
-        });  
+        });
+
+        // if({{ $paket_lists->kategori_paket_id }} == 1){
+        // }
 
         $(document).on('click', '.btn_remove', function(){  
             var button_id = $(this).attr("id");   
