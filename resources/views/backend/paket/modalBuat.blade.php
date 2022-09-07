@@ -51,6 +51,16 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label">Kategori Paket</label>
+                        <select name="kategori_paket_id" class="form-control" id="">
+                            <option>-- Kategori Paket --</option>
+                            <option value="1">Private</option>
+                            <option value="2">Publik</option>
+                        </select>
+                        {{-- <input type="text" class="form-control" name="nama_paket" placeholder="Nama Paket"> --}}
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label">Deskripsi</label>
                         <textarea name="deskripsi" class="form-control" cols="30" rows="10"></textarea>
                         {{-- <input type="email" class="form-control" id="formemail" placeholder="Enter your Email..."> --}}
