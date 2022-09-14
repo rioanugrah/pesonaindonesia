@@ -129,7 +129,7 @@
                                         <tr class="cart_item">
                                             <td class="product-name">{{ $paket_lists->nama_paket }} <span id="jumlah_order"></span></td>
                                             <td>
-                                                <span class="amount">Rp. {{ number_format($paket_lists->price,0,",",".") }}</span>
+                                                <span class="amount">Rp. {{ number_format($paket_lists->price-(($paket_lists->diskon / 100)*$paket_lists->price),0,",",".") }}</span>
                                                 {{-- <input type="text" value="{{ $paket_lists->price }}" id="price"> --}}
                                             </td>
                                         </tr>
@@ -228,7 +228,7 @@
             $('.jumlah').val('');
         }else{
             if({{ $paket_lists->kategori_paket_id }} == 2){
-                var price = {{ $paket_lists->price }};
+                var price = {{ $paket_lists->price - (($paket_lists->diskon / 100)*$paket_lists->price) }};
                 var penjumlahan = $('.jumlah').val() * price;
     
                 var bilangan = penjumlahan;
@@ -248,7 +248,8 @@
                 document.getElementById('orderTotal').innerHTML = 'Rp. '+rupiah;
                 $('#order_total').val(penjumlahan);
             }else if({{ $paket_lists->kategori_paket_id }} == 1){
-                var price = {{ $paket_lists->price }};
+                // var price = {{ $paket_lists->price }};
+                var price = {{ $paket_lists->price - (($paket_lists->diskon / 100)*$paket_lists->price) }};
     
                 var bilangan = price;
         

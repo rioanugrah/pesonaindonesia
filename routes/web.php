@@ -54,6 +54,29 @@ Route::prefix('paket')->group(function () {
     Route::post('{id}/upload', 'PaketController@paket_bukti_pembayaran')->name('frontend.paket.transfer');
 });
 
+Route::get('testingPayment', function(){
+    return json_encode([
+        'partner_tx_id' => 123,
+        'description' => '',
+        'notes' => '',
+        'sender_name' => 123,
+        'amount' => 123,
+        'email' => 123,
+        'phone_number' => 123,
+        'is_open' => false,
+        "step" => "input-amount",
+        'include_admin_fee' => false,
+        'list_disabled_payment_methods' => '',
+        'list_enabled_banks' => '',
+        // 'expiration' => '2022-09-12 23:00:00',
+        // 'due_date' => '2022-09-12 22:00:00',
+        // 'expiration' => '2022-09-12 21:00:00',
+        'expiration' => ''.\Carbon\Carbon::now()->addDays(1).'',
+        'due_date' => ''.\Carbon\Carbon::now().'',
+        "va_display_name" => "Display Name on VA"
+    ]);
+});
+
 Route::prefix('hotel')->group(function () {
     Route::get('/', 'FrontendController@hotel')->name('frontend.hotel');
     Route::get('search', 'FrontendController@search_hotel')->name('frontend.hotel_search');

@@ -14,13 +14,15 @@ class Transaksi extends Model
     public $incrementing = false;
     protected $primaryKey = 'id';
     protected $dates = ['deleted_at'];
-    public $timestamps = false;
+    // public $timestamps = false;
 
     public $fillable = [
         'id',
         'nama_penerima',
         'partner_tx_id',
+        'url',
         'total',
+        'status',
         'created_at',
         'updated_at',
     ];

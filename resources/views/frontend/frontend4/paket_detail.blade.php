@@ -61,7 +61,20 @@
                             </div>
                             {{-- <p>{{ $paket_list->jumlah_paket }}</p> --}}
                         </td>
-                        <td class="room-price">Rp. {{ number_format($paket_list->price,2,",",".") }}</td>
+                        <td class="room-price">
+                            @if ($paket_list->diskon == 0)
+                            <div>
+                                Rp. {{ number_format($paket_list->price,2,",",".") }}
+                            </div>
+                            @else
+                            <div style="text-decoration: line-through;text-decoration-color: #eb4034;">
+                                Rp. {{ number_format($paket_list->price,2,",",".") }}
+                            </div>
+                            <div>
+                                Rp. {{ number_format($paket_list->price-(($paket_list->diskon / 100)*$paket_list->price),2,",",".") }}
+                            </div>
+                            @endif
+                        </td>
                         <td>
                             @if ($paket_list->status == 1)
                             <a href="{{ route('frontend.paket.cart',['slug' => $pakets->slug,'id' => $paket_list->id]) }}" class="cws-button alt">Buy</a>                                
