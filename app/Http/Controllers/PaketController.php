@@ -512,6 +512,7 @@ class PaketController extends Controller
         $email_marketing = 'marketing@plesiranindonesia.com';
         $details = [
             'title' => 'Pembayaran ',
+            'invoice' => $id,
             'email' => $request->email_payment,
             'body' => null,
             'nama_pembayaran' => $request->nama_pembayaran,
