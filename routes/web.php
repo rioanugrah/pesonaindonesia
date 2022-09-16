@@ -39,6 +39,11 @@ Route::post('tracking_order/cari', 'FrontendController@tracking_order_search')->
 Route::get('testingemail', function(){
     return view('email.testingOrder');
 });
+Route::get('testingNew', function(){
+    $age = array("Peter"=>35, "Ben"=>37, "Joe"=>43);
+    echo json_encode($age['Peter']);
+    // return view('email.testingOrder');
+});
 
 Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
 

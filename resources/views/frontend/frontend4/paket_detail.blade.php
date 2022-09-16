@@ -46,7 +46,7 @@
                             {{-- </a> --}}
                             {{-- <p class="mb-0">(Extra beds available: Crib, <br> Rollaway bed)</p> --}}
                         </td>
-                        <td width="20%">
+                        <td>
                             <p>{{ $paket_list->deskripsi }}</p>
                         </td>
                         <td>

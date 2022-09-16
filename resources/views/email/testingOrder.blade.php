@@ -364,7 +364,8 @@
                                                     style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:24px;line-height:54px;font-weight:700;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
                                                     <singleline>
                                                         <div mc:edit Simpli>
-                                                            Terima kasih atas pesanan Anda!
+                                                            Konfirmasi Bukti Pembayaran
+                                                            {{-- Terima kasih atas pesanan Anda! --}}
                                                         </div>
                                                     </singleline>
                                                 </td>
@@ -378,8 +379,37 @@
                                                     style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
                                                     <singleline>
                                                         <div mc:edit Simpli>
-                                                            Kami akan mengirimkan informasi pelacakan segera setelah
-                                                            pesanan Anda dikirimkan.
+                                                            <table>
+                                                                <tr>
+                                                                    <td>No. Order</td>
+                                                                    <td>:</td>
+                                                                    <td><b>-</b></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Nama Pemesan</td>
+                                                                    <td>:</td>
+                                                                    <td><b>Rio Anugrah Adam Saputra</b></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Jumlah</td>
+                                                                    <td>:</td>
+                                                                    <td><b>2</b></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Harga</td>
+                                                                    <td>:</td>
+                                                                    <td><b>Rp. 1.500.000</b></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="3" align="center" Simpli bgcolor="#ff9019" style="border-radius: 6px;">
+                                                                        <singleline>
+                                                                            <a href="#" target="_blank" mc:edit  style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:20px;font-weight:700;font-style:normal;color:#FFFFFF;text-decoration:none;letter-spacing:0px;padding: 10px 35px 10px 35px;display: inline-block;"><span>BUKTI PEMBAYARAN</span></a>
+                                                                        </singleline>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            {{-- Kami akan mengirimkan informasi pelacakan segera setelah
+                                                            pesanan Anda dikirimkan. --}}
                                                         </div>
                                                     </singleline>
                                                 </td>
@@ -388,7 +418,7 @@
                                                 <td height="25" style="font-size:25px;line-height:25px;" Simpli>
                                                     &nbsp;</td>
                                             </tr>
-                                            <tr>
+                                            {{-- <tr>
                                                 <td align="center">
                                                     <!-- Use Code -->
                                                     <table border="0" cellspacing="0" cellpadding="0"
@@ -430,7 +460,7 @@
                                                     </table>
                                                     <!-- User Code -->
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
 
                                             {{-- <tr>
                                                 <td align="center">

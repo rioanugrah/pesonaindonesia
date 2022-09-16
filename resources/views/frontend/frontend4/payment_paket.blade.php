@@ -54,6 +54,30 @@
                         </table>
                     </div>
                 </div>
+                {{-- @if ($status_live != false) --}}
+                @if ($status_live == false)
+                <div class="col-12">
+                    <h3 id="order_review_heading" class="mt-30 mb-30">Status Pembayaran</h3>
+                    <div id="order_review" class="woocommerce-checkout-review-order">
+                        <table class="shop_table woocommerce-checkout-review-order-table">
+                            <tbody>
+                                <tr class="cart_item">
+                                    <td class="product-name">Status Pembayaran : <b>{{ $status }}</b></td>
+                                    <td></td>
+                                </tr>
+                                @if ($status_pembayaran != 3)
+                                <tr class="cart_item">
+                                    <td class="product-name">
+                                        <a href="{{ $transaksi->url }}" class="cws-button alt" target="_blank">Bayar Sekarang</a>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                @else
                 <div class="col-12">
                     <h3 id="order_review_heading" class="mt-30 mb-30">Pembayaran</h3>
                     <div id="order_review" class="woocommerce-checkout-review-order">
@@ -85,6 +109,7 @@
                         </table>
                     </div>
                 </div>
+                @endif
             </form>
         </div>
     </div>

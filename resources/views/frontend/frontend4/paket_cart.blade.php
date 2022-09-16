@@ -22,20 +22,20 @@
                                         <label for="billing_first_name">First Name<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <input id="billing_first_name" type="text" name="first_name" placeholder=""
-                                            value="" class="input-text">
+                                            value="" class="input-text" required>
                                     </p>
                                     <p id="billing_last_name_field" class="form-row form-row-last validate-required">
                                         <label for="billing_last_name">Last Name<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <input id="billing_last_name" type="text" name="last_name" placeholder=""
-                                            value="" class="input-text">
+                                            value="" class="input-text" required>
                                     </p>
                                     <div class="clear"></div>
                                     <p id="billing_address_1_field"
                                         class="form-row form-row-wide address-field validate-required">
                                         <label for="billing_address_1">Address<abbr title="required"
                                                 class="required">*</abbr></label>
-                                        <textarea name="alamat" id="" cols="30" rows="5"></textarea>
+                                        <textarea name="alamat" id="" cols="30" rows="5" required></textarea>
                                         {{-- <input id="billing_address_1" type="text" name="alamat" placeholder="Street address" value="" class="input-text"> --}}
                                     </p>
                                     <div class="clear"></div>
@@ -44,14 +44,14 @@
                                         <label for="billing_email">Email Address<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <input id="billing_email" type="text" name="email" placeholder=""
-                                            value="" class="input-text">
+                                            value="" class="input-text" required>
                                     </p>
                                     <p id="billing_phone_field"
                                         class="form-row form-row-last validate-required validate-phone">
                                         <label for="billing_phone">Phone<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <input id="billing_phone" type="text" name="phone" placeholder=""
-                                            value="" class="input-text">
+                                            value="" class="input-text" required>
                                     </p>
                                     <p id="billing_tgl_field"
                                         class="form-row form-row-last validate-required">
@@ -59,7 +59,7 @@
                                                 class="required">*</abbr></label>
                                         <div class="input-group">
                                             <input type="date" name="tanggal_berangkat" class="form-control" placeholder=""
-                                                value="" class="input-text">
+                                                value="" class="input-text" required>
                                         </div>
                                     </p>
                                     <div class="clear"></div>
@@ -69,7 +69,7 @@
                                                 class="required">*</abbr></label>
                                         <div class="input-group">
                                             <input id="" type="text" name="qty" placeholder=""
-                                                value="" class="input-text jumlah">
+                                                value="" class="input-text jumlah" required>
                                             {{-- <button type="button" name="add" id="add" class="cws-button alt"><i class="fa fa-plus"></i></button> --}}
                                         </div>
                                     </p>
@@ -152,60 +152,19 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                                <h3 id="order_review_heading" class="mt-30 mb-30">Metode Pembayaran</h3>
+                                {{-- <h3 id="order_review_heading" class="mt-30 mb-30">Metode Pembayaran</h3> --}}
                                 <div id="payment" class="woocommerce-checkout-payment">
-                                    <div class="payment_methods methods">
+                                    {{-- <div class="payment_methods methods">
                                         <div class="payment_method_bacs">
                                             <input id="payment_method_bacs" type="radio" name="payment_method"
                                                 value="BRI" data-order_button_text=""
                                                 class="input-radio">
                                             <label for="payment_method_bacs">BRI</label>
                                         </div>
-                                        {{-- <div class="payment_method_bacs">
-                                            <input id="payment_method_bacs" type="radio" name="payment_method"
-                                                value="bacs" checked="checked" data-order_button_text=""
-                                                class="input-radio">
-                                            <label for="payment_method_bacs">Direct Bank Transfer</label>
-                                            <div class="payment_box payment_method_bacs">
-                                                <p>Make your payment directly into our bank account. Please use your Order
-                                                    ID as the payment reference. Your order won’t be shipped until have
-                                                    account.</p>
-                                                <ul class="mb-20">
-                                                    <li>Etiam lobortis nulla mi, ac lacinia mauris </li>
-                                                    <li>Donec tempor erat vel scelerisque posuere</li>
-                                                    <li>Nam elementum elit eget tellus faucibus </li>
-                                                    <li>Aliquam turpis nibh, dictum eu consequat </li>
-                                                </ul>
-                                            </div>
-                                        </div> --}}
-                                        {{-- <div class="payment_method_cheque">
-                                            <input id="payment_method_cheque" type="radio" name="payment_method"
-                                                value="cheque" data-order_button_text="" class="input-radio">
-                                            <label for="payment_method_cheque">Cheque Payment</label>
-                                            <div style="display:none;" class="payment_box payment_method_cheque">
-                                                <p>Please send your cheque to Store Name, Store Street, Store Town, Store
-                                                    State / County, Store Postcode.</p>
-                                            </div>
-                                        </div>
-                                        <div class="payment_method_paypal">
-                                            <input id="payment_method_paypal" type="radio" name="payment_method"
-                                                value="paypal" data-order_button_text="Proceed to PayPal"
-                                                class="input-radio">
-                                            <label for="payment_method_paypal">PayPal <a
-                                                    href="https://www.paypal.com/gb/webapps/mpp/paypal-popup"
-                                                    onclick="javascript:window.open('https://www.paypal.com/gb/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"
-                                                    title="What is PayPal?" class="about_paypal">What is PayPal?</a><img
-                                                    src="https://www.paypalobjects.com/webstatic/mktg/Logo/AM_mc_vs_ms_ae_UK.png"
-                                                    alt="PayPal Acceptance Mark" class="visible-lg-block"></label>
-                                            <div style="display:none;" class="payment_box payment_method_paypal">
-                                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a
-                                                    PayPal account.</p>
-                                            </div>
-                                        </div> --}}
-                                    </div>
+                                    </div> --}}
                                     <div class="place-order mt-20">
                                         <input id="place_order" type="submit" name="woocommerce_checkout_place_order"
-                                            value="Place order" data-value="Update Totals"
+                                            value="Buy Now" data-value="Update Totals"
                                             class="cws-button full-width alt">
                                     </div>
                                     <div class="clear"></div>
@@ -228,6 +187,7 @@
             $('.jumlah').val('');
         }else{
             if({{ $paket_lists->kategori_paket_id }} == 2){
+
                 var price = {{ $paket_lists->price - (($paket_lists->diskon / 100)*$paket_lists->price) }};
                 var penjumlahan = $('.jumlah').val() * price;
     
@@ -300,7 +260,7 @@
         var i=1;  
         $('#add').click(function(){  
             if(i < $('.jumlah').val()){
-                $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="nama_anggota[]" placeholder="Nama Anggota '+i+'" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="cws-button full-width alt btn_remove">X</button></td></tr>');  
+                $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="nama_anggota[]" placeholder="Nama Anggota '+i+'" class="form-control name_list" required /></td><td><button type="button" name="remove" id="'+i+'" class="cws-button full-width alt btn_remove">X</button></td></tr>');  
                 i++;  
             }
         });

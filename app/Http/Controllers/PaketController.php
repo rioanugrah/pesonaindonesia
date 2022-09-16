@@ -28,7 +28,8 @@ class PaketController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
-        $this->payment_live = false;
+        $this->payment_live = env('OY_INDONESIA_LIVE');;
+        $this->automatics = $this->payment_live;
 
         $this->username = config('app.oy_username');
         $this->app_key = config('app.oy_api_key');
@@ -341,7 +342,7 @@ class PaketController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->passes()) {
             $data['pakets'] = Paket::where('slug',$slug)->first();
-            $data['banks'] = Bank::where('nama_bank',$request->payment_method)->first();
+            $data['banks'] = Bank::where('nama_bank','BRI')->first();
             // dd($banks->nama_bank);
             $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->first();
             // $input = $request;
@@ -356,137 +357,133 @@ class PaketController extends Controller
                 'tanggal_berangkat' => $request->tanggal_berangkat,
             ];
             if($request->qty > 1){
-                foreach ($request->nama_anggota as $key => $value) {
-                    // $data['anggota']['team'] = [
-                    //     'nama' => $value,
-                    //     'jumlah' => 1
-                    // ];
-                    PaketOrderList::create([
-                        // 'id' => rand(10000,99999),
-                        'order_paket_id' => $input['id'],
-                        'pemesan' => $value,
-                        'qty' => 1
-                    ]);
+                if(empty($request->nama_anggota)){
+                    return redirect()->back();
+                }else{
+                    foreach ($request->nama_anggota as $key => $value) {
+                        // $data['anggota']['team'] = [
+                        //     'nama' => $value,
+                        //     'jumlah' => 1
+                        // ];
+                        PaketOrderList::create([
+                            // 'id' => rand(10000,99999),
+                            'order_paket_id' => $input['id'],
+                            'pemesan' => $value,
+                            'qty' => 1
+                        ]);
+                    }
                 }
             }
-            $input['nama_paket'] = $data['paket_lists']['nama_paket'];
-            $input['pemesan'] = json_encode([
-                $data['order']
-            ]);
-            $input['bank'] = json_encode(
-                [
-                    [
-                        'nama_bank' => $data['banks']['nama_bank'],
-                        'nama_penerima' => $data['banks']['nama_penerima'],
-                        'nomor_rekening' => $data['banks']['nomor_rekening'],
-                    ]
-                ]
-            );
-            // $input['bank'] = $bank;
-
-            $input['qty'] = $request->qty;
-            $input['price'] = $request->orderTotal;
-            $input['status'] = 1;
-
-            $paket_order = PaketOrder::create($input);
 
             //Payment
 
-            // $paymentLink = new HTTP_Request2();
-            // // $paymentLink->setUrl($this->payment_production.'/balance');
-            // $paymentLink->setUrl($this->payment_production.'/payment-checkout/create-v2');
-            // // $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
-            // $paymentLink->setMethod(HTTP_Request2::METHOD_POST);
-            // $paymentLink->setConfig(array(
-            // 'follow_redirects' => TRUE
-            // ));
-            // $paymentLink->setHeader(array(
-            // 'x-oy-username:'.$this->username,
-            // 'x-api-key:'.$this->app_key,
-            // 'Content-Type' => 'application/json',
-            // 'Accept' => 'application/json'
-            // ));
-            // // $paymentLink->setBody(array(
-            // //     'partner_tx_id' => $input['id'],
-            // //     'description' => '',
-            // //     'notes' => '',
-            // //     'sender_name' => $request->first_name.' '.$request->last_name,
-            // //     'amount' => $request->orderTotal,
-            // //     'email' => $request->email,
-            // //     'phone_number' => $request->phone,
-            // //     'is_open' => true,
-            // //     'step' => 'input-amount',
-            // //     'include_admin_fee' => true,
-            // //     'list_disabled_payment_methods' => '',
-            // //     'list_enabled_banks' => '',
-            // //     'expiration' => ''.Carbon::now()->addDays(1).'',
-            // //     'due_date' => ''.Carbon::now().'',
-            // //     'va_display_name' => 'Display Name on VA',
-            // // ));
-            // $paymentLink->setBody(json_encode(
-            //     [
-            //         'partner_tx_id' => $input['id'],
-            //         'description' => '',
-            //         'notes' => '',
-            //         'sender_name' => $request->first_name.' '.$request->last_name,
-            //         'amount' => $request->orderTotal,
-            //         'email' => $request->email,
-            //         'phone_number' => $request->phone,
-            //         'is_open' => true,
-            //         "step" => "input-amount",
-            //         'include_admin_fee' => true,
-            //         'list_disabled_payment_methods' => '',
-            //         'list_enabled_banks' => '',
-            //         'expiration' => ''.Carbon::now()->addDays(1).'',
-            //         // 'expiration' => ''.Carbon::now()->addDays(1).'',
-            //         'due_date' => ''.Carbon::now().'',
-            //         "va_display_name" => "Display Name on VA"
-            //     ]
-            // ));
-            // // dd(Carbon::now()->addDays(1));
-            // try {
-            //     $response = $paymentLink->send();
-            //     if ($response->getStatus() == 200) {
-            //       echo $response->getBody();
-            //     }
-            //     else {
-            //       echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-            //       $response->getReasonPhrase();
-            //     }
-            // }
-            //     catch(HTTP_Request2_Exception $e) {
-            //     echo 'Error: ' . $e->getMessage();
-            // }
+            $paymentLink = new HTTP_Request2();
+            $paymentLink->setUrl($this->payment_production.'/payment-checkout/create-v2');
+            $paymentLink->setMethod(HTTP_Request2::METHOD_POST);
+            $paymentLink->setConfig(array(
+            'follow_redirects' => TRUE
+            ));
+            $paymentLink->setHeader(array(
+            'x-oy-username:'.$this->username,
+            'x-api-key:'.$this->app_key,
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+            ));
+            $paymentLink->setBody(json_encode(
+                [
+                    'partner_tx_id' => $input['id'],
+                    'description' => '',
+                    'notes' => '',
+                    'sender_name' => $request->first_name.' '.$request->last_name,
+                    'amount' => $request->orderTotal,
+                    'email' => $request->email,
+                    'phone_number' => $request->phone,
+                    'is_open' => true,
+                    "step" => "input-amount",
+                    'include_admin_fee' => true,
+                    'list_disabled_payment_methods' => '',
+                    'list_enabled_banks' => '',
+                    'expiration' => ''.Carbon::now()->addDays(1).'',
+                    'due_date' => ''.Carbon::now().'',
+                    "va_display_name" => "Display Name on VA"
+                ]
+            ));
+            try {
+                $response = $paymentLink->send();
+                if ($response->getStatus() == 200) {
+                $dataUrl = json_decode($response->getBody(),true);
+                // return redirect($dataUrl['url']);
 
-            $payment_link_array = array(
-                'id' => Str::uuid()->toString(),
-                'nama_penerima' => $request->first_name.' '.$request->last_name,
-                'total' => $request->orderTotal,
-                'partner_tx_id' => $input['id'],
-            );
-
-            Transaksi::firstOrCreate($payment_link_array);
-            
-            if($paket_order){
-                $message_title="Berhasil !";
-                $message_content="Orderan Berhasil";
-                $message_type="success";
-                $message_succes = true;
+                $input['nama_paket'] = $data['paket_lists']['nama_paket'];
+                $input['pemesan'] = json_encode([
+                    $data['order']
+                ]);
+    
+                if ($this->automatics == false) {
+                    //manual
+                    $input['bank'] = json_encode(
+                        [
+                            [
+                                'nama_bank' => $data['banks']['nama_bank'],
+                                'nama_penerima' => $data['banks']['nama_penerima'],
+                                'nomor_rekening' => $data['banks']['nomor_rekening'],
+                            ]
+                        ]
+                    );
+                }else{
+                    $input['bank'] = json_encode(
+                        [
+                            [
+                                'nama_bank' => 'OY Indonesia',
+                                'nama_penerima' => 'Pesona Plesiran Indonesia',
+                                'nomor_rekening' => '-'
+                            ]
+                        ]
+                    );
+                }
+    
+                $input['qty'] = $request->qty;
+                $input['price'] = $request->orderTotal;
+                $input['status'] = 1;
+    
+                $paket_order = PaketOrder::create($input);
+    
+                $payment_link_array = array(
+                    'id' => Str::uuid()->toString(),
+                    'nama_penerima' => $request->first_name.' '.$request->last_name,
+                    'total' => $request->orderTotal,
+                    'partner_tx_id' => $input['id'],
+                    'url' => $dataUrl['url'],
+                );
+    
+                Transaksi::firstOrCreate($payment_link_array);
+                
+                if($paket_order){
+                    $message_title="Berhasil !";
+                    $message_content="Orderan Berhasil";
+                    $message_type="success";
+                    $message_succes = true;
+                }
+    
+                $array_message = array(
+                    'success' => $message_succes,
+                    'message_title' => $message_title,
+                    'message_content' => $message_content,
+                    'message_type' => $message_type,
+                );
+                
+                return redirect(route('frontend.paket.payment',['id' => $input['id']]));
+                
+                }
+                else {
+                  echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+                  $response->getReasonPhrase();
+                }
             }
-
-            $array_message = array(
-                'success' => $message_succes,
-                'message_title' => $message_title,
-                'message_content' => $message_content,
-                'message_type' => $message_type,
-            );
-
-            // return $response->url;
+                catch(HTTP_Request2_Exception $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
             
-            return redirect(route('frontend.paket.payment',['id' => $input['id']]));
-            
-            // return response()->json($array_message);
-            // return $input;
         }
 
         // return response()->json(
@@ -497,6 +494,190 @@ class PaketController extends Controller
         // );
         // return $data;
     }
+
+
+    // public function paket_list_order(Request $request,$slug,$id)
+    // {
+    //     $rules = [
+    //         'first_name'  => 'required',
+    //         'last_name'  => 'required',
+    //         'alamat'  => 'required',
+    //         'email'  => 'required',
+    //         'phone'  => 'required',
+    //         'tanggal_berangkat'  => 'required',
+    //     ];
+ 
+    //     $messages = [
+    //         // 'images.required'  => 'Upload Gambar wajib diisi.',
+    //         // 'images.max'  => 'Upload Gambar Max 2MB.',
+    //         'first_name.required'   => 'Nama Pertama wajib diisi.',
+    //         'last_name.required'   => 'Nama Terakhir wajib diisi.',
+    //         'alamat.required'   => 'Alamat wajib diisi.',
+    //         'email.required'   => 'Email wajib diisi.',
+    //         'phone.required'   => 'No. Telpon wajib diisi.',
+    //         'tanggal_berangkat.required'   => 'Tanggal berangkat wajib diisi.',
+    //         // 'deskripsi.required'   => 'Deskripsi wajib diisi.',
+    //     ];
+
+    //     $validator = Validator::make($request->all(), $rules, $messages);
+    //     if ($validator->passes()) {
+    //         $data['pakets'] = Paket::where('slug',$slug)->first();
+    //         $data['banks'] = Bank::where('nama_bank',$request->payment_method)->first();
+    //         // dd($banks->nama_bank);
+    //         $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->first();
+    //         // $input = $request;
+    //         $input['id'] = 'INV-'.rand(0000001,9999999);
+    //         $data['order'] = [
+    //             'first_name' => $request->first_name,
+    //             'last_name' => $request->last_name,
+    //             'alamat' => $request->alamat,
+    //             'email' => $request->email,
+    //             'phone' => $request->phone,
+    //             'jumlah' => $request->qty,
+    //             'tanggal_berangkat' => $request->tanggal_berangkat,
+    //         ];
+    //         if($request->qty > 1){
+    //             foreach ($request->nama_anggota as $key => $value) {
+    //                 // $data['anggota']['team'] = [
+    //                 //     'nama' => $value,
+    //                 //     'jumlah' => 1
+    //                 // ];
+    //                 PaketOrderList::create([
+    //                     // 'id' => rand(10000,99999),
+    //                     'order_paket_id' => $input['id'],
+    //                     'pemesan' => $value,
+    //                     'qty' => 1
+    //                 ]);
+    //             }
+    //         }
+    //         $input['nama_paket'] = $data['paket_lists']['nama_paket'];
+    //         $input['pemesan'] = json_encode([
+    //             $data['order']
+    //         ]);
+    //         $input['bank'] = json_encode(
+    //             [
+    //                 [
+    //                     'nama_bank' => $data['banks']['nama_bank'],
+    //                     'nama_penerima' => $data['banks']['nama_penerima'],
+    //                     'nomor_rekening' => $data['banks']['nomor_rekening'],
+    //                 ]
+    //             ]
+    //         );
+    //         // $input['bank'] = $bank;
+
+    //         $input['qty'] = $request->qty;
+    //         $input['price'] = $request->orderTotal;
+    //         $input['status'] = 1;
+
+    //         $paket_order = PaketOrder::create($input);
+
+    //         //Payment
+
+    //         // $paymentLink = new HTTP_Request2();
+    //         // // $paymentLink->setUrl($this->payment_production.'/balance');
+    //         // $paymentLink->setUrl($this->payment_production.'/payment-checkout/create-v2');
+    //         // // $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
+    //         // $paymentLink->setMethod(HTTP_Request2::METHOD_POST);
+    //         // $paymentLink->setConfig(array(
+    //         // 'follow_redirects' => TRUE
+    //         // ));
+    //         // $paymentLink->setHeader(array(
+    //         // 'x-oy-username:'.$this->username,
+    //         // 'x-api-key:'.$this->app_key,
+    //         // 'Content-Type' => 'application/json',
+    //         // 'Accept' => 'application/json'
+    //         // ));
+    //         // // $paymentLink->setBody(array(
+    //         // //     'partner_tx_id' => $input['id'],
+    //         // //     'description' => '',
+    //         // //     'notes' => '',
+    //         // //     'sender_name' => $request->first_name.' '.$request->last_name,
+    //         // //     'amount' => $request->orderTotal,
+    //         // //     'email' => $request->email,
+    //         // //     'phone_number' => $request->phone,
+    //         // //     'is_open' => true,
+    //         // //     'step' => 'input-amount',
+    //         // //     'include_admin_fee' => true,
+    //         // //     'list_disabled_payment_methods' => '',
+    //         // //     'list_enabled_banks' => '',
+    //         // //     'expiration' => ''.Carbon::now()->addDays(1).'',
+    //         // //     'due_date' => ''.Carbon::now().'',
+    //         // //     'va_display_name' => 'Display Name on VA',
+    //         // // ));
+    //         // $paymentLink->setBody(json_encode(
+    //         //     [
+    //         //         'partner_tx_id' => $input['id'],
+    //         //         'description' => '',
+    //         //         'notes' => '',
+    //         //         'sender_name' => $request->first_name.' '.$request->last_name,
+    //         //         'amount' => $request->orderTotal,
+    //         //         'email' => $request->email,
+    //         //         'phone_number' => $request->phone,
+    //         //         'is_open' => true,
+    //         //         "step" => "input-amount",
+    //         //         'include_admin_fee' => true,
+    //         //         'list_disabled_payment_methods' => '',
+    //         //         'list_enabled_banks' => '',
+    //         //         'expiration' => ''.Carbon::now()->addDays(1).'',
+    //         //         // 'expiration' => ''.Carbon::now()->addDays(1).'',
+    //         //         'due_date' => ''.Carbon::now().'',
+    //         //         "va_display_name" => "Display Name on VA"
+    //         //     ]
+    //         // ));
+    //         // // dd(Carbon::now()->addDays(1));
+    //         // try {
+    //         //     $response = $paymentLink->send();
+    //         //     if ($response->getStatus() == 200) {
+    //         //       echo $response->getBody();
+    //         //     }
+    //         //     else {
+    //         //       echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    //         //       $response->getReasonPhrase();
+    //         //     }
+    //         // }
+    //         //     catch(HTTP_Request2_Exception $e) {
+    //         //     echo 'Error: ' . $e->getMessage();
+    //         // }
+
+    //         $payment_link_array = array(
+    //             'id' => Str::uuid()->toString(),
+    //             'nama_penerima' => $request->first_name.' '.$request->last_name,
+    //             'total' => $request->orderTotal,
+    //             'partner_tx_id' => $input['id'],
+    //         );
+
+    //         // Transaksi::firstOrCreate($payment_link_array);
+            
+    //         if($paket_order){
+    //             $message_title="Berhasil !";
+    //             $message_content="Orderan Berhasil";
+    //             $message_type="success";
+    //             $message_succes = true;
+    //         }
+
+    //         $array_message = array(
+    //             'success' => $message_succes,
+    //             'message_title' => $message_title,
+    //             'message_content' => $message_content,
+    //             'message_type' => $message_type,
+    //         );
+
+    //         // return $response->url;
+            
+    //         return redirect(route('frontend.paket.payment',['id' => $input['id']]));
+            
+    //         // return response()->json($array_message);
+    //         // return $input;
+    //     }
+
+    //     // return response()->json(
+    //     //     [
+    //     //         'success' => false,
+    //     //         'error' => $validator->errors()->all()
+    //     //     ]
+    //     // );
+    //     // return $data;
+    // }
 
     public function paket_bukti_pembayaran(Request $request, $id)
     {

@@ -33,6 +33,7 @@ use Mail;
 use DNS1D;
 use Validator;
 use DB;
+use HTTP_Request2;
 
 class FrontendController extends Controller
 {
@@ -51,6 +52,15 @@ class FrontendController extends Controller
             // [ 'image' => 'team01.png', 'name' => 'Kemal Izzuddin A.Md.T', 'posisi' => 'Chief Technology Officer' ],
             [ 'image' => 'tasya.jpg', 'name' => 'Tasya Ayu S.', 'posisi' => 'Chief Financial Officer' ],
         ];
+        $this->payment_live = env('OY_INDONESIA_LIVE');
+        $this->automatics = $this->payment_live;
+        $this->username = config('app.oy_username');
+        $this->app_key = config('app.oy_api_key');
+        if($this->payment_live == true){
+            $this->payment_production = 'https://partner.oyindonesia.com/api/';
+        }else{
+            $this->payment_production = 'https://api-stg.oyindonesia.com/api/';
+        }
         // protected $data['whatsapp'] = ['nomor' => '-', 'message' => 'Hello'];
     }
     public function index()
@@ -511,6 +521,7 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['paket'] = PaketOrder::find($id);
+        $data['transaksi'] = Transaksi::where('partner_tx_id',$id)->first();
         $data['anggotas'] = PaketOrderList::select('order_paket_id','pemesan','qty')
                                     ->where('order_paket_id', $data['paket']['id'])->get();
         foreach (json_decode($data['paket']['pemesan']) as $key => $p) {
@@ -518,24 +529,77 @@ class FrontendController extends Controller
             $data['pemesan'] = $p;
             // dd($data['pemesan']);
         }
-        foreach (json_decode($data['paket']['bank']) as $key => $bk) {
-            // dd($p);
-            $data['bank'] = $bk;
-            // dd($data['pemesan']);
+        $data['status_live'] = $this->automatics;
+
+        if($this->automatics == false){
+            foreach (json_decode($data['paket']['bank']) as $key => $bk) {
+                // dd($p);
+                $data['bank'] = $bk;
+                // dd($data['pemesan']);
+            }
         }
 
-        if($data['paket']['status'] == 1){
-            $data['status'] = 'Menunggu Pembayaran';
+        //Payment
+        $paymentLink = new HTTP_Request2();
+        $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
+        $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
+        $paymentLink->setConfig(array(
+        'follow_redirects' => TRUE
+        ));
+        $paymentLink->setHeader(array(
+        'x-oy-username:'.$this->username,
+        'x-api-key:'.$this->app_key,
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json'
+        ));
+        try {
+            $response = $paymentLink->send();
+            if ($response->getStatus() == 200) {
+                // $dataPayment = $response->getBody();
+                // return $dataPayment;
+                $dataPayment = json_decode($response->getBody(),true);
+                // return $dataPayment['data']['status'];
+
+                if($dataPayment['data']['status'] == 'created'){
+                    $data['status_pembayaran'] = 1;
+                    $data['status'] = 'Menunggu Pembayaran';
+                }
+                elseif($dataPayment['data']['status'] == 'complete'){
+                    $data['status_pembayaran'] = 3;
+                    $data['status'] = 'Pembayaran Berhasil';
+                    $data['paket']->update([
+                        'status' => $data['status_pembayaran']
+                    ]);
+                    $data['transaksi']->update([
+                        'status' => $data['status_pembayaran']
+                    ]);
+                }
+
+                return view('frontend.frontend4.payment_paket',$data);
+                
+                // if($data['paket']['status'] == 1){
+                //     $data['status'] = 'Menunggu Pembayaran';
+                // }
+                // elseif($data['paket']['status'] == 2){
+                //     $data['status'] = 'Sedang Diproses';
+                // }
+                // elseif($data['paket']['status'] == 3){
+                //     $data['status'] = 'Pembayaran Berhasil';
+                // }else{
+                //     $data['status'] = 'Pembayaran Ditolak';
+                // }
+                
+                // return view('frontend.frontend4.payment_paket',$data);
+            }
+            else {
+            echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+            $response->getReasonPhrase();
+            }
+        } catch (\Throwable $th) {
+            echo 'Error: ' . $th->getMessage();
         }
-        elseif($data['paket']['status'] == 2){
-            $data['status'] = 'Sedang Diproses';
-        }
-        elseif($data['paket']['status'] == 3){
-            $data['status'] = 'Pembayaran Berhasil';
-        }else{
-            $data['status'] = 'Pembayaran Ditolak';
-        }
-        return view('frontend.frontend4.payment_paket',$data);
+
+        
     }
 
     public function tracking_order()
