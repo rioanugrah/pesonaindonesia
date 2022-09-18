@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 {{-- @if ($status_live != false) --}}
-                @if ($status_live == false)
+                @if ($status_live != false)
                 <div class="col-12">
                     <h3 id="order_review_heading" class="mt-30 mb-30">Status Pembayaran</h3>
                     <div id="order_review" class="woocommerce-checkout-review-order">

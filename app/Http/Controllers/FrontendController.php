@@ -509,6 +509,7 @@ class FrontendController extends Controller
     public function paket_cart($slug,$id)
     {
         $data['whatsapp'] = $this->whatsapp;
+        $data['live'] = $this->automatics;
         $data['pakets'] = Paket::where('slug',$slug)->first();
         $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])
                                         ->where('id',$id)
@@ -531,75 +532,87 @@ class FrontendController extends Controller
         }
         $data['status_live'] = $this->automatics;
 
-        if($this->automatics == false){
+        if($this->automatics == true){
+            //Payment
+            $paymentLink = new HTTP_Request2();
+            $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
+            $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
+            $paymentLink->setConfig(array(
+            'follow_redirects' => TRUE
+            ));
+            $paymentLink->setHeader(array(
+            'x-oy-username:'.$this->username,
+            'x-api-key:'.$this->app_key,
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+            ));
+            try {
+                $response = $paymentLink->send();
+                if ($response->getStatus() == 200) {
+                    // $dataPayment = $response->getBody();
+                    // return $dataPayment;
+                    $dataPayment = json_decode($response->getBody(),true);
+                    // return $dataPayment['data']['status'];
+    
+                    if($dataPayment['data']['status'] == 'created'){
+                        $data['status_pembayaran'] = 1;
+                        $data['status'] = 'Menunggu Pembayaran';
+                    }
+                    elseif($dataPayment['data']['status'] == 'complete'){
+                        $data['status_pembayaran'] = 3;
+                        $data['status'] = 'Pembayaran Berhasil';
+                        $data['paket']->update([
+                            'status' => $data['status_pembayaran']
+                        ]);
+                        $data['transaksi']->update([
+                            'status' => $data['status_pembayaran']
+                        ]);
+                    }
+    
+                    return view('frontend.frontend4.payment_paket',$data);
+                    
+                    // if($data['paket']['status'] == 1){
+                    //     $data['status'] = 'Menunggu Pembayaran';
+                    // }
+                    // elseif($data['paket']['status'] == 2){
+                    //     $data['status'] = 'Sedang Diproses';
+                    // }
+                    // elseif($data['paket']['status'] == 3){
+                    //     $data['status'] = 'Pembayaran Berhasil';
+                    // }else{
+                    //     $data['status'] = 'Pembayaran Ditolak';
+                    // }
+                    
+                    // return view('frontend.frontend4.payment_paket',$data);
+                }
+                else {
+                echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+                $response->getReasonPhrase();
+                }
+            } catch (\Throwable $th) {
+                echo 'Error: ' . $th->getMessage();
+            }
+        }
+        else{
             foreach (json_decode($data['paket']['bank']) as $key => $bk) {
                 // dd($p);
                 $data['bank'] = $bk;
                 // dd($data['pemesan']);
             }
-        }
-
-        //Payment
-        $paymentLink = new HTTP_Request2();
-        $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
-        $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
-        $paymentLink->setConfig(array(
-        'follow_redirects' => TRUE
-        ));
-        $paymentLink->setHeader(array(
-        'x-oy-username:'.$this->username,
-        'x-api-key:'.$this->app_key,
-        'Content-Type' => 'application/json',
-        'Accept' => 'application/json'
-        ));
-        try {
-            $response = $paymentLink->send();
-            if ($response->getStatus() == 200) {
-                // $dataPayment = $response->getBody();
-                // return $dataPayment;
-                $dataPayment = json_decode($response->getBody(),true);
-                // return $dataPayment['data']['status'];
-
-                if($dataPayment['data']['status'] == 'created'){
-                    $data['status_pembayaran'] = 1;
-                    $data['status'] = 'Menunggu Pembayaran';
-                }
-                elseif($dataPayment['data']['status'] == 'complete'){
-                    $data['status_pembayaran'] = 3;
-                    $data['status'] = 'Pembayaran Berhasil';
-                    $data['paket']->update([
-                        'status' => $data['status_pembayaran']
-                    ]);
-                    $data['transaksi']->update([
-                        'status' => $data['status_pembayaran']
-                    ]);
-                }
-
-                return view('frontend.frontend4.payment_paket',$data);
-                
-                // if($data['paket']['status'] == 1){
-                //     $data['status'] = 'Menunggu Pembayaran';
-                // }
-                // elseif($data['paket']['status'] == 2){
-                //     $data['status'] = 'Sedang Diproses';
-                // }
-                // elseif($data['paket']['status'] == 3){
-                //     $data['status'] = 'Pembayaran Berhasil';
-                // }else{
-                //     $data['status'] = 'Pembayaran Ditolak';
-                // }
-                
-                // return view('frontend.frontend4.payment_paket',$data);
+            if($data['paket']['status'] == 1){
+                $data['status'] = 'Menunggu Pembayaran';
             }
-            else {
-            echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-            $response->getReasonPhrase();
+            elseif($data['paket']['status'] == 2){
+                $data['status'] = 'Sedang Diproses';
             }
-        } catch (\Throwable $th) {
-            echo 'Error: ' . $th->getMessage();
+            elseif($data['paket']['status'] == 3){
+                $data['status'] = 'Pembayaran Berhasil';
+            }else{
+                $data['status'] = 'Pembayaran Ditolak';
+            }
+            
+            return view('frontend.frontend4.payment_paket',$data);
         }
-
-        
     }
 
     public function tracking_order()

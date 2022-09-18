@@ -19,10 +19,14 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->payment_live = env('OY_INDONESIA_LIVE');
         $this->username = config('app.oy_username');
         $this->app_key = config('app.oy_api_key');
-        $this->payment_production = 'https://partner.oyindonesia.com/api/';
-        $this->payment_testing = 'https://api-stg.oyindonesia.com/api/';
+        if($this->payment_live == true){
+            $this->payment_production = 'https://partner.oyindonesia.com/api/';
+        }else{
+            $this->payment_production = 'https://api-stg.oyindonesia.com/api/';
+        }
     }
 
     /**
@@ -34,7 +38,7 @@ class HomeController extends Controller
     public function balance()
     {
         $request = new HTTP_Request2();
-        $request->setUrl($this->payment_testing.'/balance');
+        $request->setUrl($this->payment_production.'/balance');
         $request->setMethod(HTTP_Request2::METHOD_GET);
         $request->setConfig(array(
         'follow_redirects' => TRUE
