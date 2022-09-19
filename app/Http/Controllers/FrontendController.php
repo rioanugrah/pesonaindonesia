@@ -55,11 +55,13 @@ class FrontendController extends Controller
         $this->payment_live = env('OY_INDONESIA_LIVE');
         $this->automatics = $this->payment_live;
         $this->username = config('app.oy_username');
-        $this->app_key = config('app.oy_api_key');
+        // $this->app_key = config('app.oy_api_key');
         if($this->payment_live == true){
             $this->payment_production = 'https://partner.oyindonesia.com/api/';
+            $this->api_key = env('OY_INDONESIA_APP_KEY_LIVE');
         }else{
             $this->payment_production = 'https://api-stg.oyindonesia.com/api/';
+            $this->api_key = env('OY_INDONESIA_APP_KEY');
         }
         // protected $data['whatsapp'] = ['nomor' => '-', 'message' => 'Hello'];
     }
@@ -542,7 +544,7 @@ class FrontendController extends Controller
             ));
             $paymentLink->setHeader(array(
             'x-oy-username:'.$this->username,
-            'x-api-key:'.$this->app_key,
+            'x-api-key:'.$this->api_key,
             'Content-Type' => 'application/json',
             'Accept' => 'application/json'
             ));
