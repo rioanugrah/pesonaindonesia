@@ -349,8 +349,7 @@ class PaketController extends Controller
             // dd($banks->nama_bank);
             $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->first();
             // $input = $request;
-            $input['id'] = 'INV-'.Carbon::now()->format('Ymd').rand(0001,9999);
-            // $input['id'] = 'INV-'.rand(0000001,9999999);
+            $input['id'] = 'INV-'.rand(0000001,9999999);
             $data['order'] = [
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -404,14 +403,14 @@ class PaketController extends Controller
                         'amount' => $request->orderTotal,
                         'email' => $request->email,
                         'phone_number' => $request->phone,
-                        'is_open' => false,
+                        'is_open' => true,
                         "step" => "input-amount",
                         'include_admin_fee' => true,
                         'list_disabled_payment_methods' => '',
                         'list_enabled_banks' => '',
                         'expiration' => ''.Carbon::now()->addDays(1).'',
                         'due_date' => ''.Carbon::now().'',
-                        // "va_display_name" => "Display Name on VA"
+                        "va_display_name" => "Display Name on VA"
                     ]
                 ));
                 try {
@@ -424,6 +423,29 @@ class PaketController extends Controller
                     $input['pemesan'] = json_encode([
                         $data['order']
                     ]);
+
+                    // if ($this->automatics == false) {
+                    //     //manual
+                    //     $input['bank'] = json_encode(
+                    //         [
+                    //             [
+                    //                 'nama_bank' => $data['banks']['nama_bank'],
+                    //                 'nama_penerima' => $data['banks']['nama_penerima'],
+                    //                 'nomor_rekening' => $data['banks']['nomor_rekening'],
+                    //             ]
+                    //         ]
+                    //     );
+                    // }else{
+                    //     $input['bank'] = json_encode(
+                    //         [
+                    //             [
+                    //                 'nama_bank' => 'OY Indonesia',
+                    //                 'nama_penerima' => 'Pesona Plesiran Indonesia',
+                    //                 'nomor_rekening' => '-'
+                    //             ]
+                    //         ]
+                    //     );
+                    // }
                     $input['bank'] = json_encode(
                         [
                             [
@@ -477,53 +499,40 @@ class PaketController extends Controller
                 }
             }
             else{
-                $paymentLink = new HTTP_Request2();
-                // $paymentLink->setUrl('https://partner.oyindonesia.com/api/payment-checkout/create-v2');
-                $paymentLink->setUrl($this->payment_production.'/payment-checkout/create-v2');
-                $paymentLink->setMethod(HTTP_Request2::METHOD_POST);
-                $paymentLink->setConfig(array(
-                'follow_redirects' => TRUE
-                ));
-                $paymentLink->setHeader(array(
-                'x-oy-username:'.$this->username,
-                'x-api-key:'.$this->api_key,
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json'
-                ));
-                $paymentLink->setBody(json_encode(
-                    [
-                        'partner_tx_id' => $input['id'],
-                        'description' => '',
-                        'notes' => '',
-                        'sender_name' => $request->first_name.' '.$request->last_name,
-                        'amount' => $request->orderTotal,
-                        'email' => $request->email,
-                        'phone_number' => $request->phone,
-                        'is_open' => false,
-                        "step" => "input-amount",
-                        'include_admin_fee' => true,
-                        'list_disabled_payment_methods' => '',
-                        'list_enabled_banks' => '',
-                        'expiration' => ''.Carbon::now()->addDays(1).'',
-                        'due_date' => ''.Carbon::now().'',
-                        // "va_display_name" => "Display Name on VA"
-                    ]
-                ));
-                try {
-                    $response = $paymentLink->send();
-                    if ($response->getStatus() == 200) {
-                    $dataUrl = json_decode($response->getBody(),true);
-                    
-                    $input['nama_paket'] = $data['paket_lists']['nama_paket'];
+                $input['nama_paket'] = $data['paket_lists']['nama_paket'];
                     $input['pemesan'] = json_encode([
                         $data['order']
                     ]);
+
+                    // if ($this->automatics == false) {
+                    //     //manual
+                    //     $input['bank'] = json_encode(
+                    //         [
+                    //             [
+                    //                 'nama_bank' => $data['banks']['nama_bank'],
+                    //                 'nama_penerima' => $data['banks']['nama_penerima'],
+                    //                 'nomor_rekening' => $data['banks']['nomor_rekening'],
+                    //             ]
+                    //         ]
+                    //     );
+                    // }else{
+                    //     $input['bank'] = json_encode(
+                    //         [
+                    //             [
+                    //                 'nama_bank' => 'OY Indonesia',
+                    //                 'nama_penerima' => 'Pesona Plesiran Indonesia',
+                    //                 'nomor_rekening' => '-'
+                    //             ]
+                    //         ]
+                    //     );
+                    // }
+
                     $input['bank'] = json_encode(
                         [
                             [
-                                'nama_bank' => 'OY Indonesia',
-                                'nama_penerima' => 'Pesona Plesiran Indonesia',
-                                'nomor_rekening' => '-'
+                                'nama_bank' => $data['banks']['nama_bank'],
+                                'nama_penerima' => $data['banks']['nama_penerima'],
+                                'nomor_rekening' => $data['banks']['nomor_rekening'],
                             ]
                         ]
                     );
@@ -539,7 +548,7 @@ class PaketController extends Controller
                         'nama_penerima' => $request->first_name.' '.$request->last_name,
                         'total' => $request->orderTotal,
                         'partner_tx_id' => $input['id'],
-                        'url' => $dataUrl['url'],
+                        'url' => '-',
                     );
 
                     Transaksi::firstOrCreate($payment_link_array);
@@ -557,27 +566,19 @@ class PaketController extends Controller
                         'message_content' => $message_content,
                         'message_type' => $message_type,
                     );
-
+                    
                     return redirect(route('frontend.paket.payment',['id' => $input['id']]));
-
-                    }
-                    else{
-                        echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-                        $response->getReasonPhrase(); 
-                    }
-                } catch(HTTP_Request2_Exception $e) {
-                    echo 'Error: ' . $e->getMessage();
-                }
             }
             
         }
 
-        return response()->json(
-            [
-                'success' => false,
-                'error' => $validator->errors()->all()
-            ]
-        );
+        // return response()->json(
+        //     [
+        //         'success' => false,
+        //         'error' => $validator->errors()->all()
+        //     ]
+        // );
+        // return $data;
     }
 
 

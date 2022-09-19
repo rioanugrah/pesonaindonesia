@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 {{-- @if ($status_live != false) --}}
-                @if ($status_live != false)
+                {{-- @if ($status_live != false) --}}
                 <div class="col-12">
                     <h3 id="order_review_heading" class="mt-30 mb-30">Status Pembayaran</h3>
                     <div id="order_review" class="woocommerce-checkout-review-order">
@@ -67,6 +67,10 @@
                                 </tr>
                                 @if ($status_pembayaran != 3)
                                 <tr class="cart_item">
+                                    <td class="product-name">Pembayaran diverifikasi otomatis 1x24 jam</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
                                     <td class="product-name">
                                         <a href="{{ $transaksi->url }}" class="cws-button alt" target="_blank">Bayar Sekarang</a>
                                     </td>
@@ -77,7 +81,7 @@
                         </table>
                     </div>
                 </div>
-                @else
+                {{-- @else
                 <div class="col-12">
                     <h3 id="order_review_heading" class="mt-30 mb-30">Pembayaran</h3>
                     <div id="order_review" class="woocommerce-checkout-review-order">
@@ -109,7 +113,7 @@
                         </table>
                     </div>
                 </div>
-                @endif
+                @endif --}}
             </form>
         </div>
     </div>
