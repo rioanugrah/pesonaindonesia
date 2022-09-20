@@ -483,6 +483,16 @@ class FrontendController extends Controller
         return view('frontend.frontend4.wisata',$data);
     }
 
+    public function wisata_detail($slug)
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['wisata'] = Wisata::where('slug',$slug)->first();
+        if(empty($data['wisata'])){
+            return redirect()->back();
+        }
+        return view('frontend.frontend4.wisata_detail',$data);
+    }
+
     public function paket()
     {
         $data['whatsapp'] = $this->whatsapp;

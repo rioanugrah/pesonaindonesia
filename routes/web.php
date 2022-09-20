@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'FrontendController@index')->name('frontend');
-Route::get('wisata', 'FrontendController@wisata')->name('frontend.wisata');
 // Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');
 Route::get('tentang-kami', 'FrontendController@tentang_kami')->name('tentang_kami');
 Route::get('visi-misi', 'FrontendController@visimisi')->name('visi_misi');
@@ -48,6 +47,11 @@ Route::get('testingNew', function(){
 Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
 
 Route::get('instagram', 'InstagramController@index');
+
+Route::prefix('wisata')->group(function () {
+    Route::get('/', 'FrontendController@wisata')->name('frontend.wisata');
+    Route::get('{slug}', 'FrontendController@wisata_detail')->name('frontend.wisataDetail');
+});
 
 Route::prefix('paket')->group(function () {
     Route::get('/', 'FrontendController@paket')->name('frontend.paket');

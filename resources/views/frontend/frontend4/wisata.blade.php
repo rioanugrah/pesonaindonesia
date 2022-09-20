@@ -12,12 +12,12 @@
 @endsection
 
 @section('content')
-    <div class="container page">
+    <div class="container">
         <h3>Wisata</h3>
         @forelse ($wisatas as $wisata)
         <div class="col-md-6">
             <div class="recom-item border">
-                <div class="recom-media"><a href="{{ route('frontend.hotelDetail', ['slug' => $wisata->slug]) }}">
+                <div class="recom-media"><a href="{{ route('frontend.wisataDetail', ['slug' => $wisata->slug]) }}">
                         <div class="pic">
                             <img src="{{ $asset.'/img/tour-thumb01.jpg' }}" style="width: 770px; height: 240px; object-fit: cover;" data-at2x="{{ $asset.'/img/tour-thumb01.jpg' }}"
                             alt>
@@ -30,7 +30,7 @@
                     </a>
                     <div class="location"><i class="flaticon-suntour-map"></i> Indonesia</div>
                 </div>
-                <div class="recom-item-body"><a href="{{ route('frontend.hotelDetail', ['slug' => $wisata->slug]) }}">
+                <div class="recom-item-body"><a href="{{ route('frontend.wisataDetail', ['slug' => $wisata->slug]) }}">
                         <h6 class="blog-title">{{ $wisata->nama_wisata }}</h6>
                     </a>
                     <div class="stars stars-4"></div>
