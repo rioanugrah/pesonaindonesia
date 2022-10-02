@@ -153,7 +153,7 @@
             <div class="col-md-2 col-xs-6 mb-md-30">
                 <div class="counter-block"><i class="counter-icon flaticon-suntour-world"></i>
                     <div class="counter-name-wrap">
-                        <div data-count="0" class="counter">0</div>
+                        <div data-count="0" class="counter">{{ $jumlah_paket_wisata }}</div>
                         <div class="counter-name">Tours</div>
                     </div>
                 </div>

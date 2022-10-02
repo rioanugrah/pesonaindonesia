@@ -226,6 +226,7 @@ Route::middleware('web')->domain('app.'.env('APP_URL'))->group(function(){
     Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
     Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
 });
+
 Route::middleware('web')->domain('plesiranmalang.'.env('APP_URL'))->group(function(){
     Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
     Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
@@ -234,6 +235,10 @@ Route::middleware('web')->domain('plesiranmalang.'.env('APP_URL'))->group(functi
 
 Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login_google');
 Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
+
+Route::get('save-token1', 'TestingController@save')->name('save.token1');
+Route::post('save-token', 'TestingController@save')->name('save.token');
+Route::post('send-notification', 'TestingController@send_notif')->name('send.notification');
 
 // Route::prefix('app')->group(function () {
 //     Route::get('/', 'Apps\HomeController@index')->name('apps');

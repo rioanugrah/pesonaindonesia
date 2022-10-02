@@ -5,15 +5,19 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('backend/assets2/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('backend/assets2/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('backend/assets2/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('backend/assets2/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
+        type="text/css">
+    <link href="{{ asset('backend/assets2/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css">
+    <link href="{{ asset('backend/assets2/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/assets2/css/iziToast.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
     @include('backend.users.modalBuat')
     @include('backend.users.modalEdit')
+    @include('backend.users.modalTestingNotif')
     <div class="page-title-box">
         <div class="row align-items-center">
             <div class="col-md-8">
@@ -61,28 +65,92 @@
 @endsection
 
 @section('js')
-<script src="{{ asset('backend/assets2/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('backend/assets2/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/assets2/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/assets2/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 
-<script src="{{ asset('backend/assets2/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('backend/assets2/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('backend/assets2/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('backend/assets2/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
-<script src="{{ asset('backend/assets2/libs/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('backend/assets2/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('backend/assets2/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/assets2/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('backend/assets2/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('backend/assets2/libs/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
 
-<script src="{{ asset('backend/assets2/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('backend/assets2/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/assets2/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('backend/assets2/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}">
+    </script>
 
-<script src="{{ asset('backend/assets2/js/pages/datatables.init.js') }}"></script>
+    <script src="{{ asset('backend/assets2/js/pages/datatables.init.js') }}"></script>
 
-<script src="{{ asset('backend/assets2/js/iziToast.min.js') }}"></script>
+    <script src="{{ asset('backend/assets2/js/iziToast.min.js') }}"></script>
 
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
     <script>
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        function test() {
+            alert('test');
+        }
+
+        const firebaseConfig = {
+            apiKey: "{{ env('FIREBASE_API_KEY') }}",
+            authDomain: "{{ env('FIREBASE_AUTH_DOMAIN') }}",
+            projectId: "{{ env('FIREBASE_PROJECT_ID') }}",
+            storageBucket: "{{ env('FIREBASE_STORAGE_BUCKET') }}",
+            messagingSenderId: "{{ env('FIREBASE_MESSAGING_SENDER_ID') }}",
+            appId: "{{ env('FIREBASE_APP_ID') }}",
+            measurementId: "{{ env('FIREBASE_MEASUREMENT_ID') }}"
+        };
+    
+        firebase.initializeApp(firebaseConfig);
+        const messaging = firebase.messaging();
+
+        function initFirebaseMessagingRegistration() {
+            // alert('test');
+                messaging
+                .requestPermission()
+                .then(function () {
+                    return messaging.getToken()
+                })
+                .then(function(token) {
+                    console.log(token);
+    
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+    
+                    $.ajax({
+                        url: '{{ route('save.token') }}',
+                        type: 'POST',
+                        data: {
+                            token: token
+                        },
+                        dataType: 'JSON',
+                        success: function (response) {
+                            alert('Token saved successfully.');
+                        },
+                        error: function (err) {
+                            console.log('User Chat Token Error'+ err);
+                        },
+                    });
+    
+                }).catch(function (err) {
+                    console.log('User Chat Token Error'+ err);
+                });
+        }  
+        
+        messaging.onMessage(function(payload) {
+            const noteTitle = payload.notification.title;
+            const noteOptions = {
+                body: payload.notification.body,
+                icon: payload.notification.icon,
+            };
+            new Notification(noteTitle, noteOptions);
+        });
+
         var table = $('#datatable').DataTable({
             processing: true,
             serverSide: true,
@@ -141,7 +209,7 @@
         $(function() {
             'use strict';
             $('.upload').dropzone({
-                url: '{{ url("/") }}'
+                url: '{{ url('/') }}'
             });
         });
 
@@ -180,6 +248,10 @@
             $('#buat').modal('show');
         };
 
+        function testing() {
+            $('#testing').modal('show');
+        };
+
         function reload() {
             table.ajax.reload();
         }
@@ -189,27 +261,27 @@
             let formData = new FormData(this);
             $('#image-input-error').text('');
             $.ajax({
-                type:'POST',
+                type: 'POST',
                 url: "{{ route('pengguna.simpan') }}",
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: (result) => {
-                    if(result.success != false){
+                    if (result.success != false) {
                         iziToast.success({
                             title: result.message_title,
                             message: result.message_content
                         });
                         this.reset();
                         table.ajax.reload();
-                    }else{
+                    } else {
                         iziToast.error({
                             title: result.success,
                             message: result.error
                         });
                     }
                 },
-                error: function (request, status, error) {
+                error: function(request, status, error) {
                     iziToast.error({
                         title: 'Error',
                         message: error,
@@ -220,20 +292,20 @@
 
         function edit(id) {
             $.ajax({
-                type:'GET',
-                url: "{{ url('b/pengguna') }}"+'/'+id,
+                type: 'GET',
+                url: "{{ url('b/pengguna') }}" + '/' + id,
                 contentType: "application/json;  charset=utf-8",
                 cache: false,
                 success: (result) => {
                     // alert(result);
                     $('#edit').modal('show');
-                    document.getElementById('edit_pengguna').innerHTML = 'Edit - '+result.data.name;
+                    document.getElementById('edit_pengguna').innerHTML = 'Edit - ' + result.data.name;
                     $('#edit_id').val(result.data.id);
                     $('#edit_name').val(result.data.name);
                     $('#edit_email').val(result.data.email);
                     $('#edit_role').val(result.data.role);
                 },
-                error: function (request, status, error) {
+                error: function(request, status, error) {
                     iziToast.error({
                         title: 'Error',
                         message: error,
@@ -247,27 +319,27 @@
             let formData = new FormData(this);
             $('#image-input-error').text('');
             $.ajax({
-                type:'POST',
+                type: 'POST',
                 url: "{{ route('pengguna.update') }}",
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: (result) => {
-                    if(result.success != false){
+                    if (result.success != false) {
                         iziToast.success({
                             title: result.message_title,
                             message: result.message_content
                         });
                         $('#edit').modal('hide');
                         table.ajax.reload();
-                    }else{
+                    } else {
                         iziToast.error({
                             title: result.success,
                             message: result.error
                         });
                     }
                 },
-                error: function (request, status, error) {
+                error: function(request, status, error) {
                     iziToast.error({
                         title: 'Error',
                         message: error,
@@ -278,25 +350,25 @@
 
         function reset(id) {
             $.ajax({
-                type:'GET',
-                url: "{{ url('b/pengguna') }}"+'/'+id+'/reset',
+                type: 'GET',
+                url: "{{ url('b/pengguna') }}" + '/' + id + '/reset',
                 contentType: "application/json;  charset=utf-8",
                 cache: false,
                 success: (result) => {
-                    if(result.success != false){
+                    if (result.success != false) {
                         iziToast.success({
                             title: result.message_title,
                             message: result.message
                         });
                         table.ajax.reload();
-                    }else{
+                    } else {
                         iziToast.error({
                             title: result.success,
                             message: result.error
                         });
                     }
                 },
-                error: function (request, status, error) {
+                error: function(request, status, error) {
                     iziToast.error({
                         title: 'Error',
                         message: error,
@@ -307,25 +379,25 @@
 
         function hapus(id) {
             $.ajax({
-                type:'GET',
-                url: "{{ url('b/pengguna') }}"+'/delete/'+id,
+                type: 'GET',
+                url: "{{ url('b/pengguna') }}" + '/delete/' + id,
                 contentType: "application/json;  charset=utf-8",
                 cache: false,
                 success: (result) => {
-                    if(result.success != false){
+                    if (result.success != false) {
                         iziToast.success({
                             title: result.message_title,
                             message: result.message
                         });
                         table.ajax.reload();
-                    }else{
+                    } else {
                         iziToast.error({
                             title: result.success,
                             message: result.error
                         });
                     }
                 },
-                error: function (request, status, error) {
+                error: function(request, status, error) {
                     iziToast.error({
                         title: 'Error',
                         message: error,
@@ -333,6 +405,5 @@
                 }
             });
         }
-
     </script>
 @endsection

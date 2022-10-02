@@ -23,7 +23,13 @@ class UsersController extends Controller
                         return $row->roles->role;
                     })
                     ->addColumn('action', function($row){
-                        $btn = '<button type="button" onclick="reset(`'.$row->id.'`)" class="btn btn-primary btn-icon">
+                        $btn = '<button type="button" onclick="initFirebaseMessagingRegistration()" class="btn btn-primary btn-icon">
+                                    <i class="fas fa-undo-alt"></i> Allow Notification
+                                </button>
+                                <button type="button" onclick="testing()" class="btn btn-primary btn-icon">
+                                    <i class="fas fa-undo-alt"></i> Testing Notif
+                                </button>
+                                <button type="button" onclick="reset(`'.$row->id.'`)" class="btn btn-primary btn-icon">
                                     <i class="fas fa-undo-alt"></i> Reset Password
                                 </button>
                                 <button type="button" onclick="edit(`'.$row->id.'`)" class="btn btn-warning btn-icon">

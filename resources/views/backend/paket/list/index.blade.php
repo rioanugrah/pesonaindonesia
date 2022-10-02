@@ -80,7 +80,7 @@
 <script src="{{ asset('backend/assets2/js/pages/datatables.init.js') }}"></script>
 
 <script src="{{ asset('backend/assets2/js/iziToast.min.js') }}"></script>
-
+<script src="{{ asset('backend/assets2/js/ckeditor/ckeditor.js') }}"></script>
 {{-- <script src="{{ asset('backend/assets2/libs/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('backend/assets2/js/pages/form-editor.init.js') }}"></script> --}}
 <script>
@@ -126,6 +126,13 @@
             },
         ]
     });
+
+    // CKEDITOR.replace('ckeditor1', {
+    //     extraPlugins: 'editorplaceholder',
+    //     editorplaceholder: 'Start typing here...',
+    //     removeButtons: 'PasteFromWord'
+    // });
+    ClassicEditor.create(document.getElementById('ckeditor1'));
 
     function buat() {
         $('#buat').modal('show');

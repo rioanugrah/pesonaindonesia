@@ -47,7 +47,9 @@
                             {{-- <p class="mb-0">(Extra beds available: Crib, <br> Rollaway bed)</p> --}}
                         </td>
                         <td>
-                            <p>{{ $paket_list->deskripsi }}</p>
+                            {{-- <?php $convert = htmlspecialchars($paket_list->deskripsi); ?>
+                            {{ htmlspecialchars_decode($paket_list->deskripsi) }} --}}
+                            {{ htmlspecialchars_decode($paket_list->deskripsi) }}
                         </td>
                         <td>
                             <div class="table-icon">

@@ -101,6 +101,7 @@ class FrontendController extends Controller
             //                         ->get();
 
             $data['provinsis'] = Provinsi::all();
+            $data['jumlah_paket_wisata'] = PaketList::count();
             // dd($data['whatsapp']);
             return view('frontend.frontend4.index', $data);
             // return view('layouts.frontend_4.app',$data);

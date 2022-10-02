@@ -52,7 +52,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Deskripsi</label>
-                        <textarea name="deskripsi" class="form-control" cols="30" rows="10"></textarea>
+                        <textarea name="deskripsi" class="form-control" id="ckeditor1" cols="30" rows="10"></textarea>
                         {{-- <input type="email" class="form-control" id="formemail" placeholder="Enter your Email..."> --}}
                     </div>
 
