@@ -160,6 +160,30 @@
             })
         }
 
+        function hapus(id) {
+            // alert(id);
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/paket') }}"+'/'+id+'/hapus',
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    if (result.success != false) {
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                        table.ajax.reload();
+                    } else {
+                        iziToast.error({
+                            title: result.success,
+                            message: result.error
+                        });
+                    }
+                }
+            })
+        }
+
         $('#upload-form1').submit(function(e) {
             e.preventDefault();
             // alert('test');

@@ -813,4 +813,21 @@ class PaketController extends Controller
         );
         return response()->json($array_message);
     }
+
+    public function hapus($id)
+    {
+        $paket = Paket::find($id);
+        if(empty($paket)){
+            return response()->json([
+                'status' => false,
+                'message' => 'Data Tidak Ditemukan'
+            ]);
+        }
+        $paket->delete();
+        return response()->json([
+            'status' => true,
+            'message_title' => 'Berhasil!',
+            'message_content' => 'Paket Berhasil Dihapus'
+        ]);
+    }
 }
