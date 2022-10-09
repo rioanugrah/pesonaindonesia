@@ -131,11 +131,11 @@
             ]
         });
 
-        CKEDITOR.replace('ckeditor1', {
-            extraPlugins: 'editorplaceholder',
-            editorplaceholder: 'Start typing here...',
-            removeButtons: 'PasteFromWord'
-        });
+        // CKEDITOR.replace('ckeditor1', {
+        //     extraPlugins: 'editorplaceholder',
+        //     editorplaceholder: 'Start typing here...',
+        //     removeButtons: 'PasteFromWord'
+        // });
 
         function buat() {
             $('#buat').modal('show');
@@ -160,8 +160,9 @@
             })
         }
 
-        $('#upload-form').submit(function(e) {
+        $('#upload-form1').submit(function(e) {
             e.preventDefault();
+            // alert('test');
             let formData = new FormData(this);
             $.ajax({
                 type: 'POST',

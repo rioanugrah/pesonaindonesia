@@ -5,7 +5,7 @@
                 <h5 class="modal-title">DATA PAKET WISATA</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
             </div>
-            <form method="post" class="outer-repeater" id="upload-form" enctype="multipart/form-data">
+            <form method="post" id="upload-form1" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     {{-- <div class="row mb-3">
@@ -62,7 +62,8 @@
 
                     <div class="mb-3">
                         <label class="form-label">Deskripsi</label>
-                        <textarea name="deskripsi" class="form-control" id="ckeditor1" cols="30" rows="10"></textarea>
+                        <textarea name="deskripsi" class="form-control" cols="30" rows="10"></textarea>
+                        {{-- <textarea name="deskripsi" class="form-control" id="ckeditor1" cols="30" rows="10"></textarea> --}}
                         {{-- <input type="email" class="form-control" id="formemail" placeholder="Enter your Email..."> --}}
                     </div>
 
