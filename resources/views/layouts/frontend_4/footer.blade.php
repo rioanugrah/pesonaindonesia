@@ -66,9 +66,9 @@
                         {{-- <li class="text-white">
                             <a href="{{ route('frontend.hotel') }}">Hotel</a>
                         </li> --}}
-                        <li class="text-white">
+                        {{-- <li class="text-white">
                             <a href="{{ route('frontend.wisata') }}">Wisata</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
                 <div class="widget-footer">

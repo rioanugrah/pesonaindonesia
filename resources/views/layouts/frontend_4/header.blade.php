@@ -60,9 +60,9 @@
                     <li class="slash">/</li>
                     <li><a href="{{ route('frontend.paket') }}" class="mn-has-sub">Paket Wisata</a>
                     </li>
-                    <li class="slash">/</li>
+                    {{-- <li class="slash">/</li>
                     <li><a href="{{ route('frontend.wisata') }}" class="mn-has-sub">Wisata</a>
-                    </li>
+                    </li> --}}
                     <li class="slash">/</li>
                     <li><a href="javascript:void()" onclick="alert('Fitur dalam proses pengembangan!')" class="mn-has-sub">Dokumentasi</a>
                     </li>
