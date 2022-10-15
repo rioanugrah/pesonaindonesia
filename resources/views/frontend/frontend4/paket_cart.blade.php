@@ -152,18 +152,30 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                                {{-- <h3 id="order_review_heading" class="mt-30 mb-30">Metode Pembayaran</h3> --}}
+                                {{-- <h3 id="order_review_heading" class="mt-30">Metode Pembayaran</h3> --}}
                                 <div id="payment" class="woocommerce-checkout-payment">
-                                    {{-- @if ($live != true)
-                                    <div class="payment_methods methods">
+                                    {{-- @if ($live != true) --}}
+                                    {{-- <div class="payment_methods methods">
                                         <div class="payment_method_bacs">
-                                            <input id="payment_method_bacs" type="radio" name="payment_method"
+                                            <input type="radio" name="payment_method"
                                                 value="BRI" data-order_button_text=""
                                                 class="input-radio">
                                             <label for="payment_method_bacs">BRI</label>
                                         </div>
-                                    </div>
-                                    @endif --}}
+                                        <div class="payment_method_bacs">
+                                            <input type="radio" name="payment_method"
+                                                value="BNI" data-order_button_text=""
+                                                class="input-radio">
+                                            <label for="payment_method_bacs">BNI</label>
+                                        </div>
+                                        <div class="payment_method_bacs">
+                                            <input type="radio" name="payment_method"
+                                                value="Mandiri" data-order_button_text=""
+                                                class="input-radio">
+                                            <label for="payment_method_bacs">Mandiri</label>
+                                        </div>
+                                    </div> --}}
+                                    {{-- @endif --}}
                                     <div class="place-order mt-20">
                                         <input id="place_order" type="submit" name="woocommerce_checkout_place_order"
                                             value="Buy Now" data-value="Update Totals"

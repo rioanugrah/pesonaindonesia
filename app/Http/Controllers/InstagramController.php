@@ -30,4 +30,18 @@ class InstagramController extends Controller
 
     //  return view('instagram',compact('items'));
     }
+
+    public function instagram()
+    {
+        $url = 'https://instagram.com/'. 'pesonaplesiranid.official' .'/?__a=1';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json') );
+        $data = curl_exec($ch);
+        curl_close($ch);
+
+        var_dump($data);
+    }
 }

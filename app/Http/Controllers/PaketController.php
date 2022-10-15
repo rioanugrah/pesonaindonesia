@@ -349,7 +349,8 @@ class PaketController extends Controller
             // dd($banks->nama_bank);
             $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->first();
             // $input = $request;
-            $input['id'] = 'INV-'.Carbon::now()->format('Ymd').rand(0001,9999);
+            $input['id'] = Carbon::now()->format('Ymd').rand(001,999);
+            // $input['id'] = 'INV-'.Carbon::now()->format('Ymd').rand(0001,9999);
             // $input['id'] = 'INV-'.rand(0000001,9999999);
             $data['order'] = [
                 'first_name' => $request->first_name,

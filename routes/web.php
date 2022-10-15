@@ -46,7 +46,7 @@ Route::get('testingNew', function(){
 
 Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
 
-Route::get('instagram', 'InstagramController@index');
+Route::get('instagram', 'InstagramController@instagram');
 
 Route::prefix('wisata')->group(function () {
     Route::get('/', 'FrontendController@wisata')->name('frontend.wisata');

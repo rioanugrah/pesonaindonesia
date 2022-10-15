@@ -104,7 +104,7 @@ class SliderController extends Controller
     {
         $data['slider'] = Slider::find($id);
         
-        if(auth()->user()->role == 1){
+        if(auth()->user()->role != 1){
             $array_message = array(
                 'success' => false,
                 'message_title' => 'Access Denied',
@@ -120,13 +120,13 @@ class SliderController extends Controller
     public function update(Request $request)
     {
         $rules = [
-            'edit_image'  => 'required|file|max:2048',
+            // 'edit_image'  => 'required|file|max:2048',
             'edit_status'  => 'required',
         ];
  
         $messages = [
-            'edit_image.required'  => 'Upload Gambar wajib diisi.',
-            'edit_image.max'  => 'Upload Gambar Max 2MB.',
+            // 'edit_image.required'  => 'Upload Gambar wajib diisi.',
+            // 'edit_image.max'  => 'Upload Gambar Max 2MB.',
             'edit_status.required'   => 'Status wajib diisi.',
         ];
 
@@ -137,7 +137,7 @@ class SliderController extends Controller
             // $input['image'] = time().'.'.$request->edit_image->getClientOriginalExtension();
             // $request->image->move(public_path('frontend/assets4/img/wallpaper'), $input['image']);
 
-            if(auth()->user()->role == 1){
+            if(auth()->user()->role != 1){
                 $array_message = array(
                     'success' => false,
                     'message_title' => 'Access Denied',
@@ -151,18 +151,19 @@ class SliderController extends Controller
                 $slider = Slider::find($request->edit_id);
                 $user = Auth::user();
             
-                $file = $request->file('edit_image');
                 // $fileName = time().$file->getClientOriginalName();
                 // $file->move(public_path('frontend/assets4/img/wallpaper'), $fileName);
-                $img = \Image::make($file->path());
-                $img = $img->encode('webp', 75);
-                $input['edit_image'] = time().'.webp';
-                $img->save(public_path('frontend/assets4/img/wallpaper/').$input['edit_image']);
-                
-                $image_path = public_path('frontend/assets4/img/wallpaper/'.$slider->image);
-                File::delete($image_path);
-                
-                $slider->image = $input['edit_image'];
+                if(!$request->file('edit_image')){
+                    $file = $request->file('edit_image');
+                    $img = \Image::make($file->path());
+                    $img = $img->encode('webp', 75);
+                    $input['edit_image'] = time().'.webp';
+                    $img->save(public_path('frontend/assets4/img/wallpaper/').$input['edit_image']);
+                    
+                    $image_path = public_path('frontend/assets4/img/wallpaper/'.$slider->image);
+                    File::delete($image_path);
+                    $slider->image = $input['edit_image'];
+                }
                 // $slider->image = $fileName;
                 $slider->nama_slider = $request->edit_nama_slider;
                 $slider->status = $request->edit_status;

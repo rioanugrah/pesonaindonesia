@@ -165,6 +165,12 @@
                                 i++;
                             }
 
+                            if(value.status == 'NOT PAID'){
+                                var status = '<span style="color: red; font-weight: bold;">NOT PAID</span>';
+                            }else{
+                                var status = '<span style="color: green; font-weight: bold;">PAID</span>';
+                            }
+
                             text = text + '<main class="ticket-system">'+
                                                 '<div class="body">'+
                                                     '<div class="top">'+
@@ -207,6 +213,10 @@
                                                                 '<div class="item">'+
                                                                     '<span>Harga</span>'+
                                                                     '<h4>Rp. '+rupiah+'</h4>'+
+                                                                '</div>'+
+                                                                '<div class="item">'+
+                                                                    '<span>Status Pembayaran</span>'+
+                                                                    '<h4>'+status+'</h4>'+
                                                                 '</div>'+
                                                             '</div>'+
                                                             text2+

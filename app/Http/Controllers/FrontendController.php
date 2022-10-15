@@ -690,6 +690,11 @@ class FrontendController extends Controller
                     'nama' => $a->pemesan
                 ];
             }
+            if($value->status == 1){
+                $status = "NOT PAID";
+            }elseif($value->status == 3){
+                $status = "PAID";
+            }
             $dataTracking[] = [
                 'id' => $value->id,
                 'nama_paket' => $value->nama_paket,
@@ -702,11 +707,12 @@ class FrontendController extends Controller
                 'tanggal_berangkat' => Carbon::parse($pemesan->tanggal_berangkat)->format('d-m-Y'),
                 'anggota' => $anggotas,
                 'tanggal_pembelian' => Carbon::parse($value->created_at)->isoFormat('dddd, D MMMM Y'),
+                'status' => $status,
                 // json_decode(json_encode($value->pemesan),true),
                 // 'pemesan' => $dataPemesan[0]['firstname'],
                 // 'pemesan' => json_decode($value->pemesan,true),
                 // json_decode($value->pemesan['order']['firstname'],false),
-                'barcode' => DNS1D::getBarcodeHTML($value->id, 'C39', 1.32,33)
+                'barcode' => DNS1D::getBarcodeHTML($value->id, 'C39', 0.95,33)
                 // 'nama_pemesan' => $dataPemesan
             ];
         }
