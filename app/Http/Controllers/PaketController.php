@@ -393,6 +393,7 @@ class PaketController extends Controller
         );
     }
 
+    //update
     public function paket_list_update(Request $request, $id)
     {
         $rules = [

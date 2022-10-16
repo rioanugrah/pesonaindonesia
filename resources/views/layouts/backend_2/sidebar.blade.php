@@ -23,7 +23,7 @@
                 </li> --}}
                 <li class="{{ Request::is('b/hotel*') ? 'mm-active' : '' }}">
                     <a href="{{ route('hotel') }}" class="waves-effect">
-                        <i class="ti-package"></i>
+                        <i class="fas fa-hotel"></i>
                         <span>Hotel</span>
                     </a>
                 </li>
@@ -42,26 +42,26 @@
                 <li class="menu-title">Operational Officer</li>
                 <li class="{{ Request::is('b/cooperation*') ? 'mm-active' : '' }}">
                     <a href="{{ route('cooperation') }}" class="waves-effect">
-                        <i class="ti-package"></i>
+                        <i class="fas fa-book"></i>
                         <span>Kerjasama</span>
                     </a>
                 </li>
                 <li class="{{ Request::is('b/events*') ? 'mm-active' : '' }}">
                     <a href="{{ route('events') }}" class="waves-effect">
-                        <i class="ti-package"></i>
+                        <i class="fas fa-calendar-alt"></i>
                         <span>Events</span>
                     </a>
                 </li>
                 <li class="menu-title">Information Technology</li>
                 <li class="{{ Request::is('b/perusahaan*') ? 'mm-active' : '' }}">
                     <a href="{{ route('perusahaan') }}" class="waves-effect">
-                        <i class="ti-package"></i>
+                        <i class="fas fa-city"></i>
                         <span>Perusahaan</span>
                     </a>
                 </li>
                 <li class="{{ Request::is('b/kategori_kota*') ? 'mm-active' : '' }}">
                     <a href="{{ route('ktkota') }}" class="waves-effect">
-                        <i class="ti-package"></i>
+                        <i class="fas fa-city"></i>
                         <span>Kategori Kota</span>
                     </a>
                 </li>
@@ -76,7 +76,7 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ti-email"></i>
+                        <i class="fas fa-wrench"></i>
                         <span>Frontend</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -85,7 +85,7 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ti-email"></i>
+                        <i class="fas fa-user"></i>
                         <span>Akses User</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
