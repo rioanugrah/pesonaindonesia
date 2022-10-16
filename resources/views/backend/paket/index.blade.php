@@ -16,6 +16,7 @@
 
 @section('content')
     @include('backend.paket.modalBuat')
+    @include('backend.paket.modalEdit')
     @include('backend.paket.modalUploadImage')
     <div class="page-title-box">
         <div class="row align-items-center">
@@ -160,6 +161,23 @@
             })
         }
 
+        function edit(id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/paket') }}"+'/'+id,
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    // alert(result.data.id);
+                    $('#edit_id').val(result.data.id);
+                    $('#edit_nama_paket').val(result.data.nama_paket);
+                    $('#edit_kategori_paket_id').val(result.data.kategori_paket_id);
+                    $('#edit_deskripsi').val(result.data.deskripsi);
+                    $('#edit').modal('show');
+                }
+            })
+        }
+
         function hapus(id) {
             // alert(id);
             $.ajax({
@@ -202,6 +220,41 @@
                         });
                         this.reset();
                         table.ajax.reload();
+                    } else {
+                        iziToast.error({
+                            title: result.success,
+                            message: result.error
+                        });
+                    }
+                },
+                error: function(request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            });
+        });
+
+        $('#edit_upload-form1').submit(function(e) {
+            e.preventDefault();
+            // alert('test');
+            let formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('paket.update') }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    if (result.success != false) {
+                        iziToast.success({
+                            title: result.message_title,
+                            message: result.message_content
+                        });
+                        // this.reset();
+                        table.ajax.reload();
+                        $('#edit').modal('hide');
                     } else {
                         iziToast.error({
                             title: result.success,

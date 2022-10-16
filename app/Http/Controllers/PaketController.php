@@ -175,6 +175,80 @@ class PaketController extends Controller
         ]);
     }
 
+    public function detail($id)
+    {
+        $paket = Paket::find($id);
+        if(empty($paket)){
+            return response()->json([
+                'status' => false,
+                'message' => 'Data Tidak Ditemukan'
+            ]);
+        }
+        return response()->json([
+            'status' => true,
+            'data' => $paket
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $rules = [
+            'edit_nama_paket'  => 'required',
+            'edit_kategori_paket_id'  => 'required',
+            'edit_deskripsi'  => 'required',
+        ];
+ 
+        $messages = [
+            'edit_nama_paket.required'  => 'Nama Paket wajib diisi.',
+            'edit_kategori_paket_id.required'  => 'Kategori Paket wajib diisi.',
+            'edit_deskripsi.required'  => 'Deskripsi Paket wajib diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+            $input['kategori_paket_id'] = $request->edit_kategori_paket_id;
+            $input['deskripsi'] = $request->edit_deskripsi;
+            $input['nama_paket'] = $request->edit_nama_paket;
+
+            $paket = Paket::find($request->edit_id);
+            if($request->file('edit_images')){
+                $file = $request->file('edit_images');
+                $img = \Image::make($file->path());
+                $img = $img->encode('webp', 75);
+                $input['edit_images'] = time().'.webp';
+                $img->save(public_path('frontend/assets4/img/paket/').$input['edit_images']);
+
+                $image_path = public_path('frontend/assets4/img/paket/'.$paket->images);
+                File::delete($image_path);
+                $paket->images = $input['edit_images'];
+            }
+            $paket->update($input);
+
+            if($paket){
+                $message_title="Berhasil !";
+                $message_content="Paket ".$paket->nama_paket." Berhasil Update";
+                $message_type="success";
+                $message_succes = true;
+            }
+
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return response()->json($array_message);
+        }
+
+        return response()->json(
+            [
+                'success' => false,
+                'error' => $validator->errors()->all()
+            ]
+        );
+    }
+
     public function simpan_image(Request $request)
     {
         $rules = [
@@ -284,6 +358,68 @@ class PaketController extends Controller
             $input = $request->all();
             $paket = Paket::find($id);
             $input['id'] = 'PK-'.rand(1000,9999);
+            $input['paket_id'] = $id;
+            $input['kategori_paket_id'] = $paket->kategori_paket_id;
+
+            $image = $request->file('images');
+            $img = \Image::make($image->path());
+            $img = $img->encode('webp', 75);
+            $input['images'] = time().'.webp';
+            $img->save(public_path('frontend/assets4/img/paket/list/').$input['images']);
+
+            $paket_list = PaketList::create($input);
+
+            if($paket_list){
+                $message_title="Berhasil !";
+                $message_content="Paket ".$input['nama_paket']." Berhasil Disimpan";
+                $message_type="success";
+                $message_succes = true;
+            }
+
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return response()->json($array_message);
+        }
+
+        return response()->json(
+            [
+                'success' => false,
+                'error' => $validator->errors()->all()
+            ]
+        );
+    }
+
+    public function paket_list_update(Request $request, $id)
+    {
+        $rules = [
+            'edit_nama_paket'  => 'required',
+            'edit_price'  => 'required',
+            'edit_jumlah_paket'  => 'required',
+            // 'diskon'  => 'required',
+            // 'deskripsi'  => 'required',
+            // 'images'  => 'required|file|max:2048',
+        ];
+ 
+        $messages = [
+            // 'images.required'  => 'Upload Gambar wajib diisi.',
+            // 'images.max'  => 'Upload Gambar Max 2MB.',
+            'edit_nama_paket.required'   => 'Nama Paket wajib diisi.',
+            'edit_price.required'   => 'Harga wajib diisi.',
+            'edit_jumlah_paket.required'   => 'Jumlah Paket wajib diisi.',
+            // 'deskripsi.required'   => 'Deskripsi wajib diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        // dd($request['outer-group'][0]['images']);
+        // dd($request->all());
+        if ($validator->passes()) {
+            $input = $request->all();
+            $paket = Paket::find($request->edit_id);
+            $input['id'] = $request->edit_id;
             $input['paket_id'] = $id;
             $input['kategori_paket_id'] = $paket->kategori_paket_id;
 

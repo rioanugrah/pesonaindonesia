@@ -129,6 +129,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::prefix('paket')->group(function(){
             Route::get('/', 'PaketController@index')->name('paket')->middleware('verified');
             Route::post('simpan', 'PaketController@simpan')->name('paket.simpan')->middleware('verified');
+            Route::get('{id}', 'PaketController@detail')->name('paket.detail')->middleware('verified');
+            Route::post('update', 'PaketController@update')->name('paket.update')->middleware('verified');
             Route::get('{id}/paket_images', 'PaketController@detail_upload')->name('paket.imageUpload')->middleware('verified');
             Route::get('{id}/list', 'PaketController@paket_list')->name('paket.list')->middleware('verified');
             // Route::get('{id}/order', 'PaketController@paket_order')->name('paket.order')->middleware('verified');
