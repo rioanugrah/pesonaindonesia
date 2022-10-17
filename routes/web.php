@@ -35,14 +35,15 @@ Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('f
 Route::get('tracking_order', 'FrontendController@tracking_order')->name('frontend.tracking');
 Route::post('tracking_order/cari', 'FrontendController@tracking_order_search')->name('frontend.tracking.cari');
 
-Route::get('testingemail', function(){
-    return view('email.testingOrder');
-});
-Route::get('testingNew', function(){
-    $age = array("Peter"=>35, "Ben"=>37, "Joe"=>43);
-    echo json_encode($age['Peter']);
-    // return view('email.testingOrder');
-});
+Route::get('invoice/{id}/tiket_wisata', 'InvoiceController@tiket_wisata')->name('invoice.tiket_wisata');
+// Route::get('testingemail', function(){
+//     return view('email.testingOrder');
+// });
+// Route::get('testingNew', function(){
+//     $age = array("Peter"=>35, "Ben"=>37, "Joe"=>43);
+//     echo json_encode($age['Peter']);
+//     // return view('email.testingOrder');
+// });
 
 Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
 
@@ -63,28 +64,28 @@ Route::prefix('paket')->group(function () {
     Route::post('{id}/upload', 'PaketController@paket_bukti_pembayaran')->name('frontend.paket.transfer');
 });
 
-Route::get('testingPayment', function(){
-    return json_encode([
-        'partner_tx_id' => 123,
-        'description' => '',
-        'notes' => '',
-        'sender_name' => 123,
-        'amount' => 123,
-        'email' => 123,
-        'phone_number' => 123,
-        'is_open' => false,
-        "step" => "input-amount",
-        'include_admin_fee' => false,
-        'list_disabled_payment_methods' => '',
-        'list_enabled_banks' => '',
-        // 'expiration' => '2022-09-12 23:00:00',
-        // 'due_date' => '2022-09-12 22:00:00',
-        // 'expiration' => '2022-09-12 21:00:00',
-        'expiration' => ''.\Carbon\Carbon::now()->addDays(1).'',
-        'due_date' => ''.\Carbon\Carbon::now().'',
-        "va_display_name" => "Display Name on VA"
-    ]);
-});
+// Route::get('testingPayment', function(){
+//     return json_encode([
+//         'partner_tx_id' => 123,
+//         'description' => '',
+//         'notes' => '',
+//         'sender_name' => 123,
+//         'amount' => 123,
+//         'email' => 123,
+//         'phone_number' => 123,
+//         'is_open' => false,
+//         "step" => "input-amount",
+//         'include_admin_fee' => false,
+//         'list_disabled_payment_methods' => '',
+//         'list_enabled_banks' => '',
+//         // 'expiration' => '2022-09-12 23:00:00',
+//         // 'due_date' => '2022-09-12 22:00:00',
+//         // 'expiration' => '2022-09-12 21:00:00',
+//         'expiration' => ''.\Carbon\Carbon::now()->addDays(1).'',
+//         'due_date' => ''.\Carbon\Carbon::now().'',
+//         "va_display_name" => "Display Name on VA"
+//     ]);
+// });
 
 Route::prefix('hotel')->group(function () {
     Route::get('/', 'FrontendController@hotel')->name('frontend.hotel');

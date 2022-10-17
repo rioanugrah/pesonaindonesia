@@ -21,4 +21,9 @@ class PaketOrderList extends Model
         'pemesan',
         'qty',
     ];
+
+    public function paket_order()
+    {
+        return $this->belongsTo(\App\Models\PaketOrder::class, 'order_paket_id');
+    }
 }
