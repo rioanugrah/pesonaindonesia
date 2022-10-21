@@ -83,7 +83,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($paketList as $row => $pl)
+                                        @forelse ($paketLists as $row => $pl)
                                         @if($row % 2 == 0)
                                         <tr class="tm_gray_bg">
                                         @else
@@ -98,7 +98,12 @@
                                             <td class="tm_width_2 tm_text_right">Rp. {{ number_format($pl->paket_order->price/$pl->paket_order->qty,0,",",".") }}</td>
                                         </tr>
                                         @empty
-                                            
+                                        <tr>
+                                            <td class="tm_width_7">{{ $paket->nama_paket }}</td>
+                                            <td class="tm_width_2">Rp. {{ number_format($paket->price,0,",",".") }}</td>
+                                            <td class="tm_width_1">{{ $paket->qty }}</td>
+                                            <td class="tm_width_2 tm_text_right">Rp. {{ number_format($paket->price,0,",",".") }}</td>
+                                        </tr>
                                         @endforelse
                                         {{-- <tr>
                                             <td class="tm_width_7">

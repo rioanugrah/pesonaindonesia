@@ -13,7 +13,7 @@ class InvoiceController extends Controller
     {
         $data['paket'] = PaketOrder::find($id);
         // $data['perusahaan'] = Perusahaan::first();
-        $data['paketList'] = PaketOrderList::where('order_paket_id',$id)->get();
+        $data['paketLists'] = PaketOrderList::where('order_paket_id',$id)->get();
         return view('invoice.tiket',$data);
     }
 }

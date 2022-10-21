@@ -22,7 +22,8 @@
                             @csrf
                             <div class="input-container">
                                 <input type="text" placeholder="Kode Tracking" name="kode_tracking"
-                                    class="newsletter-field mb-0 form-row"><i class="flaticon-suntour-search icon-left"></i>
+                                    class="newsletter-field mb-0 form-row">
+                                    <i class="flaticon-suntour-search icon-left"></i>
                                 <button type="submit" class="subscribe-submit"><i
                                         class="flaticon-suntour-arrow icon-right"></i></button>
                             </div>

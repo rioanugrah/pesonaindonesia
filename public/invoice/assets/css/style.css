@@ -873,12 +873,14 @@ ul {
 
 .tm_accent_color,
 .tm_accent_color_hover:hover {
-  color: #007aff;
+  color: #ff9400;
+  /* color: #007aff; */
 }
 
 .tm_accent_bg,
 .tm_accent_bg_hover:hover {
-  background-color: #007aff;
+  background-color: #ff9400;
+  /* background-color: #007aff; */
 }
 
 .tm_accent_bg_10 {
@@ -2324,7 +2326,8 @@ hr {
     -webkit-print-color-adjust: exact;
   }
   .tm_accent_bg {
-    background-color: #007aff;
+    background-color: #ff9400;
+    /* background-color: #007aff; */
     -webkit-print-color-adjust: exact;
   }
   .tm_accent_bg_10 {
@@ -2340,7 +2343,8 @@ hr {
     -webkit-print-color-adjust: exact;
   }
   .tm_accent_color {
-    color: #007aff !important;
+    color: #ff9400 !important;
+    /* color: #007aff !important; */
     -webkit-print-color-adjust: exact;
   }
   .tm_ternary_color {

@@ -56,9 +56,14 @@ class PaketOrderController extends Controller
                     //     }
                     // })
                     ->addColumn('action', function($row){
-                        $btn = '<button onclick="bukti_pembayaran(`'.$row->id.'`)" class="btn btn-primary btn-sm" title="Bukti Pembayaran">
+                        $btn = '<div class="btn-group">
+                                <a href="'.route('invoice.tiket_wisata',['id' => $row->id]).'" class="btn btn-success btn-sm" target="_blank" title="Invoice">
+                                    <i class="fas fa-file-alt"></i> Invoice
+                                </a>
+                                <button onclick="bukti_pembayaran(`'.$row->id.'`)" class="btn btn-primary btn-sm" title="Bukti Pembayaran">
                                     <i class="fas fa-file-alt"></i> Bukti Pembayaran
-                                </button>';
+                                </button>
+                                </div>';
                         return $btn;
                     })
                     ->rawColumns(['action','status'])
