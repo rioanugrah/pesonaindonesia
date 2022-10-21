@@ -19,7 +19,7 @@ class Perusahaan extends Model
         'nama_perusahaan',
         'alamat_perusahaan',
         'penanggung_jawab',
-        // 'jabatan',
+        'jabatan',
         'status',
         'siup',
         'npwp',

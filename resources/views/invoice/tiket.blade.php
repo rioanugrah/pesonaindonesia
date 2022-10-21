@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $paket->id }}</title>
     <link rel="stylesheet" href="{{ asset('invoice/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('invoice/assets/css/stamp.css') }}">
 </head>
 <?php 
     $name = json_decode($paket->pemesan);
@@ -171,27 +172,43 @@
                                                 class="tm_width_3 tm_border_top_0 tm_bold tm_f16 tm_primary_color tm_text_right tm_white_color tm_accent_bg tm_radius_0_6_6_0">
                                                 Rp. {{ number_format($paket->price,0,",",".") }}</td>
                                         </tr>
+                                        <tr>
+                                            <td class="tm_width_3 tm_primary_color tm_border_none tm_bold">Status</td>
+                                            <td class="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_bold">
+                                                @if ($paket->status == 1)
+                                                    <div style="color: red">NOT PAID</div>
+                                                @elseif ($paket->status == 3)
+                                                    <div style="color: green">PAID</div>
+                                                @endif
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        {{-- <div class="tm_invoice_footer tm_type1">
+                        <div class="tm_invoice_footer tm_type1">
                             <div class="tm_left_footer"></div>
                             <div class="tm_right_footer">
                                 <div class="tm_sign tm_text_center">
-                                    <img src="{{ asset('invoice/assets/img/sign.svg') }}" alt="Sign">
-                                    <p class="tm_m0 tm_ternary_color">Jhon Donate</p>
-                                    <p class="tm_m0 tm_f16 tm_primary_color">Accounts Manager</p>
+                                    {{-- <img src="{{ asset('invoice/assets/img/sign.svg') }}" alt="Sign"> --}}
+                                    <p class="tm_m0" style="margin-bottom: 2%">Regards,</p>
+                                    @if ($paket->status == 3)
+                                    <span class="stamp is-approved">
+                                        <img src="{{ asset('invoice/assets/img/logo_plesiran_new_black2.webp') }}" alt="" srcset="">
+                                    </span>
+                                    @endif
+                                    {{-- <span class="stamp is-approved">Approved</span> --}}
+                                    <p class="tm_m0 tm_ternary_color">{{ $perusahaan->penanggung_jawab }}</p>
+                                    <p class="tm_m0 tm_f16 tm_primary_color">{{ $perusahaan->jabatan }}</p>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                     <div class="tm_note tm_font_style_normal tm_text_center">
                         <hr class="tm_mb15">
-                        <p class="tm_mb2"><b class="tm_primary_color">Terms & Conditions:</b></p>
-                        <p class="tm_m0">All claims relating to quantity or shipping errors shall be waived by Buyer
-                            unless made in writing to <br>Seller within thirty (30) days after delivery of goods to the
-                            address stated.</p>
+                        {{-- <p class="tm_mb2"><b class="tm_primary_color">Terms & Conditions:</b></p> --}}
+                        <p class="tm_m0">Invoice ini sah dan diproses oleh server. <br> Silahkan hubungi kami apabila anda membutuhkan bantuan</p>
+                        <p class="tm_m0" style="font-style: italic">Terakhir diupdate {{ \Carbon\Carbon::parse($paket->updated_at)->isoFormat('LLL') }}</p>
                     </div><!-- .tm_note -->
                 </div>
             </div>

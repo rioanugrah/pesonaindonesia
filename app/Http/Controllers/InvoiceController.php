@@ -12,6 +12,7 @@ class InvoiceController extends Controller
     public function tiket_wisata($id)
     {
         $data['paket'] = PaketOrder::find($id);
+        $data['perusahaan'] = Perusahaan::first();
         // $data['perusahaan'] = Perusahaan::first();
         $data['paketLists'] = PaketOrderList::where('order_paket_id',$id)->get();
         return view('invoice.tiket',$data);
