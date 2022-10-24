@@ -243,6 +243,7 @@
             @endforelse
         </div>
     </section>
+    {!! Adsense::ads('ads_unit') !!}
     <section class="small-section cws_prlx_section bg-gray-40"><img
             src="{{ $asset . '/img/wallpaper/bromo.webp' }}" alt class="cws_prlx_layer">
         <div class="container">

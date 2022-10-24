@@ -47,8 +47,9 @@
     <link rel="stylesheet" href="{{ $css . '/css/scroll.css' }}">
     @yield('css')
     @yield('head')
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8317224867685441"
-    crossorigin="anonymous"></script>
+    {!! Adsense::javascript() !!}
+    {{-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8317224867685441"
+    crossorigin="anonymous"></script> --}}
 </head>
 
 <body>
