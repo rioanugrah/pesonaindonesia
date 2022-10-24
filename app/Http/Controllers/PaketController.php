@@ -546,7 +546,7 @@ class PaketController extends Controller
                         "step" => "input-amount",
                         'include_admin_fee' => true,
                         'list_disabled_payment_methods' => '',
-                        'list_enabled_banks' => '',
+                        'list_enabled_banks' => '002,008,009',
                         'expiration' => ''.Carbon::now()->addDays(1).'',
                         'due_date' => ''.Carbon::now().'',
                         // "va_display_name" => "Display Name on VA"
@@ -641,7 +641,9 @@ class PaketController extends Controller
                         "step" => "input-amount",
                         'include_admin_fee' => true,
                         'list_disabled_payment_methods' => '',
-                        'list_enabled_banks' => '',
+                        'list_enabled_banks' => '002,008,009',
+                        // 'list_enabled_banks' => ['002','008','009'],
+                        // 'list_enabled_banks' => '002',
                         'expiration' => ''.Carbon::now()->addDays(1).'',
                         'due_date' => ''.Carbon::now().'',
                         // "va_display_name" => "Display Name on VA"
