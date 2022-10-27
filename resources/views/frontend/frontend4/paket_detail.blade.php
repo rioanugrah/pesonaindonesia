@@ -49,7 +49,7 @@
                         <td>
                             {{-- <?php $convert = htmlspecialchars($paket_list->deskripsi); ?>
                             {{ htmlspecialchars_decode($paket_list->deskripsi) }} --}}
-                            {{ htmlspecialchars_decode($paket_list->deskripsi) }}
+                            {!! $paket_list->deskripsi !!}
                         </td>
                         <td>
                             <div class="table-icon">

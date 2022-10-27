@@ -13,6 +13,7 @@
 @endsection
 @section('content')
 @include('backend.paket.list.modalBuat')
+@include('backend.paket.list.modalEdit')
 <div class="page-title-box">
     <div class="row align-items-center">
         <div class="col-md-8">
@@ -132,8 +133,8 @@
     //     editorplaceholder: 'Start typing here...',
     //     removeButtons: 'PasteFromWord'
     // });
-    ClassicEditor.create(document.getElementById('ckeditor1'));
-
+    // ClassicEditor.create(document.getElementById('ckeditor1'));
+    CKEDITOR.replace( 'ckeditor1' );
     function buat() {
         $('#buat').modal('show');
     };
