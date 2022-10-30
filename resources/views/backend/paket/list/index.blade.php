@@ -135,12 +135,33 @@
     // });
     // ClassicEditor.create(document.getElementById('ckeditor1'));
     CKEDITOR.replace( 'ckeditor1' );
+    CKEDITOR.replace( 'ckeditoredit' );
     function buat() {
         $('#buat').modal('show');
     };
 
     function reload() {
         table.ajax.reload();
+    }
+
+    function edit(id,detail) {
+        $.ajax({
+            type: 'GET',
+            url: "{{ url('b/paket') }}"+'/'+id+'/list'+'/'+detail,
+            contentType: "application/json;  charset=utf-8",
+            cache: false,
+            success: function(result){
+                // alert(result.data.id);
+                $('#edit_id').val(result.data.id);
+                $('#edit_nama_paket').val(result.data.nama_paket);
+                // $('#edit_kategori_paket_id').val(result.data.kategori_paket_id);
+                $('.edit_deskripsi').val(result.data.deskripsi);
+                $('#edit_jumlah_paket').val(result.data.jumlah_paket);
+                $('#edit_price').val(result.data.price);
+                $('#edit_diskon').val(result.data.diskon);
+                $('#edit').modal('show');
+            }
+        })
     }
 
     $('#upload-form').submit(function(e) {
@@ -160,6 +181,40 @@
                     });
                     this.reset();
                     table.ajax.reload();
+                } else {
+                    iziToast.error({
+                        title: result.success,
+                        message: result.error
+                    });
+                }
+            },
+            error: function(request, status, error) {
+                iziToast.error({
+                    title: 'Error',
+                    message: error,
+                });
+            }
+        });
+    });
+
+    $('#edit_upload-form').submit(function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('paket.list.update',['id' => $pakets->id]) }}",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: (result) => {
+                if (result.success != false) {
+                    iziToast.success({
+                        title: result.message_title,
+                        message: result.message_content
+                    });
+                    this.reset();
+                    table.ajax.reload();
+                    $('#edit').modal('hide');
                 } else {
                     iziToast.error({
                         title: result.success,

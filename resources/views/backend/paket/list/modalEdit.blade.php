@@ -53,7 +53,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Deskripsi</label>
-                        <textarea name="edit_deskripsi" class="form-control edit_deskripsi" id="ckeditor1" cols="30" rows="10"></textarea>
+                        <textarea name="edit_deskripsi" class="form-control edit_deskripsi" id="ckeditoredit" cols="30" rows="10"></textarea>
                         {{-- <input type="email" class="form-control" id="formemail" placeholder="Enter your Email..."> --}}
                     </div>
 
@@ -120,7 +120,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
         </div>

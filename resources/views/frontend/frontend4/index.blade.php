@@ -211,6 +211,24 @@
             </div>
         </div>
     </section>
+    <section class="small-section cws_prlx_section bg-gray-40 mb-20"><img src="{{ asset('frontend/assets4/img/wallpaper/bg_video.webp') }}" alt class="cws_prlx_layer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5">
+              <h2 class="title-section-top alt">About</h2>
+              <h2 class="title-section alt mb-20">Pesona Plesiran Indonesia</h2>
+              <p class="color-white">Pesona Plesiran Indonesia is a millennial Digital Marketing Platform that provides convenience in obtaining information and bookings for Accommodation, Destinations, Restaurants, Transportation, Travel and MICE throughout Indonesia.</p>
+              <div class="cws_divider short mb-30 mt-30"></div>
+              <h3 class="font-5 color-white font-medium">Team</h3>
+            </div>
+            <div class="col-md-7">
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe src="https://www.youtube.com/embed/Yb6KMxB3I1M" class="embed-responsive-item"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     <section class="pb-0">
         <div class="container">
             <div class="row">

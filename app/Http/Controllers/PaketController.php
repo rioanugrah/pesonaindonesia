@@ -331,6 +331,21 @@ class PaketController extends Controller
         return view('backend.paket.list.index',$data);
     }
 
+    public function paket_list_detail($detail,$id)
+    {
+        $paket_list_detail = PaketList::where('id',$detail)->first();
+        if(empty($paket_list_detail)){
+            return response()->json([
+                'status' => false,
+                'message' => 'Data Tidak Ditemukan'
+            ]);
+        }
+        return response()->json([
+            'status' => true,
+            'data' => $paket_list_detail
+        ]);
+    }
+
     public function paket_list_simpan(Request $request, $id)
     {
         $rules = [
@@ -418,23 +433,30 @@ class PaketController extends Controller
         // dd($request['outer-group'][0]['images']);
         // dd($request->all());
         if ($validator->passes()) {
-            $input = $request->all();
-            $paket = Paket::find($request->edit_id);
-            $input['id'] = $request->edit_id;
-            $input['paket_id'] = $id;
-            $input['kategori_paket_id'] = $paket->kategori_paket_id;
+            // $input = $request->all();
+            // $paket = Paket::find($request->edit_id);
+            // $input['id'] = $request->edit_id;
+            // $input['paket_id'] = $id;
+            // $input['kategori_paket_id'] = $paket->kategori_paket_id;
+            $input['nama_paket'] = $request->edit_nama_paket;
+            $input['deskripsi'] = $request->edit_deskripsi;
+            $input['jumlah_paket'] = $request->edit_jumlah_paket;
+            $input['diskon'] = $request->edit_diskon;
+            $input['price'] = $request->edit_price;
 
-            $image = $request->file('images');
-            $img = \Image::make($image->path());
-            $img = $img->encode('webp', 75);
-            $input['images'] = time().'.webp';
-            $img->save(public_path('frontend/assets4/img/paket/list/').$input['images']);
+            if($request->file('edit_images')){
+                $image = $request->file('edit_images');
+                $img = \Image::make($image->path());
+                $img = $img->encode('webp', 75);
+                $input['images'] = time().'.webp';
+                $img->save(public_path('frontend/assets4/img/paket/list/').$input['images']);
+            }
 
-            $paket_list = PaketList::create($input);
+            $paket_list = PaketList::where('id',$request->edit_id)->update($input);
 
             if($paket_list){
                 $message_title="Berhasil !";
-                $message_content="Paket ".$input['nama_paket']." Berhasil Disimpan";
+                $message_content="Paket ".$input['nama_paket']." Berhasil Diupdate";
                 $message_type="success";
                 $message_succes = true;
             }
@@ -731,6 +753,73 @@ class PaketController extends Controller
         );
     }
 
+    public function paket_bukti_pembayaran(Request $request, $id)
+    {
+        $image = $request->file('images');
+        $img = \Image::make($image->path());
+        $img = $img->encode('webp', 75);
+        $input['id'] = $id;
+        $input['images'] = $id.'.webp';
+        $img->save(public_path('frontend/assets4/img/tf/').$input['images']);
+
+        $bukti_pembayaran = BuktiPembayaran::firstOrCreate($input);
+        
+        $email_marketing = 'marketing@plesiranindonesia.com';
+        $details = [
+            'title' => 'Pembayaran ',
+            'invoice' => $id,
+            'email' => $request->email_payment,
+            'body' => null,
+            'nama_pembayaran' => $request->nama_pembayaran,
+            'bukti_pembayaran' => asset('frontend/assets4/img/tf/'.$input['images'])
+            // 'url' => 'https://www.itsolutionstuff.com'
+        ];
+
+        // Mail::send(new Pembayaran($details));
+        Mail::to($email_marketing)->send(new Pembayaran($details));
+        
+        PaketOrder::where('id',$id)->update([
+            'status' => 2
+        ]);
+        
+        if($bukti_pembayaran){
+            $message_title="Berhasil !";
+            $message_content="Bukti pembayaran berhasil dikirim. Silahkan menunggu konfirmasi";
+            $message_type="success";
+            $message_succes = true;
+        }else{
+            $message_title="Gagal !";
+            $message_content="Bukti pembayaran gagal dikirim. Silahkan dicoba lagi";
+            $message_type="danger";
+            $message_succes = true;
+        }
+
+        $array_message = array(
+            'success' => $message_succes,
+            'message_title' => $message_title,
+            'message_content' => $message_content,
+            'message_type' => $message_type,
+        );
+        return response()->json($array_message);
+    }
+
+    public function hapus($id)
+    {
+        $paket = Paket::find($id);
+        if(empty($paket)){
+            return response()->json([
+                'status' => false,
+                'message' => 'Data Tidak Ditemukan'
+            ]);
+        }
+        $paket->delete();
+        return response()->json([
+            'status' => true,
+            'message_title' => 'Berhasil!',
+            'message_content' => 'Paket Berhasil Dihapus'
+        ]);
+    }
+
 
     // public function paket_list_order(Request $request,$slug,$id)
     // {
@@ -914,71 +1003,4 @@ class PaketController extends Controller
     //     // );
     //     // return $data;
     // }
-
-    public function paket_bukti_pembayaran(Request $request, $id)
-    {
-        $image = $request->file('images');
-        $img = \Image::make($image->path());
-        $img = $img->encode('webp', 75);
-        $input['id'] = $id;
-        $input['images'] = $id.'.webp';
-        $img->save(public_path('frontend/assets4/img/tf/').$input['images']);
-
-        $bukti_pembayaran = BuktiPembayaran::firstOrCreate($input);
-        
-        $email_marketing = 'marketing@plesiranindonesia.com';
-        $details = [
-            'title' => 'Pembayaran ',
-            'invoice' => $id,
-            'email' => $request->email_payment,
-            'body' => null,
-            'nama_pembayaran' => $request->nama_pembayaran,
-            'bukti_pembayaran' => asset('frontend/assets4/img/tf/'.$input['images'])
-            // 'url' => 'https://www.itsolutionstuff.com'
-        ];
-
-        // Mail::send(new Pembayaran($details));
-        Mail::to($email_marketing)->send(new Pembayaran($details));
-        
-        PaketOrder::where('id',$id)->update([
-            'status' => 2
-        ]);
-        
-        if($bukti_pembayaran){
-            $message_title="Berhasil !";
-            $message_content="Bukti pembayaran berhasil dikirim. Silahkan menunggu konfirmasi";
-            $message_type="success";
-            $message_succes = true;
-        }else{
-            $message_title="Gagal !";
-            $message_content="Bukti pembayaran gagal dikirim. Silahkan dicoba lagi";
-            $message_type="danger";
-            $message_succes = true;
-        }
-
-        $array_message = array(
-            'success' => $message_succes,
-            'message_title' => $message_title,
-            'message_content' => $message_content,
-            'message_type' => $message_type,
-        );
-        return response()->json($array_message);
-    }
-
-    public function hapus($id)
-    {
-        $paket = Paket::find($id);
-        if(empty($paket)){
-            return response()->json([
-                'status' => false,
-                'message' => 'Data Tidak Ditemukan'
-            ]);
-        }
-        $paket->delete();
-        return response()->json([
-            'status' => true,
-            'message_title' => 'Berhasil!',
-            'message_content' => 'Paket Berhasil Dihapus'
-        ]);
-    }
 }
