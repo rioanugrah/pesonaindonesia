@@ -17,10 +17,12 @@
     <link rel="canonical" href="@yield('canonical')">
     <link rel="shortlink" href="{{ url('/') }}">
     <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <meta property="og:locale:alternate" content="{{ str_replace('_', '-', app()->getLocale()) }}">
     <meta property="og:type" content="agency">
     <meta property="og:title" content="Pesona Plesiran Indonesia">
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:site_name" content="Pesona Plesiran Indonesia">
+    <meta property="og:description" content="@yield('description')">
     <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:standard" />
     {{-- <meta name="keywords"
         content="tour, trip, travel, agency, life, vacation, climbing, wisata, pesona, plesiran, indonesia, pesona plesiran indonesia, pesona indonesia"> --}}
