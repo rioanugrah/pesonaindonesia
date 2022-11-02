@@ -114,11 +114,10 @@
         </div>
     </div> --}}
     </div>
-    <section class="page-section pb-0">
+    <section class="page-section pb-0 mb-40">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    {{-- <h6 class="title-section-top font-4">Special offers</h6> --}}
                     <h2 class="title-section"><span>Partner</span> Kami</h2>
                     <div class="cws_divider mb-25 mt-5"></div>
                 </div>
@@ -155,7 +154,7 @@
             </div>
         </div>
     </section>
-    <section class="small-section">
+    {{-- <section class="small-section">
         <div class="container">
             <div class="row">
                 <div class="col-md-2 col-xs-6 mb-md-30">
@@ -208,7 +207,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="small-section cws_prlx_section bg-gray-40 mb-20"><img src="{{ asset('frontend/assets4/img/wallpaper/bg_video.webp') }}" alt class="cws_prlx_layer">
         <div class="container">
           <div class="row">
@@ -221,7 +220,7 @@
             </div>
             <div class="col-md-7">
               <div class="embed-responsive embed-responsive-16by9">
-                <iframe src="https://www.youtube.com/embed/Yb6KMxB3I1M" class="embed-responsive-item"></iframe>
+                <iframe src="https://www.youtube.com/embed/Yb6KMxB3I1M" class="embed-responsive-item" allow="autoplay"></iframe>
               </div>
             </div>
           </div>
