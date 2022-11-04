@@ -506,7 +506,7 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['pakets'] = Paket::where('slug',$slug)->first();
-        $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->orderBy('created_at','asc')->get();
+        $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->orderBy('created_at','desc')->get();
         // dd($data);
         return view('frontend.frontend4.paket_detail',$data);
     }
