@@ -41,7 +41,7 @@
                     <tr>
                         <td>
                             {{-- <a href="{{ route('frontend.paket.detail.list',['slug' => $pakets->slug, 'id' => $paket_list->id]) }}"> --}}
-                            <img src="{{ asset('frontend/assets4/img/paket/list/'.$paket_list->images) }}" style="width: 190px; height: 130px; object-fit: cover;" data-at2x="{{ asset('frontend/assets4/img/paket/list/'.$paket_list->images) }}" alt="{{ $paket_list->nama_paket }}">
+                            <img src="{{ asset('frontend/assets4/img/paket/list/'.$paket_list->images) }}" style="width: 190px; height: 190px; object-fit: cover;" data-at2x="{{ asset('frontend/assets4/img/paket/list/'.$paket_list->images) }}" alt="{{ $paket_list->nama_paket }}">
                             <h6>{{ $paket_list->nama_paket }}</h6>
                             {{-- </a> --}}
                             {{-- <p class="mb-0">(Extra beds available: Crib, <br> Rollaway bed)</p> --}}
