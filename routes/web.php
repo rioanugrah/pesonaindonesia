@@ -58,10 +58,11 @@ Route::prefix('paket')->group(function () {
     Route::get('/', 'FrontendController@paket')->name('frontend.paket');
     Route::get('{slug}', 'FrontendController@paket_detail')->name('frontend.paket.detail');
     // Route::get('{slug}/{id}', 'FrontendController@paket_detail_list')->name('frontend.paket.detail.list');
-    Route::get('{slug}/{id}/order', 'FrontendController@paket_cart')->name('frontend.paket.cart');
+    Route::get('{slug}/order/{id}', 'FrontendController@paket_cart')->name('frontend.paket.cart');
     Route::post('{slug}/{id}/checkout', 'PaketController@paket_list_order')->name('frontend.paket.checkout');
     Route::get('payment/{id}', 'FrontendController@paket_list_order_payment')->name('frontend.paket.payment');
     Route::post('{id}/upload', 'PaketController@paket_bukti_pembayaran')->name('frontend.paket.transfer');
+    Route::get('{slug}/pages/{id}', 'PagesFrontendController@detail')->name('frontend.pagesDetail');
 });
 
 // Route::get('testingPayment', function(){

@@ -39,7 +39,7 @@
                         </div>
                         <div class="shop-price">Rp. {{ number_format($paket_lists->price,2,",",".") }} </div>
                         <div class="cws_divider mb-10"></div>
-                        <p class="description-product">{{ $paket_lists->deskripsi }}</p>
+                        <p class="description-product">{!! $paket_lists->deskripsi !!}</p>
                         <div class="price-review"><a class="cws-button small alt add-to-cart">Buy</a><a href="{{ route('frontend.paket.cart',['slug' => $paket_lists->pakets->slug,'id' => $paket_lists->id]) }}" class="cws-button small alt added-to-cart">View cart</a></div>
                         <div class="mb-0 mt-10 post-number">Product Code: <span>{{ $paket_lists->id }}</span></div>
 
