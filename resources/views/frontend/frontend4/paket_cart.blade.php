@@ -197,7 +197,7 @@
 <script>
     $('.jumlah').change(function(){
         if($('.jumlah').val() > $('#detail_maksimal').val()){
-            alert('Jumlah anggota melebihi batas yang ditentukan');
+            alert('Jumlah anggota maksimal '+$('#detail_maksimal').val()+' orang');
             $('.jumlah').val('');
         }else{
             if({{ $paket_lists->kategori_paket_id }} == 2){
@@ -272,12 +272,20 @@
     // const qty = $('#jumlah').val();
     $(document).ready(function(){
         var i=1;  
-        $('#add').click(function(){  
-            if(i < $('.jumlah').val()){
-                $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="nama_anggota[]" placeholder="Nama Anggota '+i+'" class="form-control name_list" required /></td><td><button type="button" name="remove" id="'+i+'" class="cws-button full-width alt btn_remove">X</button></td></tr>');  
-                i++;  
+        // $('#add').click(function(){  
+        //     if(i < $('.jumlah').val()){
+        //         $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="nama_anggota[]" placeholder="Nama Anggota '+i+'" class="form-control name_list" required /></td><td><button type="button" name="remove" id="'+i+'" class="cws-button full-width alt btn_remove">X</button></td></tr>');  
+        //         i++;  
+        //     }
+        // });
+
+        $('.jumlah').change(function(){
+            for (let index = 1; index < $('.jumlah').val(); index++) {
+                // const element = index;
+                // alert(element);
+                $('#dynamic_field').append('<tr id="row'+index+'" class="dynamic-added"><td><input type="text" name="nama_anggota[]" placeholder="Nama Anggota '+index+'" class="form-control name_list" required /></td><td><button type="button" name="remove" id="'+index+'" class="cws-button full-width alt btn_remove">X</button></td></tr>');
             }
-        });
+        })
 
         // if({{ $paket_lists->kategori_paket_id }} == 1){
         // }

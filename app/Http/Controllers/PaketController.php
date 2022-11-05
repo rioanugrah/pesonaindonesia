@@ -316,7 +316,8 @@ class PaketController extends Controller
                     //     return substr($row->deskripsi, 0, 50);
                     // })
                     ->addColumn('action', function($row){
-                        $btn = '<button onclick="edit(`'.$row->id.'`)" class="btn btn-warning btn-sm" title="Edit">
+                        $btn = '<a href='.route('paket.listedit',['id' => $row->paket_id, 'detail' => $row->id]).' class="btn btn-warning btn-sm">Edit</a>
+                                <button onclick="edit(`'.$row->id.'`)" class="btn btn-warning btn-sm" title="Edit">
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
                                 <button onclick="hapus(`'.$row->id.'`)" class="btn btn-danger btn-sm" title="Hapus">
@@ -408,8 +409,18 @@ class PaketController extends Controller
         );
     }
 
+    public function paket_list_edit($detail,$id)
+    {
+        $paket_list_detail = PaketList::where('id',$id)->where('paket_id',$detail)->first();
+        if(empty($paket_list_detail)){
+            // dd($paket_list_detail);
+            return redirect()->back();
+        }
+        return view('backend.paket.list.edit',compact('paket_list_detail'));
+    }
+
     //update
-    public function paket_list_update(Request $request, $id)
+    public function paket_list_update(Request $request, $detail,$id)
     {
         $rules = [
             'edit_nama_paket'  => 'required',
@@ -452,7 +463,7 @@ class PaketController extends Controller
                 $img->save(public_path('frontend/assets4/img/paket/list/').$input['images']);
             }
 
-            $paket_list = PaketList::where('id',$request->edit_id)->update($input);
+            $paket_list = PaketList::where('id',$id)->update($input);
 
             if($paket_list){
                 $message_title="Berhasil !";
@@ -461,13 +472,14 @@ class PaketController extends Controller
                 $message_succes = true;
             }
 
-            $array_message = array(
-                'success' => $message_succes,
-                'message_title' => $message_title,
-                'message_content' => $message_content,
-                'message_type' => $message_type,
-            );
-            return response()->json($array_message);
+            // $array_message = array(
+            //     'success' => $message_succes,
+            //     'message_title' => $message_title,
+            //     'message_content' => $message_content,
+            //     'message_type' => $message_type,
+            // );
+            // return response()->json($array_message);
+            return redirect()->route('paket.list',['id'=>$detail]);
         }
 
         return response()->json(

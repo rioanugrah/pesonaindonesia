@@ -135,9 +135,10 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('{id}/paket_images', 'PaketController@detail_upload')->name('paket.imageUpload')->middleware('verified');
             Route::get('{id}/list', 'PaketController@paket_list')->name('paket.list')->middleware('verified');
             Route::get('{id}/list/{detail}', 'PaketController@paket_list_detail')->name('paket.listdetail')->middleware('verified');
+            Route::get('{id}/list/{detail}/edit', 'PaketController@paket_list_edit')->name('paket.listedit')->middleware('verified');
             // Route::get('{id}/order', 'PaketController@paket_order')->name('paket.order')->middleware('verified');
             Route::post('{id}/list/simpan', 'PaketController@paket_list_simpan')->name('paket.list.simpan')->middleware('verified');
-            Route::post('{id}/list/update', 'PaketController@paket_list_update')->name('paket.list.update')->middleware('verified');
+            Route::post('{detail}/list/{id}/update', 'PaketController@paket_list_update')->name('paket.list.update')->middleware('verified');
             Route::post('upload/paket_images', 'PaketController@simpan_image')->name('paket.simpan_imageUpload')->middleware('verified');
             Route::get('{id}/hapus', 'PaketController@hapus')->name('paket.delete')->middleware('verified');
         });

@@ -197,38 +197,6 @@
         });
     });
 
-    $('#edit_upload-form').submit(function(e) {
-        e.preventDefault();
-        let formData = new FormData(this);
-        $.ajax({
-            type: 'POST',
-            url: "{{ route('paket.list.update',['id' => $pakets->id]) }}",
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: (result) => {
-                if (result.success != false) {
-                    iziToast.success({
-                        title: result.message_title,
-                        message: result.message_content
-                    });
-                    this.reset();
-                    table.ajax.reload();
-                    $('#edit').modal('hide');
-                } else {
-                    iziToast.error({
-                        title: result.success,
-                        message: result.error
-                    });
-                }
-            },
-            error: function(request, status, error) {
-                iziToast.error({
-                    title: 'Error',
-                    message: error,
-                });
-            }
-        });
-    });
+    
 </script>
 @endsection
