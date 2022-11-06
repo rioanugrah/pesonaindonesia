@@ -34,7 +34,17 @@
                     <div class="summary clearfix">
                         <h2 class="product-title mt-0">{{ $paket_lists->nama_paket }}</h2>
                         <div class="review-status">
-                            <div class="status-product in-stock">Ready</div>
+                            <?php 
+                                if($paket_lists->status == 1){    
+                            ?>
+                            <div class="status-product in-stock">
+                                Ready
+                            </div>
+                            <?php }else{ ?>
+                            <div class="status-product out-stock">
+                                Sold Out
+                            </div>
+                            <?php } ?>
                             <div class="count-review"><span>0</span> Reviews</div>
                         </div>
                         <div class="shop-price">Rp. {{ number_format($paket_lists->price,2,",",".") }} </div>
