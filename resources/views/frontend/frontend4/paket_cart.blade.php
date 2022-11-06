@@ -4,6 +4,21 @@
     {{ $paket_lists->nama_paket }} - Order
 @endsection
 
+@auth
+    <?php 
+        $user = auth()->user()->name;
+        $name = explode(" ",$user);
+        $first_name = $name[0];
+        $last_name = $name[1];
+    ?>
+@else
+    <?php 
+        $user = null;
+        $first_name = "";
+        $last_name = "";
+    ?>
+@endauth
+
 @section('content')
     <div class="container page pt-50">
         <div class="row">
@@ -15,20 +30,23 @@
                         <div class="col-1 mb-sm-50">
                             <h3 class="mt-0 mb-30">Billing Details</h3>
                             <input type="hidden" id="detail_maksimal" value="{{ $paket_lists->jumlah_paket }}">
-                            {{-- <p class="mb-20">Returning customer? <a href="#">Click here to login</a></p> --}}
+                            @auth
+                            @else
+                            <p class="mb-20">Returning customer? <a href="{{ route('login') }}">Click here to login</a></p>
+                            @endauth
                             <div class="billing-wrapper">
                                 <div class="woocommerce-billing-fields">
                                     <p id="billing_first_name_field" class="form-row form-row-first validate-required">
                                         <label for="billing_first_name">First Name<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <input id="billing_first_name" type="text" name="first_name" placeholder=""
-                                            value="" class="input-text" required>
+                                            value="{{ $first_name }}" class="input-text" required>
                                     </p>
                                     <p id="billing_last_name_field" class="form-row form-row-last validate-required">
                                         <label for="billing_last_name">Last Name<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <input id="billing_last_name" type="text" name="last_name" placeholder=""
-                                            value="" class="input-text" required>
+                                            value="{{ $last_name }}" class="input-text" required>
                                     </p>
                                     <div class="clear"></div>
                                     <p id="billing_address_1_field"
@@ -73,12 +91,12 @@
                                             {{-- <button type="button" name="add" id="add" class="cws-button alt"><i class="fa fa-plus"></i></button> --}}
                                         </div>
                                     </p>
-                                    <p id="billing_qty_field"
+                                    {{-- <p id="billing_qty_field"
                                         class="form-row form-row-last validate-required validate-phone">
-                                        {{-- <label for="billing_qty">Tambah Anggota</label> --}}
-                                        {{-- <div id="tambah_anggota"></div> --}}
+                                        <label for="billing_qty">Tambah Anggota</label>
+                                        <div id="tambah_anggota"></div>
                                         <button type="button" name="add" id="add" class="cws-button alt"><i class="fa fa-plus"></i> Tambah Anggota</button>
-                                    </p>
+                                    </p> --}}
                                 </div>
                             </div>
                             {{-- <div id="data_anggota" style="display: none"> --}}
