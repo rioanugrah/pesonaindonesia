@@ -37,13 +37,13 @@
                             <div class="billing-wrapper">
                                 <div class="woocommerce-billing-fields">
                                     <p id="billing_first_name_field" class="form-row form-row-first validate-required">
-                                        <label for="billing_first_name">First Name<abbr title="required"
+                                        <label for="billing_first_name">Nama Depan<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <input id="billing_first_name" type="text" name="first_name" placeholder=""
                                             value="{{ $first_name }}" class="input-text" required>
                                     </p>
                                     <p id="billing_last_name_field" class="form-row form-row-last validate-required">
-                                        <label for="billing_last_name">Last Name<abbr title="required"
+                                        <label for="billing_last_name">Nama Belakang<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <input id="billing_last_name" type="text" name="last_name" placeholder=""
                                             value="{{ $last_name }}" class="input-text" required>
@@ -51,7 +51,7 @@
                                     <div class="clear"></div>
                                     <p id="billing_address_1_field"
                                         class="form-row form-row-wide address-field validate-required">
-                                        <label for="billing_address_1">Address<abbr title="required"
+                                        <label for="billing_address_1">Alamat<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <textarea name="alamat" id="" cols="30" rows="5" required></textarea>
                                         {{-- <input id="billing_address_1" type="text" name="alamat" placeholder="Street address" value="" class="input-text"> --}}
@@ -59,14 +59,14 @@
                                     <div class="clear"></div>
                                     <p id="billing_email_field"
                                         class="form-row form-row-first validate-required validate-email">
-                                        <label for="billing_email">Email Address<abbr title="required"
+                                        <label for="billing_email">Email<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <input id="billing_email" type="text" name="email" placeholder=""
                                             value="" class="input-text" required>
                                     </p>
                                     <p id="billing_phone_field"
                                         class="form-row form-row-last validate-required validate-phone">
-                                        <label for="billing_phone">Phone<abbr title="required"
+                                        <label for="billing_phone">No. Telp/Whatsapp<abbr title="required"
                                                 class="required">*</abbr></label>
                                         <input id="billing_phone" type="text" name="phone" placeholder=""
                                             value="" class="input-text" required>
@@ -83,8 +83,8 @@
                                     <div class="clear"></div>
                                     <p id="billing_qty_field"
                                         class="form-row form-row-last validate-required">
-                                        <label for="billing_qty">Jumlah<abbr title="required"
-                                                class="required">*</abbr></label>
+                                        <label for="billing_qty">Jumlah Team<abbr title="required"
+                                                class="required">*</abbr> (Kosongkan bila tidak memiliki anggota)</label>
                                         <div class="input-group">
                                             <input id="" type="text" name="qty" placeholder=""
                                                 value="" class="input-text jumlah" required>
@@ -136,6 +136,20 @@
                             <h3 id="order_review_heading" class="mt-0 mb-30">Your order</h3>
                             {{-- <p class="mb-20">Have a coupon? <a href="#">Click here to enter your code</a></p> --}}
                             <div id="order_review" class="woocommerce-checkout-review-order">
+                                <table class="shop_table woocommerce-checkout-review-order-table">
+                                    {{-- <thead>
+                                        <tr>
+                                            <th class="product-name">Detail Paket</th>
+                                            <td></td>
+                                        </tr>
+                                    </thead> --}}
+                                    <tbody>
+                                        <tr>
+                                            <td>{!! $paket_lists->deskripsi !!}</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <table class="shop_table woocommerce-checkout-review-order-table">
                                     <thead>
                                         <tr>
@@ -219,9 +233,14 @@
             $('.jumlah').val('');
         }else{
             if({{ $paket_lists->kategori_paket_id }} == 2){
-
                 var price = {{ $paket_lists->price - (($paket_lists->diskon / 100)*$paket_lists->price) }};
-                var penjumlahan = $('.jumlah').val() * price;
+                if($('.jumlah').val() == 0){
+                    var penjumlahan = 1 * price;
+                    var jumlah = 1;
+                }else{
+                    var penjumlahan = $('.jumlah').val() * price;
+                    var jumlah = $('.jumlah').val();
+                }
     
                 var bilangan = penjumlahan;
         
@@ -235,7 +254,7 @@
                     rupiah += separator + ribuan.join('.');
                 }
     
-                document.getElementById('jumlah_order').innerHTML = ' - '+$('.jumlah').val()+'x';
+                document.getElementById('jumlah_order').innerHTML = ' - '+jumlah+'x';
                 document.getElementById('subTotal').innerHTML = 'Rp. '+rupiah;
                 document.getElementById('orderTotal').innerHTML = 'Rp. '+rupiah;
                 $('#order_total').val(penjumlahan);
@@ -299,8 +318,6 @@
 
         $('.jumlah').change(function(){
             for (let index = 1; index < $('.jumlah').val(); index++) {
-                // const element = index;
-                // alert(element);
                 $('#dynamic_field').append('<tr id="row'+index+'" class="dynamic-added"><td><input type="text" name="nama_anggota[]" placeholder="Nama Anggota '+index+'" class="form-control name_list" required /></td><td><button type="button" name="remove" id="'+index+'" class="cws-button full-width alt btn_remove">X</button></td></tr>');
             }
         })
