@@ -120,7 +120,7 @@ class PaketController extends Controller
             $img = \Image::make($image->path());
             $img = $img->encode('webp', 75);
             $input['images'] = time().'.webp';
-            $img->save(public_path('frontend/assets4/img/paket/').$input['images']);
+            $img->save(public_path('frontend/assets_new/images/paket/').$input['images']);
             // foreach ($request['outer-group'][0] as $imagefile) {
             //     $name=$imagefile->getClientOriginalName();
             //     $imagefile->move(public_path('frontend/assets4/img/paket/'),$name);
@@ -217,9 +217,9 @@ class PaketController extends Controller
                 $img = \Image::make($file->path());
                 $img = $img->encode('webp', 75);
                 $input['edit_images'] = time().'.webp';
-                $img->save(public_path('frontend/assets4/img/paket/').$input['edit_images']);
+                $img->save(public_path('frontend/assets_new/images/paket/').$input['edit_images']);
 
-                $image_path = public_path('frontend/assets4/img/paket/'.$paket->images);
+                $image_path = public_path('frontend/assets_new/images/paket/'.$paket->images);
                 File::delete($image_path);
                 $paket->images = $input['edit_images'];
             }
@@ -270,7 +270,7 @@ class PaketController extends Controller
             $img = \Image::make($image->path());
             $img = $img->encode('webp', 75);
             $input['images'] = time().'.webp';
-            $img->save(public_path('frontend/assets4/img/paket/').$input['images']);
+            $img->save(public_path('frontend/assets_new/images/paket/').$input['images']);
             
             $paketImages = PaketImages::create($input);
             
@@ -381,7 +381,7 @@ class PaketController extends Controller
             $img = \Image::make($image->path());
             $img = $img->encode('webp', 75);
             $input['images'] = time().'.webp';
-            $img->save(public_path('frontend/assets4/img/paket/list/').$input['images']);
+            $img->save(public_path('frontend/assets_new/images/paket/list/').$input['images']);
 
             $paket_list = PaketList::create($input);
 
@@ -460,7 +460,7 @@ class PaketController extends Controller
                 $img = \Image::make($image->path());
                 $img = $img->encode('webp', 75);
                 $input['images'] = time().'.webp';
-                $img->save(public_path('frontend/assets4/img/paket/list/').$input['images']);
+                $img->save(public_path('frontend/assets_new/images/paket/list/').$input['images']);
             }
 
             $paket_list = PaketList::where('id',$id)->update($input);
