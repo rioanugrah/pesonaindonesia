@@ -104,6 +104,17 @@ Route::prefix('partner')->group(function(){
     Route::post('simpan', 'CooperationController@simpan_frontend')->name('frontend.partnership.simpan');
 });
 
+// Route::get('testings', function(){
+//     return view('frontend.frontend_2022.index');
+// });
+Route::get('testings', 'FrontendController@frontend_testing');
+
+// Route::group(['middleware' => ['auth']], function(){
+//     Route::get('login', function(){
+//         return redirect('login');
+//     });
+// });
+
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('b')->group(function () {
         Route::get('home', 'HomeController@index')->name('home')->middleware('verified');

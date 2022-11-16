@@ -18,6 +18,7 @@ use App\Models\Paket;
 use App\Models\PaketList;
 use App\Models\PaketOrder;
 use App\Models\PaketOrderList;
+use App\User;
 
 use App\Models\KategoriPaket;
 
@@ -52,6 +53,11 @@ class FrontendController extends Controller
             // [ 'image' => 'team01.png', 'name' => 'Kemal Izzuddin A.Md.T', 'posisi' => 'Chief Technology Officer' ],
             [ 'image' => 'tasya.webp', 'name' => 'Tasya Ayu S.', 'posisi' => 'Chief Financial Officer' ],
         ];
+        $this->menu = [
+            [ 'name' => 'Home', 'active' => true ,'link' => route('frontend') ],
+            [ 'name' => 'Tour', 'active' => false ,'link' => 'javascript:void()' ],
+            [ 'name' => 'Tracking Order', 'active' => false ,'link' => 'javascript:void()' ],
+        ];
         $this->payment_live = env('OY_INDONESIA_LIVE');
         $this->automatics = $this->payment_live;
         $this->username = config('app.oy_username');
@@ -65,7 +71,15 @@ class FrontendController extends Controller
         }
         // protected $data['whatsapp'] = ['nomor' => '-', 'message' => 'Hello'];
     }
-    public function index()
+    public function frontend_testing()
+    {
+        $data['menus'] = $this->menu;
+        $data['paket_privates'] = PaketList::where('kategori_paket_id',1)->get();
+        $data['paket_trips'] = PaketList::where('kategori_paket_id',2)->orderBy('created_at','desc')->paginate(5);
+        return view('frontend.frontend_2022.index', $data);
+    }
+
+    public function index(Request $request)
     {
         $coming_soon = true;
         $years = 2021;
@@ -77,6 +91,7 @@ class FrontendController extends Controller
 
         if($date_now > $date_coming_soon){
             $data['teams'] = $this->teams;
+            $data['menus'] = $this->menu;
             // $data['wallpaper'] = [
             //     ['image' => 'frontend/assets2/images/wallpaper/bromo.png', 'arrow' => 'frontend/assets2/images/arrow-link.png', 'title' => 'Wisata Gunung Bromo'],
             //     ['image' => 'frontend/assets2/images/wallpaper/batubengkung.png', 'arrow' => 'frontend/assets2/images/arrow-link.png', 'title' => 'Wisata Pantai Batu Bengkung'],
@@ -103,8 +118,15 @@ class FrontendController extends Controller
             $data['provinsis'] = Provinsi::all();
             $data['jumlah_paket_wisata'] = PaketList::count();
             $data['pakets'] = Paket::all();
+            $data['paket_privates'] = PaketList::where('kategori_paket_id',1)->get();
+            $data['paket_trips'] = PaketList::where('kategori_paket_id',2)->where('status','!=',0)
+                                            ->orderBy('created_at','desc')->paginate(5);
+            // $request->visitor()->browser();
+            // visitor()->visit();
+            // visitor()->browser();
             // dd($data['whatsapp']);
-            return view('frontend.frontend4.index', $data);
+            return view('frontend.frontend_2022.index', $data);
+            // return view('frontend.frontend4.index', $data);
             // return view('layouts.frontend_4.app',$data);
             // return view('frontend.frontend2.index',$data);
         }else{
