@@ -65,6 +65,13 @@ Route::prefix('paket')->group(function () {
     Route::get('{slug}/pages/{id}', 'PagesFrontendController@detail')->name('frontend.pagesDetail');
 });
 
+Route::prefix('tour')->group(function () {
+    Route::get('/', 'FrontendNewController@tour')->name('frontend_new.tour');
+    Route::get('{id}/{paket_id}', 'FrontendNewController@tour_detail')->name('frontend_new.tour_detail');
+    Route::post('{slug}/{id}/checkout', 'FrontendNewController@paket_list_order_payment')->name('frontend_new.paket.checkout');
+
+});
+
 // Route::get('testingPayment', function(){
 //     return json_encode([
 //         'partner_tx_id' => 123,

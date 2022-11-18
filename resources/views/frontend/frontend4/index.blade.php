@@ -42,79 +42,8 @@
                 @endforeach
             </ul>
         </div>
-        {{-- <div class="search-tours-form">
-        <div class="container">
-            <div class="search-tours-wrap">
-                <div class="search-tours-tabs">
-                    <div class="search-tabs-wrap">
-                        <div data-tours-cat="tab-cat-3" class="tours-tab-btn active"> <span>Hotels</span><i
-                                class="tours-tab-icon flaticon-suntour-hotel"></i></div>
-                    </div>
-                </div>
-                <div class="search-tours-content">
-                    <div data-tours-cat="tab-cat-3" class="tours-container active">
-                        <div class="hotels-box active">
-                            <form method="get" action="{{ route('frontend.hotel_search') }}" class="form search">
-                            <div class="hotels-search">
-                                    <div class="search-wrap">
-                                        <input type="text"
-                                            name="search_hotel"
-                                            placeholder="Nama Hotel, Alamat Hotel"
-                                            class="form-control search-field"><i
-                                            class="flaticon-suntour-map search-icon"></i>
-                                    </div>
-                            </div>
-                            <div class="hotels-select">
-                                <div class="tours-calendar divider-skew">
-                                    <input placeholder="Check in" type="text" name="in" onfocus="(this.type='date')"
-                                        class="calendar-default textbox-n"><i
-                                        class="flaticon-suntour-calendar calendar-icon"></i>
-                                </div>
-                                <div class="tours-calendar divider-skew">
-                                    <input placeholder="Check out" type="text" name="out" onfocus="(this.type='date')"
-                                        class="calendar-default textbox-n"><i
-                                        class="flaticon-suntour-calendar calendar-icon"></i>
-                                </div>
-                                <div class="selection-box divider-skew"><i
-                                        class="flaticon-suntour-bed box-icon"></i>
-                                    <select name="room">
-                                        <option>Rooms</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </div>
-                                <div class="selection-box divider-skew"><i
-                                        class="flaticon-suntour-adult box-icon"></i>
-                                    <select name="adult">
-                                        <option>Adults</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </div>
-                                <div class="selection-box"><i class="flaticon-suntour-children box-icon"></i>
-                                    <select name="children">
-                                        <option>Children</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </div>
-                                <button class="button-search" style="background-color: rgba(255, 255, 0, 0); border: rgba(255, 255, 0, 0);" type="submit">Search</button>
-                            </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
     </div>
-    <section class="page-section pb-0 mb-40">
+    {{-- <section class="page-section pb-0 mb-40">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
@@ -153,7 +82,7 @@
                 @endforelse
             </div>
         </div>
-    </section>
+    </section> --}}
     {{-- <section class="small-section">
         <div class="container">
             <div class="row">

@@ -33,7 +33,7 @@
     @yield('css')
 </head>
 {!! Adsense::javascript() !!}
-<body class="home page-template-default page page-id-5225 gdlr-core-body tourmaster-body traveltour-body traveltour-body-front traveltour-full  traveltour-with-sticky-navigation gdlr-core-link-to-lightbox">
+<body class="tour-template-default single single-tour postid-4643 gdlr-core-body tourmaster-body woocommerce-no-js traveltour-body traveltour-body-front traveltour-full  traveltour-with-sticky-navigation gdlr-core-link-to-lightbox">
     @include('layouts.frontend_2022.header_mobile')
 
     <div class="traveltour-body-outer-wrapper ">
@@ -45,8 +45,10 @@
     </div>
     <a href="#traveltour-top-anchor" class="traveltour-footer-back-to-top-button" id="traveltour-footer-back-to-top-button"><i class="fa fa-angle-up" ></i></a>
 </body>
-    <script type='text/javascript' src='{{ asset('frontend/assets_new/js/jquery/jquery.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('frontend/assets_new/js/jquery/jquery-migrate.min.js') }}'></script>
+<?php $js = asset('frontend/assets4/'); ?>
+<script type="text/javascript" src="{{ $js . '/js/jquery.min.js' }}"></script>
+    {{-- <script type='text/javascript' src='{{ asset('frontend/assets_new/js/jquery/jquery.js') }}'></script> --}}
+    {{-- <script type='text/javascript' src='{{ asset('frontend/assets_new/js/jquery/jquery-migrate.min.js') }}'></script> --}}
     <script type='text/javascript' src='{{ asset('frontend/assets_new/js/jquery/ui/core.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('frontend/assets_new/js/jquery/ui/datepicker.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('frontend/assets_new/js/jquery/ui/effect.min.js') }}'></script>
