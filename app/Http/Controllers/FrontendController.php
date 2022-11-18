@@ -117,15 +117,19 @@ class FrontendController extends Controller
 
             $data['provinsis'] = Provinsi::all();
             $data['jumlah_paket_wisata'] = PaketList::count();
+            // $data['pakets'] = Paket::all();
             $data['pakets'] = Paket::all();
             $data['paket_privates'] = PaketList::where('kategori_paket_id',1)->get();
-            $data['paket_trips'] = PaketList::where('kategori_paket_id',2)->where('status','!=',0)
+            $data['paket_trips'] = PaketList::where('status','!=',0)
                                             ->orderBy('created_at','desc')->paginate(5);
+            // $data['paket_trips'] = PaketList::where('kategori_paket_id',2)->where('status','!=',0)
+            //                                 ->orderBy('created_at','desc')->paginate(5);
             // $request->visitor()->browser();
             // visitor()->visit();
             // visitor()->browser();
             // dd($data['whatsapp']);
             // return view('frontend.frontend_2022.index', $data);
+            // dd($data);
             return view('frontend.frontend4.index', $data);
             // return view('layouts.frontend_4.app',$data);
             // return view('frontend.frontend2.index',$data);

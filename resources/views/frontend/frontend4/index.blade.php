@@ -159,11 +159,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <h2 class="title-section"><span>Paket</span> Wisata</h2>
+                    <h3 class="title-section"><span>Our</span> Recommendation</h3>
                     <div class="cws_divider mb-25 mt-5"></div>
                 </div>
             </div>
-            @forelse ($pakets as $paket)
+            {{-- @forelse ($pakets as $paket)
                 <div class="col-md-6">
                     <div class="recom-item">
                         <div class="recom-media"><a href="{{ route('frontend.paket.detail', ['slug' => $paket->slug]) }}">
@@ -184,6 +184,29 @@
                     </div>
                 </div>
             @empty
+            @endforelse --}}
+            @forelse ($paket_trips as $paket)
+            <div class="col-md-6">
+                <div class="recom-item">
+                    <div class="recom-media"><a href="{{ route('frontend.pagesDetail', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}">
+                            <div class="pic"><img src="{{ asset('frontend/assets4/img/paket/list/' . $paket->images) }}"
+                                    style="width: 770px; height: 240px; object-fit: cover;"
+                                    data-at2x="{{ asset('frontend/assets4/img/paket/list' . $paket->images) }}" alt>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="recom-item-body">
+                        <a href="{{ route('frontend.pagesDetail', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}">
+                            <h6 class="blog-title">{{ $paket->nama_paket }}</h6>
+                        </a>
+                        <div class="stars stars-5"></div>
+                        <a href="{{ route('frontend.pagesDetail', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}"
+                            class="recom-button">Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+            @empty
+                
             @endforelse
         </div>
     </section>
@@ -193,11 +216,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="title-section-top alt" style="font-size: 18pt">THERE IS ALWAYS AWAY FOR AWAY</h3>
-                    <h2 class="title-section alt mb-20" style="font-weight: 700">Pesona Plesiran Indonesia</h2>
-                    <p class="color-white">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang
+                    {{-- <h3 class="title-section-top alt" style="font-size: 18pt">THERE IS ALWAYS AWAY FOR AWAY</h3> --}}
+                    <h2 class="title-section alt mb-20" style="font-weight: 700">THERE IS ALWAYS AWAY FOR AWAY</h2>
+                    {{-- <p class="color-white">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang
                         menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi,
-                        Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.</p>
+                        Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.</p> --}}
                     <div class="cws_divider short mb-30 mt-30"></div>
                 </div>
             </div>
