@@ -217,9 +217,9 @@ class PaketController extends Controller
                 $img = \Image::make($file->path());
                 $img = $img->encode('webp', 75);
                 $input['edit_images'] = time().'.webp';
-                $img->save(public_path('frontend/assets_new/images/paket/').$input['edit_images']);
+                $img->save(public_path('frontend/assets4/img/paket/').$input['edit_images']);
 
-                $image_path = public_path('frontend/assets_new/images/paket/'.$paket->images);
+                $image_path = public_path('frontend/assets4/img/paket/'.$paket->images);
                 File::delete($image_path);
                 $paket->images = $input['edit_images'];
             }
@@ -455,15 +455,19 @@ class PaketController extends Controller
             $input['diskon'] = $request->edit_diskon;
             $input['price'] = $request->edit_price;
 
+            $paket_list = PaketList::find($id);
             if($request->file('edit_images')){
                 $image = $request->file('edit_images');
                 $img = \Image::make($image->path());
                 $img = $img->encode('webp', 75);
                 $input['images'] = time().'.webp';
                 $img->save(public_path('frontend/assets4/img/paket/list/').$input['images']);
-            }
 
-            $paket_list = PaketList::where('id',$id)->update($input);
+                $image_path = public_path('frontend/assets4/img/paket/list/'.$paket_list->images);
+                File::delete($image_path);
+            }
+            $paket_list->update($input);
+            // $paket_list = PaketList::where('id',$id)->update($input);
 
             if($paket_list){
                 $message_title="Berhasil !";
