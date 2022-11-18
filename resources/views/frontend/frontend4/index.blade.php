@@ -219,7 +219,7 @@
                         </div>
                         <a href="{{ route('frontend.pagesDetail', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}"
                             class="recom-button">Selengkapnya</a>
-                        <a href="hotels-details.html" class="cws-button small alt">Book now</a>
+                        <a href="{{ route('frontend.paket.cart',['slug' => $paket->pakets->slug,'id' => $paket->id]) }}" class="cws-button small alt">Book now</a>
                         @if ($paket->diskon != 0)
                         <div class="action font-2">{{ $paket->diskon }}%</div>
                         @endif
