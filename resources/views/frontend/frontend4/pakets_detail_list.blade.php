@@ -47,7 +47,12 @@
                             <?php } ?>
                             <div class="count-review"><span>0</span> Reviews</div>
                         </div>
-                        <div class="shop-price">Rp. {{ number_format($paket_lists->price,2,",",".") }} </div>
+                        <div class="shop-price">
+                            @if ($paket_lists->diskon == 0)
+                            Rp. {{ number_format($paket_lists->price,2,",",".") }} </div>
+                            @else
+                            Rp. {{ number_format($paket_lists->price-(($paket_lists->diskon / 100)*$paket_lists->price),0,",",".") }} </div>
+                            @endif
                         <div class="cws_divider mb-10"></div>
                         <p class="description-product">{!! $paket_lists->deskripsi !!}</p>
                         <?php 

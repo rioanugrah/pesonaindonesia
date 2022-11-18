@@ -200,8 +200,29 @@
                             <h6 class="blog-title">{{ $paket->nama_paket }}</h6>
                         </a>
                         <div class="stars stars-5"></div>
+                        <div class="recom-price">
+                            @if ($paket->diskon == 0)
+                            <span class="font-4">Rp. {{ number_format($paket->price,0,",",".") }}</span>
+                            @else
+                            <p style="margin-bottom: -5%">
+                                <span style="text-decoration: line-through;text-decoration-color: #eb4034;">Rp. {{ number_format($paket->price,0,",",".") }}</span>
+                            </p>
+                            <p>
+                                <span class="font-4">Rp. {{ number_format($paket->price-(($paket->diskon / 100)*$paket->price),0,",",".") }}</span>
+                                @if ($paket->kategori_id == 1) 
+                                    / {{ $paket->jumlah_paket }} pax
+                                @else
+                                    / pax
+                                @endif
+                            </p>
+                            @endif
+                        </div>
                         <a href="{{ route('frontend.pagesDetail', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}"
                             class="recom-button">Selengkapnya</a>
+                        <a href="hotels-details.html" class="cws-button small alt">Book now</a>
+                        @if ($paket->diskon != 0)
+                        <div class="action font-2">{{ $paket->diskon }}%</div>
+                        @endif
                     </div>
                 </div>
             </div>
