@@ -191,7 +191,7 @@
                     <div class="recom-media"><a href="{{ route('frontend.pagesDetail', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}">
                             <div class="pic"><img src="{{ asset('frontend/assets4/img/paket/list/' . $paket->images) }}"
                                     style="width: 770px; height: 240px; object-fit: cover;"
-                                    data-at2x="{{ asset('frontend/assets4/img/paket/list' . $paket->images) }}" alt>
+                                    data-at2x="{{ asset('frontend/assets4/img/paket/list/' . $paket->images) }}" alt>
                             </div>
                         </a>
                     </div>
