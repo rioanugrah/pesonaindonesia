@@ -353,6 +353,12 @@ class FrontendController extends Controller
         return view('frontend.frontend2.kamar_hotel_detail',$data);
     }
 
+    public function blog()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        return view('frontend.frontend4.blog.blog',$data);
+    }
+
     public function payment()
     {
         $data['whatsapp'] = $this->whatsapp;

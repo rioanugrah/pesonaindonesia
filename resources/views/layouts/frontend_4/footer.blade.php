@@ -76,6 +76,9 @@
                     <h4>LAINNYA</h4>
                     <ul class="text-white">
                         <li class="text-white">
+                            <a href="{{ route('frontend.blog') }}">Blog</a>
+                        </li>
+                        <li class="text-white">
                             <a href="#">Kebijakan Privasi</a>
                         </li>
                         <li class="text-white">

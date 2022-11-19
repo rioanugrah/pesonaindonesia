@@ -106,6 +106,16 @@ Route::prefix('event')->group(function () {
     Route::get('{slug}', 'FrontendController@eventDetail')->name('frontend.eventDetail');
 });
 
+Route::prefix('blog')->group(function () {
+    Route::get('/', 'FrontendController@blog')->name('frontend.blog');
+});
+
+Route::domain('api.' . env('APP_URL'))->group(function () {
+    Route::get('/', function () {
+        return 'Second subdomain landing page';
+    });
+});
+
 Route::prefix('partner')->group(function(){
     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
     Route::post('simpan', 'CooperationController@simpan_frontend')->name('frontend.partnership.simpan');
