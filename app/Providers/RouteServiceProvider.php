@@ -46,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        $this->mapAppRoutes();
+        // $this->mapAppRoutes();
         // $this->mapSubRoutes();
 
         //
@@ -74,12 +74,12 @@ class RouteServiceProvider extends ServiceProvider
      * @return void
      */
 
-    protected function mapAppRoutes()
-    {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/app.php'));
-    }
+    // protected function mapAppRoutes()
+    // {
+    //     Route::middleware('app')
+    //          ->namespace($this->namespace)
+    //          ->group(base_path('routes/app.php'));
+    // }
 
     // protected function mapSubRoutes()
     // {
