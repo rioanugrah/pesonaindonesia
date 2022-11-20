@@ -197,7 +197,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('{id}/hapus', 'SliderController@delete')->name('slider.hapus')->middleware('verified');
         });
 
-        Route::prefix('posts')->group(function() {
+        Route::prefix('posting')->group(function() {
             Route::get('/', 'BlogController@index')->name('posting')->middleware('verified');
             Route::post('simpan', 'BlogController@simpan')->name('posting.simpan')->middleware('verified');
         });
