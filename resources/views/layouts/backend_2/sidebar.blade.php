@@ -13,6 +13,12 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('posting') }}" class="waves-effect">
+                        <i class="fas fa-hotel"></i>
+                        <span>Posting</span>
+                    </a>
+                </li>
                 <li class="menu-title">Executive Officer</li>
                 <li class="menu-title">Marketing Officer</li>
                 {{-- <li>

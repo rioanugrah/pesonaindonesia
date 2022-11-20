@@ -15,7 +15,7 @@
                     <img src="{{ $asset.'/img/logo_payment/bni.webp' }}" class="item2" alt="" srcset="">
                     <img src="{{ $asset.'/img/logo_payment/bri.webp' }}" class="item3" alt="" srcset="">
                     <img src="{{ $asset.'/img/logo_payment/mandiri.webp' }}" class="item4" alt="" srcset="">
-                    <img src="{{ $asset.'/img/logo_payment/jenius.webp' }}" class="item5" alt="" srcset="">
+                    {{-- <img src="{{ $asset.'/img/logo_payment/jenius.webp' }}" class="item5" alt="" srcset=""> --}}
                 </div>
                 {{-- <p class="color-g2 mt-10" style="text-align: justify">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang
                     menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi,

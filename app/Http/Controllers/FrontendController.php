@@ -15,6 +15,7 @@ use App\Models\Events;
 use App\Models\EventRegister;
 use App\Models\Wisata;
 use App\Models\Paket;
+use App\Models\Blog;
 use App\Models\PaketList;
 use App\Models\PaketOrder;
 use App\Models\PaketOrderList;
@@ -356,7 +357,15 @@ class FrontendController extends Controller
     public function blog()
     {
         $data['whatsapp'] = $this->whatsapp;
+        $data['postings'] = Blog::orderBy('updated_at','desc')->get();
         return view('frontend.frontend4.blog.blog',$data);
+    }
+
+    public function blog_detail($slug)
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['blog_detail'] = Blog::where('slug',$slug)->first();
+        return view('frontend.frontend4.blog.blog_detail',$data);
     }
 
     public function payment()

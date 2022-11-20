@@ -14,11 +14,11 @@ class Blog extends Model
     protected $dates = ['deleted_at'];
 
     public $fillable = [
-        'id',
         'slug',
         'title',
         'author',
         'description',
         'image',
+        'keyword',
     ];
 }

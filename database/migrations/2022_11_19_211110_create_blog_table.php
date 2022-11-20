@@ -20,6 +20,7 @@ class CreateBlogTable extends Migration
             $table->string('author', 150)->nullable();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+            $table->string('keyword')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

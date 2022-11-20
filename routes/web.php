@@ -108,6 +108,7 @@ Route::prefix('event')->group(function () {
 
 Route::prefix('blog')->group(function () {
     Route::get('/', 'FrontendController@blog')->name('frontend.blog');
+    Route::get('{slug}', 'FrontendController@blog_detail')->name('frontend.blog_detail');
 });
 
 Route::prefix('partner')->group(function(){
@@ -196,6 +197,10 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('{id}/hapus', 'SliderController@delete')->name('slider.hapus')->middleware('verified');
         });
 
+        Route::prefix('posts')->group(function() {
+            Route::get('/', 'BlogController@index')->name('posting')->middleware('verified');
+            Route::post('simpan', 'BlogController@simpan')->name('posting.simpan')->middleware('verified');
+        });
         // Route::prefix('paket')->group(function(){
 
         // });
@@ -246,22 +251,22 @@ Route::post('cooperation/kab_kota', 'CooperationController@select_kab_kota')->na
 // Route::middleware('web')->domain('partner.'.env('APP_URL'))->group(function(){
 //     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
 // });
-Route::middleware('web')->domain('app.'.env('APP_URL'))->group(function(){
-    Route::get('/', 'Apps\HomeController@index');
-    Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
-    Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
-    Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
+// Route::middleware('web')->domain('app.'.env('APP_URL'))->group(function(){
+//     Route::get('/', 'Apps\HomeController@index');
+//     Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
+//     Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
+//     Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
     
-    Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
-    Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
-    Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
-});
+//     Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
+//     Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
+//     Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
+// });
 
-Route::middleware('web')->domain('plesiranmalang.'.env('APP_URL'))->group(function(){
-    Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
-    Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
-    Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
-});
+// Route::middleware('web')->domain('plesiranmalang.'.env('APP_URL'))->group(function(){
+//     Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
+//     Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
+//     Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
+// });
 
 Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login_google');
 Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
