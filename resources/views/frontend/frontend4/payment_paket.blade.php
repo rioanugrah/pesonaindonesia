@@ -76,6 +76,13 @@
                                     </td>
                                     <td></td>
                                 </tr>
+                                @else
+                                <tr class="cart_item">
+                                    <td class="product-name">
+                                        <a href="{{ route('invoice.tiket_wisata',['id' => $paket->id]) }}" class="cws-button alt" target="_blank"> Invoice</a>
+                                    </td>
+                                    <td></td>
+                                </tr>
                                 @endif
                             </tbody>
                         </table>

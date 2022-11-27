@@ -184,33 +184,33 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                                {{-- <h3 id="order_review_heading" class="mt-30">Metode Pembayaran</h3> --}}
+                                <h3 id="order_review_heading" class="mt-30">Metode Pembayaran</h3>
                                 <div id="payment" class="woocommerce-checkout-payment">
                                     {{-- @if ($live != true) --}}
-                                    {{-- <div class="payment_methods methods">
+                                    <div class="payment_methods methods">
                                         <div class="payment_method_bacs">
                                             <input type="radio" name="payment_method"
-                                                value="BRI" data-order_button_text=""
+                                                value="002" data-order_button_text=""
                                                 class="input-radio">
-                                            <label for="payment_method_bacs">BRI</label>
+                                            <label for="payment_method_bacs"><img src="{{ $asset.'/img/logo_payment/bri.webp' }}" alt="BRI" width="100" srcset=""></label>
                                         </div>
                                         <div class="payment_method_bacs">
                                             <input type="radio" name="payment_method"
-                                                value="BNI" data-order_button_text=""
+                                                value="009" data-order_button_text=""
                                                 class="input-radio">
-                                            <label for="payment_method_bacs">BNI</label>
+                                            <label for="payment_method_bacs"><img src="{{ $asset.'/img/logo_payment/bni.webp' }}" alt="BNI" width="100" srcset=""></label>
                                         </div>
                                         <div class="payment_method_bacs">
                                             <input type="radio" name="payment_method"
-                                                value="Mandiri" data-order_button_text=""
+                                                value="008" data-order_button_text=""
                                                 class="input-radio">
-                                            <label for="payment_method_bacs">Mandiri</label>
+                                            <label for="payment_method_bacs"><img src="{{ $asset.'/img/logo_payment/mandiri.webp' }}" alt="Mandiri" width="100" srcset=""></label>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     {{-- @endif --}}
                                     <div class="place-order mt-20">
                                         <input id="place_order" type="submit" name="woocommerce_checkout_place_order"
-                                            value="Buy Now" data-value="Update Totals"
+                                            value="Booking Now" data-value="Update Totals"
                                             class="cws-button full-width alt">
                                     </div>
                                     <div class="clear"></div>

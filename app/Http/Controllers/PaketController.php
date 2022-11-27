@@ -494,6 +494,175 @@ class PaketController extends Controller
         );
     }
 
+    // public function paket_list_order(Request $request,$slug,$id)
+    // {
+    //     $rules = [
+    //         'first_name'  => 'required',
+    //         'last_name'  => 'required',
+    //         'alamat'  => 'required',
+    //         'email'  => 'required',
+    //         'phone'  => 'required',
+    //         'tanggal_berangkat'  => 'required',
+    //         'payment_method'  => 'required',
+    //     ];
+ 
+    //     $messages = [
+    //         // 'images.required'  => 'Upload Gambar wajib diisi.',
+    //         // 'images.max'  => 'Upload Gambar Max 2MB.',
+    //         'first_name.required'   => 'Nama Pertama wajib diisi.',
+    //         'last_name.required'   => 'Nama Terakhir wajib diisi.',
+    //         'alamat.required'   => 'Alamat wajib diisi.',
+    //         'email.required'   => 'Email wajib diisi.',
+    //         'phone.required'   => 'No. Telpon wajib diisi.',
+    //         'tanggal_berangkat.required'   => 'Tanggal berangkat wajib diisi.',
+    //         'payment_method.required'   => 'Metode Pembayaran wajib diisi.',
+    //         // 'deskripsi.required'   => 'Deskripsi wajib diisi.',
+    //     ];
+
+    //     $validator = Validator::make($request->all(), $rules, $messages);
+    //     if ($validator->passes()) {
+    //         $data['pakets'] = Paket::where('slug',$slug)->first();
+    //         $data['banks'] = Bank::where('nama_bank','BRI')->first();
+    //         // dd($banks->nama_bank);
+    //         $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->first();
+    //         // $input = $request;
+    //         $input['id'] = Carbon::now()->format('Ymd').rand(001,999);
+    //         // $input['id'] = 'INV-'.Carbon::now()->format('Ymd').rand(0001,9999);
+    //         // $input['id'] = 'INV-'.rand(0000001,9999999);
+    //         $data['order'] = [
+    //             'first_name' => $request->first_name,
+    //             'last_name' => $request->last_name,
+    //             'alamat' => $request->alamat,
+    //             'email' => $request->email,
+    //             'phone' => $request->phone,
+    //             'jumlah' => $request->qty,
+    //             'tanggal_berangkat' => $request->tanggal_berangkat,
+    //             'payment_method' => $request->payment_method,
+    //         ];
+    //         if($request->qty > 1){
+    //             if(empty($request->nama_anggota)){
+    //                 return redirect()->back();
+    //             }else{
+    //                 foreach ($request->nama_anggota as $key => $value) {
+    //                     // $data['anggota']['team'] = [
+    //                     //     'nama' => $value,
+    //                     //     'jumlah' => 1
+    //                     // ];
+    //                     PaketOrderList::create([
+    //                         // 'id' => rand(10000,99999),
+    //                         'order_paket_id' => $input['id'],
+    //                         'pemesan' => $value,
+    //                         'qty' => 1
+    //                     ]);
+    //                 }
+    //             }
+    //         }
+
+    //         $paymentLink = new HTTP_Request2();
+    //         $paymentLink->setUrl($this->payment_production.'/generate-static-va');
+    //         $paymentLink->setMethod(HTTP_Request2::METHOD_POST);
+    //         $paymentLink->setConfig(array(
+    //             'follow_redirects' => TRUE
+    //         ));
+    //         $paymentLink->setHeader(array(
+    //             'x-oy-username:'.$this->username,
+    //             'x-api-key:'.$this->api_key,
+    //             'Content-Type' => 'application/json',
+    //             'Accept' => 'application/json'
+    //         ));
+    //         $paymentLink->setBody(json_encode(
+    //             [
+    //                 'partner_user_id' => $input['id'].'_'.$request->first_name,
+    //                 'bank_code' => $request->payment_method,
+    //                 'amount' => $request->orderTotal,
+    //                 'is_single_use' => true,
+    //                 'is_lifetime' => false,
+    //                 'expiration_time' => ''.Carbon::now()->addDays(1).'',
+    //                 'username_display' => env('APP_NAME'),
+    //                 'email' => $request->email,
+    //                 'trx_expiration_time' => ''.Carbon::now()->addDays(1).'',
+    //                 'partner_tx_id' => $input['id'],
+    //                 'trx_counter' => 1
+    //             ]
+    //         ));
+    //         try {
+    //             $response = $paymentLink->send();
+    //             if ($response->getStatus() == 200) {
+    //                 $dataUrl = json_decode($response->getBody(),true);
+                    
+    //                 $input['nama_paket'] = $data['paket_lists']['nama_paket'];
+    //                 $input['pemesan'] = json_encode([
+    //                     $data['order']
+    //                 ]);
+    //                 $input['bank'] = json_encode(
+    //                     [
+    //                         [
+    //                             'nama_bank' => 'OY Indonesia',
+    //                             'nama_penerima' => 'Pesona Plesiran Indonesia',
+    //                             'nomor_rekening' => '-'
+    //                         ]
+    //                     ]
+    //                 );
+
+    //                 $input['qty'] = $request->qty;
+    //                 $input['price'] = $request->orderTotal;
+    //                 $input['status'] = 1;
+
+    //                 $paket_order = PaketOrder::create($input);
+
+    //                 $payment_link_array = array(
+    //                     'id' => Str::uuid()->toString(),
+    //                     'nama_penerima' => $request->first_name.' '.$request->last_name,
+    //                     'total' => $request->orderTotal,
+    //                     'partner_tx_id' => $input['id'],
+    //                     'url' => $dataUrl['url'],
+    //                 );
+
+    //                 $email_marketing = 'marketing@plesiranindonesia.com';
+    //                 $details = [
+    //                     'title' => 'Konfirmasi Pembayaran',
+    //                     'invoice' => $input['id'],
+    //                     'email' => $request->email,
+    //                     'total' => $request->orderTotal,
+    //                     'body' => 'Terima kasih '.$request->first_name.' '.$request->last_name.' telah melakukan order tiket '.$data['paket_lists']['nama_paket'].'.'.
+    //                                 ' Silahkan lakukan pembayaran berikut',
+    //                     'url' => $dataUrl['url']
+    //                 ];  
+
+    //                 Transaksi::firstOrCreate($payment_link_array);
+                    
+    //                 if($paket_order){
+    //                     $message_title="Berhasil !";
+    //                     $message_content="Orderan Berhasil";
+    //                     $message_type="success";
+    //                     $message_succes = true;
+    //                 }
+
+    //                 $array_message = array(
+    //                     'success' => $message_succes,
+    //                     'message_title' => $message_title,
+    //                     'message_content' => $message_content,
+    //                     'message_type' => $message_type,
+    //                 );
+
+    //                 return redirect(route('frontend.paket.payment',['id' => $input['id']]));
+    //             }
+    //             else{
+    //                 echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    //                 $response->getReasonPhrase(); 
+    //             }
+    //         } catch (HTTP_Request2_Exception $e) {
+    //             echo 'Error: ' . $e->getMessage();
+    //         }
+    //     }
+
+    //     return response()->json(
+    //         [
+    //             'success' => false,
+    //             'error' => $validator->errors()->all()
+    //         ]
+    //     );
+    // }
     public function paket_list_order(Request $request,$slug,$id)
     {
         $rules = [
@@ -503,6 +672,7 @@ class PaketController extends Controller
             'email'  => 'required',
             'phone'  => 'required',
             'tanggal_berangkat'  => 'required',
+            'payment_method'  => 'required',
         ];
  
         $messages = [
@@ -514,6 +684,7 @@ class PaketController extends Controller
             'email.required'   => 'Email wajib diisi.',
             'phone.required'   => 'No. Telpon wajib diisi.',
             'tanggal_berangkat.required'   => 'Tanggal berangkat wajib diisi.',
+            'payment_method.required'   => 'Metode Pembayaran wajib diisi.',
             // 'deskripsi.required'   => 'Deskripsi wajib diisi.',
         ];
 
@@ -527,14 +698,20 @@ class PaketController extends Controller
             $input['id'] = Carbon::now()->format('Ymd').rand(001,999);
             // $input['id'] = 'INV-'.Carbon::now()->format('Ymd').rand(0001,9999);
             // $input['id'] = 'INV-'.rand(0000001,9999999);
+            if($request->qty == 0 || $request->qty == null){
+                $qty = 1;
+            }else{
+                $qty = $request->qty;
+            }
             $data['order'] = [
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'alamat' => $request->alamat,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'jumlah' => $request->qty,
+                'jumlah' => $qty,
                 'tanggal_berangkat' => $request->tanggal_berangkat,
+                'payment_method' => $request->payment_method,
             ];
             if($request->qty > 1){
                 if(empty($request->nama_anggota)){
@@ -584,7 +761,8 @@ class PaketController extends Controller
                         "step" => "input-amount",
                         'include_admin_fee' => true,
                         'list_disabled_payment_methods' => '',
-                        'list_enabled_banks' => '002,008,009',
+                        'list_enabled_banks' => $request->payment_method,
+                        // 'list_enabled_banks' => '002,008,009',
                         'expiration' => ''.Carbon::now()->addDays(1).'',
                         'due_date' => ''.Carbon::now().'',
                         // "va_display_name" => "Display Name on VA"
@@ -603,14 +781,14 @@ class PaketController extends Controller
                     $input['bank'] = json_encode(
                         [
                             [
-                                'nama_bank' => 'OY Indonesia',
+                                'nama_bank' => $request->payment_method,
                                 'nama_penerima' => 'Pesona Plesiran Indonesia',
                                 'nomor_rekening' => '-'
                             ]
                         ]
                     );
 
-                    $input['qty'] = $request->qty;
+                    $input['qty'] = $qty;
                     $input['price'] = $request->orderTotal;
                     $input['status'] = 1;
 
@@ -679,7 +857,8 @@ class PaketController extends Controller
                         "step" => "input-amount",
                         'include_admin_fee' => true,
                         'list_disabled_payment_methods' => '',
-                        'list_enabled_banks' => '002,008,009',
+                        'list_enabled_banks' => $request->payment_method,
+                        // 'list_enabled_banks' => '002,008,009',
                         // 'list_enabled_banks' => ['002','008','009'],
                         // 'list_enabled_banks' => '002',
                         'expiration' => ''.Carbon::now()->addDays(1).'',
@@ -699,14 +878,14 @@ class PaketController extends Controller
                     $input['bank'] = json_encode(
                         [
                             [
-                                'nama_bank' => 'OY Indonesia',
+                                'nama_bank' => $request->payment_method,
                                 'nama_penerima' => 'Pesona Plesiran Indonesia',
                                 'nomor_rekening' => '-'
                             ]
                         ]
                     );
 
-                    $input['qty'] = $request->qty;
+                    $input['qty'] = $qty;
                     $input['price'] = $request->orderTotal;
                     $input['status'] = 1;
 

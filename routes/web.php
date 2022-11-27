@@ -65,6 +65,10 @@ Route::prefix('paket')->group(function () {
     Route::get('{slug}/pages/{id}', 'PagesFrontendController@detail')->name('frontend.pagesDetail');
 });
 
+Route::get('carbon',function(){
+    return \Carbon\Carbon::now()->addDays(1);
+});
+
 Route::prefix('tour')->group(function () {
     Route::get('/', 'FrontendNewController@tour')->name('frontend_new.tour');
     Route::get('{id}/{paket_id}', 'FrontendNewController@tour_detail')->name('frontend_new.tour_detail');
