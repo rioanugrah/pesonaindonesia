@@ -26,6 +26,14 @@
     <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:standard" />
     {{-- <meta name="keywords"
         content="tour, trip, travel, agency, life, vacation, climbing, wisata, pesona, plesiran, indonesia, pesona plesiran indonesia, pesona indonesia"> --}}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HJ8T1V4S3H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-HJ8T1V4S3H');
+    </script>
     <?php $css = asset('frontend/assets4/'); ?>
     <link href="{{ url('frontend/assets4/img/favicon.png') }}" rel="shortcut icon">
     <link rel="stylesheet" href="{{ $css . '/css/banner.css' }}">

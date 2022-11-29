@@ -137,24 +137,28 @@
             </div>
         </div>
     </section> --}}
-    <section class="small-section cws_prlx_section bg-gray-40 mb-20"><img src="{{ asset('frontend/assets4/img/wallpaper/bg_video.webp') }}" alt class="cws_prlx_layer">
+    <section class="small-section cws_prlx_section bg-gray-40 mb-20"><img
+            src="{{ asset('frontend/assets4/img/wallpaper/bg_video.webp') }}" alt class="cws_prlx_layer">
         <div class="container">
-          <div class="row">
-            <div class="col-md-5">
-              <h2 class="title-section-top alt">About</h2>
-              <h2 class="title-section alt mb-20">Pesona Plesiran Indonesia</h2>
-              <p class="color-white">Pesona Plesiran Indonesia is a millennial Digital Marketing Platform that provides convenience in obtaining information and bookings for Accommodation, Destinations, Restaurants, Transportation, Travel and MICE throughout Indonesia.</p>
-              <div class="cws_divider short mb-30 mt-30"></div>
-              <h3 class="font-5 color-white font-medium">Team</h3>
+            <div class="row">
+                <div class="col-md-5">
+                    <h2 class="title-section-top alt">About</h2>
+                    <h2 class="title-section alt mb-20">Pesona Plesiran Indonesia</h2>
+                    <p class="color-white">Pesona Plesiran Indonesia is a millennial Digital Marketing Platform that
+                        provides convenience in obtaining information and bookings for Accommodation, Destinations,
+                        Restaurants, Transportation, Travel and MICE throughout Indonesia.</p>
+                    <div class="cws_divider short mb-30 mt-30"></div>
+                    <h3 class="font-5 color-white font-medium">Team</h3>
+                </div>
+                <div class="col-md-7">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe src="https://www.youtube.com/embed/Yb6KMxB3I1M" class="embed-responsive-item"
+                            allow="autoplay"></iframe>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-7">
-              <div class="embed-responsive embed-responsive-16by9">
-                <iframe src="https://www.youtube.com/embed/Yb6KMxB3I1M" class="embed-responsive-item" allow="autoplay"></iframe>
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
+    </section>
     <section class="pb-0">
         <div class="container">
             <div class="row">
@@ -186,54 +190,90 @@
             @empty
             @endforelse --}}
             @forelse ($paket_trips as $paket)
-            <div class="col-md-6">
-                <div class="recom-item">
-                    <div class="recom-media"><a href="{{ route('frontend.pagesDetail', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}">
-                            <div class="pic"><img src="{{ asset('frontend/assets4/img/paket/list/' . $paket->images) }}"
-                                    style="width: 770px; height: 240px; object-fit: cover;"
-                                    data-at2x="{{ asset('frontend/assets4/img/paket/list/' . $paket->images) }}" alt>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="recom-item-body">
-                        <a href="{{ route('frontend.pagesDetail', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}">
-                            <h6 class="blog-title">{{ $paket->nama_paket }}</h6>
-                        </a>
-                        <div class="stars stars-5"></div>
-                        <div class="recom-price">
-                            @if ($paket->diskon == 0)
-                            <span class="font-4">Rp. {{ number_format($paket->price,0,",",".") }}</span>
-                            @else
-                            <p style="margin-bottom: -5%">
-                                <span style="text-decoration: line-through;text-decoration-color: #eb4034;">Rp. {{ number_format($paket->price,0,",",".") }}</span>
-                            </p>
-                            <p>
-                                <span class="font-4">Rp. {{ number_format($paket->price-(($paket->diskon / 100)*$paket->price),0,",",".") }}</span>
-                                @if ($paket->kategori_id == 1) 
-                                    / {{ $paket->jumlah_paket }} pax
+                <div class="col-md-6">
+                    <div class="recom-item">
+                        <div class="recom-media"><a
+                                href="{{ route('frontend.pagesDetail', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}">
+                                <div class="pic"><img
+                                        src="{{ asset('frontend/assets4/img/paket/list/' . $paket->images) }}"
+                                        style="width: 770px; height: 240px; object-fit: cover;"
+                                        data-at2x="{{ asset('frontend/assets4/img/paket/list/' . $paket->images) }}" alt>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="recom-item-body">
+                            <a
+                                href="{{ route('frontend.pagesDetail', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}">
+                                <h6 class="blog-title">{{ $paket->nama_paket }}</h6>
+                            </a>
+                            <div class="stars stars-5"></div>
+                            <div class="recom-price">
+                                @if ($paket->diskon == 0)
+                                    <span class="font-4">Rp. {{ number_format($paket->price, 0, ',', '.') }}</span>
                                 @else
-                                    / pax
+                                    <p style="margin-bottom: -5%">
+                                        <span style="text-decoration: line-through;text-decoration-color: #eb4034;">Rp.
+                                            {{ number_format($paket->price, 0, ',', '.') }}</span>
+                                    </p>
+                                    <p>
+                                        <span class="font-4">Rp.
+                                            {{ number_format($paket->price - ($paket->diskon / 100) * $paket->price, 0, ',', '.') }}</span>
+                                        @if ($paket->kategori_id == 1)
+                                            / {{ $paket->jumlah_paket }} pax
+                                        @else
+                                            / pax
+                                        @endif
+                                    </p>
                                 @endif
-                            </p>
+                            </div>
+                            <a href="{{ route('frontend.pagesDetail', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}"
+                                class="recom-button">Selengkapnya</a>
+                            <a href="{{ route('frontend.paket.cart', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}"
+                                class="cws-button small alt">Book now</a>
+                            @if ($paket->diskon != 0)
+                                <div class="action font-2">{{ $paket->diskon }}%</div>
                             @endif
                         </div>
-                        <a href="{{ route('frontend.pagesDetail', ['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}"
-                            class="recom-button">Selengkapnya</a>
-                        <a href="{{ route('frontend.paket.cart',['slug' => $paket->pakets->slug,'id' => $paket->id]) }}" class="cws-button small alt">Book now</a>
-                        @if ($paket->diskon != 0)
-                        <div class="action font-2">{{ $paket->diskon }}%</div>
-                        @endif
                     </div>
                 </div>
-            </div>
             @empty
-                
             @endforelse
         </div>
     </section>
     {!! Adsense::ads('ads_unit') !!}
-    <section class="small-section cws_prlx_section bg-gray-40"><img
-            src="{{ $asset . '/img/wallpaper/bromo.webp' }}" alt class="cws_prlx_layer">
+    {{-- <section class="small-section cws_prlx_section">
+        <img src="pic/parallax-2.jpg" alt class="cws_prlx_layer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h6 class="title-section-top font-4">Happy Memories</h6>
+                    <h2 class="title-section alt-2"><span>Our</span> Testimonials</h2>
+                    <div class="cws_divider mb-25 mt-5"></div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach ($akomodasis as $akomodasi)
+                <div class="owl-three-item">
+                    <div class="testimonial-item">
+                        <div class="testimonial-top"><a href="hotels-details.html">
+                                <div class="pic"><img src="pic/testimonial/top-bg/1.jpg"
+                                        data-at2x="pic/testimonial/top-bg/1@2x.jpg" alt></div>
+                            </a>
+                            <div class="author"> <img src="pic/testimonial/author/1.jpg"
+                                    data-at2x="pic/testimonial/author/1@2x.jpg" alt></div>
+                        </div>
+                        <div class="testimonial-body">
+                            <h5 class="title"><span>{{ $akomodasi['title'] }}</span></h5>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section> --}}
+    <section class="small-section cws_prlx_section bg-gray-40">
+        <img src="{{ $asset . '/img/wallpaper/bromo.webp' }}" alt
+            class="cws_prlx_layer">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

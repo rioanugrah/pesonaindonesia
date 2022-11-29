@@ -123,6 +123,9 @@ class FrontendController extends Controller
             $data['paket_privates'] = PaketList::where('kategori_paket_id',1)->get();
             $data['paket_trips'] = PaketList::where('status','!=',0)
                                             ->orderBy('created_at','desc')->paginate(6);
+            $data['akomodasis'] = [
+                ['image' => '', 'title' => 'Hotel']
+            ];
             // $data['paket_trips'] = PaketList::where('kategori_paket_id',2)->where('status','!=',0)
             //                                 ->orderBy('created_at','desc')->paginate(5);
             // $request->visitor()->browser();

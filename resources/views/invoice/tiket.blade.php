@@ -139,7 +139,18 @@
                         </div>
                         <div class="tm_invoice_footer tm_mb15 tm_m0_md">
                             <div class="tm_left_footer">
-                                <div class="tm_card_note tm_ternary_bg tm_white_color"><b>Pembayaran: </b>{{ $bank[0]->nama_bank.' - '.$bank[0]->nama_penerima }}</div>
+                                <div class="tm_card_note tm_ternary_bg tm_white_color">
+                                    <?php 
+                                        if ($bank[0]->nama_bank == '002') {
+                                            $nama_bank = 'BRI';
+                                        }else if($bank[0]->nama_bank == '009'){
+                                            $nama_bank = 'BNI';
+                                        }else if($bank[0]->nama_bank == '008'){
+                                            $nama_bank = 'Mandiri';
+                                        }
+                                    ?>
+                                    <b>Pembayaran: </b>{{ $nama_bank.' - '.$bank[0]->nama_penerima }}
+                                </div>
                                 {{-- <p class="tm_mb2"><b class="tm_primary_color">Important Note:</b></p>
                                 <p class="tm_m0">Delivery dates are not guaranteed and Seller has <br>no liability for
                                     damages that may be incurred <br>due to any delay.</p> --}}
