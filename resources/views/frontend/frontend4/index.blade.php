@@ -18,6 +18,14 @@
 @endsection
 
 @section('css')
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HJ8T1V4S3H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-HJ8T1V4S3H');
+    </script>
     <link rel="canonical" href="{{ asset('frontend/assets4/google944b26bed799388c.html') }}">
 @endsection
 
