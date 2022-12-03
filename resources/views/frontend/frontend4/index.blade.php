@@ -282,15 +282,13 @@
             </div>
         </div>
     </section> --}}
-    <section class="page-section pb-0">
+    {{-- <section class="page-section pb-0">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
                     <h6 class="title-section-top font-4">Special offers</h6>
                     <h2 class="title-section"><span>Popular</span> Destinations</h2>
                     <div class="cws_divider mb-25 mt-5"></div>
-                    {{-- <p>Nullam ac dolor id nulla finibus pharetra. Sed sed placerat mauris. Pellentesque lacinia imperdiet
-                        interdum. Ut nec nulla in purus consequat lobortis. Mauris lobortis a nibh sed convallis.</p> --}}
                 </div>
                 <div class="col-md-4"><img src="pic/promo-1.png" data-at2x="pic/promo-1@2x.png" alt
                         class="mt-md-0 mt-minus-70"></div>
@@ -301,14 +299,8 @@
                 @foreach ($akomodasis as $akomodasi)
                 <div class="features-tours-item">
                     <div class="features-media"><img src="{{ $akomodasi['image'] }}" data-at2x="pic/tours/1@2x.jpg" alt>
-                        {{-- <div class="features-info-top">
-                            <div class="info-price font-4"><span>start per night</span> $80</div>
-                            <div class="info-temp font-4"><span>local temperature</span> 30° / 86°</div>
-                            <p class="info-text">Etiam malesuada lectus tempor, ultricies lectus in, convallis massa.</p>
-                        </div> --}}
                         <div class="features-info-bot">
                             <h4 class="title">
-                                {{-- <span class="font-4">United arab emirates</span> --}}
                                 {{ $akomodasi['title'] }}
                             </h4>
                             <a href="javascript::void()" class="button">Details</a>
@@ -318,7 +310,7 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="small-section cws_prlx_section bg-gray-40">
         <img src="{{ $asset . '/img/wallpaper/bromo.webp' }}" alt class="cws_prlx_layer">
         <div class="container">
