@@ -79,7 +79,7 @@
                             <a href="{{ route('frontend.blog') }}">Blog</a>
                         </li>
                         <li class="text-white">
-                            <a href="#">Kebijakan Privasi</a>
+                            <a href="{{ route('frontend.kebijakan_privasi') }}">Kebijakan Privasi</a>
                         </li>
                         <li class="text-white">
                             <a href="#">Syarat & Ketentuan</a>

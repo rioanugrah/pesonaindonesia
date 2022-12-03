@@ -49,6 +49,8 @@ Route::get('cart', 'CartController@index')->name('cart')->middleware('verified')
 
 Route::get('instagram', 'InstagramController@instagram');
 
+Route::get('kebijakan_privasi', 'FrontendController@kebijakan_privasi')->name('frontend.kebijakan_privasi');
+
 Route::prefix('wisata')->group(function () {
     Route::get('/', 'FrontendController@wisata')->name('frontend.wisata');
     Route::get('{slug}', 'FrontendController@wisata_detail')->name('frontend.wisataDetail');

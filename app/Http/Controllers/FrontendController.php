@@ -804,4 +804,10 @@ class FrontendController extends Controller
         ]);
     }
 
+    public function kebijakan_privasi()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        return view('frontend.frontend4.kebijakan_privasi',$data);
+    }
+
 }
