@@ -124,7 +124,10 @@ class FrontendController extends Controller
             $data['paket_trips'] = PaketList::where('status','!=',0)
                                             ->orderBy('created_at','desc')->paginate(6);
             $data['akomodasis'] = [
-                ['image' => '', 'title' => 'Hotel']
+                ['title' => 'Hotel', 'image' => asset('frontend/assets4/img/akomodasi/hotel.webp')],
+                ['title' => 'Villa', 'image' => asset('frontend/assets4/img/akomodasi/hotel.webp')],
+                ['title' => 'Homestay', 'image' => asset('frontend/assets4/img/akomodasi/hotel.webp')],
+                ['title' => 'Apartemen', 'image' => asset('frontend/assets4/img/akomodasi/hotel.webp')],
             ];
             // $data['paket_trips'] = PaketList::where('kategori_paket_id',2)->where('status','!=',0)
             //                                 ->orderBy('created_at','desc')->paginate(5);
@@ -588,6 +591,10 @@ class FrontendController extends Controller
             $data['pemesan'] = $p;
             // dd($data['pemesan']);
         }
+        foreach (json_decode($data['paket']['bank']) as $key => $bank) {
+            $banks = $bank;
+            $data['bankss'] = $bank;
+        }
         $data['status_live'] = $this->automatics;
 
         if($this->automatics == true){
@@ -612,11 +619,12 @@ class FrontendController extends Controller
                     $dataPayment = json_decode($response->getBody(),true);
                     // return $dataPayment['data']['status'];
     
-                    if($dataPayment['data']['status'] == 'created'){
+                    $data['dataPayment'] = $dataPayment;
+                    if($dataPayment['va_status'] == 'WAITING_PAYMENT'){
                         $data['status_pembayaran'] = 1;
                         $data['status'] = 'Menunggu Pembayaran';
                     }
-                    elseif($dataPayment['data']['status'] == 'complete'){
+                    elseif($dataPayment['va_status'] == 'COMPLETE'){
                         $data['status_pembayaran'] = 3;
                         $data['status'] = 'Pembayaran Berhasil';
                         $data['paket']->update([
@@ -625,6 +633,16 @@ class FrontendController extends Controller
                         $data['transaksi']->update([
                             'status' => $data['status_pembayaran']
                         ]);
+                    }
+                    elseif($dataPayment['va_status'] == 'EXPIRED'){
+                        $data['status_pembayaran'] = 4;
+                        $data['status'] = 'Pembayaran Kadaluwarsa';
+                        $data['paket']->update([
+                            'status' => $data['status_pembayaran']
+                        ]);
+                        // $data['transaksi']->update([
+                        //     'status' => $data['status_pembayaran']
+                        // ]);
                     }
     
                     return view('frontend.frontend4.payment_paket',$data);
@@ -653,7 +671,8 @@ class FrontendController extends Controller
         }
         else{
             $paymentLink = new HTTP_Request2();
-            $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
+            // $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
+            $paymentLink->setUrl($this->payment_production.'/static-virtual-account/'.$banks->id_trx);
             $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
             $paymentLink->setConfig(array(
             'follow_redirects' => TRUE
@@ -671,16 +690,18 @@ class FrontendController extends Controller
                     // return $dataPayment;
                     $dataPayment = json_decode($response->getBody(),true);
                     // return $dataPayment['data']['status'];
-    
-                    if($dataPayment['data']['status'] == 'created'){
+                    // echo json_encode($response->getBody());
+
+                    // if($dataPayment['data']['va_status'] == 'created'){
+                    //     $data['status_pembayaran'] = 1;
+                    //     $data['status'] = 'Menunggu Pembayaran';
+                    // }
+                    $data['dataPayment'] = $dataPayment;
+                    if($dataPayment['va_status'] == 'WAITING_PAYMENT'){
                         $data['status_pembayaran'] = 1;
                         $data['status'] = 'Menunggu Pembayaran';
                     }
-                    elseif($dataPayment['data']['status'] == 'waiting_payment'){
-                        $data['status_pembayaran'] = 1;
-                        $data['status'] = 'Menunggu Pembayaran';
-                    }
-                    elseif($dataPayment['data']['status'] == 'complete'){
+                    elseif($dataPayment['va_status'] == 'COMPLETE'){
                         $data['status_pembayaran'] = 3;
                         $data['status'] = 'Pembayaran Berhasil';
                         $data['paket']->update([
@@ -689,6 +710,16 @@ class FrontendController extends Controller
                         $data['transaksi']->update([
                             'status' => $data['status_pembayaran']
                         ]);
+                    }
+                    elseif($dataPayment['va_status'] == 'EXPIRED'){
+                        $data['status_pembayaran'] = 4;
+                        $data['status'] = 'Pembayaran Kadaluwarsa';
+                        $data['paket']->update([
+                            'status' => $data['status_pembayaran']
+                        ]);
+                        // $data['transaksi']->update([
+                        //     'status' => $data['status_pembayaran']
+                        // ]);
                     }
     
                     return view('frontend.frontend4.payment_paket',$data);

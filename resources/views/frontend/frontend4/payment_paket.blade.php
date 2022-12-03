@@ -67,6 +67,31 @@
                                 </tr>
                                 @if ($status_pembayaran != 3)
                                 <tr class="cart_item">
+                                    <td class="product-name">Nama Bank : <b>{{ $dataPayment['bank_name'] }}</b></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">Nomor Virtual Account : <b>{{ $dataPayment['va_number'] }}</b></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">Nama Penerima : <b>{{ $dataPayment['username_display'] }}</b></td>
+                                    <td></td>
+                                </tr>
+                                @else
+                                <tr class="cart_item">
+                                    <td class="product-name">
+                                        <a href="{{ route('invoice.tiket_wisata',['id' => $paket->id]) }}" class="cws-button alt" target="_blank"> Invoice</a>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                @endif
+                                {{-- <tr class="cart_item">
+                                    <td class="product-name">Tanggal Dibuat : <b>{{ \Carbon\Carbon::create($dataPayment['created'])->format('d F Y') }}</b></td>
+                                    <td></td>
+                                </tr> --}}
+                                {{-- @if ($status_pembayaran != 3)
+                                <tr class="cart_item">
                                     <td class="product-name">Pembayaran diverifikasi otomatis 1x24 jam</td>
                                     <td></td>
                                 </tr>
@@ -83,10 +108,248 @@
                                     </td>
                                     <td></td>
                                 </tr>
+                                @endif --}}
+                            </tbody>
+                        </table>
+                    </div>
+                    @if ($status_pembayaran == 1)
+                    <h3 id="order_review_heading" class="mt-30 mb-30">Cara Pembayaran</h3>
+                    <div id="order_review" class="woocommerce-checkout-review-order">
+                        <table class="shop_table woocommerce-checkout-review-order-table">
+                            <tbody>
+                                @if ($dataPayment['bank_name'] == 'BNI')
+                                <tr class="cart_item">
+                                    <td class="product-name"><b>ATM</b></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">1. Masukkan kartu debit/ATM Anda</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">2. Masukkan PIN Anda</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">3. Pilih Menu Lain > Transfer</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">4. Pilih rekening asal dan pilih rekening tujuan ke rekening BNI</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">5. Masukkan nomor Virtual Account BNI OY! Anda</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">6. Masukkan jumlah nominal</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">7. Ikuti petunjuk hingga transaksi selesai</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name"><b>Mobile Banking</b></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">1. Pilih Transfer > Antar Rekening BNI</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">2. Pilih Rekening Tujuan > Input Rekening Baru. Masukkan nomor rekening dengan nomor Virtual Account Anda dan klik Lanjut, kemudian klik Lanjut lagi.</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">3. Masukkan jumlah pembayaran sejumlah tagihan Anda, lalu klik Lanjutkan.</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">4. Periksa detail konfirmasi. Pastikan Nama Rekening Tujuan adalah nama penerima Anda dan nominal transaksi sudah benar. Jika benar, masukkan password transaksi dan klik Lanjut.</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">5. Ikuti petunjuk hingga transaksi selesai</td>
+                                    <td></td>
+                                </tr>
+                                
+                                @elseif ($dataPayment['bank_name'] == 'BRI')
+                                <tr class="cart_item">
+                                    <td class="product-name"><b>ATM</b></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">1. Pilih menu Transaksi Lain</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">2. Pilih menu Pembayaran</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">3. Pilih menu Lainnya</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">4. Pilih menu BRIVA</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">5. Masukkan nomor Virtual Account BRI OY! Anda</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">6. Pilih Ya untuk memproses pembayaran</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name"><b>Mobile Banking</b></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">1. Masuk ke aplikasi BRI Mobile dan pilih Mobile Banking BRI</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">2. Pilih menu Info</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">3. Pilih menu BRIVA</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">4. Masukkan nomor Virtual Account BRI OY! Anda</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">5. Masukkan PIN Mobile/SMS Banking BRI</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">6. Anda akan mendapatkan notifikasi pembayaran melalui SMS</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name"><b>Internet Banking</b></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">1. Login pada halaman Internet Banking BRI</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">2. Pilih menu Pembayaran</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">3. Pilih menu BRIVA</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">4. Masukkan nomor Virtual Account BRI OY! Anda</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">5. Masukkan password Internet Banking BRI</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">6. Masukkan mToken Internet Banking BRI</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">7. Anda akan mendapatkan notifikasi pembayaran</td>
+                                    <td></td>
+                                </tr>
+                                @elseif ($dataPayment['bank_name'] == 'BANK MANDIRI')
+                                <tr class="cart_item">
+                                    <td class="product-name"><b>MANDIRI ATM</b></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">1. Masukkan kartu debit/ATM Anda</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">2. Masukkan PIN Anda</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">3. Pilih menu Bayar/Beli</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">4. Pilih menu Lainnya, hingga menemukan menu Multipayment</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">5. Pilih penyedia jasa OY! Indonesia Masukkan kode biller <b>89325</b>, lalu pilih Benar</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">6. Masukkan nomor Virtual Account Mandiri OY! Anda</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">7. Masukkan jumlah nominal</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">8. Ikuti petunjuk hingga transaksi selesai</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name"><b>MANDIRI ONLINE / MOBILE BANKING</b></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">1. Masuk ke aplikasi Mandiri Online</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">2. Pilih menu Pembayaran</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">3. Pilih menu Buat Pembayaran Baru</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">4. Pilih menu Multipayment</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">5. Pilih penyedia jasa OY! Indonesia</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">6. Masukkan nomor VA (klik Tambah Sebagai Nomor Baru)</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">7. Klik konfirmasi</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">8. Masukkan nominal</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">9. Konfirmasi pembayaran Anda lalu masukkan PIN mandiri Online Anda</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">10. Transaksi selesai, simpan bukti pembayaran Anda</td>
+                                    <td></td>
+                                </tr>
                                 @endif
                             </tbody>
                         </table>
                     </div>
+                    @endif
                 </div>
                 {{-- @else
                 <div class="col-12">

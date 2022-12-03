@@ -21,9 +21,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HJ8T1V4S3H"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
-    
+
         gtag('config', 'G-HJ8T1V4S3H');
     </script>
     <link rel="canonical" href="{{ asset('frontend/assets4/google944b26bed799388c.html') }}">
@@ -261,27 +264,63 @@
             </div>
             <div class="row">
                 @foreach ($akomodasis as $akomodasi)
-                <div class="owl-three-item">
-                    <div class="testimonial-item">
-                        <div class="testimonial-top"><a href="hotels-details.html">
-                                <div class="pic"><img src="pic/testimonial/top-bg/1.jpg"
-                                        data-at2x="pic/testimonial/top-bg/1@2x.jpg" alt></div>
-                            </a>
-                            <div class="author"> <img src="pic/testimonial/author/1.jpg"
-                                    data-at2x="pic/testimonial/author/1@2x.jpg" alt></div>
+                    <div class="owl-three-item">
+                        <div class="testimonial-item">
+                            <div class="testimonial-top"><a href="hotels-details.html">
+                                    <div class="pic"><img src="{{ $akomodasi['image'] }}"
+                                            data-at2x="{{ $akomodasi['image'] }}" alt></div>
+                                </a>
+                                <div class="author"> <img src="pic/testimonial/author/1.jpg"
+                                        data-at2x="pic/testimonial/author/1@2x.jpg" alt></div>
+                            </div>
+                            <div class="testimonial-body">
+                                <h5 class="title"><span>{{ $akomodasi['title'] }}</span></h5>
+                            </div>
                         </div>
-                        <div class="testimonial-body">
-                            <h5 class="title"><span>{{ $akomodasi['title'] }}</span></h5>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section> --}}
+    <section class="page-section pb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h6 class="title-section-top font-4">Special offers</h6>
+                    <h2 class="title-section"><span>Popular</span> Destinations</h2>
+                    <div class="cws_divider mb-25 mt-5"></div>
+                    {{-- <p>Nullam ac dolor id nulla finibus pharetra. Sed sed placerat mauris. Pellentesque lacinia imperdiet
+                        interdum. Ut nec nulla in purus consequat lobortis. Mauris lobortis a nibh sed convallis.</p> --}}
+                </div>
+                <div class="col-md-4"><img src="pic/promo-1.png" data-at2x="pic/promo-1@2x.png" alt
+                        class="mt-md-0 mt-minus-70"></div>
+            </div>
+        </div>
+        <div class="features-tours-full-width">
+            <div class="features-tours-wrap clearfix">
+                @foreach ($akomodasis as $akomodasi)
+                <div class="features-tours-item">
+                    <div class="features-media"><img src="{{ $akomodasi['image'] }}" data-at2x="pic/tours/1@2x.jpg" alt>
+                        {{-- <div class="features-info-top">
+                            <div class="info-price font-4"><span>start per night</span> $80</div>
+                            <div class="info-temp font-4"><span>local temperature</span> 30° / 86°</div>
+                            <p class="info-text">Etiam malesuada lectus tempor, ultricies lectus in, convallis massa.</p>
+                        </div> --}}
+                        <div class="features-info-bot">
+                            <h4 class="title">
+                                {{-- <span class="font-4">United arab emirates</span> --}}
+                                {{ $akomodasi['title'] }}
+                            </h4>
+                            <a href="javascript::void()" class="button">Details</a>
                         </div>
                     </div>
                 </div>
                 @endforeach
             </div>
         </div>
-    </section> --}}
+    </section>
     <section class="small-section cws_prlx_section bg-gray-40">
-        <img src="{{ $asset . '/img/wallpaper/bromo.webp' }}" alt
-            class="cws_prlx_layer">
+        <img src="{{ $asset . '/img/wallpaper/bromo.webp' }}" alt class="cws_prlx_layer">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $paket->id }}</title>
+    <title>Invoice - {{ $paket->id }}</title>
     <link rel="stylesheet" href="{{ asset('invoice/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('invoice/assets/css/stamp.css') }}">
 </head>
@@ -106,33 +106,6 @@
                                             <td class="tm_width_2 tm_text_right">Rp. {{ number_format($paket->price,0,",",".") }}</td>
                                         </tr>
                                         @endforelse
-                                        {{-- <tr>
-                                            <td class="tm_width_7">
-                                                <p class="tm_m0 tm_f16 tm_primary_color">Web Development</p>
-                                                Convert pixel-perfect frontend and make it dynamic
-                                            </td>
-                                            <td class="tm_width_2">$600</td>
-                                            <td class="tm_width_1">1</td>
-                                            <td class="tm_width_2 tm_text_right">$600</td>
-                                        </tr>
-                                        <tr class="tm_gray_bg">
-                                            <td class="tm_width_7">
-                                                <p class="tm_m0 tm_f16 tm_primary_color">App Development</p>
-                                                Android & Ios Application Development
-                                            </td>
-                                            <td class="tm_width_2">$200</td>
-                                            <td class="tm_width_1">2</td>
-                                            <td class="tm_width_2 tm_text_right">$400</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tm_width_7">
-                                                <p class="tm_m0 tm_f16 tm_primary_color">Digital Marketing</p>
-                                                Facebook, Youtube and Google Marketing
-                                            </td>
-                                            <td class="tm_width_2">$100</td>
-                                            <td class="tm_width_1">3</td>
-                                            <td class="tm_width_2 tm_text_right">$300</td>
-                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -141,11 +114,11 @@
                             <div class="tm_left_footer">
                                 <div class="tm_card_note tm_ternary_bg tm_white_color">
                                     <?php 
-                                        if ($bank[0]->nama_bank == '002') {
+                                        if ($bank[0]->kode_bank == '002') {
                                             $nama_bank = 'BRI';
-                                        }else if($bank[0]->nama_bank == '009'){
+                                        }else if($bank[0]->kode_bank == '009'){
                                             $nama_bank = 'BNI';
-                                        }else if($bank[0]->nama_bank == '008'){
+                                        }else if($bank[0]->kode_bank == '008'){
                                             $nama_bank = 'Mandiri';
                                         }
                                     ?>
