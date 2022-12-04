@@ -79,7 +79,7 @@ class HomeController extends Controller
                 // dd($data['balances']['balance']);
             } catch (\Throwable $th) {
                 // dd($data['balances']['balance']=0);
-                $data['balances']['balance']=0;
+                $data['balances']['balance']=1;
             }
             // dd(json_decode($data['balances'],true));
             // return view('layouts.backend_3.app', $data);
