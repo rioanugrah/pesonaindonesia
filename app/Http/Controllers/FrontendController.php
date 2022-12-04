@@ -579,6 +579,165 @@ class FrontendController extends Controller
         return view('frontend.frontend4.paket_cart',$data);
     }
 
+    // public function paket_list_order_payment($id)
+    // {
+    //     $data['whatsapp'] = $this->whatsapp;
+    //     $data['paket'] = PaketOrder::find($id);
+    //     $data['transaksi'] = Transaksi::where('partner_tx_id',$id)->first();
+    //     $data['anggotas'] = PaketOrderList::select('order_paket_id','pemesan','qty')
+    //                                 ->where('order_paket_id', $data['paket']['id'])->get();
+    //     foreach (json_decode($data['paket']['pemesan']) as $key => $p) {
+    //         // dd($p);
+    //         $data['pemesan'] = $p;
+    //         // dd($data['pemesan']);
+    //     }
+    //     foreach (json_decode($data['paket']['bank']) as $key => $bank) {
+    //         $banks = $bank;
+    //         $data['bankss'] = $bank;
+    //     }
+    //     $data['status_live'] = $this->automatics;
+
+    //     if($this->automatics == true){
+    //         //Payment
+    //         $paymentLink = new HTTP_Request2();
+    //         // $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
+    //         $paymentLink->setUrl($this->payment_production.'/static-virtual-account/'.$banks->id_trx);
+    //         $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
+    //         $paymentLink->setConfig(array(
+    //         'follow_redirects' => TRUE
+    //         ));
+    //         $paymentLink->setHeader(array(
+    //         'x-oy-username:'.$this->username,
+    //         'x-api-key:'.$this->api_key,
+    //         'Content-Type' => 'application/json',
+    //         'Accept' => 'application/json'
+    //         ));
+    //         try {
+    //             $response = $paymentLink->send();
+    //             if ($response->getStatus() == 200) {
+    //                 // $dataPayment = $response->getBody();
+    //                 // return $dataPayment;
+    //                 $dataPayment = json_decode($response->getBody(),true);
+    //                 // return $dataPayment['data']['status'];
+    
+    //                 $data['dataPayment'] = $dataPayment;
+    //                 if($dataPayment['va_status'] == 'WAITING_PAYMENT'){
+    //                     $data['status_pembayaran'] = 1;
+    //                     $data['status'] = 'Menunggu Pembayaran';
+    //                 }
+    //                 elseif($dataPayment['va_status'] == 'COMPLETE'){
+    //                     $data['status_pembayaran'] = 3;
+    //                     $data['status'] = 'Pembayaran Berhasil';
+    //                     $data['paket']->update([
+    //                         'status' => $data['status_pembayaran']
+    //                     ]);
+    //                     $data['transaksi']->update([
+    //                         'status' => $data['status_pembayaran']
+    //                     ]);
+    //                 }
+    //                 elseif($dataPayment['va_status'] == 'EXPIRED'){
+    //                     $data['status_pembayaran'] = 4;
+    //                     $data['status'] = 'Pembayaran Kadaluwarsa';
+    //                     $data['paket']->update([
+    //                         'status' => $data['status_pembayaran']
+    //                     ]);
+    //                     // $data['transaksi']->update([
+    //                     //     'status' => $data['status_pembayaran']
+    //                     // ]);
+    //                 }
+    
+    //                 return view('frontend.frontend4.payment_paket',$data);
+                    
+    //                 // if($data['paket']['status'] == 1){
+    //                 //     $data['status'] = 'Menunggu Pembayaran';
+    //                 // }
+    //                 // elseif($data['paket']['status'] == 2){
+    //                 //     $data['status'] = 'Sedang Diproses';
+    //                 // }
+    //                 // elseif($data['paket']['status'] == 3){
+    //                 //     $data['status'] = 'Pembayaran Berhasil';
+    //                 // }else{
+    //                 //     $data['status'] = 'Pembayaran Ditolak';
+    //                 // }
+                    
+    //                 // return view('frontend.frontend4.payment_paket',$data);
+    //             }
+    //             else {
+    //             echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    //             $response->getReasonPhrase();
+    //             }
+    //         } catch (\HTTP_Request2_Exception $th) {
+    //             echo 'Error: ' . $th->getMessage();
+    //         }
+    //     }
+    //     else{
+    //         $paymentLink = new HTTP_Request2();
+    //         // $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
+    //         $paymentLink->setUrl($this->payment_production.'/static-virtual-account/'.$banks->id_trx);
+    //         $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
+    //         $paymentLink->setConfig(array(
+    //         'follow_redirects' => TRUE
+    //         ));
+    //         $paymentLink->setHeader(array(
+    //         'x-oy-username:'.$this->username,
+    //         'x-api-key:'.$this->api_key,
+    //         'Content-Type' => 'application/json',
+    //         'Accept' => 'application/json'
+    //         ));
+    //         try {
+    //             $response = $paymentLink->send();
+    //             if ($response->getStatus() == 200) {
+    //                 // $dataPayment = $response->getBody();
+    //                 // return $dataPayment;
+    //                 $dataPayment = json_decode($response->getBody(),true);
+    //                 // return $dataPayment['data']['status'];
+    //                 // echo json_encode($response->getBody());
+
+    //                 // if($dataPayment['data']['va_status'] == 'created'){
+    //                 //     $data['status_pembayaran'] = 1;
+    //                 //     $data['status'] = 'Menunggu Pembayaran';
+    //                 // }
+    //                 $data['dataPayment'] = $dataPayment;
+    //                 if($dataPayment['va_status'] == 'WAITING_PAYMENT'){
+    //                     $data['status_pembayaran'] = 1;
+    //                     $data['status'] = 'Menunggu Pembayaran';
+    //                 }
+    //                 elseif($dataPayment['va_status'] == 'COMPLETE'){
+    //                     $data['status_pembayaran'] = 3;
+    //                     $data['status'] = 'Pembayaran Berhasil';
+    //                     $data['paket']->update([
+    //                         'status' => $data['status_pembayaran']
+    //                     ]);
+    //                     $data['transaksi']->update([
+    //                         'status' => $data['status_pembayaran']
+    //                     ]);
+    //                 }
+    //                 elseif($dataPayment['va_status'] == 'EXPIRED'){
+    //                     $data['status_pembayaran'] = 4;
+    //                     $data['status'] = 'Pembayaran Kadaluwarsa';
+    //                     $data['paket']->update([
+    //                         'status' => $data['status_pembayaran']
+    //                     ]);
+    //                     // $data['transaksi']->update([
+    //                     //     'status' => $data['status_pembayaran']
+    //                     // ]);
+    //                 }
+    
+    //                 return view('frontend.frontend4.payment_paket',$data);
+                    
+    //             }
+    //             else {
+    //             echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    //             $response->getReasonPhrase();
+    //             }
+    //         } catch (\HTTP_Request2_Exception $th) {
+    //             echo 'Error: ' . $th->getMessage();
+    //         }
+            
+    //         return view('frontend.frontend4.payment_paket',$data);
+    //     }
+    // }
+
     public function paket_list_order_payment($id)
     {
         $data['whatsapp'] = $this->whatsapp;
@@ -595,147 +754,71 @@ class FrontendController extends Controller
             $banks = $bank;
             $data['bankss'] = $bank;
         }
-        $data['status_live'] = $this->automatics;
+        
+        $paymentLink = new HTTP_Request2();
+        // $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
+        $paymentLink->setUrl($this->payment_production.'/static-virtual-account/'.$banks->id_trx);
+        $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
+        $paymentLink->setConfig(array(
+        'follow_redirects' => TRUE
+        ));
+        $paymentLink->setHeader(array(
+        'x-oy-username:'.$this->username,
+        'x-api-key:'.$this->api_key,
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json'
+        ));
+        try {
+            $response = $paymentLink->send();
+            if ($response->getStatus() == 200) {
+                // $dataPayment = $response->getBody();
+                // return $dataPayment;
+                $dataPayment = json_decode($response->getBody(),true);
+                // return $dataPayment['data']['status'];
+                // echo json_encode($response->getBody());
 
-        if($this->automatics == true){
-            //Payment
-            $paymentLink = new HTTP_Request2();
-            // $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
-            $paymentLink->setUrl($this->payment_production.'/static-virtual-account/'.$banks->id_trx);
-            $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
-            $paymentLink->setConfig(array(
-            'follow_redirects' => TRUE
-            ));
-            $paymentLink->setHeader(array(
-            'x-oy-username:'.$this->username,
-            'x-api-key:'.$this->api_key,
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-            ));
-            try {
-                $response = $paymentLink->send();
-                if ($response->getStatus() == 200) {
-                    // $dataPayment = $response->getBody();
-                    // return $dataPayment;
-                    $dataPayment = json_decode($response->getBody(),true);
-                    // return $dataPayment['data']['status'];
-    
-                    $data['dataPayment'] = $dataPayment;
-                    if($dataPayment['va_status'] == 'WAITING_PAYMENT'){
-                        $data['status_pembayaran'] = 1;
-                        $data['status'] = 'Menunggu Pembayaran';
-                    }
-                    elseif($dataPayment['va_status'] == 'COMPLETE'){
-                        $data['status_pembayaran'] = 3;
-                        $data['status'] = 'Pembayaran Berhasil';
-                        $data['paket']->update([
-                            'status' => $data['status_pembayaran']
-                        ]);
-                        $data['transaksi']->update([
-                            'status' => $data['status_pembayaran']
-                        ]);
-                    }
-                    elseif($dataPayment['va_status'] == 'EXPIRED'){
-                        $data['status_pembayaran'] = 4;
-                        $data['status'] = 'Pembayaran Kadaluwarsa';
-                        $data['paket']->update([
-                            'status' => $data['status_pembayaran']
-                        ]);
-                        // $data['transaksi']->update([
-                        //     'status' => $data['status_pembayaran']
-                        // ]);
-                    }
-    
-                    return view('frontend.frontend4.payment_paket',$data);
-                    
-                    // if($data['paket']['status'] == 1){
-                    //     $data['status'] = 'Menunggu Pembayaran';
-                    // }
-                    // elseif($data['paket']['status'] == 2){
-                    //     $data['status'] = 'Sedang Diproses';
-                    // }
-                    // elseif($data['paket']['status'] == 3){
-                    //     $data['status'] = 'Pembayaran Berhasil';
-                    // }else{
-                    //     $data['status'] = 'Pembayaran Ditolak';
-                    // }
-                    
-                    // return view('frontend.frontend4.payment_paket',$data);
+                // if($dataPayment['data']['va_status'] == 'created'){
+                //     $data['status_pembayaran'] = 1;
+                //     $data['status'] = 'Menunggu Pembayaran';
+                // }
+                $data['dataPayment'] = $dataPayment;
+                if($dataPayment['va_status'] == 'WAITING_PAYMENT'){
+                    $data['status_pembayaran'] = 1;
+                    $data['status'] = 'Menunggu Pembayaran';
                 }
-                else {
-                echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-                $response->getReasonPhrase();
+                elseif($dataPayment['va_status'] == 'COMPLETE'){
+                    $data['status_pembayaran'] = 3;
+                    $data['status'] = 'Pembayaran Berhasil';
+                    $data['paket']->update([
+                        'status' => $data['status_pembayaran']
+                    ]);
+                    $data['transaksi']->update([
+                        'status' => $data['status_pembayaran']
+                    ]);
                 }
-            } catch (\HTTP_Request2_Exception $th) {
-                echo 'Error: ' . $th->getMessage();
-            }
-        }
-        else{
-            $paymentLink = new HTTP_Request2();
-            // $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
-            $paymentLink->setUrl($this->payment_production.'/static-virtual-account/'.$banks->id_trx);
-            $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
-            $paymentLink->setConfig(array(
-            'follow_redirects' => TRUE
-            ));
-            $paymentLink->setHeader(array(
-            'x-oy-username:'.$this->username,
-            'x-api-key:'.$this->api_key,
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-            ));
-            try {
-                $response = $paymentLink->send();
-                if ($response->getStatus() == 200) {
-                    // $dataPayment = $response->getBody();
-                    // return $dataPayment;
-                    $dataPayment = json_decode($response->getBody(),true);
-                    // return $dataPayment['data']['status'];
-                    // echo json_encode($response->getBody());
+                elseif($dataPayment['va_status'] == 'EXPIRED'){
+                    $data['status_pembayaran'] = 4;
+                    $data['status'] = 'Pembayaran Kadaluwarsa';
+                    $data['paket']->update([
+                        'status' => $data['status_pembayaran']
+                    ]);
+                    // $data['transaksi']->update([
+                    //     'status' => $data['status_pembayaran']
+                    // ]);
+                }
 
-                    // if($dataPayment['data']['va_status'] == 'created'){
-                    //     $data['status_pembayaran'] = 1;
-                    //     $data['status'] = 'Menunggu Pembayaran';
-                    // }
-                    $data['dataPayment'] = $dataPayment;
-                    if($dataPayment['va_status'] == 'WAITING_PAYMENT'){
-                        $data['status_pembayaran'] = 1;
-                        $data['status'] = 'Menunggu Pembayaran';
-                    }
-                    elseif($dataPayment['va_status'] == 'COMPLETE'){
-                        $data['status_pembayaran'] = 3;
-                        $data['status'] = 'Pembayaran Berhasil';
-                        $data['paket']->update([
-                            'status' => $data['status_pembayaran']
-                        ]);
-                        $data['transaksi']->update([
-                            'status' => $data['status_pembayaran']
-                        ]);
-                    }
-                    elseif($dataPayment['va_status'] == 'EXPIRED'){
-                        $data['status_pembayaran'] = 4;
-                        $data['status'] = 'Pembayaran Kadaluwarsa';
-                        $data['paket']->update([
-                            'status' => $data['status_pembayaran']
-                        ]);
-                        // $data['transaksi']->update([
-                        //     'status' => $data['status_pembayaran']
-                        // ]);
-                    }
-    
-                    return view('frontend.frontend4.payment_paket',$data);
-                    
-                }
-                else {
-                echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-                $response->getReasonPhrase();
-                }
-            } catch (\HTTP_Request2_Exception $th) {
-                echo 'Error: ' . $th->getMessage();
+                return view('frontend.frontend4.payment_paket',$data);
+                
             }
-            
-            return view('frontend.frontend4.payment_paket',$data);
+            else {
+            echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+            $response->getReasonPhrase();
+            }
+        } catch (\HTTP_Request2_Exception $th) {
+            echo 'Error: ' . $th->getMessage();
         }
+        
+        return view('frontend.frontend4.payment_paket',$data);
     }
 
     public function tracking_order()
