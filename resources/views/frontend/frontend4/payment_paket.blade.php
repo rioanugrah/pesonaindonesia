@@ -78,6 +78,10 @@
                                     <td class="product-name">Nama Penerima : <b>{{ $dataPayment['username_display'] }}</b></td>
                                     <td></td>
                                 </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">Expired Date Payment : <b>{{ date("d F Y H:i:s", substr($dataPayment['trx_expiration_time'], 0, 10)) }}</b></td>
+                                    <td></td>
+                                </tr>
                                 @else
                                 <tr class="cart_item">
                                     <td class="product-name">

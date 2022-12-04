@@ -68,7 +68,13 @@ Route::prefix('paket')->group(function () {
 });
 
 Route::get('carbon',function(){
-    return \Carbon\Carbon::now()->addDays(1);
+    // echo strtotime(1670160719000);
+    // echo gmdate('r', 1670160719000);
+    // $epoch = 1670161610000;
+    // $dt = new DateTime("@$epoch");  // convert UNIX timestamp to PHP DateTime
+    // echo $dt->format('y-m-d H:i:s'); // output = 2017-01-01 00:00:00
+    echo date("d F Y H:i:s", substr("1670161610000", 0, 10));
+    // return \Carbon\Carbon::createFromFormat('d-M-Y',1670160719000)->toDateString();
 });
 
 Route::prefix('tour')->group(function () {

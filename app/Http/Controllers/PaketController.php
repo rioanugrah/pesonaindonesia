@@ -754,10 +754,10 @@ class PaketController extends Controller
                         'is_open' => false,
                         'is_single_use' => true,
                         'is_lifetime' => false,
-                        'expiration_time' => 5,
+                        'expiration_time' => 10,
                         'username_display' => 'Pesona Plesiran Indonesia',
                         'email' => $request->email,
-                        'trx_expiration_time' => 5,
+                        'trx_expiration_time' => 10,
                         'partner_trx_id' => 'TRX-'.rand(1000,9999),
                         'trx_counter' => 1
                         // 'partner_tx_id' => $input['id'],
