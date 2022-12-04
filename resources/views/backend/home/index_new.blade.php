@@ -121,7 +121,7 @@
                                     @endif
                                     <td>{{ $order->nama_paket }}</td>
                                     <td>{{ $pemesan->first_name.' '.$pemesan->last_name }}</td>
-                                    <td>{{ $bank->nama_bank.' : '.$bank->nama_penerima }}</td>
+                                    <td>{{ $bank->kode_bank.' : '.$bank->nama_penerima }}</td>
                                     <td>{{ $order->qty }}</td>
                                     <td>Rp. {{ number_format($order->price,2,",",".") }}</td>
                                     <td>
