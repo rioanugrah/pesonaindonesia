@@ -600,7 +600,8 @@ class FrontendController extends Controller
         if($this->automatics == true){
             //Payment
             $paymentLink = new HTTP_Request2();
-            $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
+            // $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
+            $paymentLink->setUrl($this->payment_production.'/static-virtual-account/'.$banks->id_trx);
             $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
             $paymentLink->setConfig(array(
             'follow_redirects' => TRUE
@@ -808,6 +809,11 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         return view('frontend.frontend4.kebijakan_privasi',$data);
+    }
+
+    public function cek_id_payment($id)
+    {
+        # code...
     }
 
 }
