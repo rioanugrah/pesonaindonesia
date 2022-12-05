@@ -701,7 +701,7 @@ class PaketController extends Controller
             if($request->qty == 0 || $request->qty == null){
                 $qty = 1;
             }else{
-                $qty = $request->qty;
+                $qty = $request->qty + 1;
             }
             $data['order'] = [
                 'first_name' => $request->first_name,
@@ -713,7 +713,7 @@ class PaketController extends Controller
                 'tanggal_berangkat' => $request->tanggal_berangkat,
                 'payment_method' => $request->payment_method,
             ];
-            if($request->qty > 1){
+            if($request->qty >= 1){
                 if(empty($request->nama_anggota)){
                     return redirect()->back();
                 }else{

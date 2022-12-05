@@ -84,7 +84,7 @@
                                     <p id="billing_qty_field"
                                         class="form-row form-row-last validate-required">
                                         <label for="billing_qty">Jumlah Team<abbr title="required"
-                                                class="required">*</abbr> (Kosongkan bila tidak memiliki anggota)</label>
+                                                class="required">*</abbr> (Isi <b>"0"</b> bila tidak memiliki anggota)</label>
                                         <div class="input-group">
                                             <input id="" type="text" name="qty" placeholder=""
                                                 value="" class="input-text jumlah" required>
@@ -238,8 +238,8 @@
                     var penjumlahan = 1 * price;
                     var jumlah = 1;
                 }else{
-                    var penjumlahan = $('.jumlah').val() * price;
-                    var jumlah = $('.jumlah').val();
+                    var jumlah = parseInt($('.jumlah').val())+parseInt(1);
+                    var penjumlahan = jumlah * price;
                 }
     
                 var bilangan = penjumlahan;
@@ -274,7 +274,7 @@
                     rupiah += separator + ribuan.join('.');
                 }
     
-                document.getElementById('jumlah_order').innerHTML = ' - '+$('.jumlah').val()+' pax';
+                document.getElementById('jumlah_order').innerHTML = ' - '+($('.jumlah').val()+parseInt(1))+' pax';
                 document.getElementById('subTotal').innerHTML = 'Rp. '+rupiah;
                 document.getElementById('orderTotal').innerHTML = 'Rp. '+rupiah;
                 $('#order_total').val(price);
@@ -317,7 +317,7 @@
         // });
 
         $('.jumlah').change(function(){
-            for (let index = 1; index < $('.jumlah').val(); index++) {
+            for (let index = 1; index <= $('.jumlah').val(); index++) {
                 $('#dynamic_field').append('<tr id="row'+index+'" class="dynamic-added"><td><input type="text" name="nama_anggota[]" placeholder="Nama Anggota '+index+'" class="form-control name_list" required /></td><td><button type="button" name="remove" id="'+index+'" class="cws-button full-width alt btn_remove">X</button></td></tr>');
             }
         })

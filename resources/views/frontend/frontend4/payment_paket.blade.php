@@ -163,7 +163,7 @@
                                     <td></td>
                                 </tr>
                                 <tr class="cart_item">
-                                    <td class="product-name">2. Pilih Rekening Tujuan > Input Rekening Baru. Masukkan nomor rekening dengan nomor Virtual Account Anda dan klik Lanjut, kemudian klik Lanjut lagi.</td>
+                                    <td class="product-name">2. Pilih Rekening Tujuan > Input Rekening Baru. Masukkan nomor rekening dengan nomor Virtual Account Anda - <b>{{ $dataPayment['va_number'] }}</b> dan klik Lanjut, kemudian klik Lanjut lagi.</td>
                                     <td></td>
                                 </tr>
                                 <tr class="cart_item">
@@ -225,7 +225,7 @@
                                     <td></td>
                                 </tr>
                                 <tr class="cart_item">
-                                    <td class="product-name">4. Masukkan nomor Virtual Account BRI OY! Anda</td>
+                                    <td class="product-name">4. Masukkan nomor Virtual Account BRI OY! Anda - <b>{{ $dataPayment['va_number'] }}</b></td>
                                     <td></td>
                                 </tr>
                                 <tr class="cart_item">
@@ -294,7 +294,7 @@
                                     <td></td>
                                 </tr>
                                 <tr class="cart_item">
-                                    <td class="product-name">6. Masukkan nomor Virtual Account Mandiri OY! Anda</td>
+                                    <td class="product-name">6. Masukkan nomor Virtual Account Mandiri OY! Anda - <b>{{ $dataPayment['va_number'] }}</b></td>
                                     <td></td>
                                 </tr>
                                 <tr class="cart_item">
@@ -330,7 +330,7 @@
                                     <td></td>
                                 </tr>
                                 <tr class="cart_item">
-                                    <td class="product-name">6. Masukkan nomor VA (klik Tambah Sebagai Nomor Baru)</td>
+                                    <td class="product-name">6. Masukkan nomor VA (klik Tambah Sebagai Nomor Baru) - <b>{{ $dataPayment['va_number'] }}</b></td>
                                     <td></td>
                                 </tr>
                                 <tr class="cart_item">
