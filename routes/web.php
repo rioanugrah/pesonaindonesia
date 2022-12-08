@@ -131,6 +131,9 @@ Route::prefix('partner')->group(function(){
 Route::prefix('gallery')->group(function () {
     Route::get('/', 'GalleryController@index')->name('frontend.gallery');
 });
+Route::prefix('dokumentasi')->group(function () {
+    Route::get('/', 'GalleryController@dokumentasi')->name('frontend.dokumentasi');
+});
 
 // Route::get('testings', function(){
 //     return view('frontend.frontend_2022.index');

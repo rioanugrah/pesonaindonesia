@@ -41,4 +41,34 @@ class GalleryController extends Controller
             //throw $th;
         }
     }
+    public function dokumentasi()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+
+        $fields = 'id,media_type,media_url,username,timestamp';
+        $accessToken = env('IG_TOKEN_PM');
+        $galleryLink = new HTTP_Request2();
+        $galleryLink->setUrl('https://graph.instagram.com/me/media?fields='.$fields.'&'.'access_token='.$accessToken);
+        $galleryLink->setMethod(HTTP_Request2::METHOD_GET);
+        $galleryLink->setConfig(array(
+        'follow_redirects' => TRUE
+        ));
+
+        try {
+            $response = $galleryLink->send();
+            if ($response->getStatus() == 200) {
+                $dataUrl = json_decode($response->getBody(),true);
+                // $dataUrl = $response->getBody();
+                // echo $response->getBody();
+                // echo json_encode($dataUrl['data']);
+                // $data['gallerys'] = json_encode($dataUrl['data']);
+                // echo $data['gallerys'];
+                $data['gallerys'] = $dataUrl;
+                return view('frontend.frontend4.gallery.dokumentasi',$data);
+
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }
