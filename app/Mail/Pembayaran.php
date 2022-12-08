@@ -28,7 +28,8 @@ class Pembayaran extends Mailable
      */
     public function build()
     {
-        return $this->from($this->details['email'], env('MAIL_FROM_NAME'))
+        // return $this->from($this->details['email'], env('MAIL_FROM_NAME'))
+        return $this->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
                     ->subject($this->details['title'])
                     ->markdown('emails.Pembayaran')->with('details', $this->details);
     }

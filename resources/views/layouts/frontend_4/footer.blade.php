@@ -79,6 +79,9 @@
                             <a href="{{ route('frontend.blog') }}">Blog</a>
                         </li>
                         <li class="text-white">
+                            <a href="{{ route('frontend.gallery') }}">Gallery</a>
+                        </li>
+                        <li class="text-white">
                             <a href="{{ route('frontend.kebijakan_privasi') }}">Kebijakan Privasi</a>
                         </li>
                         <li class="text-white">

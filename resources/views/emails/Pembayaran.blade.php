@@ -578,7 +578,7 @@
                                                     <table border="0" align="center" cellpadding="0"
                                                         cellspacing="0" role="presentation">
                                                         <tr>
-                                                            <td class="rwd-on-mobile" align="center" valign="middle"
+                                                            {{-- <td class="rwd-on-mobile" align="center" valign="middle"
                                                                 height="36" style="height: 36px;">
                                                                 <table border="0" align="center" cellpadding="0"
                                                                     cellspacing="0" role="presentation">
@@ -594,7 +594,7 @@
                                                                         <td width="10"></td>
                                                                     </tr>
                                                                 </table>
-                                                            </td>
+                                                            </td> --}}
                                                             <td class="rwd-on-mobile" align="center" valign="middle"
                                                                 height="36" style="height: 36px;">
                                                                 <table border="0" align="center" cellpadding="0"
@@ -602,11 +602,13 @@
                                                                     <tr>
                                                                         <td width="10"></td>
                                                                         <td align="center">
-                                                                            <img style="width:36px;border:0px;display: inline!important;"
-                                                                                src="{{ asset('frontend/email/images/Instagram.png') }}"
-                                                                                width="36" border="0"
-                                                                                editable="true" Simpli data-image-edit
-                                                                                Simpli alt="icon">
+                                                                            <a href="https://www.instagram.com/pesonaplesiranid.official/">
+                                                                                <img style="width:36px;border:0px;display: inline!important;"
+                                                                                    src="{{ asset('frontend/email/images/Instagram.png') }}"
+                                                                                    width="36" border="0"
+                                                                                    editable="true" Simpli data-image-edit
+                                                                                    Simpli alt="icon">
+                                                                            </a>
                                                                         </td>
                                                                         <td width="10"></td>
                                                                     </tr>

@@ -827,13 +827,16 @@ class PaketController extends Controller
                     $email_marketing = 'marketing@plesiranindonesia.com';
                     $details = [
                         'title' => 'Konfirmasi Pembayaran',
+                        'nama_pembayaran' => $request->first_name.' '.$request->last_name,
                         'invoice' => $input['id'],
                         'email' => $request->email,
                         'total' => $request->orderTotal,
                         'body' => 'Terima kasih '.$request->first_name.' '.$request->last_name.' telah melakukan order tiket '.$data['paket_lists']['nama_paket'].'.'.
                                     ' Silahkan lakukan pembayaran berikut',
                         // 'url' => $dataUrl['url']
-                    ];  
+                    ];
+                    // Mail::to($email_marketing)->send(new Pembayaran($details));
+                    Mail::to($details['email'])->send(new Pembayaran($details));
 
                     Transaksi::firstOrCreate($payment_link_array);
                     

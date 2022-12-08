@@ -128,9 +128,21 @@ Route::prefix('partner')->group(function(){
     Route::post('simpan', 'CooperationController@simpan_frontend')->name('frontend.partnership.simpan');
 });
 
+Route::prefix('gallery')->group(function () {
+    Route::get('/', 'GalleryController@index')->name('frontend.gallery');
+});
+
 // Route::get('testings', function(){
 //     return view('frontend.frontend_2022.index');
 // });
+Route::get('testing-email', function(){
+    $data['details'] = [
+        'nama_pembayaran' => 'Rio',
+        'body' => 'Terima telah melakukan order tiket',
+        'invoice' => 'INV-00000'
+    ];
+    return view('emails.Pembayaran',$data);
+});
 Route::get('testings', 'FrontendController@frontend_testing');
 
 // Route::group(['middleware' => ['auth']], function(){
