@@ -3,6 +3,18 @@
 @section('title')
     Pesona Plesiran Indonesia
 @endsection
+@section('keywords')
+    tour, trip, travel, agency, life, vacation, climbing, wisata, pesona, plesiran, indonesia, pesona plesiran indonesia,
+    pesona indonesia
+@endsection
+
+@section('canonical')
+    {{ url('/') }}
+@endsection
+@section('description')
+    Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang menyediakan kemudahan dalam mendapat informasi
+    dan pemesanan Akomodasi, Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.
+@endsection
 <?php $asset = asset('frontend/assets4/'); ?>
 <?php $assets = asset('frontend/assets5/'); ?>
 @section('content')
