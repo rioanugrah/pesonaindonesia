@@ -135,6 +135,10 @@ Route::prefix('dokumentasi')->group(function () {
     Route::get('/', 'GalleryController@dokumentasi')->name('frontend.dokumentasi');
 });
 
+Route::get('testingss', function(){
+    return view('layouts.frontend_5.app');
+});
+
 // Route::get('testings', function(){
 //     return view('frontend.frontend_2022.index');
 // });

@@ -11,7 +11,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-8">
-                                <h6 class="title-section-top font-4">Happy Memories</h6>
+                                {{-- <h6 class="title-section-top font-4">Happy Memories</h6> --}}
                                 <h2 class="title-section"><span>Gallery</span> Instagram</h2>
                                 <div class="cws_divider mb-25 mt-5"></div>
                             </div>
@@ -20,6 +20,7 @@
                         <div class="row portfolio-grid">
                             @foreach ($gallerys['data'] as $gallery)
                             <div class="col-md-4 col-sm-12 col-xs-12">
+                                @if ($gallery['media_type'] == 'IMAGE')
                                 <div class="portfolio-item big">
                                     <a href="{{ $gallery['media_url'] }}" class="fancy">
                                         <div class="portfolio-media"><img src="{{ $gallery['media_url'] }}"
@@ -28,6 +29,7 @@
                                     <div class="links"><a href="{{ $gallery['media_url'] }}" class="fancy"><i
                                                 class="fa fa-expand"></i></a></div>
                                 </div>
+                                @endif
                             </div>
                             @endforeach
                         </div>

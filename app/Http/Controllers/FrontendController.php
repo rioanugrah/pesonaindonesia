@@ -129,6 +129,52 @@ class FrontendController extends Controller
                 ['title' => 'Homestay', 'image' => asset('frontend/assets4/img/akomodasi/hotel.webp')],
                 ['title' => 'Apartemen', 'image' => asset('frontend/assets4/img/akomodasi/hotel.webp')],
             ];
+            $data['jelajahins'] = [
+                [
+                    'row' => true,
+                    'data' => [
+                        [
+                            'column' => 'col-lg-12 mb-4',
+                            'country' => 'Indonesia',
+                            'title' => 'Surabaya',
+                            'tour' => 0,
+                            'image' => asset('frontend/assets5/images/image/surabaya.webp')
+                        ],
+                        [
+                            'column' => 'col-lg-6 col-md-6 col-sm-6 mb-4',
+                            'country' => 'Indonesia',
+                            'title' => 'Yogyakarta',
+                            'tour' => 0,
+                            'image' => asset('frontend/assets5/images/image/yogyakarta.webp')
+                        ],
+                        [
+                            'column' => 'col-lg-6 col-md-6 col-sm-6 mb-4',
+                            'country' => 'Indonesia',
+                            'title' => 'Bali',
+                            'tour' => 0,
+                            'image' => asset('frontend/assets5/images/image/bali.webp')
+                        ],
+                    ]
+                ],
+                [
+                    'row' => false,
+                    'column' => 'col-lg-5 mb-4',
+                    'country' => 'Indonesia',
+                    'title' => 'Kota Malang',
+                    'tour' => 0,
+                    'image' => asset('frontend/assets5/images/image/malang.webp')
+                ],
+            ];
+            // dd($data['jelajahins']);
+            $data['testimonis'] = [
+                [
+                    'name' => 'Shella', 
+                    'deskripsi' => 'Excellent, Terima kasih Pesona Plesiran Indonesia membuat pengalaman yang tidak terlupakan. Tour guide yang handal yang tau spot-spot foto yang luar biasa.', 
+                    'image' => asset('frontend/assets5/images/mitra/logo_plesiran_malang.png')],
+            ];
+            $data['mitras'] = [
+                ['title' => 'Plesiran Malang', 'image' => asset('frontend/assets5/images/mitra/logo_plesiran_malang.png')],
+            ];
             // $data['paket_trips'] = PaketList::where('kategori_paket_id',2)->where('status','!=',0)
             //                                 ->orderBy('created_at','desc')->paginate(5);
             // $request->visitor()->browser();
@@ -137,7 +183,8 @@ class FrontendController extends Controller
             // dd($data['whatsapp']);
             // return view('frontend.frontend_2022.index', $data);
             // dd($data);
-            return view('frontend.frontend4.index', $data);
+            return view('frontend.frontend5.index', $data);
+            // return view('frontend.frontend4.index', $data);
             // return view('layouts.frontend_4.app',$data);
             // return view('frontend.frontend2.index',$data);
         }else{
