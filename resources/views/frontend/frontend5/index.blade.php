@@ -3,6 +3,7 @@
 @section('title')
     Pesona Plesiran Indonesia
 @endsection
+<?php $asset = asset('frontend/assets4/'); ?>
 <?php $assets = asset('frontend/assets5/'); ?>
 @section('content')
 <section class="banner overflow-hidden">
@@ -12,7 +13,7 @@
                 @foreach ($wallpaper as $wp)
                 <div class="swiper-slide">
                     <div class="slide-inner">
-                        <div class="slide-image" style="background-image:url({{ $assets }}/images/wallpaper/{{ $wp->image }})"></div>
+                        <div class="slide-image" style="background-image:url({{ asset($asset . '/img/wallpaper/' . $wp->image) }})"></div>
                         <div class="swiper-content">
                             <div class="entry-meta mb-2">
                                 <h5 class="entry-category mb-0 white">{{ $wp->nama_slider }}</h5>
@@ -159,7 +160,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
                     <div class="trend-item rounded box-shadow bg-white">
                         <div class="trend-image position-relative">
-                            <img src="{{ $assets }}/images/paket/list/{{ $paket->images }}" alt="image" style="width: 800px; height: 250px; object-fit: cover;">
+                            <img src="{{ asset('frontend/assets4/img/paket/list/' . $paket->images) }}" alt="image" style="width: 800px; height: 250px; object-fit: cover;">
                             <div class="color-overlay"></div>
                         </div>
                         <div class="trend-content p-4 pt-5 position-relative">
