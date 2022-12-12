@@ -68,7 +68,7 @@
                                 </ul>
                             </li> --}}
                             <li class="active"><a href="{{ route('frontend') }}">Beranda</a></li>
-                            <li><a href="javascript:void()">Paket Wisata</a></li>
+                            <li><a href="{{ route('frontend.paket') }}">Paket Wisata</a></li>
                             <li><a href="javascript:void()">Dokumentasi</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->     

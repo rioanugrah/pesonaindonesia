@@ -593,7 +593,8 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['pakets'] = Paket::all();
-        return view('frontend.frontend4.paket',$data);
+        // return view('frontend.frontend4.paket',$data);
+        return view('frontend.frontend5.paket_wisata',$data);
     }
 
     public function paket_detail($slug)
@@ -602,7 +603,8 @@ class FrontendController extends Controller
         $data['pakets'] = Paket::where('slug',$slug)->first();
         $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->orderBy('created_at','desc')->get();
         // dd($data);
-        return view('frontend.frontend4.paket_detail',$data);
+        // return view('frontend.frontend4.paket_detail',$data);
+        return view('frontend.frontend5.paket_wisata_list',$data);
     }
 
     public function paket_detail_list($id)
@@ -623,7 +625,9 @@ class FrontendController extends Controller
                                         ->where('id',$id)
                                         ->first();
         // dd($data);
-        return view('frontend.frontend4.paket_cart',$data);
+        // dd($data['paket_lists']);
+        // return view('frontend.frontend4.paket_cart',$data);
+        return view('frontend.frontend5.paket_wisata_cart',$data);
     }
 
     // public function paket_list_order_payment($id)

@@ -62,6 +62,6 @@
     <script src="{{ $assets }}/js/main.js"></script>
     <script src="{{ $assets }}/js/custom-swiper.js"></script>
     <script src="{{ $assets }}/js/custom-nav.js"></script>
-    @yield('css')
+    @yield('js')
 </body>
 </html>
