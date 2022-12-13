@@ -10,7 +10,7 @@
             </div>
             <div class="links float-right">
                 <ul>  
-                    <li><a href="javascript:void()" class="white"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="https://www.instagram.com/pesonaplesiranid.official/" class="white"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
         </div>

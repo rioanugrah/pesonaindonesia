@@ -290,7 +290,8 @@ class FrontendController extends Controller
         $data['jumlah_hotel'] = Hotel::count();
         $data['event'] = Events::count();
         // return view('frontend.frontend2.tentang_kami', $data);
-        return view('frontend.frontend4.tentang_kami', $data);
+        // return view('frontend.frontend4.tentang_kami', $data);
+        return view('frontend.frontend5.about', $data);
     }
     public function visimisi()
     {

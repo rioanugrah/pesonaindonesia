@@ -1,7 +1,6 @@
 @extends('layouts.frontend_5.app')
 <?php $asset = asset('frontend/assets5/'); ?>
 @section('css')
-    <link href="{{ asset('backend/assets2/css/iziToast.min.css') }}" rel="stylesheet" />
 @endsection
 @section('title')
     Pembayaran - {{ $paket->id }}

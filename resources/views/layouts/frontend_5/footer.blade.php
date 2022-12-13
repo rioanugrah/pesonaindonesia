@@ -34,7 +34,7 @@
                         @if ($pm['media_type'] == 'IMAGE')
                         <div class="col-md-3 col-sm-6">
                             <div class="insta-image rounded">
-                                <a href="{{ $pm['media_url'] }}"><img src="{{ $pm['media_url'] }}" alt></a>
+                                <a href="{{ $pm['media_url'] }}" target="_blank"><img src="{{ $pm['media_url'] }}" alt></a>
                             </div>
                         </div>
                         @endif
@@ -65,7 +65,7 @@
                     <div class="footer-links">
                         <h3 class="white">Perusahaan</h3>
                         <ul>
-                            <li><a href="javascript:void()">Tentang Kami</a></li>
+                            <li><a href="{{ route('tentang_kami') }}">Tentang Kami</a></li>
                             <li><a href="javascript:void()">Our Team</a></li>
                             <li><a href="javascript:void()">Kontak Kami</a></li>
                             <li><a href="javascript:void()">Terms &amp; Conditions</a></li>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="social-links">
                     <ul>
-                        <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="https://www.instagram.com/pesonaplesiranid.official/"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
             </div>    
