@@ -858,7 +858,8 @@ class FrontendController extends Controller
                     // ]);
                 }
 
-                return view('frontend.frontend4.payment_paket',$data);
+                // return view('frontend.frontend4.payment_paket',$data);
+                return view('frontend.frontend5.paket_wisata_payment',$data);
                 
             }
             else {
@@ -869,7 +870,8 @@ class FrontendController extends Controller
             echo 'Error: ' . $th->getMessage();
         }
         
-        return view('frontend.frontend4.payment_paket',$data);
+        // return view('frontend.frontend4.payment_paket',$data);
+        return view('frontend.frontend5.paket_wisata_payment',$data);
     }
 
     public function tracking_order()
