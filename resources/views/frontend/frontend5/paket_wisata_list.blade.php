@@ -45,7 +45,9 @@
                             {{-- <small>6+ Hours | Full Day Tours</small> --}}
                             <h3 class="mb-1"><a href="javascript:void()">{{ $paket_list->nama_paket }}</a></h3>
                             <h6 class="theme mb-0"><i class="icon-location-pin"></i> Indonesia</h6>
-                            {{-- <p class="mt-4 mb-0">Taking Safety Measures <br><a href="#"><span class="theme"> Free cancellation</span></a></p> --}}
+                            @if ($paket_list->meeting_point != null)
+                            <p class="mt-4 mb-0">Meeting Point: <br><a href="#"><span class="theme">{{ $paket_list->meeting_point }}</span></a></p>
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3">

@@ -24,6 +24,10 @@ class PaketList extends Model
         'price',
         'diskon',
         'deskripsi',
+        'alamat',
+        'meeting_point',
+        'include',
+        'depature',
         'images',
         'status',
     ];

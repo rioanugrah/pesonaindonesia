@@ -451,6 +451,10 @@ class PaketController extends Controller
             // $input['kategori_paket_id'] = $paket->kategori_paket_id;
             $input['nama_paket'] = $request->edit_nama_paket;
             $input['deskripsi'] = $request->edit_deskripsi;
+            $input['alamat'] = $request->edit_alamat;
+            $input['meeting_point'] = $request->edit_meeting_point;
+            $input['include'] = $request->edit_include;
+            $input['depature'] = $request->edit_depature;
             $input['jumlah_paket'] = $request->edit_jumlah_paket;
             $input['diskon'] = $request->edit_diskon;
             $input['price'] = $request->edit_price;

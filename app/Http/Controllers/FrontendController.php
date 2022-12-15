@@ -303,7 +303,8 @@ class FrontendController extends Controller
         $data['teams'] = $this->teams;
         $data['whatsapp'] = $this->whatsapp;
         // return view('frontend.frontend2.tim_kami', $data);
-        return view('frontend.frontend4.teams', $data);
+        // return view('frontend.frontend4.teams', $data);
+        return view('frontend.frontend5.tim', $data);
     }
     public function kontak()
     {

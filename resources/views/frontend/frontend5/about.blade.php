@@ -23,7 +23,7 @@
     </div>
     <div class="dot-overlay"></div>
 </section>
-<section class="about-us pt-6" style="background-image:url(images/background_pattern.png); background-position:bottom right;">
+<section class="about-us pt-6" style="background-image:url({{ $asset }}/images/background_pattern.png); background-position:bottom right;">
     <div class="container">
         <div class="about-image-box">
             <div class="row d-flex align-items-center justify-content-between">

@@ -26,9 +26,24 @@
                     <input type="text" class="form-control" name="edit_nama_paket" value="{{ $paket_list_detail->nama_paket }}" id="edit_nama_paket" placeholder="Nama Paket">
                 </div>
                 <div class="mb-3">
+                    <label class="form-label">Meeting Point</label>
+                    <input type="text" class="form-control" name="edit_meeting_point" value="{{ $paket_list_detail->meeting_point }}" id="edit_meeting_point" placeholder="Meeting Point">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Alamat</label>
+                    <textarea name="edit_alamat" class="form-control edit_alamat" cols="30" rows="10">{{ $paket_list_detail->alamat }}</textarea>
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Deskripsi</label>
-                    <textarea name="edit_deskripsi" class="form-control edit_deskripsi" id="ckeditoredit" cols="30" rows="10">{{ $paket_list_detail->deskripsi }}</textarea>
-                    {{-- <input type="email" class="form-control" id="formemail" placeholder="Enter your Email..."> --}}
+                    <textarea name="edit_deskripsi" class="form-control edit_deskripsi" cols="30" rows="10">{{ $paket_list_detail->deskripsi }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Include</label>
+                    <textarea name="edit_include" class="form-control edit_include" cols="30" rows="10">{{ $paket_list_detail->include }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Depature</label>
+                    <textarea name="edit_depature" class="form-control edit_depature" cols="30" rows="10">{{ $paket_list_detail->depature }}</textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Jumlah Paket</label>
