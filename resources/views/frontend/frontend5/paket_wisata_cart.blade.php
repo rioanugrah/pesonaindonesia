@@ -48,7 +48,7 @@
                             <form id="form-form" action="{{ route('frontend.paket.checkout',['slug' => $pakets->slug, 'id' => $paket_lists->id]) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="customer-information mb-4">
-                                    <h3 class="border-b pb-2 mb-2">Traveller Information</h3>
+                                    <h3 class="border-b pb-2 mb-2">Biodata Wisatawan</h3>
                                     <input type="hidden" id="detail_maksimal" value="{{ $paket_lists->jumlah_paket }}">
                                     {{-- <h5>Let us know who you are</h5> --}}
                                     <div class="row">
@@ -165,8 +165,7 @@
                                     <div class="booking-terms border-t pt-3 mt-3">
                                         <div class="d-lg-flex align-items-center">
                                             <div class="form-group mb-2 w-75">
-                                                <input type="checkbox"> By continuing, you agree to the <a
-                                                    href="#">Terms and Conditions.</a>
+                                                <input type="checkbox"> Dengan melanjutkan, Anda menyetujui Syarat dan Ketentuan.
                                             </div>
                                             <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('form-form').submit();" class="nir-btn float-lg-end w-25">CONFIRM BOOKING</a>
                                         </div>
@@ -224,8 +223,8 @@
                                         <td class="theme2"><span id="jumlah_order"></span></td>
                                     </tr>
                                     <tr>
-                                        <td>Booking Fee</td>
-                                        <td class="theme2">Free</td>
+                                        <td>Biaya Pemesanan</td>
+                                        <td class="theme2">Gratis</td>
                                     </tr>
                                     <tr>
                                         <td>Total</td>
