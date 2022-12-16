@@ -183,7 +183,7 @@
                                 </div>
                             </div> --}}
                             {{-- <h5 class="theme mb-1"><i class="flaticon-location-pin"></i> Croatia</h5> --}}
-                            <h3 class="mb-1"><a href="javascript:void()">{{ $paket->nama_paket }}</a></h3>
+                            <h3 class="mb-1"><a href="{{ route('frontend.pagesDetail',['slug' => $paket->pakets->slug, 'id' => $paket->id]) }}">{{ $paket->nama_paket }}</a></h3>
                             <div class="rating-main d-flex align-items-center pb-2">
                                 <div class="rating">
                                     <span class="fa fa-star checked"></span>

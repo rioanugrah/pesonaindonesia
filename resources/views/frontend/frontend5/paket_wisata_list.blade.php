@@ -43,7 +43,7 @@
                     <div class="col-lg-5 col-md-6">
                         <div class="trend-content position-relative text-md-start text-center">
                             {{-- <small>6+ Hours | Full Day Tours</small> --}}
-                            <h3 class="mb-1"><a href="javascript:void()">{{ $paket_list->nama_paket }}</a></h3>
+                            <h3 class="mb-1"><a href="{{ route('frontend.pagesDetail',['slug' => $pakets->slug, 'id' => $paket_list->id]) }}">{{ $paket_list->nama_paket }}</a></h3>
                             <h6 class="theme mb-0"><i class="icon-location-pin"></i> Indonesia</h6>
                             @if ($paket_list->meeting_point != null)
                             <p class="mt-4 mb-0">Meeting Point: <br><a href="#"><span class="theme">{{ $paket_list->meeting_point }}</span></a></p>

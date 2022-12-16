@@ -10,6 +10,7 @@ use App\Models\PaketList;
 use App\Models\PaketOrder;
 use App\Models\PaketOrderList;
 use App\Models\PaketImages;
+use App\Models\PaketReview;
 use App\Models\Bank;
 use App\Models\BuktiPembayaran;
 use App\Models\Transaksi;
@@ -946,7 +947,32 @@ class PaketController extends Controller
         ]);
     }
 
+    public function paket_review(Request $request, $paket_id)
+    {
+        if ($request->ajax()) {
+            $data = PaketReview::where('paket_list_id',$paket_id)->get();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('comment', function($row){
+                        return substr($row->deskripsi, 0, 50);
+                    })
+                    // ->addColumn('action', function($row){
+                    //     $btn = '<a href='.route('paket.list',['id' => $row->id]).' class="btn btn-secondary btn-sm" title="Paket List">
+                    //                 <i class="fas fa-list"></i> Paket List
+                    //             </a>
+                    //             <button onclick="edit(`'.$row->id.'`)" class="btn btn-warning btn-sm" title="Edit">
+                    //                 <i class="fas fa-pencil-alt"></i>
+                    //             </button>
+                    //             <button onclick="hapus(`'.$row->id.'`)" class="btn btn-danger btn-sm" title="Hapus">
+                    //                 <i class="fas fa-trash"></i>
+                    //             </button>';
+                    //     return $btn;
+                    // })
+                    // ->rawColumns(['action'])
+                    ->make(true);
+        }
 
+    }
     // public function paket_list_order(Request $request,$slug,$id)
     // {
     //     $rules = [

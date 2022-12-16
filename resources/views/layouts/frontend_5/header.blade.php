@@ -67,9 +67,7 @@
                                     </li>
                                 </ul>
                             </li> --}}
-                            <li class="active"><a href="{{ route('frontend') }}">Beranda</a></li>
-                            <li><a href="{{ route('frontend.paket') }}">Paket Wisata</a></li>
-                            <li><a href="javascript:void()">Dokumentasi</a></li>
+                            @include('layouts.frontend_5.menu')
                         </ul>
                     </div><!-- /.navbar-collapse -->     
                     {{-- <div class="register-login d-flex align-items-center">
