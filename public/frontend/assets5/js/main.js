@@ -36,9 +36,7 @@
      });
 
     jQuery(document).ready(() => {
-         jQuery('.js-video-button').modalVideo({
-             channel: 'vimeo'
-         });
+         jQuery('.js-video-button').modalVideo();
      });
 
      // Range sliders activation
