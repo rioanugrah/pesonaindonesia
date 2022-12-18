@@ -351,6 +351,16 @@
                                             style="width:520px;max-width:520px; margin-top:25px">
                                             <tr>
                                                 <td class="center-text" Simpli align="center"
+                                                    style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:12px;line-height:24px;font-weight:900;font-style:normal;color:#ff9019;text-decoration:none;letter-spacing:2px;text-transform: uppercase;">
+                                                    <singleline>
+                                                        <div mc:edit Simpli>
+                                                            HEY, {{ $details['nama_pembayaran'] }}
+                                                        </div>
+                                                    </singleline>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="center-text" Simpli align="center"
                                                     style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:24px;font-weight:700;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
                                                     <singleline>
                                                         <div mc:edit Simpli>
@@ -368,7 +378,8 @@
                                                     style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
                                                     <singleline>
                                                         <div mc:edit Simpli>
-                                                            Kami akan mengirimkan informasi pelacakan pemesanan Anda.
+                                                            Kami akan mengirimkan informasi pelacakan segera setelah
+                                                            pesanan Anda dikirimkan.
                                                         </div>
                                                     </singleline>
                                                 </td>
@@ -377,144 +388,49 @@
                                                 <td height="25" style="font-size:25px;line-height:25px;" Simpli>
                                                     &nbsp;</td>
                                             </tr>
-                                            <td align="center">
-                                                <table>
-                                                    <tr>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        Nomor Pesanan
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        :
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        <b>{{ $details['invoice'] }}</b>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        Nama Pesanan
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        :
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        <b>{{ $details['nama_pembayaran'] }}</b>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        Nama Paket
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        :
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        <b>{{ $details['nama_paket'] }}</b>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        Email
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        :
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        <b>{{ $details['email'] }}</b>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        Total Pembayaran
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        :
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        <b>Rp. {{ number_format($details['total'],0,",",".") }}</b>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        Nama Bank
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        :
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        @if ($details['kode_bank'] == '002')
-                                                        <b>BRI</b>
-                                                        @elseif ($details['kode_bank'] == '008')
-                                                        <b>BANK MANDIRI</b>
-                                                        @elseif ($details['kode_bank'] == '009')
-                                                        <b>BNI</b>
-                                                        @elseif ($details['kode_bank'] == '014')
-                                                        <b>BCA</b>
-                                                        @endif
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        No. Virtual Account
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        :
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        <b>{{ $details['nomor_rekening'] }}</b>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        Nama Penerima
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        :
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        <b>{{ $details['nama_penerima'] }}</b>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        Tanggal Kedaluwarsa Pembayaran
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        :
-                                                        </td>
-                                                        <td class="center-text" Simpli
-                                                        style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;font-weight:300;font-style:normal;color:#333333;text-decoration:none;letter-spacing:0px;">
-                                                        <b>{{ $details['payment_expired'] }}</b>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
+                                            <tr>
+                                                <td align="center">
+                                                    <!-- Use Code -->
+                                                    <table border="0" cellspacing="0" cellpadding="0"
+                                                        role="presentation" align="center" class="row"
+                                                        width="480" style="width:480px;max-width:480px;">
+                                                        <tr>
+                                                            <td align="center" Simpli bgcolor="#ff9019"
+                                                                style="border-radius: 10px;">
+                                                                <!-- Content -->
+                                                                <table border="0" cellspacing="0" cellpadding="0"
+                                                                    role="presentation" align="center" class="row"
+                                                                    width="480"
+                                                                    style="width:480px;max-width:480px;">
+                                                                    <tr>
+                                                                        <td height="20"
+                                                                            style="font-size:20px;line-height:20px;">
+                                                                            &nbsp;</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="center-text" Simpli align="center"
+                                                                            style="font-family:'Catamaran',Arial,Helvetica,sans-serif;font-size:22px;line-height:26px;font-weight:400;font-style:normal;color:#FFFFFF;text-decoration:none;letter-spacing:0px;">
+                                                                            <singleline>
+                                                                                <div mc:edit Simpli>
+                                                                                    <strong
+                                                                                        style="color:#FFFFFF;">{{ $details['invoice'] }}</strong>
+                                                                                </div>
+                                                                            </singleline>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td height="20"
+                                                                            style="font-size:20px;line-height:20px;">
+                                                                            &nbsp;</td>
+                                                                    </tr>
+                                                                </table>
+                                                                <!-- Content -->
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <!-- User Code -->
+                                                </td>
+                                            </tr>
 
                                             {{-- <tr>
                                                 <td align="center">

@@ -833,14 +833,21 @@ class PaketController extends Controller
                     $details = [
                         'title' => 'Konfirmasi Pembayaran',
                         'nama_pembayaran' => $request->first_name.' '.$request->last_name,
+                        'nama_paket' => $data['paket_lists']['nama_paket'],
                         'invoice' => $input['id'],
                         'email' => $request->email,
                         'total' => $request->orderTotal,
-                        'body' => 'Terima kasih '.$request->first_name.' '.$request->last_name.' telah melakukan order tiket '.$data['paket_lists']['nama_paket'].'.'.
-                                    ' Silahkan lakukan pembayaran berikut',
+                        'body' => 'Terima kasih telah melakukan pembelian tiket '.$data['paket_lists']['nama_paket'].'.'.
+                                    ' Silahkan lakukan pembayaran berikut.',
+                        'kode_bank' => $dataUrl['bank_code'],
+                        'nama_penerima' => 'Pesona Plesiran Indonesia',
+                        'nomor_rekening' => $dataUrl['va_number'],
+                        'payment_expired' => date("d F Y H:i:s", substr($dataUrl['trx_expiration_time'], 0, 10)),
                         // 'url' => $dataUrl['url']
                     ];
+                    // echo json_encode($details);
                     // Mail::to($email_marketing)->send(new Pembayaran($details));
+                    
                     Mail::to($details['email'])->send(new Pembayaran($details));
 
                     Transaksi::firstOrCreate($payment_link_array);

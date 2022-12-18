@@ -145,8 +145,15 @@ Route::get('testingss', function(){
 Route::get('testing-email', function(){
     $data['details'] = [
         'nama_pembayaran' => 'Rio',
-        'body' => 'Terima telah melakukan order tiket',
-        'invoice' => 'INV-00000'
+        'nama_paket' => 'Wisata Bromo Desember 2022',
+        'body' => 'Terima telah melakukan pembelian tiket Wisata Bromo Desember 2022',
+        'invoice' => 'INV-00000',
+        'email' => 'rioanugrah999@gmail.com',
+        'total' => 350000,
+        'kode_bank' => '008',
+        'nama_penerima' => 'Pesona Plesiran Indonesia',
+        'nomor_rekening' => '8932560000011983',
+        'payment_expired' => date("d F Y H:i:s", substr('1671380982000', 0, 10)),
     ];
     return view('emails.Pembayaran',$data);
 });
