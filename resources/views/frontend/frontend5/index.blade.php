@@ -153,7 +153,7 @@
     </div>
 </section>
 <section class="trending bg-grey pt-17 pb-6">
-    <div class="section-shape top-0" style="background-image: url(images/shape8.png);"></div>
+    <div class="section-shape top-0" style="background-image: url({{ $assets }}/images/shape8.png);"></div>
     <div class="container">
         <div class="row align-items-center justify-content-between mb-6 ">
             <div class="col-lg-7">
@@ -326,7 +326,7 @@
                 <div class="col-lg-5">
                     <div class="section-title">
                         <h4 class="mb-1 theme1">Testimonials</h4>
-                        <h2 class="mb-1 white">Good Reviews By <span class="theme">Clients</span></h2>
+                        <h2 class="mb-1 white">Ulasan <span class="theme">Klien</span></h2>
                         {{-- <p class="mb-0 white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p> --}}
                     </div>
                 </div>

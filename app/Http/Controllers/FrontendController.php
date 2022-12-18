@@ -310,7 +310,8 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         // return view('frontend.frontend2.kontak', $data);
-        return view('frontend.frontend4.kontak', $data);
+        // return view('frontend.frontend4.kontak', $data);
+        return view('frontend.frontend5.contact', $data);
     }
 
     public function info()

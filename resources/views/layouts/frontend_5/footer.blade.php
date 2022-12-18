@@ -67,7 +67,7 @@
                         <ul>
                             <li><a href="{{ route('tentang_kami') }}">Tentang Kami</a></li>
                             <li><a href="{{ route('tim_kami') }}">Our Team</a></li>
-                            <li><a href="javascript:void()">Kontak Kami</a></li>
+                            <li><a href="{{ route('kontak') }}">Kontak Kami</a></li>
                             <li><a href="javascript:void()">Terms &amp; Conditions</a></li>
                         </ul>
                     </div>
