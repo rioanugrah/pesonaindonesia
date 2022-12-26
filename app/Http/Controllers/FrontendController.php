@@ -286,6 +286,7 @@ class FrontendController extends Controller
     }
     public function tentang_kami()
     {
+        $data['teams'] = $this->teams;
         $data['whatsapp'] = $this->whatsapp;
         $data['jumlah_hotel'] = Hotel::count();
         $data['event'] = Events::count();
@@ -413,15 +414,48 @@ class FrontendController extends Controller
     public function blog()
     {
         $data['whatsapp'] = $this->whatsapp;
-        $data['postings'] = Blog::orderBy('updated_at','desc')->get();
-        return view('frontend.frontend4.blog.blog',$data);
+        $data['postings'] = Blog::orderBy('updated_at','desc')->paginate(5);
+        // return view('frontend.frontend4.blog.blog',$data);
+        return view('frontend.frontend5.blog',$data);
     }
 
     public function blog_detail($slug)
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['blog_detail'] = Blog::where('slug',$slug)->first();
-        return view('frontend.frontend4.blog.blog_detail',$data);
+        $data['count'] = DB::table('blog_view')->where('blog_id',$data['blog_detail']['id'])->count();
+        DB::table('blog_view')->updateOrInsert([
+            'blog_id' => $data['blog_detail']['id'],
+            'body' => json_encode([
+                'ip' => visitor()->ip(),
+                'browser' => visitor()->browser(),
+                'device' => visitor()->device(),
+                'url' => visitor()->url(),
+                'referer' => visitor()->referer(),
+                'useragent' => visitor()->useragent(),
+                'platform' => visitor()->platform(),
+                'languages' => visitor()->languages(),
+            ]),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        // dd([
+        //     'blog_id' => $data['blog_detail']['id'],
+        //     'body' => json_encode([
+        //         'ip' => visitor()->ip(),
+        //         'browser' => visitor()->browser(),
+        //         'device' => visitor()->device(),
+        //         'url' => visitor()->url(),
+        //         'referer' => visitor()->referer(),
+        //         'useragent' => visitor()->useragent(),
+        //         'platform' => visitor()->platform(),
+        //         'languages' => visitor()->languages(),
+        //     ]),
+        //     'created_at' => Carbon::now(),
+        //     'updated_at' => Carbon::now(),
+        // ]);
+        // return view('frontend.frontend4.blog.blog_detail',$data);
+        return view('frontend.frontend5.blog_detail',$data);
     }
 
     public function payment()
@@ -947,7 +981,8 @@ class FrontendController extends Controller
     public function kebijakan_privasi()
     {
         $data['whatsapp'] = $this->whatsapp;
-        return view('frontend.frontend4.kebijakan_privasi',$data);
+        // return view('frontend.frontend4.kebijakan_privasi',$data);
+        return view('frontend.frontend5.kebijakan_privasi',$data);
     }
 
     public function cek_id_payment($id)

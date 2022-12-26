@@ -41,7 +41,11 @@ class BlogController extends Controller
                     ->rawColumns(['action','image'])
                     ->make(true);
         }
-        return view('backend.posting.index');
+        $data['kategori'] = [
+            ['kategori' => 'Travel'],
+            ['kategori' => 'Food']
+        ];
+        return view('backend.posting.index',$data);
     }
 
     public function simpan(Request $request)
@@ -62,6 +66,7 @@ class BlogController extends Controller
         if ($validator->passes()) {
             $input['slug'] = Str::slug($request->title);
             $input['title'] = $request->title;
+            $input['kategori'] = $request->kategori;
             $perusahaan = Perusahaan::select('nama_perusahaan')->first();
             $input['author'] = $perusahaan->nama_perusahaan;
             $input['description'] = $request->description;

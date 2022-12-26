@@ -16,6 +16,7 @@ class Blog extends Model
     public $fillable = [
         'slug',
         'title',
+        'kategori',
         'author',
         'description',
         'image',

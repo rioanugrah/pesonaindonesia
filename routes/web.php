@@ -67,16 +67,6 @@ Route::prefix('paket')->group(function () {
     Route::get('{slug}/pages/{id}', 'PagesFrontendController@detail')->name('frontend.pagesDetail');
 });
 
-Route::get('carbon',function(){
-    // echo strtotime(1670160719000);
-    // echo gmdate('r', 1670160719000);
-    // $epoch = 1670161610000;
-    // $dt = new DateTime("@$epoch");  // convert UNIX timestamp to PHP DateTime
-    // echo $dt->format('y-m-d H:i:s'); // output = 2017-01-01 00:00:00
-    echo date("d F Y H:i:s", substr("1670161610000", 0, 10));
-    // return \Carbon\Carbon::createFromFormat('d-M-Y',1670160719000)->toDateString();
-});
-
 Route::prefix('tour')->group(function () {
     Route::get('/', 'FrontendNewController@tour')->name('frontend_new.tour');
     Route::get('{id}/{paket_id}', 'FrontendNewController@tour_detail')->name('frontend_new.tour_detail');
@@ -135,30 +125,43 @@ Route::prefix('dokumentasi')->group(function () {
     Route::get('/', 'GalleryController@dokumentasi')->name('frontend.dokumentasi');
 });
 
-Route::get('testingss', function(){
-    return view('layouts.frontend_5.app');
-});
-
 // Route::get('testings', function(){
 //     return view('frontend.frontend_2022.index');
 // });
-Route::get('testing-email', function(){
-    $data['details'] = [
-        'nama_pembayaran' => 'Rio',
-        'nama_paket' => 'Wisata Bromo Desember 2022',
-        'body' => 'Terima telah melakukan pembelian tiket Wisata Bromo Desember 2022',
-        'invoice' => 'INV-00000',
-        'email' => 'rioanugrah999@gmail.com',
-        'total' => 350000,
-        'kode_bank' => '008',
-        'nama_penerima' => 'Pesona Plesiran Indonesia',
-        'nomor_rekening' => '8932560000011983',
-        'payment_expired' => date("d F Y H:i:s", substr('1671380982000', 0, 10)),
-    ];
-    return view('emails.Pembayaran',$data);
+Route::get('test', function(){
+    return response()->json([
+        'ip' => visitor()->ip(),
+        'browser' => visitor()->browser(),
+        'device' => visitor()->device(),
+        'url' => visitor()->url(),
+        'referer' => visitor()->referer(),
+        'useragent' => visitor()->useragent(),
+        'platform' => visitor()->platform(),
+        'languages' => visitor()->languages(),
+    ], 200);
 });
-Route::get('testings', 'FrontendController@frontend_testing');
+// Route::get('testing-email', function(){
+//     $data['details'] = [
+//         'nama_pembayaran' => 'Rio',
+//         'nama_paket' => 'Wisata Bromo Desember 2022',
+//         'body' => 'Terima telah melakukan pembelian tiket Wisata Bromo Desember 2022',
+//         'invoice' => 'INV-00000',
+//         'email' => 'rioanugrah999@gmail.com',
+//         'total' => 350000,
+//         'kode_bank' => '008',
+//         'nama_penerima' => 'Pesona Plesiran Indonesia',
+//         'nomor_rekening' => '8932560000011983',
+//         'payment_expired' => date("d F Y H:i:s", substr('1671380982000', 0, 10)),
+//     ];
+//     return view('emails.Pembayaran',$data);
+// });
 
+Route::get('testings', 'FrontendController@frontend_testing');
+// Route::domain('{account}.'.env('APP_URL'))->group(function () {
+//     Route::get('{id}', function ($account,$id) {
+//         return $id;
+//     });
+// });
 // Route::group(['middleware' => ['auth']], function(){
 //     Route::get('login', function(){
 //         return redirect('login');

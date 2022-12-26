@@ -68,7 +68,7 @@
                             <li><a href="{{ route('tentang_kami') }}">Tentang Kami</a></li>
                             <li><a href="{{ route('tim_kami') }}">Our Team</a></li>
                             <li><a href="{{ route('kontak') }}">Kontak Kami</a></li>
-                            <li><a href="javascript:void()">Terms &amp; Conditions</a></li>
+                            <li><a href="{{ route('frontend.kebijakan_privasi') }}">Kebijakan Privasi</a></li>
                         </ul>
                     </div>
                 </div>
@@ -76,9 +76,9 @@
                     <div class="footer-links">
                         <h3 class="white">Lainnya</h3>
                         <ul>
-                          <li><a href="javascript:void()">Blog</a></li>
-                          <li><a href="javascript:void()">Gallery</a></li>
-                          <li><a href="javascript:void()">Syarat & Ketentuan</a></li>
+                          <li><a href="{{ route('frontend.blog') }}">Blog</a></li>
+                          {{-- <li><a href="javascript:void()">Gallery</a></li>
+                          <li><a href="javascript:void()">Syarat & Ketentuan</a></li> --}}
                         </ul>
                     </div>
                 </div>
