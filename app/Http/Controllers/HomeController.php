@@ -8,6 +8,7 @@ use App\Models\Hotel;
 use App\Models\Paket;
 use App\Models\PaketOrder;
 use App\User;
+use DB;
 use HTTP_Request2;
 
 class HomeController extends Controller
@@ -87,6 +88,7 @@ class HomeController extends Controller
                     'languages' => visitor()->languages(),
                 ]
             ];
+            $data['visitors'] = DB::table('shetabit_visits')->orderBy('created_at','DESC')->paginate(5);
             try {
                 $data['balances'] = json_decode((new HomeController)->balance(),true);
                 // dd($data['balances']['balance']);

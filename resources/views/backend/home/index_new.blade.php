@@ -162,55 +162,33 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-7">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Activity</h4>
                 <ol class="activity-feed">
+                    @foreach ($visitors as $visitor)
                     <li class="feed-item">
                         <div class="feed-item-list">
-                            <span class="date">Jan 22</span>
-                            <span class="activity-text">Responded to need “Volunteer
-                                Activities”</span>
+                            <span class="date">{{ $visitor->created_at }}</span>
+                            <div class="row">
+                                <span class="activity-text"><b>Url : </b>{{ $visitor->url }}</span>
+                                <span class="activity-text"><b>Method : </b>{{ $visitor->method }}</span>
+                                <span class="activity-text"><b>Sistem Operasi : </b>{{ $visitor->platform }}</span>
+                                <span class="activity-text"><b>Device : </b>{{ $visitor->device }}</span>
+                                <span class="activity-text"><b>Useragent : </b>{{ $visitor->useragent }}</span>
+                            </div>
                         </div>
                     </li>
-                    <li class="feed-item">
-                        <div class="feed-item-list">
-                            <span class="date">Jan 20</span>
-                            <span class="activity-text">At vero eos et accusamus et iusto odio
-                                dignissimos ducimus qui deleniti atque...<a href="#"
-                                    class="text-success">Read more</a></span>
-                        </div>
-                    </li>
-                    <li class="feed-item">
-                        <div class="feed-item-list">
-                            <span class="date">Jan 19</span>
-                            <span class="activity-text">Joined the group “Boardsmanship
-                                Forum”</span>
-                        </div>
-                    </li>
-                    <li class="feed-item">
-                        <div class="feed-item-list">
-                            <span class="date">Jan 17</span>
-                            <span class="activity-text">Responded to need “In-Kind
-                                Opportunity”</span>
-                        </div>
-                    </li>
-                    <li class="feed-item">
-                        <div class="feed-item-list">
-                            <span class="date">Jan 16</span>
-                            <span class="activity-text">Sed ut perspiciatis unde omnis iste natus
-                                error sit rem.</span>
-                        </div>
-                    </li>
+                    @endforeach
                 </ol>
-                <div class="text-center">
+                {{-- <div class="text-center">
                     <a href="#" class="btn btn-primary">Load More</a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-5">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Devices</h4>
