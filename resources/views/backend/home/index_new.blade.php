@@ -167,17 +167,18 @@
             <div class="card-body">
                 <h4 class="card-title mb-4">Activity</h4>
                 <ol class="activity-feed">
-                    @foreach ($visitors as $visitor)
+                    @foreach ($visitorss as $visitor)
                     <li class="feed-item">
                         <div class="feed-item-list">
-                            <span class="date">{{ $visitor->created_at }}</span>
+                            <span class="date">{{ $visitor['created_at'] }}</span>
                             <div class="row">
-                                <span class="activity-text"><b>Url : </b>{{ $visitor->url }}</span>
-                                <span class="activity-text"><b>Method : </b>{{ $visitor->method }}</span>
-                                <span class="activity-text"><b>Sistem Operasi : </b>{{ $visitor->platform }}</span>
-                                <span class="activity-text"><b>Device : </b>{{ $visitor->device }}</span>
-                                <span class="activity-text"><b>Useragent : </b>{{ $visitor->useragent }}</span>
-                                <span class="activity-text"><b>Languages : </b>{{ $visitor->languages }}</span>
+                                <span class="activity-text"><b>Url : </b>{{ $visitor['url'] }}</span>
+                                <span class="activity-text"><b>Method : </b>{{ $visitor['method'] }}</span>
+                                <span class="activity-text"><b>User : </b>{{ $visitor['visitor']['name'] }}</span>
+                                <span class="activity-text"><b>Sistem Operasi : </b>{{ $visitor['platform'] }}</span>
+                                <span class="activity-text"><b>Device : </b>{{ $visitor['device'] }}</span>
+                                <span class="activity-text"><b>Useragent : </b>{{ $visitor['useragent'] }}</span>
+                                <span class="activity-text"><b>Languages : </b>{{ $visitor['languages'] }}</span>
                             </div>
                         </div>
                     </li>

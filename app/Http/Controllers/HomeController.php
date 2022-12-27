@@ -8,6 +8,7 @@ use App\Models\Hotel;
 use App\Models\Paket;
 use App\Models\PaketOrder;
 use App\User;
+use \Carbon\Carbon;
 use DB;
 use HTTP_Request2;
 
@@ -89,6 +90,18 @@ class HomeController extends Controller
                 ]
             ];
             $data['visitors'] = DB::table('shetabit_visits')->orderBy('created_at','DESC')->paginate(5);
+            foreach ($data['visitors'] as $key => $visitor) {
+                $data['visitorss'][] = [
+                    'url' => $visitor->url,
+                    'method' => $visitor->method,
+                    'platform' => $visitor->platform,
+                    'device' => $visitor->device,
+                    'useragent' => $visitor->useragent,
+                    'languages' => $visitor->languages,
+                    'visitor' => $visitor->visitor_id = null ? '-' : User::select('name')->where('id',$visitor->visitor_id)->first(),
+                    'created_at' => Carbon::create($visitor->created_at)->isoFormat('LLLL'),
+                ];
+            }
             try {
                 $data['balances'] = json_decode((new HomeController)->balance(),true);
                 // dd($data['balances']['balance']);
