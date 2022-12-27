@@ -4,6 +4,8 @@
     Beranda
 @endsection
 
+<?php $asset = asset('backend/assets2/'); ?>
+
 @section('content')
 @include('backend.paket.order.modalBuat')
 <div class="page-title-box">
@@ -35,14 +37,31 @@
             <div class="card-body">
                 <div class="mb-4">
                     <div class="float-start mini-stat-img me-4">
-                        <img src="assets/images/services-icon/01.png" alt="">
+                        <img src="{{ $asset }}/images/services-icon/01.png" alt="">
                     </div>
                     <h5 class="font-size-16 text-uppercase text-white-50">Balance</h5>
                     <h4 class="fw-medium font-size-24">Rp. {{ number_format($balances['balance'],0,',','.') }} <i
                             class="mdi mdi-arrow-up text-success ms-2"></i></h4>
-                    <div class="mini-stat-label bg-success">
+                    {{-- <div class="mini-stat-label bg-success">
                         <p class="mb-0">+ 12%</p>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-3">
+        <div class="card mini-stat bg-primary text-white">
+            <div class="card-body">
+                <div class="mb-4">
+                    <div class="float-start mini-stat-img me-4">
+                        <img src="{{ $asset }}/images/services-icon/04.png" alt="">
                     </div>
+                    <h5 class="font-size-16 text-uppercase text-white-50">Paket</h5>
+                    <h4 class="fw-medium font-size-24">{{ number_format($total_paket,0,',','.') }}<i
+                            class="mdi mdi-arrow-up text-success ms-2"></i></h4>
+                    {{-- <div class="mini-stat-label bg-success">
+                        <p class="mb-0">+ 12%</p>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -140,6 +159,73 @@
                     </table>
                 </div>
                 {{ $orders->links() }}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Activity</h4>
+                <ol class="activity-feed">
+                    <li class="feed-item">
+                        <div class="feed-item-list">
+                            <span class="date">Jan 22</span>
+                            <span class="activity-text">Responded to need “Volunteer
+                                Activities”</span>
+                        </div>
+                    </li>
+                    <li class="feed-item">
+                        <div class="feed-item-list">
+                            <span class="date">Jan 20</span>
+                            <span class="activity-text">At vero eos et accusamus et iusto odio
+                                dignissimos ducimus qui deleniti atque...<a href="#"
+                                    class="text-success">Read more</a></span>
+                        </div>
+                    </li>
+                    <li class="feed-item">
+                        <div class="feed-item-list">
+                            <span class="date">Jan 19</span>
+                            <span class="activity-text">Joined the group “Boardsmanship
+                                Forum”</span>
+                        </div>
+                    </li>
+                    <li class="feed-item">
+                        <div class="feed-item-list">
+                            <span class="date">Jan 17</span>
+                            <span class="activity-text">Responded to need “In-Kind
+                                Opportunity”</span>
+                        </div>
+                    </li>
+                    <li class="feed-item">
+                        <div class="feed-item-list">
+                            <span class="date">Jan 16</span>
+                            <span class="activity-text">Sed ut perspiciatis unde omnis iste natus
+                                error sit rem.</span>
+                        </div>
+                    </li>
+                </ol>
+                <div class="text-center">
+                    <a href="#" class="btn btn-primary">Load More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Devices</h4>
+                <ol class="activity-feed">
+                    <li class="feed-item">
+                        <div class="feed-item-list">
+                            <div class="row">
+                                <span class="activity-text"><b>IP Address :</b> {{ $devices[0]['ip'] }}</span>
+                                <span class="activity-text"><b>Devices :</b> {{ $devices[0]['device'] }}</span>
+                                <span class="activity-text"><b>Useragent :</b> {{ $devices[0]['useragent'] }}</span>
+                                <span class="activity-text"><b>Sistem Operasi :</b> {{ $devices[0]['platform'] }}</span>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
             </div>
         </div>
     </div>

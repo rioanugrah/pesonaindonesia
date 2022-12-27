@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Wisata;
 use App\Models\Hotel;
+use App\Models\Paket;
 use App\Models\PaketOrder;
 use App\User;
 use HTTP_Request2;
@@ -72,8 +73,20 @@ class HomeController extends Controller
             $data['total_users'] = User::count();
             // $data['wisata'] = Wisata::count();
             $data['hotel'] = Hotel::count();
+            $data['total_paket'] = Paket::count();
             $data['orders'] = PaketOrder::orderBy('created_at','desc')->paginate(10);
-            
+            $data['devices'] = [
+                [
+                    'ip' => visitor()->ip(),
+                    'browser' => visitor()->browser(),
+                    'device' => visitor()->device(),
+                    'url' => visitor()->url(),
+                    'referer' => visitor()->referer(),
+                    'useragent' => visitor()->useragent(),
+                    'platform' => visitor()->platform(),
+                    'languages' => visitor()->languages(),
+                ]
+            ];
             try {
                 $data['balances'] = json_decode((new HomeController)->balance(),true);
                 // dd($data['balances']['balance']);
