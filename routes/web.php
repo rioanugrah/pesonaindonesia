@@ -224,6 +224,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('{id}/reset', 'UsersController@reset')->name('pengguna.reset')->middleware('verified');
         });
 
+        Route::prefix('visitor')->group(function(){
+            Route::get('/', 'VisitorController@index')->name('visitor')->middleware('verified');
+        });
         
         Route::prefix('roles')->group(function(){
             Route::get('/', 'RolesController@index')->name('roles')->middleware('verified');
