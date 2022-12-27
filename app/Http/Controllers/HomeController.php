@@ -98,7 +98,7 @@ class HomeController extends Controller
                     'device' => $visitor->device,
                     'useragent' => $visitor->useragent,
                     'languages' => $visitor->languages,
-                    'visitor' => $visitor->visitor_id = null ? '-' : User::select('name')->where('id',$visitor->visitor_id)->first(),
+                    'visitor' => $visitor->visitor_id == null ? ['name' => '-'] : User::select('name')->where('id',$visitor->visitor_id)->first(),
                     'created_at' => Carbon::create($visitor->created_at)->isoFormat('LLLL'),
                 ];
             }
