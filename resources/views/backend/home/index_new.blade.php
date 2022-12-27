@@ -177,6 +177,7 @@
                                 <span class="activity-text"><b>Sistem Operasi : </b>{{ $visitor->platform }}</span>
                                 <span class="activity-text"><b>Device : </b>{{ $visitor->device }}</span>
                                 <span class="activity-text"><b>Useragent : </b>{{ $visitor->useragent }}</span>
+                                <span class="activity-text"><b>Languages : </b>{{ $visitor->languages }}</span>
                             </div>
                         </div>
                     </li>
