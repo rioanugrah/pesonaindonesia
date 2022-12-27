@@ -15,6 +15,7 @@ class CreateVisitsTable extends Migration
     {
         Schema::create(config('visitor.table_name'), function (Blueprint $table) {
             $table->bigIncrements('id');
+            // $table->uuid('id')->primary();
             $table->string('method')->nullable();
             $table->mediumText('request')->nullable();
             $table->mediumText('url')->nullable();

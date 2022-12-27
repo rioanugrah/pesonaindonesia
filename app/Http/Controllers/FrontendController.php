@@ -183,6 +183,7 @@ class FrontendController extends Controller
             // dd($data['whatsapp']);
             // return view('frontend.frontend_2022.index', $data);
             // dd($data);
+            visitor()->visit();
             return view('frontend.frontend5.index', $data);
             // return view('frontend.frontend4.index', $data);
             // return view('layouts.frontend_4.app',$data);
@@ -282,6 +283,7 @@ class FrontendController extends Controller
     public function struktur()
     {
         $data['whatsapp'] = $this->whatsapp;
+        visitor()->visit();
         return view('frontend.struktur_organisasi', $data);
     }
     public function tentang_kami()
@@ -290,6 +292,7 @@ class FrontendController extends Controller
         $data['whatsapp'] = $this->whatsapp;
         $data['jumlah_hotel'] = Hotel::count();
         $data['event'] = Events::count();
+        visitor()->visit();
         // return view('frontend.frontend2.tentang_kami', $data);
         // return view('frontend.frontend4.tentang_kami', $data);
         return view('frontend.frontend5.about', $data);
@@ -297,12 +300,14 @@ class FrontendController extends Controller
     public function visimisi()
     {
         $data['whatsapp'] = $this->whatsapp;
+        visitor()->visit();
         return view('frontend.frontend2.visi_misi', $data);
     }
     public function tim()
     {
         $data['teams'] = $this->teams;
         $data['whatsapp'] = $this->whatsapp;
+        visitor()->visit();
         // return view('frontend.frontend2.tim_kami', $data);
         // return view('frontend.frontend4.teams', $data);
         return view('frontend.frontend5.tim', $data);
@@ -310,6 +315,7 @@ class FrontendController extends Controller
     public function kontak()
     {
         $data['whatsapp'] = $this->whatsapp;
+        visitor()->visit();
         // return view('frontend.frontend2.kontak', $data);
         // return view('frontend.frontend4.kontak', $data);
         return view('frontend.frontend5.contact', $data);
@@ -318,6 +324,7 @@ class FrontendController extends Controller
     public function info()
     {
         $data['whatsapp'] = $this->whatsapp;
+        visitor()->visit();
         return view('frontend.frontend4.informasi', $data);
     }
 
@@ -356,6 +363,7 @@ class FrontendController extends Controller
                 'message_content' => $message_content,
                 'message_type' => $message_type,
             );
+            visitor()->visit($request);
             return response()->json($array_message);
         }
 
@@ -375,6 +383,7 @@ class FrontendController extends Controller
         }
         // $data['kabupaten_kotas'] = KabupatenKota::all();
         $data['provinsis'] = Provinsi::pluck('nama','id');
+        visitor()->visit();
         return view('frontend.frontend2.partnership',$data);
     }
 
@@ -382,7 +391,7 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['hotels'] = Hotel::paginate(18);
-
+        visitor()->visit();
         // dd($data['hotelss']);
         // return view('frontend.frontend2.hotel', $data);
         return view('frontend.frontend4.hotel', $data);
@@ -394,6 +403,7 @@ class FrontendController extends Controller
         $data['hotels'] = Hotel::where('slug',$slug)->first();
         $data['fasilitas_popular'] = FasilitasUmumHotel::where('hotel_id',$data['hotels']['id'])->get();
         $data['kamar_hotels'] = KamarHotel::where('hotel_id',$data['hotels']['id'])->get();
+        visitor()->visit();
         // dd($data['kamar_hotels']);
         // return view('frontend.frontend2.hotelDetail', $data);
         return view('frontend.frontend4.hotelDetail', $data);
@@ -407,6 +417,7 @@ class FrontendController extends Controller
         //                         ->where('kamar_hotel.slug',$slug_kamar)
         //                         ->first();
         $data['kamar_hotels'] = KamarHotel::where('slug',$slug_kamar)->first();
+        visitor()->visit();
         // dd($data);
         return view('frontend.frontend2.kamar_hotel_detail',$data);
     }
@@ -415,6 +426,7 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['postings'] = Blog::orderBy('updated_at','desc')->paginate(5);
+        visitor()->visit();
         // return view('frontend.frontend4.blog.blog',$data);
         return view('frontend.frontend5.blog',$data);
     }
@@ -439,6 +451,7 @@ class FrontendController extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+        visitor()->visit();
         // dd([
         //     'blog_id' => $data['blog_detail']['id'],
         //     'body' => json_encode([
@@ -480,6 +493,7 @@ class FrontendController extends Controller
     public function event()
     {
         $data['whatsapp'] = $this->whatsapp;
+        visitor()->visit();
         $data['events'] = Events::orderBy('id','desc')->paginate(10);
 
         return view('frontend.frontend4.events',$data);
@@ -494,6 +508,7 @@ class FrontendController extends Controller
         $setCarbon = Carbon::setTestNow($carbon);
 
         $data['pendaftaran_terakhir'] = Carbon::yesterday()->isoFormat('LLLL');
+        visitor()->visit();
         // dd($data); 
         // dd(Carbon::parse($data['event']['start_event']));
 
@@ -613,6 +628,7 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['wisatas'] = Wisata::all();
+        visitor()->visit();
         return view('frontend.frontend4.wisata',$data);
     }
 
@@ -623,6 +639,7 @@ class FrontendController extends Controller
         if(empty($data['wisata'])){
             return redirect()->back();
         }
+        visitor()->visit();
         return view('frontend.frontend4.wisata_detail',$data);
     }
 
@@ -630,6 +647,7 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['pakets'] = Paket::all();
+        visitor()->visit();
         // return view('frontend.frontend4.paket',$data);
         return view('frontend.frontend5.paket_wisata',$data);
     }
@@ -639,6 +657,7 @@ class FrontendController extends Controller
         $data['whatsapp'] = $this->whatsapp;
         $data['pakets'] = Paket::where('slug',$slug)->first();
         $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])->orderBy('created_at','desc')->get();
+        visitor()->visit();
         // dd($data);
         // return view('frontend.frontend4.paket_detail',$data);
         return view('frontend.frontend5.paket_wisata_list',$data);
@@ -649,6 +668,7 @@ class FrontendController extends Controller
         $data['whatsapp'] = $this->whatsapp;
         $data['paket'] = Paket::where('slug',$id)->first();
         $data['paket_lists'] = PaketList::where('paket_id',$data['paket']['id'])->first();
+        visitor()->visit();
         // dd($data);
         return view('frontend.frontend4.pakets_detail_list',$data);
     }
@@ -661,6 +681,7 @@ class FrontendController extends Controller
         $data['paket_lists'] = PaketList::where('paket_id',$data['pakets']['id'])
                                         ->where('id',$id)
                                         ->first();
+        visitor()->visit();
         // dd($data);
         // dd($data['paket_lists']);
         // return view('frontend.frontend4.paket_cart',$data);
@@ -914,6 +935,7 @@ class FrontendController extends Controller
     public function tracking_order()
     {
         $data['whatsapp'] = $this->whatsapp;
+        visitor()->visit();
         return view('frontend.frontend4.tracking_order',$data);
     }
 
@@ -981,6 +1003,7 @@ class FrontendController extends Controller
     public function kebijakan_privasi()
     {
         $data['whatsapp'] = $this->whatsapp;
+        visitor()->visit();
         // return view('frontend.frontend4.kebijakan_privasi',$data);
         return view('frontend.frontend5.kebijakan_privasi',$data);
     }

@@ -129,15 +129,20 @@ Route::prefix('dokumentasi')->group(function () {
 //     return view('frontend.frontend_2022.index');
 // });
 Route::get('test', function(){
+    // $data = \DB::table('shetabit_visits')->insert(visitor()->visit());
     return response()->json([
-        'ip' => visitor()->ip(),
-        'browser' => visitor()->browser(),
-        'device' => visitor()->device(),
-        'url' => visitor()->url(),
-        'referer' => visitor()->referer(),
-        'useragent' => visitor()->useragent(),
-        'platform' => visitor()->platform(),
-        'languages' => visitor()->languages(),
+        // 'method' => request()->method(),
+        // 'ip' => visitor()->ip(),
+        // 'browser' => visitor()->browser(),
+        // 'device' => visitor()->device(),
+        // 'url' => visitor()->url(),
+        // 'referer' => visitor()->referer(),
+        // 'useragent' => visitor()->useragent(),
+        // 'platform' => visitor()->platform(),
+        // 'languages' => visitor()->languages(),
+        // 'request' => request()->header(),
+        // 'data' => $data
+        visitor()->visit()
     ], 200);
 });
 // Route::get('testing-email', function(){
