@@ -30,9 +30,6 @@
                             <div class="entry-meta mb-2">
                                 <h5 class="entry-category mb-0 white">{{ $wp->nama_slider }}</h5>
                             </div>
-                            {{-- <h1 class="mb-2"><a href="tour-single.html" class="white">Make Your Trip Fun & Noted</a></h1>
-                            <p class="white mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                            <a href="tour-single.html" class="nir-btn">Discover More</a> --}}
                         </div>
                         <div class="dot-overlay"></div>
                     </div> 
@@ -41,19 +38,15 @@
             </div>
         </div>
     </div>
-    <!-- Add Arrows -->
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
 </section>
-<section class="about-us pb-6 pt-10" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
+{{-- <section class="about-us pb-6 pt-10" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
     <div class="container">
         
         <div class="section-title mb-6 w-50 mx-auto text-center">
             <h2 class="mb-1">Temukan <span class="theme">Kesempurnaan Perjalanan</span></h2>
-            {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p> --}}
         </div>
-
-        <!-- why us starts -->
         <div class="why-us">
             <div class="why-us-box">
                 <div class="row">
@@ -93,7 +86,64 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="white-overlay"></div>
+</section> --}}
+<section class="about-us pb-2 pt-2 mt-8" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
+    <div class="container">
+        <div class="row align-items-center d-flex">
+            <div class="col-lg-6 mb-4">
+                <div class="section-title">
+                    <h2 class="mb-4"><span class="theme">Pesona</span> Plesiran Indonesia</h2>
+                    <p class="mb-4">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi, Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <!-- why us starts -->
+        <div class="why-us">
+            <div class="why-us-box">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 mb-4">
+                        <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
+                            <div class="why-us-content">
+                                <div class="why-us-icon mb-1">
+                                    <i class="icon-directions theme"></i>
+                                </div>
+                                <h4><a href="javascript:void()">Bagikan Preferensi Perjalanan Anda</a></h4>
+                                {{-- <p class="mb-0 theme">100+ Reviews</p> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
+                            <div class="why-us-content">
+                                <div class="why-us-icon mb-1">
+                                    <i class="icon-location-pin theme"></i>
+                                </div>
+                                <h4><a href="javascript:void()">Bagikan Lokasi Perjalanan Anda</a></h4>
+                                {{-- <p class="mb-0 theme">100+ Reviews</p> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
+                            <div class="why-us-content">
+                                <div class="why-us-icon mb-1">
+                                    <i class="icon-compass theme"></i>
+                                </div>
+                                <h4><a href="javascript:void()">Di Sini 100% Agen Tur Terpercaya</a></h4>
+                                {{-- <p class="mb-0 theme">100+ Reviews</p> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- why us ends -->
+            </div>
+        </div>
+
     </div>
     <div class="white-overlay"></div>
 </section>
@@ -359,7 +409,7 @@
 
     <div class="dot-overlay"></div>   
 </section>
-<section class="discount-action pt-8 pb-8" style="background-image: url({{ $assets }}/images/shape-1.png); background-attachment:unset">
+{{-- <section class="discount-action pt-8 pb-8" style="background-image: url({{ $assets }}/images/shape-1.png); background-attachment:unset">
     <div class="container">
         <div class="call-banner1 rounded" style="background-image: url({{ $assets }}/images/image/about.webp); background-position:right;">
             <div class="row d-flex align-items-center">
@@ -369,7 +419,6 @@
                         <h2 class="white">Pesona Plesiran Indonesia</h2>
                         <p class="white mb-3">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang menyediakan kemudahan dalam mendapat informasi
                             dan pemesanan Akomodasi, Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.</p>
-                        {{-- <a href="#" class="nir-btn-black">Read More</a> --}}
                     </div>
                 </div>  
                 <div class="col-lg-6 col-md-6 p-0">
@@ -385,6 +434,31 @@
             </div> 
         </div>
     </div>    
+</section> --}}
+<section class="discount-action" style="background-image:url({{ $assets }}/images/section-bg3.jpg); background-position:center; background-color: #f1f1f1;"> 
+    <div class="container">
+        <div class="call-banner rounded pt-0 py-5 overflow-visible">
+            <div class="call-banner-inner w-75 px-5">
+                <div class="trend-content-main">
+                    <div class="trend-content mb-5 pb-2">
+                        <h2><a href="cruise-detail.html">There is always a way, <span class="theme1"> for a way
+                                    You Want!</span></a></h2>
+                        {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqua.</p> --}}
+                    </div>
+                    <div class="video-button position-relative ms-lg-5 text-center text-lg-start">
+                        <div class="call-button">
+                            <button type="button" class="play-btn js-video-button" data-video-id="Yb6KMxB3I1M" data-channel="youtube">
+                                <i class="fa fa-play bg-blue"></i>
+                            </button>
+                        </div>
+                        <div class="video-figure"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="white-overlay"></div>
 </section>
 <section class="our-partner pb-5 pt-5">
     <div class="container">

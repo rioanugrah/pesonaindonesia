@@ -70,14 +70,31 @@
                             @include('layouts.frontend_5.menu')
                         </ul>
                     </div><!-- /.navbar-collapse -->     
-                    {{-- <div class="register-login d-flex align-items-center">
-                        <a href="#" class="me-3">
+                    @guest
+                    <div class="register-login d-flex align-items-center">
+                        <a href="{{ route('login') }}" class="me-3">
                             Login
                         </a>
-                        <a href="#" class="me-3">
+                        <a href="{{ route('register') }}" class="me-3">
                             Register
                         </a>
-                    </div>  --}}
+                    </div> 
+                    @else
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown submenu active">
+                            <a href="javascript:void()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                {{ auth()->user()->name }} <i class="icon-arrow-down" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    @endguest
                     <div id="slicknav-mobile"></div>
                 </div>
             </div><!-- /.container-fluid --> 
