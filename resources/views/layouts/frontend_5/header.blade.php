@@ -80,20 +80,22 @@
                         </a>
                     </div> 
                     @else
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown submenu active">
-                            <a href="javascript:void()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                {{ auth()->user()->name }} <i class="icon-arrow-down" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <form id="logout-form" action="{{ url('/logout') }}" method="POST"
-                                    style="display: none;">
-                                    @csrf
-                                </form>
-                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <div class="register-login">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown submenu active">
+                                <a href="javascript:void()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    {{ auth()->user()->name }} <i class="icon-arrow-down" aria-hidden="true"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                     @endguest
                     <div id="slicknav-mobile"></div>
                 </div>

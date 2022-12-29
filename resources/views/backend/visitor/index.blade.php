@@ -60,6 +60,27 @@
                                 <th>Dibuat</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @foreach ($visitors as $visitor)
+                                <tr>
+                                    <td>{{ $visitor['id'] }}</td>
+                                    <td>{!! $visitor['method'] !!}</td>
+                                    <td>{{ $visitor['ip'] }}</td>
+                                    <td>{{ $visitor['request'] }}</td>
+                                    <td>{{ $visitor['url'] }}</td>
+                                    <td>{{ $visitor['referer'] }}</td>
+                                    <td>{{ $visitor['languages'] }}</td>
+                                    <td>{{ $visitor['useragent'] }}</td>
+                                    <td>{{ $visitor['headers'] }}</td>
+                                    <td>{{ $visitor['device'] }}</td>
+                                    <td>{{ $visitor['platform']}}</td>
+                                    <td>{{ $visitor['browser'] }}</td>
+                                    <td>{{ $visitor['visitor_type'] }}</td>
+                                    <td>{{ $visitor['visitor_id']['name'] }}</td>
+                                    <td>{{ $visitor['created_at'] }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -89,81 +110,81 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    var table = $('.datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('visitor') }}",
-        columns: [
-            {
-                data: 'id',
-                name: 'id'
-            },
-            {
-                data: 'method',
-                name: 'method'
-            },
-            {
-                data: 'ip',
-                name: 'ip'
-            },
-            {
-                data: 'request',
-                name: 'request'
-            },
-            {
-                data: 'url',
-                name: 'url'
-            },
-            {
-                data: 'referer',
-                name: 'referer'
-            },
-            {
-                data: 'languages',
-                name: 'languages'
-            },
-            {
-                data: 'useragent',
-                name: 'useragent'
-            },
-            {
-                data: 'headers',
-                name: 'headers'
-            },
-            {
-                data: 'device',
-                name: 'device'
-            },
-            {
-                data: 'platform',
-                name: 'platform'
-            },
-            {
-                data: 'browser',
-                name: 'browser'
-            },
-            {
-                data: 'visitor_type',
-                name: 'visitor_type'
-            },
-            {
-                data: 'visitor_id',
-                name: 'visitor_id'
-            },
-            {
-                data: 'created_at',
-                name: 'created_at'
-            },
-            // {
-            //     data: 'action',
-            //     name: 'action',
-            //     orderable: false,
-            //     searchable: false
-            // },
-        ]
-    });
-    function reload() {
-        table.ajax.reload();
-    }
+    // var table = $('.datatable').DataTable({
+    //     processing: true,
+    //     serverSide: true,
+    //     ajax: "{{ route('visitor') }}",
+    //     columns: [
+    //         {
+    //             data: 'id',
+    //             name: 'id'
+    //         },
+    //         {
+    //             data: 'method',
+    //             name: 'method'
+    //         },
+    //         {
+    //             data: 'ip',
+    //             name: 'ip'
+    //         },
+    //         {
+    //             data: 'request',
+    //             name: 'request'
+    //         },
+    //         {
+    //             data: 'url',
+    //             name: 'url'
+    //         },
+    //         {
+    //             data: 'referer',
+    //             name: 'referer'
+    //         },
+    //         {
+    //             data: 'languages',
+    //             name: 'languages'
+    //         },
+    //         {
+    //             data: 'useragent',
+    //             name: 'useragent'
+    //         },
+    //         {
+    //             data: 'headers',
+    //             name: 'headers'
+    //         },
+    //         {
+    //             data: 'device',
+    //             name: 'device'
+    //         },
+    //         {
+    //             data: 'platform',
+    //             name: 'platform'
+    //         },
+    //         {
+    //             data: 'browser',
+    //             name: 'browser'
+    //         },
+    //         {
+    //             data: 'visitor_type',
+    //             name: 'visitor_type'
+    //         },
+    //         {
+    //             data: 'visitor_id',
+    //             name: 'visitor_id'
+    //         },
+    //         {
+    //             data: 'created_at',
+    //             name: 'created_at'
+    //         },
+    //         // {
+    //         //     data: 'action',
+    //         //     name: 'action',
+    //         //     orderable: false,
+    //         //     searchable: false
+    //         // },
+    //     ]
+    // });
+    // function reload() {
+    //     table.ajax.reload();
+    // }
 </script>
 @endsection
