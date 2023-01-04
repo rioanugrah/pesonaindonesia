@@ -82,6 +82,17 @@
                         </ul>
                     </div>
                 </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="footer-links">
+                        <h3 class="white">Produk</h3>
+                        <ul>
+                          <li><a href="{{ route('frontend.paket') }}">Paket</a></li>
+                          <li><a href="{{ route('frontend.travelling') }}">Travelling</a></li>
+                          {{-- <li><a href="javascript:void()">Gallery</a></li>
+                          <li><a href="javascript:void()">Syarat & Ketentuan</a></li> --}}
+                        </ul>
+                    </div>
+                </div>
                 {{-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="footer-links">
                         <h3 class="white">Newsletter</h3>

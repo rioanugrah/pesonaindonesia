@@ -87,6 +87,9 @@
                                     {{ auth()->user()->name }} <i class="icon-arrow-down" aria-hidden="true"></i>
                                 </a>
                                 <ul class="dropdown-menu">
+                                    @if (auth()->user()->roles->id != 4)
+                                    <li><a href="{{ route('home') }}">Dashboard</a></li>
+                                    @endif
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST"
                                         style="display: none;">
                                         @csrf

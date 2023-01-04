@@ -33,6 +33,12 @@
                         <span>Hotel</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('b/travelling*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('travelling') }}" class="waves-effect">
+                        <i class="ti-package"></i>
+                        <span>Travelling</span>
+                    </a>
+                </li>
                 <li class="{{ Request::is('b/paket*') ? 'mm-active' : '' }}">
                     <a href="{{ route('paket') }}" class="waves-effect">
                         <i class="ti-package"></i>

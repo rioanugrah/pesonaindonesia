@@ -441,8 +441,7 @@
             <div class="call-banner-inner w-75 px-5">
                 <div class="trend-content-main">
                     <div class="trend-content mb-5 pb-2">
-                        <h2><a href="cruise-detail.html">There is always a way, <span class="theme1"> for a way
-                                    You Want!</span></a></h2>
+                        <h2><a href="javascript:void()">There is always a way, <span class="theme1"> for a way</span></a></h2>
                         {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                             ut labore et dolore magna aliqua.</p> --}}
                     </div>

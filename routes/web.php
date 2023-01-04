@@ -48,6 +48,7 @@ Route::get('invoice/{id}/tiket_wisata', 'InvoiceController@tiket_wisata')->name(
 Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
 
 Route::get('instagram', 'InstagramController@instagram');
+Route::get('servers', 'HomeController@servers');
 
 Route::get('kebijakan-privasi', 'FrontendController@kebijakan_privasi')->name('frontend.kebijakan_privasi');
 
@@ -121,30 +122,40 @@ Route::prefix('partner')->group(function(){
 Route::prefix('gallery')->group(function () {
     Route::get('/', 'GalleryController@index')->name('frontend.gallery');
 });
+
 Route::prefix('dokumentasi')->group(function () {
     Route::get('/', 'GalleryController@dokumentasi')->name('frontend.dokumentasi');
 });
 
-// Route::get('testings', function(){
-//     return view('frontend.frontend_2022.index');
-// });
-Route::get('test', function(){
-    // $data = \DB::table('shetabit_visits')->insert(visitor()->visit());
-    return response()->json([
-        // 'method' => request()->method(),
-        // 'ip' => visitor()->ip(),
-        // 'browser' => visitor()->browser(),
-        // 'device' => visitor()->device(),
-        // 'url' => visitor()->url(),
-        // 'referer' => visitor()->referer(),
-        // 'useragent' => visitor()->useragent(),
-        // 'platform' => visitor()->platform(),
-        // 'languages' => visitor()->languages(),
-        // 'request' => request()->header(),
-        // 'data' => $data
-        visitor()->visit()
-    ], 200);
+Route::prefix('travelling')->group(function(){
+    Route::get('/', 'TravellingController@f_index')->name('frontend.travelling');
+    Route::get('/order/{id}', 'TravellingController@f_detail_order')->name('frontend.travelling_detail_order');
+    Route::post('order/{id}/checkout', 'TravellingController@buy_order')->name('frontend.travelling.checkout');
+    Route::get('payment/{id}', 'TravellingController@order_payment')->name('frontend.travelling.payment');
+    // Route::get('payment/{id}', function($id){
+    //     echo 'Travelling Payment - '.$id;
+    // })->name('frontend.travelling.payment');
+
 });
+
+// Route::get('test', function(){
+//     $request = new HTTP_Request2();
+//     $request->setUrl('https://hotels4.p.rapidapi.com/v2/get-meta-data');
+//     $request->setMethod(HTTP_Request2::METHOD_GET);
+//     $request->setHeader([
+//         'X-RapidAPI-Key' => 'e35dfac073msh7ab7c9150a5eecap1a8c08jsn7ad10c81d417',
+//         'X-RapidAPI-Host' => 'hotels4.p.rapidapi.com'
+//     ]);
+
+//     try {
+//         $response = $request->send();
+
+//         echo $response->getBody();
+//     } catch (HttpException $ex) {
+//         echo $ex;
+//     }
+// });
+
 // Route::get('testing-email', function(){
 //     $data['details'] = [
 //         'nama_pembayaran' => 'Rio',
@@ -162,16 +173,6 @@ Route::get('test', function(){
 // });
 
 Route::get('testings', 'FrontendController@frontend_testing');
-// Route::domain('{account}.'.env('APP_URL'))->group(function () {
-//     Route::get('{id}', function ($account,$id) {
-//         return $id;
-//     });
-// });
-// Route::group(['middleware' => ['auth']], function(){
-//     Route::get('login', function(){
-//         return redirect('login');
-//     });
-// });
 
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('b')->group(function () {
@@ -216,6 +217,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', 'PaketOrderController@index')->name('paket.order')->middleware('verified');
             Route::get('{id}/bukti_pembayaran', 'PaketOrderController@bukti_pembayaran')->name('paket.order.bukti_pembayaran')->middleware('verified');
             Route::post('bukti_pembayaran/update', 'PaketOrderController@bukti_pembayaran_update')->name('paket.order.bukti_pembayaran.update')->middleware('verified');
+        });
+
+        Route::prefix('travelling')->group(function(){
+            Route::get('/', 'TravellingController@b_index')->name('travelling')->middleware('verified');
+            Route::post('simpan', 'TravellingController@simpan')->name('travelling.simpan')->middleware('verified');
         });
 
         Route::prefix('pengguna')->group(function(){
