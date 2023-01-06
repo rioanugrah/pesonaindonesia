@@ -139,7 +139,7 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group mb-0 text-center">
-                                                <button type="submit" class="nir-btn w-100" onclick="document.getElementById('cari_destinasi').submit();"><i class="fa fa-search mr-2"></i> Search1</button>
+                                                <button type="submit" class="nir-btn w-100" onclick="document.getElementById('cari_destinasi').submit();"><i class="fa fa-search mr-2"></i> Search</button>
                                             </div>
                                         </div>
                                     </div>

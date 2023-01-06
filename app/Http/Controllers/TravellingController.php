@@ -180,7 +180,7 @@ class TravellingController extends Controller
     public function f_cari_travelling(Request $request)
     {
         $data['travellings'] = Travelling::where('nama_travelling', 'like', '%'.$request->cari_destinasi.'%')
-                                        ->orWhere('jumlah_paket', 'like', '%'.$request->jumlah_pax.'%')
+                                        ->where('jumlah_paket', 'like', '%'.$request->jumlah_pax.'%')
                                         ->paginate(10);
         return view('frontend.frontend5.travelling.index',$data);
     }
