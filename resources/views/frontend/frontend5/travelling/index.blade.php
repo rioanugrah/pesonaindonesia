@@ -113,36 +113,38 @@
                 <div class="sidebar-sticky">
                     <div class="list-sidebar">
                         <div class="sidebar-item mb-4">
-                            <div class="book-form w-100 bg-white box-shadow p-4 pb-1 z-index1 rounded">
-                                <div class="row d-flex align-items-center justify-content-between">
-                                    <div class="col-lg-12 mb-2">
-                                        <div class="form-group">
-                                            <div class="input-box">
-                                                <label>Destinasi</label>
-                                                <input type="text" name="cari_destinasi" placeholder="Cari Destinasi">
+                            <form action="{{ route('frontend.search.travelling') }}" method="get" id="cari_destinasi">
+                                <div class="book-form w-100 bg-white box-shadow p-4 pb-1 z-index1 rounded">
+                                    <div class="row d-flex align-items-center justify-content-between">
+                                        <div class="col-lg-12 mb-2">
+                                            <div class="form-group">
+                                                <div class="input-box">
+                                                    <label>Destinasi</label>
+                                                    <input type="text" name="cari_destinasi" placeholder="Cari Destinasi">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-12 mb-2">
-                                        <div class="form-group">
-                                            <div class="input-box">
-                                                <label>Travellers</label>
-                                                <select class="niceSelect">
-                                                    <option>-- Traveller --</option>
-                                                    @for ($i = 1; $i <= 9; $i++)
-                                                    <option value="{{ $i }}">{{ $i }} Travellers</option>
-                                                    @endfor
-                                                </select>
+                                        <div class="col-lg-12 mb-2">
+                                            <div class="form-group">
+                                                <div class="input-box">
+                                                    <label>Travellers</label>
+                                                    <select class="niceSelect" name="jumlah_pax">
+                                                        <option>-- Traveller --</option>
+                                                        @for ($i = 1; $i <= 9; $i++)
+                                                        <option value="{{ $i }}">{{ $i }} Travellers</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group mb-0 text-center">
-                                            <a href="#" class="nir-btn w-100"><i class="fa fa-search mr-2"></i> Search</a>
+                                        <div class="col-lg-12">
+                                            <div class="form-group mb-0 text-center">
+                                                <button type="submit" class="nir-btn w-100" onclick="document.getElementById('cari_destinasi').submit();"><i class="fa fa-search mr-2"></i> Search</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
                     </div>

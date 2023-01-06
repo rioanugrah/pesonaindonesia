@@ -177,6 +177,14 @@ class TravellingController extends Controller
         return view('frontend.frontend5.travelling.order',$data);
     }
 
+    public function f_cari_travelling(Request $request)
+    {
+        $data['travellings'] = Travelling::where('nama_travelling', 'like', '%'.$request->cari_destinasi.'%')
+                                        ->orWhere('jumlah_paket', 'like', '%'.$request->jumlah_pax.'%')
+                                        ->paginate(10);
+        return view('frontend.frontend5.travelling.index',$data);
+    }
+
     public function buy_order(Request $request,$id)
     {
         $rules = [

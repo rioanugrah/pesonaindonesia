@@ -129,6 +129,7 @@ Route::prefix('dokumentasi')->group(function () {
 
 Route::prefix('travelling')->group(function(){
     Route::get('/', 'TravellingController@f_index')->name('frontend.travelling');
+    Route::get('search', 'TravellingController@f_cari_travelling')->name('frontend.search.travelling');
     Route::get('/order/{id}', 'TravellingController@f_detail_order')->name('frontend.travelling_detail_order');
     Route::post('order/{id}/checkout', 'TravellingController@buy_order')->name('frontend.travelling.checkout');
     Route::get('payment/{id}', 'TravellingController@order_payment')->name('frontend.travelling.payment');
