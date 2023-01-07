@@ -50,7 +50,16 @@
                                 </div> --}}
                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                     <div class="item-inner text-end">
+                                        @if ($travelling->diskon == 0)
                                         <p class="theme2 fs-4 fw-bold">Rp. {{ number_format($travelling->price,2,",",".") }}</p>
+                                        @else
+                                        <div style="text-decoration: line-through;text-decoration-color: #eb4034; font-weight:100">
+                                            Rp. {{ number_format($travelling->price,2,",",".") }}
+                                        </div>
+                                        <p class="theme2 fs-4 fw-bold">
+                                            Rp. {{ number_format($travelling->price - ($travelling->diskon / 100) * $travelling->price,2,",",".") }}
+                                        </p>
+                                        @endif
                                         <a href="{{ route('frontend.travelling_detail_order',['id' => $travelling->id]) }}" class="nir-btn-black">Book Now</a>
                                     </div>
                                 </div>
