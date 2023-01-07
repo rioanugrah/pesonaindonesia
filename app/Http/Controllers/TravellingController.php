@@ -41,7 +41,7 @@ class TravellingController extends Controller
 
     public function f_index()
     {
-        $data['travellings'] = Travelling::paginate(10);
+        $data['travellings'] = Travelling::orderBy('tanggal_rilis','desc')->paginate(10);
         // foreach ($data['travellings'] as $key => $value) {
         //     $datas[] = $value->deskripsi;
         // }
