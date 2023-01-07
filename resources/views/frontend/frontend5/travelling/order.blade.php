@@ -234,7 +234,8 @@
 @section('js')
     <script>
         $('.jumlah').change(function() {
-            if ($('.jumlah').val() > $('#detail_maksimal').val()) {
+            // if ($('.jumlah').val() > $('#detail_maksimal').val()) {
+            if (($('.jumlah').val() + parseInt(1)) > $('#detail_maksimal').val()) {
                 alert('Jumlah anggota maksimal ' + $('#detail_maksimal').val() + ' orang');
                 $('.jumlah').val('');
             } else {

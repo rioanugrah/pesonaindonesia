@@ -11,7 +11,7 @@
 <section class="trending pt-6 pb-0 bg-lgrey">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <div class="flight-list">
                     <div class="flight-full">
                         @foreach ($travellings as $key => $travelling)
@@ -28,21 +28,22 @@
                                         <small><i class="fa fa-location-arrow"></i> Meeting Point: {{ $travelling->meeting_point }}</small>
                                     </div>
                                 </div>    
-                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="col-lg-3 col-md-3 col-sm-12">
                                     <div class="item-inner">
                                         <div class="content">
+                                            <p class="mb-0 text-uppercase">From Order</p>
                                             <h5 class="mb-0">{{ \Carbon\Carbon::create($travelling->tanggal_rilis)->isoFormat('dddd, D MMMM Y') }}</h5>
                                         </div>
                                     </div>
                                 </div>    
-                                {{-- <div class="col-lg-2 col-md-2 col-sm-12"> 
+                                <div class="col-lg-1 col-md-1 col-sm-12"> 
                                     <div class="item-inner">
                                         <div class="content">
+                                            <p class="mb-0 text-uppercase">Time</p>
                                             <h3 class="mb-0">12:30</h3>
-                                            <p class="mb-0 text-uppercase">DAC</p>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
                                 {{-- <div class="col-lg-2 col-md-2 col-sm-12">
                                     <div class="item-inner flight-time">
                                     <p class="mb-0">-</p>
@@ -53,7 +54,7 @@
                                         @if ($travelling->diskon == 0)
                                         <p class="theme2 fs-4 fw-bold">Rp. {{ number_format($travelling->price,2,",",".") }}</p>
                                         @else
-                                        <div style="text-decoration: line-through;text-decoration-color: #eb4034; font-weight:100">
+                                        <div style="text-decoration: line-through;text-decoration-color: #eb4034; font-weight:300">
                                             Rp. {{ number_format($travelling->price,2,",",".") }}
                                         </div>
                                         <p class="theme2 fs-4 fw-bold">
@@ -118,7 +119,7 @@
                     {{-- <div class="flight-btn text-center"><a href="flight-grid.html" class="nir-btn">Load More</a></div> --}}
                 </div>
             </div>
-            <div class="col-lg-4 ps-lg-4">
+            <div class="col-lg-3 ps-lg-4">
                 <div class="sidebar-sticky">
                     <div class="list-sidebar">
                         <div class="sidebar-item mb-4">
