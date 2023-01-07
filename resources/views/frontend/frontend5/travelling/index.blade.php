@@ -87,15 +87,19 @@
                                                             <div class="flight-detail-right">
                                                                 <h5><i class="fa fa-database"></i> Highlight</h5>
                                                                 <div class="flight-detail-info d-flex align-items-center p-2 py-3 bg-grey rounded mb-2">
-                                                                    <img src="{{ asset('frontend/assets_new/images/travelling/'.$travelling->images) }}" width="125" alt="">
+                                                                    {{-- <img src="{{ asset('frontend/assets_new/images/travelling/'.$travelling->images) }}" width="125" alt=""> --}}
                                                                     <ul>
                                                                         @foreach ($travelling->travellingHighlight as $travelling_th)
                                                                         <li>{{ $travelling_th->nama_highlight }},</li>
                                                                         @endforeach
-                                                                        {{-- <li>Tpm Line</li>
-                                                                        <li>Operated by Airlines</li>
-                                                                        <li>Economy | Flight EK585 | Aircraft BOEING 777-300ER</li>
-                                                                        <li>Adult(s): 25KG luggage free</li> --}}
+                                                                    </ul>
+                                                                </div>
+                                                                <h5><i class="fa fa-database"></i> Fasilitas</h5>
+                                                                <div class="flight-detail-info d-flex align-items-center p-2 py-3 bg-grey rounded mb-2">
+                                                                    <ul>
+                                                                        @foreach ($travelling->travellingFasilitas as $travelling_f)
+                                                                        <li>{{ $travelling_f->nama_fasilitas }} | </li>
+                                                                        @endforeach
                                                                     </ul>
                                                                 </div>
                                                             </div>

@@ -38,4 +38,8 @@ class Travelling extends Model
     {
         return $this->hasMany(\App\Models\TravellingHighlight::class, 'travelling_id');
     }
+    public function travellingFasilitas()
+    {
+        return $this->hasMany(\App\Models\TravellingFasilitas::class, 'travelling_id');
+    }
 }
