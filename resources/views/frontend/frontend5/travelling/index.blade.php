@@ -40,7 +40,7 @@
                                     <div class="item-inner">
                                         <div class="content">
                                             <p class="mb-0 text-uppercase">Time</p>
-                                            <h3 class="mb-0">12:30</h3>
+                                            <h3 class="mb-0">{{ \Carbon\Carbon::create($travelling->tanggal_rilis)->format('H:i') }}</h3>
                                         </div>
                                     </div>
                                 </div>
