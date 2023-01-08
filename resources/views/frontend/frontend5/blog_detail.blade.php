@@ -34,4 +34,20 @@
         </div>
     </div>
 </div>
+
+<section class="blog pt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="blog-single">
+                    <div class="blog-wrapper">
+                        <div class="blog-content first-child-cap mb-4">
+                            <p class="mb-0">{{ $blog_detail->description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection
