@@ -112,16 +112,66 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Paket</th>
+                                <th>Nama Transaksi</th>
                                 <th>Pemesan</th>
                                 <th>Bank</th>
                                 <th>Jumlah</th>
                                 <th>Harga</th>
+                                <th>Tanggal Transaksi</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($orders as $order)
+                                {{-- <tr>
+                                    @if ($order->status == 0)
+                                    <td><span class="badge bg-danger">{{ $order->id }}</span></td>
+                                    @elseif ($order->status == 1)
+                                    <td><span class="badge bg-primary">{{ $order->id }}</span></td>
+                                    @elseif ($order->status == 2)
+                                    <td><span class="badge bg-warning">{{ $order->id }}</span></td>
+                                    @elseif ($order->status == 3)
+                                    <td><span class="badge bg-success">{{ $order->id }}</span></td>
+                                    @endif
+                                    <td>{{ $order->nama_order }}</td>
+                                    <td>{{ $order->pemesan }}</td>
+                                </tr> --}}
+                                @foreach (json_decode($order->pemesan) as $p)
+                                    <?php $pemesan = $p; ?>
+                                @endforeach
+                                @foreach (json_decode($order->bank) as $b)
+                                    <?php $bank = $b; ?>
+                                @endforeach
+                                <tr>
+                                    @if ($order->status == 0)
+                                    <td><span class="badge bg-danger">{{ $order->id }}</span></td>
+                                    @elseif ($order->status == 1)
+                                    <td><span class="badge bg-primary">{{ $order->id }}</span></td>
+                                    @elseif ($order->status == 2)
+                                    <td><span class="badge bg-warning">{{ $order->id }}</span></td>
+                                    @elseif ($order->status == 4)
+                                    <td><span class="badge bg-success">{{ $order->id }}</span></td>
+                                    @endif
+                                    {{-- <td>{{ $order->id }}</td> --}}
+                                    <td>{{ $order->nama_order }}</td>
+                                    <td>{{ $pemesan->first_name.' '.$pemesan->last_name }}</td>
+                                    <td>{{ $bank->kode_bank.' : '.$bank->nama_penerima }}</td>
+                                    <td>{{ $order->qty }}</td>
+                                    <td>Rp. {{ number_format($order->price,2,",",".") }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($order->created_at)->isoFormat('LLLL') }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            {{-- <button onclick="bukti_pembayaran(`{{ $order->id }}`)" class="btn btn-primary btn-sm" title="Bukti Pembayaran">
+                                                <i class="fas fa-file-alt"></i> Bukti Pembayaran
+                                            </button> --}}
+                                            <a href="javascript:void()" onclick="alert('Fitur dalam pengembangan')" class="btn btn-success btn-sm" title="Invoice">
+                                                <i class="fas fa-file-pdf"></i> Invoice
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            {{-- @foreach ($orders as $order)
                                 @foreach (json_decode($order->pemesan) as $p)
                                     <?php $pemesan = $p; ?>
                                 @endforeach
@@ -154,7 +204,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>

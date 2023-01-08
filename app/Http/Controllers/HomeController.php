@@ -7,6 +7,7 @@ use App\Models\Wisata;
 use App\Models\Hotel;
 use App\Models\Paket;
 use App\Models\PaketOrder;
+use App\Models\Order;
 use App\User;
 use \Carbon\Carbon;
 use DB;
@@ -76,7 +77,8 @@ class HomeController extends Controller
             // $data['wisata'] = Wisata::count();
             $data['hotel'] = Hotel::count();
             $data['total_paket'] = Paket::count();
-            $data['orders'] = PaketOrder::orderBy('created_at','desc')->paginate(10);
+            // $data['orders'] = PaketOrder::orderBy('created_at','desc')->paginate(10);
+            $data['orders'] = Order::orderBy('created_at','desc')->paginate(10);
             $data['devices'] = [
                 [
                     'ip' => visitor()->ip(),
