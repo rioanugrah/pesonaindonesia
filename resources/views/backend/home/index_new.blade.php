@@ -149,8 +149,10 @@
                                     <td><span class="badge bg-primary">{{ $order->id }}</span></td>
                                     @elseif ($order->status == 2)
                                     <td><span class="badge bg-warning">{{ $order->id }}</span></td>
-                                    @elseif ($order->status == 4)
+                                    @elseif ($order->status == 3)
                                     <td><span class="badge bg-success">{{ $order->id }}</span></td>
+                                    @elseif ($order->status == 4)
+                                    <td><span class="badge bg-danger">{{ $order->id }}</span></td>
                                     @endif
                                     {{-- <td>{{ $order->id }}</td> --}}
                                     <td>{{ $order->nama_order }}</td>
