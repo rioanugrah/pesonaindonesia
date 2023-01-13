@@ -19,8 +19,19 @@ class UserController extends Controller
             // return response()->json(['success' => $success], $this->successStatus);
             return response()->json([
                 'success' => true,
-                'token' => $success,
-                'data' => $user
+                // 'data' => $user
+                'data' => [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'profile' => $user->profile,
+                    'email_verified_at' => $user->email_verified_at,
+                    'role' => $user->role,
+                    'device_token' => $user->device_token,
+                    'created_at' => $user->created_at,
+                    'updated_at' => $user->updated_at,
+                    'deleted_at' => $user->deleted_at,
+                    'token' => $success,
+                ]
             ], $this->successStatus);
         }
         else{
