@@ -86,7 +86,7 @@
                                 <a href="javascript:void()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     {{ auth()->user()->name }} <i class="icon-arrow-down" aria-hidden="true"></i>
                                 </a>
-                                <ul class="dropdown-menu">
+                                {{-- <ul class="dropdown-menu">
                                     @if (auth()->user()->roles->id != 4)
                                     <li><a href="{{ route('home') }}">Dashboard</a></li>
                                     @endif
@@ -95,7 +95,7 @@
                                         @csrf
                                     </form>
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
                         </ul>
                     </div>

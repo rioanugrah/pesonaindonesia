@@ -114,6 +114,7 @@ class HomeController extends Controller
             // dd(json_decode($data['balances'],true));
             // return view('layouts.backend_3.app', $data);
             // return view('backend.home.home3', $data);
+            // dd($data);
             return view('backend.home.index_new', $data);
         }
         // return view('backend.home.home2');

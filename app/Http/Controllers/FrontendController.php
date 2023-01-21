@@ -182,7 +182,7 @@ class FrontendController extends Controller
             // visitor()->browser();
             // dd($data['whatsapp']);
             // return view('frontend.frontend_2022.index', $data);
-            // dd($data);
+            // dd(visitor()->visit());
             visitor()->visit();
             return view('frontend.frontend5.index', $data);
             // return view('frontend.frontend4.index', $data);

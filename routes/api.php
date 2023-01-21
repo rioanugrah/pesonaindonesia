@@ -33,5 +33,10 @@ Route::group(['middleware' => 'auth:api'], function(){
         Route::get('/', 'API\PaketController@paket_order');
     });
     Route::post('details', 'API\UserController@details');
+
+    Route::prefix('travelling')->group(function () {
+        Route::get('/', 'API\TravellingController@index_v1');
+    });
     Route::post('logout', 'API\UserController@logout');
+    
 });
