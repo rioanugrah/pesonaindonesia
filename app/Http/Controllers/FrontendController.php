@@ -98,7 +98,7 @@ class FrontendController extends Controller
             //     ['image' => 'frontend/assets2/images/wallpaper/batubengkung.png', 'arrow' => 'frontend/assets2/images/arrow-link.png', 'title' => 'Wisata Pantai Batu Bengkung'],
             //     ['image' => 'frontend/assets2/images/wallpaper/museum_angkut.png', 'arrow' => 'frontend/assets2/images/arrow-link.png', 'title' => 'Wisata Museum Angkut'],
             // ];
-            $data['wallpaper'] = Slider::where('status','Y')->orderBy('created_at','asc')->get();
+            $data['wallpaper'] = Slider::where('status','Y')->orderBy('created_at','desc')->get();
             // $data['wallpaper'] = Slider::where('status','Y')->inRandomOrder()->get();
             $data['adventure'] = [
                 ['image' => 'frontend/assets4/images/bromo_vertikal.jpg', 'title' => 'Gunung Bromo'],
