@@ -262,6 +262,39 @@
         <div class="trend-box">
             <div class="row">
                 @foreach ($travellings as $travelling)
+                @if ($travelling->diskon == 0)
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="trend-item1 rounded box-shadow">
+                        <div class="trend-image position-relative">
+                            <img src="{{ $asset_new }}/images/travelling/{{ $travelling->images }}" alt="image" style="width: 700px; height: 250px; object-fit: cover;" class="">
+                            <div class="trend-content1 p-4">
+                                <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h5>
+                                <h3 class="mb-1 white"><a href="tour-grid.html" class="white">{{ $travelling->nama_travelling }}</a></h3>
+                                <div class="rating-main d-flex align-items-center pb-2">
+                                    <div class="rating">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                    </div>
+                                    <span class="ms-2 white">(12)</span>
+                                </div>
+                                <div class="entry-meta d-flex align-items-center justify-content-between">
+                                    <div class="entry-author d-flex align-items-center">
+                                        <p class="mb-0 white"><span class="theme1 fw-bold fs-5"> Rp. {{ number_format($travelling->price,0,",",".") }}</span> | Per pax</p>
+                                    </div>
+                                    {{-- <div class="entry-author">
+                                        <i class="icon-calendar white"></i>
+                                        <span class="fw-bold white"> 3 Days Tours</span>
+                                    </div> --}}
+                                </div>
+                            </div>
+                            <div class="overlay"></div>
+                        </div>
+                    </div>
+                </div>
+                @else
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="trend-item1 rounded box-shadow bg-white">
                         <div class="trend-image position-relative">
@@ -269,7 +302,7 @@
                             <div class="trend-content1 p-4">
                                 <h6 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h6>
                                 <h3 class="mb-1 white"><a href="tour-grid.html" class="white">{{ $travelling->nama_travelling }}</a></h3>
-                                <div class="rating-main d-flex align-items-center pb-2">
+                                <div class="rating-main d-flex align-items-center pb-0">
                                     <div class="rating">
                                         <span class="fa fa-star checked"></span>
                                         <span class="fa fa-star checked"></span>
@@ -280,8 +313,16 @@
                                     <span class="ms-2 white">(16)</span>
                                 </div>
                                 <div class="entry-meta d-flex align-items-center justify-content-between">
-                                    <div class="entry-author d-flex align-items-center">
-                                        <p class="mb-0 white"><span class="theme1 fw-bold fs-5"> Rp. {{ number_format($travelling->price,0,',','.') }}</span> | Per person</p>
+                                    <div class="entry-author align-items-center">
+                                        <p class="mb-0 white">
+                                            <div class="theme1 fw-bold fs-5" style="text-decoration: line-through;text-decoration-color: #eb4034; font-weight:300;">
+                                                Rp. {{ number_format($travelling->price,0,",",".") }}
+                                            </div>
+                                        </p>
+                                        <p class="mb-0 white">
+                                            <span class="theme1 fw-bold fs-4"> Rp. {{ number_format($travelling->price - ($travelling->diskon / 100) * $travelling->price,0,",",".") }}
+                                            </span> | Per pax
+                                        </p>
                                     </div>
                                     {{-- <div class="entry-author">
                                         <i class="icon-calendar white"></i>
@@ -293,9 +334,10 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 @endforeach
                 <div class="col-lg-12 text-center">
-                    <a href="tour-grid.html" class="nir-btn">View All Deals</a>
+                    <a href="{{ route('frontend.travelling') }}" class="nir-btn">View All Deals</a>
                 </div>
             </div>
         </div>    
