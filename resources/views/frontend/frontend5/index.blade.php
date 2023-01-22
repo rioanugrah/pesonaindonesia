@@ -265,7 +265,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="trend-item1 rounded box-shadow bg-white">
                         <div class="trend-image position-relative">
-                            <img src="{{ $asset_new }}/images/travelling/{{ $travelling->images }}" alt="image" class="">
+                            <img src="{{ $asset_new }}/images/travelling/{{ $travelling->images }}" alt="image" style="width: 700px; height: 250px; object-fit: cover;" class="">
                             <div class="trend-content1 p-4">
                                 <h6 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h6>
                                 <h3 class="mb-1 white"><a href="tour-grid.html" class="white">{{ $travelling->nama_travelling }}</a></h3>
