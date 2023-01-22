@@ -16,6 +16,7 @@
     dan pemesanan Akomodasi, Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.
 @endsection
 <?php $asset = asset('frontend/assets4/'); ?>
+<?php $asset_new = asset('frontend/assets_new/'); ?>
 <?php $assets = asset('frontend/assets5/'); ?>
 @section('content')
 <section class="banner overflow-hidden">
@@ -251,22 +252,23 @@
         </div>
     </div>
 </section> --}}
-{{-- <section class="trending pb-9">
+<section class="trending pb-9">
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">
-            <h4 class="mb-1 theme1">Top Deals</h4>
-            <h2 class="mb-1">The Last <span class="theme">Minute Deals</span></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+            <h4 class="mb-1 theme1">Travelling</h4>
+            {{-- <h2 class="mb-1">The Last <span class="theme">Minute Deals</span></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p> --}}
         </div>  
         <div class="trend-box">
             <div class="row">
-                <div class="col-lg-4 mb-4">
+                @foreach ($travellings as $travelling)
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="trend-item1 rounded box-shadow bg-white">
                         <div class="trend-image position-relative">
-                            <img src="{{ $assets }}/images/destination/destination11.jpg" alt="image" class="">
+                            <img src="{{ $asset_new }}/images/travelling/{{ $travelling->images }}" alt="image" class="">
                             <div class="trend-content1 p-4">
-                                <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Norway</h5>
-                                <h3 class="mb-1 white"><a href="tour-grid.html" class="white">Norway Lake</a></h3>
+                                <h6 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h6>
+                                <h3 class="mb-1 white"><a href="tour-grid.html" class="white">{{ $travelling->nama_travelling }}</a></h3>
                                 <div class="rating-main d-flex align-items-center pb-2">
                                     <div class="rating">
                                         <span class="fa fa-star checked"></span>
@@ -279,87 +281,26 @@
                                 </div>
                                 <div class="entry-meta d-flex align-items-center justify-content-between">
                                     <div class="entry-author d-flex align-items-center">
-                                        <p class="mb-0 white"><span class="theme1 fw-bold fs-5"> $180.00</span> | Per person</p>
+                                        <p class="mb-0 white"><span class="theme1 fw-bold fs-5"> Rp. {{ number_format($travelling->price,0,',','.') }}</span> | Per person</p>
                                     </div>
-                                    <div class="entry-author">
+                                    {{-- <div class="entry-author">
                                         <i class="icon-calendar white"></i>
                                         <span class="fw-bold white"> 6 Days Tours</span>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="overlay"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="trend-item1 rounded box-shadow">
-                        <div class="trend-image position-relative">
-                            <img src="{{ $assets }}/images/destination/destination10.jpg" alt="image" class="">
-                            <div class="trend-content1 p-4">
-                                <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Usa</h5>
-                                <h3 class="mb-1 white"><a href="tour-grid.html" class="white">New York City</a></h3>
-                                <div class="rating-main d-flex align-items-center pb-2">
-                                    <div class="rating">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                    </div>
-                                    <span class="ms-2 white">(12)</span>
-                                </div>
-                                <div class="entry-meta d-flex align-items-center justify-content-between">
-                                    <div class="entry-author d-flex align-items-center">
-                                        <p class="mb-0 white"><span class="theme1 fw-bold fs-5"> $140.00</span> | Per person</p>
-                                    </div>
-                                    <div class="entry-author">
-                                        <i class="icon-calendar white"></i>
-                                        <span class="fw-bold white"> 3 Days Tours</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="overlay"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="trend-item1 rounded box-shadow">
-                        <div class="trend-image position-relative">
-                            <img src="{{ $assets }}/images/destination/destination13.jpg" alt="image" class="">
-                            <div class="trend-content1 p-4">
-                                <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Maldives</h5>
-                                <h3 class="mb-1 white"><a href="tour-grid.html" class="white">Male City</a></h3>
-                                <div class="rating-main d-flex align-items-center pb-2">
-                                    <div class="rating">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                    </div>
-                                    <span class="ms-2 white">(12)</span>
-                                </div>
-                                <div class="entry-meta d-flex align-items-center justify-content-between">
-                                    <div class="entry-author d-flex align-items-center">
-                                        <p class="mb-0 white"><span class="theme1 fw-bold fs-5"> $140.00</span> | Per person</p>
-                                    </div>
-                                    <div class="entry-author">
-                                        <i class="icon-calendar white"></i>
-                                        <span class="fw-bold white"> 3 Days Tours</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="overlay"></div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
                 <div class="col-lg-12 text-center">
                     <a href="tour-grid.html" class="nir-btn">View All Deals</a>
                 </div>
             </div>
         </div>    
     </div>
-</section> --}}
+</section>
 <section class="testimonial pt-10 pb-10"  style="background-image: url({{ $assets }}/images/image/bromo.webp);">   
     <div class="container">
         <div class="testimonial-in">

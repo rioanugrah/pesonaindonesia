@@ -19,6 +19,7 @@ use App\Models\Blog;
 use App\Models\PaketList;
 use App\Models\PaketOrder;
 use App\Models\PaketOrderList;
+use App\Models\Travelling;
 use App\User;
 
 use App\Models\KategoriPaket;
@@ -124,6 +125,7 @@ class FrontendController extends Controller
             $data['paket_privates'] = PaketList::where('kategori_paket_id',1)->get();
             $data['paket_trips'] = PaketList::where('status','!=',0)
                                             ->orderBy('created_at','desc')->paginate(6);
+            $data['travellings'] = Travelling::orderBy('created_at','desc')->paginate(6);
             $data['akomodasis'] = [
                 ['title' => 'Hotel', 'image' => asset('frontend/assets4/img/akomodasi/hotel.webp')],
                 ['title' => 'Villa', 'image' => asset('frontend/assets4/img/akomodasi/hotel.webp')],
