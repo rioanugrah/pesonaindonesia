@@ -255,9 +255,9 @@
 <section class="trending pb-9">
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">
-            <h4 class="mb-1 theme1">Travelling</h4>
-            {{-- <h2 class="mb-1">The Last <span class="theme">Minute Deals</span></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p> --}}
+            {{-- <h4 class="mb-1 theme1">Travelling</h4> --}}
+            <h2 class="mb-1">Jelajahi <span class="theme">Travelling</span></h2>
+            {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p> --}}
         </div>  
         <div class="trend-box">
             <div class="row">
@@ -269,7 +269,7 @@
                             <img src="{{ $asset_new }}/images/travelling/{{ $travelling->images }}" alt="image" style="width: 700px; height: 250px; object-fit: cover;" class="">
                             <div class="trend-content1 p-4">
                                 <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h5>
-                                <h3 class="mb-1 white"><a href="tour-grid.html" class="white">{{ $travelling->nama_travelling }}</a></h3>
+                                <h3 class="mb-1 white"><a href="javascript::void()" class="white">{{ $travelling->nama_travelling }}</a></h3>
                                 <div class="rating-main d-flex align-items-center pb-2">
                                     <div class="rating">
                                         <span class="fa fa-star checked"></span>
@@ -301,7 +301,7 @@
                             <img src="{{ $asset_new }}/images/travelling/{{ $travelling->images }}" alt="image" style="width: 700px; height: 250px; object-fit: cover;" class="">
                             <div class="trend-content1 p-4">
                                 <h6 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h6>
-                                <h3 class="mb-1 white"><a href="tour-grid.html" class="white">{{ $travelling->nama_travelling }}</a></h3>
+                                <h3 class="mb-1 white"><a href="javascript::void()" class="white">{{ $travelling->nama_travelling }}</a></h3>
                                 <div class="rating-main d-flex align-items-center pb-0">
                                     <div class="rating">
                                         <span class="fa fa-star checked"></span>
