@@ -20,7 +20,7 @@
 @endauth
 
 @section('content')
-    <section class="breadcrumb-main pb-20 pt-14"
+    {{-- <section class="breadcrumb-main pb-20 pt-14"
         style="background-image: url({{ asset('frontend/assets4/img/paket/list/' . $travelling->images) }});">
         <div class="section-shape section-shape1 top-inherit bottom-0"
             style="background-image: url({{ $asset }}/images/shape8.png);"></div>
@@ -38,11 +38,11 @@
             </div>
         </div>
         <div class="dot-overlay"></div>
-    </section>
+    </section> --}}
     <section class="trending pt-6 pb-0 bg-lgrey">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mb-4">
+                <div class="col-lg-7 mb-4">
                     <div class="payment-book">
                         <div class="booking-box">
                             <form id="form-form" action="{{ route('frontend.travelling.checkout',['id' => $travelling->id]) }}" method="post" enctype="multipart/form-data">
@@ -163,7 +163,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 mb-4 ps-ld-4">
+                <div class="col-lg-5 mb-4 ps-ld-4">
                     <div class="sidebar-sticky">
                         <div class="sidebar-item bg-white rounded box-shadow overflow-hidden p-3 mb-4">
                             <h4>Detail Pemesanan</h4>
@@ -209,6 +209,10 @@
                                         <td class="theme2"><span id="jumlah_order"></span></td>
                                     </tr>
                                     <tr>
+                                        <td>Diskon</td>
+                                        <td class="theme2"><span id="jumlah_diskon">0 %</span></td>
+                                    </tr>
+                                    <tr>
                                         <td>Biaya Pemesanan</td>
                                         <td class="theme2">Gratis</td>
                                     </tr>
@@ -225,6 +229,15 @@
                                 </tfoot>
                             </table>
                         </div>
+                        <form id="cek_kode" method="post">
+                            @csrf
+                            <div class="sidebar-item bg-white rounded box-shadow overflow-hidden p-3">
+                                <h4>Kode Promo?</h4>
+                                <input type="text" name="kode_promo" id="kode_promo">
+                                {{-- <input type="submit" class="nir-btn-black mt-2" value="Apply"> --}}
+                                <button type="submit" class="nir-btn-black mt-2">Apply</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -233,11 +246,18 @@
 @endsection
 @section('js')
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        }); 
+
         $('.jumlah').change(function() {
             // if ($('.jumlah').val() > $('#detail_maksimal').val()) {
             if (($('.jumlah').val() + parseInt(1)) > $('#detail_maksimal').val()) {
                 alert('Jumlah anggota maksimal ' + $('#detail_maksimal').val() + ' orang');
                 $('.jumlah').val('');
+                document.getElementById('jumlah_diskon').innerHTML = '0 %';
             } else {
                 if ({{ $travelling->kategori_paket_id }} == 2) {
                     var price = {{ $travelling->price - ($travelling->diskon / 100) * $travelling->price }};
@@ -261,12 +281,20 @@
                         rupiah += separator + ribuan.join('.');
                     }
 
+                    document.getElementById('jumlah_diskon').innerHTML = '0 %';
                     document.getElementById('jumlah_order').innerHTML = jumlah + ' pax';
                     document.getElementById('subTotal').innerHTML = 'Rp. ' + rupiah;
                     document.getElementById('orderTotal').innerHTML = 'Rp. ' + rupiah;
                     $('#order_total').val(penjumlahan);
                 } else if ({{ $travelling->kategori_paket_id }} == 1) {
                     var price = {{ $travelling->price - ($travelling->diskon / 100) * $travelling->price }};
+                    if ($('.jumlah').val() == 0) {
+                        var penjumlahan = 1 * price;
+                        var jumlah = 1;
+                    } else {
+                        var jumlah = parseInt($('.jumlah').val()) + parseInt(1);
+                        var penjumlahan = jumlah * price;
+                    }
 
                     var bilangan = price;
 
@@ -280,13 +308,13 @@
                         rupiah += separator + ribuan.join('.');
                     }
 
-                    document.getElementById('jumlah_order').innerHTML = ($('.jumlah').val() + parseInt(1)) + ' pax';
+                    document.getElementById('jumlah_diskon').innerHTML = '0 %';
+                    document.getElementById('jumlah_order').innerHTML = jumlah + ' pax';
                     document.getElementById('subTotal').innerHTML = 'Rp. ' + rupiah;
                     document.getElementById('orderTotal').innerHTML = 'Rp. ' + rupiah;
                     $('#order_total').val(price);
                 }
             }
-
 
             // const box = document.getElementById('tambah_anggota');
             // // const anggota = document.getElementById('data_anggota');
@@ -311,7 +339,76 @@
             //     // j--; 
             // }
 
-        })
+        });
+
+        $('#cek_kode').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('cek_kode',['id' => $travelling->id]) }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    if (result.success != false) {
+                        if({{ $travelling->diskon }} != 0){
+                            alert('Voucher Tidak Bisa Digunakan');
+                            $('#kode_promo').val('');
+                        }else{
+                            var diskon = result.data.discount;
+                            var hitung_diskon = $('#order_total').val() - (diskon / 100) * $('#order_total').val();
+                            
+                            var bilangan = hitung_diskon;
+
+                            var number_string = bilangan.toString(),
+                                sisa = number_string.length % 3,
+                                rupiah = number_string.substr(0, sisa),
+                                ribuan = number_string.substr(sisa).match(/\d{3}/g);
+
+                            if (ribuan) {
+                                separator = sisa ? '.' : '';
+                                rupiah += separator + ribuan.join('.');
+                            }
+
+                            $('#order_total').val(hitung_diskon);
+                            document.getElementById('jumlah_diskon').innerHTML = result.data.discount + ' %';
+                            document.getElementById('subTotal').innerHTML = 'Rp. ' + rupiah;
+                            document.getElementById('orderTotal').innerHTML = 'Rp. ' + rupiah;
+                            // $('#order_total').val() - (diskon / 100) * $('#order_total').val();
+                        }
+
+
+                        // if(result.data.ammount > 0){
+
+                        // }
+
+                        // if(result.data.limit >= result.data.used_limit ){
+                        //     alert('Voucher Telah Habis');
+                        // }else{
+
+                        // }
+                        // iziToast.success({
+                        //     title: result.message_title,
+                        //     message: result.message_content
+                        // });
+                        // this.reset();
+                        // table.ajax.reload();
+                    } else {
+                        // iziToast.error({
+                        //     title: result.success,
+                        //     message: result.error
+                        // });
+                    }
+                },
+                error: function(request, status, error) {
+                    // iziToast.error({
+                    //     title: 'Error',
+                    //     message: error,
+                    // });
+                }
+            });
+        });
         // const qty = $('#jumlah').val();
         $(document).ready(function() {
             var i = 1;

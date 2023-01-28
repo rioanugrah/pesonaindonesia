@@ -27,6 +27,12 @@
                         <span>Wisata</span>
                     </a>
                 </li> --}}
+                <li class="{{ Request::is('b/coupon*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('coupon') }}" class="waves-effect">
+                        <i class="ti-package"></i>
+                        <span>Coupon</span>
+                    </a>
+                </li>
                 <li class="{{ Request::is('b/hotel*') ? 'mm-active' : '' }}">
                     <a href="{{ route('hotel') }}" class="waves-effect">
                         <i class="fas fa-hotel"></i>

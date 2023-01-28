@@ -127,6 +127,11 @@ Route::prefix('dokumentasi')->group(function () {
     Route::get('/', 'GalleryController@dokumentasi')->name('frontend.dokumentasi');
 });
 
+Route::prefix('promosi')->group(function () {
+    Route::get('{id}', 'CouponController@promosi')->name('frontend.promosi');
+    Route::post('{id}/cek_kode', 'CouponController@cek_kupon_used')->name('cek_kode');
+});
+
 Route::prefix('travelling')->group(function(){
     Route::get('/', 'TravellingController@f_index')->name('frontend.travelling');
     Route::get('search', 'TravellingController@f_cari_travelling')->name('frontend.search.travelling');
@@ -218,6 +223,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', 'PaketOrderController@index')->name('paket.order')->middleware('verified');
             Route::get('{id}/bukti_pembayaran', 'PaketOrderController@bukti_pembayaran')->name('paket.order.bukti_pembayaran')->middleware('verified');
             Route::post('bukti_pembayaran/update', 'PaketOrderController@bukti_pembayaran_update')->name('paket.order.bukti_pembayaran.update')->middleware('verified');
+        });
+        
+        Route::prefix('coupons')->group(function(){
+            Route::get('/', 'CouponController@index')->name('coupon')->middleware('verified');
+            Route::post('simpan', 'CouponController@simpan')->name('coupon.simpan')->middleware('verified');
+            Route::get('{id}/used', 'CouponController@kupon_used')->name('coupon.used')->middleware('verified');
+            Route::post('{id}/used/simpan', 'CouponController@kupon_used_simpan')->name('coupon.used.simpan')->middleware('verified');
         });
 
         Route::prefix('travelling')->group(function(){

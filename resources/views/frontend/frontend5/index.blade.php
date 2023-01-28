@@ -170,7 +170,7 @@
                                             <h5 class="mb-0"><a href="tour-grid.html" class="theme1">{{ $jlh['country'] }}</a></h5>
                                             <h3 class="mb-0 white">{{ $jlh['title'] }}</h3>
                                         </div>
-                                        <span class="white bg-theme p-1 px-2 rounded">{{ $jlh['tour'] }} Tours</span>
+                                        {{-- <span class="white bg-theme p-1 px-2 rounded">{{ $jlh['tour'] }} Tours</span> --}}
                                     </div>
                                     <div class="color-overlay"></div>
                                 </div>
@@ -192,7 +192,7 @@
                                 <h5 class="mb-0"><a href="javascript:void()" class="theme1">{{ $jh['country'] }}</a></h5>
                                 <h3 class="mb-0 white">{{ $jh['title'] }}</h3>
                             </div>
-                            <span class="white bg-theme p-1 px-2 rounded">{{ $jh['tour'] }} Tours</span>
+                            {{-- <span class="white bg-theme p-1 px-2 rounded">{{ $jh['tour'] }} Tours</span> --}}
                         </div>
                         <div class="color-overlay"></div>
                     </div>
@@ -252,6 +252,62 @@
         </div>
     </div>
 </section> --}}
+{{-- <section class="trending pb-0">
+    <div class="container">
+        <div class="trend-box">
+            <div class="row">
+                @forelse ($coupons as $coupon)
+                <a href="javascript::void()">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="trend-item1 rounded box-shadow">
+                            <div class="trend-image position-relative">
+                                <img src="{{ $assets }}/images/kupon/{{ $coupon->coupons_images }}" alt="image" style="width: 700px; height: 150px; object-fit: cover;" class="">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                @empty
+                    
+                @endforelse
+            </div>
+        </div>    
+    </div>
+</section> --}}
+<section class="trending pb-3 pt-0">
+    <div class="container">
+        <div class="section-title mb-6 w-75 mx-auto text-center">
+            <h4 class="mb-1 theme1">Promo</h4>
+            <h2 class="mb-1">Yuk cek promo <span class="theme">sebelum booking</span></h2>
+        </div>
+        <div class="row align-items-center">
+            <div class="row">
+                @forelse ($coupons as $coupon)
+                <div class="col-md-4 mb-4">
+                    <a href="{{ route('frontend.promosi',['id'=>$coupon->id]) }}">
+                        <div class="trend-item1">
+                            <div class="trend-image position-relative rounded">
+                                <img src="{{ $assets }}/images/kupon/{{ $coupon->coupons_images }}" alt="image">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @empty
+                <div class="trend-item1">
+                    <div class="trend-image position-relative rounded">
+                        <p>Promo belum tersedia</p>
+                    </div>
+                </div>
+                @endforelse
+            </div>
+        </div>
+        {{-- <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8">
+            </div>
+        </div> --}}
+    </div>
+</section>
 <section class="trending pb-9">
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">

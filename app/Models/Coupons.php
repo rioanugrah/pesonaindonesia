@@ -17,7 +17,9 @@ class Coupons extends Model
 
     public $fillable = [
         'id',
+        'kategori_akomodasi_id',
         'coupons_code',
+        'coupons_title',
         'coupons_type',
         'coupons_amount',
         'coupons_discount',
