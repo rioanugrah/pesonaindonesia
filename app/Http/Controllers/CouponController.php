@@ -193,7 +193,10 @@ class CouponController extends Controller
 
     public function cek_kupon_used(Request $request, $id)
     {
-        $kupon = Coupons::where('coupons_code',$request->kode_promo)->first();
+        $date = Carbon::now()->format('Y-m-d');
+        $kupon = Coupons::where('coupons_code',$request->kode_promo)
+                        ->where('coupons_expired','>=',$date)
+                        ->first();
         // dd($request->all());
         if(empty($kupon)){
             $message_title="Kode Voucher Habis / Tidak Ditemukan";
@@ -213,6 +216,21 @@ class CouponController extends Controller
         $kupon_used = CouponsUsed::where('akomodasi_id', $id)
                                 ->where('coupons_id',$kupon->id)
                                 ->first();
+        if(empty($kupon_used)){
+            $message_title="Kode Voucher Habis / Tidak Ditemukan";
+            $message_content="Kode Voucher Habis / Tidak Ditemukan";
+            $message_type="danger";
+            $message_succes = false;
+
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return response()->json($array_message);
+
+        }
         $kupon_count_used = CouponsDetails::where('coupons_id',$kupon->id)->count();
         return response()->json([
             'success' => true,

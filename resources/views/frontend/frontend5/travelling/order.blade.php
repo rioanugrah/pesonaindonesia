@@ -377,28 +377,9 @@
                             document.getElementById('orderTotal').innerHTML = 'Rp. ' + rupiah;
                             // $('#order_total').val() - (diskon / 100) * $('#order_total').val();
                         }
-
-
-                        // if(result.data.ammount > 0){
-
-                        // }
-
-                        // if(result.data.limit >= result.data.used_limit ){
-                        //     alert('Voucher Telah Habis');
-                        // }else{
-
-                        // }
-                        // iziToast.success({
-                        //     title: result.message_title,
-                        //     message: result.message_content
-                        // });
-                        // this.reset();
-                        // table.ajax.reload();
                     } else {
-                        // iziToast.error({
-                        //     title: result.success,
-                        //     message: result.error
-                        // });
+                        alert(result.message_title);
+                        $('#kode_promo').val('');
                     }
                 },
                 error: function(request, status, error) {
