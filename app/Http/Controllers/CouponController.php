@@ -117,8 +117,12 @@ class CouponController extends Controller
                     ->addColumn('coupons_id', function($row){
                         return $row->coupon->coupons_code;
                     })
+                    ->addColumn('kategori_akomodasi_id', function($row){
+                        return $row->kategori_akomodasi->kategori_akomodasi;
+                    })
                     ->addColumn('akomodasi_id', function($row){
-                        return $row->akomodasi_id;
+                        return $row->akomodasi->id;
+                        // return $row->akomodasi_id;
                     })
                     ->addColumn('action', function($row){
                         $btn = '<button onclick="edit(`'.$row->id.'`)" class="btn btn-warning btn-sm" title="Edit">

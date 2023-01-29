@@ -25,7 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('profile')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->uuid('role')->default('3fbdf3fa-1bb1-4a61-9c82-a0836ba4ee12');
+            // $table->uuid('role')->default('3fbdf3fa-1bb1-4a61-9c82-a0836ba4ee12');
+            $table->integer('role')->nullable();
             // $table->integer('role')->default(1);
             $table->string('api_token', 80)->nullable();
             $table->string('device_token')->nullable();

@@ -341,54 +341,58 @@
 
         });
 
+        var no = 0;
         $('#cek_kode').submit(function(e) {
-            e.preventDefault();
-            let formData = new FormData(this);
-            $.ajax({
-                type: 'POST',
-                url: "{{ route('cek_kode',['id' => $travelling->id]) }}",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: (result) => {
-                    if (result.success != false) {
-                        if({{ $travelling->diskon }} != 0){
-                            alert('Voucher Tidak Bisa Digunakan');
-                            $('#kode_promo').val('');
-                        }else{
-                            var diskon = result.data.discount;
-                            var hitung_diskon = $('#order_total').val() - (diskon / 100) * $('#order_total').val();
-                            
-                            var bilangan = hitung_diskon;
-
-                            var number_string = bilangan.toString(),
-                                sisa = number_string.length % 3,
-                                rupiah = number_string.substr(0, sisa),
-                                ribuan = number_string.substr(sisa).match(/\d{3}/g);
-
-                            if (ribuan) {
-                                separator = sisa ? '.' : '';
-                                rupiah += separator + ribuan.join('.');
+            var number = no += 1;
+            if(number == 1){
+                e.preventDefault();
+                let formData = new FormData(this);
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('cek_kode',['id' => $travelling->id]) }}",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: (result) => {
+                        if (result.success != false) {
+                            if({{ $travelling->diskon }} != 0){
+                                alert('Voucher Tidak Bisa Digunakan');
+                                $('#kode_promo').val('');
+                            }else{
+                                var diskon = result.data.discount;
+                                var hitung_diskon = $('#order_total').val() - (diskon / 100) * $('#order_total').val();
+                                
+                                var bilangan = hitung_diskon;
+    
+                                var number_string = bilangan.toString(),
+                                    sisa = number_string.length % 3,
+                                    rupiah = number_string.substr(0, sisa),
+                                    ribuan = number_string.substr(sisa).match(/\d{3}/g);
+    
+                                if (ribuan) {
+                                    separator = sisa ? '.' : '';
+                                    rupiah += separator + ribuan.join('.');
+                                }
+    
+                                $('#order_total').val(hitung_diskon);
+                                document.getElementById('jumlah_diskon').innerHTML = result.data.discount + ' %';
+                                document.getElementById('subTotal').innerHTML = 'Rp. ' + rupiah;
+                                document.getElementById('orderTotal').innerHTML = 'Rp. ' + rupiah;
+                                // $('#order_total').val() - (diskon / 100) * $('#order_total').val();
                             }
-
-                            $('#order_total').val(hitung_diskon);
-                            document.getElementById('jumlah_diskon').innerHTML = result.data.discount + ' %';
-                            document.getElementById('subTotal').innerHTML = 'Rp. ' + rupiah;
-                            document.getElementById('orderTotal').innerHTML = 'Rp. ' + rupiah;
-                            // $('#order_total').val() - (diskon / 100) * $('#order_total').val();
+                        } else {
+                            alert(result.message_title);
+                            $('#kode_promo').val('');
                         }
-                    } else {
-                        alert(result.message_title);
-                        $('#kode_promo').val('');
+                    },
+                    error: function(request, status, error) {
+                        // iziToast.error({
+                        //     title: 'Error',
+                        //     message: error,
+                        // });
                     }
-                },
-                error: function(request, status, error) {
-                    // iziToast.error({
-                    //     title: 'Error',
-                    //     message: error,
-                    // });
-                }
-            });
+                });
+            }
         });
         // const qty = $('#jumlah').val();
         $(document).ready(function() {

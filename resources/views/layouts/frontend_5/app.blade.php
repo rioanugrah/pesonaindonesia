@@ -60,6 +60,27 @@
     <script src="{{ $assets }}/js/particlerun.js"></script>
     <script src="{{ $assets }}/js/plugin.js"></script>
     <script src="{{ $assets }}/js/main.js"></script>
+    @guest
+    <script>
+        document.addEventListener("keydown", (e) => {
+            if(e.ctrlKey || e.keyCode == 123){
+                e.stopPropagation();
+                e.preventDefault();
+            }
+        });
+    </script>
+    @else
+        @if (auth()->user()->role != 1)
+        <script>
+            document.addEventListener("keydown", (e) => {
+                if(e.ctrlKey || e.keyCode == 123){
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
+            });
+        </script>
+        @endif
+    @endguest
     <script src="{{ $assets }}/js/custom-swiper.js"></script>
     <script src="{{ $assets }}/js/custom-nav.js"></script>
     @yield('js')
