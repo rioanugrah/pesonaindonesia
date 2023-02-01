@@ -121,7 +121,7 @@ class CouponController extends Controller
                         return $row->kategori_akomodasi->kategori_akomodasi;
                     })
                     ->addColumn('akomodasi_id', function($row){
-                        return $row->akomodasi->id;
+                        return $row->akomodasi_id;
                         // return $row->akomodasi_id;
                     })
                     ->addColumn('action', function($row){
