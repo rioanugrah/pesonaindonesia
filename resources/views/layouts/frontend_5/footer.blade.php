@@ -1,4 +1,4 @@
-<?php 
+{{-- <?php 
     try {
         $fields = 'id,media_type,media_url,caption,username,timestamp';
         $accessToken = env('IG_TOKEN_PM');
@@ -19,11 +19,10 @@
     } catch (\Throwable $th) {
         $plesiran_malangs['data'] = [];
     }
-?>
+?> --}}
 <footer class="pt-20 pb-4"  style="background-image: url({{ $assets }}/images/background_pattern.png);">
     <div class="section-shape top-0" style="background-image: url({{ $assets }}/images/shape8.png);"></div>
-    <!-- Instagram starts -->
-    <div class="insta-main pb-10">
+    {{-- <div class="insta-main pb-10">
         <div class="container">
             <div class="insta-inner">
                 <div class="follow-button">
@@ -43,7 +42,7 @@
                 </div>
             </div>    
         </div>
-    </div>
+    </div> --}}
     <!-- Instagram ends -->
     <div class="footer-upper pb-4">
         <div class="container">
