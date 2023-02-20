@@ -5,11 +5,12 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Travelling;
+use \Carbon\Carbon;
 class TravellingController extends Controller
 {
     public function index_v1()
     {
-        $travellings = Travelling::all();
+        $travellings = Travelling::orderBy('created_at','desc')->get();
         foreach ($travellings as $key => $travelling) {
             $travellingss[] = [
                 'id' => $travelling->id,
@@ -25,8 +26,8 @@ class TravellingController extends Controller
                 'diskon' => $travelling->diskon,
                 'price' => $travelling->price,
                 'images' => asset('frontend/assets_new/images/travelling/'.$travelling->images),
-                'created_at' => $travelling->created_at,
-                'updated_at' => $travelling->updated_at,
+                'created_at' => Carbon::parse($travelling->created_at)->isoFormat('LL'),
+                'updated_at' => Carbon::parse($travelling->updated_at)->isoFormat('LL'),
             ];
         }
 
@@ -34,6 +35,37 @@ class TravellingController extends Controller
             'status' => true,
             'data_row' => $travellings->count(),
             'data' => $travellingss
+        ],200);
+    }
+
+    public function detail($id)
+    {
+        $travellings = Travelling::find($id);
+        if(empty($travellings)){
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan'
+            ]);
+        }
+        $data = [
+            'id' => $travellings->id,
+            'kategori_paket_id' => $travellings->id,
+            'nama_travelling' => $travellings->nama_travelling,
+            'deskripsi' => $travellings->deskripsi,
+            'jumlah_paket' => $travellings->jumlah_paket,
+            'meeting_point' => $travellings->meeting_point,
+            'location' => $travellings->location,
+            'contact_person' => $travellings->contact_person,
+            'tanggal_rilis' => $travellings->tanggal_rilis,
+            'diskon' => $travellings->diskon,
+            'price' => $travellings->price,
+            'images' => asset('frontend/assets_new/images/travelling/'.$travellings->images),
+            'created_at' => Carbon::parse($travellings->created_at)->isoFormat('LLL'),
+            'updated_at' => Carbon::parse($travellings->updated_at)->isoFormat('LLL')
+        ];
+        return response()->json([
+            'success' => true,
+            'data' => $data,
         ]);
     }
     // public function paket()
