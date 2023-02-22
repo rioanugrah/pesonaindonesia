@@ -32,7 +32,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xl-4 col-md-6">
+    {{-- <div class="col-xl-4 col-md-6">
         <div class="card mini-stat bg-primary text-white">
             <div class="card-body">
                 <div class="mb-4">
@@ -42,13 +42,10 @@
                     <h5 class="font-size-16 text-uppercase text-white-50">Balance</h5>
                     <h4 class="fw-medium font-size-24">Rp. {{ number_format($balances['balance'] == null ? 0 : $balances['balance'],0,',','.') }} <i
                             class="mdi mdi-arrow-up text-success ms-2"></i></h4>
-                    {{-- <div class="mini-stat-label bg-success">
-                        <p class="mb-0">+ 12%</p>
-                    </div> --}}
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="col-xl-3 col-md-3">
         <div class="card mini-stat bg-primary text-white">
             <div class="card-body">
