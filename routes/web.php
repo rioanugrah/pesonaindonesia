@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -181,6 +181,44 @@ Route::prefix('travelling')->group(function(){
 Route::get('testings', 'FrontendController@frontend_testing');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('balance',function(){
+
+        $this->payment_live = env('OY_INDONESIA_LIVE');
+        $this->username = config('app.oy_username');
+        $this->app_key = config('app.oy_api_key');
+        if($this->payment_live == true){
+            $this->payment_production = 'https://partner.oyindonesia.com/api/';
+        }else{
+            $this->payment_production = 'https://api-stg.oyindonesia.com/api/';
+        }
+        
+        $request = new \HTTP_Request2();
+        $request->setUrl($this->payment_production.'/balance');
+        $request->setMethod(HTTP_Request2::METHOD_GET);
+        $request->setConfig(array(
+        'follow_redirects' => TRUE
+        ));
+        $request->setHeader(array(
+        'x-oy-username:'.$this->username,
+        'x-api-key:'.$this->app_key,
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json'
+        ));
+        try {
+        $response = $request->send();
+        if ($response->getStatus() == 200) {
+            return $response->getBody();
+            // echo $response->getBody();
+        }
+        else {
+            echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+            $response->getReasonPhrase();
+        }
+        }
+        catch(HTTP_Request2_Exception $e) {
+        echo 'Error: ' . $e->getMessage();
+        }
+    });
     Route::prefix('b')->group(function () {
         Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
         Route::get('home/balance', 'HomeController@balance')->name('home.balance')->middleware('verified');
