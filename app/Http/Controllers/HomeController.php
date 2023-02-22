@@ -104,13 +104,13 @@ class HomeController extends Controller
                     'created_at' => Carbon::create($visitor->created_at)->isoFormat('LLLL'),
                 ];
             }
-            try {
-                $data['balances'] = json_decode((new HomeController)->balance(),true);
-                // dd($data['balances']['balance']);
-            } catch (\Throwable $th) {
-                // dd($data['balances']['balance']=0);
-                $data['balances']['balance']=1;
-            }
+            // try {
+            //     $data['balances'] = json_decode((new HomeController)->balance(),true);
+            //     // dd($data['balances']['balance']);
+            // } catch (\Throwable $th) {
+            //     // dd($data['balances']['balance']=0);
+            //     $data['balances']['balance']=1;
+            // }
             // dd(json_decode($data['balances'],true));
             // return view('layouts.backend_3.app', $data);
             // return view('backend.home.home3', $data);
