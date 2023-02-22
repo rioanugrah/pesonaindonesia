@@ -40,8 +40,8 @@
                         <img src="{{ $asset }}/images/services-icon/01.png" alt="">
                     </div>
                     <h5 class="font-size-16 text-uppercase text-white-50">Balance</h5>
-                    <h4 class="fw-medium font-size-24">Rp. {{ number_format($balances['balance'],0,',','.') }} <i
-                            class="mdi mdi-arrow-up text-success ms-2"></i></h4>
+                    {{-- <h4 class="fw-medium font-size-24">Rp. {{ number_format($balances['balance'],0,',','.') }} <i
+                            class="mdi mdi-arrow-up text-success ms-2"></i></h4> --}}
                     {{-- <div class="mini-stat-label bg-success">
                         <p class="mb-0">+ 12%</p>
                     </div> --}}

@@ -10,7 +10,7 @@ class TravellingController extends Controller
 {
     public function index_v1()
     {
-        $travellings = Travelling::orderBy('created_at','desc')->get();
+        $travellings = Travelling::orderBy('created_at','desc')->paginate(5);
         foreach ($travellings as $key => $travelling) {
             $travellingss[] = [
                 'id' => $travelling->id,
