@@ -1,7 +1,7 @@
 @extends('layouts.frontend_5.app')
 
 @section('title')
-    Posting
+Referensi Wisata
 @endsection
 
 @section('canonical')
@@ -16,11 +16,11 @@
     <div class="breadcrumb-outer">
         <div class="container">
             <div class="breadcrumb-content text-center">
-                <h1 class="mb-3">Posting Update</h1>
+                <h1 class="mb-3">Referensi Wisata</h1>
                 <nav aria-label="breadcrumb" class="d-block">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('frontend') }}">Beranda</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Posting Update</li>
+                        <li class="breadcrumb-item active" aria-current="page">Referensi Wisata</li>
                     </ul>
                 </nav>
             </div>

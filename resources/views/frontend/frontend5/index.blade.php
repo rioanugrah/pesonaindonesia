@@ -326,7 +326,7 @@
                                 <img src="{{ $asset_new }}/images/travelling/{{ $travelling->images }}" alt="image" style="width: 700px; height: 250px; object-fit: cover;" class="">
                                 <div class="trend-content1 p-4">
                                     <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h5>
-                                    <h3 class="mb-1 white"><a class="white">{{ $travelling->nama_travelling }}</a></h3>
+                                    <h3 class="mb-1 white"><a href="{{ route('frontend.travelling_detail_order',['id' => $travelling->id]) }}" class="white">{{ $travelling->nama_travelling }}</a></h3>
                                     <div class="rating-main d-flex align-items-center pb-2">
                                         <div class="rating">
                                             <span class="fa fa-star checked"></span>
@@ -359,7 +359,7 @@
                             <img src="{{ $asset_new }}/images/travelling/{{ $travelling->images }}" alt="image" style="width: 700px; height: 250px; object-fit: cover;" class="">
                             <div class="trend-content1 p-4">
                                 <h6 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h6>
-                                <h3 class="mb-1 white"><a href="javascript::void()" class="white">{{ $travelling->nama_travelling }}</a></h3>
+                                <h3 class="mb-1 white"><a href="{{ route('frontend.travelling_detail_order',['id' => $travelling->id]) }}" class="white">{{ $travelling->nama_travelling }}</a></h3>
                                 <div class="rating-main d-flex align-items-center pb-0">
                                     <div class="rating">
                                         <span class="fa fa-star checked"></span>
