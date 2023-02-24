@@ -501,13 +501,14 @@ class FrontendController extends Controller
         visitor()->visit();
         $data['events'] = Events::orderBy('id','desc')->paginate(10);
 
-        return view('frontend.frontend4.events',$data);
+        return view('frontend.frontend5.event',$data);
     }
 
     public function eventDetail($slug)
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['event'] = Events::where('slug',$slug)->first();
+        $data['count'] = DB::table('event')->where('id',$data['event']['id'])->count();
 
         $carbon = Carbon::parse($data['event']['start_event']);
         $setCarbon = Carbon::setTestNow($carbon);
@@ -517,7 +518,8 @@ class FrontendController extends Controller
         // dd($data); 
         // dd(Carbon::parse($data['event']['start_event']));
 
-        return view('frontend.frontend4.eventsDetail',$data);
+        return view('frontend.frontend5.event_detail',$data);
+        // return view('frontend.frontend4.eventsDetail',$data);
 
     }
 

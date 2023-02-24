@@ -18,7 +18,7 @@
                     <div class="row mb-3">
                         <label for="example-text-input" class="col-sm-2 col-form-label">Deskripsi</label>
                         <div class="col-sm-10">
-                            <textarea name="deskripsi" class="form-control" rows="5"></textarea>
+                            <textarea name="deskripsi" class="form-control" id="elm1" rows="5"></textarea>
                             {{-- <input class="form-control" name="title" type="text" placeholder="Title"> --}}
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="row mb-3">
                         <label for="example-text-input" class="col-sm-2 col-form-label">Kuota</label>
                         <div class="col-sm-10">
-                            <input class="form-control" name="kuota" type="number" placeholder="Kuota">
+                            <input class="form-control" name="kuota" type="text" placeholder="Kuota">
                         </div>
                     </div>
                     <div class="row mb-3">

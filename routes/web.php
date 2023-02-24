@@ -299,6 +299,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('log', 'LogController@index')->name('log')->middleware('verified');
         
         Route::get('events', 'EventsController@index')->name('events')->middleware('verified');
+        Route::get('events/buat', 'EventsController@create')->name('events.buat')->middleware('verified');
         Route::post('events/simpan', 'EventsController@simpan')->name('events.simpan')->middleware('verified');
         Route::get('events/{id}', 'EventsController@detail')->name('events.detail')->middleware('verified');
         Route::get('events/{id}/register', 'EventsController@detailEventRegister')->name('events.detailRegister')->middleware('verified');

@@ -21,7 +21,7 @@ class EventsController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('image', function($row){
-                        return "<a href='".url('frontend/assets4/img/events/'.$row->image)."' target='_blank'><img src='".url('frontend/assets4/img/events/'.$row->image)."' class='img-thumbnail' width='150' /></a>";
+                        return "<a href='".url('frontend/assets4/img/events/'.$row->image)."' target='_blank'><img src='".url('frontend/assets4/img/events/'.$row->image)."' class='img-thumbnail' width='850' /></a>";
                     })
                     ->addColumn('is_event', function($row){
                         if($row->is_event == 'W'){
@@ -65,15 +65,30 @@ class EventsController extends Controller
         return view('backend.events.index');
     }
 
+    public function create()
+    {
+        return view('backend.events.create');
+    }
+
     public function simpan(Request $request)
     {
         $rules = [
             'title' => 'required',
+            'deskripsi' => 'required',
+            'location' => 'required',
+            'start_event' => 'required',
+            'finish_event' => 'required',
+            'kuota' => 'required',
             'image'  => 'required|file|max:2048',
         ];
  
         $messages = [
             'title.required' => 'Judul Event wajib diisi.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'location.required' => 'Lokasi Event wajib diisi.',
+            'start_event.required' => 'Mulai Event wajib diisi.',
+            'finish_event.required' => 'Selesai Event wajib diisi.',
+            'kuota.required' => 'Kuota Event wajib diisi.',
             'image.required'  => 'Upload Gambar wajib diisi.',
             'image.max'  => 'Upload Gambar Max 2MB.',
         ];
@@ -82,10 +97,17 @@ class EventsController extends Controller
 
         if ($validator->passes()){
             $input = $request->all();
+            $input['id'] = Str::uuid();
             $input['slug'] = Str::slug($request->title);
             $input['is_event'] = 'W';
-            $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('frontend/assets4/img/events'), $input['image']);
+
+            $image = $request->file('image');
+            $img = \Image::make($image->path());
+            $img = $img->encode('webp', 75);
+            $input['image'] = time().'.webp';
+            $img->save(public_path('frontend/assets4/img/events/').$input['image']);
+            // $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
+            // $request->image->move(public_path('frontend/assets4/img/events'), $input['image']);
 
             $events = Events::create($input);
 
@@ -94,23 +116,24 @@ class EventsController extends Controller
                 $message_content="Event ".$input['title']." Berhasil Dibuat";
                 $message_type="success";
                 $message_succes = true;
+                return redirect()->route('events')->with('success',$message_content);
             }
 
-            $array_message = array(
-                'success' => $message_succes,
-                'message_title' => $message_title,
-                'message_content' => $message_content,
-                'message_type' => $message_type,
-            );
-            return response()->json($array_message);
+            // $array_message = array(
+            //     'success' => $message_succes,
+            //     'message_title' => $message_title,
+            //     'message_content' => $message_content,
+            //     'message_type' => $message_type,
+            // );
+            // return response()->json($array_message);
         }
-
-        return response()->json(
-            [
-                'success' => false,
-                'error' => $validator->errors()->all()
-            ]
-        );
+        return redirect()->back()->with('error',$validator->errors()->all());
+        // return response()->json(
+        //     [
+        //         'success' => false,
+        //         'error' => $validator->errors()->all()
+        //     ]
+        // );
     }
 
     public function detail($id)

@@ -14,7 +14,7 @@
 @endsection
 
 @section('content')
-@include('backend.events.modalBuat')
+{{-- @include('backend.events.modalBuat') --}}
 @include('backend.events.modalEdit')
 <div class="page-title-box">
     <div class="row align-items-center">
@@ -28,9 +28,9 @@
         <div class="col-md-4">
             <div class="float-end d-md-block">
                 <div class="btn-group">
-                    <button class="btn btn-primary" onclick="buat()">
+                    <a href="{{ route('events.buat') }}" class="btn btn-primary">
                         <i class="mdi mdi-plus"></i> Buat
-                    </button>
+                    </a>
                     <button class="btn btn-primary" onclick="reload()">
                         <i class="mdi mdi-reload"></i> Reload
                     </button>
@@ -49,7 +49,7 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
-                                <th>Deskripsi</th>
+                                {{-- <th>Deskripsi</th> --}}
                                 <th>Lokasi</th>
                                 <th>Start Event</th>
                                 <th>Finish Event</th>
@@ -86,8 +86,8 @@
 <script src="{{ asset('backend/assets2/js/iziToast.min.js') }}"></script>
 {{-- <script src="{{ asset('backend/assets2/libs/dropzone/min/dropzone.min.js') }}"></script> --}}
 
-{{-- <script src="{{ asset('backend/assets2/js/pages/form-editor.init.js') }}"></script>
-<script src="{{ asset('backend/assets2/libs/tinymce/tinymce.min.js') }}"></script> --}}
+<script src="{{ asset('backend/assets2/js/pages/form-editor.init.js') }}"></script>
+<script src="{{ asset('backend/assets2/libs/tinymce/tinymce.min.js') }}"></script>
 
 <script>
     var table = $('#datatable').DataTable({
@@ -99,10 +99,10 @@
                     data: 'title',
                     name: 'title'
                 },
-                {
-                    data: 'deskripsi',
-                    name: 'deskripsi'
-                },
+                // {
+                //     data: 'deskripsi',
+                //     name: 'deskripsi'
+                // },
                 {
                     data: 'location',
                     name: 'location'
