@@ -12,7 +12,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Post::all();
+            $data = Post::orderBy('created_at','desc')->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('link', function($row){
