@@ -20,7 +20,8 @@
         $plesiran_malangs['data'] = [];
     }
 ?> --}}
-<footer class="pt-20 pb-4"  style="background-image: url({{ $assets }}/images/background_pattern.png);">
+{{-- <footer class="pt-20 pb-4"  style="background-image: url({{ $assets }}/images/background_pattern.png);"> --}}
+    <footer class="pt-20 pb-4">
     <div class="section-shape top-0" style="background-image: url({{ $assets }}/images/shape8.png);"></div>
     {{-- <div class="insta-main pb-10">
         <div class="container">
