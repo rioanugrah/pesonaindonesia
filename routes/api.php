@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function(){
     Route::post('login', 'API\UserController@login');
+    Route::post('logout', 'API\UserController@logout');
     Route::post('register', 'API\UserController@register');
     Route::prefix('paket')->group(function () {
         Route::get('/', 'API\PaketController@paket');
