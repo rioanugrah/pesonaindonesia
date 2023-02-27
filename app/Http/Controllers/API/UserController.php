@@ -15,14 +15,14 @@ class UserController extends Controller
     public function login(){
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
-            $first_name = explode($user->name);
+            $first_name = explode(" ",$user->name);
             $success =  $user->createToken('nApp')->accessToken;
             // return response()->json(['success' => $success], $this->successStatus);
             return response()->json([
                 'success' => true,
                 // 'data' => $user
                 'data' => [
-                    'first_name' => $first_name,
+                    'first_name' => $first_name[0],
                     'name' => $user->name,
                     'email' => $user->email,
                     'profile' => $user->profile,
