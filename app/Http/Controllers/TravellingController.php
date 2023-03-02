@@ -409,6 +409,7 @@ class TravellingController extends Controller
                 'nama_order' => $data['order']['nama_order'],
                 'nama_pembayaran' => $name[0]->first_name.' '.$name[0]->last_name,
                 'alamat' =>  $name[0]->alamat,
+                'qty' =>  $data['order']['qty'],
                 'phone' =>  $name[0]->phone,
                 'email' =>  $name[0]->email,
                 'total' =>  $data['order']['price'],

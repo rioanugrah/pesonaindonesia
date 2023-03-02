@@ -110,10 +110,10 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td class="tm_width_7" style="font-size:10pt">{{ $order->nama_order.' - '.$name[0]->first_name.' '.$name[0]->last_name }}</td>
-                                                <td class="tm_width_2">Rp. {{ number_format($order->price,0,",",".") }}</td>
-                                                <td class="tm_width_1">{{ $order->qty }}</td>
-                                                <td class="tm_width_2 tm_text_right">Rp. {{ number_format($order->price,0,",",".") }}</td>
+                                                <td class="tm_width_7" style="font-size:10pt">{{ $details['nama_order'].' - '.$details['nama_pembayaran'] }}</td>
+                                                <td class="tm_width_2">Rp. {{ number_format($details['total'],0,",",".") }}</td>
+                                                <td class="tm_width_1">{{ $details['qty'] }}</td>
+                                                <td class="tm_width_2 tm_text_right">Rp. {{ number_format($details['total'],0,",",".") }}</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
