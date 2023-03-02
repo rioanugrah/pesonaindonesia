@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PaketOrder;
 use App\Models\PaketOrderList;
+use App\Models\Order;
+use App\Models\OrderList;
 use App\Models\Perusahaan;
 
 class InvoiceController extends Controller
@@ -16,5 +18,17 @@ class InvoiceController extends Controller
         // $data['perusahaan'] = Perusahaan::first();
         $data['paketLists'] = PaketOrderList::where('order_paket_id',$id)->get();
         return view('invoice.tiket',$data);
+    }
+
+    public function invoice_travelling($id)
+    {
+        $data['order'] = Order::find($id);
+        if(empty($data['order'])){
+            return redirect()->back();
+        }
+
+        $data['order_details'] = OrderList::where('order_id',$data['order']['id'])->get();
+
+        return view('invoice.travelling',$data);
     }
 }

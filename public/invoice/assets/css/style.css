@@ -2309,6 +2309,9 @@ hr {
   Will apply only print window
 ----------------------------------------------------------------*/
 @media print {
+  body{
+    margin:0
+  }
   .tm_gray_bg {
     background-color: #f5f6fa !important;
     -webkit-print-color-adjust: exact;

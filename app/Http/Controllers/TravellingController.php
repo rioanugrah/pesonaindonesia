@@ -10,6 +10,7 @@ use \App\Models\TravellingHighlight;
 use \App\Models\Order;
 use \App\Models\OrderList;
 use App\Mail\Pembayaran;
+use App\Mail\InvoiceTravelling;
 use DataTables;
 use Validator;
 use DB;
@@ -400,6 +401,31 @@ class TravellingController extends Controller
         ));
         try {
             $response = $paymentLink->send();
+            $name = json_decode($data['order']['pemesan']);
+            $bank = json_decode($data['order']['bank']);
+            $details = [
+                'title' => 'Invoice'.' - '.$data['order']['id'],
+                'invoice' => $data['order']['id'],
+                'nama_order' => $data['order']['nama_order'],
+                'nama_pembayaran' => $name[0]->first_name.' '.$name[0]->last_name,
+                'alamat' =>  $name[0]->alamat,
+                'phone' =>  $name[0]->phone,
+                'email' =>  $name[0]->email,
+                'total' =>  $data['order']['price'],
+                'status' =>  $data['order']['status'],
+                'bank' =>  $bank[0]->kode_bank,
+                'nama_penerima' =>  $bank[0]->nama_penerima,
+                'created_at' =>  $data['order']['created_at'],
+                'updated_at' =>  $data['order']['updated_at'],
+                'order_details' => $data['order_list']
+                // 'body' => 'Terima kasih telah melakukan pembelian tiket '.$data['travelling']['nama_travelling'].'.'.
+                //             ' Silahkan lakukan pembayaran berikut.',
+                // 'kode_bank' => $dataUrl['bank_code'],
+                // 'nama_penerima' => 'Pesona Plesiran Indonesia',
+                // 'nomor_rekening' => $dataUrl['va_number'],
+                // 'payment_expired' => date("d F Y H:i:s", substr($dataUrl['trx_expiration_time'], 0, 10)),
+                // 'url' => $dataUrl['url']
+            ];
             if ($response->getStatus() == 200) {
                 $dataPayment = json_decode($response->getBody(),true);
                 $data['dataPayment'] = $dataPayment;
@@ -413,6 +439,7 @@ class TravellingController extends Controller
                     $data['order']->update([
                         'status' => $data['status_pembayaran']
                     ]);
+                    Mail::to($details['email'])->send(new InvoiceTravelling($details));
                     // $data['transaksi']->update([
                     //     'status' => $data['status_pembayaran']
                     // ]);

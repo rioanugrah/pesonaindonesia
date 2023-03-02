@@ -34,10 +34,8 @@ Route::post('event_register', 'FrontendController@eventRegister')->name('fronten
 Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
 Route::get('tracking_order', 'FrontendController@tracking_order')->name('frontend.tracking');
 Route::post('tracking_order/cari', 'FrontendController@tracking_order_search')->name('frontend.tracking.cari');
-
-Route::get('invoice/{id}/tiket_wisata', 'InvoiceController@tiket_wisata')->name('invoice.tiket_wisata');
 // Route::get('testingemail', function(){
-//     return view('email.testingOrder');
+//     return view('invoice.tiket2');
 // });
 // Route::get('testingNew', function(){
 //     $age = array("Peter"=>35, "Ben"=>37, "Joe"=>43);
@@ -143,6 +141,9 @@ Route::prefix('travelling')->group(function(){
     // })->name('frontend.travelling.payment');
 
 });
+
+Route::get('invoice/{id}/tiket_wisata', 'InvoiceController@tiket_wisata')->name('invoice.tiket_wisata');
+Route::get('invoice/{id}/travelling', 'InvoiceController@invoice_travelling')->name('invoice.travelling');
 
 // Route::get('test', function(){
 //     $request = new HTTP_Request2();
