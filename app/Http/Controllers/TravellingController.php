@@ -440,7 +440,9 @@ class TravellingController extends Controller
                     $data['order']->update([
                         'status' => $data['status_pembayaran']
                     ]);
-                    Mail::to($details['email'])->send(new InvoiceTravelling($details));
+
+                    // Mail::to($details['email'])->send(new InvoiceTravelling($details));
+                    
                     // $data['transaksi']->update([
                     //     'status' => $data['status_pembayaran']
                     // ]);
