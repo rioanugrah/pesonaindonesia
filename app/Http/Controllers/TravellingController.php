@@ -15,6 +15,7 @@ use DataTables;
 use Validator;
 use DB;
 use File;
+use PDF;
 use \Carbon\Carbon;
 
 use Mail;
@@ -441,8 +442,31 @@ class TravellingController extends Controller
                         'status' => $data['status_pembayaran']
                     ]);
 
-                    // Mail::to($details['email'])->send(new InvoiceTravelling($details));
+                    $pdf = PDF::loadView('emails.InvoiceTravelling',['details' => $details]);
+                    $pdf->setPaper('A4', 'portrait');
+                    // $pdf->setPaper('A4', 'portrait');
+                    // $pdf = PDF::loadView('emails.testingPDF',['details' => $details]);
                     
+                    // Mail::send($details["email"], $details, function($message)use($details,$pdf) {
+                    //     $message->to($details["email"], $details["nama_pembayaran"])
+                    //     ->subject($details["title"])
+                    //     ->attachData($pdf->output(), "invoice.pdf");
+                    // });
+
+                    // Mail::to($details['email'])
+                    //     ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+                    //     ->subject($details["title"])
+                    //     ->attachData($pdf->output(), "invoice.pdf")
+                    //     ;
+                    
+                    // Mail::to($details['email'])->send(new InvoiceTravelling($details,$pdf));
+                    
+                    Mail::send('emails.messageInvoice', ['details' => $details], function ($message) use ($details, $pdf) {
+                        $message->to($details["email"], $details["email"])
+                                ->subject($details["title"])
+                                ->attachData($pdf->output(), 'Invoice - '.$details["invoice"].'.pdf');
+                    });
+
                     // $data['transaksi']->update([
                     //     'status' => $data['status_pembayaran']
                     // ]);

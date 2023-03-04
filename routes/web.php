@@ -345,6 +345,7 @@ Route::get('save-token1', 'TestingController@save')->name('save.token1');
 Route::post('save-token', 'TestingController@save')->name('save.token');
 Route::post('send-notification', 'TestingController@send_notif')->name('send.notification');
 
+// Route::get('tesinvoice', 'TestingController@testInvoice');
 // Route::prefix('app')->group(function () {
 //     Route::get('/', 'Apps\HomeController@index')->name('apps');
     

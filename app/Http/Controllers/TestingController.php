@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use PDF;
+
 class TestingController extends Controller
 {
     public function save(Request $request)
@@ -45,6 +47,13 @@ class TestingController extends Controller
         $response = curl_exec($ch);
   
         dd($response);
+    }
+
+    public function testInvoice()
+    {
+        $pdf = PDF::loadview('emails.testingPDF');
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream();
     }
 
     
