@@ -238,6 +238,14 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('simpan', 'TravellingController@simpan')->name('travelling.simpan')->middleware('verified');
         });
 
+        Route::prefix('vendors')->group(function(){
+            Route::get('/', 'VendorsController@index')->name('vendors')->middleware('verified');
+            Route::post('simpan', 'VendorsController@simpan')->name('vendors.simpan')->middleware('verified');
+            Route::post('update', 'VendorsController@update')->name('vendors.update')->middleware('verified');
+            Route::get('{kode_vendor}', 'VendorsController@detail')->name('vendors.detail')->middleware('verified');
+            Route::get('produk/{kode_vendor}', 'VendorsController@detail_produk')->name('vendors.detail_produk')->middleware('verified');
+        });
+
         Route::prefix('pengguna')->group(function(){
             Route::get('/', 'UsersController@index')->name('pengguna')->middleware('verified');
             Route::get('{id}', 'UsersController@detail')->name('pengguna.detail')->middleware('verified');

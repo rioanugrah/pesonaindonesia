@@ -70,6 +70,15 @@
                         <span>Events</span>
                     </a>
                 </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ti-email"></i>
+                        <span>Vendor</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('vendors') }}">Data Vendor</a></li>
+                    </ul>
+                </li>
                 <li class="menu-title">Information Technology</li>
                 <li class="{{ Request::is('b/perusahaan*') ? 'mm-active' : '' }}">
                     <a href="{{ route('perusahaan') }}" class="waves-effect">
