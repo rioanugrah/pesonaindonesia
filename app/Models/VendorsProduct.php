@@ -21,5 +21,11 @@ class VendorsProduct extends Model
         'deskripsi',
         'price',
         'discount',
+        'images',
     ];
+
+    public function vendors()
+    {
+        return $this->belongsTo(\App\Models\Vendors::class,'vendors_id');
+    }
 }

@@ -21,6 +21,7 @@ class CreateVendorsProductTable extends Migration
             $table->text('deskripsi')->nullabel();
             $table->string('price');
             $table->string('discount');
+            $table->text('images');
             $table->timestamps();
             $table->foreign('vendors_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->softDeletes();

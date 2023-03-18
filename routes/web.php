@@ -244,6 +244,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('update', 'VendorsController@update')->name('vendors.update')->middleware('verified');
             Route::get('{kode_vendor}', 'VendorsController@detail')->name('vendors.detail')->middleware('verified');
             Route::get('produk/{kode_vendor}', 'VendorsController@detail_produk')->name('vendors.detail_produk')->middleware('verified');
+            Route::get('produk/{kode_vendor}/create', 'VendorsController@detail_create')->name('vendors.detail_produk.create')->middleware('verified');
+            Route::post('produk/{kode_vendor}/simpan', 'VendorsController@detail_simpan')->name('vendors.detail_produk.simpan')->middleware('verified');
         });
 
         Route::prefix('pengguna')->group(function(){
@@ -284,19 +286,21 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
         
-        Route::get('hotel', 'HotelController@index')->name('hotel')->middleware('verified');
-        Route::post('hotel/simpan', 'HotelController@simpan')->name('hotel.simpan')->middleware('verified');
-        Route::post('hotel/upload_image', 'HotelController@upload_image')->name('hotel.upload_image')->middleware('verified');
-        Route::post('hotel/update', 'HotelController@update')->name('hotel.update')->middleware('verified');
-        Route::get('hotel/{id}/image', 'HotelController@detail_image')->middleware('verified');
-        Route::get('hotel/{id}', 'HotelController@detail')->name('hotel.detail')->middleware('verified');
-        Route::get('hotel/{id}/edit', 'HotelController@edit')->name('hotel.edit')->middleware('verified');
-        Route::get('hotel/{id}/kamar', 'KamarHotelController@index')->name('kamar')->middleware('verified');
-        Route::post('hotel/kamar/simpan', 'KamarHotelController@simpan')->name('kamar.simpan')->middleware('verified');
-        Route::get('hotel/delete/{id}', 'HotelController@destroy')->name('hotel.hapus')->middleware('verified');
-        Route::post('hotel/export', 'HotelController@export')->name('hotel.export')->middleware('verified');
-        Route::post('hotel/import', 'HotelController@import')->name('hotel.import')->middleware('verified');
-        Route::get('hotel/checkroom/{id}', 'HotelController@checkRoom')->name('hotel.checkroom')->middleware('verified');
+        Route::prefix('hotel')->group(function() {
+            Route::get('/', 'HotelController@index')->name('hotel')->middleware('verified');
+            Route::post('/simpan', 'HotelController@simpan')->name('hotel.simpan')->middleware('verified');
+            Route::post('/upload_image', 'HotelController@upload_image')->name('hotel.upload_image')->middleware('verified');
+            Route::post('/update', 'HotelController@update')->name('hotel.update')->middleware('verified');
+            Route::get('/{id}/image', 'HotelController@detail_image')->middleware('verified');
+            Route::get('/{id}', 'HotelController@detail')->name('hotel.detail')->middleware('verified');
+            Route::get('/{id}/edit', 'HotelController@edit')->name('hotel.edit')->middleware('verified');
+            Route::get('/{id}/kamar', 'KamarHotelController@index')->name('kamar')->middleware('verified');
+            Route::post('/kamar/simpan', 'KamarHotelController@simpan')->name('kamar.simpan')->middleware('verified');
+            Route::get('/delete/{id}', 'HotelController@destroy')->name('hotel.hapus')->middleware('verified');
+            Route::post('/export', 'HotelController@export')->name('hotel.export')->middleware('verified');
+            Route::post('/import', 'HotelController@import')->name('hotel.import')->middleware('verified');
+            Route::get('/checkroom/{id}', 'HotelController@checkRoom')->name('hotel.checkroom')->middleware('verified');
+        });
         // Route::get('hotel/importExportView', 'DemoController@importExportView');
         
         Route::get('perusahaan', 'PerusahaanController@index')->name('perusahaan')->middleware('verified');
