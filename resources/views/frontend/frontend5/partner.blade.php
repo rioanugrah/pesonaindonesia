@@ -71,7 +71,7 @@
                 <div class="container">
                     <div class="navbar-flex d-flex align-items-center justify-content-between w-100 pb-3 pt-3">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="{{ route('frontend') }}">
+                            <a class="navbar-brand" href="{{ route('frontend.partnership') }}">
                                 <img src="{{ $assets }}/images/logo_plesiran_new_black2.webp" width="200" alt="image">
                             </a>
                         </div>

@@ -265,7 +265,7 @@ Route::post('send-notification', 'TestingController@send_notif')->name('send.not
 
 Route::domain(env('APP_PARTNER_APP'))->group(function () {
 // Route::domain('partner.plesiranindonesia.com')->group(function () {
-    Route::get('home', 'FrontendController@partnership')->name('frontend.partnership');
+    Route::get('home', 'FrontendController@partnership');
 });
 
 // Route::any('{page?}',function(){
