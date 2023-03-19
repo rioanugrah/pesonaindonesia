@@ -359,13 +359,6 @@ Route::post('send-notification', 'TestingController@send_notif')->name('send.not
 
 Route::domain('partner.' . env('APP_URL'))->group(function () {
     Route::get('home', 'FrontendController@partnership')->name('frontend.partnership');
-    
-    // Route::get('home', function () {
-    //     return 'Second subdomain landing page';
-    // });
-    Route::get('post/{id}', function ($id) {
-        return 'Post ' . $id . ' in second subdomain';
-    });
 });
 
 // Route::get('tesinvoice', 'TestingController@testInvoice');
