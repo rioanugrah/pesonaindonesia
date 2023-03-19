@@ -263,7 +263,7 @@ Route::get('save-token1', 'TestingController@save')->name('save.token1');
 Route::post('save-token', 'TestingController@save')->name('save.token');
 Route::post('send-notification', 'TestingController@send_notif')->name('send.notification');
 
-Route::domain('partner.' . env('APP_PARTNER_APP'))->group(function () {
+Route::domain('partner.plesiranindonesia.com')->group(function () {
     Route::get('homes', 'FrontendController@partnership')->name('frontend.partnership');
 });
 
