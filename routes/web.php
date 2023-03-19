@@ -12,11 +12,6 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     // return view('frontend.index');
-//     // return view('welcome');
-// });
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'FrontendController@index')->name('frontend');
@@ -34,14 +29,6 @@ Route::post('event_register', 'FrontendController@eventRegister')->name('fronten
 Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
 Route::get('tracking_order', 'FrontendController@tracking_order')->name('frontend.tracking');
 Route::post('tracking_order/cari', 'FrontendController@tracking_order_search')->name('frontend.tracking.cari');
-// Route::get('testingemail', function(){
-//     return view('invoice.tiket2');
-// });
-// Route::get('testingNew', function(){
-//     $age = array("Peter"=>35, "Ben"=>37, "Joe"=>43);
-//     echo json_encode($age['Peter']);
-//     // return view('email.testingOrder');
-// });
 
 Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
 
@@ -72,29 +59,6 @@ Route::prefix('tour')->group(function () {
     Route::post('{slug}/{id}/checkout', 'FrontendNewController@paket_list_order_payment')->name('frontend_new.paket.checkout');
 
 });
-
-// Route::get('testingPayment', function(){
-//     return json_encode([
-//         'partner_tx_id' => 123,
-//         'description' => '',
-//         'notes' => '',
-//         'sender_name' => 123,
-//         'amount' => 123,
-//         'email' => 123,
-//         'phone_number' => 123,
-//         'is_open' => false,
-//         "step" => "input-amount",
-//         'include_admin_fee' => false,
-//         'list_disabled_payment_methods' => '',
-//         'list_enabled_banks' => '',
-//         // 'expiration' => '2022-09-12 23:00:00',
-//         // 'due_date' => '2022-09-12 22:00:00',
-//         // 'expiration' => '2022-09-12 21:00:00',
-//         'expiration' => ''.\Carbon\Carbon::now()->addDays(1).'',
-//         'due_date' => ''.\Carbon\Carbon::now().'',
-//         "va_display_name" => "Display Name on VA"
-//     ]);
-// });
 
 Route::prefix('hotel')->group(function () {
     Route::get('/', 'FrontendController@hotel')->name('frontend.hotel');
@@ -136,48 +100,10 @@ Route::prefix('travelling')->group(function(){
     Route::get('/order/{id}', 'TravellingController@f_detail_order')->name('frontend.travelling_detail_order');
     Route::post('order/{id}/checkout', 'TravellingController@buy_order')->name('frontend.travelling.checkout');
     Route::get('payment/{id}', 'TravellingController@order_payment')->name('frontend.travelling.payment');
-    // Route::get('payment/{id}', function($id){
-    //     echo 'Travelling Payment - '.$id;
-    // })->name('frontend.travelling.payment');
-
 });
 
 Route::get('invoice/{id}/tiket_wisata', 'InvoiceController@tiket_wisata')->name('invoice.tiket_wisata');
 Route::get('invoice/{id}/travelling', 'InvoiceController@invoice_travelling')->name('invoice.travelling');
-
-// Route::get('test', function(){
-//     $request = new HTTP_Request2();
-//     $request->setUrl('https://hotels4.p.rapidapi.com/v2/get-meta-data');
-//     $request->setMethod(HTTP_Request2::METHOD_GET);
-//     $request->setHeader([
-//         'X-RapidAPI-Key' => 'e35dfac073msh7ab7c9150a5eecap1a8c08jsn7ad10c81d417',
-//         'X-RapidAPI-Host' => 'hotels4.p.rapidapi.com'
-//     ]);
-
-//     try {
-//         $response = $request->send();
-
-//         echo $response->getBody();
-//     } catch (HttpException $ex) {
-//         echo $ex;
-//     }
-// });
-
-// Route::get('testing-email', function(){
-//     $data['details'] = [
-//         'nama_pembayaran' => 'Rio',
-//         'nama_paket' => 'Wisata Bromo Desember 2022',
-//         'body' => 'Terima telah melakukan pembelian tiket Wisata Bromo Desember 2022',
-//         'invoice' => 'INV-00000',
-//         'email' => 'rioanugrah999@gmail.com',
-//         'total' => 350000,
-//         'kode_bank' => '008',
-//         'nama_penerima' => 'Pesona Plesiran Indonesia',
-//         'nomor_rekening' => '8932560000011983',
-//         'payment_expired' => date("d F Y H:i:s", substr('1671380982000', 0, 10)),
-//     ];
-//     return view('emails.Pembayaran',$data);
-// });
 
 Route::get('testings', 'FrontendController@frontend_testing');
 
@@ -330,26 +256,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::post('cooperation/kab_kota', 'CooperationController@select_kab_kota')->name('select.kota');
 
-// Route::middleware('web')->domain('partner.'.env('APP_URL'))->group(function(){
-//     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
-// });
-// Route::middleware('web')->domain('app.'.env('APP_URL'))->group(function(){
-//     Route::get('/', 'Apps\HomeController@index');
-//     Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
-//     Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
-//     Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
-    
-//     Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
-//     Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
-//     Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
-// });
-
-// Route::middleware('web')->domain('plesiranmalang.'.env('APP_URL'))->group(function(){
-//     Route::get('/', 'FrontendPlesiranMalangController@index')->name('plmlg');
-//     Route::get('hotel', 'FrontendPlesiranMalangController@hotel')->name('plmlg.hotel');
-//     Route::get('hotel/{slug}', 'FrontendPlesiranMalangController@hotel_detail')->name('plmlg.hotelDetail');
-// });
-
 Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login_google');
 Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
 
@@ -360,33 +266,6 @@ Route::post('send-notification', 'TestingController@send_notif')->name('send.not
 Route::domain('partner.' . env('APP_URL'))->group(function () {
     Route::get('home', 'FrontendController@partnership')->name('frontend.partnership');
 });
-
-// Route::get('tesinvoice', 'TestingController@testInvoice');
-// Route::prefix('app')->group(function () {
-//     Route::get('/', 'Apps\HomeController@index')->name('apps');
-    
-//     Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
-//     Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
-//     Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
-
-//     Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
-//     Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
-//     Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
-// });
-// Route::group(['domain' => 'app.localhost'], function () {
-//     Route::get('/', 'Apps\HomeController@index');
-//     // {
-//         // return view('auth.login');
-//         // return "This will respond to requests for 'admin.localhost/'";
-//     // });
-//     Route::get('login', 'Apps\Auth\LoginController@login')->name('apps.login');
-//     Route::post('login', 'Apps\Auth\LoginController@authenticate')->name('apps.post.login');
-//     Route::get('logout', 'Apps\Auth\LoginController@logout')->name('apps.logout');
-
-//     Route::get('home', 'Apps\HomeController@index')->middleware('verified')->name('apps.home');
-//     Route::get('hotel', 'Apps\HotelController@index')->name('apps.hotel');
-//     Route::get('hotel/{slug}', 'Apps\HotelController@detail')->name('apps.detail');
-// });
 
 // Route::any('{page?}',function(){
 //     return View::make('layouts.status.404');
