@@ -389,7 +389,8 @@ class FrontendController extends Controller
         // $data['kabupaten_kotas'] = KabupatenKota::all();
         $data['provinsis'] = Provinsi::pluck('nama','id');
         visitor()->visit();
-        return view('frontend.frontend2.partnership',$data);
+        return view('frontend.frontend5.partner');
+        // return view('frontend.frontend2.partnership',$data);
     }
 
     public function hotel()

@@ -357,6 +357,17 @@ Route::get('save-token1', 'TestingController@save')->name('save.token1');
 Route::post('save-token', 'TestingController@save')->name('save.token');
 Route::post('send-notification', 'TestingController@send_notif')->name('send.notification');
 
+Route::domain('partner.' . env('APP_URL'))->group(function () {
+    Route::get('home', 'FrontendController@partnership')->name('frontend.partnership');
+    
+    // Route::get('home', function () {
+    //     return 'Second subdomain landing page';
+    // });
+    Route::get('post/{id}', function ($id) {
+        return 'Post ' . $id . ' in second subdomain';
+    });
+});
+
 // Route::get('tesinvoice', 'TestingController@testInvoice');
 // Route::prefix('app')->group(function () {
 //     Route::get('/', 'Apps\HomeController@index')->name('apps');

@@ -77,6 +77,7 @@
                         <h3 class="white">Lainnya</h3>
                         <ul>
                           <li><a href="{{ route('frontend.blog') }}">Blog</a></li>
+                          <li><a href="javascript:void()">Jadi Partner Kami</a></li>
                           {{-- <li><a href="javascript:void()">Gallery</a></li>
                           <li><a href="javascript:void()">Syarat & Ketentuan</a></li> --}}
                         </ul>
@@ -114,7 +115,7 @@
             <div class="row footer-pay align-items-center justify-content-between text-lg-start text-center">
                 <div class="col-lg-8 footer-payment-nav mb-4">
                     <ul class="">
-                        <li class="me-2">Kami Support:</li>
+                        <li class="me-2">Payment Partner:</li>
                         <li class="me-2"><img src="{{ $assets }}/images/logo_payment/bca.webp" alt="bca" width="80" style="filter: brightness(0) invert(1);" srcset=""></li>
                         <li class="me-2"><img src="{{ $assets }}/images/logo_payment/bni.webp" alt="bni" width="80" style="filter: brightness(0) invert(1);" srcset=""></li>
                         <li class="me-2"><img src="{{ $assets }}/images/logo_payment/bri.webp" alt="bri" width="80" style="filter: brightness(0) invert(1);" srcset=""></li>
