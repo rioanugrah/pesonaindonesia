@@ -264,7 +264,7 @@ Route::post('save-token', 'TestingController@save')->name('save.token');
 Route::post('send-notification', 'TestingController@send_notif')->name('send.notification');
 
 Route::domain('partner.' . env('APP_URL'))->group(function () {
-    Route::get('home', 'FrontendController@partnership')->name('frontend.partnership');
+    Route::get('homes', 'FrontendController@partnership')->name('frontend.partnership');
 });
 
 // Route::any('{page?}',function(){
