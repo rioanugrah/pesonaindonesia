@@ -153,73 +153,80 @@
                                         <div class="col-md-4">
                                             <div class="form-group mb-2">
                                                 <label>Nama Perusahaan</label>
-                                                <input type="text" name="first_name"
+                                                <input type="text" name="nama_perusahaan"
                                                     placeholder="Nama Perusahaan" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-2">
                                                 <label>Nama Pemilik</label>
-                                                <input type="text" name="first_name"
+                                                <input type="text" name="nama"
                                                     placeholder="Nama Pemilik" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-2">
                                                 <label>Email</label>
-                                                <input type="email" name="first_name"
+                                                <input type="email" name="email"
                                                     placeholder="Email" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group mb-2">
                                                 <label>Alamat</label>
-                                                <textarea name="" id="" cols="30" rows="5"></textarea>
+                                                <textarea name="alamat_perusahaan" id="" cols="30" rows="5"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-2">
                                                 <label>Jenis Perusahaan</label>
-                                                <select name="" id="">
+                                                <select name="kategori" id="">
                                                     <option>-- Jenis Perusahaan --</option>
+                                                    <option value="Rental">Rental</option>
+                                                    <option value="Jeep">Jeep</option>
+                                                    <option value="Sewa">Sewa</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-2">
                                                 <label>Provinsi</label>
-                                                <select name="" id="">
+                                                <select name="provinsi" id="provinsi">
                                                     <option>-- Provinsi --</option>
+                                                    @foreach ($provinsis as $id => $provinsi)
+                                                        <option value="{{ $id }}">{{ $provinsi }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-2">
                                                 <label>Kabupaten / Kota</label>
-                                                <select name="" id="">
-                                                    <option>-- Kabupaten / Kota --</option>
+                                                <select name="kab_kota" id="kab_kota">
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-2">
                                                 <label>Kode Pos</label>
-                                                <input type="text" name="first_name"
+                                                <input type="text" name="kode_pos"
                                                     placeholder="Kode Pos" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-2">
                                                 <label>Negara</label>
-                                                <select name="" id="">
+                                                <select name="negara" id="">
                                                     <option>-- Negara --</option>
+                                                    <option value="Indonesia">Indonesia</option>
+                                                    <option value="Inggris">Inggris</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-2">
                                                 <label>No.Telp / Whatsapp</label>
-                                                <input type="text" name="first_name"
+                                                <input type="text" name="telp_selular"
                                                     placeholder="No.Telp / Whatsapp" required>
                                             </div>
                                         </div>
@@ -268,6 +275,64 @@
     @endguest
     <script src="{{ $assets }}/js/custom-swiper.js"></script>
     <script src="{{ $assets }}/js/custom-nav.js"></script>
+    <script src="{{ asset('backend/assets2/js/axios.min.js') }}"></script>
+
     @yield('js')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#provinsi').on('change',function(){
+            axios.post('{{ url('cooperation/kab_kota') }}', {id: $(this).val()})
+            .then(function (response) {
+                $('#kab_kota').empty();
+
+                $.each(response.data, function (id, nama) {
+                    // alert(nama);
+                    $('#kab_kota').append(new Option(nama, id))
+                })
+            });
+        });
+
+        $('#upload-form').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $('#image-input-error').text('');
+            $.ajax({
+                type:'POST',
+                url: "{{ route('frontend.partnership.simpan') }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    if(result.success != false){
+                        // iziToast.success({
+                        //     title: result.message_title,
+                        //     message: result.message_content
+                        // });
+                        alert(result.message_content);
+                        this.reset();
+                        // table.ajax.reload();
+                    }else{
+                        // iziToast.error({
+                        //     title: result.success,
+                        //     message: result.error
+                        // });
+                        alert(result.error);
+                    }
+                },
+                error: function (request, status, error) {
+                    // iziToast.error({
+                    //     title: 'Error',
+                    //     message: error,
+                    // });
+                    alert(error);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -21,6 +21,8 @@ use App\Models\PaketOrder;
 use App\Models\PaketOrderList;
 use App\Models\Travelling;
 use App\Models\Coupons;
+use App\Models\Cooperation;
+use App\Models\Partnership;
 use App\User;
 
 use App\Models\KategoriPaket;
@@ -389,8 +391,85 @@ class FrontendController extends Controller
         // $data['kabupaten_kotas'] = KabupatenKota::all();
         $data['provinsis'] = Provinsi::pluck('nama','id');
         visitor()->visit();
-        return view('frontend.frontend5.partner');
+        return view('frontend.frontend5.partner',$data);
         // return view('frontend.frontend2.partnership',$data);
+    }
+
+    public function partnership_simpan(Request $request)
+    {
+        $rules = [
+            'nama'  => 'required',
+            'nama_perusahaan'  => 'required',
+            'email'  => 'required|unique:cooperation',
+            // 'logo_perusahaan'  => 'required',
+            'kategori'  => 'required',
+            'alamat_perusahaan'  => 'required',
+            'kab_kota'  => 'required',
+            'provinsi'  => 'required',
+            'kode_pos'  => 'required',
+            // 'telp_kantor'  => 'required',
+            'telp_selular'  => 'required',
+            // 'no_fax'  => 'required',
+        ];
+
+        $messages = [
+            'nama.required'  => 'Nama wajib diisi.',
+            'nama_perusahaan.required'  => 'Nama Perusahaan wajib diisi.',
+            'email.required'  => 'Email wajib diisi.',
+            'email.unique'  => 'Email sudah ada.',
+            // 'logo_perusahaan.required'   => 'Logo Perusahaan wajib diisi.',
+            'kategori.required'   => 'Kategori wajib diisi.',
+            'alamat_perusahaan.required'   => 'Alamat Perusahaan wajib diisi.',
+            'kab_kota.required'   => 'Kabupaten / Kota wajib diisi.',
+            'provinsi.required'   => 'Provinsi wajib diisi.',
+            'kode_pos.required'   => 'Kode Pos wajib diisi.',
+            // 'telp_kantor.required'   => 'Telpon Kantor wajib diisi.',
+            'telp_selular.required'   => 'Telpon Selular wajib diisi.',
+            // 'no_fax.required'   => 'No. Fax wajib diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->passes()) {
+            $input = $request->all();
+            $input['id'] = Str::uuid()->toString();
+            $input['status'] = 0;
+            $norut = Cooperation::max('kode_corporate');
+            if($norut == null){
+                $norut = 1;
+            }
+            $input['kode_corporate'] = 'C-'.sprintf("%03s",$norut+1).'-'.date('m-Y');
+            $cooperation = Cooperation::create($input);
+
+            $input2['id'] = Str::uuid()->toString();
+            $input2['slug'] = $request->nama_perusahaan;
+            $input2['nama_partner'] = $request->nama_perusahaan;
+            $input2['penanggung_jawab'] = $request->nama;
+            $input2['alamat'] = $request->alamat_perusahaan;
+
+            $partnership = Partnership::create($input2);
+
+            if($cooperation){
+                $message_title="Berhasil !";
+                $message_content="Kerjasama Berhasil Dibuat";
+                $message_type="success";
+                $message_succes = true;
+            }
+
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return response()->json($array_message);
+        }
+
+        return response()->json(
+            [
+                'success' => false,
+                'error' => $validator->errors()->all()
+            ]
+        );
     }
 
     public function hotel()

@@ -263,9 +263,10 @@ Route::get('save-token1', 'TestingController@save')->name('save.token1');
 Route::post('save-token', 'TestingController@save')->name('save.token');
 Route::post('send-notification', 'TestingController@send_notif')->name('send.notification');
 
-Route::domain(env('APP_PARTNER_APP'))->group(function () {
+Route::domain('partner.'.parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
 // Route::domain('partner.plesiranindonesia.com')->group(function () {
     Route::get('home', 'FrontendController@partnership');
+    Route::post('home/simpan', 'FrontendController@partnership_simpan')->name('partnership.simpan');
 });
 
 // Route::any('{page?}',function(){
