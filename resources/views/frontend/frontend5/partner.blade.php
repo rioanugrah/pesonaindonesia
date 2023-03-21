@@ -40,6 +40,7 @@
     <link href="{{ $assets }}/css/plugin.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ $assets }}/fonts/line-icons.css" type="text/css">
     <link rel="stylesheet" href="{{ $assets . '/css/scroll.css' }}">
+    <link href="{{ $assets }}/css/sweetalert2.min.css" rel="stylesheet">
     @yield('css')
     @yield('head')
 </head>
@@ -145,7 +146,7 @@
                 <div class="col-lg-12">
                     <div class="payment-book">
                         <div class="booking-box">
-                            <form action="" method="post">
+                            <form id="upload-form" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="customer-information mb-4">
                                     <h3 class="border-b pb-2 mb-2 text-center">Formulir Pendaftaran Partner</h3>
@@ -154,21 +155,21 @@
                                             <div class="form-group mb-2">
                                                 <label>Nama Perusahaan</label>
                                                 <input type="text" name="nama_perusahaan"
-                                                    placeholder="Nama Perusahaan" required>
+                                                    placeholder="Nama Perusahaan">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-2">
                                                 <label>Nama Pemilik</label>
                                                 <input type="text" name="nama"
-                                                    placeholder="Nama Pemilik" required>
+                                                    placeholder="Nama Pemilik">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-2">
                                                 <label>Email</label>
                                                 <input type="email" name="email"
-                                                    placeholder="Email" required>
+                                                    placeholder="Email">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -210,7 +211,7 @@
                                             <div class="form-group mb-2">
                                                 <label>Kode Pos</label>
                                                 <input type="text" name="kode_pos"
-                                                    placeholder="Kode Pos" required>
+                                                    placeholder="Kode Pos">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -227,7 +228,7 @@
                                             <div class="form-group mb-2">
                                                 <label>No.Telp / Whatsapp</label>
                                                 <input type="text" name="telp_selular"
-                                                    placeholder="No.Telp / Whatsapp" required>
+                                                    placeholder="No.Telp / Whatsapp">
                                             </div>
                                         </div>
                                     </div>
@@ -252,6 +253,7 @@
     <script src="{{ $assets }}/js/particlerun.js"></script>
     <script src="{{ $assets }}/js/plugin.js"></script>
     <script src="{{ $assets }}/js/main.js"></script>
+    <script src="{{ $assets }}/js/sweetalert2.all.min.js"></script>
     @guest
     <script>
         document.addEventListener("keydown", (e) => {
@@ -297,16 +299,67 @@
             });
         });
 
+        const showLoading = function(){
+            swal.fire({
+                title: 'Now loading',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                // timer: 2000,
+                onOpen: () => {
+                    swal.showLoading();
+                }
+            })
+            .then(
+                () => {},
+                (dismiss) => {
+                if (dismiss === 'timer') {
+                    console.log('closed by timer!!!!');
+                    swal({ 
+                        title: 'Finished!',
+                        type: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
+                    })
+                }
+                }
+            )
+        }
+
         $('#upload-form').submit(function(e) {
             e.preventDefault();
             let formData = new FormData(this);
             $('#image-input-error').text('');
             $.ajax({
                 type:'POST',
-                url: "{{ route('frontend.partnership.simpan') }}",
+                url: "{{ route('partnership.simpan') }}",
                 data: formData,
                 contentType: false,
                 processData: false,
+                beforeSend: function() {
+                    swal.fire({
+                        title: 'Now loading',
+                        allowEscapeKey: false,
+                        allowOutsideClick: false,
+                        timer: 2000,
+                        onOpen: () => {
+                            swal.showLoading();
+                        }
+                    })
+                    .then(
+                        () => {},
+                        (dismiss) => {
+                        if (dismiss === 'timer') {
+                            // console.log('closed by timer!!!!');
+                            swal({ 
+                                title: 'Finished!',
+                                type: 'success',
+                                timer: 2000,
+                                showConfirmButton: false
+                            })
+                        }
+                        }
+                    )
+                },
                 success: (result) => {
                     if(result.success != false){
                         // iziToast.success({
@@ -321,7 +374,12 @@
                         //     title: result.success,
                         //     message: result.error
                         // });
-                        alert(result.error);
+                        // alert(result.error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: result.error,
+                        })
                     }
                 },
                 error: function (request, status, error) {
@@ -329,8 +387,30 @@
                     //     title: 'Error',
                     //     message: error,
                     // });
-                    alert(error);
-                }
+                    // alert(error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error,
+                    })
+                },
+                // complete: function() {
+                //     showLoading
+                //     .then(
+                //         () => {},
+                //         (dismiss) => {
+                //         if (dismiss === 'timer') {
+                //             console.log('closed by timer!!!!');
+                //             swal({ 
+                //                 title: 'Finished!',
+                //                 type: 'success',
+                //                 timer: 2000,
+                //                 showConfirmButton: false
+                //             })
+                //         }
+                //         }
+                //     )
+                // },
             });
         });
     </script>

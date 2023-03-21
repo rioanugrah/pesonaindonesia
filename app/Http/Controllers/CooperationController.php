@@ -142,15 +142,15 @@ class CooperationController extends Controller
             'nama'  => 'required',
             'nama_perusahaan'  => 'required',
             'email'  => 'required|unique:cooperation',
-            'logo_perusahaan'  => 'required',
-            'kategori'  => 'required',
+            // 'logo_perusahaan'  => 'required',
+            // 'kategori'  => 'required',
             'alamat_perusahaan'  => 'required',
             'kab_kota'  => 'required',
             'provinsi'  => 'required',
             'kode_pos'  => 'required',
-            'telp_kantor'  => 'required',
+            // 'telp_kantor'  => 'required',
             'telp_selular'  => 'required',
-            'no_fax'  => 'required',
+            // 'no_fax'  => 'required',
         ];
  
         $messages = [
@@ -158,15 +158,15 @@ class CooperationController extends Controller
             'nama_perusahaan.required'  => 'Nama Perusahaan wajib diisi.',
             'email.required'  => 'Email wajib diisi.',
             'email.unique'  => 'Email sudah ada.',
-            'logo_perusahaan.required'   => 'Logo Perusahaan wajib diisi.',
-            'kategori.required'   => 'Kategori wajib diisi.',
+            // 'logo_perusahaan.required'   => 'Logo Perusahaan wajib diisi.',
+            // 'kategori.required'   => 'Kategori wajib diisi.',
             'alamat_perusahaan.required'   => 'Alamat Perusahaan wajib diisi.',
             'kab_kota.required'   => 'Kabupaten / Kota wajib diisi.',
             'provinsi.required'   => 'Provinsi wajib diisi.',
             'kode_pos.required'   => 'Kode Pos wajib diisi.',
-            'telp_kantor.required'   => 'Telpon Kantor wajib diisi.',
+            // 'telp_kantor.required'   => 'Telpon Kantor wajib diisi.',
             'telp_selular.required'   => 'Telpon Selular wajib diisi.',
-            'no_fax.required'   => 'No. Fax wajib diisi.',
+            // 'no_fax.required'   => 'No. Fax wajib diisi.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -182,11 +182,13 @@ class CooperationController extends Controller
             }
             $input['kode_corporate'] = 'C-'.sprintf("%03s",$norut+1).'-'.date('m-Y');
 
-            $image = $request->file('logo_perusahaan');
-            $img = \Image::make($image->path());
-            $img = $img->encode('webp', 75);
-            $input['logo_perusahaan'] = 'LG-'.sprintf("%03s",$norut+1).'-'.date('m-Y').'.webp';
-            $img->save(public_path('backend/berkas/coorporate/').$input['logo_perusahaan']);
+            if($request->file('logo_perusahaan')){
+                $image = $request->file('logo_perusahaan');
+                $img = \Image::make($image->path());
+                $img = $img->encode('webp', 75);
+                $input['logo_perusahaan'] = 'LG-'.sprintf("%03s",$norut+1).'-'.date('m-Y').'.webp';
+                $img->save(public_path('backend/berkas/coorporate/').$input['logo_perusahaan']);
+            }
             // $input['logo_perusahaan'] = 'logo-'.Str::slug($request->nama_perusahaan).'.'.$request->logo_perusahaan->getClientOriginalExtension();
             // $request->logo_perusahaan->move(public_path('backend/berkas/coorporate'), $input['logo_perusahaan']);
             // $request->foto->move(storage_path('app/public/image'), $input['image']);

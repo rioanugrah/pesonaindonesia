@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Slider;
 use App\Models\Hotel;
 use App\Models\KamarHotel;
@@ -430,16 +431,31 @@ class FrontendController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->passes()) {
+            // $input = $request->all();
+            // $input['id'] = 1;
+            // $input['id'] = Str::uuid()->toString();
+            // $input['nama_perusahaan'] = $request->nama_perusahaan;
+            // $input['nama'] = $request->nama;
+            // $input['email'] = $request->email;
+            // $input['alamat_perusahaan'] = $request->alamat_perusahaan;
+            // $input['kategori'] = $request->kategori;
+            // $input['provinsi'] = $request->provinsi;
+            // $input['kab_kota'] = $request->kab_kota;
+            // $input['kode_pos'] = $request->kode_pos;
+            // $input['negara'] = $request->negara;
+            // $input['telp_selular'] = $request->telp_selular;
             $input = $request->all();
             $input['id'] = Str::uuid()->toString();
+            $input['negara'] = 'Indonesia';
             $input['status'] = 0;
+            
             $norut = Cooperation::max('kode_corporate');
             if($norut == null){
                 $norut = 1;
             }
             $input['kode_corporate'] = 'C-'.sprintf("%03s",$norut+1).'-'.date('m-Y');
             $cooperation = Cooperation::create($input);
-
+            // dd($input);
             $input2['id'] = Str::uuid()->toString();
             $input2['slug'] = $request->nama_perusahaan;
             $input2['nama_partner'] = $request->nama_perusahaan;
