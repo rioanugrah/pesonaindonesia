@@ -366,7 +366,13 @@
                         //     title: result.message_title,
                         //     message: result.message_content
                         // });
-                        alert(result.message_content);
+                        // alert(result.message_content);
+                        swal.fire({ 
+                            title: 'Success!',
+                            type: 'success',
+                            timer: 2000,
+                            showConfirmButton: false
+                        })
                         this.reset();
                         // table.ajax.reload();
                     }else{
