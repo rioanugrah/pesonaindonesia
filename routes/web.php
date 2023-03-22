@@ -269,7 +269,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
 
 Route::domain('partner.'.parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
 // Route::domain('partner.plesiranindonesia.com')->group(function () {
-    Route::get('/', 'FrontendController@partnership');
+    Route::get('/', 'FrontendController@partnership')->name('partnership');
     Route::post('home/simpan', 'FrontendController@partnership_simpan')->name('partnership.simpan');
 });
 
