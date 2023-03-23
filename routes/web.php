@@ -78,10 +78,10 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::get('{slug}', 'FrontendController@blog_detail')->name('frontend.blog_detail');
     });
     
-    Route::prefix('partner')->group(function(){
-        Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
-        Route::post('simpan', 'CooperationController@simpan_frontend')->name('frontend.partnership.simpan');
-    });
+    // Route::prefix('partner')->group(function(){
+    //     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
+    //     Route::post('simpan', 'CooperationController@simpan_frontend')->name('frontend.partnership.simpan');
+    // });
     
     Route::prefix('gallery')->group(function () {
         Route::get('/', 'GalleryController@index')->name('frontend.gallery');
