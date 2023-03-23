@@ -28,22 +28,22 @@
                                         <small><i class="fa fa-location-arrow"></i> Meeting Point: {{ $travelling->meeting_point }}</small>
                                     </div>
                                 </div>    
-                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                {{-- <div class="col-lg-3 col-md-3 col-sm-12">
                                     <div class="item-inner">
                                         <div class="content">
                                             <p class="mb-0 text-uppercase">From Order</p>
                                             <h5 class="mb-0">{{ \Carbon\Carbon::create($travelling->tanggal_rilis)->isoFormat('dddd, D MMMM Y') }}</h5>
                                         </div>
                                     </div>
-                                </div>    
-                                <div class="col-lg-1 col-md-1 col-sm-12"> 
+                                </div>     --}}
+                                {{-- <div class="col-lg-1 col-md-1 col-sm-12"> 
                                     <div class="item-inner">
                                         <div class="content">
                                             <p class="mb-0 text-uppercase">Time</p>
                                             <h3 class="mb-0">{{ \Carbon\Carbon::create($travelling->tanggal_rilis)->format('H:i') }}</h3>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 {{-- <div class="col-lg-2 col-md-2 col-sm-12">
                                     <div class="item-inner flight-time">
                                     <p class="mb-0">-</p>

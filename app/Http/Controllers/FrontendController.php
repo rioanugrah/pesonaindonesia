@@ -130,7 +130,9 @@ class FrontendController extends Controller
             $data['paket_trips'] = PaketList::where('status','!=',0)
                                             ->orderBy('created_at','desc')->paginate(6);
             $data['travellings'] = Travelling::orderBy('created_at','desc')->paginate(6);
-            $data['coupons'] = Coupons::orderBy('created_at','desc')->paginate(6);
+            $data['coupons'] = Coupons::orderBy('created_at','desc')
+                                    ->where('coupons_expired','>=',Carbon::now()->format('Y-m-d'))
+                                    ->paginate(6);
             $data['akomodasis'] = [
                 ['title' => 'Hotel', 'image' => asset('frontend/assets4/img/akomodasi/hotel.webp')],
                 ['title' => 'Villa', 'image' => asset('frontend/assets4/img/akomodasi/hotel.webp')],

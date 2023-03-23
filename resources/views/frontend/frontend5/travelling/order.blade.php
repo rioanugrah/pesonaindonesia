@@ -46,6 +46,7 @@
                     <div class="payment-book">
                         <div class="booking-box">
                             <form id="form-form" action="{{ route('frontend.travelling.checkout',['id' => $travelling->id]) }}" method="post" enctype="multipart/form-data">
+                            {{-- <form action="{{ route('frontend.travelling.checkout',['id' => $travelling->id]) }}" method="post" enctype="multipart/form-data"> --}}
                                 @csrf
                                 <div class="customer-information mb-4">
                                     <h3 class="border-b pb-2 mb-2">Biodata Travelling</h3>
@@ -153,6 +154,7 @@
                                             <div class="form-group mb-2 w-75">
                                                 <input type="checkbox"> Dengan melanjutkan, Anda menyetujui Syarat dan Ketentuan.
                                             </div>
+                                            {{-- <button type="submit">CONFIRM BOOKING</button> --}}
                                             <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('form-form').submit();" class="nir-btn float-lg-end w-25">CONFIRM BOOKING</a>
                                         </div>
 

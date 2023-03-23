@@ -77,7 +77,7 @@
                         <h3 class="white">Lainnya</h3>
                         <ul>
                           <li><a href="{{ route('frontend.blog') }}">Blog</a></li>
-                          <li><a href="javascript:void()">Jadi Partner Kami</a></li>
+                          <li><a href="{{ route('partnership') }}">Jadi Partner Kami</a></li>
                           {{-- <li><a href="javascript:void()">Gallery</a></li>
                           <li><a href="javascript:void()">Syarat & Ketentuan</a></li> --}}
                         </ul>
