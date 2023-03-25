@@ -52,12 +52,12 @@ class FrontendController extends Controller
             [ 'image' => 'wahid.webp', 'name' => 'Nurwahid A.', 'posisi' => 'Chief Executive Officer' ],
             [ 'image' => 'dani.webp', 'name' => 'Fabrizio D.K', 'posisi' => 'Chief Operating Officer' ],
             [ 'image' => 'bima.webp', 'name' => 'Bima Gani S, A.Md.T', 'posisi' => 'Chief Operating Officer' ],
-            [ 'image' => 'adit.webp', 'name' => 'Rio Ramadhan', 'posisi' => 'Chief Operating Officer' ],
+            // [ 'image' => 'adit.webp', 'name' => 'Rio Ramadhan', 'posisi' => 'Chief Operating Officer' ],
             [ 'image' => 'joko.webp', 'name' => 'Tri Joko P.', 'posisi' => 'Chief Marketing Officer' ],
-            [ 'image' => 'faqeh.webp', 'name' => 'Muhammad Arsys', 'posisi' => 'Chief Marketing Officer' ],
+            // [ 'image' => 'faqeh.webp', 'name' => 'Muhammad Arsys', 'posisi' => 'Chief Marketing Officer' ],
             [ 'image' => 'rio.webp', 'name' => 'Rio Anugrah A.S, A.Md.T', 'posisi' => 'Chief Technology Officer' ],
             // [ 'image' => 'team01.png', 'name' => 'Kemal Izzuddin A.Md.T', 'posisi' => 'Chief Technology Officer' ],
-            [ 'image' => 'tasya.webp', 'name' => 'Tasya Ayu S.', 'posisi' => 'Chief Financial Officer' ],
+            // [ 'image' => 'tasya.webp', 'name' => 'Tasya Ayu S.', 'posisi' => 'Chief Financial Officer' ],
         ];
         $this->menu = [
             [ 'name' => 'Home', 'active' => true ,'link' => route('frontend') ],
@@ -103,7 +103,7 @@ class FrontendController extends Controller
             //     ['image' => 'frontend/assets2/images/wallpaper/batubengkung.png', 'arrow' => 'frontend/assets2/images/arrow-link.png', 'title' => 'Wisata Pantai Batu Bengkung'],
             //     ['image' => 'frontend/assets2/images/wallpaper/museum_angkut.png', 'arrow' => 'frontend/assets2/images/arrow-link.png', 'title' => 'Wisata Museum Angkut'],
             // ];
-            $data['wallpaper'] = Slider::where('status','Y')->orderBy('created_at','desc')->get();
+            // $data['wallpaper'] = Slider::where('status','Y')->orderBy('created_at','desc')->get();
             // $data['wallpaper'] = Slider::where('status','Y')->inRandomOrder()->get();
             $data['adventure'] = [
                 ['image' => 'frontend/assets4/images/bromo_vertikal.jpg', 'title' => 'Gunung Bromo'],

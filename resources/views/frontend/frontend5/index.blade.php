@@ -19,7 +19,7 @@
 <?php $asset_new = asset('frontend/assets_new/'); ?>
 <?php $assets = asset('frontend/assets5/'); ?>
 @section('content')
-<section class="banner overflow-hidden">
+{{-- <section class="banner overflow-hidden">
     <div class="slider top50">
         <div class="swiper-container">
             <div class="swiper-wrapper">
@@ -41,7 +41,7 @@
     </div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
-</section>
+</section> --}}
 {{-- <section class="about-us pb-6 pt-10" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
     <div class="container">
         
@@ -90,7 +90,7 @@
     </div>
     <div class="white-overlay"></div>
 </section> --}}
-<section class="about-us pb-2 pt-2 mt-8" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
+<section class="about-us pb-2 pt-2" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
     <div class="container">
         <div class="row align-items-center d-flex">
             <div class="col-lg-6 mb-4">
@@ -479,7 +479,7 @@
                     </div>
                     <div class="video-button position-relative ms-lg-5 text-center text-lg-start">
                         <div class="call-button">
-                            <button type="button" class="play-btn js-video-button" data-video-id="Yb6KMxB3I1M" data-channel="youtube">
+                            <button type="button" class="play-btn js-video-button" data-video-id="LpOdL5eS5xo" data-channel="youtube">
                                 <i class="fa fa-play bg-blue"></i>
                             </button>
                         </div>
