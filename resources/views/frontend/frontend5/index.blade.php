@@ -90,7 +90,7 @@
     </div>
     <div class="white-overlay"></div>
 </section> --}}
-<section class="trending pb-9">
+<section class="trending pb-9" style="margin-top: -2.5%">
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">
             {{-- <h4 class="mb-1 theme1">Travelling</h4> --}}
