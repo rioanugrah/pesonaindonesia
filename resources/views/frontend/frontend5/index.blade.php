@@ -142,7 +142,7 @@
                             <div class="trend-content1 p-4">
                                 <h6 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h6>
                                 <h3 class="mb-1 white"><a href="{{ route('frontend.travelling_detail_order',['id' => $travelling->id]) }}" class="white">{{ $travelling->nama_travelling }}</a></h3>
-                                <div class="rating-main d-flex align-items-center pb-0">
+                                {{-- <div class="rating-main d-flex align-items-center pb-0">
                                     <div class="rating">
                                         <span class="fa fa-star checked"></span>
                                         <span class="fa fa-star checked"></span>
@@ -151,7 +151,7 @@
                                         <span class="fa fa-star checked"></span>
                                     </div>
                                     <span class="ms-2 white">(16)</span>
-                                </div>
+                                </div> --}}
                                 <div class="entry-meta d-flex align-items-center justify-content-between">
                                     <div class="entry-author align-items-center">
                                         <p class="mb-0 white">
