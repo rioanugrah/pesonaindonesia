@@ -160,7 +160,7 @@
                                             </div>
                                         </p>
                                         <p class="mb-0 white">
-                                            <span class="theme1 fw-bold fs-4"> Rp. {{ number_format($travelling->price - ($travelling->diskon / 100) * $travelling->price,0,",",".") }}
+                                            <span class="theme1 fw-bold fs-5"> Rp. {{ number_format($travelling->price - ($travelling->diskon / 100) * $travelling->price,0,",",".") }}
                                             </span> | Per pax
                                         </p>
                                     </div>
