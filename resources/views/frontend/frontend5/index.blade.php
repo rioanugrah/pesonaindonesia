@@ -109,7 +109,7 @@
                                 <div class="trend-content1 p-4">
                                     <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h5>
                                     <h3 class="mb-1 white"><a href="{{ route('frontend.travelling_detail_order',['id' => $travelling->id]) }}" class="white">{{ $travelling->nama_travelling }}</a></h3>
-                                    <div class="rating-main d-flex align-items-center pb-2">
+                                    {{-- <div class="rating-main d-flex align-items-center pb-2">
                                         <div class="rating">
                                             <span class="fa fa-star checked"></span>
                                             <span class="fa fa-star checked"></span>
@@ -118,7 +118,7 @@
                                             <span class="fa fa-star checked"></span>
                                         </div>
                                         <span class="ms-2 white">(12)</span>
-                                    </div>
+                                    </div> --}}
                                     <div class="entry-meta d-flex align-items-center justify-content-between">
                                         <div class="entry-author d-flex align-items-center">
                                             <p class="mb-0 white"><span class="theme1 fw-bold fs-5"> Rp. {{ number_format($travelling->price,0,",",".") }}</span> | Per pax</p>
