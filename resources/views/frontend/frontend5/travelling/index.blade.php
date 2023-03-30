@@ -11,119 +11,44 @@
 <section class="trending pt-6 pb-0 bg-lgrey">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9">
-                <div class="flight-list">
-                    <div class="flight-full">
-                        @foreach ($travellings as $key => $travelling)
-                        <?php 
-                        // $data = json_decode($travelling->deskripsi);
-                        // echo $travelling->deskripsi->experience;
-                        ?>
-                        <div class="item mb-2 border-all p-3 px-4 rounded">
-                            <div class="row d-flex align-items-center justify-content-between">
-                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                    <div class="item-inner-image text-start">
-                                        <img src="{{ asset('frontend/assets_new/images/travelling/'.$travelling->images) }}" alt="{{ $travelling->nama_paket }}" width="160">
-                                        <h5 class="mb-0">{{ $travelling->nama_travelling }}</h5>
-                                        <small><i class="fa fa-location-arrow"></i> Meeting Point: {{ $travelling->meeting_point }}</small>
-                                    </div>
-                                </div>    
-                                {{-- <div class="col-lg-3 col-md-3 col-sm-12">
-                                    <div class="item-inner">
-                                        <div class="content">
-                                            <p class="mb-0 text-uppercase">From Order</p>
-                                            <h5 class="mb-0">{{ \Carbon\Carbon::create($travelling->tanggal_rilis)->isoFormat('dddd, D MMMM Y') }}</h5>
-                                        </div>
-                                    </div>
-                                </div>     --}}
-                                {{-- <div class="col-lg-1 col-md-1 col-sm-12"> 
-                                    <div class="item-inner">
-                                        <div class="content">
-                                            <p class="mb-0 text-uppercase">Time</p>
-                                            <h3 class="mb-0">{{ \Carbon\Carbon::create($travelling->tanggal_rilis)->format('H:i') }}</h3>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                {{-- <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner flight-time">
-                                    <p class="mb-0">-</p>
-                                    </div>
-                                </div> --}}
-                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                    <div class="item-inner text-end">
-                                        @if ($travelling->diskon == 0)
-                                        <p class="theme2 fs-4 fw-bold">Rp. {{ number_format($travelling->price,2,",",".") }}</p>
-                                        @else
-                                        <div style="text-decoration: line-through;text-decoration-color: #eb4034; font-weight:300">
-                                            Rp. {{ number_format($travelling->price,2,",",".") }}
-                                        </div>
-                                        <p class="theme2 fs-4 fw-bold">
-                                            Rp. {{ number_format($travelling->price - ($travelling->diskon / 100) * $travelling->price,2,",",".") }}
-                                        </p>
-                                        @endif
-                                        <a href="{{ route('frontend.travelling_detail_order',['id' => $travelling->id]) }}" class="nir-btn-black">Book Now</a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="accordion accordion-flush border-t mt-1 pt-1" id="accordionflush">
-                                        <div class="accordion-item overflow-hidden">
-                                            <p class="accordion-header" id="flush-heading{{ $key }}">
-                                                <button class="accordion-button collapsed p-0 border-0 rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ $key }}" aria-expanded="false" aria-controls="flush-collapseOne">
-                                                  Travelling Details
-                                                </button>
-                                            </p>
-                                            <div id="flush-collapse{{ $key }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ $key }}" data-bs-parent="#accordionFlushExample">
-                                                <div class="accordion-body p-0">
-                                                    <div class="row flight-detail-wrap align-items-center border-t pt-1 mt-1" style="">
-                                                        <div class="col-lg-4">
-                                                            <div class="flight-date">
-                                                                <ul>
-                                                                    <li>{{ $travelling->nama_travelling }}</li>
-                                                                    <li class="theme">{{ \Carbon\Carbon::create($travelling->tanggal_rilis)->isoFormat('dddd, D MMMM Y') }}</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-8">
-                                                            <div class="flight-detail-right">
-                                                                <h5><i class="fa fa-database"></i> Highlight</h5>
-                                                                <div class="flight-detail-info d-flex align-items-center p-2 py-3 bg-grey rounded mb-2">
-                                                                    {{-- <img src="{{ asset('frontend/assets_new/images/travelling/'.$travelling->images) }}" width="125" alt=""> --}}
-                                                                    <ul>
-                                                                        @foreach ($travelling->travellingHighlight as $travelling_th)
-                                                                        <li>{{ $travelling_th->nama_highlight }},</li>
-                                                                        @endforeach
-                                                                    </ul>
-                                                                </div>
-                                                                <h5><i class="fa fa-database"></i> Fasilitas</h5>
-                                                                <div class="flight-detail-info d-flex align-items-center p-2 py-3 bg-grey rounded mb-2">
-                                                                    <ul>
-                                                                        @foreach ($travelling->travellingFasilitas as $travelling_f)
-                                                                        <li>{{ $travelling_f->nama_fasilitas }} | </li>
-                                                                        @endforeach
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    @foreach ($travellings as $key => $travelling)
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div class="trend-item rounded box-shadow">
+                            <div class="trend-image position-relative">
+                                <img src="{{ asset('frontend/assets_new/images/travelling/'.$travelling->images) }}" alt="{{ $travelling->nama_paket }}" class="">
+                                <div class="color-overlay"></div>
+                            </div>
+                            <div class="trend-content p-4 position-relative bg-white">
+                                <h3 class="mb-1"><a href="{{ route('frontend.travelling_detail_order',['id' => $travelling->id]) }}" class="">{{ $travelling->nama_travelling }}</a></h3>
+                                <p class="mb-4">Meeting Point: <b>{{ $travelling->meeting_point }}</b></p>
+                                <p class=" border-b pb-2 mb-2">{{ strip_tags($travelling->deskripsi) }}</p>
+                                <div class="entry-meta d-flex align-items-center justify-content-between">
+                                    <div class="entry-author d-flex align-items-center">
+                                        <p class="mb-0">
+                                            @if ($travelling->diskon == 0)
+                                            <span class="theme fw-bold fs-5">
+                                                Rp. {{ number_format($travelling->price,0,",",".") }}
+                                            </span>
+                                            @else
+                                            <div class="theme" style="text-decoration: line-through;text-decoration-color: #eb4034; font-weight:300">
+                                                Rp. {{ number_format($travelling->price,0,",",".") }} 
+                                            </div> &nbsp;
+                                            <div class="theme fw-bold fs-5">
+                                                Rp. {{ number_format($travelling->price - ($travelling->diskon / 100) * $travelling->price,2,",",".") }}
                                             </div>
-                                        </div>
+                                            @endif
+                                        </p>
                                     </div>
                                 </div>
-                            </div>    
+                            </div>
                         </div>
-                        @endforeach
-
-                    </div> 
-                    <div class="pagination-main text-center">
-                        <ul class="pagination">
-                            {{ $travellings->links('vendor.pagination.frontend5') }}
-                        </ul>
                     </div>
-                    {{-- <div class="flight-btn text-center"><a href="flight-grid.html" class="nir-btn">Load More</a></div> --}}
+                    @endforeach
                 </div>
             </div>
-            <div class="col-lg-3 ps-lg-4">
+            <div class="col-lg-4 ps-lg-4">
                 <div class="sidebar-sticky">
                     <div class="list-sidebar">
                         <div class="sidebar-item mb-4">
