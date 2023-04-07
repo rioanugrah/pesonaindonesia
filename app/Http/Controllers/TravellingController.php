@@ -70,12 +70,7 @@ class TravellingController extends Controller
                         return 'Rp. '.number_format($row->price,2,",",".");
                     })
                     ->addColumn('action', function($row){
-                        $btn = '<a href='.route('paket.list',['id' => $row->id]).' class="btn btn-secondary btn-sm" title="Paket List">
-                                    <i class="fas fa-list"></i> Paket List
-                                </a>
-                                <button onclick="edit(`'.$row->id.'`)" class="btn btn-warning btn-sm" title="Edit">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </button>
+                        $btn = '<a href="'.route('travelling.edit',['id' => $row->id]).'" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                 <button onclick="hapus(`'.$row->id.'`)" class="btn btn-danger btn-sm" title="Hapus">
                                     <i class="fas fa-trash"></i>
                                 </button>';
@@ -85,6 +80,12 @@ class TravellingController extends Controller
                     ->make(true);
         }
         return view('backend.travelling.index');
+    }
+
+    public function b_create()
+    {
+        return view('backend.travelling.create');
+        // return '-';
     }
 
     public function simpan(Request $request)
@@ -162,7 +163,8 @@ class TravellingController extends Controller
                 'message_content' => $message_content,
                 'message_type' => $message_type,
             );
-            return response()->json($array_message);
+            return redirect()->route('travelling')->with($array_message['success'],$array_message['message_content']);
+            // return response()->json($array_message);
         }
         return response()->json(
             [
@@ -171,6 +173,20 @@ class TravellingController extends Controller
             ]
         );
         // dd($request->input());
+    }
+
+    public function b_edit($id)
+    {
+        $data['travelling'] = Travelling::find($id);
+        
+        if (empty($data['travelling'])) {
+            return redirect()->back();
+        }
+
+        $data['travelling_highlights'] = DB::table('travelling_highlight')->where('travelling_id',$data['travelling']['id'])->get();
+        $data['travelling_fasilitas'] = DB::table('travelling_fasilitas')->where('travelling_id',$data['travelling']['id'])->get();
+        // dd($data['travelling_fasilitas']);
+        return view('backend.travelling.edit',$data);
     }
 
     public function f_detail_order($id)

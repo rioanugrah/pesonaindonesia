@@ -28,9 +28,10 @@
         <div class="col-md-4">
             <div class="float-end d-md-block">
                 <div class="btn-group">
-                    <button class="btn btn-primary" onclick="buat()">
+                    {{-- <button class="btn btn-primary" onclick="buat()">
                         <i class="mdi mdi-plus"></i> Buat
-                    </button>
+                    </button> --}}
+                    <a href="{{ route('travelling.create') }}" class="btn btn-primary"><i class="mdi mdi-plus"></i> Buat</a>
                     <button class="btn btn-primary" onclick="reload()">
                         <i class="mdi mdi-reload"></i> Reload
                     </button>

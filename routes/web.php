@@ -163,6 +163,8 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     
             Route::prefix('travelling')->group(function(){
                 Route::get('/', 'TravellingController@b_index')->name('travelling')->middleware('verified');
+                Route::get('create', 'TravellingController@b_create')->name('travelling.create')->middleware('verified');
+                Route::get('{id}/edit', 'TravellingController@b_edit')->name('travelling.edit')->middleware('verified');
                 Route::post('simpan', 'TravellingController@simpan')->name('travelling.simpan')->middleware('verified');
             });
     
