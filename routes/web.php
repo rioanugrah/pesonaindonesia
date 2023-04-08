@@ -208,7 +208,11 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     
             Route::prefix('posting')->group(function() {
                 Route::get('/', 'BlogController@index')->name('posting')->middleware('verified');
+                Route::get('buat', 'BlogController@create')->name('posting.create')->middleware('verified');
                 Route::post('simpan', 'BlogController@simpan')->name('posting.simpan')->middleware('verified');
+                Route::get('{slug}/edit', 'BlogController@edit')->name('posting.edit')->middleware('verified');
+                Route::post('{slug}/update', 'BlogController@update')->name('posting.update')->middleware('verified');
+                Route::get('{id}/delete', 'BlogController@delete')->name('posting.delete')->middleware('verified');
             });
             // Route::prefix('paket')->group(function(){
     

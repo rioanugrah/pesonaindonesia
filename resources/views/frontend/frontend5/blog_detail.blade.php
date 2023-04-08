@@ -42,7 +42,7 @@
                 <div class="blog-single">
                     <div class="blog-wrapper">
                         <div class="blog-content first-child-cap mb-4">
-                            <p class="mb-0">{{ $blog_detail->description }}</p>
+                            <p class="mb-0">{!! $blog_detail->description !!}</p>
                         </div>
                     </div>
                 </div>

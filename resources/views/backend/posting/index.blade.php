@@ -12,10 +12,11 @@
     <link href="{{ asset('backend/assets2/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
         rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/assets2/css/iziToast.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('backend/assets2/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
-@include('backend.posting.modalBuat')
+    @include('backend.posting.modalBuat')
     <div class="page-title-box">
         <div class="row align-items-center">
             <div class="col-md-8">
@@ -28,9 +29,11 @@
             <div class="col-md-4">
                 <div class="float-end d-md-block">
                     <div class="btn-group">
-                        <button class="btn btn-primary" onclick="buat()">
+                        <a href="{{ route('posting.create') }}" class="btn btn-primary"><i class="mdi mdi-plus"></i>
+                            Buat</a>
+                        {{-- <button class="btn btn-primary" onclick="buat()">
                             <i class="mdi mdi-plus"></i> Buat
-                        </button>
+                        </button> --}}
                         <button class="btn btn-primary" onclick="reload()">
                             <i class="mdi mdi-reload"></i> Reload
                         </button>
@@ -41,6 +44,17 @@
     </div>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
+            @if (Session::has('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+
+            @if (Session::has('error'))
+                <div class="alert alert-danger">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -79,6 +93,7 @@
 
     <script src="{{ asset('backend/assets2/js/iziToast.min.js') }}"></script>
     <script src="{{ asset('backend/assets2/js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('backend/assets2/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -89,8 +104,7 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('posting') }}",
-            columns: [
-                {
+            columns: [{
                     data: 'image',
                     name: 'image'
                 },
@@ -114,13 +128,52 @@
                 },
             ]
         });
-        CKEDITOR.replace( 'ckeditor1' );
+        CKEDITOR.replace('ckeditor1');
+
         function buat() {
             $('#buat').modal('show');
         };
+
         function reload() {
             table.ajax.reload();
         }
+
+        function hapus(id) {
+            // alert(id);
+            Swal.fire({
+                title: 'Apakah kamu yakin menghapus ini?',
+                // text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'GET',
+                        // url: "{{ route('slider.edit',['id' => "+id+"]) }}",
+                        url: "{{ url('b/posting') }}"+'/'+id+'/delete',
+                        contentType: "application/json;  charset=utf-8",
+                        cache: false,
+                        success: function(result){
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                            table.ajax.reload();
+                        }
+                    })
+                    // Swal.fire(
+                    // 'Deleted!',
+                    // 'Your file has been deleted.',
+                    // 'success'
+                    // )
+                }
+            })
+        }
+
         $('#upload-form').submit(function(e) {
             e.preventDefault();
             // alert('test');
