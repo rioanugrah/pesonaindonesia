@@ -183,10 +183,106 @@ class TravellingController extends Controller
             return redirect()->back();
         }
 
-        $data['travelling_highlights'] = DB::table('travelling_highlight')->where('travelling_id',$data['travelling']['id'])->get();
-        $data['travelling_fasilitas'] = DB::table('travelling_fasilitas')->where('travelling_id',$data['travelling']['id'])->get();
+        $data['travelling_highlights'] = TravellingHighlight::where('travelling_id',$data['travelling']['id'])->get();
+        $data['travelling_fasilitas'] = TravellingFasilitas::where('travelling_id',$data['travelling']['id'])->get();
         // dd($data['travelling_fasilitas']);
         return view('backend.travelling.edit',$data);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $travelling = Travelling::find($id);
+
+        if($request->file('images')){
+            $file = $request->file('images');
+            $img = \Image::make($file->path());
+            $img = $img->encode('webp', 75);
+            $input['images'] = time().'.webp';
+            $img->save(public_path('frontend/assets_new/images/travelling/').$input['images']);
+            
+            $image_path = public_path('frontend/assets_new/images/travelling/'.$input['images']);
+            File::delete($image_path);
+            $input['images'] = $input['images'];
+        }
+
+        // dd(count($request['outer-fasilitas'][0]['fasilitas']));
+
+        foreach ($request['outer-highlight'][0]['highlight'] as $key => $od) {
+            // TravellingFasilitas
+            TravellingHighlight::where('travelling_id',$id)->update([
+                'nama_highlight' => $od['nama_highlight']
+            ]);
+       }
+
+        foreach ($request['outer-fasilitas'][0]['fasilitas'] as $key => $of) {
+            // TravellingFasilitas
+            TravellingFasilitas::where('travelling_id',$id)->update([
+                'icon' => $of['icon'],
+                'nama_fasilitas' => $of['nama_fasilitas']
+            ]);
+       }
+
+    // dd($request['outer-fasilitas'][0]['fasilitas']);
+
+        $input['kategori_paket_id'] = $request->kategori_paket_id;
+        $input['nama_travelling'] = $request->nama_travelling;
+        $input['deskripsi'] = $request->deskripsi;
+        $input['jumlah_paket'] = $request->jumlah_paket;
+        $input['meeting_point'] = $request->meeting_point;
+        $input['location'] = $request->nama_lokasi;
+        $input['contact_person'] = $request->contact_person;
+        $input['tanggal_rilis'] = $request->tanggal_rilis;
+        $input['diskon'] = $request->diskon;
+        $input['price'] = $request->price;
+
+        $travelling->update($input);
+
+        if($travelling){
+            $message_title="Berhasil !";
+            $message_content="Travelling ".$input['nama_travelling']." Berhasil Diupdate";
+            $message_type="success";
+            $message_succes = true;
+
+            return redirect()->route('travelling')->with($message_type,$message_content);
+        }else{
+            $message_title="Gagal !";
+            $message_content="Travelling ".$input['nama_travelling']." Tidak Berhasil Diupdate";
+            $message_type="error";
+            $message_succes = true;
+
+            return redirect()->back()->with($message_type,$message_content);
+        }
+    }
+
+    public function delete($id)
+    {
+        $travelling = Travelling::find($id);
+        if(!empty($travelling)){
+            $message_title="Berhasil !";
+            $message_content="Data ".$travelling->nama_travelling." Berhasil Dihapus";
+            $message_type="success";
+            $message_succes = true;
+            $image_path = public_path('frontend/assets_new/images/travelling/'.$travelling->images);
+            File::delete($image_path);
+            $travelling->delete();
+
+            TravellingHighlight::where('travelling_id',$id)->delete();
+            TravellingFasilitas::where('travelling_id',$id)->delete();
+            
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return response()->json($array_message);
+        }
+        return response()->json(
+            [
+                'success' => false,
+                'error' => 'Data Tidak Berhasil Dihapus'
+            ]
+        );
     }
 
     public function f_detail_order($id)

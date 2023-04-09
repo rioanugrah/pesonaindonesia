@@ -166,6 +166,8 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('create', 'TravellingController@b_create')->name('travelling.create')->middleware('verified');
                 Route::get('{id}/edit', 'TravellingController@b_edit')->name('travelling.edit')->middleware('verified');
                 Route::post('simpan', 'TravellingController@simpan')->name('travelling.simpan')->middleware('verified');
+                Route::post('{id}/update', 'TravellingController@update')->name('travelling.update')->middleware('verified');
+                Route::get('{id}/delete', 'TravellingController@delete')->name('travelling.delete')->middleware('verified');
             });
     
             Route::prefix('vendors')->group(function(){
