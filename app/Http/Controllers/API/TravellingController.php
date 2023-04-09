@@ -39,6 +39,8 @@ class TravellingController extends Controller
     {
         $travellings = Travelling::orderBy('created_at','desc')->paginate(5);
         foreach ($travellings as $key => $travelling) {
+            $travelling_highlights = TravellingHighlight::where('travelling_id',$travelling->id)->get();
+            $travelling_fasilitas = TravellingFasilitas::where('travelling_id',$travelling->id)->get();
             $travellingss[] = [
                 'id' => $travelling->id,
                 'kategori_paket_id' => $travelling->kategori_paket_id,
@@ -55,6 +57,8 @@ class TravellingController extends Controller
                 'images' => asset('frontend/assets_new/images/travelling/'.$travelling->images),
                 'created_at' => Carbon::parse($travelling->created_at)->isoFormat('LL'),
                 'updated_at' => Carbon::parse($travelling->updated_at)->isoFormat('LL'),
+                'highlights' => $travelling_highlights,
+                'fasilitas' => $travelling_fasilitas,
             ];
         }
 
