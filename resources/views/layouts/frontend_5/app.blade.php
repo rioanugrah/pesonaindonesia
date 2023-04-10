@@ -33,6 +33,8 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ env('ADSENSE_CLIENT_ID') }}"
+     crossorigin="anonymous"></script>
     <?php $assets = asset('frontend/assets5/'); ?>
     <link href="{{ url('frontend/assets4/img/favicon.png') }}" rel="shortcut icon">
     <link href="{{ $assets }}/css/bootstrap.min.css" rel="stylesheet" type="text/css">
