@@ -36,6 +36,9 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ env('ADSENSE_CLIENT_ID') }}"
      crossorigin="anonymous"></script>
     <?php $assets = asset('frontend/assets5/'); ?>
+    <script async custom-element="amp-auto-ads"
+            src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
     <link href="{{ url('frontend/assets4/img/favicon.png') }}" rel="shortcut icon">
     <link href="{{ $assets }}/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="{{ $assets }}/css/style.css" rel="stylesheet" type="text/css">
@@ -51,6 +54,9 @@
     </div>
     @include('layouts.frontend_5.header')
     @yield('content')
+    <amp-auto-ads type="adsense"
+            data-ad-client="{{ env('ADSENSE_CLIENT_ID') }}">
+    </amp-auto-ads>
     @include('layouts.frontend_5.footer')
     <div id="back-to-top">
         <a href="#"></a>
