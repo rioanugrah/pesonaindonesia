@@ -55,7 +55,7 @@ class FrontendController extends Controller
             [ 'image' => 'dani.webp', 'name' => 'Fabrizio D.K', 'posisi' => 'Chief Operating Officer' ],
             [ 'image' => 'bima.webp', 'name' => 'Bima Gani S, A.Md.T', 'posisi' => 'Chief Operating Officer' ],
             // [ 'image' => 'adit.webp', 'name' => 'Rio Ramadhan', 'posisi' => 'Chief Operating Officer' ],
-            [ 'image' => 'joko.webp', 'name' => 'Tri Joko P.', 'posisi' => 'Chief Marketing Officer' ],
+            // [ 'image' => 'joko.webp', 'name' => 'Tri Joko P.', 'posisi' => 'Chief Marketing Officer' ],
             // [ 'image' => 'faqeh.webp', 'name' => 'Muhammad Arsys', 'posisi' => 'Chief Marketing Officer' ],
             [ 'image' => 'rio.webp', 'name' => 'Rio Anugrah A.S, A.Md.T', 'posisi' => 'Chief Technology Officer' ],
             // [ 'image' => 'team01.png', 'name' => 'Kemal Izzuddin A.Md.T', 'posisi' => 'Chief Technology Officer' ],
