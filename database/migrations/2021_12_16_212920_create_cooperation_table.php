@@ -19,8 +19,10 @@ class CreateCooperationTable extends Migration
             $table->string('nama')->nullable();
             $table->string('email');
             $table->string('nama_perusahaan')->nullable();
+            $table->string('slug');
             $table->string('logo_perusahaan')->nullable();
-            $table->enum('kategori', ['Pribadi', 'Bisnis'])->nullable();
+            $table->string('kategori')->nullable();
+            // $table->enum('kategori', ['Pribadi', 'Bisnis'])->nullable();
             $table->text('alamat_perusahaan');
             $table->integer('kab_kota');
             $table->integer('provinsi');
@@ -31,6 +33,8 @@ class CreateCooperationTable extends Migration
             $table->string('no_fax')->nullable();
             $table->integer('status')->nullable();
             $table->string('berkas')->nullable();
+            $table->string('ttd_1')->nullable();
+            $table->string('ttd_2')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

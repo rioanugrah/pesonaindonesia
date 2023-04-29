@@ -44,6 +44,9 @@ class CooperationController extends Controller
                     // })
                     ->addColumn('action', function($row){
                         $btn = '
+                                <a href="'.route('cooperation.surat',['id' => $row->id]).'" class="btn btn-primary btn-sm" title="Download File" target="_blank">
+                                    <i class="fas fa-file"></i> Surat Pernyataan
+                                </a>
                                 <a href="'.route('cooperation.download',['id' => $row->id]).'" class="btn btn-primary btn-sm" title="Download File" target="_blank">
                                     <i class="fas fa-print"></i> View File
                                 </a>
@@ -86,34 +89,6 @@ class CooperationController extends Controller
         ];
         // dd($data);
         return view('backend.cooperation.index', $data);
-    }
-
-    public function detail($id)
-    {
-        $cooperations = Cooperation::find($id);
-        $data['cooperation'] = [
-            'id' => $cooperations['id'],
-            'nama' => $cooperations['nama'],
-            'email' => $cooperations['email'],
-            'nama_perusahaan' => $cooperations['nama_perusahaan'],
-            'alamat_perusahaan' => $cooperations['alamat_perusahaan'],
-            'kab_kota' => $cooperations['kota']['nama'],
-            'provinsi' => $cooperations['provinsis']['nama'],
-            'kode_pos' => $cooperations['kode_pos'],
-            'berkas' => $cooperations['berkas'],
-        ];
-        
-        if(auth()->user()->role != 1){
-            $array_message = array(
-                'success' => false,
-                'message_title' => 'Access Denied',
-                'message_content' => 'Anda Tidak Memiliki Akses',
-                'message_type' => "error",
-            );
-            return response()->json($array_message);
-        }else{
-            return response()->json($data);
-        }
     }
 
     public function edit($id)
@@ -176,6 +151,7 @@ class CooperationController extends Controller
             $input['id'] = Str::uuid()->toString();
             $input['negara'] = 'Indonesia';
             $input['status'] = 0;
+            $input['slug'] = Str::slug($request->nama_perusahaan);
             $norut = Cooperation::max('kode_corporate');
             if($norut == null){
                 $norut = 1;
@@ -530,6 +506,59 @@ class CooperationController extends Controller
 		return "Email telah dikirim";
     }
 
+    public function surat($id)
+    {
+        $password = '123456';
+        $userPassword = '123456a';
+
+        $data['cooperations'] = Cooperation::find($id);
+
+        $surat = PDF::loadview('backend.cooperation.surat_perjanjian_kerjasama',$data)
+                    // ->allow('AllFeatures')
+                    // ->setPassword($password)
+                    // ->setUserPassword($userPassword)
+                    // ->passwordEncryption(128)
+                    // ->setOptions([
+                    //     'dpi' => 150,
+                    //     'enable_remote' => true,
+                    //     'isHtml5ParserEnabled' => true,
+                    //     'isRemoteEnabled' => true
+                    // ])
+                    ->setPaper('a4', 'portrait');
+        // $surat->setOption([
+        //     'dpi' => 150,
+        // ]);
+        return $surat->stream();
+    }
+
+    public function detail($id)
+    {
+        $cooperations = Cooperation::find($id);
+        $data['cooperation'] = [
+            'id' => $cooperations['id'],
+            'nama' => $cooperations['nama'],
+            'email' => $cooperations['email'],
+            'nama_perusahaan' => $cooperations['nama_perusahaan'],
+            'alamat_perusahaan' => $cooperations['alamat_perusahaan'],
+            'kab_kota' => $cooperations['kota']['nama'],
+            'provinsi' => $cooperations['provinsis']['nama'],
+            'kode_pos' => $cooperations['kode_pos'],
+            'berkas' => $cooperations['berkas'],
+        ];
+        
+        if(auth()->user()->role != 1){
+            $array_message = array(
+                'success' => false,
+                'message_title' => 'Access Denied',
+                'message_content' => 'Anda Tidak Memiliki Akses',
+                'message_type' => "error",
+            );
+            return response()->json($array_message);
+        }else{
+            return response()->json($data);
+        }
+    }
+
     public function simpan_frontend(Request $request)
     {
         $rules = [
@@ -562,7 +591,12 @@ class CooperationController extends Controller
             $input = $request->all();
             $input['id'] = Str::uuid()->toString();
             $input['status'] = 0;
-            $input['kode_corporate'] = 'C-'.rand(10000,99999);
+            $norut = Cooperation::max('kode_corporate');
+            if($norut == null){
+                $norut = 1;
+            }
+            $input['kode_corporate'] = 'C-'.sprintf("%03s",$norut+1).'-'.date('m-Y');
+            // $input['kode_corporate'] = 'C-'.rand(10000,99999);
             // $input['logo_perusahaan'] = 'logo-'.Str::slug($request->nama_perusahaan).'.'.$request->logo_perusahaan->getClientOriginalExtension();
             // $request->logo_perusahaan->move(public_path('backend/berkas/coorporate'), $input['logo_perusahaan']);
             // $request->foto->move(storage_path('app/public/image'), $input['image']);

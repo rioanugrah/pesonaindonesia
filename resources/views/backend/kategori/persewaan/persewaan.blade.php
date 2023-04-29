@@ -1,23 +1,17 @@
 @extends('layouts.backend_2.app')
 
 @section('title')
-    Order
+    Kategori Persewaan
 @endsection
 
 @section('css')
-    <link href="{{ asset('backend/assets2/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css">
-    <link href="{{ asset('backend/assets2/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}"
-        rel="stylesheet" type="text/css">
-    <link href="{{ asset('backend/assets2/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
-        rel="stylesheet" type="text/css">
-    {{-- <link href="https://www.jqueryscript.net/demo/jQuery-Plugin-To-Submit-A-Form-By-Sliding-slide-to-submit/css/slide-to-submit.css"
-        rel="stylesheet" type="text/css"> --}}
+    <link href="{{ asset('backend/assets2/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('backend/assets2/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('backend/assets2/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/assets2/css/iziToast.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
-@include('backend.paket.order.modalBuat')
 <div class="page-title-box">
     <div class="row align-items-center">
         <div class="col-md-8">
@@ -30,6 +24,9 @@
         <div class="col-md-4">
             <div class="float-end d-md-block">
                 <div class="btn-group">
+                    <button class="btn btn-primary" onclick="buat()">
+                        <i class="mdi mdi-plus"></i> Buat
+                    </button>
                     <button class="btn btn-primary" onclick="reload()">
                         <i class="mdi mdi-reload"></i> Reload
                     </button>
@@ -38,28 +35,21 @@
         </div>
     </div>
 </div>
+@include('backend.kategori.persewaan.modalBuat')
 <div class="row">
-    <div class="col-md-12 grid-margin stretch-card">
+    <div class="col-12">
         <div class="card">
             <div class="card-body">
-                {{-- <h6 class="card-title">Paket Wisata</h6> --}}
                 <div class="table-responsive">
-                    <table class="table datatable">
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Nama Paket</th>
-                                <th>Pemesan</th>
-                                <th>Jumlah</th>
-                                <th>Harga</th>
-                                <th>Status</th>
-                                {{-- <th>Deskripsi</th> --}}
-                                {{-- <th>Harga</th>
-                                <th>Diskon</th>
-                                <th>Total Harga</th> --}}
+                                <th>Nama Persewaan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
@@ -67,6 +57,7 @@
     </div>
 </div>
 @endsection
+
 @section('js')
 <script src="{{ asset('backend/assets2/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('backend/assets2/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -78,13 +69,11 @@
 <script src="{{ asset('backend/assets2/libs/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
 
 <script src="{{ asset('backend/assets2/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('backend/assets2/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}">
-</script>
+<script src="{{ asset('backend/assets2/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
 
 <script src="{{ asset('backend/assets2/js/pages/datatables.init.js') }}"></script>
 
 <script src="{{ asset('backend/assets2/js/iziToast.min.js') }}"></script>
-{{-- <script src="https://www.jqueryscript.net/demo/jQuery-Plugin-To-Submit-A-Form-By-Sliding-slide-to-submit/js/slide-to-submit.js"></script> --}}
 
 <script>
     $.ajaxSetup({
@@ -92,35 +81,14 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
-    var table = $('.datatable').DataTable({
+    var table = $('#datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('paket.order') }}",
+        ajax: "{{ route('kategori.persewaan') }}",
         columns: [
             {
-                data: 'id',
-                name: 'id'
-            },
-            {
-                data: 'nama_paket',
-                name: 'nama_paket'
-            },
-            {
-                data: 'pemesan',
-                name: 'pemesan'
-            },
-            {
-                data: 'qty',
-                name: 'qty'
-            },
-            {
-                data: 'price',
-                name: 'price'
-            },
-            {
-                data: 'status',
-                name: 'status'
+                data: 'nama_kategori',
+                name: 'nama_kategori'
             },
             {
                 data: 'action',
@@ -131,32 +99,21 @@
         ]
     });
 
+    function buat() {
+        $('#buat').modal('show');
+    }
+
     function reload() {
         table.ajax.reload();
     }
 
-    function bukti_pembayaran(id) {
-        $.ajax({
-            type: 'GET',
-            url: "{{ url('b/paket_order') }}"+'/'+id+'/bukti_pembayaran',
-            contentType: "application/json;  charset=utf-8",
-            cache: false,
-            success: function(result){
-                // alert(result.data);
-                $('#bukti_id').val(id);
-                $('#uploaded_image').html(result.data.images);
-                $('#tf').modal('show');
-            }
-        })
-    }
-
-    $('#upload-bukti').submit(function(e) {
-        // alert('testing');
+    $('#upload-form').submit(function(e) {
         e.preventDefault();
         let formData = new FormData(this);
+        $('#image-input-error').text('');
         $.ajax({
             type:'POST',
-            url: "{{ route('paket.order.bukti_pembayaran.update') }}",
+            url: "{{ route('kategori.persewaan.simpan') }}",
             data: formData,
             contentType: false,
             processData: false,
@@ -166,10 +123,8 @@
                         title: result.message_title,
                         message: result.message_content
                     });
+                    this.reset();
                     table.ajax.reload();
-                    $('#tf').modal('hide');
-                    // document.getElementById("button").style.display = "block";
-                    // document.getElementById("input_slider").style.display = "none";
                 }else{
                     iziToast.error({
                         title: result.success,

@@ -19,8 +19,10 @@ class Cooperation extends Model
         'id',
         'kode_corporate',
         'nama',
+        'jabatan',
         'email',
         'nama_perusahaan',
+        'slug',
         'logo_perusahaan',
         'kategori',
         'alamat_perusahaan',
@@ -33,6 +35,8 @@ class Cooperation extends Model
         'no_fax',
         'status',
         'berkas',
+        'ttd_1',
+        'ttd_2',
     ];
     public function kota()
     {

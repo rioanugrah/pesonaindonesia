@@ -69,7 +69,7 @@
                             </li> --}}
                             @include('layouts.frontend_5.menu')
                         </ul>
-                    </div><!-- /.navbar-collapse -->     
+                    </div><!-- /.navbar-collapse -->  
                     @guest
                     <div class="register-login d-flex align-items-center">
                         <a href="{{ route('login') }}" class="me-3">

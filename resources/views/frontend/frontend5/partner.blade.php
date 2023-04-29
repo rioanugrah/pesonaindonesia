@@ -151,21 +151,28 @@
                                 <div class="customer-information mb-4">
                                     <h3 class="border-b pb-2 mb-2 text-center">Formulir Pendaftaran Partner</h3>
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group mb-2">
                                                 <label>Nama Perusahaan</label>
                                                 <input type="text" name="nama_perusahaan"
                                                     placeholder="Nama Perusahaan">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group mb-2">
                                                 <label>Nama Pemilik</label>
                                                 <input type="text" name="nama"
                                                     placeholder="Nama Pemilik">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
+                                            <div class="form-group mb-2">
+                                                <label>Jabatan</label>
+                                                <input type="text" name="jabatan"
+                                                    placeholder="Jabatan">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
                                             <div class="form-group mb-2">
                                                 <label>Email</label>
                                                 <input type="email" name="email"
@@ -183,9 +190,12 @@
                                                 <label>Jenis Perusahaan</label>
                                                 <select name="kategori" id="">
                                                     <option>-- Jenis Perusahaan --</option>
-                                                    <option value="Rental">Rental</option>
+                                                    @foreach ($kategori_bidang_usahas as $kategori_bidang_usaha)
+                                                        <option value="{{ $kategori_bidang_usaha->nama_bidang_usaha }}">{{ $kategori_bidang_usaha->nama_bidang_usaha }}</option>
+                                                    @endforeach
+                                                    {{-- <option value="Rental">Rental</option>
                                                     <option value="Jeep">Jeep</option>
-                                                    <option value="Sewa">Sewa</option>
+                                                    <option value="Sewa">Sewa</option> --}}
                                                 </select>
                                             </div>
                                         </div>

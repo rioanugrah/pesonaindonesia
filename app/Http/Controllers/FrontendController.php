@@ -24,9 +24,11 @@ use App\Models\Travelling;
 use App\Models\Coupons;
 use App\Models\Cooperation;
 use App\Models\Partnership;
+
 use App\User;
 
 use App\Models\KategoriPaket;
+use App\Models\KategoriBidangUsaha;
 
 use App\Models\KabupatenKota;
 use \Carbon\Carbon;
@@ -393,6 +395,7 @@ class FrontendController extends Controller
         }
         // $data['kabupaten_kotas'] = KabupatenKota::all();
         $data['provinsis'] = Provinsi::pluck('nama','id');
+        $data['kategori_bidang_usahas'] = KategoriBidangUsaha::all();
         visitor()->visit();
         return view('frontend.frontend5.partner',$data);
         // return view('frontend.frontend2.partnership',$data);
@@ -448,18 +451,28 @@ class FrontendController extends Controller
             // $input['telp_selular'] = $request->telp_selular;
             $input = $request->all();
             $input['id'] = Str::uuid()->toString();
+            $input['slug'] = Str::slug($request->nama_perusahaan);
             $input['negara'] = 'Indonesia';
             $input['status'] = 0;
             
             $norut = Cooperation::max('kode_corporate');
             if($norut == null){
-                $norut = 1;
+                // $explode_norut = explode("-",$norut);
+                // $nomor_urut = $explode_norut[1];
+                $nomor_urut = 0;
+            }else{
+                $explode_norut = explode("-",$norut);
+                $nomor_urut = $explode_norut[1];
             }
-            $input['kode_corporate'] = 'C-'.sprintf("%03s",$norut+1).'-'.date('m-Y');
+
+            $input['kode_corporate'] = 'C-'.sprintf("%03s",$nomor_urut+1).'-'.date('m-Y');
+            
+            // dd($input['kode_corporate']);
+            // dd($norut);
             $cooperation = Cooperation::create($input);
             // dd($input);
             $input2['id'] = Str::uuid()->toString();
-            $input2['slug'] = $request->nama_perusahaan;
+            $input2['slug'] = Str::slug($request->nama_perusahaan);
             $input2['nama_partner'] = $request->nama_perusahaan;
             $input2['penanggung_jawab'] = $request->nama;
             $input2['alamat'] = $request->alamat_perusahaan;
@@ -1041,68 +1054,68 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         visitor()->visit();
-        return view('frontend.frontend4.tracking_order',$data);
+        return view('frontend.frontend5.tracking_order',$data);
     }
 
     public function tracking_order_search(Request $request)
     {
-        $input_kode_tracking = $request->kode_tracking;
-        $tracking = PaketOrder::where('id',$input_kode_tracking)->get();
-        if(empty($tracking)){
-            return response()->json([
-                'status' => false,
-                'message' => 'Kode Tracking Tidak Ditemukan'
-            ],201);
-        }
-        foreach ($tracking as $key => $value) {
-            // $dataTracking = $tracking;
-            foreach (json_decode($value->pemesan) as $key => $vp) {
-                $pemesan = $vp;
-            }
-            $anggotas = PaketOrderList::select('order_paket_id','pemesan','qty')
-                                    ->where('order_paket_id', $value->id)->get();
-            foreach ($anggotas as $key => $a) {
-                $anggota[] = [
-                    'nama' => $a->pemesan
-                ];
-            }
-            if($value->status == 1){
-                $status = "NOT PAID";
-            }elseif($value->status == 3){
-                $status = "PAID";
-            }
-            $dataTracking[] = [
-                'id' => $value->id,
-                'nama_paket' => $value->nama_paket,
-                'price' => $value->price,
-                'qty' => $value->qty,
-                // 'nama_pemesan' => $pemesan->first_name,
-                // 'pemesan' => $pemesan,
-                'nama_pemesan' => $pemesan->first_name.' '.$pemesan->last_name,
-                // 'anggota' => $anggota,
-                'tanggal_berangkat' => Carbon::parse($pemesan->tanggal_berangkat)->format('d-m-Y'),
-                'anggota' => $anggotas,
-                'tanggal_pembelian' => Carbon::parse($value->created_at)->isoFormat('dddd, D MMMM Y'),
-                'status' => $status,
-                // json_decode(json_encode($value->pemesan),true),
-                // 'pemesan' => $dataPemesan[0]['firstname'],
-                // 'pemesan' => json_decode($value->pemesan,true),
-                // json_decode($value->pemesan['order']['firstname'],false),
-                'barcode' => DNS1D::getBarcodeHTML($value->id, 'C39', 0.95,33)
-                // 'nama_pemesan' => $dataPemesan
-            ];
-        }
-        return response()->json([
-            'status' => true,
-            // 'data' => [
-            //     'id' => $tracking->id,
-            //     'nama_paket' => $tracking->nama_paket,
-            //     'price' => $tracking->price,
-            //     'qty' => $tracking->qty,
-            //     'nama_pemesan' => $tracking->pemesan['order']['firstname']
-            // ],
-            'data' => $dataTracking
-        ]);
+        // $input_kode_tracking = $request->kode_tracking;
+        // $tracking = PaketOrder::where('id',$input_kode_tracking)->get();
+        // if(empty($tracking)){
+        //     return response()->json([
+        //         'status' => false,
+        //         'message' => 'Kode Tracking Tidak Ditemukan'
+        //     ],201);
+        // }
+        // foreach ($tracking as $key => $value) {
+        //     // $dataTracking = $tracking;
+        //     foreach (json_decode($value->pemesan) as $key => $vp) {
+        //         $pemesan = $vp;
+        //     }
+        //     $anggotas = PaketOrderList::select('order_paket_id','pemesan','qty')
+        //                             ->where('order_paket_id', $value->id)->get();
+        //     foreach ($anggotas as $key => $a) {
+        //         $anggota[] = [
+        //             'nama' => $a->pemesan
+        //         ];
+        //     }
+        //     if($value->status == 1){
+        //         $status = "NOT PAID";
+        //     }elseif($value->status == 3){
+        //         $status = "PAID";
+        //     }
+        //     $dataTracking[] = [
+        //         'id' => $value->id,
+        //         'nama_paket' => $value->nama_paket,
+        //         'price' => $value->price,
+        //         'qty' => $value->qty,
+        //         // 'nama_pemesan' => $pemesan->first_name,
+        //         // 'pemesan' => $pemesan,
+        //         'nama_pemesan' => $pemesan->first_name.' '.$pemesan->last_name,
+        //         // 'anggota' => $anggota,
+        //         'tanggal_berangkat' => Carbon::parse($pemesan->tanggal_berangkat)->format('d-m-Y'),
+        //         'anggota' => $anggotas,
+        //         'tanggal_pembelian' => Carbon::parse($value->created_at)->isoFormat('dddd, D MMMM Y'),
+        //         'status' => $status,
+        //         // json_decode(json_encode($value->pemesan),true),
+        //         // 'pemesan' => $dataPemesan[0]['firstname'],
+        //         // 'pemesan' => json_decode($value->pemesan,true),
+        //         // json_decode($value->pemesan['order']['firstname'],false),
+        //         'barcode' => DNS1D::getBarcodeHTML($value->id, 'C39', 0.95,33)
+        //         // 'nama_pemesan' => $dataPemesan
+        //     ];
+        // }
+        // return response()->json([
+        //     'status' => true,
+        //     // 'data' => [
+        //     //     'id' => $tracking->id,
+        //     //     'nama_paket' => $tracking->nama_paket,
+        //     //     'price' => $tracking->price,
+        //     //     'qty' => $tracking->qty,
+        //     //     'nama_pemesan' => $tracking->pemesan['order']['firstname']
+        //     // ],
+        //     'data' => $dataTracking
+        // ]);
     }
 
     public function kebijakan_privasi()
@@ -1116,6 +1129,13 @@ class FrontendController extends Controller
     public function cek_id_payment($id)
     {
         # code...
+    }
+
+    public function sewa_bus()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        visitor()->visit();
+        return view('frontend.frontend5.persewaan.bus.index',$data);
     }
 
 }

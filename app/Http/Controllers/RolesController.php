@@ -48,6 +48,7 @@ class RolesController extends Controller
 
         if ($validator->passes()) {
             $input = $request->all();
+            $input['slug'] = Str::slug($request->role);
             $roles = Roles::create($input);
 
             if($roles){

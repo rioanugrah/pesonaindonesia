@@ -103,6 +103,10 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::post('order/{id}/checkout', 'TravellingController@buy_order')->name('frontend.travelling.checkout');
         Route::get('payment/{id}', 'TravellingController@order_payment')->name('frontend.travelling.payment');
     });
+
+    Route::prefix('sewa-bus')->group(function () {
+        Route::get('/', 'FrontendController@sewa_bus')->name('frontend.sewa_bus');
+    });
     
     Route::get('invoice/{id}/tiket_wisata', 'InvoiceController@tiket_wisata')->name('invoice.tiket_wisata');
     Route::get('invoice/{id}/travelling', 'InvoiceController@invoice_travelling')->name('invoice.travelling');
@@ -120,12 +124,33 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::get('kategori_kota', 'KategoriKotaController@index')->name('ktkota')->middleware('verified');
             Route::post('kategori_kota/simpan', 'KategoriKotaController@simpan')->name('ktkota.simpan')->middleware('verified');
             
+            Route::prefix('kategori')->group(function() {
+                Route::prefix('bidang_usaha')->group(function() {
+                    Route::get('/', 'KategoriController@bidang_usaha')->name('kategori.bidang_usaha')->middleware('verified');
+                    Route::post('simpan', 'KategoriController@bidang_usaha_simpan')->name('kategori.bidang_usaha.simpan')->middleware('verified');
+                });
+                Route::prefix('persewaan')->group(function() {
+                    Route::get('/', 'KategoriController@persewaan')->name('kategori.persewaan')->middleware('verified');
+                    Route::post('simpan', 'KategoriController@persewaan_simpan')->name('kategori.persewaan.simpan')->middleware('verified');
+                });
+            });
+
+            Route::prefix('persewaan')->group(function() {
+                Route::prefix('bus')->group(function() {
+                    Route::get('/', 'PersewaanController@bus')->name('persewaan.bus')->middleware('verified');
+                    Route::get('create', 'PersewaanController@bus_create')->name('persewaan.bus.create')->middleware('verified');
+                    Route::post('simpan', 'PersewaanController@bus_simpan')->name('persewaan.bus.simpan')->middleware('verified');
+                    // Route::post('simpan', 'KategoriController@bidang_usaha_simpan')->name('kategori.bidang_usaha.simpan')->middleware('verified');
+                });
+            });
+
             Route::prefix('cooperation')->group(function() {
                 Route::get('/', 'CooperationController@index')->name('cooperation')->middleware('verified');
+                Route::get('{id}/surat', 'CooperationController@surat')->name('cooperation.surat')->middleware('verified');
                 Route::get('notif', 'CooperationController@notif')->middleware('verified');
                 Route::post('simpan', 'CooperationController@simpan')->name('cooperation.simpan')->middleware('verified');
                 Route::get('{id}/download', 'CooperationController@download')->name('cooperation.download')->middleware('verified');
-                Route::get('{id}', 'CooperationController@detail')->middleware('verified');
+                Route::get('{id}', 'CooperationController@detail')->name('cooperation.detail')->middleware('verified');
                 Route::get('{id}/edit', 'CooperationController@edit')->middleware('verified');
                 Route::get('{id}/hapus', 'CooperationController@hapus')->middleware('verified');
                 Route::post('upload', 'CooperationController@upload_berkas')->name('cooperation.upload_berkas')->middleware('verified');

@@ -19,6 +19,16 @@
                         <span>Posting</span>
                     </a>
                 </li>
+                 <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ti-email"></i>
+                        <span>Persewaan</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('persewaan.bus') }}">Bus</a></li>
+                        <li><a href="#">Mobil</a></li>
+                    </ul>
+                </li>
                 <li class="menu-title">Executive Officer</li>
                 <li class="menu-title">Marketing Officer</li>
                 {{-- <li>
@@ -45,16 +55,16 @@
                         <span>Travelling</span>
                     </a>
                 </li>
-                <li class="{{ Request::is('b/paket*') ? 'mm-active' : '' }}">
+                {{-- <li class="{{ Request::is('b/paket*') ? 'mm-active' : '' }}">
                     <a href="{{ route('paket') }}" class="waves-effect">
                         <i class="ti-package"></i>
                         <span>Paket Wisata</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="{{ Request::is('b/paket_order*') ? 'mm-active' : '' }}">
                     <a href="{{ route('paket.order') }}" class="waves-effect">
                         <i class="ti-package"></i>
-                        <span>Paket Order</span>
+                        <span>Order</span>
                     </a>
                 </li>
                 <li class="menu-title">Operational Officer</li>
@@ -86,11 +96,27 @@
                         <span>Perusahaan</span>
                     </a>
                 </li>
-                <li class="{{ Request::is('b/kategori_kota*') ? 'mm-active' : '' }}">
+                {{-- <li class="{{ Request::is('b/kategori_bidang_usaha*') ? 'mm-active' : '' }}">
+                    <a href="#" class="waves-effect">
+                        <i class="fas fa-city"></i>
+                        <span>Kategori Bidang Usaha</span>
+                    </a>
+                </li> --}}
+                {{-- <li class="{{ Request::is('b/kategori_kota*') ? 'mm-active' : '' }}">
                     <a href="{{ route('ktkota') }}" class="waves-effect">
                         <i class="fas fa-city"></i>
                         <span>Kategori Kota</span>
                     </a>
+                </li> --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ti-email"></i>
+                        <span>Kategori</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('kategori.bidang_usaha') }}">Bidang Usaha</a></li>
+                        <li><a href="{{ route('kategori.persewaan') }}">Persewaan</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
