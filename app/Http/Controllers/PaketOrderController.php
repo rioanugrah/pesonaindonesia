@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 use App\Models\PaketOrder;
 use App\Models\PaketOrderList;
 use App\Models\BuktiPembayaran;
+
+use App\Models\Order;
 use DataTables;
 
 use App\Mail\Pembayaran;
@@ -14,10 +16,67 @@ use Mail;
 
 class PaketOrderController extends Controller
 {
+    // public function index(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $data = PaketOrder::all();
+    //         return DataTables::of($data)
+    //                 ->addIndexColumn()
+    //                 // ->addColumn('price', function($row){
+    //                 //     return 'Rp. '.number_format($row->price,2,",",".");
+    //                 // })
+    //                 // ->addColumn('diskon', function($row){
+    //                 //     return $row->diskon.'%';
+    //                 // })
+    //                 ->addColumn('price', function($row){
+    //                     return 'Rp. '.number_format($row->price,2,",",".");
+    //                 })
+    //                 ->addColumn('status', function($row){
+    //                     if($row->status == 0){
+    //                         return '<span class="badge bg-danger">Tolak</span>';
+    //                     }
+    //                     elseif($row->status == 1){
+    //                         return '<span class="badge bg-primary">Menunggu Pembayaran</span>';
+    //                     }
+    //                     elseif($row->status == 2){
+    //                         return '<span class="badge bg-warning">Sedang Diproses</span>';
+    //                     }
+    //                     elseif($row->status == 3){
+    //                         return '<span class="badge bg-success">Pembayaran Berhasil</span>';
+    //                     }
+    //                 })
+    //                 ->addColumn('pemesan', function($row){
+    //                     foreach (json_decode($row->pemesan) as $key => $p) {
+    //                         return $p->first_name.' '.$p->last_name;
+    //                     }
+    //                 })
+    //                 // ->addColumn('status', function($row){
+    //                 //     if($row->status == 'Y'){
+    //                 //         return 'Aktif';
+    //                 //     }else{
+    //                 //         return 'Tidak Aktif';
+    //                 //     }
+    //                 // })
+    //                 ->addColumn('action', function($row){
+    //                     $btn = '<div class="btn-group">
+    //                             <a href="'.route('invoice.tiket_wisata',['id' => $row->id]).'" class="btn btn-success btn-sm" target="_blank" title="Invoice">
+    //                                 <i class="fas fa-file-alt"></i> Invoice
+    //                             </a>
+    //                             <button onclick="bukti_pembayaran(`'.$row->id.'`)" class="btn btn-primary btn-sm" title="Bukti Pembayaran">
+    //                                 <i class="fas fa-file-alt"></i> Bukti Pembayaran
+    //                             </button>
+    //                             </div>';
+    //                     return $btn;
+    //                 })
+    //                 ->rawColumns(['action','status'])
+    //                 ->make(true);
+    //     }
+    //     return view('backend.paket.order.index');
+    // }
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = PaketOrder::all();
+            $data = Order::all();
             return DataTables::of($data)
                     ->addIndexColumn()
                     // ->addColumn('price', function($row){

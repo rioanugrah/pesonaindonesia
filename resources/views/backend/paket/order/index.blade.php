@@ -48,7 +48,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nama Paket</th>
+                                <th>Nama Order</th>
                                 <th>Pemesan</th>
                                 <th>Jumlah</th>
                                 <th>Harga</th>
@@ -103,8 +103,8 @@
                 name: 'id'
             },
             {
-                data: 'nama_paket',
-                name: 'nama_paket'
+                data: 'nama_order',
+                name: 'nama_order'
             },
             {
                 data: 'pemesan',

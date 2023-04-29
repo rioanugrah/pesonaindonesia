@@ -15,7 +15,7 @@
 <div class="page-title-box">
     @if (Session::has('success'))
         <div class="alert alert-success">
-            {{ Session::get('success') }}
+            {{ Session::get('message_content') }}
         </div>
     @endif
 
@@ -114,5 +114,9 @@
             },
         ]
     });
+
+    function reload() {
+        table.ajax.reload();
+    }
 </script>
 @endsection

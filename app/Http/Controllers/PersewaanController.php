@@ -14,6 +14,7 @@ use App\Models\KabupatenKota;
 use App\Models\Provinsi;
 use DataTables;
 use Validator;
+use File;
 
 class PersewaanController extends Controller
 {
@@ -34,9 +35,9 @@ class PersewaanController extends Controller
                     })
                     ->addColumn('action', function($row){
                         // $slug = Str::slug($row->role,'-');
-                        $btn = '<button onclick="edit('.$row->id.')" class="btn btn-warning btn-sm" title="Edit">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </button>
+                        $btn = '<a href="'.route('persewaan.bus.edit',['id' => $row->id]).'" class="btn btn-warning btn-sm" title="Edit">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </a>
                                 <button onclick="hapus('.$row->id.')" class="btn btn-danger btn-sm" title="Hapus">
                                     <i class="fas fa-trash"></i>
                                 </button>';
@@ -152,6 +153,106 @@ class PersewaanController extends Controller
         //     'success' => false,
         //     'error' => $validator->errors()->all()
         // ]);
+    }
+
+    public function bus_edit($id)
+    {
+        $data['persewaan_bus'] = Persewaan::where('id',$id)->where('user_id',auth()->user()->id)->first();
+        if(empty($data['persewaan_bus'])){
+            return redirect()->back();
+        }
+        // $data['kategori_persewaan']
+        $data['provinsis'] = Provinsi::pluck('nama','id');
+        $data['persewaan_armadas'] = PersewaanArmada::where('persewaan_id',$data['persewaan_bus']['id'])->get();
+        $data['persewaan_spesifikasis'] = PersewaanSpesifikasi::where('persewaan_id',$data['persewaan_bus']['id'])->get();
+        $data['persewaan_hargas'] = PersewaanHarga::where('persewaan_id',$data['persewaan_bus']['id'])->get();
+
+        return view('backend.persewaan.bus.edit',$data);
+    }
+
+    public function bus_update(Request $request, $id)
+    {
+        $rules = [
+            'nama_barang'  => 'required',
+            // 'provinsi'  => 'required',
+            // 'kab_kota'  => 'required',
+            // 'images'  => 'required|file|max:2048',
+            // 'email'  => 'required|unique:cooperation',
+        ];
+ 
+        $messages = [
+            'nama_barang.required'  => 'Nama Persewaan wajib diisi.',
+            // 'provinsi.required'  => 'Inputan Provinsi wajib diisi.',
+            // 'kab_kota.required'  => 'Inputan Kabupaten Kota wajib diisi.',
+            // 'images.required'  => 'Upload Gambar wajib diisi.',
+            // 'images.max'  => 'Upload Gambar Max 2MB.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->passes()) {
+            $persewaan = Persewaan::where('id',$id)->where('user_id',auth()->user()->id)->first();
+    
+            if ($request->file('images')) {
+                $image = $request->file('images');
+                $img = \Image::make($image->path());
+                $img = $img->encode('webp', 75);
+                $input['images'] = $data['persewaan_bus']['kode_persewaan'].'_edit'.'.webp';
+                $img->save(public_path('backend/persewaan/').$input['images']);
+    
+                $image_path = public_path(('backend/persewaan/').$input['images']);
+                File::delete($image_path);
+                $input['images'] = $input['images'];
+            }
+    
+            foreach ($request['outer-armada'][0] as $key => $oa) {
+                foreach ($oa as $key => $value_armada) {
+                    PersewaanArmada::where('persewaan_id',$id)->update([
+                        'persewaan_id' => $persewaan->id,
+                        'armada' => $value_armada['armada']
+                    ]);
+                }
+            }
+            foreach ($request['outer-spesifikasi'][0] as $key => $os) {
+                foreach ($os as $key => $value_spesifikasi) {
+                    PersewaanSpesifikasi::where('persewaan_id',$id)->update([
+                        'persewaan_id' => $persewaan->id,
+                        'icon' => $value_spesifikasi['icon'],
+                        'spesifikasi' => $value_spesifikasi['spesifikasi'],
+                    ]);
+                }
+            }
+            foreach ($request['outer-harga'][0] as $key => $oh) {
+                foreach ($oh as $key => $value_harga) {
+                    PersewaanHarga::where('persewaan_id',$id)->update([
+                        'persewaan_id' => $persewaan->id,
+                        'deskripsi' => $value_harga['deskripsi'],
+                        'harga' => $value_harga['harga'],
+                        'satuan' => $value_harga['satuan'],
+                    ]);
+                }
+            }
+    
+            $input = $request->all();
+            $persewaan->update($input);
+    
+            if($persewaan){
+                $message_title="Berhasil !";
+                $message_content="Persewaan ".$persewaan->kode_persewaan." Berhasil Diupdate";
+                $message_type="success";
+                $message_succes = true;
+            }
+    
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+            return redirect()->route('persewaan.bus')->with($array_message);
+        }
+
+        dd($validator->errors()->all());
+        
     }
 
 }

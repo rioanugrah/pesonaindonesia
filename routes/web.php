@@ -140,6 +140,8 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                     Route::get('/', 'PersewaanController@bus')->name('persewaan.bus')->middleware('verified');
                     Route::get('create', 'PersewaanController@bus_create')->name('persewaan.bus.create')->middleware('verified');
                     Route::post('simpan', 'PersewaanController@bus_simpan')->name('persewaan.bus.simpan')->middleware('verified');
+                    Route::get('{id}/edit', 'PersewaanController@bus_edit')->name('persewaan.bus.edit')->middleware('verified');
+                    Route::post('{id}/update', 'PersewaanController@bus_update')->name('persewaan.bus.update')->middleware('verified');
                     // Route::post('simpan', 'KategoriController@bidang_usaha_simpan')->name('kategori.bidang_usaha.simpan')->middleware('verified');
                 });
             });
