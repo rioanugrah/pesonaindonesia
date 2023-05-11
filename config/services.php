@@ -36,4 +36,10 @@ return [
         'redirect'      => env('GOOGLE_REDIRECT'),
     ],
 
+    'telegram-bot-api' => [
+        'token' => env('TELEGRAM_BOT_TOKEN', 'YOUR BOT TOKEN HERE')
+    ],
+
+    'telegram_id' => env('TELEGRAM_ID','YOUR ID'),
+
 ];

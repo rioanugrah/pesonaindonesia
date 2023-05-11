@@ -51,3 +51,6 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     });
 });
 
+Route::domain('camping.'.parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
+    Route::get('testing', 'Camping\TestingController@index');
+});

@@ -17,6 +17,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "haruncpi/laravel-maintenance": "^1.0",
         "intervention/image": "^2.7",
+        "laravel-notification-channels/telegram": "^1.0",
         "laravel/framework": "^7.0",
         "laravel/passport": "~9.0",
         "laravel/socialite": "^5.3",

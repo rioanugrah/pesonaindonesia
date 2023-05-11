@@ -46,6 +46,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->mapPartnerRoutes();
+        $this->mapCampingRoutes();
 
         // $this->mapAppRoutes();
         // $this->mapSubRoutes();
@@ -72,6 +73,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/partner.php'));
+    }
+
+    protected function mapCampingRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/camping.php'));
     }
 
     /**
