@@ -7,7 +7,7 @@
     <title>@yield('title')</title>
     <meta name="author" content="Camping Adventure">
     <meta name="description" content="@yield('description')">
-    <meta name="theme-color" content="#ff7b00">
+    <meta name="theme-color" content="#63AB45">
     <meta name="keywords" content="@yield('keywords')">
     <link rel="canonical" href="@yield('canonical')">
     <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
