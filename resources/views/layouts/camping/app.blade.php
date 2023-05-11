@@ -59,7 +59,7 @@
                     <div class="nav-menu">
 
                         <div class="mobile-logo mb-30 d-block d-xl-none">
-                            <a href="{{ url('/') }}" class="brand-logo"><img src="assets/images/logo/logo-black.png" alt="Logo Camping Adventure"></a>
+                            <a href="{{ url('/') }}" class="brand-logo"><img src="{{ $assets }}/images/LogoCampingAdventureBlack.png" alt="Logo Camping Adventure"></a>
                         </div>
 
                         {{-- <div class="nav-search mb-30 d-block d-xl-none ">
