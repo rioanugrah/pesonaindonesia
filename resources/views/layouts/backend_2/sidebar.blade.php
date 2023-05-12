@@ -55,6 +55,12 @@
                         <span>Travelling</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('b/honeymoon*') ? 'mm-active' : '' }}">
+                    <a href="{{ route('honeymoon') }}" class="waves-effect">
+                        <i class="ti-package"></i>
+                        <span>Honeymoon</span>
+                    </a>
+                </li>
                 {{-- <li class="{{ Request::is('b/paket*') ? 'mm-active' : '' }}">
                     <a href="{{ route('paket') }}" class="waves-effect">
                         <i class="ti-package"></i>
