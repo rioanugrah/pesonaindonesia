@@ -89,8 +89,9 @@
                         <ul>
                           {{-- <li><a href="{{ route('frontend.paket') }}">Paket</a></li> --}}
                           <li><a href="{{ route('frontend.travelling') }}">Travelling</a></li>
-                          <li><a href="{{ route('frontend.sewa_bus') }}">Sewa Bus / Bus Pariwisata</a></li>
-                          <li><a href="#">Rental Mobil</a></li>
+                          <li><a href="#">Honeymoon</a></li>
+                          {{-- <li><a href="{{ route('frontend.sewa_bus') }}">Sewa Bus / Bus Pariwisata</a></li> --}}
+                          {{-- <li><a href="#">Rental Mobil</a></li> --}}
                           {{-- <li><a href="javascript:void()">Gallery</a></li>
                           <li><a href="javascript:void()">Syarat & Ketentuan</a></li> --}}
                         </ul>

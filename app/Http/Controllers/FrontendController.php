@@ -24,6 +24,7 @@ use App\Models\Travelling;
 use App\Models\Coupons;
 use App\Models\Cooperation;
 use App\Models\Partnership;
+use App\Models\Honeymoon;
 
 use App\User;
 
@@ -196,6 +197,7 @@ class FrontendController extends Controller
             // return view('frontend.frontend_2022.index', $data);
             // dd(visitor()->visit());
             visitor()->visit();
+            $data['honeymoons'] = Honeymoon::all();
             return view('frontend.frontend5.index', $data);
             // return view('frontend.frontend4.index', $data);
             // return view('layouts.frontend_4.app',$data);

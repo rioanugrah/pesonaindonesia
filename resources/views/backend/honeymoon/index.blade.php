@@ -116,5 +116,28 @@
                 },
             ]
         });
+
+        function hapus(id) {
+            $.ajax({
+                type: 'GET',
+                // url: "{{ route('slider.edit',['id' => "+id+"]) }}",
+                url: "{{ url('b/honeymoon') }}"+'/'+id+'/delete',
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                success: function(result){
+                    iziToast.success({
+                        title: result.message_title,
+                        message: result.message_content
+                    });
+                    table.ajax.reload();
+                },
+                error: function (request, status, error) {
+                    iziToast.error({
+                        title: 'Error',
+                        message: error,
+                    });
+                }
+            })
+        }
     </script>
 @endsection

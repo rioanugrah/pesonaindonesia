@@ -183,6 +183,38 @@
         </div>    
     </div>
 </section>
+<section class="trending pb-9" style="margin-top: -5%">
+    <div class="container">
+        <div class="section-title mb-6 w-75 mx-auto text-center">
+            <h2 class="mb-1">Jelajahi <span class="theme">Honeymoon</span></h2>
+        </div>
+        <div class="trend-box">
+            <div class="row">
+                @foreach ($honeymoons as $honeymoon)
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <a href="#">
+                            <div class="trend-item1 rounded box-shadow">
+                                <div class="trend-image position-relative">
+                                    <img src="{{ $asset }}/img/honeymoon/{{ $honeymoon->images }}" alt="image" style="width: 700px; height: 250px; object-fit: cover;" class="">
+                                    <div class="trend-content1 p-4">
+                                        {{-- <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h5> --}}
+                                        <h3 class="mb-1 white"><a href="#" class="white">{{ $honeymoon->nama_paket }}</a></h3>
+                                        <div class="entry-meta d-flex align-items-center justify-content-between">
+                                            <div class="entry-author d-flex align-items-center">
+                                                <p class="mb-0 white"><span class="theme1 fw-bold fs-4"> Rp. {{ number_format($honeymoon->price,0,",",".") }}</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="overlay"></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>
 <section class="about-us pb-2 pt-2" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
     <div class="container">
         <div class="row align-items-center d-flex">
@@ -496,7 +528,7 @@
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">
             {{-- <h4 class="mb-1 theme1">Our Partners</h4> --}}
-            <h2 class="mb-1">Mitra <span class="theme">Kami</span></h2>
+            <h2 class="mb-1">Partner <span class="theme">Kami</span></h2>
             <p>Kami bekerja sama dengan</p>
         </div>
         <div class="row align-items-center partner-in partner-slider">

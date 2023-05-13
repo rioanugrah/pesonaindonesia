@@ -269,6 +269,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('/', 'HoneymoonController@index')->name('honeymoon')->middleware('verified');
                 Route::get('create', 'HoneymoonController@create')->name('honeymoon.create')->middleware('verified');
                 Route::post('simpan', 'HoneymoonController@simpan')->name('honeymoon.simpan')->middleware('verified');
+                Route::get('{id}/edit', 'HoneymoonController@edit')->name('honeymoon.edit')->middleware('verified');
+                Route::post('{id}/update', 'HoneymoonController@update')->name('honeymoon.update')->middleware('verified');
+                Route::get('{id}/delete', 'HoneymoonController@delete')->name('honeymoon.delete')->middleware('verified');
             });
             // Route::get('hotel/importExportView', 'DemoController@importExportView');
             
