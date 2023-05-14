@@ -77,6 +77,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::get('/', 'FrontendController@blog')->name('frontend.blog');
         Route::get('{slug}', 'FrontendController@blog_detail')->name('frontend.blog_detail');
     });
+    Route::prefix('honeymoon')->group(function () {
+        Route::get('{slug}', 'FrontendController@honeymoon_detail')->name('frontend.honeymoon_detail');
+    });
     
     // Route::prefix('partner')->group(function(){
     //     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');

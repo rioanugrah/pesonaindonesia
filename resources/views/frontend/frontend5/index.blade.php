@@ -195,10 +195,10 @@
                         <a href="#">
                             <div class="trend-item1 rounded box-shadow">
                                 <div class="trend-image position-relative">
-                                    <img src="{{ $asset }}/img/honeymoon/{{ $honeymoon->images }}" alt="image" style="width: 700px; height: 250px; object-fit: cover;" class="">
+                                    <img src="{{ $asset }}/img/honeymoon/{{ $honeymoon->images }}" alt="{{ $honeymoon->nama_paket }}" style="width: 700px; height: 250px; object-fit: cover;" class="">
                                     <div class="trend-content1 p-4">
                                         {{-- <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h5> --}}
-                                        <h3 class="mb-1 white"><a href="#" class="white">{{ $honeymoon->nama_paket }}</a></h3>
+                                        <h3 class="mb-1 white"><a href="{{ route('frontend.honeymoon_detail',['slug' => $honeymoon->slug]) }}" class="white">{{ $honeymoon->nama_paket }}</a></h3>
                                         <div class="entry-meta d-flex align-items-center justify-content-between">
                                             <div class="entry-author d-flex align-items-center">
                                                 <p class="mb-0 white"><span class="theme1 fw-bold fs-4"> Rp. {{ number_format($honeymoon->price,0,",",".") }}</span></p>

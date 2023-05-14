@@ -1140,4 +1140,14 @@ class FrontendController extends Controller
         return view('frontend.frontend5.persewaan.bus.index',$data);
     }
 
+    public function honeymoon_detail($slug)
+    {
+        $data['honeymoon'] = Honeymoon::where('slug',$slug)->first();
+        if(empty($data['honeymoon'])){
+            return redirect()->back();
+        }
+        visitor()->visit();
+        return view('frontend.frontend5.honeymoon_detail',$data);
+    }
+
 }
