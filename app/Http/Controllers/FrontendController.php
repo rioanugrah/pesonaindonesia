@@ -25,6 +25,7 @@ use App\Models\Coupons;
 use App\Models\Cooperation;
 use App\Models\Partnership;
 use App\Models\Honeymoon;
+use App\Models\HoneymoonOrder;
 
 use App\User;
 
@@ -44,6 +45,7 @@ use DNS1D;
 use Validator;
 use DB;
 use HTTP_Request2;
+use PDF;
 
 class FrontendController extends Controller
 {
@@ -1147,7 +1149,186 @@ class FrontendController extends Controller
             return redirect()->back();
         }
         visitor()->visit();
-        return view('frontend.frontend5.honeymoon_detail',$data);
+        return view('frontend.frontend5.honeymoon.honeymoon_detail',$data);
+    }
+
+    public function honeymoon_order($slug)
+    {
+        $data['honeymoon'] = Honeymoon::where('slug',$slug)->first();
+        if(empty($data['honeymoon'])){
+            return redirect()->back();
+        }
+        visitor()->visit();
+        return view('frontend.frontend5.honeymoon.order',$data);
+    }
+
+    public function honeymoon_buy(Request $request, $slug)
+    {
+        $honeymoon = Honeymoon::where('slug',$slug)->first();
+        
+        // $norut = Honeymoon::max('kode_paket');
+        // if($norut == null){
+        //     $norut = 0;
+        // }
+        $input['kode_invoice'] = 'INV-HN-'.date('m-Y').time();
+
+        $input['id'] = Str::uuid()->toString();
+        $input['honeymoon_id'] = $honeymoon->id;
+        $input['data_pria'] = json_encode([
+            'first_name' => $request->first_name_pria,
+            'last_name' => $request->last_name_pria
+        ]);
+        $input['data_wanita'] = json_encode([
+            'first_name' => $request->first_name_wanita,
+            'last_name' => $request->last_name_wanita
+        ]);
+        $input['email'] = $request->email;
+        $input['no_telp'] = $request->no_telp;
+        $input['alamat'] = $request->alamat;
+        $input['wedding_date'] = $request->wedding_date;
+        $input['departure_date'] = $request->departure_date;
+        $input['return_date'] = $request->return_date;
+        $input['price'] = $honeymoon->price;
+        $input['qty'] = 1;
+
+        $paymentLink = new HTTP_Request2();
+        $paymentLink->setUrl($this->payment_production.'/generate-static-va');
+        $paymentLink->setMethod(HTTP_Request2::METHOD_POST);
+        $paymentLink->setConfig(array(
+        'follow_redirects' => TRUE
+        ));
+        $paymentLink->setHeader(array(
+            'x-oy-username:'.$this->username,
+            'x-api-key:'.$this->api_key,
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        ));
+        $paymentLink->setBody(json_encode(
+            [
+                'partner_user_id' => $input['id'],
+                'bank_code' => $request->payment_method,
+                'amount' => $input['price'],
+                'is_open' => false,
+                'is_single_use' => true,
+                'is_lifetime' => false,
+                'expiration_time' => 10,
+                'username_display' => 'Pesona Plesiran Indonesia',
+                'email' => $input['email'],
+                'trx_expiration_time' => 10,
+                'partner_trx_id' => 'TRX-HN'.Carbon::now()->format('dmY').'-'.time(),
+                'trx_counter' => 1
+            ]
+        ));
+        try {
+            $response = $paymentLink->send();
+            if ($response->getStatus() == 200) {
+                $dataUrl = json_decode($response->getBody(),true);
+                $input['payment'] = json_encode([
+                    'id_trx' => $dataUrl['id'],
+                    'nomor_rekening' => $dataUrl['va_number'],
+                    'kode_bank' => $dataUrl['bank_code'],
+                    'nama_penerima' => 'Pesona Plesiran Indonesia',
+                ]);
+
+                $honeymoonOrder = HoneymoonOrder::create($input);
+                $email_marketing = 'marketing@plesiranindonesia.com';
+                $details = [
+                    'title' => 'Konfirmasi Pembayaran',
+                    'nama_pembayaran' => $request->first_name_pria.' '.$request->last_name_pria,
+                    'nama_paket' => $honeymoon->nama_paket,
+                    'invoice' => $input['kode_invoice'],
+                    'email' => $input['email'],
+                    'total' => $input['price'],
+                    'body' => 'Terima kasih telah melakukan pembelian tiket '.$honeymoon->nama_paket.'.'.
+                                ' Silahkan lakukan pembayaran berikut.',
+                    'kode_bank' => $dataUrl['bank_code'],
+                    'nama_penerima' => 'Pesona Plesiran Indonesia',
+                    'nomor_rekening' => $dataUrl['va_number'],
+                    'payment_expired' => date("d F Y H:i:s", substr($dataUrl['trx_expiration_time'], 0, 10)),
+                    // 'url' => $dataUrl['url']
+                ];
+                Mail::to($details['email'])->send(new Pembayaran($details));
+                if($honeymoonOrder){
+                    $message_title="Berhasil !";
+                    $message_content="Orderan Berhasil";
+                    $message_type="success";
+                    $message_succes = true;
+                }
+
+                $array_message = array(
+                    'success' => $message_succes,
+                    'message_title' => $message_title,
+                    'message_content' => $message_content,
+                    'message_type' => $message_type,
+                );
+                // return $dataUrl;
+                return redirect(route('frontend.honeymoon_confirm',['id' => $honeymoonOrder->id, 'slug' => $slug]));
+            }else{
+                echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+                    $response->getReasonPhrase();
+            }
+        } catch(HTTP_Request2_Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+        // dd($input);
+        // HoneymoonOrder::create($input);
+        // dd($request->all());
+    }
+
+    public function honeymoon_confirm($slug,$id)
+    {
+        $data['honeymoon_order'] = HoneymoonOrder::find($id);
+        // if(empty($data['honeymoon_order'])){
+        //     return redirect()->back();
+        // }
+        $data_payment = json_decode($data['honeymoon_order']['payment'],true);
+        // dd($data_payment['id_trx']);
+        $paymentLink = new HTTP_Request2();
+        $paymentLink->setUrl($this->payment_production.'/static-virtual-account/'.$data_payment['id_trx']);
+        $paymentLink->setMethod(HTTP_Request2::METHOD_GET);
+        $paymentLink->setConfig(array(
+        'follow_redirects' => TRUE
+        ));
+        $paymentLink->setHeader(array(
+        'x-oy-username:'.$this->username,
+        'x-api-key:'.$this->api_key,
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json'
+        ));
+        try {
+            $response = $paymentLink->send();
+            if($response->getStatus() == 200){
+                $data['dataPayment'] = json_decode($response->getBody(),true);
+                // return $dataPayment;
+                if($data['dataPayment']['va_status'] == 'WAITING_PAYMENT'){
+                    $data['status_pembayaran'] = 1;
+                    $data['status'] = 'Menunggu Pembayaran';
+                }elseif($data['dataPayment']['va_status'] == 'COMPLETE'){
+                    $data['status_pembayaran'] = 3;
+                    $data['status'] = 'Pembayaran Berhasil';
+
+                    $pdf = PDF::loadView('emails.InvoiceHoneymoon',['details' => $data['honeymoon_order'],'status' => $data['status']]);
+                    $pdf->setPaper('A4', 'portrait');
+
+                    Mail::send('emails.messageHoneymoon', ['details' => $data['honeymoon_order']], function ($message) use ($data,$pdf) {
+                        $message->to($data['honeymoon_order']["email"], $data['honeymoon_order']["email"])
+                                ->subject($data['honeymoon_order']['honeymoon']['nama_paket'])
+                                ->attachData($pdf->output(), $data['honeymoon_order']["kode_invoice"].'.pdf');
+                    });
+
+                }elseif($data['dataPayment']['va_status'] == 'EXPIRED'){
+                    $data['status_pembayaran'] = 4;
+                    $data['status'] = 'Pembayaran Kadaluwarsa';
+                }
+                return view('frontend.frontend5.honeymoon.order_detail_payment',$data);
+            }else{
+                echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+                $response->getReasonPhrase();
+            }
+        } catch (\HTTP_Request2_Exception $th) {
+            echo 'Error: ' . $th->getMessage();
+        }
+
     }
 
 }

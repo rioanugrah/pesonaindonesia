@@ -79,6 +79,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     });
     Route::prefix('honeymoon')->group(function () {
         Route::get('{slug}', 'FrontendController@honeymoon_detail')->name('frontend.honeymoon_detail');
+        Route::get('{slug}/order', 'FrontendController@honeymoon_order')->name('frontend.honeymoon_order');
+        Route::post('{slug}/buy_now', 'FrontendController@honeymoon_buy')->name('frontend.honeymoon_buy');
+        Route::get('{slug}/payment/{id}', 'FrontendController@honeymoon_confirm')->name('frontend.honeymoon_confirm');
     });
     
     // Route::prefix('partner')->group(function(){

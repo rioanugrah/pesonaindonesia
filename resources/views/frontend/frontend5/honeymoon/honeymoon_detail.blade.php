@@ -14,11 +14,11 @@
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4">
                 <div class="cover-content text-center text-md-start">
+                    <h1>{{ $honeymoon->nama_paket }}</h1>
                     <div class="author-detail mb-2">
                         <a href="javascript:void()" class="tag white bg-theme py-1 px-3 me-2 rounded"><b>Rp. {{ number_format($honeymoon->price,0,',','.') }}</b></a>
                         {{-- <a href="javascript:void()" class="tag py-1 px-3"><i class="fa fa-eye"></i> {{ $count }}</a> --}}
                     </div>
-                    <h1>{{ $honeymoon->nama_paket }}</h1>
                     {{-- <div class="author-detail d-flex align-items-center">
                         <span class="me-3"><a href="javascript:void()"><i class="fa fa-clock"></i> Post On : {{ \Carbon\Carbon::create($blog_detail->created_at)->isoFormat('LL') }}</a></span>
                         <span class="me-3"><a href="javascript:void()"><i class="fa fa-user"></i> Jack Richard</a></span>
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <button class="nir-btn float-lg-end w-25">BOOKING NOW</button>
+        <a href="{{ route('frontend.honeymoon_order',['slug' => $honeymoon->slug]) }}" class="nir-btn float-lg-end w-25">BOOKING NOW</a>
     </div>
 </section>
 @endsection
