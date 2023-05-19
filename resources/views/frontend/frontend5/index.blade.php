@@ -190,7 +190,7 @@
         </div>
         <div class="trend-box">
             <div class="row">
-                @foreach ($honeymoons as $honeymoon)
+                @forelse ($honeymoons as $honeymoon)
                     <div class="col-lg-4 col-md-6 mb-4">
                         <a href="#">
                             <div class="trend-item1 rounded box-shadow">
@@ -210,7 +210,11 @@
                             </div>
                         </a>
                     </div>
-                @endforeach
+                @empty
+                <div class="col-lg-12">
+                    <div class="text-center">Paket Honeymoon Belum Tersedia</div>
+                </div>
+                @endforelse
             </div>
         </div>
     </div>
@@ -419,7 +423,7 @@
                 @empty
                 <div class="trend-item1">
                     <div class="trend-image position-relative rounded">
-                        <p>Promo belum tersedia</p>
+                        <p class="text-center">Promo belum tersedia</p>
                     </div>
                 </div>
                 @endforelse
