@@ -1307,6 +1307,70 @@ class FrontendController extends Controller
                     $data['status_pembayaran'] = 3;
                     $data['status'] = 'Pembayaran Berhasil';
 
+                    $nohp = $data['honeymoon_order']['no_telp'];
+                    if(!preg_match("/[^+0-9]/",trim($nohp))){
+                        // cek apakah no hp karakter ke 1 dan 2 adalah angka 62
+                        if(substr(trim($nohp), 0, 2)=="62"){
+                            $hp    =trim($nohp);
+                        }
+                        // cek apakah no hp karakter ke 1 adalah angka 0
+                        else if(substr(trim($nohp), 0, 1)=="0"){
+                            $hp    ="62".substr(trim($nohp), 1);
+                        }
+                    }
+                    // return $hp;
+
+                    // $url = "https://graph.facebook.com/v16.0/116810811415413/messages";
+
+                    // $curl = curl_init($url);
+                    // curl_setopt($curl, CURLOPT_URL, $url);
+                    // curl_setopt($curl, CURLOPT_POST, true);
+                    // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+                    // $headers = array(
+                    // "Authorization: Bearer EAADej5MDIU0BANmxCVoi94KFZAczDcHPZAQIOERUjP5huD1m2nrHyW4yV8pU1pCJnbi2FSh1DZB14JJxh8Mw0ZCgoJ20iyUHP6WEY0jw8OwAf9EgckNUzNiy7ZBM9ex0UmVngTkwHZCrOpdFZCVwAkZBCt2UJWftv4YXpnAJb2xEZC0yJDan8JdInDzIKptP7xRMXSIsMcWcKHsAZAHRCfsyDszDCj1DauAY4ZD",
+                    // "Content-Type: application/json",
+                    // );
+                    // curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+                    // $data = '{ 
+                    //     "messaging_product": "whatsapp", 
+                    //     "to": "'.$hp.'", 
+                    //     "type": "template", 
+                    //     "template": 
+                    //         { 
+                    //             "name": "hello_world", 
+                    //             "language": 
+                    //                 { 
+                    //                     "code": "en_US" 
+                    //                 } 
+                    //             } 
+                    //         }
+                    //     ';
+
+                    // $data = '{
+                    //     "messaging_product": "whatsapp",
+                    //     "recipient_type": "individual",
+                    //     "to": "'.$hp.'",
+                    //     "type": "text",
+                    //     "text": {
+                    //         "preview_url": true,
+                    //         "body": "Hello"
+                    //         }
+                    // }';
+
+                    // curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+
+                    // //for debug only!
+                    // curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+                    // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+                    // $resp = curl_exec($curl);
+                    // curl_close($curl);
+
+                    // return $resp;
+                    // var_dump($resp);
+
                     $pdf = PDF::loadView('emails.InvoiceHoneymoon',['details' => $data['honeymoon_order'],'status' => $data['status']]);
                     $pdf->setPaper('A4', 'portrait');
 
@@ -1315,6 +1379,7 @@ class FrontendController extends Controller
                                 ->subject($data['honeymoon_order']['honeymoon']['nama_paket'])
                                 ->attachData($pdf->output(), $data['honeymoon_order']["kode_invoice"].'.pdf');
                     });
+                    
 
                 }elseif($data['dataPayment']['va_status'] == 'EXPIRED'){
                     $data['status_pembayaran'] = 4;

@@ -183,6 +183,7 @@
         </div>    
     </div>
 </section>
+@if (!$honeymoons->isEmpty())
 <section class="trending pb-9" style="margin-top: -5%">
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">
@@ -219,6 +220,7 @@
         </div>
     </div>
 </section>
+@endif
 <section class="about-us pb-2 pt-2" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
     <div class="container">
         <div class="row align-items-center d-flex">
@@ -402,6 +404,7 @@
         </div>    
     </div>
 </section> --}}
+@if (!$coupons->isEmpty())
 <section class="trending pb-3 pt-0">
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">
@@ -437,8 +440,8 @@
         </div> --}}
     </div>
 </section>
-
-<section class="testimonial pt-10 pb-10"  style="background-image: url({{ $assets }}/images/image/bromo.webp);">   
+@endif
+{{-- <section class="testimonial pt-10 pb-10"  style="background-image: url({{ $assets }}/images/image/bromo.webp);">   
     <div class="container">
         <div class="testimonial-in">
             <div class="row align-items-center">
@@ -446,7 +449,6 @@
                     <div class="section-title">
                         <h4 class="mb-1 theme1">Testimonials</h4>
                         <h2 class="mb-1 white">Ulasan <span class="theme">Klien</span></h2>
-                        {{-- <p class="mb-0 white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p> --}}
                     </div>
                 </div>
                 <div class="col-lg-7">
@@ -462,7 +464,6 @@
                                             <img src="{{ $assets }}/images/testimonial/img1.jpg" alt="">
                                             <div class="author-title ms-3">
                                                 <h5 class="m-0 theme1">{{ $testimoni['name'] }}</h5>
-                                                {{-- <span class="white">Accountant</span> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -477,7 +478,7 @@
     </div> 
 
     <div class="dot-overlay"></div>   
-</section>
+</section> --}}
 {{-- <section class="discount-action pt-8 pb-8" style="background-image: url({{ $assets }}/images/shape-1.png); background-attachment:unset">
     <div class="container">
         <div class="call-banner1 rounded" style="background-image: url({{ $assets }}/images/image/about.webp); background-position:right;">
