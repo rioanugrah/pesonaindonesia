@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="col-lg-6 mb-4">
-                <div class="box-shadow p-3 rounded"><img src="{{ asset('frontend/assets4/img/blog/'.$blog_detail->image) }}" alt="Image" class="w-100 rounded"></div>
+                <div class="box-shadow p-3 rounded"><img src="{{ asset('frontend/assets4/img/blog/'.$blog_detail->image) }}" alt="{{ $blog_detail->title }}" class="w-100 rounded"></div>
             </div>
         </div>
     </div>

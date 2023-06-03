@@ -121,7 +121,27 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     
     Route::group(['middleware' => 'auth'], function () {
         Route::prefix('b')->group(function () {
-            Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
+            Route::get('home', 'v2\HomeController@index')->name('home')->middleware('verified');
+            Route::prefix('tour')->group(function() {
+                Route::get('/', 'v2\TourController@all_tour')->name('tour')->middleware('verified');
+                Route::get('create', 'v2\TourController@all_tour_create')->name('tour.create')->middleware('verified');
+                Route::post('simpan', 'v2\TourController@all_tour_simpan')->name('tour.create.simpan')->middleware('verified');
+                Route::prefix('category')->group(function() {
+                    Route::get('/', 'v2\TourController@tour_category')->name('tour.category')->middleware('verified');
+                    Route::post('simpan', 'v2\TourController@tour_category_simpan')->name('tour.category.simpan')->middleware('verified');
+                });
+                Route::prefix('attribute')->group(function() {
+                    Route::get('/', 'v2\TourController@tour_attribute')->name('tour.attribute')->middleware('verified');
+                    Route::post('simpan', 'v2\TourController@tour_attribute_simpan')->name('tour.attribute.simpan')->middleware('verified');
+                    Route::prefix('manage')->group(function() {
+                        Route::get('{id}', 'v2\TourController@tour_attribute_manage')->name('tour.attribute.manage')->middleware('verified');
+                        Route::post('{id}/simpan', 'v2\TourController@tour_attribute_manage_simpan')->name('tour.attribute.manage.simpan')->middleware('verified');
+                        Route::get('{id}/detail/{tour_manage_id}', 'v2\TourController@tour_attribute_manage_detail')->name('tour.attribute.manage.detail')->middleware('verified');
+                        Route::post('{id}/update', 'v2\TourController@tour_attribute_manage_update')->name('tour.attribute.manage.update')->middleware('verified');
+                    });
+                });
+            });
+            // Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
             Route::get('home/balance', 'HomeController@balance')->name('home.balance')->middleware('verified');
             
             Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
