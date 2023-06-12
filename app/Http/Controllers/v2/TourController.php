@@ -10,6 +10,7 @@ use \App\Models\v2\Tour;
 use \App\Models\v2\TourCategory;
 use \App\Models\v2\TourAttribute;
 use \App\Models\v2\TourAttributeDetail;
+use \App\Models\v2\TourOrder;
 
 use DataTables;
 use Validator;
@@ -425,5 +426,33 @@ class TourController extends Controller
                 'error' => $validator->errors()->all()
             ]
         );
+    }
+
+    public function tour_order_view(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = TourOrder::all();
+            return DataTables::of($data)
+                            ->addIndexColumn()
+                            // ->addColumn('images', function($row){
+                            //     return '<img src='.asset('backend_2023/images/tour/').'/'.$row->images.' width="150">';
+                            // })
+                            ->addColumn('action', function($row){
+                                $btn = '<div class="btn-group">';
+                                $btn .= '<a class="btn btn-warning btn-xs"><i class="fas fa-edit"></i></a>';
+                                $btn .= '<a class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></a>';
+                                $btn .= '</div>';
+                                return $btn;
+                            })
+                            ->rawColumns(['action'])
+                            ->make(true);
+        }
+
+        return view('backend_new_2023.tour.order');
+    }
+
+    public function tour_order_buy(Request $request)
+    {
+        # code...
     }
 }

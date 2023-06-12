@@ -27,6 +27,8 @@ use App\Models\Partnership;
 use App\Models\Honeymoon;
 use App\Models\HoneymoonOrder;
 
+use App\Models\v2\Tour;
+
 use App\User;
 
 use App\Models\KategoriPaket;
@@ -134,7 +136,8 @@ class FrontendController extends Controller
             $data['paket_privates'] = PaketList::where('kategori_paket_id',1)->get();
             $data['paket_trips'] = PaketList::where('status','!=',0)
                                             ->orderBy('created_at','desc')->paginate(6);
-            $data['travellings'] = Travelling::orderBy('created_at','desc')->paginate(6);
+            $data['travellings'] = Tour::orderBy('created_at','desc')->paginate(6);
+            // $data['travellings'] = Travelling::orderBy('created_at','desc')->paginate(6);
             $data['coupons'] = Coupons::orderBy('created_at','desc')
                                     ->where('coupons_expired','>=',Carbon::now()->format('Y-m-d'))
                                     ->paginate(6);
@@ -234,6 +237,15 @@ class FrontendController extends Controller
         //     $data['date'] = 12;
         //     return view('coming_soon.index', $data);
         // }
+    }
+
+    public function travelling_detail($id,$slug)
+    {
+        $data['travelling_detail'] = Tour::find($id);
+        if(empty($data['travelling_detail'])){
+            return redirect()->back();
+        }
+        return view('frontend.frontend5.travelling.detail',$data);
     }
 
     public function search_hotel(Request $request)

@@ -47,7 +47,7 @@
                             <a href="{{ route('tour') }}">All Travel</a>
                             <a href="{{ route('tour.category') }}">Category</a>
                             <a href="{{ route('tour.attribute') }}">Attribute</a>
-                            <a href="javascript:void(0);">All Booking</a>
+                            <a href="{{ route('tour.order') }}">All Booking</a>
                         </li>
                     </ul>
                 </li>

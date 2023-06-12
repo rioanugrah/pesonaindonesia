@@ -22,10 +22,11 @@ class CreateTourOrderTable extends Migration
             $table->string('day',2);
             $table->string('payment_metode');
             $table->string('transaksi_id')->nullable();
-            $table->text('detail_information');
+            $table->text('detail_informasi');
             $table->string('price');
             $table->string('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

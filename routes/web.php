@@ -104,6 +104,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     
     Route::prefix('travelling')->group(function(){
         Route::get('/', 'TravellingController@f_index')->name('frontend.travelling');
+        Route::get('{id}/{slug}', 'FrontendController@travelling_detail')->name('frontend.travelling.detail');
         Route::get('search', 'TravellingController@f_cari_travelling')->name('frontend.search.travelling');
         Route::get('/order/{id}', 'TravellingController@f_detail_order')->name('frontend.travelling_detail_order');
         Route::post('order/{id}/checkout', 'TravellingController@buy_order')->name('frontend.travelling.checkout');
@@ -126,6 +127,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('/', 'v2\TourController@all_tour')->name('tour')->middleware('verified');
                 Route::get('create', 'v2\TourController@all_tour_create')->name('tour.create')->middleware('verified');
                 Route::post('simpan', 'v2\TourController@all_tour_simpan')->name('tour.create.simpan')->middleware('verified');
+                Route::get('order', 'v2\TourController@tour_order_view')->name('tour.order')->middleware('verified');
                 Route::prefix('category')->group(function() {
                     Route::get('/', 'v2\TourController@tour_category')->name('tour.category')->middleware('verified');
                     Route::post('simpan', 'v2\TourController@tour_category_simpan')->name('tour.category.simpan')->middleware('verified');
