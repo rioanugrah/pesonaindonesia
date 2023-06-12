@@ -75,9 +75,8 @@
                                 <h5 class="mb-2">Rencana Perjalanan</h5>
                                 <ul>
                                     @foreach (json_decode($travelling_detail->itinerary) as $key => $itinerary)
-                                        
-                                    @endforeach
                                     <li class="d-block pb-1"><i class="fa fa-check pink mr-1"></i> {{ $itinerary->time.' - '.$itinerary->title }}</li>
+                                    @endforeach
                                 </ul>
                             </div>
                             @endif
