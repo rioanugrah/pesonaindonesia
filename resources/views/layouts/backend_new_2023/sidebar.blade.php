@@ -3,10 +3,10 @@
     <div class="navbar-brand-box">
         <a href="{{route('home')}}" class="logo logo-dark">
             <span class="logo-sm">
-                <img src="{{ URL::asset('backend_new/images/logo-sm.png') }}" alt="" height="22">
+                <img src="{{ URL::asset('backend_2023/images/logo_ppi.webp') }}" alt="" height="25">
             </span>
             <span class="logo-lg">
-                <img src="{{ URL::asset('backend_new/images/logo-dark.png') }}" alt="" height="20">
+                <img src="{{ URL::asset('backend_2023/images/logo_plesiran_new_black.webp') }}" alt="" height="40">
             </span>
         </a>
 

@@ -127,6 +127,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('/', 'v2\TourController@all_tour')->name('tour')->middleware('verified');
                 Route::get('create', 'v2\TourController@all_tour_create')->name('tour.create')->middleware('verified');
                 Route::post('simpan', 'v2\TourController@all_tour_simpan')->name('tour.create.simpan')->middleware('verified');
+                Route::get('{id}/edit', 'v2\TourController@all_tour_edit')->name('tour.edit')->middleware('verified');
+                Route::post('{id}/update', 'v2\TourController@all_tour_update')->name('tour.update')->middleware('verified');
+                Route::get('{id}/delete', 'v2\TourController@all_tour_delete')->name('tour.delete')->middleware('verified');
                 Route::get('order', 'v2\TourController@tour_order_view')->name('tour.order')->middleware('verified');
                 Route::prefix('category')->group(function() {
                     Route::get('/', 'v2\TourController@tour_category')->name('tour.category')->middleware('verified');
