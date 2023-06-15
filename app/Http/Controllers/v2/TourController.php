@@ -149,8 +149,8 @@ class TourController extends Controller
             return redirect()->route('tour')->with($array_message);
             // dd($input);
         }
-        return redirect()->back()->with('error',$validator->errors()->all());
-        // dd($validator->errors()->all());
+        // return redirect()->back()->with('error',$validator->errors()->all());
+        dd($validator->errors()->all());
     }
     
     public function all_tour_edit($id)
