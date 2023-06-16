@@ -35,7 +35,7 @@
             </form>
         </div>
 
-        <div class="d-flex">
+        {{-- <div class="d-flex">
 
             <div class="dropdown d-inline-block d-lg-none ms-2">
                 <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
@@ -289,9 +289,9 @@
                 </button>
             </div>
             
-        </div>
+        </div> --}}
     </div>
-    <div class="container-fluid">
+    {{-- <div class="container-fluid">
         <div class="topnav">
 
             <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
@@ -300,7 +300,7 @@
                     <ul class="navbar-nav">
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('index')}}">
+                            <a class="nav-link" href="{{route('home')}}">
                                 <i class="uil-home-alt me-2"></i> @lang('translation.Dashboard')
                             </a>
                         </li>
@@ -565,5 +565,5 @@
                 </div>
             </nav>
         </div>
-    </div>
+    </div> --}}
 </header>

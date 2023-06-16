@@ -36,6 +36,25 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('posting') }}">
+                        <i class="uil-presentation-check"></i>
+                        <span>Posting</span>
+                    </a>
+                </li>
+                <li class="menu-title">Marketing Officer</li>
+                <li>
+                    <a href="#">
+                        <i class="uil-home-alt"></i>
+                        <span>Kupon</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil-home-alt"></i>
+                        <span>Honeymoon</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -52,6 +71,54 @@
                     </ul>
                 </li>
 
+                <li class="menu-title">Operating Officer</li>
+
+                <li>
+                    <a href="#">
+                        <i class="uil-home-alt"></i>
+                        <span>Kerjasama</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="uil-home-alt"></i>
+                        <span>Event</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="uil-home-alt"></i>
+                        <span>Vendor</span>
+                    </a>
+                </li>
+
+                <li class="menu-title">IT Officer</li>
+                <li>
+                    <a href="#">
+                        <i class="uil-bag"></i>
+                        <span>Company</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil-boombox"></i>
+                        <span>SEO</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil-book-reader"></i>
+                        <span>Visitor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil-user-circle"></i>
+                        <span>User</span>
+                    </a>
+                </li>
                 {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="uil-window-section"></i>
