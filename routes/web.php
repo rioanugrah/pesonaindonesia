@@ -323,10 +323,11 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('{id}/register', 'v2\EventController@detailEventRegister')->name('events.detailRegister')->middleware('verified');
                 Route::get('delete/{id}', 'v2\EventController@destroy')->name('events.delete')->middleware('verified');
             });
-
-    
-            Route::get('post', 'PostController@index')->name('post')->middleware('verified');
-            Route::post('post/simpan', 'PostController@simpan')->name('post.simpan')->middleware('verified');
+            
+            Route::prefix('post')->group(function(){
+                Route::get('/', 'v2\SeoController@index')->name('seo')->middleware('verified');
+                Route::post('simpan', 'v2\SeoController@simpan')->name('seo.simpan')->middleware('verified');                
+            });
     
             Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');
             Route::get('pengguna/delete/{id}', 'UsersController@delete')->middleware('verified');
