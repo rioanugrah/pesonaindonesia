@@ -178,17 +178,17 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             });
 
             Route::prefix('cooperation')->group(function() {
-                Route::get('/', 'CooperationController@index')->name('cooperation')->middleware('verified');
-                Route::get('{id}/surat', 'CooperationController@surat')->name('cooperation.surat')->middleware('verified');
-                Route::get('notif', 'CooperationController@notif')->middleware('verified');
-                Route::post('simpan', 'CooperationController@simpan')->name('cooperation.simpan')->middleware('verified');
-                Route::get('{id}/download', 'CooperationController@download')->name('cooperation.download')->middleware('verified');
-                Route::get('{id}', 'CooperationController@detail')->name('cooperation.detail')->middleware('verified');
-                Route::get('{id}/edit', 'CooperationController@edit')->middleware('verified');
-                Route::get('{id}/hapus', 'CooperationController@hapus')->middleware('verified');
-                Route::post('upload', 'CooperationController@upload_berkas')->name('cooperation.upload_berkas')->middleware('verified');
-                Route::post('data/upload', 'CooperationController@berkas')->name('cooperation.berkas')->middleware('verified');
-                Route::post('status', 'CooperationController@status')->name('cooperation.status')->middleware('verified');
+                Route::get('/', 'v2\CooperationController@index')->name('cooperation')->middleware('verified');
+                Route::get('{id}/surat', 'v2\CooperationController@surat')->name('cooperation.surat')->middleware('verified');
+                Route::get('notif', 'v2\CooperationController@notif')->middleware('verified');
+                Route::post('simpan', 'v2\CooperationController@simpan')->name('cooperation.simpan')->middleware('verified');
+                Route::get('{id}/download', 'v2\CooperationController@download')->name('cooperation.download')->middleware('verified');
+                Route::get('{id}', 'v2\CooperationController@detail')->name('cooperation.detail')->middleware('verified');
+                Route::get('{id}/edit', 'v2\CooperationController@edit')->middleware('verified');
+                Route::get('{id}/hapus', 'v2\CooperationController@hapus')->middleware('verified');
+                Route::post('upload', 'v2\CooperationController@upload_berkas')->name('cooperation.upload_berkas')->middleware('verified');
+                Route::post('data/upload', 'v2\CooperationController@berkas')->name('cooperation.berkas')->middleware('verified');
+                Route::post('status', 'v2\CooperationController@status')->name('cooperation.status')->middleware('verified');
             });
     
             Route::prefix('paket')->group(function(){
@@ -270,9 +270,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('/', 'v2\PostingController@index')->name('posting')->middleware('verified');
                 Route::get('buat', 'v2\PostingController@create')->name('posting.create')->middleware('verified');
                 Route::post('simpan', 'v2\PostingController@simpan')->name('posting.simpan')->middleware('verified');
-                Route::get('{slug}/edit', 'BlogController@edit')->name('posting.edit')->middleware('verified');
-                Route::post('{slug}/update', 'BlogController@update')->name('posting.update')->middleware('verified');
-                Route::get('{id}/delete', 'BlogController@delete')->name('posting.delete')->middleware('verified');
+                Route::get('{slug}/edit', 'v2\PostingController@edit')->name('posting.edit')->middleware('verified');
+                Route::post('{slug}/update', 'v2\PostingController@update')->name('posting.update')->middleware('verified');
+                Route::get('{id}/delete', 'v2\PostingController@delete')->name('posting.delete')->middleware('verified');
             });
             // Route::prefix('paket')->group(function(){
     
@@ -305,21 +305,25 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('{id}/delete', 'HoneymoonController@delete')->name('honeymoon.delete')->middleware('verified');
             });
             // Route::get('hotel/importExportView', 'DemoController@importExportView');
-            
-            Route::get('perusahaan', 'PerusahaanController@index')->name('perusahaan')->middleware('verified');
-            Route::post('perusahaan/simpan', 'PerusahaanController@simpan')->name('perusahaan.simpan')->middleware('verified');
-            Route::get('perusahaan/{id}/edit', 'PerusahaanController@edit')->name('perusahaan.edit')->middleware('verified');
-            Route::post('perusahaan/update', 'PerusahaanController@update')->name('perusahaan.update')->middleware('verified');
-            Route::get('perusahaan/delete/{id}', 'PerusahaanController@destroy')->name('perusahaan.hapus')->middleware('verified');
-    
+            Route::prefix('perusahaan')->group(function(){
+                Route::get('/', 'v2\PerusahaanController@index')->name('perusahaan')->middleware('verified');
+                Route::post('simpan', 'v2\PerusahaanController@simpan')->name('perusahaan.simpan')->middleware('verified');
+                Route::get('{id}/edit', 'v2\PerusahaanController@edit')->name('perusahaan.edit')->middleware('verified');
+                Route::post('update', 'v2\PerusahaanController@update')->name('perusahaan.update')->middleware('verified');
+                Route::get('delete/{id}', 'v2\PerusahaanController@destroy')->name('perusahaan.hapus')->middleware('verified');
+            });
+
             Route::get('log', 'LogController@index')->name('log')->middleware('verified');
             
-            Route::get('events', 'EventsController@index')->name('events')->middleware('verified');
-            Route::get('events/buat', 'EventsController@create')->name('events.buat')->middleware('verified');
-            Route::post('events/simpan', 'EventsController@simpan')->name('events.simpan')->middleware('verified');
-            Route::get('events/{id}', 'EventsController@detail')->name('events.detail')->middleware('verified');
-            Route::get('events/{id}/register', 'EventsController@detailEventRegister')->name('events.detailRegister')->middleware('verified');
-            Route::get('events/delete/{id}', 'EventsController@destroy')->name('events.delete')->middleware('verified');
+            Route::prefix('events')->group(function(){
+                Route::get('/', 'v2\EventController@index')->name('events')->middleware('verified');
+                Route::get('buat', 'v2\EventController@create')->name('events.buat')->middleware('verified');
+                Route::post('simpan', 'v2\EventController@simpan')->name('events.simpan')->middleware('verified');
+                Route::get('{id}', 'v2\EventController@detail')->name('events.detail')->middleware('verified');
+                Route::get('{id}/register', 'v2\EventController@detailEventRegister')->name('events.detailRegister')->middleware('verified');
+                Route::get('delete/{id}', 'v2\EventController@destroy')->name('events.delete')->middleware('verified');
+            });
+
     
             Route::get('post', 'PostController@index')->name('post')->middleware('verified');
             Route::post('post/simpan', 'PostController@simpan')->name('post.simpan')->middleware('verified');

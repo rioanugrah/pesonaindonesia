@@ -122,7 +122,7 @@ class PostingController extends Controller
             ['kategori' => 'Travel'],
             ['kategori' => 'Food']
         ];
-        return view('backend.posting.edit',$data);
+        return view('backend_new_2023.posting.edit',$data);
     }
 
     public function update(Request $request,$slug)

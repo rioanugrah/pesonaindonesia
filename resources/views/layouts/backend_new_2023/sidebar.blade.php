@@ -74,14 +74,14 @@
                 <li class="menu-title">Operating Officer</li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('cooperation') }}">
                         <i class="uil-home-alt"></i>
                         <span>Kerjasama</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('events') }}">
                         <i class="uil-home-alt"></i>
                         <span>Event</span>
                     </a>
@@ -96,7 +96,7 @@
 
                 <li class="menu-title">IT Officer</li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('perusahaan') }}">
                         <i class="uil-bag"></i>
                         <span>Company</span>
                     </a>
