@@ -324,7 +324,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('delete/{id}', 'v2\EventController@destroy')->name('events.delete')->middleware('verified');
             });
             
-            Route::prefix('post')->group(function(){
+            Route::prefix('seo')->group(function(){
                 Route::get('/', 'v2\SeoController@index')->name('seo')->middleware('verified');
                 Route::post('simpan', 'v2\SeoController@simpan')->name('seo.simpan')->middleware('verified');                
             });

@@ -102,7 +102,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('seo') }}">
                         <i class="uil-boombox"></i>
                         <span>SEO</span>
                     </a>
