@@ -55,7 +55,8 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio suspendisse leo neque iaculis molestie sagittis maecenas aenean eget molestie sagittis.
                         </p> --}}
                         <ul class="mt-3 mb-3">
-                            <li class="white"><strong>Whatsapp:</strong> 0813-3112-6991</li>
+                            <li class="white"><strong>Whatsapp Office:</strong> 0813-3112-6991</li>
+                            <li class="white"><strong>Whatsapp Admin:</strong> 0858-6722-4494</li>
                             <li class="white"><strong>Location:</strong> Jl. Raya Tlogowaru No. 3, Tlogowaru Kec. Kedungkandang, Kota Malang, Jawa Timur</li>
                             <li class="white"><strong>Email:</strong> business@plesiranindonesia.com</li>
                         </ul>
