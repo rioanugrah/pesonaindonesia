@@ -108,7 +108,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('visitor') }}">
                         <i class="uil-book-reader"></i>
                         <span>Visitor</span>
                     </a>

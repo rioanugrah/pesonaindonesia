@@ -245,7 +245,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             });
     
             Route::prefix('visitor')->group(function(){
-                Route::get('/', 'VisitorController@index')->name('visitor')->middleware('verified');
+                Route::get('/', 'v2\VisitorController@index')->name('visitor')->middleware('verified');
             });
             
             Route::prefix('roles')->group(function(){
