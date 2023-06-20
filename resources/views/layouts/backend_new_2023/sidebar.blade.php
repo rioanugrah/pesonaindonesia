@@ -114,7 +114,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('pengguna') }}">
                         <i class="uil-user-circle"></i>
                         <span>User</span>
                     </a>

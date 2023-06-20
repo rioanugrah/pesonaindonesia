@@ -46,7 +46,7 @@ class TestingController extends Controller
                
         $response = curl_exec($ch);
   
-        dd($response);
+        return($response);
     }
 
     public function testInvoice()

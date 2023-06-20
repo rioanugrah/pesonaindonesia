@@ -239,9 +239,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             });
     
             Route::prefix('pengguna')->group(function(){
-                Route::get('/', 'UsersController@index')->name('pengguna')->middleware('verified');
-                Route::get('{id}', 'UsersController@detail')->name('pengguna.detail')->middleware('verified');
-                Route::get('{id}/reset', 'UsersController@reset')->name('pengguna.reset')->middleware('verified');
+                Route::get('/', 'v2\UsersController@index')->name('pengguna')->middleware('verified');
+                Route::get('{id}', 'v2\UsersController@detail')->name('pengguna.detail')->middleware('verified');
+                Route::get('{id}/reset', 'v2\UsersController@reset')->name('pengguna.reset')->middleware('verified');
             });
     
             Route::prefix('visitor')->group(function(){
