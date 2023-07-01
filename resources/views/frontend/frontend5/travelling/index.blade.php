@@ -17,26 +17,26 @@
                     <div class="col-lg-6 col-md-6 mb-4">
                         <div class="trend-item rounded box-shadow">
                             <div class="trend-image position-relative">
-                                <img src="{{ asset('frontend/assets_new/images/travelling/'.$travelling->images) }}" alt="{{ $travelling->nama_paket }}" class="">
+                                <img src="{{ asset('backend_2023/images/tour/'.$travelling->images) }}" alt="{{ $travelling->title }}" class="">
                                 <div class="color-overlay"></div>
                             </div>
                             <div class="trend-content p-4 position-relative bg-white">
-                                <h3 class="mb-1"><a href="{{ route('frontend.travelling_detail_order',['id' => $travelling->id]) }}" class="">{{ $travelling->nama_travelling }}</a></h3>
-                                <p class="mb-4">Meeting Point: <b>{{ $travelling->meeting_point }}</b></p>
+                                <h3 class="mb-1"><a href="{{ route('frontend.travelling.detail',['id' => $travelling->id, 'slug' => $travelling->slug]) }}">{{ $travelling->title }}</a></h3>
+                                {{-- <p class="mb-4">Meeting Point: <b>{{ $travelling->meeting_point }}</b></p> --}}
                                 <p class=" border-b pb-2 mb-2">{{ strip_tags($travelling->deskripsi) }}</p>
                                 <div class="entry-meta d-flex align-items-center justify-content-between">
                                     <div class="entry-author d-flex align-items-center">
                                         <p class="mb-0">
-                                            @if ($travelling->diskon == 0)
+                                            @if ($travelling->discount == 0)
                                             <span class="theme fw-bold fs-5">
-                                                Rp. {{ number_format($travelling->price,0,",",".") }}
+                                                Rp. {{ number_format($travelling->current_price,0,",",".") }}
                                             </span>
                                             @else
                                             <div class="theme" style="text-decoration: line-through;text-decoration-color: #eb4034; font-weight:300">
-                                                Rp. {{ number_format($travelling->price,0,",",".") }} 
+                                                Rp. {{ number_format($travelling->current_price,0,",",".") }} 
                                             </div> &nbsp;
                                             <div class="theme fw-bold fs-5">
-                                                Rp. {{ number_format($travelling->price - ($travelling->diskon / 100) * $travelling->price,2,",",".") }}
+                                                Rp. {{ number_format($travelling->previous_price,2,",",".") }}
                                             </div>
                                             @endif
                                         </p>

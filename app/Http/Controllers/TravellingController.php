@@ -11,6 +11,9 @@ use \App\Models\Order;
 use \App\Models\OrderList;
 use App\Mail\Pembayaran;
 use App\Mail\InvoiceTravelling;
+
+use \App\Models\v2\Tour;
+
 use DataTables;
 use Validator;
 use DB;
@@ -43,7 +46,8 @@ class TravellingController extends Controller
 
     public function f_index()
     {
-        $data['travellings'] = Travelling::orderBy('tanggal_rilis','desc')->paginate(10);
+        // $data['travellings'] = Travelling::orderBy('tanggal_rilis','desc')->paginate(10);
+        $data['travellings'] = Tour::orderBy('created_at','desc')->paginate(10);
         // foreach ($data['travellings'] as $key => $value) {
         //     $datas[] = $value->deskripsi;
         // }

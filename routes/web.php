@@ -122,7 +122,10 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     
     Route::group(['middleware' => 'auth'], function () {
         Route::prefix('b')->group(function () {
-            Route::get('home', 'v2\HomeController@index')->name('home')->middleware('verified');
+            Route::prefix('home')->group(function() {
+                Route::get('/', 'v2\HomeController@index')->name('home')->middleware('verified');
+                Route::get('ajax_booking', 'v2\HomeController@ajax_booking_travelling')->name('home.ajax_booking_travelling')->middleware('verified');
+            });
             Route::prefix('tour')->group(function() {
                 Route::get('/', 'v2\TourController@all_tour')->name('tour')->middleware('verified');
                 Route::get('create', 'v2\TourController@all_tour_create')->name('tour.create')->middleware('verified');

@@ -2,6 +2,9 @@
 @section('title')
     Dashboard
 @endsection
+@section('css')
+    <link href="{{ URL::asset('backend_new/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+@endsection
 @section('content')
     @component('common-components.breadcrumb')
         @slot('pagetitle')
@@ -17,7 +20,7 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h4 class="mb-1 mt-1">Rp. <span data-plugin="counterup">0</span></h4>
+                        <h4 class="mb-1 mt-1">Rp. <span data-plugin="counterup">{{ number_format($balances['balance'] == null ? 0 : $balances['balance'],0,'.',',') }}</span></h4>
                         <p class="text-muted mb-0">Balance</p>
                     </div>
                 </div>
@@ -61,7 +64,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Booking Travelling</h4>
-                    <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                    <table id="datatable_tour_booking" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
@@ -73,22 +76,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @forelse ($tour_orders as $tour_order)
-                                <tr>
-                                    <td>{{ $tour_order->kode_order }}</td>
-                                    <td>{{ $tour_order->nama_order }}</td>
-                                    <td>{{ $tour_order->tanggal_booking }}</td>
-                                    <td>{{ $tour_order->payment_metode }}</td>
-                                    <td>{{ $tour_order->status }}</td>
-                                    <td></td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="6" class="text-center">Data Belum Tersedia</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
@@ -104,6 +92,44 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        var table = $('#datatable_tour_booking').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('home.ajax_booking_travelling') }}",
+            columns: [
+                {
+                    data: 'kode_order',
+                    name: 'kode_order'
+                },
+                {
+                    data: 'nama_order',
+                    name: 'nama_order'
+                },
+                {
+                    data: 'tanggal_booking',
+                    name: 'tanggal_booking'
+                },
+                {
+                    data: 'payment_metode',
+                    name: 'payment_metode'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        });
+
+        function reload() {
+            table.ajax.reload();
+        }
+
         var options = {
             chart: {
                 height: 339,
