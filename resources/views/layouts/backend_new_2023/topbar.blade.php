@@ -2,21 +2,21 @@
     <div class="navbar-header">
         <div class="d-flex">
             <div class="navbar-brand-box">
-                <a href="{{url('index')}}" class="logo logo-dark">
+                <a href="{{route('home')}}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('backend_new/images/logo-sm.png') }}" alt="" height="22">
+                        <img src="{{ URL::asset('backend_2023/images/logo_ppi.webp') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('backend_new/images/logo-dark.png') }}" alt="" height="20">
+                        <img src="{{ URL::asset('backend_2023/images/logo_ppi.webp') }}" alt="" height="20">
                     </span>
                 </a>
 
-                <a href="{{url('index')}}" class="logo logo-light">
+                <a href="{{route('home')}}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('backend_new/images/logo-sm.png') }}" alt="" height="22">
+                        <img src="{{ URL::asset('backend_2023/images/logo_ppi.webp') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('backend_new/images/logo-light.png') }}" alt="" height="20">
+                        <img src="{{ URL::asset('backend_2023/images/logo_ppi.webp') }}" alt="" height="20">
                     </span>
                 </a>
             </div>
@@ -218,9 +218,9 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="#"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">View Profile</span></a>
-                    <a class="dropdown-item d-block" href="#"><i class="uil uil-cog font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Setting</span> <span class="badge bg-soft-success rounded-pill mt-1 ms-2">03</span></a>
-                    <a class="dropdown-item" href="#"><i class="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Lock Screen</span></a>
+                    <a class="dropdown-item" href="{{ route('pengguna.profile') }}"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">View Profile</span></a>
+                    {{-- <a class="dropdown-item d-block" href="#"><i class="uil uil-cog font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Setting</span> <span class="badge bg-soft-success rounded-pill mt-1 ms-2">03</span></a>
+                    <a class="dropdown-item" href="#"><i class="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Lock Screen</span></a> --}}
                     <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Logout</span></a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

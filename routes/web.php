@@ -246,6 +246,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('{id}', 'v2\UsersController@detail')->name('pengguna.detail')->middleware('verified');
                 Route::get('{id}/reset', 'v2\UsersController@reset')->name('pengguna.reset')->middleware('verified');
             });
+            Route::get('profile', 'v2\UsersController@profile')->name('pengguna.profile')->middleware('verified');
     
             Route::prefix('visitor')->group(function(){
                 Route::get('/', 'v2\VisitorController@index')->name('visitor')->middleware('verified');
@@ -332,10 +333,10 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::post('simpan', 'v2\SeoController@simpan')->name('seo.simpan')->middleware('verified');                
             });
     
-            Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');
-            Route::get('pengguna/delete/{id}', 'UsersController@delete')->middleware('verified');
-            Route::post('pengguna/simpan', 'UsersController@simpan')->name('pengguna.simpan')->middleware('verified');
-            Route::post('pengguna/update', 'UsersController@update')->name('pengguna.update')->middleware('verified');
+            // Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');
+            // Route::get('pengguna/delete/{id}', 'UsersController@delete')->middleware('verified');
+            // Route::post('pengguna/simpan', 'UsersController@simpan')->name('pengguna.simpan')->middleware('verified');
+            // Route::post('pengguna/update', 'UsersController@update')->name('pengguna.update')->middleware('verified');
         });
     });
     

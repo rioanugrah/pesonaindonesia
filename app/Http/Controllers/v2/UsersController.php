@@ -226,4 +226,22 @@ class UsersController extends Controller
             
         // return substr(str_shuffle(str_repeat($pool, 5)), 0, 8);
     }
+
+    public function profile()
+    {
+        $data['devices'] = [
+            [
+                'ip' => visitor()->ip(),
+                'browser' => visitor()->browser(),
+                'device' => visitor()->device(),
+                'url' => visitor()->url(),
+                'referer' => visitor()->referer(),
+                'useragent' => visitor()->useragent(),
+                'platform' => visitor()->platform(),
+                'languages' => visitor()->languages(),
+            ]
+        ];
+        $data['profile'] = User::where('id',auth()->user()->id)->first();
+        return view('backend_new_2023.users.profile.index',$data);
+    }
 }

@@ -12,10 +12,10 @@
 
         <a href="{{route('home')}}" class="logo logo-light">
             <span class="logo-sm">
-                <img src="{{ URL::asset('backend_new/images/logo-sm.png') }}" alt="" height="22">
+                <img src="{{ URL::asset('backend_2023/images/logo_ppi.webp') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="{{ URL::asset('backend_new/images/logo-light.png') }}" alt="" height="20">
+                <img src="{{ URL::asset('backend_2023/images/logo_plesiran_new_black.webp') }}" alt="" height="20">
             </span>
         </a>
     </div>
