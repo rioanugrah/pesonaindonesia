@@ -243,6 +243,8 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     
             Route::prefix('pengguna')->group(function(){
                 Route::get('/', 'v2\UsersController@index')->name('pengguna')->middleware('verified');
+                Route::post('simpan', 'v2\UsersController@simpan')->name('pengguna.simpan')->middleware('verified');
+                Route::post('update', 'v2\UsersController@update')->name('pengguna.update')->middleware('verified');
                 Route::get('{id}', 'v2\UsersController@detail')->name('pengguna.detail')->middleware('verified');
                 Route::get('{id}/reset', 'v2\UsersController@reset')->name('pengguna.reset')->middleware('verified');
             });
