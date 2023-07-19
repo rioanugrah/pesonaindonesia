@@ -1,7 +1,7 @@
 @extends('layouts.frontend_5.app')
 <?php $asset = asset('frontend/assets5/'); ?>
 @section('title')
-    {{ $travelling->title }} - Order
+    {{ $travelling->nama_travelling }} - Order
 @endsection
 
 @auth
@@ -45,14 +45,12 @@
                 <div class="col-lg-7 mb-4">
                     <div class="payment-book">
                         <div class="booking-box">
-                            <form id="form-form" action="{{ route('payment.checkout') }}" method="post" enctype="multipart/form-data">
-                            {{-- <form id="form-form" action="{{ route('frontend.travelling.checkout',['id' => $travelling->id]) }}" method="post" enctype="multipart/form-data"> --}}
+                            <form id="form-form" action="{{ route('frontend.travelling.checkout',['id' => $travelling->id]) }}" method="post" enctype="multipart/form-data">
                             {{-- <form action="{{ route('frontend.travelling.checkout',['id' => $travelling->id]) }}" method="post" enctype="multipart/form-data"> --}}
                                 @csrf
-                                {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
                                 <div class="customer-information mb-4">
                                     <h3 class="border-b pb-2 mb-2">Biodata Travelling</h3>
-                                    <input type="hidden" id="detail_maksimal" value="{{ $travelling->max_people }}">
+                                    <input type="hidden" id="detail_maksimal" value="{{ $travelling->jumlah_paket }}">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group mb-2">
@@ -112,12 +110,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" name="title" value="{{ $travelling->title }}">
-                                <input type="hidden" name="price" value="{{ $travelling->current_price }}">
                                 <input type="hidden" name="orderTotal" id="order_total">
-                                {{-- <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('form-form').submit();" class="nir-btn float-lg-end w-25">CONFIRM BOOKING</a> --}}
-                                <button type="submit" onclick="event.preventDefault(); document.getElementById('form-form').submit();" class="nir-btn float-lg-end w-25">CONFIRM BOOKING</button>
-                                {{-- <div class="customer-information card-information">
+                                <div class="customer-information card-information">
                                     <h3 class="border-b pb-2 mb-2">Metode Pembayaran</h3>
 
                                     <div class="trending-topic-main">
@@ -160,10 +154,12 @@
                                             <div class="form-group mb-2 w-75">
                                                 <input type="checkbox"> Dengan melanjutkan, Anda menyetujui Syarat dan Ketentuan.
                                             </div>
+                                            {{-- <button type="submit">CONFIRM BOOKING</button> --}}
                                             <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('form-form').submit();" class="nir-btn float-lg-end w-25">CONFIRM BOOKING</a>
                                         </div>
+
                                     </div>
-                                </div> --}}
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -177,9 +173,8 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4">
                                         <div class="trend-item2 rounded">
-                                            <a href="javascript:void()"
-                                                {{-- style="background-image: url({{ asset('frontend/assets_new/images/travelling/' . $travelling->images) }});"></a> --}}
-                                                style="background-image: url({{ asset('backend_2023/images/tour/' . $travelling->images) }});"></a>
+                                            <a href="destination-single1.html"
+                                                style="background-image: url({{ asset('frontend/assets_new/images/travelling/' . $travelling->images) }});"></a>
                                             <div class="color-overlay"></div>
                                         </div>
                                     </div>
@@ -194,7 +189,7 @@
                                                 <small>5 Reviews</small>
                                             </div>
                                             <h5 class="mb-1"><a
-                                                    href="grid-leftfilter.html">{{ $travelling->title }}</a></h5>
+                                                    href="grid-leftfilter.html">{{ $travelling->nama_travelling }}</a></h5>
                                             <h6 class="theme mb-0"><i class="icon-location-pin"></i> Indonesia</h6>
                                         </div>
                                     </div>
@@ -206,9 +201,9 @@
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td>{{ $travelling->title }}</td>
+                                        <td>{{ $travelling->nama_travelling }}</td>
                                         <td class="theme2">Rp.
-                                            {{ number_format($travelling->current_price - ($travelling->discount / 100) * $travelling->current_price, 0, ',', '.') }}
+                                            {{ number_format($travelling->price - ($travelling->diskon / 100) * $travelling->price, 0, ',', '.') }}
                                         </td>
                                     </tr>
                                     <tr>
@@ -217,7 +212,7 @@
                                     </tr>
                                     <tr>
                                         <td>Diskon</td>
-                                        <td class="theme2"><span id="jumlah_diskon">{{ $travelling->discount }} %</span></td>
+                                        <td class="theme2"><span id="jumlah_diskon">0 %</span></td>
                                     </tr>
                                     <tr>
                                         <td>Biaya Pemesanan</td>
@@ -266,8 +261,8 @@
                 $('.jumlah').val('');
                 document.getElementById('jumlah_diskon').innerHTML = '0 %';
             } else {
-                if ('{{ $travelling->jenis_tour }}' == 'Publik') {
-                    var price = {{ $travelling->current_price - ($travelling->discount / 100) * $travelling->current_price }};
+                if ({{ $travelling->kategori_paket_id }} == 2) {
+                    var price = {{ $travelling->price - ($travelling->diskon / 100) * $travelling->price }};
                     if ($('.jumlah').val() == 0) {
                         var penjumlahan = 1 * price;
                         var jumlah = 1;
@@ -293,8 +288,8 @@
                     document.getElementById('subTotal').innerHTML = 'Rp. ' + rupiah;
                     document.getElementById('orderTotal').innerHTML = 'Rp. ' + rupiah;
                     $('#order_total').val(penjumlahan);
-                } else if ('{{ $travelling->jenis_tour }}' == 'Private') {
-                    var price = {{ $travelling->current_price - ($travelling->discount / 100) * $travelling->current_price }};
+                } else if ({{ $travelling->kategori_paket_id }} == 1) {
+                    var price = {{ $travelling->price - ($travelling->diskon / 100) * $travelling->price }};
                     if ($('.jumlah').val() == 0) {
                         var penjumlahan = 1 * price;
                         var jumlah = 1;
@@ -362,7 +357,7 @@
                     processData: false,
                     success: (result) => {
                         if (result.success != false) {
-                            if({{ $travelling->discount }} != 0){
+                            if({{ $travelling->diskon }} != 0){
                                 alert('Voucher Tidak Bisa Digunakan');
                                 $('#kode_promo').val('');
                             }else{

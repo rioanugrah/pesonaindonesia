@@ -17,10 +17,11 @@ class Order extends Model
 
     public $fillable = [
         'id',
-        'icon',
+        // 'icon',
+        'kode_order',
         'nama_order',
         'pemesan',
-        'bank',
+        // 'bank',
         'qty',
         'price',
         'user',

@@ -11,6 +11,7 @@
 </head>
 <?php 
     $name = json_decode($order->pemesan);
+    // dd($name);
     $bank = json_decode($order->bank);
     // $name_decode = $name['first_name'];
     // dd($name[0]->first_name);

@@ -291,7 +291,8 @@ class TravellingController extends Controller
 
     public function f_detail_order($id)
     {
-        $data['travelling'] = Travelling::find($id);
+        $data['travelling'] = Tour::find($id);
+        // dd($data);
         return view('frontend.frontend5.travelling.order',$data);
     }
 

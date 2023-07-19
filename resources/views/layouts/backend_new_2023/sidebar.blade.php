@@ -43,6 +43,12 @@
                     </a>
                 </li>
                 <li class="menu-title">Marketing Officer</li>
+                {{-- <li>
+                    <a href="{{ route('b.invoice') }}">
+                        <i class="uil-home-alt"></i>
+                        <span>Invoice</span>
+                    </a>
+                </li> --}}
                 <li>
                     <a href="#">
                         <i class="uil-home-alt"></i>

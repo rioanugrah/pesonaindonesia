@@ -15,14 +15,15 @@ class CreateOrderTable extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('icon');
+            // $table->string('icon');
+            $table->string('kode_order');
             $table->string('nama_order');
             $table->text('pemesan');
-            $table->text('bank');
+            // $table->text('bank');
             $table->integer('qty');
             $table->string('price');
             $table->uuid('user')->nullable();
-            $table->integer('status');
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });

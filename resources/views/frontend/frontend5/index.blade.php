@@ -134,11 +134,11 @@
                                     <div class="entry-author align-items-center">
                                         <p class="mb-0 white">
                                             <div class="theme1 fw-bold fs-5" style="text-decoration: line-through;text-decoration-color: #eb4034; font-weight:300;">
-                                                Rp. {{ number_format($travelling->previous_price,0,",",".") }}
+                                                Rp. {{ number_format($travelling->current_price,0,",",".") }}
                                             </div>
                                         </p>
                                         <p class="mb-0 white">
-                                            <span class="theme1 fw-bold fs-5"> Rp. {{ number_format($travelling->current_price,0,",",".") }}
+                                            <span class="theme1 fw-bold fs-5"> Rp. {{ number_format($travelling->previous_price,0,",",".") }}
                                             </span> | Per {{ $travelling->jenis_tour == 'Private' ? $travelling->min_people : null }} pax
                                         </p>
                                         {{-- <p class="mb-0 white">

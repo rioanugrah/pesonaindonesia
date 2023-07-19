@@ -63,7 +63,7 @@ class HomeController extends Controller
         try {
             $data['balances'] = json_decode((new HomeController)->balance(),true);
         } catch (\Throwable $th) {
-            $data['balances']['balance']=1;
+            $data['balances']['balance']=0;
         }
 
         $data['periode'] = [];

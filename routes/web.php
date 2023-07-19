@@ -16,6 +16,10 @@ Auth::routes(['verify' => true]);
 
 
 Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
+    // Route::post('simpan',function(){
+    //     return 'test';
+    // })->name('payment.test.simpan');
+    
     Route::get('/', 'FrontendController@index')->name('frontend');
     // Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');
     Route::get('tentang-kami', 'FrontendController@tentang_kami')->name('tentang_kami');
@@ -104,9 +108,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     
     Route::prefix('travelling')->group(function(){
         Route::get('/', 'TravellingController@f_index')->name('frontend.travelling');
+        Route::get('{id}/order', 'TravellingController@f_detail_order')->name('frontend.travelling_detail_order');
         Route::get('{id}/{slug}', 'FrontendController@travelling_detail')->name('frontend.travelling.detail');
         Route::get('search', 'TravellingController@f_cari_travelling')->name('frontend.search.travelling');
-        Route::get('/order/{id}', 'TravellingController@f_detail_order')->name('frontend.travelling_detail_order');
         Route::post('order/{id}/checkout', 'TravellingController@buy_order')->name('frontend.travelling.checkout');
         Route::get('payment/{id}', 'TravellingController@order_payment')->name('frontend.travelling.payment');
     });
@@ -116,7 +120,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     });
     
     Route::get('invoice/{id}/tiket_wisata', 'InvoiceController@tiket_wisata')->name('invoice.tiket_wisata');
-    Route::get('invoice/{id}/travelling', 'InvoiceController@invoice_travelling')->name('invoice.travelling');
+    Route::get('invoice/{kode_order}/travelling', 'InvoiceController@invoice_travelling')->name('invoice.travelling');
     
     Route::get('testings', 'FrontendController@frontend_testing');
     
@@ -333,6 +337,11 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::prefix('seo')->group(function(){
                 Route::get('/', 'v2\SeoController@index')->name('seo')->middleware('verified');
                 Route::post('simpan', 'v2\SeoController@simpan')->name('seo.simpan')->middleware('verified');                
+            });
+            
+            Route::prefix('invoice')->group(function(){
+                Route::get('/', 'v2\InvoiceController@index')->name('b.invoice')->middleware('verified');
+                Route::get('create', 'v2\InvoiceController@create')->name('b.invoice.create')->middleware('verified');
             });
     
             // Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');

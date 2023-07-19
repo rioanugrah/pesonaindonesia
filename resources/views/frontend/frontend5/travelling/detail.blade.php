@@ -14,7 +14,7 @@
                 <div class="cover-content text-center text-md-start">
                     <div class="author-detail mb-2">
                         <a href="javascript:void()" class="tag white bg-theme py-1 px-3 me-2 rounded">{{ $travelling_detail->jenis_tour == 'Publik' ? 'Open Trip' : 'Private Trip' }}</a>
-                        <a href="javascript:void()" class="tag white bg-theme py-1 px-3 me-2 rounded">Rp. {{ number_format($travelling_detail->current_price, 0,',','.') }}</a>
+                        <a href="javascript:void()" class="tag white bg-theme py-1 px-3 me-2 rounded">Rp. {{ number_format($travelling_detail->previous_price, 0,',','.') }}</a>
                     </div>
                     <h1>{{ $travelling_detail->title }}</h1>
                     <div class="author-detail d-flex align-items-center">
@@ -90,6 +90,9 @@
                                     </li>
                                     @endforeach
                                 </ul>
+                            </div>
+                            <div class="description">
+                                <a href="{{ route('frontend.travelling_detail_order',['id' => $travelling_detail->id]) }}" class="nir-btn w-25">BUY NOW</a>
                             </div>
                         </div>
                     </div>
