@@ -120,7 +120,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     });
     
     Route::get('invoice/{id}/tiket_wisata', 'InvoiceController@tiket_wisata')->name('invoice.tiket_wisata');
-    Route::get('invoice/{kode_order}/travelling', 'InvoiceController@invoice_travelling')->name('invoice.travelling');
+    Route::get('invoice/{kode_order}', 'InvoiceController@invoice_order')->name('invoice');
     
     Route::get('testings', 'FrontendController@frontend_testing');
     
@@ -342,6 +342,10 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::prefix('invoice')->group(function(){
                 Route::get('/', 'v2\InvoiceController@index')->name('b.invoice')->middleware('verified');
                 Route::get('create', 'v2\InvoiceController@create')->name('b.invoice.create')->middleware('verified');
+            });
+            
+            Route::prefix('order')->group(function(){
+                Route::get('/', 'v2\OrderController@index')->name('b.order')->middleware('verified');
             });
     
             // Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');

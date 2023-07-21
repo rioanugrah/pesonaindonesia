@@ -50,6 +50,12 @@
                     </a>
                 </li> --}}
                 <li>
+                    <a href="{{ route('b.order') }}">
+                        <i class="uil-home-alt"></i>
+                        <span>Order</span>
+                    </a>
+                </li>
+                <li>
                     <a href="#">
                         <i class="uil-home-alt"></i>
                         <span>Kupon</span>

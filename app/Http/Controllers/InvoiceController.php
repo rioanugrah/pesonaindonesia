@@ -20,7 +20,7 @@ class InvoiceController extends Controller
         return view('invoice.tiket',$data);
     }
 
-    public function invoice_travelling($kode_order)
+    public function invoice_order($kode_order)
     {
         $data['order'] = Order::where('kode_order',$kode_order)->first();
         if(empty($data['order'])){
@@ -30,6 +30,6 @@ class InvoiceController extends Controller
         $data['order_details'] = OrderList::where('order_id',$data['order']['id'])->get();
 
         // return view('invoice.travelling',$data);
-        return view('invoice.travelling_new',$data);
+        return view('invoice.order',$data);
     }
 }

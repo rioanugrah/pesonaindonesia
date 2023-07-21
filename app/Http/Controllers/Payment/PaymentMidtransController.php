@@ -151,6 +151,11 @@ class PaymentMidtransController extends Controller
             $order->update([
                 'status' => 'Paid'
             ]);
+        }else{
+            $order = Order::where('kode_order',$request->order_id)->first();
+            $order->update([
+                'status' => 'Not Paid'
+            ]);
         }
     }
 }

@@ -131,7 +131,7 @@ data-client-key="{{ $midtrans_client_key }}"></script>
             // Optional
             onSuccess: function(result){
                 // alert('Pembayaran Berhasil');
-                window.location.href='{{ route('invoice.travelling',['kode_order' => $kode_order]) }}'
+                window.location.href='{{ route('invoice',['kode_order' => $kode_order]) }}'
                 /* You may add your own js here, this is just example */ 
                 // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
             },
