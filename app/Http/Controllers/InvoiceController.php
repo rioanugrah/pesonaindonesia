@@ -67,17 +67,17 @@ class InvoiceController extends Controller
         // $data['details'] = [
         //     'nama' => 'Rio'
         // ];
-        $pdf = PDF::loadView('emails.InvoiceTravellingNew',$data);
-        $pdf->setPaper('A4', 'portrait');
+        // $pdf = PDF::loadView('emails.InvoiceTravellingNew',$data);
+        // $pdf->setPaper('A4', 'portrait');
         // return $pdf->stream();
 
-        $data['pemesan'] = json_decode($data['order']['pemesan']);
+        // $data['pemesan'] = json_decode($data['order']['pemesan']);
 
-        Mail::send('emails.messageInvoiceTravellingNew',$data, function($message) use ($data,$pdf){
-            $message->to($data['pemesan']->email,$data['pemesan']->email)
-                    ->subject('Invoice #'.$data['order']['kode_order'])
-                    ->attachData($pdf->output(),'Invoice #'.$data['order']['kode_order'].'.pdf');
-        });
+        // Mail::send('emails.messageInvoiceTravellingNew',$data, function($message) use ($data,$pdf){
+        //     $message->to($data['pemesan']->email,$data['pemesan']->email)
+        //             ->subject('Invoice #'.$data['order']['kode_order'])
+        //             ->attachData($pdf->output(),'Invoice #'.$data['order']['kode_order'].'.pdf');
+        // });
         return view('frontend.frontend5.invoice.index',$data);
         // return view('invoice.travelling',$data);
         // return view('invoice.order',$data);
