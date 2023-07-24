@@ -97,8 +97,9 @@
                                         <div class="col-md-6">
                                             <div class="form-group mb-2">
                                                 <label>Jumlah Team (Isi <b>"0"</b> bila tidak memiliki anggota)</label>
-                                                <input id="" type="text" name="qty" placeholder=""
+                                                <input id="" type="text" name="qty_team" placeholder=""
                                                     value="" class="input-text jumlah" required>
+                                                <input type="hidden" name="qty" id="qty">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -276,6 +277,9 @@
                         var penjumlahan = jumlah * price;
                     }
 
+                    $('#qty').val(jumlah);
+                    // alert(jumlah);
+
                     var bilangan = penjumlahan;
 
                     var number_string = bilangan.toString(),
@@ -302,6 +306,9 @@
                         var jumlah = parseInt($('.jumlah').val()) + parseInt(1);
                         var penjumlahan = jumlah * price;
                     }
+
+                    // alert(jumlah);
+                    $('#qty').val(jumlah);
 
                     var bilangan = price;
 

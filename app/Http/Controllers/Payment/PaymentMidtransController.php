@@ -82,7 +82,7 @@ class PaymentMidtransController extends Controller
 
         // $urutan = Order::max('kode_order');
         $input['id'] = Str::uuid()->toString();
-        $input['kode_order'] = 'TRX-'.rand().Carbon::now()->format('mY');
+        $input['kode_order'] = 'TRX-'.rand(1000,9999).Carbon::now()->format('mY');
         $input['nama_order'] = $request->title;
         $input['pemesan'] = json_encode([
             'first_name' => $request->first_name,
@@ -92,7 +92,12 @@ class PaymentMidtransController extends Controller
             'phone' => $request->phone,
         ]);
 
-        $input['qty'] = $request->qty+1;
+        if($request->qty == 0 and $request->qty == null){
+            $input['qty'] = 1;
+        }else{
+            $input['qty'] = $request->qty;
+        }
+
         $input['price'] = $request->orderTotal;
         if (auth()) {
             $input['user'] = auth()->user()->id;
@@ -114,21 +119,22 @@ class PaymentMidtransController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
             ];
-            $params['item_details'] = [
-                [
-                    'id' => '1',
-                    'price' => $request->orderTotal,
-                    'quantity' => $request->qty+1,
-                    'name' => $request->title
-                ]
-            ];
+            // $params['item_details'] = [
+            //     [
+            //         'id' => '1',
+            //         'price' => $request->orderTotal,
+            //         'quantity' => $input['qty'],
+            //         'name' => $request->title
+            //     ]
+            // ];
 
             $data['kode_order'] = $input['kode_order'];
             $data['first_name'] = $request->first_name;
             $data['last_name'] = $request->last_name;
             $data['email'] = $request->email;
             $data['title'] = $request->title;
-            $data['qty'] = $request->qty+1;
+            $data['qty'] = $input['qty'];
+            $data['price'] = $input['price'];
     
             $data['link_url_payment'] = $this->url_payment;
             $data['midtrans_client_key'] = env('MIDTRANS_CLIENT_KEY');

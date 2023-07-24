@@ -121,6 +121,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     
     Route::get('invoice/{id}/tiket_wisata', 'InvoiceController@tiket_wisata')->name('invoice.tiket_wisata');
     Route::get('invoice/{kode_order}', 'InvoiceController@invoice_order')->name('invoice');
+    Route::get('invoice/{kode_order}/send', 'InvoiceController@invoice_send')->name('invoice.send');
     
     Route::get('testings', 'FrontendController@frontend_testing');
     

@@ -3,9 +3,7 @@
     Payment - Checkout
 @endsection
 @section('css')
-<script type="text/javascript"
-src="{{ $link_url_payment }}"
-data-client-key="{{ $midtrans_client_key }}"></script>
+    <script type="text/javascript" src="{{ $link_url_payment }}" data-client-key="{{ $midtrans_client_key }}"></script>
 @endsection
 <?php $asset = asset('frontend/assets5/'); ?>
 
@@ -78,7 +76,12 @@ data-client-key="{{ $midtrans_client_key }}"></script>
                                         <td>{{ $email }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><button id="pay-button" class="nir-btn float-lg-end w-25">Bayar Sekarang</button></td>
+                                        <td>Total Harga</td>
+                                        <td>{{ 'Rp. ' . number_format($price, 0, ',', '.') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><button id="pay-button" class="nir-btn float-lg-end w-25">Bayar
+                                                Sekarang</button></td>
                                     </tr>
                                 </table>
                             </div>
@@ -92,8 +95,10 @@ data-client-key="{{ $midtrans_client_key }}"></script>
                                 <h4>Perlu Bantuan Pemesanan?</h4>
                                 <div class="sidebar-module-inner">
                                     <ul class="help-list">
-                                        <li class="border-b pb-1 mb-1"><span class="font-weight-bold">Whatsapp</span>: 0813-3112-6991</li>
-                                        <li class="border-b pb-1 mb-1"><span class="font-weight-bold">Email</span>: marketing@plesiranindonesia.com</li>
+                                        <li class="border-b pb-1 mb-1"><span class="font-weight-bold">Whatsapp</span>:
+                                            0813-3112-6991</li>
+                                        <li class="border-b pb-1 mb-1"><span class="font-weight-bold">Email</span>:
+                                            marketing@plesiranindonesia.com</li>
                                     </ul>
                                 </div>
                             </div>
@@ -124,33 +129,66 @@ data-client-key="{{ $midtrans_client_key }}"></script>
     </section>
 @endsection
 @section('js')
-<script type="text/javascript">
-    document.getElementById('pay-button').onclick = function(){
-        // SnapToken acquired from previous step
-        snap.pay('{{ $snapToken }}', {
-            // Optional
-            onSuccess: function(result){
-                // alert('Pembayaran Berhasil');
-                window.location.href='{{ route('invoice',['kode_order' => $kode_order]) }}'
-                /* You may add your own js here, this is just example */ 
-                // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-            },
-            // Optional
-            onPending: function(result){
-                alert('Pembayaran Sedang Ditunggu');
-                /* You may add your own js here, this is just example */ 
-                // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-            },
-            // Optional
-            onError: function(result){
-                alert('Pembayaran Gagal');
-                /* You may add your own js here, this is just example */ 
-                // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-            },
-            onClose: function(result) {
-                alert('You Close the popup without finishing the payment');
-            }
-        });
-    };
-</script>
+    <script type="text/javascript">
+        document.getElementById('pay-button').onclick = function() {
+            // SnapToken acquired from previous step
+            snap.pay('{{ $snapToken }}', {
+                // Optional
+                onSuccess: function(result) {
+                    // alert('Pembayaran Berhasil');
+                    // window.location.href='{{ route('invoice', ['kode_order' => $kode_order]) }}'
+
+                    $.ajax({
+                        type: 'GET',
+                        url: "{{ route('invoice.send', ['kode_order' => $kode_order]) }}",
+                        contentType: "application/json;  charset=utf-8",
+                        cache: false,
+                        beforeSend: function() {
+                            $("#status").fadeIn();
+                            $("#preloader").delay(100).fadeIn("slow");
+                        },
+                        success: (result) => {
+                            if (result.success == true) {
+                                window.location.href='{{ route('invoice', ['kode_order' => $kode_order]) }}';
+                            }else{
+                                alert(result.message_title);
+                            }
+                            // alert(result);
+                            // $('#edit').modal('show');
+                            // document.getElementById('edit_pengguna').innerHTML = 'Edit - ' +
+                            //     result.data.name;
+                            // $('#edit_id').val(result.data.id);
+                            // $('#edit_name').val(result.data.name);
+                            // $('#edit_email').val(result.data.email);
+                            // $('#edit_role').val(result.data.role);
+                        },
+                        error: function(request, status, error) {
+                            // iziToast.error({
+                            //     title: 'Error',
+                            //     message: error,
+                            // });
+                        }
+                    });
+
+                    /* You may add your own js here, this is just example */
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                },
+                // Optional
+                onPending: function(result) {
+                    alert('Pembayaran Sedang Ditunggu');
+                    /* You may add your own js here, this is just example */
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                },
+                // Optional
+                onError: function(result) {
+                    alert('Pembayaran Gagal');
+                    /* You may add your own js here, this is just example */
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                },
+                onClose: function(result) {
+                    alert('You Close the popup without finishing the payment');
+                }
+            });
+        };
+    </script>
 @endsection
