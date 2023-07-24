@@ -48,6 +48,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapPartnerRoutes();
         $this->mapCampingRoutes();
         $this->mapPaymentMidtransRoutes();
+        $this->mapPlesiranMalangRoutes();
 
         // $this->mapAppRoutes();
         // $this->mapSubRoutes();
@@ -88,6 +89,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/payment_midtrans.php'));
+    }
+
+    protected function mapPlesiranMalangRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/plesiran_malang.php'));
     }
 
     /**
