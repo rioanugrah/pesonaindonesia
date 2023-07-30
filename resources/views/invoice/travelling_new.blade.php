@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tm_table tm_style1">
+                {{-- <div class="tm_table tm_style1">
                     <div class="tm_round_border">
                         <div class="tm_table_responsive">
                             <table>
@@ -170,7 +170,140 @@
                         <div class="tm_left_footer"></div>
                         <div class="tm_right_footer">
                             <div class="tm_sign tm_text_center">
-                                {{-- <img src="{{ asset('invoice/assets/img/sign.svg') }}" alt="Sign"> --}}
+                                <p class="tm_m0" style="margin-bottom: 2%">Team Marketing,</p>
+                                @if ($order->status == 'Paid')
+                                <span class="stamp is-approved">
+                                    <img src="{{ asset('invoice/assets/img/logo_plesiran_new_black2.webp') }}" alt="" srcset="">
+                                </span>
+                                <span class="stamp is-approved">Approval</span>
+                                @endif
+                                <p class="tm_m0 tm_ternary_color"></p>
+                                <p class="tm_m0 tm_f16 tm_primary_color"></p>
+                                <p>Fabrizio Danindra Kurniawan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+                <div class="tm_table tm_style1">
+                    <div class="tm_round_border">
+                        <div class="tm_table_responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="tm_width_7 tm_semi_bold tm_accent_color">Items</th>
+                                        <th class="tm_width_2 tm_semi_bold tm_accent_color">Price</th>
+                                        <th class="tm_width_1 tm_semi_bold tm_accent_color">Qty</th>
+                                        <th class="tm_width_2 tm_semi_bold tm_accent_color tm_text_right">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                    $detail_items = json_decode($order->pemesan);
+                                        // dd(json_decode($order->pemesan));
+                                    @endphp
+                                    {{-- <tr>
+                                        <td><b>{{ $order->nama_order }}</b></td>
+                                    </tr> --}}
+                                    <tr>
+                                        <td>
+                                            <b>{{ $order->nama_order }}</b>
+                                            @if (!empty($detail_items->item_details))
+                                            <ul>
+                                                @forelse ($detail_items->item_details as $item)
+                                                <li>{{ $item->name }}</li>
+                                                @empty
+                                                    
+                                                @endforelse
+                                            </ul>
+                                            @endif
+                                        </td>
+                                        <td style="text-align: right; vertical-align: top">{{ 'Rp. '.number_format($order->price,0,',','.') }}</td>
+                                        <td style="text-align: center; vertical-align: top">{{ $order->qty }}</td>
+                                        <td style="text-align: right; vertical-align: top">{{ 'Rp. '.number_format($order->price,0,',','.') }}</td>
+                                    </tr>
+                                    {{-- @forelse ($order_details as $row => $order_detail)
+                                        <tr>
+                                            @if ($row == 0)
+                                                <td class="tm_width_7">
+                                                    <p class="tm_m0 tm_f16 tm_primary_color" style="font-size:10pt">
+                                                        {{ $order->nama_order . ' - ' . $pemesan->first_name . ' ' . $pemesan->last_name }}
+                                                    </p>
+                                                </td>
+                                                <td class="tm_width_2">Rp.
+                                                    {{ number_format($order_detail->order->price / $order_detail->order->qty, 0, ',', '.') }}
+                                                </td>
+                                                <td class="tm_width_1">{{ $order_detail->qty }}</td>
+                                                <td class="tm_width_2 tm_text_right">Rp.
+                                                    {{ number_format($order_detail->order->price / $order_detail->order->qty, 0, ',', '.') }}
+                                                </td>
+                                        </tr>
+                                    @endif
+                                    <td class="tm_width_7">
+                                        <p class="tm_m0 tm_f16 tm_primary_color" style="font-size:10pt">
+                                            {{ $order_detail->order->nama_order . ' - ' . $order_detail->pemesan }}</p>
+                                    </td>
+                                    <td class="tm_width_2">Rp.
+                                        {{ number_format($order_detail->order->price / $order_detail->order->qty, 0, ',', '.') }}
+                                    </td>
+                                    <td class="tm_width_1">{{ $order_detail->qty }}</td>
+                                    <td class="tm_width_2 tm_text_right">Rp.
+                                        {{ number_format($order_detail->order->price / $order_detail->order->qty, 0, ',', '.') }}
+                                    </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="tm_width_7" style="font-size:10pt">
+                                            {{ $order->nama_order }}
+                                        </td>
+                                        <td class="tm_width_2">Rp. {{ number_format($order->price, 0, ',', '.') }}</td>
+                                        <td class="tm_width_1">{{ $order->qty }}</td>
+                                        <td class="tm_width_2 tm_text_right">Rp.
+                                            {{ number_format($order->price, 0, ',', '.') }}</td>
+                                    </tr>
+                                    @endforelse --}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tm_invoice_footer tm_mb15 tm_m0_md">
+                        <div class="tm_left_footer">
+                        </div>
+                        <div class="tm_right_footer">
+                            <table class="tm_mb15">
+                                <tbody>
+                                    <tr>
+                                        <td class="tm_width_3 tm_primary_color tm_border_none tm_bold">SUB TOTAL</td>
+                                        <td
+                                            class="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_bold">
+                                            Rp. {{ number_format($order->price,0,",",".") }}
+                                        </td>
+                                        <tr>
+                                            <td
+                                                class="tm_width_3 tm_border_top_0 tm_bold tm_f16 tm_white_color tm_accent_bg tm_radius_6_0_0_6">
+                                                Total </td>
+                                            <td
+                                                class="tm_width_3 tm_border_top_0 tm_bold tm_f16 tm_primary_color tm_text_right tm_white_color tm_accent_bg tm_radius_0_6_6_0">
+                                                Rp. {{ number_format($order->price,0,",",".") }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tm_width_3 tm_primary_color tm_border_none tm_bold">Status</td>
+                                            <td class="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_bold">
+                                                @if ($order->status == 'Unpaid')
+                                                    <div style="color: red">NOT PAID</div>
+                                                @elseif ($order->status == 'Paid')
+                                                    <div style="color: green">PAID</div>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tm_invoice_footer tm_type1">
+                        <div class="tm_left_footer"></div>
+                        <div class="tm_right_footer">
+                            <div class="tm_sign tm_text_center">
                                 <p class="tm_m0" style="margin-bottom: 2%">Team Marketing,</p>
                                 @if ($order->status == 'Paid')
                                 <span class="stamp is-approved">

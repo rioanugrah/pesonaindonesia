@@ -235,6 +235,7 @@ return [
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'Visitor' => Shetabit\Visitor\Facade\Visitor::class,
+        'Pusher' => Pusher\Pusher::class,
         // 'Chatify' => Chatify\Facades\ChatifyMessenger::class,
     ],
 

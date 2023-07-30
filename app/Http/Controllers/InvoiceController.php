@@ -79,7 +79,7 @@ class InvoiceController extends Controller
         //             ->attachData($pdf->output(),'Invoice #'.$data['order']['kode_order'].'.pdf');
         // });
         return view('frontend.frontend5.invoice.index',$data);
-        // return view('invoice.travelling',$data);
+        // return view('invoice.travelling_new',$data);
         // return view('invoice.order',$data);
     }
 }

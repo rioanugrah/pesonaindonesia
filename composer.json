@@ -28,7 +28,7 @@
         "midtrans/midtrans-php": "^2.4",
         "milon/barcode": "^7.0",
         "pear/http_request2": "^2.5",
-        "pusher/pusher-php-server": "~7.0",
+        "pusher/pusher-php-server": "~4.0",
         "reliese/laravel": "^1.1",
         "shetabit/visitor": "^3.1",
         "spatie/laravel-activitylog": "^3.17",

@@ -25,6 +25,7 @@
                 <i class="fa fa-fw fa-bars"></i>
             </button>
 
+            <!-- App Search-->
             {{-- <form class="app-search d-none d-lg-block">
                 <div class="position-relative">
                     <input type="text" class="form-control" placeholder="@lang('translation.Search')...">
@@ -58,51 +59,51 @@
                 <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @switch(Session::get('lang'))
                     @case('ru')
-                    <img src="{{ URL::asset('/assets/images/flags/russia.jpg')}}" alt="Header Language" height="16"> <span class="align-middle"></span>
+                    <img src="{{ URL::asset('public/assets/images/flags/russia.jpg')}}" alt="Header Language" height="16"> <span class="align-middle"></span>
                     @break
                     @case('it')
-                    <img src="{{ URL::asset('/assets/images/flags/italy.jpg')}}" alt="Header Language" height="16"> <span class="align-middle"></span>
+                    <img src="{{ URL::asset('public/assets/images/flags/italy.jpg')}}" alt="Header Language" height="16"> <span class="align-middle"></span>
                     @break
                     @case('de')
-                    <img src="{{ URL::asset('/assets/images/flags/germany.jpg')}}" alt="Header Language" height="16"> <span class="align-middle"></span>
+                    <img src="{{ URL::asset('public/assets/images/flags/germany.jpg')}}" alt="Header Language" height="16"> <span class="align-middle"></span>
                     @break
                     @case('es')
-                    <img src="{{ URL::asset('/assets/images/flags/spain.jpg')}}" alt="Header Language" height="16"> <span class="align-middle"></span>
+                    <img src="{{ URL::asset('public/assets/images/flags/spain.jpg')}}" alt="Header Language" height="16"> <span class="align-middle"></span>
                     @break
                     @default
-                    <img src="{{ URL::asset('/assets/images/flags/us.jpg')}}" alt="Header Language" height="16"> <span class="align-middle"></span>
+                    <img src="{{ URL::asset('public/assets/images/flags/us.jpg')}}" alt="Header Language" height="16"> <span class="align-middle"></span>
                     @endswitch
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
 
                     <!-- item-->
                     <a href="{{ url('index/en') }}" class="dropdown-item notify-item">
-                        <img src="{{ URL::asset('assets/images/flags/us.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
+                        <img src="{{ URL::asset('public/assets/images/flags/us.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
                     </a>
 
                     <!-- item-->
                     <a href="{{ url('index/es') }}" class="dropdown-item notify-item">
-                        <img src="{{ URL::asset('assets/images/flags/spain.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
+                        <img src="{{ URL::asset('public/assets/images/flags/spain.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
                     </a>
 
                     <!-- item-->
                     <a href="{{ url('index/de') }}" class="dropdown-item notify-item">
-                        <img src="{{ URL::asset('assets/images/flags/germany.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
+                        <img src="{{ URL::asset('public/assets/images/flags/germany.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
                     </a>
 
                     <!-- item-->
                     <a href="{{ url('index/it') }}" class="dropdown-item notify-item">
-                        <img src="{{ URL::asset('assets/images/flags/italy.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
+                        <img src="{{ URL::asset('public/assets/images/flags/italy.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
                     </a>
 
                     <!-- item-->
                     <a href="{{ url('index/ru') }}" class="dropdown-item notify-item">
-                        <img src="{{ URL::asset('assets/images/flags/russia.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
+                        <img src="{{ URL::asset('public/assets/images/flags/russia.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
                     </a>
                 </div>
-            </div> --}}
+            </div>
 
-            {{-- <div class="dropdown d-none d-lg-inline-block ms-1">
+            <div class="dropdown d-none d-lg-inline-block ms-1">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="uil-apps"></i>
                 </button>
@@ -111,19 +112,19 @@
                         <div class="row g-0">
                             <div class="col">
                                 <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('/assets/images/brands/github.png') }}" alt="Github">
+                                    <img src="{{ URL::asset('public/assets/images/brands/github.png') }}" alt="Github">
                                     <span>GitHub</span>
                                 </a>
                             </div>
                             <div class="col">
                                 <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('/assets/images/brands/bitbucket.png') }}" alt="bitbucket">
+                                    <img src="{{ URL::asset('public/assets/images/brands/bitbucket.png') }}" alt="bitbucket">
                                     <span>Bitbucket</span>
                                 </a>
                             </div>
                             <div class="col">
                                 <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('/assets/images/brands/dribbble.png') }}" alt="dribbble">
+                                    <img src="{{ URL::asset('public/assets/images/brands/dribbble.png') }}" alt="dribbble">
                                     <span>Dribbble</span>
                                 </a>
                             </div>
@@ -132,19 +133,19 @@
                         <div class="row g-0">
                             <div class="col">
                                 <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('/assets/images/brands/dropbox.png') }}" alt="dropbox">
+                                    <img src="{{ URL::asset('public/assets/images/brands/dropbox.png') }}" alt="dropbox">
                                     <span>Dropbox</span>
                                 </a>
                             </div>
                             <div class="col">
                                 <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('/assets/images/brands/mail_chimp.png') }}" alt="mail_chimp">
+                                    <img src="{{ URL::asset('public/assets/images/brands/mail_chimp.png') }}" alt="mail_chimp">
                                     <span>Mail Chimp</span>
                                 </a>
                             </div>
                             <div class="col">
                                 <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('/assets/images/brands/slack.png') }}" alt="slack">
+                                    <img src="{{ URL::asset('public/assets/images/brands/slack.png') }}" alt="slack">
                                     <span>Slack</span>
                                 </a>
                             </div>
@@ -159,68 +160,109 @@
                 </button>
             </div>
 
-            <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="uil-bell"></i>
+            <div class="dropdown d-inline-block dropdown-notifications">
+                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+                    <i data-count="0" class="uil-bell"></i>
                     @if (auth()->user()->unreadNotifications->count() != 0)
-                    <span class="badge bg-danger rounded-pill">{{ auth()->user()->unreadNotifications->count() }}</span>
+                    {{-- <span class="badge bg-danger rounded-pill" data-count="0">{{ auth()->user()->unreadNotifications->count() }}</span> --}}
+                    <span class="badge bg-danger rounded-pill"><span class="notif-count" data-count="0">{{ auth()->user()->unreadNotifications->count() }}</span></span>
+                    @else
+                    <span class="badge bg-danger rounded-pill notif-count">0</span>
                     @endif
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
                     <div class="p-3">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h5 class="m-0 font-size-16"> Notifications </h5>
+                                <h5 class="m-0 font-size-16"> Notifications</h5>
                             </div>
-                            <div class="col-auto">
-                                <a href="#!" class="small"> Mark_read </a>
-                            </div>
+                            {{-- <div class="col-auto">
+                                <a href="#!" class="small"> @lang('translation.Mark_read')</a>
+                            </div> --}}
                         </div>
                     </div>
+                    {{-- <div data-simplebar style="max-height: 230px;" class="dropdown-notifications"> --}}
                     <div data-simplebar style="max-height: 230px;">
-                        @forelse(auth()->user()->unreadNotifications->take(5) as $notification)
-                        <a href="" class="text-reset notification-item">
+                        {{-- <a href="{{ $notification->data['url'] }}" class="text-reset notification-item mark-as-read" data-id="{{ $notification->id }}"> --}}
+                        
+                        {{-- <div data-toggle="dropdown">
+                            <a href="#" class="text-reset notification-item mark-as-read notification-items" data-id="">
+                            </a>
+                        </div> --}}
+                        {{-- <a class="text-reset notification-item mark-as-read notification-items"></a> --}}
+                        <div class="notification-items"></div>
+                        @foreach (auth()->user()->unreadNotifications as $notification)
+                        <a href="{{ $notification->data['url'] }}" class="text-reset notification-item mark-as-read" data-id="{{ $notification->id }}">
                             <div class="d-flex align-items-start">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar-xs">
-                                        <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                            <i class="uil-shopping-basket"></i>
+                                        <span class="avatar-title bg-{{ $notification->data['color_icon'] }} rounded-circle font-size-16">
+                                            <i class="{{ $notification->data['icon'] }}"></i>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <h6 class="mt-0 mb-1">order_placed</h6>
+                                    <h6 class="mt-0 mb-1">{{ $notification->data['title'] }}</h6>
                                     <div class="font-size-12 text-muted">
-                                        <p class="mb-1">languages_grammar</p>
-                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3_min_ago</p>
+                                        <p class="mb-1">{{ $notification->data['message'] }}</p>
+                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> {{ $notification->created_at->diffForHumans() }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        @endforeach
+                        
+                        {{-- @forelse (auth()->user()->unreadNotifications->take(5) as $notification)
+                        <a href="{{ $notification->data['url'] }}" class="text-reset notification-item mark-as-read" data-id="{{ $notification->id }}">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-shrink-0 me-3">
+                                    <div class="avatar-xs">
+                                        <span class="avatar-title bg-{{ $notification->data['color_icon'] }} rounded-circle font-size-16">
+                                            <i class="{{ $notification->data['icon'] }}"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mt-0 mb-1">{{ $notification->data['title'] }}</h6>
+                                    <div class="font-size-12 text-muted">
+                                        <p class="mb-1">{{ $notification->data['message'] }}</p>
+                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> {{ $notification->created_at->diffForHumans() }}</p>
                                     </div>
                                 </div>
                             </div>
                         </a>
                         @empty
-                        @endforelse
+                        <a href="javascript:void()" class="text-reset notification-item">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-grow-1">
+                                    <h6 class="mt-0 mb-1">Notifikasi Tidak Ada</h6>
+                                </div>
+                            </div>
+                        </a>
+                        @endforelse --}}
                     </div>
-                    <div class="p-2 border-top">
+                    {{-- <div class="p-2 border-top">
                         <div class="d-grid">
                             <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
-                                <i class="uil-arrow-circle-right me-1"></i> View_More
+                                <i class="uil-arrow-circle-right me-1"></i> @lang('translation.View_More')..
                             </a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="{{ URL::asset('backend_new/images/users/avatar-4.jpg') }}" alt="Header Avatar">
+                    {{-- <img class="rounded-circle header-profile-user" src="{{ URL::asset('public/assets/images/users/avatar-4.jpg') }}" alt="Header Avatar"> --}}
                     <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">{{Str::ucfirst(Auth::user()->name)}}</span>
                     <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="{{ route('pengguna.profile') }}"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">View Profile</span></a>
-                    {{-- <a class="dropdown-item d-block" href="#"><i class="uil uil-cog font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Setting</span> <span class="badge bg-soft-success rounded-pill mt-1 ms-2">03</span></a>
-                    <a class="dropdown-item" href="#"><i class="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Lock Screen</span></a> --}}
+                    {{-- <a class="dropdown-item" href="#"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">@lang('translation.View_Profile')</span></a>
+                    <a class="dropdown-item" href="#"><i class="uil uil-wallet font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">@lang('translation.My_Wallet')</span></a>
+                    <a class="dropdown-item d-block" href="#"><i class="uil uil-cog font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">@lang('translation.Settings')</span> <span class="badge bg-soft-success rounded-pill mt-1 ms-2">03</span></a>
+                    <a class="dropdown-item" href="#"><i class="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">@lang('translation.Lock_screen')</span></a> --}}
                     <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Logout</span></a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

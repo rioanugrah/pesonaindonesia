@@ -84,12 +84,22 @@ class PaymentMidtransController extends Controller
         $input['id'] = Str::uuid()->toString();
         $input['kode_order'] = 'TRX-'.rand(1000,9999).Carbon::now()->format('mY');
         $input['nama_order'] = $request->title;
+
+        foreach ($request->nama_anggota as $key => $value) {
+            $data['item_details'][] = [
+                'id' => $key+1,
+                'name' => $value,
+                'qty' => 1
+            ];
+        }
+
         $input['pemesan'] = json_encode([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'address' => $request->alamat,
             'email' => $request->email,
             'phone' => $request->phone,
+            'item_details' => $data['item_details']
         ]);
 
         if($request->qty == 0 and $request->qty == null){

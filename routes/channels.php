@@ -13,9 +13,20 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
+Broadcast::routes();
+
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
-Broadcast::channel('notif-wisata', function () {
+// Broadcast::channel('notif-wisata', function () {
+//     return true;
+// });
+// Broadcast::channel('notif-travelling', function () {
+//     return true;
+// });
+Broadcast::channel('order-notif', function () {
     return true;
 });
+// Broadcast::channel('global-notif', function () {
+//     return true;
+// });

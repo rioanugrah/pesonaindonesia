@@ -343,6 +343,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::prefix('invoice')->group(function(){
                 Route::get('/', 'v2\InvoiceController@index')->name('b.invoice')->middleware('verified');
                 Route::get('create', 'v2\InvoiceController@create')->name('b.invoice.create')->middleware('verified');
+                Route::get('{kode_order}', 'v2\InvoiceController@detail')->name('b.invoice.detail')->middleware('verified');
             });
             
             Route::prefix('order')->group(function(){
@@ -387,6 +388,18 @@ Route::domain('partner.'.parse_url(env('APP_URL'), PHP_URL_HOST))->group(functio
     Route::post('cooperation/kab_kota', 'CooperationController@select_kab_kota');
     Route::post('home/simpan', 'FrontendController@partnership_simpan')->name('partnership.simpan');
 });
+
+Route::get('test', function () {
+    // event(new App\Events\TravellingEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
+    event(new App\Events\OrderEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
+    // event(new App\Events\TravellingEvent('1'));
+    return "Event has been sent!";
+});
+
+// Route::get('send-notif/{name}', function ($name) {
+//     event(new \App\Events\TravellingEvent($name));
+//     return "Event has been sent!";
+// });
 
 // Route::any('{page?}',function(){
 //     return View::make('layouts.status.404');

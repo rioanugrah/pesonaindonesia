@@ -38,7 +38,7 @@
                             <th>Pemesan</th>
                             <th>Jumlah</th>
                             <th>Harga</th>
-                            <th>Status</th>
+                            {{-- <th>Status</th> --}}
                             <th>TGL.Pembelian</th>
                             <th>Action</th>
                         </tr>
@@ -82,10 +82,10 @@
                 data: 'price',
                 name: 'price'
             },
-            {
-                data: 'status',
-                name: 'status'
-            },
+            // {
+            //     data: 'status',
+            //     name: 'status'
+            // },
             {
                 data: 'created_at',
                 name: 'created_at'
@@ -96,7 +96,8 @@
                 orderable: false,
                 searchable: false
             },
-        ]
+        ],
+        order:[5,'desc']
     });
 </script>
 @endsection
