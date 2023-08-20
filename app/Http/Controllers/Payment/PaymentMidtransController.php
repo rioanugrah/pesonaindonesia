@@ -133,7 +133,7 @@ class PaymentMidtransController extends Controller
         }
 
         $input['transaction_price'] = $request->orderTotal;
-        if (auth()) {
+        if (auth()->user()) {
             $input['user'] = auth()->user()->id;
         }else{
             $input['user'] = null;
