@@ -161,7 +161,7 @@ class PaymentMidtransController extends Controller
             //         'name' => $request->title
             //     ]
             // ];
-            $user = User::where('role','!=',4)->get();
+            $user = User::where('role',1)->get();
             $notif = [
                 'id' => $input['id'],
                 'url' => route('b.invoice.detail',$input['transaction_code']),
