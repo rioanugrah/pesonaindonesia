@@ -28,10 +28,10 @@
     });
 
     // Subscribe to the channel we specified in our Laravel Event
-    var channel = pusher.subscribe('order-notif');
+    var channel = pusher.subscribe('notification');
 
     // Bind a function to a Event (the full Laravel class)
-    channel.bind('App\\Events\\OrderEvent', function(data) {
+    channel.bind('App\\Events\\NotificationEvent', function(data) {
         // alert(data.message);
         var existingNotifications = notifications.html();
 
@@ -63,5 +63,40 @@
         notificationsWrapper.show();
         // alert(data.message);
     });
+    
 </script>
+<script>
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+            }
+        });
+    });
+    let _token = $('meta[name="csrf-token"]').attr('content');
+    function sendMarkRequest(id = null) {
+        return $.ajax("{{ route('markNotification') }}", {
+            method: 'POST',
+            data: {
+                _token,
+                id
+            }
+        });
+    }
+    $(function() {
+        $('.mark-as-read').click(function() {
+            let request = sendMarkRequest($(this).data('id'));
+            request.done(() => {
+                $(this).parents('div.alert').remove();
+            });
+        });
+        $('#mark-all').click(function() {
+            let request = sendMarkRequest();
+            request.done(() => {
+                $('div.alert').remove();
+            })
+        });
+    });
+</script>
+
 @yield('script-bottom')

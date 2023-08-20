@@ -15,34 +15,32 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->payment_live = env('MIDTRANS_IS_PRODUCTION');
-        // $this->username = config('app.oy_username');
-        // $this->app_key = config('app.oy_api_key');
+        $this->payment_live = env('OY_INDONESIA_LIVE');
+        $this->username = config('app.oy_username');
+        $this->app_key = config('app.oy_api_key');
         if($this->payment_live == true){
-            $this->payment_production = 'https://app.midtrans.com/api/';
+            $this->payment_production = 'https://partner.oyindonesia.com/api/';
         }else{
-            $this->payment_production = 'https://app.sandbox.midtrans.com/api/';
+            $this->payment_production = 'https://api-stg.oyindonesia.com/api/';
         }
     }
 
     public function balance()
     {
         $request = new HTTP_Request2();
-        $request->setUrl($this->payment_production.'/v1/balance');
+        $request->setUrl($this->payment_production.'/balance');
         $request->setMethod(HTTP_Request2::METHOD_GET);
         $request->setConfig(array(
         'follow_redirects' => TRUE
         ));
         $request->setHeader(array(
-        // 'x-oy-username:'.$this->username,
-        // 'x-api-key:'.$this->app_key,
+        'x-oy-username:'.$this->username,
+        'x-api-key:'.$this->app_key,
         'Content-Type' => 'application/json',
-        'Accept' => 'application/json',
-        'Authorization' => env('MIDTRANS_SERVER_KEY').':'
+        'Accept' => 'application/json'
         ));
         try {
         $response = $request->send();
-        // dd($response->getBody());
         if ($response->getStatus() == 200) {
             return $response->getBody();
             // echo $response->getBody();
@@ -62,11 +60,11 @@ class HomeController extends Controller
         // $data['start_month'] = Carbon::now()->startOfYear();
         // $data['now_month'] = Carbon::now();
 
-        // try {
-        //     $data['balances'] = json_decode((new HomeController)->balance(),true);
-        // } catch (\Throwable $th) {
-        //     $data['balances']['balance']=0;
-        // }
+        try {
+            $data['balances'] = json_decode((new HomeController)->balance(),true);
+        } catch (\Throwable $th) {
+            $data['balances']['balance']=0;
+        }
 
         $data['periode'] = [];
         $data['tanggals'] = now()->subMonths(12)->monthsUntil(now());

@@ -1,6 +1,6 @@
 @extends('layouts.backend_new_2023.master')
 @section('title')
-    Order
+    Transactions
 @endsection
 @section('css')
     <link href="{{ URL::asset('backend_new/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />

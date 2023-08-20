@@ -5,17 +5,9 @@ namespace App\Http\Controllers\Payment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\User;
 use App\Models\Order;
 use App\Models\OrderList;
-use App\Models\Transactions;
-use App\Models\TransactionList;
-
-use App\Events\NotificationEvent;
-use App\Notifications\NotificationNotif;
-
 use \Carbon\Carbon;
-use Notification;
 // use Midtrans\Config;
 // use Midtrans\Snap;
 // use App\Services\Midtrans\CreateSnapTokenService;
@@ -25,13 +17,11 @@ class PaymentMidtransController extends Controller
 {
     public function __construct(){
         // $this->midtrans_is_production = env('MIDTRANS_IS_PRODUCTION');
+        $this->midtrans_client_key = env('MIDTRANS_CLIENT_KEY');
+        $this->midtrans_server_key = env('MIDTRANS_SERVER_KEY');
         if (env('MIDTRANS_IS_PRODUCTION') == true) {
-            $this->midtrans_client_key = env('MIDTRANS_CLIENT_KEY_LIVE');
-            $this->midtrans_server_key = env('MIDTRANS_SERVER_KEY_LIVE');
             $this->url_payment = 'https://app.midtrans.com/snap/snap.js';
         }else{
-            $this->midtrans_client_key = env('MIDTRANS_CLIENT_KEY_DEMO');
-            $this->midtrans_server_key = env('MIDTRANS_SERVER_KEY_DEMO');
             $this->url_payment = 'https://app.sandbox.midtrans.com/snap/snap.js';
         }
     }
@@ -39,13 +29,9 @@ class PaymentMidtransController extends Controller
     public function test_payment(Request $request)
     {
         // Set your Merchant Server Key
-        // if (env('MIDTRANS_IS_PRODUCTION') == true) {
-        //     \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        // }else{
-        // }
-        \Midtrans\Config::$serverKey = $this->midtrans_server_key;
+        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
+        \Midtrans\Config::$isProduction = false;
         // Set sanitization on (default)
         \Midtrans\Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
@@ -76,7 +62,7 @@ class PaymentMidtransController extends Controller
             ),
         ];
 
-        $data['midtrans_client_key'] = $this->midtrans_client_key;
+        $data['midtrans_client_key'] = env('MIDTRANS_CLIENT_KEY');
         $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
         // $snapToken = Snap::getSnapToken($params);
         return view('frontend.frontend5.payment.index',$data);
@@ -86,9 +72,9 @@ class PaymentMidtransController extends Controller
     public function payment_checkout(Request $request)
     {
         // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = $this->midtrans_server_key;
+        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
+        \Midtrans\Config::$isProduction = false;
         // Set sanitization on (default)
         \Midtrans\Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
@@ -96,8 +82,8 @@ class PaymentMidtransController extends Controller
 
         // $urutan = Order::max('kode_order');
         $input['id'] = Str::uuid()->toString();
-        $input['transaction_code'] = 'TRX-'.rand(1000,9999).Carbon::now()->format('mY');
-        $input['transaction_unit'] = $request->title;
+        $input['kode_order'] = 'TRX-'.rand(1000,9999).Carbon::now()->format('mY');
+        $input['nama_order'] = $request->title;
 
         if (!empty($request->nama_anggota)) {
             foreach ($request->nama_anggota as $key => $value) {
@@ -108,7 +94,7 @@ class PaymentMidtransController extends Controller
                 ];
             }
 
-            $input['transaction_order'] = json_encode([
+            $input['pemesan'] = json_encode([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'address' => $request->alamat,
@@ -117,7 +103,7 @@ class PaymentMidtransController extends Controller
                 'item_details' => $data['item_details']
             ]);
         }else{
-            $input['transaction_order'] = json_encode([
+            $input['pemesan'] = json_encode([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'address' => $request->alamat,
@@ -127,12 +113,12 @@ class PaymentMidtransController extends Controller
         }
 
         if($request->qty == 0 and $request->qty == null){
-            $input['transaction_qty'] = 1;
+            $input['qty'] = 1;
         }else{
-            $input['transaction_qty'] = $request->qty;
+            $input['qty'] = $request->qty;
         }
 
-        $input['transaction_price'] = $request->orderTotal;
+        $input['price'] = $request->orderTotal;
         if (auth()) {
             $input['user'] = auth()->user()->id;
         }else{
@@ -140,11 +126,11 @@ class PaymentMidtransController extends Controller
         }
         $input['status'] = 'Unpaid';
         
-        $transactions = Transactions::create($input);
+        $order = Order::create($input);
 
-        if($transactions){
+        if($order){
             $params['transaction_details'] = [
-                'order_id' => $input['transaction_code'],
+                'order_id' => $input['kode_order'],
                 'gross_amount' => $request->orderTotal,
             ];
             $params['customer_details'] = [
@@ -161,30 +147,17 @@ class PaymentMidtransController extends Controller
             //         'name' => $request->title
             //     ]
             // ];
-            $user = User::where('role','!=',4)->get();
-            $notif = [
-                'id' => $input['id'],
-                'url' => route('b.invoice.detail',$input['transaction_code']),
-                'title' => $input['transaction_unit'],
-                'message' => 'Pesanan Baru - Sedang Melakukan Pembayaran',
-                'color_icon' => 'warning',
-                'icon' => 'uil-clipboard-alt',
-                'publish' => $transactions->created_at,
-            ];
-            Notification::send($user,new NotificationNotif($notif));
-            // foreach ($users as $user) {
-            // }
 
-            $data['kode_order'] = $input['transaction_code'];
+            $data['kode_order'] = $input['kode_order'];
             $data['first_name'] = $request->first_name;
             $data['last_name'] = $request->last_name;
             $data['email'] = $request->email;
             $data['title'] = $request->title;
-            $data['qty'] = $input['transaction_qty'];
-            $data['price'] = $input['transaction_price'];
+            $data['qty'] = $input['qty'];
+            $data['price'] = $input['price'];
     
             $data['link_url_payment'] = $this->url_payment;
-            $data['midtrans_client_key'] = $this->midtrans_client_key;
+            $data['midtrans_client_key'] = env('MIDTRANS_CLIENT_KEY');
             $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
             return view('frontend.frontend5.payment.index',$data);
         }
@@ -197,16 +170,16 @@ class PaymentMidtransController extends Controller
 
     public function payment_callback(Request $request)
     {
-        $serverKey = $this->midtrans_server_key;
+        $serverKey = env('MIDTRANS_SERVER_KEY');
         $hashed = hash('sha512', $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
         if ($hashed == $request->signature_key) {
-            $transactions = Transactions::where('transaction_code',$request->order_id)->first();
-            $transactions->update([
+            $order = Order::where('kode_order',$request->order_id)->first();
+            $order->update([
                 'status' => 'Paid'
             ]);
         }else{
-            $transactions = Transactions::where('transaction_code',$request->order_id)->first();
-            $transactions->update([
+            $order = Order::where('kode_order',$request->order_id)->first();
+            $order->update([
                 'status' => 'Not Paid'
             ]);
         }

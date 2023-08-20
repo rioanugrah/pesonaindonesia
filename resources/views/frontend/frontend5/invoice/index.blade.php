@@ -13,7 +13,7 @@
                             class="booking-box-title d-md-flex align-items-center bg-title p-4 mb-4 rounded text-md-start text-center">
                             <i class="fa fa-check px-4 py-3 bg-white rounded title fs-5"></i>
                             <div class="title-content ms-md-3">
-                                <h4 class="mb-1 white">Terima kasih telah melakukan pembayaran. Kami akan mengirimkan bukti Invoice pembelian
+                                <h4 class="mb-1 white">Terima kasih telah melakukan pembayaran. Kami telah mengirimkan bukti Invoice #{{ $order->transaction_code }} pembelian
                                     melalui email anda.
                                 </h4>
                                 {{-- <p class="mb-0 white">Email konfirmasi telah dikirim ke alamat email yang Anda berikan.</p> --}}

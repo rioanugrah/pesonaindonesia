@@ -19,10 +19,10 @@
         <div class="col-md-6 col-xl-3">
             <div class="card">
                 <div class="card-body">
-                    <div>
+                    {{-- <div>
                         <h4 class="mb-1 mt-1">Rp. <span data-plugin="counterup">{{ number_format($balances['balance'] == null ? 0 : $balances['balance'],0,'.',',') }}</span></h4>
                         <p class="text-muted mb-0">Balance</p>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

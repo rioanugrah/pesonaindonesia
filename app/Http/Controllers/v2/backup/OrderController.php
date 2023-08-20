@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-use \App\Models\Transactions;
+use \App\Models\Order;
 use \App\Models\OrderList;
 
 use DataTables;
@@ -21,7 +21,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Transactions::all();
+            $data = Order::all();
             return DataTables::of($data)
                     ->addIndexColumn()
                     // ->addColumn('kategori_paket_id', function($row){
@@ -30,19 +30,16 @@ class OrderController extends Controller
                     // ->addColumn('images', function($row){
                     //     return '<img src='.asset('frontend/assets_new/images/travelling/'.$row->images).' width="150">';
                     // })
-                    ->addColumn('nama_order', function($row){
-                        return ucwords($row->transaction_unit);
-                    })
                     ->addColumn('kode_order', function($row){
                         if($row->status == 'Unpaid'){
                             // return '<span class="badge bg-warning"><i class="uil-postcard"></i> '.strtoupper($row->status).'</span>';
-                            return $row->transaction_code.' <span class="badge bg-warning"><i class="uil-postcard"></i> '.strtoupper($row->status).'</span>'.'<br>'.'<span style="font-size:9pt">'.$row->created_at->isoFormat('LLLL').'</span>';
+                            return $row->kode_order.' <span class="badge bg-warning"><i class="uil-postcard"></i> '.strtoupper($row->status).'</span>'.'<br>'.'<span style="font-size:9pt">'.$row->created_at->isoFormat('LLLL').'</span>';
                         }elseif($row->status == 'Paid'){
                             // return '<span class="badge bg-success"><i class="uil-check-circle"></i> '.strtoupper($row->status).'</span>';
-                            return $row->transaction_code.' <span class="badge bg-success"><i class="uil-check-circle"></i> '.strtoupper($row->status).'</span>'.'<br>'.'<span style="font-size:9pt">'.$row->created_at->isoFormat('LLLL').'</span>';
+                            return $row->kode_order.' <span class="badge bg-success"><i class="uil-check-circle"></i> '.strtoupper($row->status).'</span>'.'<br>'.'<span style="font-size:9pt">'.$row->created_at->isoFormat('LLLL').'</span>';
                         }elseif($row->status == 'Not Paid'){
                             // return '<span class="badge bg-danger"><i class="uil-times-circle"></i> '.strtoupper($row->status).'</span>';
-                            return $row->transaction_code.' <span class="badge bg-danger"><i class="uil-times-circle"></i> '.strtoupper($row->status).'</span>'.'<br>'.'<span style="font-size:9pt">'.$row->created_at->isoFormat('LLLL').'</span>';
+                            return $row->kode_order.' <span class="badge bg-danger"><i class="uil-times-circle"></i> '.strtoupper($row->status).'</span>'.'<br>'.'<span style="font-size:9pt">'.$row->created_at->isoFormat('LLLL').'</span>';
                         }
                         // return $row->kode_order.'<br>'.'<span style="font-size:9pt">'.$row->created_at->isoFormat('LLLL').'</span>';
                         // return $row->created_at->isoFormat('LLLL');
@@ -51,10 +48,10 @@ class OrderController extends Controller
                         return $row->created_at;
                     })
                     ->addColumn('price', function($row){
-                        return 'Rp. '.number_format($row->transaction_price,2,",",".");
+                        return 'Rp. '.number_format($row->price,2,",",".");
                     })
                     ->addColumn('pemesan', function($row){
-                        $pemesan = json_decode($row->transaction_order);
+                        $pemesan = json_decode($row->pemesan);
                         $card = '';
                         $card .= '<div class="d-flex align-items-start">';
                         $card .=    '<div class="flex-grow-1 align-self-center">';
@@ -72,9 +69,6 @@ class OrderController extends Controller
                         return $card;
                         // return 'Pemesan :'.$pemesan->first_name;
                     })
-                    ->addColumn('qty', function($row){
-                        return $row->transaction_qty;
-                    })
                     // ->addColumn('status', function($row){
                     //     if($row->status == 'Unpaid'){
                     //         return '<span class="badge bg-warning"><i class="uil-postcard"></i> '.strtoupper($row->status).'</span>';
@@ -91,7 +85,7 @@ class OrderController extends Controller
                         //         </button>';
                         // return $btn;
                         $btn = '<div class="btn-group">';
-                        $btn .= '<a href='.route('b.invoice.detail',['kode_order' => $row->transaction_code]).' target="_blank" class="btn btn-xs btn-primary"><i class="uil-file-alt"></i> Invoice</a>';
+                        $btn .= '<a href='.route('b.invoice.detail',['kode_order' => $row->kode_order]).' target="_blank" class="btn btn-xs btn-primary"><i class="uil-file-alt"></i> Invoice</a>';
                         $btn .= '<button class="btn btn-xs btn-success"><i class="uil-eye"></i> Detail Pembelian</button>';
                         $btn .= '</div>';
                         return $btn;

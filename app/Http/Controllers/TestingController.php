@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notifications\NotificationNotif;
+use App\Events\NotificationEvent;
 use App\User;
 use PDF;
+use Notification;
+use \Carbon\Carbon;
 
 class TestingController extends Controller
 {
@@ -56,6 +60,23 @@ class TestingController extends Controller
         return $pdf->stream();
     }
 
-    
+    public function sendNotif()
+    {
+        // $user = User::where('role','!=',4)->get();
+        // $notif = [
+        //     'id' => 1,
+        //     'url' => 'http://localhost:8000',
+        //     'title' => 'Notif Baru',
+        //     'message' => 'Pesanan Baru - Sedang Melakukan Pembayaran',
+        //     'color_icon' => 'warning',
+        //     'icon' => 'uil-clipboard-alt',
+        //     'publish' => Carbon::now(),
+        // ];
+        // // dd($notif);
+        // // $user = User::find(auth()->user()->id);
+        // Notification::send($user, new NotificationNotif($notif));
+        // // Notification::send($user, new NotificationNotif('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
+        return event(new NotificationEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
+    }
 }
 

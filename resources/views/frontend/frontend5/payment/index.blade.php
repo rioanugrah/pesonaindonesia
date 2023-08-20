@@ -3,7 +3,7 @@
     Payment - Checkout
 @endsection
 @section('css')
-    <script type="text/javascript" src="{{ $link_url_payment }}" data-client-key="{{ $midtrans_client_key }}"></script>
+    <script type="text/javascript" src="{!! $link_url_payment !!}" data-client-key="{!! $midtrans_client_key !!}"></script>
 @endsection
 <?php $asset = asset('frontend/assets5/'); ?>
 

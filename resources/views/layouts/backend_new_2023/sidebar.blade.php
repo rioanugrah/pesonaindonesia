@@ -42,6 +42,13 @@
                         <span>Posting</span>
                     </a>
                 </li>
+                <li class="menu-title">Payment</li>
+                <li>
+                    <a href="{{ route('b.order') }}">
+                        <i class="uil-home-alt"></i>
+                        <span>Transactions</span>
+                    </a>
+                </li>
                 <li class="menu-title">Marketing Officer</li>
                 {{-- <li>
                     <a href="{{ route('b.invoice') }}">
@@ -50,15 +57,9 @@
                     </a>
                 </li> --}}
                 <li>
-                    <a href="{{ route('b.order') }}">
-                        <i class="uil-home-alt"></i>
-                        <span>Order</span>
-                    </a>
-                </li>
-                <li>
                     <a href="#">
                         <i class="uil-home-alt"></i>
-                        <span>Kupon</span>
+                        <span>Coupon</span>
                     </a>
                 </li>
                 <li>

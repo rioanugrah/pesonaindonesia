@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Invoice - {{ $order->kode_order }}</title>
+    <title>Invoice - {{ $order->transaction_code }}</title>
     <link rel="stylesheet" href="{{ asset('invoice/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('invoice/assets/css/stamp.css') }}">
 </head>
 
 <body>
     <?php
-    $pemesan = json_decode($order->pemesan);
+    $pemesan = json_decode($order->transaction_order);
+    // dd($pemesan);
     ?>
 </body>
 <div class="tm_container">
@@ -29,7 +30,7 @@
                         <div class="tm_grid_row tm_col_3">
                             <div>
                                 <b class="tm_primary_color">Email</b> <br>
-                                business@plesiranindonesia.com
+                                marketing@plesiranindonesia.com
                             </div>
                             <div>
                                 <b class="tm_primary_color">Phone</b> <br>
@@ -60,7 +61,7 @@
                         <div class="tm_grid_row tm_col_3 tm_invoice_info_in tm_accent_bg">
                             <div>
                                 <span class="tm_white_color_60">Total:</span> <br>
-                                <b class="tm_f16 tm_white_color">Rp. {{ number_format($order->price, 0, ',', '.') }}</b>
+                                <b class="tm_f16 tm_white_color">Rp. {{ number_format($order->transaction_price, 0, ',', '.') }}</b>
                             </div>
                             <div>
                                 <span class="tm_white_color_60">Invoice Date:</span> <br>
@@ -69,7 +70,7 @@
                             </div>
                             <div>
                                 <span class="tm_white_color_60">Invoice No:</span> <br>
-                                <b class="tm_f16 tm_white_color">{{ $order->kode_order }}</b>
+                                <b class="tm_f16 tm_white_color">{{ $order->transaction_code }}</b>
                             </div>
                         </div>
                     </div>
@@ -206,7 +207,7 @@
                                     </tr> --}}
                                     <tr>
                                         <td>
-                                            <b>{{ $order->nama_order }}</b>
+                                            <b>{{ ucwords($order->transaction_unit) }}</b>
                                             @if (!empty($detail_items->item_details))
                                             <ul>
                                                 @forelse ($detail_items->item_details as $item)
@@ -217,9 +218,9 @@
                                             </ul>
                                             @endif
                                         </td>
-                                        <td style="text-align: right; vertical-align: top">{{ 'Rp. '.number_format($order->price,0,',','.') }}</td>
-                                        <td style="text-align: center; vertical-align: top">{{ $order->qty }}</td>
-                                        <td style="text-align: right; vertical-align: top">{{ 'Rp. '.number_format($order->price,0,',','.') }}</td>
+                                        <td style="text-align: right; vertical-align: top">{{ 'Rp. '.number_format($order->transaction_price,0,',','.') }}</td>
+                                        <td style="text-align: center; vertical-align: top">{{ $order->transaction_qty }}</td>
+                                        <td style="text-align: right; vertical-align: top">{{ 'Rp. '.number_format($order->transaction_price,0,',','.') }}</td>
                                     </tr>
                                     {{-- @forelse ($order_details as $row => $order_detail)
                                         <tr>
@@ -275,7 +276,7 @@
                                         <td class="tm_width_3 tm_primary_color tm_border_none tm_bold">SUB TOTAL</td>
                                         <td
                                             class="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_bold">
-                                            Rp. {{ number_format($order->price,0,",",".") }}
+                                            Rp. {{ number_format($order->transaction_price,0,",",".") }}
                                         </td>
                                         <tr>
                                             <td
@@ -283,12 +284,14 @@
                                                 Total </td>
                                             <td
                                                 class="tm_width_3 tm_border_top_0 tm_bold tm_f16 tm_primary_color tm_text_right tm_white_color tm_accent_bg tm_radius_0_6_6_0">
-                                                Rp. {{ number_format($order->price,0,",",".") }}</td>
+                                                Rp. {{ number_format($order->transaction_price,0,",",".") }}</td>
                                         </tr>
                                         <tr>
                                             <td class="tm_width_3 tm_primary_color tm_border_none tm_bold">Status</td>
                                             <td class="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_bold">
                                                 @if ($order->status == 'Unpaid')
+                                                    <div style="color: orange">UNPAID</div>
+                                                @elseif ($order->status == 'Not Paid')
                                                     <div style="color: red">NOT PAID</div>
                                                 @elseif ($order->status == 'Paid')
                                                     <div style="color: green">PAID</div>

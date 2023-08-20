@@ -346,7 +346,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('{kode_order}', 'v2\InvoiceController@detail')->name('b.invoice.detail')->middleware('verified');
             });
             
-            Route::prefix('order')->group(function(){
+            Route::prefix('transaction')->group(function(){
                 Route::get('/', 'v2\OrderController@index')->name('b.order')->middleware('verified');
             });
     
@@ -389,12 +389,20 @@ Route::domain('partner.'.parse_url(env('APP_URL'), PHP_URL_HOST))->group(functio
     Route::post('home/simpan', 'FrontendController@partnership_simpan')->name('partnership.simpan');
 });
 
-Route::get('test', function () {
-    // event(new App\Events\TravellingEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
-    event(new App\Events\OrderEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
-    // event(new App\Events\TravellingEvent('1'));
-    return "Event has been sent!";
-});
+// Route::get('test', function () {
+//     // event(new App\Events\TravellingEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
+//     // event(new App\Events\NotificationEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
+    
+//     // new App\Notifications\NotificationNotif;
+//     $user = auth()->user();
+//     new Notification::send($user,new App\Notifications\NotificationNotif('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
+//     // NotificationNotif::send(send(auth()->user(),('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21')));
+    
+//         // event(new App\Events\TravellingEvent('1'));
+//     return "Event has been sent!";
+// });
+Route::get('test', 'TestingController@sendNotif');
+Route::post('mark-as-read', 'NotifikasiController@markNotification')->name('markNotification');
 
 // Route::get('send-notif/{name}', function ($name) {
 //     event(new \App\Events\TravellingEvent($name));

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PaketOrder;
 use App\Models\PaketOrderList;
-use App\Models\Transactions;
+use App\Models\Order;
 use App\Models\OrderList;
 use App\Models\Perusahaan;
 use PDF;
@@ -24,18 +24,18 @@ class InvoiceController extends Controller
 
     public function invoice_send($kode_order)
     {
-        $data['order'] = Transactions::where('transaction_code',$kode_order)->first();
+        $data['order'] = Order::where('kode_order',$kode_order)->first();
         
         $pdf = PDF::loadView('emails.InvoiceTravellingNew',$data);
         $pdf->setPaper('A4', 'portrait');
 
-        $data['pemesan'] = json_decode($data['order']['transaction_order']);
+        $data['pemesan'] = json_decode($data['order']['pemesan']);
         
         $send_invoice = Mail::send('emails.messageInvoiceTravellingNew',$data, function($message) use ($data,$pdf){
             $message->to($data['pemesan']->email,$data['pemesan']->email)
                     ->cc('marketing@plesiranindonesia.com')
-                    ->subject('Invoice #'.$data['order']['transaction_code'])
-                    ->attachData($pdf->output(),'Invoice #'.$data['order']['transaction_code'].'.pdf');
+                    ->subject('Invoice #'.$data['order']['kode_order'])
+                    ->attachData($pdf->output(),'Invoice #'.$data['order']['kode_order'].'.pdf');
         });
 
         return response()->json([
@@ -59,7 +59,7 @@ class InvoiceController extends Controller
 
     public function invoice_order($kode_order)
     {
-        $data['order'] = Transactions::where('transaction_code',$kode_order)->first();
+        $data['order'] = Order::where('kode_order',$kode_order)->first();
         if(empty($data['order'])){
             return redirect()->back();
         }

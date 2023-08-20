@@ -5,7 +5,7 @@ namespace App\Http\Controllers\v2;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\Transactions;
+use App\Models\Order;
 use App\Models\v2\Invoice;
 use App\Models\v2\InvoiceKategori;
 use DataTables;
@@ -39,7 +39,7 @@ class InvoiceController extends Controller
 
     public function detail($kode_order)
     {
-        $data['order'] = Transactions::where('transaction_code',$kode_order)->first();
+        $data['order'] = Order::where('kode_order',$kode_order)->first();
         if(empty($data['order'])){
             return redirect()->back();
         }
