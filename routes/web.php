@@ -401,7 +401,7 @@ Route::domain('partner.'.parse_url(env('APP_URL'), PHP_URL_HOST))->group(functio
 //         // event(new App\Events\TravellingEvent('1'));
 //     return "Event has been sent!";
 // });
-Route::get('test', 'TestingController@sendNotif');
+Route::get('test/{code}', 'TestingController@sendNotif');
 Route::post('mark-as-read', 'NotifikasiController@markNotification')->name('markNotification');
 
 // Route::get('send-notif/{name}', function ($name) {

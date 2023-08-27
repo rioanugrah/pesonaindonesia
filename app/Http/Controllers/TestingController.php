@@ -62,7 +62,7 @@ class TestingController extends Controller
         return $pdf->stream();
     }
 
-    public function sendNotif()
+    public function sendNotif($code)
     {
         // $user = User::where('role','!=',4)->get();
         // $notif = [
@@ -81,7 +81,7 @@ class TestingController extends Controller
         // return event(new NotificationEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
 
         $email = 'rioanugrah999@gmail.com';
-        $invoice = \App\Models\Transactions::where('transaction_code','TRX-1703082023')->first();
+        $invoice = \App\Models\Transactions::where('transaction_code',$code)->first();
         // $detail['invoice'] = $invoice;
         // $maildata = [
         //     'title' => 'Laravel Mail Sending Example with Markdown',
