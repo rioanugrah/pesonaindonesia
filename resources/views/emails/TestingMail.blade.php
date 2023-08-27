@@ -10,16 +10,6 @@
     {{-- <link rel="stylesheet" href="{{ asset('invoice/assets/css/style.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('invoice/assets/css/stamp.css') }}">
     <style>
-        /*--------------------------------------------------------------
->> TABLE OF CONTENTS:
-----------------------------------------------------------------
-1. Normalize
-2. Typography
-3. Invoice General Style
---------------------------------------------------------------*/
-        /*--------------------------------------------------------------
-2. Normalize
-----------------------------------------------------------------*/
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap");
 
         *,
@@ -35,10 +25,7 @@
         }
 
         /* Sections
-   ========================================================================== */
-        /**
- * Remove the margin in all browsers.
- */
+
         body {
             margin: 0;
         }
@@ -2862,7 +2849,7 @@ $transaction_detail = json_decode($invoice->transaction_order);
                     <div class="tm_invoice_head tm_top_head tm_mb20">
                         <div class="tm_invoice_left">
                             <div class="tm_logo"><img
-                                    src="{{ asset('invoice/assets/img/logo_plesiran_new_black2.webp') }}" alt="Logo"
+                                    src="{{ asset('invoice/assets/img/logo_plesiran_new_black.png') }}" alt="Logo"
                                     width="190"></div>
                             {{-- <div class="tm_logo"><img src="assets/img/logo.svg" alt="Logo"></div> --}}
                         </div>

@@ -80,7 +80,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th class="tm_width_7 tm_semi_bold tm_accent_color">Item
+                                            <th class="tm_width_7 tm_semi_bold tm_accent_color">Description
                                             </th>
                                             <th class="tm_width_2 tm_semi_bold tm_accent_color">Price</th>
                                             <th class="tm_width_1 tm_semi_bold tm_accent_color">Qty</th>
@@ -88,7 +88,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        @if (empty($pemesan->item_details))
+                                            <td class="tm_width_7">
+                                                <p class="tm_m0 tm_f16 tm_primary_color" style="font-size:10pt">
+                                                    {{ $order->transaction_unit }}
+                                                </p>
+                                            </td>
+                                            <td class="tm_width_2">Rp.
+                                                {{ number_format($order->transaction_price, 0, ',', '.') }}
+                                            </td>
+                                            <td class="tm_width_1">{{ $order->transaction_qty }}</td>
+                                            <td class="tm_width_2 tm_text_right">Rp.
+                                                {{ number_format($order->transaction_price * $order->transaction_qty, 0, ',', '.') }}
+                                            </td>
+                                        @else
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -99,7 +113,7 @@
                                     <table class="tm_mb15">
                                         <tbody>
                                             <tr>
-                                                <td class="tm_width_3 tm_primary_color tm_border_none tm_bold">Subtoal</td>
+                                                <td class="tm_width_3 tm_primary_color tm_border_none tm_bold">Subtotal</td>
                                                 <td
                                                     class="tm_width_3 tm_primary_color tm_text_right tm_border_none tm_bold">
                                                     Rp. {{ number_format($order->transaction_price, 0, ',', '.') }}</td>
