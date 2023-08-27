@@ -16,6 +16,7 @@ use App\Notifications\NotificationNotif;
 
 use \Carbon\Carbon;
 use Notification;
+use DB;
 // use Midtrans\Config;
 // use Midtrans\Snap;
 // use App\Services\Midtrans\CreateSnapTokenService;
@@ -95,102 +96,108 @@ class PaymentMidtransController extends Controller
         \Midtrans\Config::$is3ds = true;
 
         // $urutan = Order::max('kode_order');
-        $input['id'] = Str::uuid()->toString();
-        $input['transaction_code'] = 'TRX-'.rand(1000,9999).Carbon::now()->format('mY');
-        $input['transaction_unit'] = $request->title;
+        DB::beginTransaction();
 
-        if (!empty($request->nama_anggota)) {
-            foreach ($request->nama_anggota as $key => $value) {
-                $data['item_details'][] = [
-                    'id' => $key+1,
-                    'name' => $value,
-                    'qty' => 1
-                ];
+        try {
+            $input['id'] = Str::uuid()->toString();
+            $input['transaction_code'] = 'TRX-'.rand(1000,9999).Carbon::now()->format('mY');
+            $input['transaction_unit'] = $request->title;
+
+            if (!empty($request->nama_anggota)) {
+                foreach ($request->nama_anggota as $key => $value) {
+                    $data['item_details'][] = [
+                        'id' => $key+1,
+                        'name' => $value,
+                        'qty' => 1
+                    ];
+                }
+
+                $input['transaction_order'] = json_encode([
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'address' => $request->alamat,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'item_details' => $data['item_details']
+                ]);
+            }else{
+                $input['transaction_order'] = json_encode([
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'address' => $request->alamat,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                ]);
             }
 
-            $input['transaction_order'] = json_encode([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'address' => $request->alamat,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'item_details' => $data['item_details']
-            ]);
-        }else{
-            $input['transaction_order'] = json_encode([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'address' => $request->alamat,
-                'email' => $request->email,
-                'phone' => $request->phone,
-            ]);
-        }
+            if($request->qty == 0 and $request->qty == null){
+                $input['transaction_qty'] = 1;
+            }else{
+                $input['transaction_qty'] = $request->qty;
+            }
 
-        if($request->qty == 0 and $request->qty == null){
-            $input['transaction_qty'] = 1;
-        }else{
-            $input['transaction_qty'] = $request->qty;
-        }
+            $input['transaction_price'] = $request->orderTotal;
+            if (auth()->user()) {
+                $input['user'] = auth()->user()->id;
+            }else{
+                $input['user'] = null;
+            }
+            $input['status'] = 'Unpaid';
+            
+            $transactions = Transactions::create($input);
+            DB::commit();
+            
+            if($transactions){
+                $params['transaction_details'] = [
+                    'order_id' => $input['transaction_code'],
+                    'gross_amount' => $request->orderTotal,
+                ];
+                $params['customer_details'] = [
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                ];
+                // $params['item_details'] = [
+                //     [
+                //         'id' => '1',
+                //         'price' => $request->orderTotal,
+                //         'quantity' => $input['qty'],
+                //         'name' => $request->title
+                //     ]
+                // ];
+                $user = User::where('role',1)->get();
+                $notif = [
+                    'id' => $input['id'],
+                    'url' => route('b.invoice.detail',$input['transaction_code']),
+                    'title' => $input['transaction_unit'],
+                    'message' => 'Pesanan Baru - Sedang Melakukan Pembayaran',
+                    'color_icon' => 'warning',
+                    'icon' => 'uil-clipboard-alt',
+                    'publish' => $transactions->created_at,
+                ];
+                Notification::send($user,new NotificationNotif($notif));
+                // foreach ($users as $user) {
+                // }
 
-        $input['transaction_price'] = $request->orderTotal;
-        if (auth()->user()) {
-            $input['user'] = auth()->user()->id;
-        }else{
-            $input['user'] = null;
-        }
-        $input['status'] = 'Unpaid';
+                $data['kode_order'] = $input['transaction_code'];
+                $data['first_name'] = $request->first_name;
+                $data['last_name'] = $request->last_name;
+                $data['email'] = $request->email;
+                $data['title'] = $request->title;
+                $data['qty'] = $input['transaction_qty'];
+                $data['price'] = $input['transaction_price'];
         
-        $transactions = Transactions::create($input);
-
-        if($transactions){
-            $params['transaction_details'] = [
-                'order_id' => $input['transaction_code'],
-                'gross_amount' => $request->orderTotal,
-            ];
-            $params['customer_details'] = [
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-            ];
-            // $params['item_details'] = [
-            //     [
-            //         'id' => '1',
-            //         'price' => $request->orderTotal,
-            //         'quantity' => $input['qty'],
-            //         'name' => $request->title
-            //     ]
-            // ];
-            $user = User::where('role',1)->get();
-            $notif = [
-                'id' => $input['id'],
-                'url' => route('b.invoice.detail',$input['transaction_code']),
-                'title' => $input['transaction_unit'],
-                'message' => 'Pesanan Baru - Sedang Melakukan Pembayaran',
-                'color_icon' => 'warning',
-                'icon' => 'uil-clipboard-alt',
-                'publish' => $transactions->created_at,
-            ];
-            Notification::send($user,new NotificationNotif($notif));
-            // foreach ($users as $user) {
-            // }
-
-            $data['kode_order'] = $input['transaction_code'];
-            $data['first_name'] = $request->first_name;
-            $data['last_name'] = $request->last_name;
-            $data['email'] = $request->email;
-            $data['title'] = $request->title;
-            $data['qty'] = $input['transaction_qty'];
-            $data['price'] = $input['transaction_price'];
-    
-            $data['link_url_payment'] = $this->url_payment;
-            $data['midtrans_client_key'] = $this->midtrans_client_key;
-            $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
-            return view('frontend.frontend5.payment.index',$data);
+                $data['link_url_payment'] = $this->url_payment;
+                $data['midtrans_client_key'] = $this->midtrans_client_key;
+                $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
+                return view('frontend.frontend5.payment.index',$data);
+            }
+            
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->back();
         }
-
-        return redirect()->back();
-        
         // return $data['snapToken'];
         // return view('orders.show', compact('order', 'snapToken'));
     }

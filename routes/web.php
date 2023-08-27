@@ -408,6 +408,9 @@ Route::post('mark-as-read', 'NotifikasiController@markNotification')->name('mark
 //     event(new \App\Events\TravellingEvent($name));
 //     return "Event has been sent!";
 // });
+Route::get('testing_new', function () {
+    return view('email.testingOrder');
+});
 
 // Route::any('{page?}',function(){
 //     return View::make('layouts.status.404');
