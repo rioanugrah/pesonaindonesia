@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Notifications\NotificationNotif;
 use App\Events\NotificationEvent;
+use App\Mail\TestingMail;
 use App\User;
+use Mail;
 use PDF;
 use Notification;
 use \Carbon\Carbon;
@@ -76,7 +78,22 @@ class TestingController extends Controller
         // // $user = User::find(auth()->user()->id);
         // Notification::send($user, new NotificationNotif($notif));
         // // Notification::send($user, new NotificationNotif('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
-        return event(new NotificationEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
+        // return event(new NotificationEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
+
+        $email = 'rioanugrah999@gmail.com';
+        $invoice = \App\Models\Transactions::where('transaction_code','TRX-1703082023')->first();
+        // $detail['invoice'] = $invoice;
+        // $maildata = [
+        //     'title' => 'Laravel Mail Sending Example with Markdown',
+        //     'url' => 'https://www.positronx.io'
+        // ];
+        // $maildata = [
+        //     'invoice' => $invoice
+        // ];
+
+        Mail::to($email)->send(new TestingMail($invoice));
+   
+        dd("Mail has been sent successfully");
     }
 }
 

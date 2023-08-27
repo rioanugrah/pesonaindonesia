@@ -408,8 +408,9 @@ Route::post('mark-as-read', 'NotifikasiController@markNotification')->name('mark
 //     event(new \App\Events\TravellingEvent($name));
 //     return "Event has been sent!";
 // });
-Route::get('testing_new', function () {
-    return view('email.testingOrder');
+Route::get('testing_new/{code}', function ($code) {
+    $invoice = \App\Models\Transactions::where('transaction_code',$code)->first();
+    return view('emails.InvoiceTesting',compact('invoice'));
 });
 
 // Route::any('{page?}',function(){
