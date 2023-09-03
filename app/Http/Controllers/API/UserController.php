@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -37,36 +38,55 @@ class UserController extends Controller
             ], $this->successStatus);
         }
         else{
-            return response()->json(['error'=>'Unauthorised'], 401);
+            return response()->json(['error'=>'Unauthorised'], 422);
         }
     }
 
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'c_password' => 'required|same:password',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'name' => 'required',
+        //     'email' => 'required|email',
+        //     'password' => 'required',
+        //     'c_password' => 'required|same:password',
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 401);            
+        // if ($validator->fails()) {
+        //     return response()->json(['error'=>$validator->errors()], 422);            
+        // }
+
+        $rules = [
+            'name'  => 'required',
+            'email'  => 'required',
+            'password'  => 'required',
+            'c_password'  => 'required',
+        ];
+        $messages = [
+            'name.required'  => 'Nama wajib diisi.',
+            'email.required'  => 'Email wajib diisi.',
+            'password.required'  => 'Password wajib diisi.',
+            'c_password.required'  => 'Confirm Password wajib diisi.',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->passes()) {
+            $input = $request->all();
+            $input['id'] = Str::uuid()->toString();
+            $input['password'] = bcrypt($input['password']);
+            $input['role'] = 4;
+            $user = User::create($input);
+            $success['token'] =  $user->createToken('nApp')->accessToken;
+            $success['name'] =  $user->name;
+    
+            return response()->json(['success'=>$success], $this->successStatus);
         }
-
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
-        $success['token'] =  $user->createToken('nApp')->accessToken;
-        $success['name'] =  $user->name;
-
-        return response()->json(['success'=>$success], $this->successStatus);
+        // return response()->json(['error'=>$validator->errors()], 422);
+        return response()->json($validator->errors(), 422);
     }
 
     public function details()
     {
         $user = Auth::user();
-        return response()->json(['success' => $user], $this->successStatus);
+        return response()->json(['data' => $user], $this->successStatus);
     }
 
     public function logout()

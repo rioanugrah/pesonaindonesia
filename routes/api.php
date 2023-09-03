@@ -43,7 +43,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::prefix('paket_order')->group(function () {
                 Route::get('/', 'API\PaketController@paket_order');
             });
-            Route::post('details', 'API\UserController@details');
+            Route::post('me', 'API\UserController@details');
             Route::prefix('travelling')->group(function () {
                 Route::get('/', 'API\TravellingController@index_v1');
                 Route::get('{id}', 'API\TravellingController@detail');

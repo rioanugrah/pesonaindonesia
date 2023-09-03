@@ -115,6 +115,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('b.gallery') }}">
+                        <i class="uil-bag"></i>
+                        <span>Gallery</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('seo') }}">
                         <i class="uil-boombox"></i>
                         <span>SEO</span>

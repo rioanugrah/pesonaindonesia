@@ -23,6 +23,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     Route::get('/', 'FrontendController@index')->name('frontend');
     // Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');
     Route::get('tentang-kami', 'FrontendController@tentang_kami')->name('tentang_kami');
+    Route::get('gallery', 'FrontendController@gallery')->name('frontend.gallery');
     Route::get('visi-misi', 'FrontendController@visimisi')->name('visi_misi');
     Route::get('tim-kami', 'FrontendController@tim')->name('tim_kami');
     Route::get('kontak', 'FrontendController@kontak')->name('kontak');
@@ -93,9 +94,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     //     Route::post('simpan', 'CooperationController@simpan_frontend')->name('frontend.partnership.simpan');
     // });
     
-    Route::prefix('gallery')->group(function () {
-        Route::get('/', 'GalleryController@index')->name('frontend.gallery');
-    });
+    // Route::prefix('gallery')->group(function () {
+    //     Route::get('/', 'GalleryController@index')->name('frontend.gallery');
+    // });
     
     Route::prefix('dokumentasi')->group(function () {
         Route::get('/', 'GalleryController@dokumentasi')->name('frontend.dokumentasi');
@@ -257,6 +258,11 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     
             Route::prefix('visitor')->group(function(){
                 Route::get('/', 'v2\VisitorController@index')->name('visitor')->middleware('verified');
+            });
+
+            Route::prefix('gallery')->group(function(){
+                Route::get('/', 'v2\GalleryController@index')->name('b.gallery')->middleware('verified');
+                Route::post('simpan', 'v2\GalleryController@simpan')->name('b.gallery.simpan')->middleware('verified');
             });
             
             Route::prefix('roles')->group(function(){

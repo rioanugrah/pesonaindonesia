@@ -26,6 +26,7 @@ use App\Models\Cooperation;
 use App\Models\Partnership;
 use App\Models\Honeymoon;
 use App\Models\HoneymoonOrder;
+use App\Models\Gallery;
 
 use App\Models\v2\Tour;
 
@@ -51,8 +52,13 @@ use PDF;
 
 class FrontendController extends Controller
 {
-    public function __construct()
+    protected $gallery;
+
+    public function __construct(
+        Gallery $gallery
+    )
     {
+        $this->gallery = $gallery;
         $this->whatsapp = ['nomor' => env('WA_BUSINESS'), 'message' => env('WA_MESSAGE')];
         $this->teams = [
             [ 'image' => 'pras.webp', 'name' => 'Prasetyo Aji Prakoso S.E, M.M', 'posisi' => 'Advisor' ],
@@ -354,6 +360,14 @@ class FrontendController extends Controller
         $data['whatsapp'] = $this->whatsapp;
         visitor()->visit();
         return view('frontend.frontend4.informasi', $data);
+    }
+
+    public function gallery()
+    {
+        $data['whatsapp'] = $this->whatsapp;
+        $data['gallerys'] = $this->gallery->all();
+        visitor()->visit();
+        return view('frontend.frontend5.gallery', $data);
     }
 
     public function kontak_simpan(Request $request)
