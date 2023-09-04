@@ -95,25 +95,67 @@
                 processData: false,
                 success: (result) => {
                     if(result.success != false){
-                        iziToast.success({
-                            title: result.message_title,
-                            message: result.message_content
-                        });
+                        toastr["success"](result.message_content);
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": 300,
+                            "hideDuration": 1000,
+                            "timeOut": 5000,
+                            "extendedTimeOut": 1000,
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
                         this.reset();
                         table.ajax.reload();
                         $('#modal_buat').modal('hide');
                     }else{
-                        iziToast.error({
-                            title: result.message_title,
-                            message: result.message_content
-                        });
+                        toastr["error"](result.error);
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": 300,
+                            "hideDuration": 1000,
+                            "timeOut": 5000,
+                            "extendedTimeOut": 1000,
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
                     }
                 },
                 error: function (request, status, error) {
-                    iziToast.error({
-                        title: 'Error',
-                        message: error,
-                    });
+                    toastr["error"](error);
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": 300,
+                        "hideDuration": 1000,
+                        "timeOut": 5000,
+                        "extendedTimeOut": 1000,
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
                 }
             });
         });

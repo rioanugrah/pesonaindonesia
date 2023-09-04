@@ -29,7 +29,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
                         <div class="gallery-item mb-4 rounded overflow-hidden">
                             <div class="gallery-image">
-                                <img src="{{ asset('frontend/gallery/' . $gallery->image) }}" alt="{{ $gallery->title }}">
+                                <img src="{{ asset('frontend/gallery/' . $gallery->image) }}" alt="{{ $gallery->title }}" style="width: 600px; height: 300px; object-fit: cover;">
                             </div>
                             <div class="gallery-content">
                                 <h5 class="white text-center position-absolute bottom-0 pb-4 left-50 mb-0 w-100">
