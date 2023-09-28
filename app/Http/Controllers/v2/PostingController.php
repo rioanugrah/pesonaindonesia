@@ -16,6 +16,12 @@ use Auth;
 
 class PostingController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:posting-list', ['only' => ['index']]);
+        $this->middleware('permission:posting-create', ['only' => ['create']]);
+    }
+
     public function index(Request $request)
     {
         if ($request->ajax()) {

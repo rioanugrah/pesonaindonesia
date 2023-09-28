@@ -95,5 +95,10 @@ class TestingController extends Controller
    
         dd("Mail has been sent successfully");
     }
+
+    public function coba()
+    {
+        return auth()->user()->assignRole('Administrator');
+    }
 }
 

@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use App\Models\Roles;
 use \Carbon\Carbon;
+
 class RolesTableSeeder extends Seeder
 {
     /**

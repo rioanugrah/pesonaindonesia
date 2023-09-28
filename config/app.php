@@ -166,6 +166,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         Shetabit\Visitor\Provider\VisitorServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -236,6 +237,7 @@ return [
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'Visitor' => Shetabit\Visitor\Facade\Visitor::class,
         'Pusher' => Pusher\Pusher::class,
+        
         // 'Chatify' => Chatify\Facades\ChatifyMessenger::class,
     ],
 

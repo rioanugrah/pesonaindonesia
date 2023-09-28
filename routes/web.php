@@ -19,6 +19,8 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     // Route::post('simpan',function(){
     //     return 'test';
     // })->name('payment.test.simpan');
+
+    Route::get('coba','TestingController@coba');
     
     Route::get('/', 'FrontendController@index')->name('frontend');
     // Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');
@@ -248,12 +250,19 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             });
     
             Route::prefix('pengguna')->group(function(){
-                Route::get('/', 'v2\UsersController@index')->name('pengguna')->middleware('verified');
-                Route::post('simpan', 'v2\UsersController@simpan')->name('pengguna.simpan')->middleware('verified');
-                Route::post('update', 'v2\UsersController@update')->name('pengguna.update')->middleware('verified');
-                Route::get('{id}', 'v2\UsersController@detail')->name('pengguna.detail')->middleware('verified');
-                Route::get('{id}/reset', 'v2\UsersController@reset')->name('pengguna.reset')->middleware('verified');
+                Route::get('/', 'v2\PenggunaController@index')->name('pengguna')->middleware('verified');
+                Route::post('simpan', 'v2\PenggunaController@simpan')->name('pengguna.simpan')->middleware('verified');
+                Route::post('update', 'v2\PenggunaController@update')->name('pengguna.update')->middleware('verified');
+                Route::get('{id}', 'v2\PenggunaController@detail')->name('pengguna.detail')->middleware('verified');
+                Route::get('{id}/reset', 'v2\PenggunaController@reset')->name('pengguna.reset')->middleware('verified');
             });
+            
+            Route::resource('users','v2\UsersController');
+            Route::prefix('permissions')->group(function(){
+                Route::get('/', 'v2\PermissionsController@index')->name('permissions')->middleware('verified');
+                Route::post('simpan', 'v2\PermissionsController@simpan')->name('permissions.simpan')->middleware('verified');
+            });
+
             Route::get('profile', 'v2\UsersController@profile')->name('pengguna.profile')->middleware('verified');
     
             Route::prefix('visitor')->group(function(){
@@ -265,13 +274,14 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::post('simpan', 'v2\GalleryController@simpan')->name('b.gallery.simpan')->middleware('verified');
             });
             
-            Route::prefix('roles')->group(function(){
-                Route::get('/', 'RolesController@index')->name('roles')->middleware('verified');
-                Route::post('simpan', 'RolesController@simpan')->name('roles.simpan')->middleware('verified');
-                Route::get('{id}/edit', 'RolesController@edit')->name('roles.edit')->middleware('verified');
-                Route::get('{slug}', 'RolesController@detail')->name('roles.detail')->middleware('verified');
-                Route::post('update', 'RolesController@update')->name('roles.update')->middleware('verified');
-            });
+            // Route::prefix('roles')->group(function(){
+            //     Route::get('/', 'RolesController@index')->name('roles')->middleware('verified');
+            //     Route::post('simpan', 'RolesController@simpan')->name('roles.simpan')->middleware('verified');
+            //     Route::get('{id}/edit', 'RolesController@edit')->name('roles.edit')->middleware('verified');
+            //     Route::get('{slug}', 'RolesController@detail')->name('roles.detail')->middleware('verified');
+            //     Route::post('update', 'RolesController@update')->name('roles.update')->middleware('verified');
+            // });
+            Route::resource('roles','v2\RolesController');
             
             Route::get('status', 'StatusController@index')->name('status')->middleware('verified');
             
