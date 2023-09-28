@@ -420,10 +420,10 @@ Route::domain('partner.'.parse_url(env('APP_URL'), PHP_URL_HOST))->group(functio
 Route::get('test/{code}', 'TestingController@sendNotif');
 Route::post('mark-as-read', 'NotifikasiController@markNotification')->name('markNotification');
 
-// Route::get('send-notif/{name}', function ($name) {
-//     event(new \App\Events\TravellingEvent($name));
-//     return "Event has been sent!";
-// });
+Route::get('send-notif/{name}', function ($name) {
+    event(new \App\Events\TravellingEvent($name));
+    return "Event has been sent!";
+});
 Route::get('testing_new/{code}', function ($code) {
     $invoice = \App\Models\Transactions::where('transaction_code',$code)->first();
     return view('emails.InvoiceTesting',compact('invoice'));
