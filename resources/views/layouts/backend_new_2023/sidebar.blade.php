@@ -28,6 +28,7 @@
 
         <div id="sidebar-menu">
             <ul class="metismenu list-unstyled" id="side-menu">
+                @can('dashboard')
                 <li class="menu-title">Dashboard</li>
                 <li>
                     <a href="{{route('home')}}">
@@ -35,6 +36,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                @endcan
                 {{-- @if (auth()->user()->hasRole(['Administrator']))
                 @include('layouts.backend_new_2023.administrator')
                 @elseif(auth()->user()->hasRole(['Users']))
