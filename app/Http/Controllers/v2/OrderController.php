@@ -18,6 +18,11 @@ use \Carbon\Carbon;
 
 class OrderController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:transaksi-list', ['only' => ['index']]);
+        // $this->middleware('permission:posting-create', ['only' => ['create']]);
+    }
     public function index(Request $request)
     {
         if ($request->ajax()) {

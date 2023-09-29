@@ -18,6 +18,16 @@ use File;
 
 class TourController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:kt-marketing', ['only' => [
+                            'all_tour',
+                            'tour_category',
+                            'tour_attribute',
+                            'tour_order_view'
+                            ]]);
+        // $this->middleware('permission:posting-create', ['only' => ['create']]);
+    }
     public function all_tour(Request $request)
     {
         if ($request->ajax()) {
