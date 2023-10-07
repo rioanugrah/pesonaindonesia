@@ -158,7 +158,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 });
             });
             // Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
-            Route::get('home/balance', 'HomeController@balance')->name('home.balance')->middleware('verified');
+            // Route::get('home/balance', 'HomeController@balance')->name('home.balance')->middleware('verified');
             
             Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
             Route::post('wisata/simpan', 'WisataController@simpan')->name('wisata.simpan')->middleware('verified');
@@ -360,6 +360,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('/', 'v2\InvoiceController@index')->name('b.invoice')->middleware('verified');
                 Route::get('create', 'v2\InvoiceController@create')->name('b.invoice.create')->middleware('verified');
                 Route::get('{kode_order}', 'v2\InvoiceController@detail')->name('b.invoice.detail')->middleware('verified');
+                Route::get('{kode_order}/print', 'v2\InvoiceController@print_pos')->name('b.invoice.print_pos')->middleware('verified');
             });
             
             Route::prefix('transaction')->group(function(){

@@ -45,4 +45,13 @@ class InvoiceController extends Controller
         }
         return view('invoice.travelling_new',$data);
     }
+
+    public function print_pos($kode_order)
+    {
+        $data['order'] = Transactions::where('transaction_code',$kode_order)->first();
+        if(empty($data['order'])){
+            return redirect()->back();
+        }
+        return view('invoice.print_pos',$data);
+    }
 }

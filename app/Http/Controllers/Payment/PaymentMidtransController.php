@@ -198,6 +198,7 @@ class PaymentMidtransController extends Controller
             DB::rollback();
             return redirect()->back();
         }
+        
         // return $data['snapToken'];
         // return view('orders.show', compact('order', 'snapToken'));
     }

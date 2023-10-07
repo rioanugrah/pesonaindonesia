@@ -98,6 +98,7 @@ class OrderController extends Controller
                         $btn = '<div class="btn-group">';
                         $btn .= '<a href='.route('b.invoice.detail',['kode_order' => $row->transaction_code]).' target="_blank" class="btn btn-xs btn-primary"><i class="uil-file-alt"></i> Invoice</a>';
                         $btn .= '<button class="btn btn-xs btn-success"><i class="uil-eye"></i> Detail Pembelian</button>';
+                        $btn .= '<a href='.route('b.invoice.print_pos',['kode_order' => $row->transaction_code]).' class="btn btn-xs btn-primary"><i class="uil-print"></i> Print POS</a>';
                         $btn .= '</div>';
                         return $btn;
                     })

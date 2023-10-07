@@ -67,12 +67,21 @@
                     <table id="datatable_tour_booking" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
-                            <tr>
+                            {{-- <tr>
                                 <th>Kode Booking</th>
                                 <th>Nama Order</th>
                                 <th>Tanggal Booking</th>
                                 <th>Payment Metode</th>
                                 <th>Status</th>
+                                <th>Action</th>
+                            </tr> --}}
+                            <tr>
+                                <th>Kode Order</th>
+                                <th>Nama Order</th>
+                                <th>Pemesan</th>
+                                <th>Jumlah</th>
+                                <th>Harga</th>
+                                <th>TGL.Pembelian</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -95,9 +104,37 @@
         var table = $('#datatable_tour_booking').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('home.ajax_booking_travelling') }}",
-            columns: [
-                {
+            // ajax: "{{ route('home.ajax_booking_travelling') }}",
+            // columns: [
+            //     {
+            //         data: 'kode_order',
+            //         name: 'kode_order'
+            //     },
+            //     {
+            //         data: 'nama_order',
+            //         name: 'nama_order'
+            //     },
+            //     {
+            //         data: 'tanggal_booking',
+            //         name: 'tanggal_booking'
+            //     },
+            //     {
+            //         data: 'payment_metode',
+            //         name: 'payment_metode'
+            //     },
+            //     {
+            //         data: 'status',
+            //         name: 'status'
+            //     },
+            //     {
+            //         data: 'action',
+            //         name: 'action',
+            //         orderable: false,
+            //         searchable: false
+            //     },
+            // ]
+            ajax: "{{ route('b.order') }}",
+            columns: [{
                     data: 'kode_order',
                     name: 'kode_order'
                 },
@@ -106,16 +143,24 @@
                     name: 'nama_order'
                 },
                 {
-                    data: 'tanggal_booking',
-                    name: 'tanggal_booking'
+                    data: 'pemesan',
+                    name: 'pemesan'
                 },
                 {
-                    data: 'payment_metode',
-                    name: 'payment_metode'
+                    data: 'qty',
+                    name: 'qty'
                 },
                 {
-                    data: 'status',
-                    name: 'status'
+                    data: 'price',
+                    name: 'price'
+                },
+                // {
+                //     data: 'status',
+                //     name: 'status'
+                // },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
                 },
                 {
                     data: 'action',
@@ -123,7 +168,8 @@
                     orderable: false,
                     searchable: false
                 },
-            ]
+            ],
+            order: [5, 'desc']
         });
 
         function reload() {
