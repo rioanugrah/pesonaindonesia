@@ -97,8 +97,8 @@
         <img src="{{ asset('invoice/assets/img/logo_plesiran_new_black2.webp') }}"
                                 alt="Logo" width="120"> <br>
         {{-- <h5>Pesona Plesiran Indonesia</h5> --}}
-        <span>Whatsapp : marketing@plesiranindonesia.com</span><br>
-        <span>Email : 0813-3112-6991</span><br>
+        <span>Whatsapp : 0813-3112-6991</span><br>
+        <span>Email : marketing@plesiranindonesia.com</span><br>
         <span>Instagram : @pesonaplesiranid.official</span><br>
         <span>Jl. Raya Tlogowaru No. 3, Tlogowaru Kec. Kedungkandang, <br> Kota Malang, Jawa Timur</span>
         

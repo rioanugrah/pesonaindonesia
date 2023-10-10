@@ -85,6 +85,13 @@ class VisitorController extends Controller
         // }
 
         // dd($data);
-        return view('backend_new_2023.visitor.index');
+        $start_year = Carbon::now()->startOfYear()->format('m');
+        $end_year = Carbon::now()->endOfYear()->format('m');
+        // dd($end_year);
+        for ($i=$start_year; $i <= $end_year ; $i++) { 
+            $data['count_visitor'][] = DB::table('shetabit_visits')->whereMonth('created_at',$i)->count();
+        }
+        // dd($data);
+        return view('backend_new_2023.visitor.index',$data);
     }
 }

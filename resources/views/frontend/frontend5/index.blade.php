@@ -110,7 +110,7 @@
                                 <img src="{{ $asset_new_backend }}/images/tour/{{ $travelling->images }}" alt="{{ $travelling->title }}" style="width: 700px; height: 250px; object-fit: cover;" class="">
                                 <div class="trend-content1 p-4">
                                     {{-- <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h5> --}}
-                                    <h3 class="mb-1 white"><a href="{{ route('frontend.travelling.detail',['id' => $travelling->id, 'slug' => $travelling->slug]) }}" class="white">{{ $travelling->title }}</a></h3>
+                                    <h3 class="mb-1 white" style="font-size: 14pt"><a href="{{ route('frontend.travelling.detail',['id' => $travelling->id, 'slug' => $travelling->slug]) }}" class="white">{{ $travelling->title }}</a></h3>
                                     <div class="entry-meta d-flex align-items-center justify-content-between">
                                         <div class="entry-author d-flex align-items-center">
                                             <p class="mb-0 white"><span class="theme1 fw-bold fs-5"> Rp. {{ number_format($travelling->current_price,0,",",".") }}</span> | Per {{ $travelling->jenis_tour == 'Private' ? $travelling->min_people : null }} pax</p>
@@ -123,17 +123,17 @@
                     </a>
                 </div>
                 @else
-                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="trend-item1 rounded box-shadow bg-white">
                         <div class="trend-image position-relative">
                             <img src="{{ $asset_new_backend }}/images/tour/{{ $travelling->images }}" alt="{{ $travelling->title }}" style="width: 700px; height: 250px; object-fit: cover;" class="">
                             <div class="trend-content1 p-4">
                                 {{-- <h6 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h6> --}}
-                                <h3 class="mb-1 white"><a href="{{ route('frontend.travelling.detail',['id' => $travelling->id, 'slug' => $travelling->slug]) }}" class="white">{{ $travelling->title }}</a></h3>
+                                <h3 class="mb-1 white" style="font-size: 14pt"><a href="{{ route('frontend.travelling.detail',['id' => $travelling->id, 'slug' => $travelling->slug]) }}" class="white">{{ $travelling->title }}</a></h3>
                                 <div class="entry-meta d-flex align-items-center justify-content-between">
                                     <div class="entry-author align-items-center">
                                         <p class="mb-0 white">
-                                            <div class="theme1 fw-bold fs-5" style="text-decoration: line-through;text-decoration-color: #eb4034; font-weight:300;">
+                                            <div class="theme1 fw-bold fs-5" style="text-decoration: line-through;text-decoration-color: #eb4034; font-weight:300; font-size: 14pt">
                                                 Rp. {{ number_format($travelling->current_price,0,",",".") }}
                                             </div>
                                         </p>

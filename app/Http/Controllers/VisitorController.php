@@ -60,6 +60,7 @@ class VisitorController extends Controller
         //             ->make(true);
         // }
         $visitors = DB::table('shetabit_visits')->orderBy('created_at','DESC')->paginate(30);
+        
         foreach ($visitors as $key => $visitor) {
             if ($visitor->method == 'GET') {
                 $method = '<span class="badge bg-success">'.$visitor->method.'</span>';
