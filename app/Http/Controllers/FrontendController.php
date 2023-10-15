@@ -251,6 +251,31 @@ class FrontendController extends Controller
         if(empty($data['travelling_detail'])){
             return redirect()->back();
         }
+        $data['date_live'] = Carbon::now();
+        $data['buy_open_one'] = Carbon::createFromDate($data['date_live']->format('Y-m-d'.'08:10:00'));
+        $data['buy_close_one'] = Carbon::createFromDate($data['date_live']->format('Y-m-d'.'13:00:00'));
+
+        $data['buy_open_two'] = Carbon::createFromDate($data['date_live']->format('Y-m-d'.'14:00:00'));
+        $data['buy_close_two'] = Carbon::createFromDate($data['date_live']->format('Y-m-d'.'18:00:00'));
+
+        $data['buy_open_three'] = Carbon::createFromDate($data['date_live']->format('Y-m-d'.'19:00:00'));
+        $data['buy_close_three'] = Carbon::createFromDate($data['date_live']->format('Y-m-d'.'23:00:00'));
+
+        // if ($date_live >= $buy_open_one && $date_live <= $buy_close_one) {
+        //     dd('Oke1');
+        // }
+        
+        // if ($date_live >= $buy_open_two && $date_live <= $buy_close_two) {
+        //     dd('Oke2');
+        // }
+
+        // if ($date_live >= $buy_open_three && $date_live <= $buy_close_three) {
+        //     dd('Oke3');
+        // }
+        // dd($data);
+        // dd($buy_close_one);
+        // $tomorrow = Carbon::tomorrow();
+        // dd($tomorrow);
         return view('frontend.frontend5.travelling.detail',$data);
     }
 
