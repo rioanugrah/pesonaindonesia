@@ -126,28 +126,37 @@
                                     @if ($date_live >= $buy_open_one && $date_live <= $buy_close_one)
                                         <a href="{{ route('frontend.travelling_detail_order', ['id' => $travelling_detail->id]) }}"
                                             class="nir-btn">BOOK NOW
-                                            {{ $buy_open_one->isoFormat('D MMMM YYYY HH:mm') . ' WIB - ' . $buy_close_one->isoFormat('D MMMM YYYY HH:mm') . ' WIB' }}</a>
-                                    @else
+                                            {{ $buy_open_one->isoFormat('D MMMM YYYY HH:mm') . ' - ' . $buy_close_one->isoFormat('HH:mm') . ' WIB' }}</a>
+                                    @elseif($date_live >= $buy_close_one)
                                         <a class="nir-btn" style="background-color: #d1d1d1; color: black">BOOKING CLOSE
-                                            {{ $buy_open_one->isoFormat('D MMMM YYYY HH:mm') . ' WIB - ' . $buy_close_one->isoFormat('D MMMM YYYY HH:mm') . ' WIB' }}</a>
+                                            {{ $buy_open_one->isoFormat('D MMMM YYYY HH:mm') . ' - ' . $buy_close_one->isoFormat('HH:mm') . ' WIB' }}</a>
+                                    @else
+                                        <a class="nir-btn" style="background-color: #d1d1d1; color: black">BOOKING OPEN
+                                            {{ $buy_open_one->isoFormat('D MMMM YYYY HH:mm') . ' - ' . $buy_close_one->isoFormat('HH:mm') . ' WIB' }}</a>
                                     @endif
 
                                     @if ($date_live >= $buy_open_two && $date_live <= $buy_close_two)
                                         <a href="{{ route('frontend.travelling_detail_order', ['id' => $travelling_detail->id]) }}"
                                             class="nir-btn">BOOK NOW
-                                            {{ $buy_open_two->isoFormat('D MMMM YYYY HH:mm') . ' WIB - ' . $buy_close_two->isoFormat('D MMMM YYYY HH:mm') . ' WIB' }}</a>
-                                    @else
+                                            {{ $buy_open_two->isoFormat('D MMMM YYYY HH:mm') . ' - ' . $buy_close_two->isoFormat('HH:mm') . ' WIB' }}</a>
+                                    @elseif($date_live >= $buy_close_two)
                                         <a class="nir-btn" style="background-color: #d1d1d1; color: black">BOOKING CLOSE
-                                            {{ $buy_open_two->isoFormat('D MMMM YYYY HH:mm') . ' WIB - ' . $buy_close_two->isoFormat('D MMMM YYYY HH:mm') . ' WIB' }}</a>
+                                            {{ $buy_open_two->isoFormat('D MMMM YYYY HH:mm') . ' - ' . $buy_close_two->isoFormat('HH:mm') . ' WIB' }}</a>
+                                    @else
+                                        <a class="nir-btn" style="background-color: #d1d1d1; color: black">BOOKING OPEN
+                                            {{ $buy_open_two->isoFormat('D MMMM YYYY HH:mm') . ' - ' . $buy_close_two->isoFormat('HH:mm') . ' WIB' }}</a>
                                     @endif
 
                                     @if ($date_live >= $buy_open_three && $date_live <= $buy_close_three)
                                         <a href="{{ route('frontend.travelling_detail_order', ['id' => $travelling_detail->id]) }}"
                                             class="nir-btn">BOOK NOW
-                                            {{ $buy_open_three->isoFormat('D MMMM YYYY HH:mm') . ' WIB - ' . $buy_close_three->isoFormat('D MMMM YYYY HH:mm') . ' WIB' }}</a>
-                                    @else
+                                            {{ $buy_open_three->isoFormat('D MMMM YYYY HH:mm') . ' - ' . $buy_close_three->isoFormat('HH:mm') . ' WIB' }}</a>
+                                    @elseif($date_live >= $buy_close_three)
                                         <a class="nir-btn" style="background-color: #d1d1d1; color: black">BOOKING CLOSE
-                                            {{ $buy_open_three->isoFormat('D MMMM YYYY HH:mm') . ' WIB - ' . $buy_close_three->isoFormat('D MMMM YYYY HH:mm') . ' WIB' }}</a>
+                                            {{ $buy_open_three->isoFormat('D MMMM YYYY HH:mm') . ' - ' . $buy_close_three->isoFormat('HH:mm') . ' WIB' }}</a>
+                                    @else
+                                        <a class="nir-btn" style="background-color: #d1d1d1; color: black">BOOKING OPEN
+                                            {{ $buy_open_three->isoFormat('D MMMM YYYY HH:mm') . ' - ' . $buy_close_three->isoFormat('HH:mm') . ' WIB' }}</a>
                                     @endif
                                     {{-- <a href="{{ route('frontend.travelling_detail_order',['id' => $travelling_detail->id]) }}" class="nir-btn w-25">BUY NOW</a> --}}
                                 </div>

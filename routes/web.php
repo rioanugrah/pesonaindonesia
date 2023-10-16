@@ -153,6 +153,10 @@ Route::domain('partner.'.parse_url(env('APP_URL'), PHP_URL_HOST))->group(functio
     Route::post('home/simpan', 'FrontendController@partnership_simpan')->name('partnership.simpan');
 });
 
+// Route::domain('booking.'.parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
+//     Route::get('{id}/order', 'TravellingController@f_detail_order')->name('frontend.travelling_detail_order');
+// });
+
 // Route::get('test', function () {
 //     // event(new App\Events\TravellingEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
 //     // event(new App\Events\NotificationEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
