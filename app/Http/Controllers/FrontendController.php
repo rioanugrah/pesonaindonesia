@@ -153,40 +153,98 @@ class FrontendController extends Controller
                 ['title' => 'Homestay', 'image' => asset('frontend/assets4/img/akomodasi/hotel.webp')],
                 ['title' => 'Apartemen', 'image' => asset('frontend/assets4/img/akomodasi/hotel.webp')],
             ];
+            // $data['jelajahins'] = [
+            //     [
+            //         'row' => true,
+            //         'data' => [
+            //             [
+            //                 'column' => 'col-lg-6 col-md-6 col-sm-6 mb-4',
+            //                 'country' => 'Indonesia',
+            //                 'title' => 'Surabaya',
+            //                 'tour' => 0,
+            //                 'image' => asset('frontend/assets5/images/image/surabaya.webp')
+            //             ],
+            //             [
+            //                 'column' => 'col-lg-6 col-md-6 col-sm-6 mb-4',
+            //                 'country' => 'Indonesia',
+            //                 'title' => 'Yogyakarta',
+            //                 'tour' => 0,
+            //                 'image' => asset('frontend/assets5/images/image/yogyakarta.webp')
+            //             ],
+            //             [
+            //                 'column' => 'col-lg-6 col-md-6 col-sm-6 mb-4',
+            //                 'country' => 'Indonesia',
+            //                 'title' => 'Bali',
+            //                 'tour' => 0,
+            //                 'image' => asset('frontend/assets5/images/image/bali.webp')
+            //             ],
+            //             [
+            //                 'column' => 'col-lg-6 col-md-6 col-sm-6 mb-4',
+            //                 'country' => 'Indonesia',
+            //                 'title' => 'Banyuwangi',
+            //                 'tour' => 0,
+            //                 'image' => asset('frontend/assets5/images/image/kawah_ijen.webp')
+            //             ],
+            //             [
+            //                 'column' => 'col-lg-6 col-md-6 col-sm-6 mb-4',
+            //                 'country' => 'Indonesia',
+            //                 'title' => 'Lombok',
+            //                 'tour' => 0,
+            //                 'image' => asset('frontend/assets5/images/image/bukit-seger.webp')
+            //             ],
+            //         ]
+            //     ],
+            //     [
+            //         'row' => false,
+            //         'column' => 'col-lg-5 col-md-5 col-sm-5 mb-4',
+            //         'country' => 'Indonesia',
+            //         'title' => 'Kota Malang',
+            //         'tour' => 0,
+            //         'image' => asset('frontend/assets5/images/image/malang.webp')
+            //     ],
+            // ];
             $data['jelajahins'] = [
                 [
-                    'row' => true,
-                    'data' => [
-                        [
-                            'column' => 'col-lg-12 mb-4',
-                            'country' => 'Indonesia',
-                            'title' => 'Surabaya',
-                            'tour' => 0,
-                            'image' => asset('frontend/assets5/images/image/surabaya.webp')
-                        ],
-                        [
-                            'column' => 'col-lg-6 col-md-6 col-sm-6 mb-4',
-                            'country' => 'Indonesia',
-                            'title' => 'Yogyakarta',
-                            'tour' => 0,
-                            'image' => asset('frontend/assets5/images/image/yogyakarta.webp')
-                        ],
-                        [
-                            'column' => 'col-lg-6 col-md-6 col-sm-6 mb-4',
-                            'country' => 'Indonesia',
-                            'title' => 'Bali',
-                            'tour' => 0,
-                            'image' => asset('frontend/assets5/images/image/bali.webp')
-                        ],
-                    ]
+                    'column' => 'col-lg-4 col-md-4 col-sm-4 mb-4',
+                    'country' => 'Indonesia',
+                    'title' => 'Surabaya',
+                    'tour' => 0,
+                    'image' => asset('frontend/assets5/images/image/surabaya.webp')
                 ],
                 [
-                    'row' => false,
-                    'column' => 'col-lg-5 mb-4',
+                    'column' => 'col-lg-4 col-md-4 col-sm-4 mb-4',
                     'country' => 'Indonesia',
-                    'title' => 'Kota Malang',
+                    'title' => 'Malang',
                     'tour' => 0,
                     'image' => asset('frontend/assets5/images/image/malang.webp')
+                ],
+                [
+                    'column' => 'col-lg-4 col-md-4 col-sm-4 mb-4',
+                    'country' => 'Indonesia',
+                    'title' => 'Yogyakarta',
+                    'tour' => 0,
+                    'image' => asset('frontend/assets5/images/image/yogyakarta.webp')
+                ],
+                [
+                    'column' => 'col-lg-4 col-md-4 col-sm-4 mb-4',
+                    'country' => 'Indonesia',
+                    'title' => 'Bali',
+                    'tour' => 0,
+                    'image' => asset('frontend/assets5/images/image/bali.webp')
+                ],
+                [
+                    'column' => 'col-lg-4 col-md-4 col-sm-4 mb-4',
+                    'country' => 'Indonesia',
+                    'title' => 'Banyuwangi',
+                    'tour' => 0,
+                    'image' => asset('frontend/assets5/images/image/kawah_ijen.webp')
+                ],
+                [
+                    'column' => 'col-lg-4 col-md-4 col-sm-4 mb-4',
+                    'country' => 'Indonesia',
+                    'title' => 'Lombok',
+                    'tour' => 0,
+                    'image' => asset('frontend/assets5/images/image/bukit-seger.webp')
                 ],
             ];
             // dd($data['jelajahins']);

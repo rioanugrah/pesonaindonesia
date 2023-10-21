@@ -266,49 +266,22 @@
             {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p> --}}
         </div>
         <div class="row align-items-center">
-            <div class="col-lg-7">
-                <div class="row">
-                    @foreach ($jelajahins as $jelajahi)
-                    @if ($jelajahi['row'] == true)
-                        @foreach ($jelajahi['data'] as $jlh)
-                        <div class="{{ $jlh['column'] }}">
-                            <div class="trend-item1">
-                                <div class="trend-image position-relative rounded">
-                                    <img src="{{ $jlh['image'] }}" alt="image">
-                                    <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
-                                        <div class="trend-content-title">
-                                            <h5 class="mb-0"><a href="tour-grid.html" class="theme1">{{ $jlh['country'] }}</a></h5>
-                                            <h3 class="mb-0 white">{{ $jlh['title'] }}</h3>
-                                        </div>
-                                        {{-- <span class="white bg-theme p-1 px-2 rounded">{{ $jlh['tour'] }} Tours</span> --}}
-                                    </div>
-                                    <div class="color-overlay"></div>
+            @foreach ($jelajahins as $jelajahi)
+                <div class="{{ $jelajahi['column'] }}">
+                    <div class="trend-item1">
+                        <div class="trend-image position-relative rounded">
+                            <img src="{{ $jelajahi['image'] }}" style="width: 1800px; height: 220px; object-fit: cover;">
+                            <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
+                                <div class="trend-content-title">
+                                    <h5 class="mb-0"><a href="#" class="theme1">{{ $jelajahi['country'] }}</a></h5>
+                                    <h3 class="mb-0 white">{{ $jelajahi['title'] }}</h3>
                                 </div>
+                                {{-- <span class="white bg-theme p-1 px-2 rounded">{{ $jlh['tour'] }} Tours</span> --}}
                             </div>
+                            <div class="color-overlay"></div>
                         </div>
-                        @endforeach
-                    @endif
-                    @endforeach
-                </div>
-            </div>
-            @foreach ($jelajahins as $jh)
-            @if ($jh['row'] == false)
-            <div class="{{ $jh['column'] }}">
-                <div class="trend-item1">
-                    <div class="trend-image position-relative rounded">
-                        <img src="{{ $jh['image'] }}" alt="image" style="width: 700px; height: 550px; object-fit: cover;">
-                        <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
-                            <div class="trend-content-title">
-                                <h5 class="mb-0"><a href="javascript:void()" class="theme1">{{ $jh['country'] }}</a></h5>
-                                <h3 class="mb-0 white">{{ $jh['title'] }}</h3>
-                            </div>
-                            {{-- <span class="white bg-theme p-1 px-2 rounded">{{ $jh['tour'] }} Tours</span> --}}
-                        </div>
-                        <div class="color-overlay"></div>
                     </div>
                 </div>
-            </div>
-            @endif
             @endforeach
         </div>
     </div>
