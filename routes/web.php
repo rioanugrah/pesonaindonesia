@@ -36,6 +36,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     Route::post('wistlist/search', 'FrontendController@search_wistlist')->name('frontend.search.wistlist');
     Route::post('event_register', 'FrontendController@eventRegister')->name('frontend.eventRegister');
     Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
+    
     Route::get('tracking_order', 'FrontendController@tracking_order')->name('frontend.tracking');
     Route::post('tracking_order/cari', 'FrontendController@tracking_order_search')->name('frontend.tracking.cari');
     

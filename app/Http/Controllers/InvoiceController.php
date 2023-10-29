@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PaketOrder;
 use App\Models\PaketOrderList;
 use App\Models\Transactions;
+use App\Models\VerifikasiTiket;
 use App\Models\OrderList;
 use App\Models\Perusahaan;
 use PDF;
@@ -25,6 +26,7 @@ class InvoiceController extends Controller
     public function invoice_send($kode_order)
     {
         $data['order'] = Transactions::where('transaction_code',$kode_order)->first();
+        $data['verifikasi_tiket'] = VerifikasiTiket::select('kode_tiket')->where('transaction_id',$data['order']['id'])->first();
         
         $pdf = PDF::loadView('emails.InvoiceTravellingNew',$data);
         $pdf->setPaper('A4', 'portrait');

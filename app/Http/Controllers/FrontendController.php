@@ -35,6 +35,10 @@ use App\User;
 use App\Models\KategoriPaket;
 use App\Models\KategoriBidangUsaha;
 
+use App\Models\Transactions;
+use App\Models\VerifikasiTiket;
+use App\Models\VerifikasiTiketList;
+
 use App\Models\KabupatenKota;
 use \Carbon\Carbon;
 
@@ -55,10 +59,16 @@ class FrontendController extends Controller
     protected $gallery;
 
     public function __construct(
-        Gallery $gallery
+        Gallery $gallery,
+        VerifikasiTiket $verifikasi_tiket,
+        VerifikasiTiketList $verifikasi_tiket_list,
+        Transactions $transactions
     )
     {
         $this->gallery = $gallery;
+        $this->verifikasi_tiket = $verifikasi_tiket;
+        $this->verifikasi_tiket_list = $verifikasi_tiket_list;
+        $this->transactions = $transactions;
         $this->whatsapp = ['nomor' => env('WA_BUSINESS'), 'message' => env('WA_MESSAGE')];
         $this->teams = [
             [ 'image' => 'pras.webp', 'name' => 'Prasetyo Aji Prakoso S.E, M.M', 'posisi' => 'Advisor' ],
@@ -1172,6 +1182,36 @@ class FrontendController extends Controller
 
     public function tracking_order_search(Request $request)
     {
+        $verifikasi_tiket = $this->verifikasi_tiket
+                                    ->where('kode_tiket',$request->id_pesanan)
+                                    ->where('phone',$request->no_telp)
+                                    ->first();
+        if (empty($verifikasi_tiket)) {
+            return response()->json([
+                'success' => false,
+                'message_title' => 'Tiket tidak ditemukan'
+            ], 200);
+        }
+
+        if ($verifikasi_tiket->status == 'Unpaid') {
+            $status_tiket = 'warning';
+        }elseif($verifikasi_tiket->status == 'Paid'){
+            $status_tiket = 'success';
+        }
+        
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'kode_tiket' => $verifikasi_tiket->kode_tiket,
+                'nama_tiket' => $verifikasi_tiket->nama_tiket,
+                'nama_order' => $verifikasi_tiket->nama_order,
+                'qty' => $verifikasi_tiket->qty,
+                'price' => $verifikasi_tiket->price,
+                'status' => $verifikasi_tiket->status,
+                'color' => $status_tiket,
+            ],
+            'detail' => $verifikasi_tiket->verifikasi_tiket_list
+        ],200);
         // $input_kode_tracking = $request->kode_tracking;
         // $tracking = PaketOrder::where('id',$input_kode_tracking)->get();
         // if(empty($tracking)){

@@ -11,6 +11,9 @@ use App\Models\OrderList;
 use App\Models\Transactions;
 use App\Models\TransactionList;
 
+use App\Models\VerifikasiTiket;
+use App\Models\VerifikasiTiketList;
+
 use App\Events\NotificationEvent;
 use App\Notifications\NotificationNotif;
 
@@ -100,16 +103,41 @@ class PaymentMidtransController extends Controller
 
         try {
             $input['id'] = Str::uuid()->toString();
-            $input['transaction_code'] = 'TRX-'.rand(1000,9999).Carbon::now()->format('mY');
+            $kode_jenis_transaksi = 'TRX';
+            $kode_random_transaksi = Carbon::now()->format('Ym').rand(100,999);
+            
+            $input['transaction_code'] = $kode_jenis_transaksi.'-'.$kode_random_transaksi;
             $input['transaction_unit'] = $request->title;
 
             if (!empty($request->nama_anggota)) {
+                $verifikasi_tiket = VerifikasiTiket::create([
+                    'id' => Str::uuid()->toString(),
+                    'transaction_id' => $input['id'],
+                    'kode_tiket' => 'E-TIKET-'.$kode_random_transaksi,
+                    'tanggal_booking' => $request->tanggal_berangkat,
+                    'nama_tiket' => $request->title,
+                    'nama_order' => $request->first_name.' '.$request->last_name,
+                    'address' => $request->alamat,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'qty' => $request->qty,
+                    'price' => $request->orderTotal,
+                    'status' => 'Unpaid'
+                ]);
+
                 foreach ($request->nama_anggota as $key => $value) {
                     $data['item_details'][] = [
                         'id' => $key+1,
                         'name' => $value,
                         'qty' => 1
                     ];
+
+                    VerifikasiTiketList::create([
+                        'id' => Str::uuid()->toString(),
+                        'verifikasi_tiket_id' => $verifikasi_tiket->id,
+                        'nama_order' => $value,
+                        'qty' => 1
+                    ]);
                 }
 
                 $input['transaction_order'] = json_encode([
@@ -212,9 +240,16 @@ class PaymentMidtransController extends Controller
             $transactions->update([
                 'status' => 'Paid'
             ]);
+            VerifikasiTiket::where('transaction_id',$transactions->id)->update([
+                'status' => 'Paid'
+            ]);
+            // $explode_transaction_code = explode('-')
         }else{
             $transactions = Transactions::where('transaction_code',$request->order_id)->first();
             $transactions->update([
+                'status' => 'Not Paid'
+            ]);
+            VerifikasiTiket::where('transaction_id',$transactions->id)->update([
                 'status' => 'Not Paid'
             ]);
         }

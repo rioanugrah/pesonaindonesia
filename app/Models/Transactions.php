@@ -25,4 +25,9 @@ class Transactions extends Model
         'user',
         'status',
     ];
+
+    public function verifikasi_tiket()
+    {
+        return $this->belongsTo(\App\Models\VerifikasiTiket::class, 'id');
+    }
 }
