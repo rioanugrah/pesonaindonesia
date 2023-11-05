@@ -33,6 +33,8 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::prefix('event')->group(function () {
             Route::get('/', 'API\EventController@index');
         });
+
+        Route::get('list_hotel', 'API\HotelController@list_hotel')->name('api.list_hotel');
     });
     Route::group(['middleware' => 'auth:api'], function(){
         Route::prefix('v1')->group(function(){

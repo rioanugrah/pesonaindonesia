@@ -11,6 +11,121 @@
 @section('canonical')
     {{ url('/') }}
 @endsection
+
+@section('css')
+    <style>
+        .box{
+            max-width: 280px;
+            width: 100%;
+            padding: 0 15px;
+        }
+        .skeleton {
+            padding:15px;
+            max-width: 300px;
+            width: 100%;
+            background: #fff;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12);
+        }
+        .skeleton .square {
+            height: 80px;
+            border-radius: 5px;
+            background: rgba(130, 130, 130, 0.2);
+            background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(130, 130, 130, 0.2)), color-stop(18%, rgba(130, 130, 130, 0.3)), color-stop(33%, rgba(130, 130, 130, 0.2)));
+            background: linear-gradient(to right, rgba(130, 130, 130, 0.2) 8%, rgba(130, 130, 130, 0.3) 18%, rgba(130, 130, 130, 0.2) 33%);
+            background-size: 800px 100px;
+            animation: wave-squares 2s infinite ease-out;
+        }
+        .skeleton .line {
+            height: 12px;
+            margin-bottom:6px;
+            border-radius: 2px;
+            background: rgba(130, 130, 130, 0.2);
+            background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(130, 130, 130, 0.2)), color-stop(18%, rgba(130, 130, 130, 0.3)), color-stop(33%, rgba(130, 130, 130, 0.2)));
+            background: linear-gradient(to right, rgba(130, 130, 130, 0.2) 8%, rgba(130, 130, 130, 0.3) 18%, rgba(130, 130, 130, 0.2) 33%);
+            background-size: 800px 100px;
+            animation: wave-lines 2s infinite ease-out;
+        }
+        .skeleton-right{
+            flex:1;
+        }
+        .skeleton-left{
+            flex:2;
+            padding-right:15px;
+        }
+        .flex1{
+            flex: 1;
+        }
+        .flex2{
+            flex: 2;
+        }
+        .skeleton .line:last-child{
+            margin-bottom: 0;
+        }
+        .h8{
+            height: 8px !important;
+        }
+        .h10{
+            height: 10px !important;
+        }
+        .h12{
+            height: 12px !important;
+        }
+        .h15{
+            height: 15px !important;
+        }
+        .h17{
+            height: 17px !important;
+        }
+        .h20{
+            height: 20px !important;
+        }
+        .h25{
+            height: 25px !important;
+        }
+        .w25{
+            width: 25% !important
+        }
+        .w40{
+            width:40% !important;
+        }
+        .w50{
+            width: 50% !important
+        }
+        .w75{
+            width: 75% !important
+        }
+        .m10{
+            margin-bottom: 10px !important;
+        }
+        .circle{
+            border-radius: 50% !important;
+            height: 80px !important;
+            width: 80px;
+        }
+        @keyframes wave-lines {
+            0% {
+                background-position: -468px 0;
+            }
+            100% {
+                background-position: 468px 0;
+            }
+        }
+        @keyframes wave-squares {
+            0% {
+                background-position: -468px 0;
+            }
+            100% {
+                background-position: 468px 0;
+            }
+        }
+    </style>
+@endsection
+
 @section('description')
     Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang menyediakan kemudahan dalam mendapat informasi
     dan pemesanan Akomodasi, Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.
@@ -162,6 +277,51 @@
     </div>
 </section>
 @endif
+
+{{-- <section class="trending pb-9" style="margin-top: -2.5%">
+    <div class="container">
+        <div class="section-title mb-6 w-75 mx-auto text-center">
+            <h2 class="mb-1">Jelajahi <span class="theme">Hotel</span></h2>
+        </div>
+        <div class="trend-box">
+            <div class="row" id="datas">
+
+            </div>
+        </div>
+    </div>
+</section> --}}
+
+{{-- <section class="trending pb-9" style="margin-top: -2.5%">
+    <div class="container">
+        <div class="section-title mb-6 w-75 mx-auto text-center">
+            <h2 class="mb-1">Jelajahi <span class="theme">Hotel</span></h2>
+        </div>  
+        <div class="trend-box">
+            <div class="row">
+                @foreach ($list_hotels as $list_hotel)
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="trend-item1 rounded box-shadow">
+                        <div class="trend-image position-relative">
+                            <img src="{{ $asset_new_backend }}/images/tour/{{ $travelling->images }}" alt="{{ $travelling->title }}" style="width: 700px; height: 250px; object-fit: cover;" class="">
+                            <div class="trend-content1 p-4">
+                                <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h5>
+                                <h3 class="mb-1 white" style="font-size: 14pt"><a href="#" class="white">{{ $list_hotel['name'] }}</a></h3>
+                                <div class="entry-meta d-flex align-items-center justify-content-between">
+                                    <div class="entry-author d-flex align-items-center">
+                                        <p class="mb-0 white"><span class="theme1 fw-bold fs-5"> Rp. {{ number_format($travelling->current_price,0,",",".") }}</span> | Per {{ $travelling->jenis_tour == 'Private' ? $travelling->min_people : null }} pax</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="overlay"></div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section> --}}
+
 @if (!$honeymoons->isEmpty())
 <section class="trending pb-9" style="margin-top: -5%">
     <div class="container">
@@ -499,4 +659,111 @@
         </div>
     </div>
 </section>
+@endsection
+@section('js')
+    {{-- <script src="{{ asset('frontend/axios.min.js') }}"></script> --}}
+    <script src="{{ asset('frontend/assets5/js/scripts.js') }}" type="javascript"></script>
+    <script>
+        // $.ajax({
+        //     type: 'GET',
+        //     url: "{{ route('api.list_hotel') }}",
+        //     contentType: "application/json;  charset=utf-8",
+        //     cache: false,
+        //     beforeSend: function() {
+        //         document.getElementById('datas').innerHTML = '<div class="box">'+
+        //                                                         '<div class="skeleton">'+
+        //                                                                 '<div class="skeleton-left">'+
+        //                                                                     '<div class="line h17 w40 m10"></div>'+
+        //                                                                     '<div class="line"></div>'+
+        //                                                                     '<div class="line h8 w50"></div>'+
+        //                                                                     '<div class="line  w75"></div>'+
+        //                                                                 '</div>'+
+        //                                                                 '<div class="skeleton-right">'+
+        //                                                                 '<div class="square"></div>'+
+        //                                                                 '</div>'+
+        //                                                         '</div>'+
+        //                                                     '</div>'+
+        //                                                     '<div class="box">'+
+        //                                                         '<div class="skeleton">'+
+        //                                                                 '<div class="skeleton-left">'+
+        //                                                                     '<div class="line h17 w40 m10"></div>'+
+        //                                                                     '<div class="line"></div>'+
+        //                                                                     '<div class="line h8 w50"></div>'+
+        //                                                                     '<div class="line  w75"></div>'+
+        //                                                                 '</div>'+
+        //                                                                 '<div class="skeleton-right">'+
+        //                                                                 '<div class="square"></div>'+
+        //                                                                 '</div>'+
+        //                                                         '</div>'+
+        //                                                     '</div>'+
+        //                                                     '<div class="box">'+
+        //                                                         '<div class="skeleton">'+
+        //                                                                 '<div class="skeleton-left">'+
+        //                                                                     '<div class="line h17 w40 m10"></div>'+
+        //                                                                     '<div class="line"></div>'+
+        //                                                                     '<div class="line h8 w50"></div>'+
+        //                                                                     '<div class="line  w75"></div>'+
+        //                                                                 '</div>'+
+        //                                                                 '<div class="skeleton-right">'+
+        //                                                                 '<div class="square"></div>'+
+        //                                                                 '</div>'+
+        //                                                         '</div>'+
+        //                                                     '</div>'+
+        //                                                     '<div class="box">'+
+        //                                                         '<div class="skeleton">'+
+        //                                                                 '<div class="skeleton-left">'+
+        //                                                                     '<div class="line h17 w40 m10"></div>'+
+        //                                                                     '<div class="line"></div>'+
+        //                                                                     '<div class="line h8 w50"></div>'+
+        //                                                                     '<div class="line  w75"></div>'+
+        //                                                                 '</div>'+
+        //                                                                 '<div class="skeleton-right">'+
+        //                                                                 '<div class="square"></div>'+
+        //                                                                 '</div>'+
+        //                                                         '</div>'+
+        //                                                     '</div>'
+        //                                                     ;
+        //     },
+        //     success: (result) => {
+        //         // console.table(result);
+        //         var datas = result.data;
+        //         var txt_hotel = "";
+
+        //         datas.forEach(htl);
+
+        //         function htl(value, index) {
+        //             txt_hotel += '<div class="col-lg-3 col-md-6 mb-4">';
+        //             txt_hotel +=    '<div class="trend-item1 rounded box-shadow">';
+        //             txt_hotel +=        '<div class="trend-image position-relative">';
+        //             txt_hotel +=            '<img src="{{ $asset_new_backend }}/images/tour/{{ $travelling->images }}" style="width: 700px; height: 250px; object-fit: cover;" class="">';
+        //             txt_hotel +=            '<div class="trend-content1 p-4">';
+        //             txt_hotel +=                '<h3 class="mb-1 white" style="font-size: 14pt"><a href="#" class="white">'+value.name+'</a></h3>';
+        //             txt_hotel +=                '<div class="entry-meta d-flex align-items-center justify-content-between">';
+        //             txt_hotel +=                    '<div class="entry-author d-flex align-items-center">';
+        //             txt_hotel +=                        '<p class="mb-0 white"><span class="theme1 fw-bold fs-5"> Rp. </span> | Per pax</p>';
+        //             txt_hotel +=                    '</div>';
+        //             txt_hotel +=                '</div>';
+        //             txt_hotel +=            '</div>';
+        //             txt_hotel +=            '<div class="overlay"></div>';
+        //             txt_hotel +=        '</div>';
+        //             txt_hotel +=    '</div>';
+        //             txt_hotel += '</div>';
+        //         }
+        //         document.getElementById('datas').innerHTML = txt_hotel;
+        //     },
+        //     error: function(request, status, error) {
+                
+        //     }
+        // });
+
+        // const successCallback = (position) => {
+        //     console.log(position);
+        // };
+
+        // const errorCallback = (error) => {
+        //     console.log(error);
+        // };
+
+        // navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    </script>
 @endsection

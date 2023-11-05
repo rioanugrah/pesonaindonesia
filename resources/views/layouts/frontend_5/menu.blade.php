@@ -3,7 +3,7 @@
 <li class="{{ Request::is('blog*') ? 'active' : '' }}"><a href="{{ route('frontend.blog') }}">Referensi</a></li>
 <li class="{{ Request::is('event*') ? 'active' : '' }}"><a href="{{ route('frontend.event') }}">Event</a></li>
 <li class="{{ Request::is('gallery*') ? 'active' : '' }}"><a href="{{ route('frontend.gallery') }}">Gallery</a></li>
-<li class="{{ Request::is('tracking_tiket*') ? 'active' : '' }}"><a href="{{ route('frontend.tracking') }}">Tracking Tiket</a></li>
+<li class="{{ Request::is('tracking_order*') ? 'active' : '' }}"><a href="{{ route('frontend.tracking') }}">Tracking Tiket</a></li>
 {{-- <li class="{{ Request::is('tracking*') ? 'active' : '' }}"><a href="#">Cek Order</a></li> --}}
 {{-- <li class="{{ Request::is('paket*') ? 'active' : '' }}"><a href="{{ route('frontend.paket') }}">Paket Wisata</a></li> --}}
 {{-- <li><a href="javascript:void()">Dokumentasi</a></li> --}}

@@ -129,13 +129,18 @@
                                                     '<table>'+
                                                         '<tr>'+
                                                             '<td>Nama Pemesan</td>'+
-                                                            '<td>:</td>'+
+                                                            '<td style="text-align: center">:</td>'+
                                                             '<td>'+result.data.nama_order+'</td>'+
                                                         '</tr>'+
                                                         '<tr>'+
                                                             '<td>Jumlah</td>'+
-                                                            '<td>:</td>'+
+                                                            '<td style="text-align: center">:</td>'+
                                                             '<td>'+result.data.qty+'</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<td>Tanggal Booking</td>'+
+                                                            '<td style="text-align: center">:</td>'+
+                                                            '<td>'+result.data.tanggal_booking+'</td>'+
                                                         '</tr>'+
                                                     '</table>'+
                                                 '</div>'+

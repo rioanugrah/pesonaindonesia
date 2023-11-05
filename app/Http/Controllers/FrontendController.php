@@ -267,6 +267,39 @@ class FrontendController extends Controller
             $data['mitras'] = [
                 ['title' => 'Plesiran Malang', 'image' => asset('frontend/assets5/images/mitra/logo_plesiran_malang.png')],
             ];
+
+            // $client = new HTTP_Request2();
+            
+            // $client->setUrl('https://booking-com.p.rapidapi.com/v1/static/hotels');
+            
+            // $client->setMethod(HTTP_Request2::METHOD_GET);
+            
+            // $client->setConfig(array(
+            // 'follow_redirects' => TRUE
+            // ));
+            
+            // $client->setHeader(array(
+            // 'X-RapidAPI-Host' => env('X_RAPIDAPI_HOST'),
+            // 'X-RapidAPI-Key' => env('X_RAPIDAPI_KEY'),
+            // 'Content-Type' => 'application/json',
+            // 'Accept' => 'application/json'
+            // ));
+
+            // try {
+            //     $response = $client->send();
+            //     $list_hotels = json_decode($response->getBody(), true);
+            //     // foreach ($list_hotels['result'] as $key => $list_hotel) {
+            //     //     $data['list_hotels'][] = [
+            //     //         'name' => $list_hotel['name']
+            //     //     ];
+            //     // }
+            //     // $data['list_hotels'] = $list_hotels['result'];
+            //     // dd($data['list_hotels']);
+            //     dd($list_hotels);
+            // } catch (\Throwable $th) {
+            //     //throw $th;
+            // }
+
             // $data['paket_trips'] = PaketList::where('kategori_paket_id',2)->where('status','!=',0)
             //                                 ->orderBy('created_at','desc')->paginate(5);
             // $request->visitor()->browser();
@@ -1205,6 +1238,7 @@ class FrontendController extends Controller
                 'kode_tiket' => $verifikasi_tiket->kode_tiket,
                 'nama_tiket' => $verifikasi_tiket->nama_tiket,
                 'nama_order' => $verifikasi_tiket->nama_order,
+                'tanggal_booking' => Carbon::create($verifikasi_tiket->tanggal_booking)->isoFormat('LL'),
                 'qty' => $verifikasi_tiket->qty,
                 'price' => $verifikasi_tiket->price,
                 'status' => $verifikasi_tiket->status,

@@ -218,7 +218,7 @@
                                     </tr>
                                     <tr>
                                         <td>Diskon</td>
-                                        <td class="theme2"><span id="jumlah_diskon">{{ $travelling->discount }} %</span></td>
+                                        <td class="theme2"><span id="jumlah_diskon"></span></td>
                                     </tr>
                                     <tr>
                                         <td>Biaya Pemesanan</td>

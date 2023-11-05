@@ -156,6 +156,21 @@ class PaymentMidtransController extends Controller
                     'email' => $request->email,
                     'phone' => $request->phone,
                 ]);
+
+                $verifikasi_tiket = VerifikasiTiket::create([
+                    'id' => Str::uuid()->toString(),
+                    'transaction_id' => $input['id'],
+                    'kode_tiket' => 'E-TIKET-'.$kode_random_transaksi,
+                    'tanggal_booking' => $request->tanggal_berangkat,
+                    'nama_tiket' => $request->title,
+                    'nama_order' => $request->first_name.' '.$request->last_name,
+                    'address' => $request->alamat,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'qty' => $request->qty,
+                    'price' => $request->orderTotal,
+                    'status' => 'Unpaid'
+                ]);
             }
 
             if($request->qty == 0 and $request->qty == null){
