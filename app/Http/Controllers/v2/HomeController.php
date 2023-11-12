@@ -20,8 +20,10 @@ class HomeController extends Controller
         // $this->app_key = config('app.oy_api_key');
         if($this->payment_live == true){
             $this->payment_production = 'https://app.midtrans.com/api/';
+            $this->server_key = env('MIDTRANS_SERVER_KEY_LIVE');
         }else{
             $this->payment_production = 'https://app.sandbox.midtrans.com/api/';
+            $this->server_key = env('MIDTRANS_SERVER_KEY_DEMO');
         }
     }
 
@@ -38,7 +40,7 @@ class HomeController extends Controller
         // 'x-api-key:'.$this->app_key,
         'Content-Type' => 'application/json',
         'Accept' => 'application/json',
-        'Authorization' => env('MIDTRANS_SERVER_KEY').':'
+        'Authorization' => $this->server_key
         ));
         try {
         $response = $request->send();
@@ -57,7 +59,7 @@ class HomeController extends Controller
         }
     }
 
-    public function index()
+    public function index(Request $request)
     {
         // $data['start_month'] = Carbon::now()->startOfYear();
         // $data['now_month'] = Carbon::now();
@@ -66,6 +68,29 @@ class HomeController extends Controller
         //     $data['balances'] = json_decode((new HomeController)->balance(),true);
         // } catch (\Throwable $th) {
         //     $data['balances']['balance']=0;
+        // }
+
+        // if ($request->ajax()) {
+        //     $get_balance = new HTTP_Request2();
+        //     $get_balance->setUrl($this->payment_production.'/v1/balance');
+        //     $get_balance->setMethod(HTTP_Request2::METHOD_GET);
+        //     $get_balance->setConfig(array(
+        //     'follow_redirects' => TRUE
+        //     ));
+        //     $get_balance->setHeader(array(
+        //     'Content-Type' => 'application/json',
+        //     'Accept' => 'application/json',
+        //     'Authorization' => env('MIDTRANS_SERVER_KEY').':'
+        //     ));
+
+        //     try {
+        //         $response = $request->send();
+        //         if ($response->getStatus() == 200) {
+        //             return $response->getBody();
+        //         }
+        //     } catch (\Throwable $th) {
+        //         //throw $th;
+        //     }
         // }
 
         $data['periode'] = [];

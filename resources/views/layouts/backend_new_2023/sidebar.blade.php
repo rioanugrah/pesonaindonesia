@@ -68,6 +68,12 @@
                     </a>
                 </li> --}}
                 <li>
+                    <a href="{{ route('b.promosi') }}">
+                        <i class="uil-home-alt"></i>
+                        <span>Promosi</span>
+                    </a>
+                </li>
+                <li>
                     <a href="#">
                         <i class="uil-home-alt"></i>
                         <span>Coupon</span>
@@ -95,6 +101,19 @@
                     </ul>
                 </li>
                 @endcan
+                <li class="menu-title">Finance Officer</li>
+                <li>
+                    <a href="{{ route('b.laporan_transaksi') }}">
+                        <i class="uil-home-alt"></i>
+                        <span>Laporan Transaksi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil-home-alt"></i>
+                        <span>Laporan Keuangan</span>
+                    </a>
+                </li>
                 @can('kt-operating')
                 <li class="menu-title">Operating Officer</li>
                 
@@ -145,6 +164,14 @@
                         <span>Visitor</span>
                     </a>
                 </li>
+                @can('permission-list')
+                <li>
+                    <a href="{{ route('permissions') }}">
+                        <i class="uil-user-circle"></i>
+                        <span>Permission</span>
+                    </a>
+                </li>
+                @endcan
                 @can('role-list')
                 <li>
                     <a href="{{ route('roles.index') }}">

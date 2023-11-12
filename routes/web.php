@@ -21,6 +21,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     // })->name('payment.test.simpan');
 
     Route::get('coba','TestingController@coba');
+    Route::get('testinfomail','TestingController@testInfoMail');
     
     Route::get('/', 'FrontendController@index')->name('frontend');
     // Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');

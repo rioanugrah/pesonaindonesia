@@ -10,6 +10,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::prefix('b')->group(function () {
             Route::prefix('home')->group(function() {
                 Route::get('/', 'v2\HomeController@index')->name('home')->middleware('verified');
+                Route::get('balance', 'v2\HomeController@balance')->name('balance')->middleware('verified');
                 Route::get('ajax_booking', 'v2\HomeController@ajax_booking_travelling')->name('home.ajax_booking_travelling')->middleware('verified');
             });
             Route::prefix('tour')->group(function() {
@@ -243,6 +244,15 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             
             Route::prefix('transaction')->group(function(){
                 Route::get('/', 'v2\OrderController@index')->name('b.order')->middleware('verified');
+            });
+
+            Route::prefix('finance')->group(function(){
+                Route::get('laporan_transaksi', 'v2\LaporanKeuanganController@laporan_transaksi')->name('b.laporan_transaksi')->middleware('verified');
+            });
+
+            Route::prefix('promosi')->group(function(){
+                Route::get('/', 'v2\PromosiController@index')->name('b.promosi')->middleware('verified');
+                Route::post('simpan', 'v2\PromosiController@simpan')->name('b.promosi.simpan')->middleware('verified');
             });
     
             // Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');

@@ -258,5 +258,22 @@
 
         var chart = new ApexCharts(document.querySelector("#sales-analytics-chart"), options);
         chart.render();
+
+        // function balance() {
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: "{{ route('balance') }}",
+        //         contentType: "application/json;  charset=utf-8",
+        //         cache: false,
+        //         success: function(result){
+        //             console.log(result);
+        //         },
+        //         error: function (request, status, error) {
+                    
+        //         }
+        //     })
+        // }
+
+        // balance();
     </script>
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Notifications\NotificationNotif;
 use App\Events\NotificationEvent;
 use App\Mail\TestingMail;
+use App\Mail\TestMail;
 use App\User;
 use Mail;
 use PDF;
@@ -99,6 +100,11 @@ class TestingController extends Controller
     public function coba()
     {
         return auth()->user()->assignRole('Administrator');
+    }
+
+    public function testInfoMail()
+    {
+        return Mail::mailer('info')->to('rioanugrah@rioanugrah.my.id')->send(new TestMail());
     }
 }
 
