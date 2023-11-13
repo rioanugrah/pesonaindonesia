@@ -360,6 +360,7 @@
     </div>
 </section>
 @endif
+
 <section class="about-us pb-2 pt-2" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
     <div class="container">
         <div class="row align-items-center d-flex">
@@ -418,6 +419,32 @@
     </div>
     <div class="white-overlay"></div>
 </section>
+
+<section class="trending pb-9" style="margin-top: -2.5%">
+    <div class="container">
+        <div class="section-title mb-6 mx-auto text-left">
+            <h3 class="mb-1">Jelajahi <span class="theme">Promo</span></h3>
+        </div>
+        <div class="trend-box">
+            <div class="row">
+                @forelse ($promosis as $promosi)
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="trend-item1 rounded box-shadow">
+                        <div class="trend-image position-relative">
+                            <a href="{{ route('frontend.detailPromosi',['generate' => $promosi->id_generate, 'slug' => $promosi->slug]) }}">
+                                <img src="{{ asset('frontend/assets5/promosi/'.$promosi->images) }}" alt="{{ $promosi->nama_promosi }}" style="width: 700px; height: 250px; object-fit: cover;" class="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                    
+                @endforelse
+            </div>
+        </div>
+    </div>
+</section> 
+
 <section class="trending pb-3 pt-0">
     <div class="container">
         <div class="section-title mb-6 w-50 mx-auto text-center">

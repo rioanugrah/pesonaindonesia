@@ -29,6 +29,7 @@ use App\Models\HoneymoonOrder;
 use App\Models\Gallery;
 
 use App\Models\v2\Tour;
+use App\Models\v2\Promosi;
 
 use App\User;
 
@@ -62,13 +63,15 @@ class FrontendController extends Controller
         Gallery $gallery,
         VerifikasiTiket $verifikasi_tiket,
         VerifikasiTiketList $verifikasi_tiket_list,
-        Transactions $transactions
+        Transactions $transactions,
+        Promosi $promosi
     )
     {
         $this->gallery = $gallery;
         $this->verifikasi_tiket = $verifikasi_tiket;
         $this->verifikasi_tiket_list = $verifikasi_tiket_list;
         $this->transactions = $transactions;
+        $this->promosi = $promosi;
         $this->whatsapp = ['nomor' => env('WA_BUSINESS'), 'message' => env('WA_MESSAGE')];
         $this->teams = [
             [ 'image' => 'pras.webp', 'name' => 'Prasetyo Aji Prakoso S.E, M.M', 'posisi' => 'Advisor' ],
@@ -310,6 +313,7 @@ class FrontendController extends Controller
             // dd(visitor()->visit());
             visitor()->visit();
             $data['honeymoons'] = Honeymoon::all();
+            $data['promosis'] = Promosi::all();
             return view('frontend.frontend5.index', $data);
             // return view('frontend.frontend4.index', $data);
             // return view('layouts.frontend_4.app',$data);
@@ -494,6 +498,14 @@ class FrontendController extends Controller
         $data['gallerys'] = $this->gallery->all();
         visitor()->visit();
         return view('frontend.frontend5.gallery', $data);
+    }
+
+    public function detail_promosi($generate, $slug)
+    {
+        $data['promosi'] = $this->promosi->where('id_generate',$generate)
+                            ->where('slug',$slug)
+                            ->first();
+        return view('frontend.frontend5.promosi.detail',$data);
     }
 
     public function kontak_simpan(Request $request)
