@@ -113,12 +113,12 @@ class PromosiController extends Controller
         $rules = [
             'nama_promosi'  => 'required',
             'deskripsi'  => 'required',
-            'images'  => 'required',
+            // 'images'  => 'required',
         ];
         $messages = [
             'nama_promosi.required'  => 'Title wajib diisi.',
             'deskripsi.required'  => 'Deskripsi wajib diisi.',
-            'images.required'   => 'Upload Gambar wajib diisi.',
+            // 'images.required'   => 'Upload Gambar wajib diisi.',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
 
@@ -135,15 +135,17 @@ class PromosiController extends Controller
             $input['nama_promosi'] = $request->nama_promosi;
             $input['deskripsi'] = $request->deskripsi;
 
-            $image = $request->file('images');
-            $img = \Image::make($image->path());
-            $img = $img->encode('webp', 75);
-            $input['images'] = 'promo-'.time().'.webp';
-
-            if (File::exists(public_path('frontend/assets5/promosi/'.$promosi->images))) {
-                File::delete(public_path('frontend/assets5/promosi/'.$promosi->images));
+            if ($request->file('images')) {
+                $image = $request->file('images');
+                $img = \Image::make($image->path());
+                $img = $img->encode('webp', 75);
+                $input['images'] = 'promo-'.time().'.webp';
+    
+                if (File::exists(public_path('frontend/assets5/promosi/'.$promosi->images))) {
+                    File::delete(public_path('frontend/assets5/promosi/'.$promosi->images));
+                }
+                $img->save(public_path('frontend/assets5/promosi/').$input['images']);
             }
-            $img->save(public_path('frontend/assets5/promosi/').$input['images']);
 
             $promosi->update($input);
             // $promosi = Promosi::create($input);
