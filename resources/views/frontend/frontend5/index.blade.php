@@ -422,8 +422,8 @@
 
 <section class="trending pb-9" style="margin-top: -2.5%">
     <div class="container">
-        <div class="section-title mb-6 mx-auto text-left">
-            <h3 class="mb-1">Jelajahi <span class="theme">Promo</span></h3>
+        <div class="section-title mb-6 mx-auto text-center">
+            <h2 class="mb-1">Jelajahi <span class="theme">Promo</span></h2>
         </div>
         <div class="trend-box">
             <div class="row">

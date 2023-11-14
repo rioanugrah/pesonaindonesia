@@ -252,7 +252,10 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
 
             Route::prefix('promosi')->group(function(){
                 Route::get('/', 'v2\PromosiController@index')->name('b.promosi')->middleware('verified');
+                Route::get('create', 'v2\PromosiController@create')->name('b.promosi.create')->middleware('verified');
                 Route::post('simpan', 'v2\PromosiController@simpan')->name('b.promosi.simpan')->middleware('verified');
+                Route::get('{id_generate}/edit', 'v2\PromosiController@edit')->name('b.promosi.edit')->middleware('verified');
+                Route::post('{id_generate}/update', 'v2\PromosiController@update')->name('b.promosi.update')->middleware('verified');
             });
     
             // Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');
