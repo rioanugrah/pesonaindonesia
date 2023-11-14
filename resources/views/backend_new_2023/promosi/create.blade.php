@@ -16,9 +16,9 @@
     <div class="row">
         <div class="col-md-12 col-xl-12">
             <div class="card">
-                <div class="card-body">
-                    <form action="" method="post">
-                        @csrf
+                <form action="{{ route('b.promosi.simpan') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="mb-3">
@@ -40,12 +40,12 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-success">Submit</button>
-                    <a href="{{ route('b.promosi') }}" class="btn btn-secondary">Back</a>
-                </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="{{ route('b.promosi') }}" class="btn btn-secondary">Back</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
