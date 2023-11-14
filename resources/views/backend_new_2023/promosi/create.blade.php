@@ -50,3 +50,13 @@
         </div>
     </div>
 @endsection
+@section('script')
+<script src="{{ URL::asset('backend_new/libs/ckeditor/ckeditor.min.js') }}"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('.editor'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+@endsection
