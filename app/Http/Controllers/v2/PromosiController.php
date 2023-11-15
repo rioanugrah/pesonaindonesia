@@ -28,7 +28,7 @@ class PromosiController extends Controller
                             ->addColumn('action', function($row){
                                 $btn = '<div class="btn-group">';
                                 $btn .= '<a href='.route('b.promosi.edit',['id_generate' => $row->id_generate]).' class="btn btn-warning"><i class="mdi mdi-file-document-edit"></i> Edit</a>';
-                                $btn .= '<a class="btn btn-danger"><i class="mdi mdi-trash-can"></i> Delete</a>';
+                                $btn .= '<button class="btn btn-danger" onclick="hapus(`'.$row->id_generate.'`)"><i class="mdi mdi-trash-can"></i> Delete</button>';
                                 $btn .= '</div>';
                                 return $btn;
                             })
@@ -154,5 +154,29 @@ class PromosiController extends Controller
             }
         }
         return redirect()->back();
+    }
+
+    public function delete($id_generate)
+    {
+        $promosi = Promosi::where('id_generate',$id_generate)->first();
+        if (empty($promosi)) {
+            return response()->json([
+                'success' => false,
+                'message_title' => 'Gagal',
+                'message_content' => 'Data Tidak Ditemukan'
+            ]);
+        }
+
+        if (File::exists(public_path('frontend/assets5/promosi/'.$promosi->images))) {
+            File::delete(public_path('frontend/assets5/promosi/'.$promosi->images));
+        }
+
+        $promosi->delete();
+
+        return response()->json([
+            'success' => true,
+            'message_title' => 'Berhasil',
+            'message_content' => 'Data Berhasil Dihapus'
+        ]);
     }
 }
