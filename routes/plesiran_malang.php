@@ -7,6 +7,6 @@ Auth::routes(['verify' => true]);
 
 Route::domain('plesiranmalang.'.parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     Route::get('/', function(){
-        return 'Halaman ini sedang maintenance';
-    });
+        return view('layouts.f_plesiranmalang.app');
+    })->name('plesiranmalang.home');
 });
