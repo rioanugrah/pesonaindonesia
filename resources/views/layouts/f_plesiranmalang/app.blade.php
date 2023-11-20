@@ -49,7 +49,7 @@
                     <div class="navigation-brand-text">
                         <div class="rlr-logo rlr-logo__navbar-brand rlr-logo--default">
                             <a href="{{ route('plesiranmalang.home') }}">
-                                <img src="{{ $assets }}/assets/logo_plesiran_malang.webp" class="" width="150">
+                                <img src="{{ $assets }}/assets/logo_plesiran_malang.webp" class="" width="120">
                             </a>
                         </div>
                     </div>
@@ -1074,7 +1074,7 @@
                                 <div class="rlr-banner-splide__image-wrapper">
                                     <img class="rlr-banner-splide__banner-img lazyload" data-sizes="auto"
                                         data-src="{{ $assets }}/assets/images/slider/slider_1.webp"
-                                        src="{{ $assets }}/assets/images/slider/slider_1.webp">
+                                        src="{{ $assets }}/assets/images/slider/slider_1.webp" style="width:1600px;height:646px;object-fit:cover; filter: brightness(90%);">
                                 </div>
                                 <article class="rlr-banner-splide__content-wrapper">
                                     <header class="rlr-banner-splide__header">
@@ -1105,7 +1105,7 @@
                                 <div class="rlr-banner-splide__image-wrapper">
                                     <img class="rlr-banner-splide__banner-img lazyload" data-sizes="auto"
                                         data-src="{{ $assets }}/assets/images/slider/slider_2.webp"
-                                        src="{{ $assets }}/assets/images/slider/slider_2.webp">
+                                        src="{{ $assets }}/assets/images/slider/slider_2.webp" style="width:1600px;height:646px;object-fit:cover; filter: brightness(90%);">
                                 </div>
                                 <article class="rlr-banner-splide__content-wrapper">
                                     <header class="rlr-banner-splide__header">
@@ -2051,7 +2051,7 @@
             </div>
         </section> --}}
         <!-- Destination Masonary Grid -->
-        <section class="rlr-section rlr-section__mb mt-4">
+        <section class="rlr-section rlr-section__mb" style="margin-top: 2.5%">
             <div class="container">
                 <!-- Section heading -->
                 <div class="rlr-section__title">
@@ -2065,7 +2065,7 @@
                         <a class="rlr-destination-card" href="javascript:void()">
                             <img data-sizes="auto" data-src="{{ $assets }}/assets/images/tour_3.webp"
                                 data-srcset="{{ $assets }}/assets/images/tour_3.webp 2x"
-                                class="rlr-destination-card__img lazyload" style="width:376px;height:250px;object-fit:cover; filter: brightness(90%);">
+                                class="rlr-destination-card__img lazyload" style="filter: brightness(90%);">
                             {{-- <span class="rlr-badge rlr-badge--left rlr-badge-- rlr-badge--abs rlr-badge--abs-dest">
                                 200+ </span> --}}
                             <div
@@ -2080,7 +2080,7 @@
                         <a class="rlr-destination-card" href="javascript:void()">
                             <img data-sizes="auto" data-src="{{ $assets }}/assets/images/tour_5.webp"
                                 data-srcset="{{ $assets }}/assets/images/tour_5.webp 2x"
-                                class="rlr-destination-card__img lazyload" style="width:376px;height:250px;object-fit:cover;">
+                                class="rlr-destination-card__img lazyload" style="">
                             {{-- <span class="rlr-badge rlr-badge--left rlr-badge-- rlr-badge--abs rlr-badge--abs-dest">
                                 320 Tours </span> --}}
                             <div
@@ -2095,7 +2095,7 @@
                         <a class="rlr-destination-card" href="javascript:void()">
                             <img data-sizes="auto" data-src="{{ $assets }}/assets/images/tour_1.webp"
                                 data-srcset="{{ $assets }}/assets/images/tour_1.webp 2x"
-                                class="rlr-destination-card__img lazyload" style="width:650px;height:535px;object-fit:cover; filter: brightness(90%);">
+                                class="rlr-destination-card__img lazyload" style="filter: brightness(90%);">
                             {{-- <span class="rlr-badge rlr-badge--left rlr-badge-- rlr-badge--abs rlr-badge--abs-dest"> 58
                                 Tours </span> --}}
                             <div
@@ -2125,7 +2125,7 @@
                         <a class="rlr-destination-card" href="javascript:void()">
                             <img data-sizes="auto" data-src="{{ $assets }}/assets/images/tour_6.webp"
                                 data-srcset="{{ $assets }}/assets/images/tour_6.webp 2x"
-                                class="rlr-destination-card__img lazyload" style="width:376px;height:250px;object-fit:cover;">
+                                class="rlr-destination-card__img lazyload" style="">
                             {{-- <span class="rlr-badge rlr-badge--left rlr-badge-- rlr-badge--abs rlr-badge--abs-dest"> 37
                                 Tours </span> --}}
                             <div
@@ -2140,7 +2140,7 @@
                         <a class="rlr-destination-card" href="javascript:void()">
                             <img data-sizes="auto" data-src="{{ $assets }}/assets/images/tour_4.webp"
                                 data-srcset="{{ $assets }}/assets/images/tour_4.webp 2x"
-                                class="rlr-destination-card__img lazyload" style="width:376px;height:250px;object-fit:cover;">
+                                class="rlr-destination-card__img lazyload" style="">
                             {{-- <span class="rlr-badge rlr-badge--left rlr-badge-- rlr-badge--abs rlr-badge--abs-dest"> 74
                                 Tours </span> --}}
                             <div
