@@ -187,6 +187,9 @@
                     </a>
                 </li>
                 @endcan
+                @can('kt-plesiranmalang')
+                <li class="menu-title">Plesiran Malang</li>
+                @endcan
 
                 {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">

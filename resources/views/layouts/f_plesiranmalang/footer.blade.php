@@ -7,7 +7,7 @@
             </div>
             <div class="rlr-footer__getintouch_col rlr-footer__getintouch__col--address">
                 <h4>Our Offices</h4>
-                <a href="#">Kota Malang, Jawa Timur, Indonesia</a>
+                <a href="{{ route('plesiranmalang.contact') }}">Kota Malang, Jawa Timur, Indonesia</a>
             </div>
         </div>
         <!-- Footer menu -->

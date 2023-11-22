@@ -1,14 +1,19 @@
 @extends('layouts.f_plesiranmalang.app')
 <?php $assets = asset('plesiran_malang/'); ?>
-@section('title')Plesiran Malang @endsection
-@section('description')
-    
+@section('title')
+    Plesiran Malang
 @endsection
-@section('keywords')tour, plesiran malang, trip, travel, biro perjalanan, vacation, wisata malang, pesona, plesiran @endsection
-@section('canonical'){{ url('/') }}@endsection
+@section('description')
+@endsection
+@section('keywords')
+    tour, plesiran malang, trip, travel, biro perjalanan, vacation, wisata malang, pesona, plesiran
+@endsection
+@section('canonical')
+    {{ url('/') }}
+@endsection
 @section('content')
     <!-- Hero Banner -->
-    <aside class="rlr-hero--half-mast">
+    {{-- <aside class="rlr-hero--half-mast">
         <div class="container">
             <div id="rlr_banner_slider" class="splide rlr-banner-splide rlr-banner-splide--v3">
                 <div class="splide__track rlr-banner-splide__track">
@@ -27,7 +32,6 @@
                                 </header>
                                 <div class="rlr-banner-splide__content-desc">
                                     <div class="rlr-banner-splide__temperature">
-                                        {{-- <span>-02° C Very Cold</span> --}}
                                         <div class="rlr-banner-splide__arrows">
                                             <button
                                                 class="rlr-banner-splide__arrow rlr-banner-splide__arrow--prev rlr-banner-js-arrow-prev"
@@ -58,6 +62,86 @@
                                 </header>
                                 <div class="rlr-banner-splide__content-desc">
                                     <div class="rlr-banner-splide__temperature">
+                                        <div class="rlr-banner-splide__arrows">
+                                            <button
+                                                class="rlr-banner-splide__arrow rlr-banner-splide__arrow--prev rlr-banner-js-arrow-prev"
+                                                aria-label="prev button">
+                                                <span> <i class="rlr-icon-font flaticon-left"> </i> </span>
+                                            </button>
+                                            <button
+                                                class="rlr-banner-splide__arrow rlr-banner-splide__arrow--next rlr-banner-js-arrow-next"
+                                                aria-label="next button">
+                                                <span> <i class="rlr-icon-font flaticon-right"> </i> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </aside> --}}
+    <aside class="rlr-hero--half-mast">
+        <div class="container">
+            <div id="rlr_banner_slider" class="splide rlr-banner-splide rlr-banner-splide--v3">
+                <div class="splide__track rlr-banner-splide__track">
+                    <ul class="splide__list">
+                        <!-- Banner slide 1 -->
+                        <li class="splide__slide rlr-banner-splide__slide">
+                            <div class="rlr-banner-splide__image-wrapper">
+                                <img class="rlr-banner-splide__banner-img lazyload" data-sizes="auto"
+                                    data-src="{{ $assets }}/assets/images/slider/slider_1.webp"
+                                    src="{{ $assets }}/assets/images/slider/slider_1.webp" style="width:1600px;height:646px;object-fit:cover; filter: brightness(80%);">
+                            </div>
+                            <article class="rlr-banner-splide__content-wrapper">
+                                <header class="rlr-banner-splide__header">
+                                    <h2 class="rlr-banner-splide__slogan">Balai Kota Malang</h2>
+                                    <span class="rlr-banner-splide__sub-title">The Plesiran Malang</span>
+                                </header>
+                                <div class="rlr-banner-splide__content-desc">
+                                    <div class="rlr-banner-splide__temperature">
+                                        {{-- <span>-02° C Very Cold</span> --}}
+                                        <div class="rlr-banner-splide__arrows">
+                                            <button
+                                                class="rlr-banner-splide__arrow rlr-banner-splide__arrow--prev rlr-banner-js-arrow-prev"
+                                                aria-label="prev button">
+                                                <span> <i class="rlr-icon-font flaticon-left"> </i> </span>
+                                            </button>
+                                            <button
+                                                class="rlr-banner-splide__arrow rlr-banner-splide__arrow--next rlr-banner-js-arrow-next"
+                                                aria-label="next button">
+                                                <span> <i class="rlr-icon-font flaticon-right"> </i> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="rlr-banner-splide__payment-option">
+                                        {{-- <span> <i class="rlr-icon-font flaticon-credit-cards-payment"> </i> </span>
+                                        <div class="rlr-banner-splide__content-desc-right">
+                                            <span class="rlr-banner-splide__payment-desc">We Accept Payment Through All
+                                                Cards & Banking</span>
+                                            <a href="./product-detail-page.html"
+                                                class="btn rlr-button rlr-banner-splide__book-now"> Book Now! </a>
+                                        </div> --}}
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+                        <!-- Banner slide 2 -->
+                        <li class="splide__slide rlr-banner-splide__slide">
+                            <div class="rlr-banner-splide__image-wrapper">
+                                <img class="rlr-banner-splide__banner-img lazyload" data-sizes="auto"
+                                    data-src="{{ $assets }}/assets/images/slider/slider_2.webp"
+                                    src="{{ $assets }}/assets/images/slider/slider_2.webp" style="width:1600px;height:646px;object-fit:cover; filter: brightness(80%);">
+                            </div>
+                            <article class="rlr-banner-splide__content-wrapper">
+                                <header class="rlr-banner-splide__header">
+                                    <h2 class="rlr-banner-splide__slogan">Kampung Warna - Warni</h2>
+                                    <span class="rlr-banner-splide__sub-title">The Plesiran Malang</span>
+                                </header>
+                                <div class="rlr-banner-splide__content-desc">
+                                    <div class="rlr-banner-splide__temperature">
                                         {{-- <span>27° C Moderate</span> --}}
                                         <div class="rlr-banner-splide__arrows">
                                             <button
@@ -71,6 +155,15 @@
                                                 <span> <i class="rlr-icon-font flaticon-right"> </i> </span>
                                             </button>
                                         </div>
+                                    </div>
+                                    <div class="rlr-banner-splide__payment-option">
+                                        {{-- <span> <i class="rlr-icon-font flaticon-credit-cards-payment"> </i> </span>
+                                        <div class="rlr-banner-splide__content-desc-right">
+                                            <span class="rlr-banner-splide__payment-desc">We Accept Payment Through All
+                                                Cards & Banking</span>
+                                            <a href="./product-detail-page.html"
+                                                class="btn rlr-button rlr-banner-splide__book-now"> Book Now! </a>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </article>
