@@ -168,6 +168,46 @@
                                 </div>
                             </article>
                         </li>
+
+                        <li class="splide__slide rlr-banner-splide__slide">
+                            <div class="rlr-banner-splide__image-wrapper">
+                                <img class="rlr-banner-splide__banner-img lazyload" data-sizes="auto"
+                                    data-src="{{ $assets }}/assets/images/slider/cloudy-mountains-landscape.webp"
+                                    src="{{ $assets }}/assets/images/slider/cloudy-mountains-landscape.webp" style="width:1600px;height:646px;object-fit:cover; filter: brightness(80%);">
+                            </div>
+                            <article class="rlr-banner-splide__content-wrapper">
+                                <header class="rlr-banner-splide__header">
+                                    <h2 class="rlr-banner-splide__slogan">Gunung Bromo</h2>
+                                    <span class="rlr-banner-splide__sub-title">The Plesiran Malang</span>
+                                </header>
+                                <div class="rlr-banner-splide__content-desc">
+                                    <div class="rlr-banner-splide__temperature">
+                                        {{-- <span>27° C Moderate</span> --}}
+                                        <div class="rlr-banner-splide__arrows">
+                                            <button
+                                                class="rlr-banner-splide__arrow rlr-banner-splide__arrow--prev rlr-banner-js-arrow-prev"
+                                                aria-label="prev button">
+                                                <span> <i class="rlr-icon-font flaticon-left"> </i> </span>
+                                            </button>
+                                            <button
+                                                class="rlr-banner-splide__arrow rlr-banner-splide__arrow--next rlr-banner-js-arrow-next"
+                                                aria-label="next button">
+                                                <span> <i class="rlr-icon-font flaticon-right"> </i> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="rlr-banner-splide__payment-option">
+                                        {{-- <span> <i class="rlr-icon-font flaticon-credit-cards-payment"> </i> </span>
+                                        <div class="rlr-banner-splide__content-desc-right">
+                                            <span class="rlr-banner-splide__payment-desc">We Accept Payment Through All
+                                                Cards & Banking</span>
+                                            <a href="./product-detail-page.html"
+                                                class="btn rlr-button rlr-banner-splide__book-now"> Book Now! </a>
+                                        </div> --}}
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
                     </ul>
                 </div>
             </div>
