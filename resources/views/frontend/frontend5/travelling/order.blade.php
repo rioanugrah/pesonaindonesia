@@ -117,7 +117,7 @@
                                 <input type="hidden" name="price" value="{{ $travelling->current_price }}">
                                 <input type="hidden" name="orderTotal" id="order_total">
                                 {{-- <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('form-form').submit();" class="nir-btn float-lg-end w-25">CONFIRM BOOKING</a> --}}
-                                <button type="submit" onclick="event.preventDefault(); document.getElementById('form-form').submit();" class="nir-btn float-lg-end w-25">CONFIRM BOOKING</button>
+                                <button type="submit" onclick="event.preventDefault(); document.getElementById('form-form').submit();" class="nir-btn float-lg-end">CONFIRM BOOKING</button>
                                 {{-- <div class="customer-information card-information">
                                     <h3 class="border-b pb-2 mb-2">Metode Pembayaran</h3>
 

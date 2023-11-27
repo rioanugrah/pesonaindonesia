@@ -189,6 +189,12 @@
                 @endcan
                 @can('kt-plesiranmalang')
                 <li class="menu-title">Plesiran Malang</li>
+                <li>
+                    <a href="#">
+                        <i class="uil-user-circle"></i>
+                        <span>Tour</span>
+                    </a>
+                </li>
                 @endcan
 
                 {{-- <li>

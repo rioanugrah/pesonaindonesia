@@ -650,7 +650,7 @@
             <div class="call-banner-inner w-75 px-5">
                 <div class="trend-content-main">
                     <div class="trend-content mb-5 pb-2">
-                        <h2><a href="javascript:void()">There is always a way, <span class="theme1"> for a way</span></a></h2>
+                        <h2><a href="javascript:void()">There is always a way <span class="theme1"> for a way</span></a></h2>
                         {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                             ut labore et dolore magna aliqua.</p> --}}
                     </div>
@@ -690,7 +690,7 @@
 @section('js')
     {{-- <script src="{{ asset('frontend/axios.min.js') }}"></script> --}}
     <script src="{{ asset('frontend/assets5/js/scripts.js') }}" type="javascript"></script>
-    <script>
+    {{-- <script>
         // $.ajax({
         //     type: 'GET',
         //     url: "{{ route('api.list_hotel') }}",
@@ -792,5 +792,5 @@
         // };
 
         // navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-    </script>
+    </script> --}}
 @endsection

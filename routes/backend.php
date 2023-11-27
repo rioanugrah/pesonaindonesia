@@ -264,6 +264,14 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             // Route::post('pengguna/simpan', 'UsersController@simpan')->name('pengguna.simpan')->middleware('verified');
             // Route::post('pengguna/update', 'UsersController@update')->name('pengguna.update')->middleware('verified');
         });
+
+        Route::prefix('b/plesiran_malang')->group(function(){
+            Route::prefix('tour')->group(function(){
+                Route::get('/', 'PlesiranMalang\TourController@tour')->name('b.plesiran_malang.tour');
+                Route::get('create', 'PlesiranMalang\TourController@tour_create')->name('b.plesiran_malang.tour_create');
+                Route::post('simpan', 'PlesiranMalang\TourController@tour_simpan')->name('b.plesiran_malang.tour_simpan');
+            });
+        });
     });
     
     Route::post('cooperation/kab_kota', 'CooperationController@select_kab_kota')->name('select.kota');

@@ -20,10 +20,11 @@ class CreatePlesiranMalangTourTable extends Migration
             $table->text('deskripsi');
             $table->string('durasi');
             $table->string('grup',2);
-            $table->string('umur');
+            $table->string('age');
             $table->string('lokasi');
-            $table->date('jam_mulai');
+            $table->time('jam_mulai');
             $table->double('harga');
+            $table->string('images');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -36,6 +37,6 @@ class CreatePlesiranMalangTourTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plesiran_malang_tour');
+        Schema::connection('plesiran_malang')->dropIfExists('tour');
     }
 }
