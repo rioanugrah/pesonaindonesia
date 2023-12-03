@@ -89,7 +89,17 @@ class TourController extends Controller
             $path = public_path('plesiran_malang/assets/images/tour');
             if(!File::isDirectory($path)){
                 File::makeDirectory($path, 0777, true, true);
-            }  
+            }
+
+            foreach ($request->group_itinerary as $key => $gi) {
+                $itinerary[] = [
+                    'title' => $gi['itinerary_title'],
+                    'description' => $gi['itinerary_description']
+                ];
+            }
+
+            $input['itinerary'] = json_encode($itinerary);
+            $input['include_exclude'] = $request->include_exclude;
 
             foreach ($request->group_images as $key => $value) {
                 $image = $value['images'];
@@ -103,7 +113,6 @@ class TourController extends Controller
                     'images' => $saveImages
                 ];
             }
-
             $input['images'] = json_encode($titleImages);
 
             // dd($image);

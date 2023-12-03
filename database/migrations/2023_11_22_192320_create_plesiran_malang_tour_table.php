@@ -24,7 +24,9 @@ class CreatePlesiranMalangTourTable extends Migration
             $table->string('lokasi');
             $table->time('jam_mulai');
             $table->double('harga');
-            $table->string('images');
+            $table->text('images');
+            $table->text('itinerary');
+            $table->text('include_exclude');
             $table->timestamps();
             $table->softDeletes();
         });

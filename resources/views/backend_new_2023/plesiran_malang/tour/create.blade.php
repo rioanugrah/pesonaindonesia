@@ -13,11 +13,14 @@
         @endslot
     @endcomponent
 
+    <form action="{{ route('b.plesiran_malang.tour_simpan') }}" method="post" enctype="multipart/form-data">
+    @csrf
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="card">
-                <form action="{{ route('b.plesiran_malang.tour_simpan') }}" method="post" enctype="multipart/form-data">
-                    @csrf
+                <div class="card-header">
+                    <h2 class="card-title">Data Travelling</h2>
+                </div>
                     <div class="card-body">
                         <div class="mb-3">
                             <label>Nama Tour</label>
@@ -65,32 +68,64 @@
                                     <input type="text" name="harga" class="form-control" placeholder="Harga" id="">
                                 </div>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="">Upload Image</label>
-                            <div class="repeater">
-                                <div data-repeater-list="group_images">
-                                    <div data-repeater-item class="row mb-1">
-                                        <div class="col-md-4 mb-3">
-                                            <input type="file" name="images" class="form-control" id="">
+                            <hr>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="">Itinerary</label>
+                                    <div class="repeater">
+                                        <div data-repeater-list="group_itinerary">
+                                            <div data-repeater-item class="row mb-1">
+                                                <div class="col-md-11">
+                                                    <div class="mb-3">
+                                                        <input type="text" name="itinerary_title" class="form-control" placeholder="Itinerary" id="">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <textarea name="itinerary_description" class="form-control" id="" cols="30" rows="5"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <button data-repeater-delete type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            <input data-repeater-delete type="button" class="btn btn-danger" value="Delete">
-                                        </div>
+                                        <button data-repeater-create type="button" class="btn btn-success mt-3 mt-lg-0"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <input data-repeater-create type="button" class="btn btn-success mt-3 mt-lg-0" value="Add" />
+                            </div>
+                            <div class="mb-3">
+                                <label>Include & Exclude</label>
+                                <textarea name="include_exclude" class="form-control editor2" id="" cols="30" rows="5"></textarea>
+                            </div>
+                            <hr>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="">Upload Image</label>
+                                    <div class="repeater">
+                                        <div data-repeater-list="group_images">
+                                            <div data-repeater-item class="row mb-1">
+                                                <div class="col-md-11 mb-3">
+                                                    <input type="file" name="images" class="form-control" id="">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <button data-repeater-delete type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button data-repeater-create type="button" class="btn btn-success mt-3 mt-lg-0"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
                     </div>
-                </form>
             </div>
         </div>
     </div>
+    </form>
 @endsection
 @section('script')
     <script src="{{ URL::asset('backend_new/libs/ckeditor/ckeditor.min.js') }}"></script>
@@ -98,6 +133,12 @@
     <script>
         ClassicEditor
         .create(document.querySelector('.editor'))
+        .catch(error => {
+            console.error(error);
+        });
+
+        ClassicEditor
+        .create(document.querySelector('.editor2'))
         .catch(error => {
             console.error(error);
         });

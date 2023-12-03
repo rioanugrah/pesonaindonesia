@@ -29,5 +29,7 @@ class Tour extends Model
         'jam_mulai',
         'harga',
         'images',
+        'itinerary',
+        'include_exclude',
     ];
 }

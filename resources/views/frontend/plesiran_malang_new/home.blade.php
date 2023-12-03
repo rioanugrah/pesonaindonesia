@@ -268,7 +268,7 @@
         </form>
     </div> --}}
     <!-- Product Carousel -->
-    {{-- <section class="rlr-section rlr-section__mb">
+    <section class="rlr-section rlr-section__mb mt-4">
         <div class="container">
             <!-- Swiper -->
             <div class="rlr-carousel__items">
@@ -277,9 +277,9 @@
                     <div class="rlr-section-header">
                         <!-- Section heading -->
                         <div class="rlr-section__title">
-                            <h2 class="rlr-section__title--main">Trending 2022</h2>
-                            <span class="rlr-section__title--sub">Sost Brilliant reasons Emprise should be your
-                                one-stop-shop!</span>
+                            <h2 class="rlr-section__title--main">Destinasi</h2>
+                            {{-- <span class="rlr-section__title--sub">Sost Brilliant reasons Emprise should be your
+                                one-stop-shop!</span> --}}
                         </div>
                         <div class="button-row">
                             <button type="button"
@@ -298,15 +298,15 @@
                         </div>
                     </div>
                     <div class="swiper-wrapper">
+                        @foreach ($tours as $tour)
                         <div class="swiper-slide">
                             <!-- Product card item -->
-                            <article class="rlr-product-card rlr-product-card--v3" itemscope
-                                itemtype="https://schema.org/Product">
+                            <article class="rlr-product-card rlr-product-card--v3">
                                 <!-- Product card image -->
                                 <figure class="rlr-product-card__image-wrapper">
-                                    <span
-                                        class="rlr-badge rlr-badge-- rlr-badge--accent-red rlr-product-card__badge">
-                                        -20% Today </span>
+                                    {{-- <span
+                                        class="rlr-badge rlr-badge-- rlr-badge--accent-blue rlr-product-card__badge">
+                                        Best Seller </span> --}}
                                     <div class="rlr-product-detail-header__button-wrapper">
                                         <button type="button"
                                             class="btn rlr-button rlr-button--circle rlr-wishlist rlr-wishlist-button--light rlr-wishlist-button rlr-js-action-wishlist"
@@ -315,27 +315,24 @@
                                         </button>
                                         <span class="rlr-product-detail-header__helptext rlr-js-helptext"></span>
                                     </div>
-                                    <a href="./product-detail-page.html">
+                                    <a href="{{ route('plesiranmalang.tour_detail',['id' => $tour->id, 'slug' => $tour->slug]) }}">
                                         <div class="swiper rlr-js-product-multi-image-swiper">
                                             <div class="swiper-wrapper">
+                                                @php
+                                                    // dd($tour->images);
+                                                    $images = json_decode($tour->images);
+                                                @endphp
+                                                @foreach ($images as $im)
+                                                {{-- @php
+                                                    dd($im->images);
+                                                @endphp --}}
                                                 <div class="swiper-slide">
                                                     <img itemprop="image" data-sizes="auto"
-                                                        data-src="./assets/images/product-images/small/01.jpg"
-                                                        data-srcset="./assets/images/product-images/small/01.jpg"
-                                                        class="lazyload" alt="product-image" />
+                                                        data-src="{{ asset('plesiran_malang/assets/images/tour/'.$im->images) }}"
+                                                        data-srcset="{{ asset('plesiran_malang/assets/images/tour/'.$im->images) }}"
+                                                        class="lazyload" alt="{{ $tour->nama_tour }}">
                                                 </div>
-                                                <div class="swiper-slide">
-                                                    <img itemprop="image" data-sizes="auto"
-                                                        data-src="./assets/images/product-images/small/02.jpg"
-                                                        data-srcset="./assets/images/product-images/small/02.jpg"
-                                                        class="lazyload" alt="product-image" />
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <img itemprop="image" data-sizes="auto"
-                                                        data-src="./assets/images/product-images/small/03.jpg"
-                                                        data-srcset="./assets/images/product-images/small/03.jpg"
-                                                        class="lazyload" alt="product-image" />
-                                                </div>
+                                                @endforeach
                                             </div>
                                             <button type="button"
                                                 class="btn rlr-button splide__arrow splide__arrow--prev"
@@ -356,20 +353,8 @@
                                         <div>
                                             <a href="./product-detail-page.html"
                                                 class="rlr-product-card__anchor-title">
-                                                <h2 class="rlr-product-card__title" itemprop="name">Full-Day
-                                                    Catamaran Cruise to Hvar &amp; Pakleni Islands</h2>
+                                                <h2 class="rlr-product-card__title" itemprop="name">{{ $tour->nama_tour }}</h2>
                                             </a>
-                                            <div>
-                                                <a href="./product-detail-page.html"
-                                                    class="rlr-product-card__anchor-cat">
-                                                    <span class="rlr-product-card__sub-title">Beach Tours</span>
-                                                </a>
-                                                <span class="rlr-product-card__sub-title">|</span>
-                                                <a href="./product-detail-page.html"
-                                                    class="rlr-product-card__anchor-sub-cat">
-                                                    <span class="rlr-product-card__sub-title">Dubronik</span>
-                                                </a>
-                                            </div>
                                         </div>
                                     </header>
                                     <!-- Product card body -->
@@ -378,10 +363,10 @@
                                             itemtype="https://schema.org/Offer">
                                             <span class="rlr-product-card__from">from </span>
                                             <span class="rlr-product-card__price"> <mark
-                                                    itemprop="priceCurrency">$</mark><mark
-                                                    itemprop="price">895</mark> </span>
+                                                    itemprop="priceCurrency">Rp.</mark><mark
+                                                    itemprop="price">{{ number_format($tour->harga,0,',','.') }}</mark> </span>
                                         </div>
-                                        <div class="rlr-product-card__ratings" itemprop="aggregateRating"
+                                        {{-- <div class="rlr-product-card__ratings" itemprop="aggregateRating"
                                             itemscope itemtype="https://schema.org/AggregateRating">
                                             <div class="rlr-review-stars" itemprop="ratingValue" itemscope
                                                 itemtype="https://schema.org/Product">
@@ -391,28 +376,29 @@
                                                     class="rlr-icon-font flaticon-star-1"> </i> <i
                                                     class="rlr-icon-font flaticon-star"> </i>
                                             </div>
-                                            <span class="rlr-product-card__rating-text" itemprop="reviewCount">4.7
-                                                (577)</span>
-                                        </div>
+                                            <span class="rlr-product-card__rating-text"
+                                                itemprop="reviewCount">4.3 (109)</span>
+                                        </div> --}}
                                     </div>
                                     <!-- Product card footer -->
                                     <div class="rlr-product-card__footer">
                                         <div class="rlr-icon-text rlr-product-card__icon-text"><i
                                                 class="rlr-icon-font flaticon-three-o-clock-clock"> </i> <span
-                                                class="">7 Days </span></div>
-                                        <ul class="rlr-product-card__icon-text-list">
+                                                class="">{{ $tour->durasi }} </span></div>
+                                        {{-- <ul class="rlr-product-card__icon-text-list">
                                             <li class="rlr-icon-text rlr-product-card__icon-text"><i
                                                     class="rlr-icon-font flaticon-check"> </i> <span
                                                     class="rlr-icon-text__title">New on Emprise </span></li>
                                             <li class="rlr-icon-text rlr-product-card__icon-text"><i
                                                     class="rlr-icon-font flaticon-check"> </i> <span
                                                     class="rlr-icon-text__title">Free Cancellation </span></li>
-                                        </ul>
+                                        </ul> --}}
                                     </div>
                                 </div>
                             </article>
                         </div>
-                        <div class="swiper-slide">
+                        @endforeach
+                        {{-- <div class="swiper-slide">
                             <!-- Product card item -->
                             <article class="rlr-product-card rlr-product-card--v3" itemscope
                                 itemtype="https://schema.org/Product">
@@ -984,12 +970,12 @@
                                     </div>
                                 </div>
                             </article>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
     <!-- Category Carousel -->
     {{-- <section class="rlr-section rlr-section__mb">
         <div class="container">
