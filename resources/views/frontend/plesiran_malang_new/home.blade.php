@@ -351,7 +351,7 @@
                                     <!-- Product card header -->
                                     <header class="rlr-product-card__header">
                                         <div>
-                                            <a href="./product-detail-page.html"
+                                            <a href="{{ route('plesiranmalang.tour_detail',['id' => $tour->id, 'slug' => $tour->slug]) }}"
                                                 class="rlr-product-card__anchor-title">
                                                 <h2 class="rlr-product-card__title" itemprop="name">{{ $tour->nama_tour }}</h2>
                                             </a>
