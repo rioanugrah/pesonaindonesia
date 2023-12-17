@@ -48,29 +48,14 @@ class PaymentMidtransController extends Controller
         // }else{
         // }
         \Midtrans\Config::$serverKey = $this->midtrans_server_key;
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
         \Midtrans\Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
-        // Set sanitization on (default)
         \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
-
-        // $params = array(
-        //     'transaction_details' => array(
-        //         'order_id' => rand(),
-        //         'gross_amount' => 10000,
-        //     ),
-        //     'customer_details' => array(
-        //         'first_name' => 'budi',
-        //         'last_name' => 'pratama',
-        //         'email' => 'budi.pra@example.com',
-        //         'phone' => '08111222333',
-        //     ),
-        // );
         $params = [
             'transaction_details' => [
                 'order_id' => 'TRX-'.rand(),
-                'gross_amount' => $request->orderTotal,
+                'gross_amount' => "10000",
+                // 'gross_amount' => strval($request->orderTotal),
             ],
             'customer_details' => array(
                 'first_name' => $request->first_name,
@@ -79,8 +64,15 @@ class PaymentMidtransController extends Controller
                 'phone' => $request->phone,
             ),
         ];
-
         $data['midtrans_client_key'] = $this->midtrans_client_key;
+        $data['link_url_payment'] = $this->url_payment;
+        // $data['kode_order'] = 123;
+        // $data['first_name'] = 'Radit';
+        // $data['last_name'] ="-";
+        // $data['email'] = "-";
+        // $data['title'] = "-";
+        // $data['qty'] = 1;
+        // $data['price'] = 10000;
         $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
         // $snapToken = Snap::getSnapToken($params);
         return view('frontend.frontend5.payment.index',$data);
