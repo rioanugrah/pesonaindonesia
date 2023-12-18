@@ -71,6 +71,7 @@ Route::prefix('v1')->group(function(){
         Route::get('list_hotel', 'API\HotelController@list_hotel')->name('api.list_hotel');
         Route::prefix('tour')->group(function () {
             Route::get('/', 'API\TourController@list_tour');
+            Route::get('{id}', 'API\TourController@tour_detail');
         });
     });
 });
