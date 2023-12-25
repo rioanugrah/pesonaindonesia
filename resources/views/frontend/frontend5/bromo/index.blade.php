@@ -681,7 +681,7 @@
                     </div>  
                 </div> --}}
             </div>
-            <div class="flight-btn text-center"><a href="flight-grid.html" class="nir-btn">View More</a></div>
+            {{-- <div class="flight-btn text-center"><a href="flight-grid.html" class="nir-btn">View More</a></div> --}}
         </div>
     </div>
 </section>
