@@ -181,20 +181,6 @@
                     <button class="nav-link {{ \Carbon\Carbon::today()->format('Y-m-d') == $i ? 'active' : null }}" id="nav-schedule{{ $i }}-tab" data-bs-toggle="tab" data-bs-target="#schedule{{ $i }}" 
                     type="button" role="tab" aria-selected="true">{{ \Carbon\Carbon::create($i)->isoFormat('dddd') }}<span>{{ \Carbon\Carbon::create($i)->isoFormat('D-MM-YYYY') }}</span></button>
                     @endfor
-                    {{-- <button class="nav-link active" id="nav-schedule1-tab" data-bs-toggle="tab" data-bs-target="#schedule1" 
-                    type="button" role="tab" aria-selected="true">Saturday<span>Feb 15, 2022</span></button>
-                    <button class="nav-link" id="nav-schedule2-tab" data-bs-toggle="tab" data-bs-target="#schedule2" 
-                    type="button" role="tab" aria-selected="false">Sunday<span>Feb 16, 2022</span></button>
-                    <button class="nav-link" id="nav-schedule3-tab" data-bs-toggle="tab" data-bs-target="#schedule3" 
-                    type="button" role="tab" aria-selected="false">Monday<span>Feb 17, 2022</span></button>
-                    <button class="nav-link" id="nav-schedule4-tab" data-bs-toggle="tab" data-bs-target="#schedul4" 
-                    type="button" role="tab" aria-selected="false">Tuesday<span>Feb 18, 2022</span></button>
-                    <button class="nav-link" id="nav-schedule5-tab" data-bs-toggle="tab" data-bs-target="#schedule5" 
-                    type="button" role="tab" aria-selected="false">Wednesday<span>Feb 19, 2022</span></button>
-                    <button class="nav-link" id="nav-schedule6-tab" data-bs-toggle="tab" data-bs-target="#schedule6" 
-                    type="button" role="tab" aria-selected="false">Thursday<span>Feb 20, 2022</span></button>
-                    <button class="nav-link" id="nav-schedule7-tab" data-bs-toggle="tab" data-bs-target="#schedule7" 
-                    type="button" role="tab" aria-selected="false">Friday<span>Feb 21, 2022</span></button> --}}
                 </div>
             </div>
             <div class="tab-content" id="nav-tabContent">
@@ -225,6 +211,7 @@
                                         <div class="item-inner">
                                         <div class="content">
                                             <h5 class="mb-0" style="text-transform: uppercase">{{ \Carbon\Carbon::create($bromo->tanggal)->isoformat('dddd, D MMMM YYYY') }}</h5>
+                                            <p class="mb-0 text-uppercase">Departure Date</p>
                                         </div>
                                         </div>
                                     </div>    

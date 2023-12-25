@@ -81,6 +81,15 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @if (env('PAYMENT_MANUAL') == true)
+                                    <div class="booking-terms border-t pt-3 mt-3">
+                                        <h3 class="border-b pb-2 mb-2">Payment Methode</h3>
+                                        <select name="" id="">
+                                            <option value="">-- Change Payment --</option>
+                                            <option value="BRI">Bank BRI</option>
+                                        </select>
+                                    </div>
+                                    @endif
                                     <div class="booking-terms border-t pt-3 mt-3">
                                         <div class="d-lg-flex align-items-center">
                                             <div class="form-group mb-2 w-75">

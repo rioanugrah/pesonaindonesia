@@ -83,27 +83,18 @@ class BromoController extends Controller
 
     public function f_booking_payment_checkout(Request $request, $id, $tanggal)
     {
-        // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = $this->midtrans_server_key;
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
         DB::beginTransaction();
-        try {
+        if (env('PAYMENT_MANUAL') == true) {
             $tanggal_live = Carbon::now()->format('H:i');
             $bromo = Bromo::where('id',$id)
                             ->where('tanggal','LIKE','%'.$tanggal.'%')
                             ->whereTime('tanggal','>=',$tanggal_live)
                             ->first();
-            // dd($bromo);
             if ($bromo->quota == 0) {
                 // return 'test';
                 return redirect()->back();
             }else{
-                $kode_jenis_transaksi = 'TRX-BRMO';
+                $kode_jenis_transaksi = 'TRX-BRMO-M';
                 $kode_random_transaksi = Carbon::now()->format('Ym').rand(100,999);
                 $input['id'] = Str::uuid()->toString();
                 $input['transaction_code'] = $kode_jenis_transaksi.'-'.$kode_random_transaksi;
@@ -124,7 +115,6 @@ class BromoController extends Controller
                         'price' => $transaction_price,
                         'status' => 'Unpaid'
                     ]);
-    
                     foreach ($request->nama_anggota as $key => $value) {
                         $data['item_details'][] = [
                             'id' => $key+1,
@@ -146,16 +136,23 @@ class BromoController extends Controller
                         'address' => $request->alamat,
                         'email' => $request->email,
                         'phone' => $request->phone,
+                        'payment_method' => env('PAYMENT_METHODE'),
+                        'payment_name' => env('PAYMENT_NAME'),
+                        'payment_rekening' => env('PAYMENT_REKENING'),
+                        'prof_payment' => null,
                         'item_details' => $data['item_details']
                     ]);
                 }else{
-                    // return 'ok';
                     $input['transaction_order'] = json_encode([
                         'first_name' => $request->first_name,
                         'last_name' => $request->last_name,
                         'address' => $request->alamat,
                         'email' => $request->email,
                         'phone' => $request->phone,
+                        'payment_method' => env('PAYMENT_METHODE'),
+                        'payment_name' => env('PAYMENT_NAME'),
+                        'payment_rekening' => env('PAYMENT_REKENING'),
+                        'prof_payment' => null,
                     ]);
     
                     $verifikasi_tiket = VerifikasiTiket::create([
@@ -173,7 +170,7 @@ class BromoController extends Controller
                         'status' => 'Unpaid'
                     ]);
                 }
-    
+
                 if($request->qty == 0 and $request->qty == null){
                     $input['transaction_qty'] = 1;
                 }else{
@@ -193,20 +190,8 @@ class BromoController extends Controller
                 $bromo->quota = $bromo->quota - $request->qty;
                 $bromo->update();
                 DB::commit();
+
                 if ($transactions) {
-                    // return 'ok';
-                    $params['transaction_details'] = [
-                        'order_id' => $input['transaction_code'],
-                        'gross_amount' => $transaction_price,
-                    ];
-    
-                    $params['customer_details'] = [
-                        'first_name' => $request->first_name,
-                        'last_name' => $request->last_name,
-                        'email' => $request->email,
-                        'phone' => $request->phone,
-                    ];
-    
                     $user = User::where('role',1)->get();
                     $notif = [
                         'id' => $input['id'],
@@ -225,19 +210,166 @@ class BromoController extends Controller
                     $data['title'] = $bromo->title;
                     $data['qty'] = $input['transaction_qty'];
                     $data['price'] = $input['transaction_price'];
-            
-                    $data['link_url_payment'] = $this->url_payment;
-                    $data['midtrans_client_key'] = $this->midtrans_client_key;
-                    $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
-    
-                    return view('frontend.frontend5.bromo.payment',$data);
+                    return view('frontend.frontend5.bromo.payment_manual',$data);
                 }
             }
-
-        } catch (\Throwable $th) {
-            DB::rollback();
-            // return $th;
-            return redirect()->back();
+        }else{
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = $this->midtrans_server_key;
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = true;
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = true;
+            // DB::beginTransaction();
+            try {
+                $tanggal_live = Carbon::now()->format('H:i');
+                $bromo = Bromo::where('id',$id)
+                                ->where('tanggal','LIKE','%'.$tanggal.'%')
+                                ->whereTime('tanggal','>=',$tanggal_live)
+                                ->first();
+                // dd($bromo);
+                if ($bromo->quota == 0) {
+                    // return 'test';
+                    return redirect()->back();
+                }else{
+                    $kode_jenis_transaksi = 'TRX-BRMO';
+                    $kode_random_transaksi = Carbon::now()->format('Ym').rand(100,999);
+                    $input['id'] = Str::uuid()->toString();
+                    $input['transaction_code'] = $kode_jenis_transaksi.'-'.$kode_random_transaksi;
+                    $input['transaction_unit'] = $bromo->title;
+                    $transaction_price = $bromo->category_trip == 'Publik' ? ($bromo->price - (($bromo->discount/100) * $bromo->price)) * $request->qty : $bromo->price - (($bromo->discount/100) * $bromo->price);
+                    if (!empty($request->nama_anggota)) {
+                        $verifikasi_tiket = VerifikasiTiket::create([
+                            'id' => Str::uuid()->toString(),
+                            'transaction_id' => $input['id'],
+                            'kode_tiket' => 'E-TIKET-'.$kode_random_transaksi,
+                            'tanggal_booking' => $bromo->tanggal_berangkat,
+                            'nama_tiket' => $bromo->title,
+                            'nama_order' => $request->first_name.' '.$request->last_name,
+                            'address' => $request->alamat,
+                            'email' => $request->email,
+                            'phone' => $request->phone,
+                            'qty' => $request->qty,
+                            'price' => $transaction_price,
+                            'status' => 'Unpaid'
+                        ]);
+        
+                        foreach ($request->nama_anggota as $key => $value) {
+                            $data['item_details'][] = [
+                                'id' => $key+1,
+                                'name' => $value,
+                                'qty' => 1
+                            ];
+        
+                            VerifikasiTiketList::create([
+                                'id' => Str::uuid()->toString(),
+                                'verifikasi_tiket_id' => $verifikasi_tiket->id,
+                                'nama_order' => $value,
+                                'qty' => 1
+                            ]);
+                        }
+        
+                        $input['transaction_order'] = json_encode([
+                            'first_name' => $request->first_name,
+                            'last_name' => $request->last_name,
+                            'address' => $request->alamat,
+                            'email' => $request->email,
+                            'phone' => $request->phone,
+                            'item_details' => $data['item_details']
+                        ]);
+                    }else{
+                        // return 'ok';
+                        $input['transaction_order'] = json_encode([
+                            'first_name' => $request->first_name,
+                            'last_name' => $request->last_name,
+                            'address' => $request->alamat,
+                            'email' => $request->email,
+                            'phone' => $request->phone,
+                        ]);
+        
+                        $verifikasi_tiket = VerifikasiTiket::create([
+                            'id' => Str::uuid()->toString(),
+                            'transaction_id' => $input['id'],
+                            'kode_tiket' => 'E-TIKET-'.$kode_random_transaksi,
+                            'tanggal_booking' => $request->tanggal_berangkat,
+                            'nama_tiket' => $bromo->title,
+                            'nama_order' => $request->first_name.' '.$request->last_name,
+                            'address' => $request->alamat,
+                            'email' => $request->email,
+                            'phone' => $request->phone,
+                            'qty' => $request->qty,
+                            'price' => $transaction_price,
+                            'status' => 'Unpaid'
+                        ]);
+                    }
+        
+                    if($request->qty == 0 and $request->qty == null){
+                        $input['transaction_qty'] = 1;
+                    }else{
+                        $input['transaction_qty'] = $request->qty;
+                    }
+                    // return 'ok';
+        
+                    $input['transaction_price'] = $transaction_price;
+                    if (auth()->user()) {
+                        $input['user'] = auth()->user()->id;
+                    }else{
+                        $input['user'] = null;
+                    }
+                    $input['status'] = 'Unpaid';
+                    
+                    $transactions = Transactions::create($input);
+                    $bromo->quota = $bromo->quota - $request->qty;
+                    $bromo->update();
+                    DB::commit();
+                    if ($transactions) {
+                        // return 'ok';
+                        $params['transaction_details'] = [
+                            'order_id' => $input['transaction_code'],
+                            'gross_amount' => $transaction_price,
+                        ];
+        
+                        $params['customer_details'] = [
+                            'first_name' => $request->first_name,
+                            'last_name' => $request->last_name,
+                            'email' => $request->email,
+                            'phone' => $request->phone,
+                        ];
+        
+                        $user = User::where('role',1)->get();
+                        $notif = [
+                            'id' => $input['id'],
+                            'url' => route('b.invoice.detail',$input['transaction_code']),
+                            'title' => $input['transaction_unit'],
+                            'message' => 'Pesanan Baru - Sedang Melakukan Pembayaran',
+                            'color_icon' => 'warning',
+                            'icon' => 'uil-clipboard-alt',
+                            'publish' => $transactions->created_at,
+                        ];
+                        Notification::send($user,new NotificationNotif($notif));
+                        $data['kode_order'] = $input['transaction_code'];
+                        $data['first_name'] = $request->first_name;
+                        $data['last_name'] = $request->last_name;
+                        $data['email'] = $request->email;
+                        $data['title'] = $bromo->title;
+                        $data['qty'] = $input['transaction_qty'];
+                        $data['price'] = $input['transaction_price'];
+                
+                        $data['link_url_payment'] = $this->url_payment;
+                        $data['midtrans_client_key'] = $this->midtrans_client_key;
+                        $data['snapToken'] = \Midtrans\Snap::getSnapToken($params);
+        
+                        return view('frontend.frontend5.bromo.payment',$data);
+                    }
+                }
+    
+            } catch (\Throwable $th) {
+                DB::rollback();
+                // return $th;
+                return redirect()->back();
+            }
         }
     }
 

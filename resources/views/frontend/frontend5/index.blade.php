@@ -206,13 +206,11 @@
     </div>
     <div class="white-overlay"></div>
 </section> --}}
-@if (!$travellings->isEmpty())
+{{-- @if (!$travellings->isEmpty())
 <section class="trending pb-9" style="margin-top: -2.5%">
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">
-            {{-- <h4 class="mb-1 theme1">Travelling</h4> --}}
             <h2 class="mb-1">Jelajahi <span class="theme">Travelling</span></h2>
-            {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p> --}}
         </div>  
         <div class="trend-box">
             <div class="row">
@@ -224,7 +222,6 @@
                             <div class="trend-image position-relative">
                                 <img src="{{ $asset_new_backend }}/images/tour/{{ $travelling->images }}" alt="{{ $travelling->title }}" style="width: 700px; height: 250px; object-fit: cover;" class="">
                                 <div class="trend-content1 p-4">
-                                    {{-- <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h5> --}}
                                     <h3 class="mb-1 white" style="font-size: 14pt"><a href="{{ route('frontend.travelling.detail',['id' => $travelling->id, 'slug' => $travelling->slug]) }}" class="white">{{ $travelling->title }}</a></h3>
                                     <div class="entry-meta d-flex align-items-center justify-content-between">
                                         <div class="entry-author d-flex align-items-center">
@@ -243,7 +240,6 @@
                         <div class="trend-image position-relative">
                             <img src="{{ $asset_new_backend }}/images/tour/{{ $travelling->images }}" alt="{{ $travelling->title }}" style="width: 700px; height: 250px; object-fit: cover;" class="">
                             <div class="trend-content1 p-4">
-                                {{-- <h6 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h6> --}}
                                 <h3 class="mb-1 white" style="font-size: 14pt"><a href="{{ route('frontend.travelling.detail',['id' => $travelling->id, 'slug' => $travelling->slug]) }}" class="white">{{ $travelling->title }}</a></h3>
                                 <div class="entry-meta d-flex align-items-center justify-content-between">
                                     <div class="entry-author align-items-center">
@@ -256,10 +252,6 @@
                                             <span class="theme1 fw-bold fs-5"> Rp. {{ number_format($travelling->previous_price,0,",",".") }}
                                             </span> | Per {{ $travelling->jenis_tour == 'Private' ? $travelling->min_people : null }} pax
                                         </p>
-                                        {{-- <p class="mb-0 white">
-                                            <span class="theme1 fw-bold fs-5"> Rp. {{ number_format($travelling->current_price - ($travelling->diskon / 100) * $travelling->price,0,",",".") }}
-                                            </span> | Per pax
-                                        </p> --}}
                                     </div>
                                 </div>
                             </div>
@@ -276,7 +268,7 @@
         </div>    
     </div>
 </section>
-@endif
+@endif --}}
 
 {{-- <section class="trending pb-9" style="margin-top: -2.5%">
     <div class="container">
