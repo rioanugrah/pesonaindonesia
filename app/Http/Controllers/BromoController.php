@@ -236,8 +236,8 @@ class BromoController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return $th;
-            // return redirect()->back();
+            // return $th;
+            return redirect()->back();
         }
     }
 
