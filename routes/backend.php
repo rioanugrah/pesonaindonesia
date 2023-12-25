@@ -96,6 +96,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::post('upload/paket_images', 'PaketController@simpan_image')->name('paket.simpan_imageUpload')->middleware('verified');
                 Route::get('{id}/hapus', 'PaketController@hapus')->name('paket.delete')->middleware('verified');
             });
+
             Route::prefix('paket_order')->group(function(){
                 Route::get('/', 'PaketOrderController@index')->name('paket.order')->middleware('verified');
                 Route::get('{id}/bukti_pembayaran', 'PaketOrderController@bukti_pembayaran')->name('paket.order.bukti_pembayaran')->middleware('verified');
@@ -257,6 +258,13 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('{id_generate}/edit', 'v2\PromosiController@edit')->name('b.promosi.edit')->middleware('verified');
                 Route::post('{id_generate}/update', 'v2\PromosiController@update')->name('b.promosi.update')->middleware('verified');
                 Route::get('{id_generate}/delete', 'v2\PromosiController@delete')->name('b.promosi.delete')->middleware('verified');
+            });
+            
+            Route::prefix('bromo')->group(function(){
+                Route::get('/', 'BromoController@b_index')->name('b.bromo')->middleware('verified');
+                Route::post('simpan', 'BromoController@b_simpan')->name('b.bromo.simpan')->middleware('verified');
+                Route::get('{id}', 'BromoController@b_detail')->name('b.bromo.detail')->middleware('verified');
+                Route::post('reupload/simpan', 'BromoController@b_reupload_simpan')->name('b.bromo.reupload_simpan')->middleware('verified');
             });
     
             // Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');

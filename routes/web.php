@@ -120,6 +120,12 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::post('order/{id}/checkout', 'TravellingController@buy_order')->name('frontend.travelling.checkout');
         Route::get('payment/{id}', 'TravellingController@order_payment')->name('frontend.travelling.payment');
     });
+    
+    Route::prefix('bromo')->group(function(){
+        Route::get('/', 'BromoController@f_index')->name('frontend.bromo');
+        Route::get('reservasi/{id}/{tanggal}', 'BromoController@f_booking')->name('frontend.bromo.booking');
+        Route::post('reservasi/{id}/{tanggal}/ckeckout', 'BromoController@f_booking_payment_checkout')->name('frontend.bromo.checkout');
+    });
 
     Route::prefix('sewa-bus')->group(function () {
         Route::get('/', 'FrontendController@sewa_bus')->name('frontend.sewa_bus');

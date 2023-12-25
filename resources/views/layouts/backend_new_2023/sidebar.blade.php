@@ -100,6 +100,13 @@
                         </li>
                     </ul>
                 </li>
+
+                <li>
+                    <a href="{{ route('b.bromo') }}">
+                        <i class="uil-home-alt"></i>
+                        <span>Bromo</span>
+                    </a>
+                </li>
                 @endcan
                 <li class="menu-title">Finance Officer</li>
                 <li>
