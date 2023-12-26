@@ -611,10 +611,10 @@ class BromoController extends Controller
         $bromo = Bromo::find($request->reupload_id);
         $input['id'] = Str::uuid()->toString();
         $input['tanggal'] = $request->reupload_tanggal;
-        $input['title'] = $bromo->title;
-        $input['slug'] = $bromo->slug;
-        $input['meeting_point'] = $bromo->meeting_point;
-        $input['category_trip'] = $bromo->category_trip;
+        $input['title'] = $request->reupload_title;
+        $input['slug'] = Str::slug($request->reupload_title);
+        $input['meeting_point'] = $request->reupload_meeting_point;
+        $input['category_trip'] = $request->reupload_category_trip;
         $input['quota'] = $request->reupload_quota;
         $input['include'] = $bromo->include;
         $input['exclude'] = $bromo->exclude;

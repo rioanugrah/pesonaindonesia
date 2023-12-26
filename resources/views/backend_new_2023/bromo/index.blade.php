@@ -127,8 +127,11 @@
                 cache: false,
                 success: function(result){
                     if (result.success = true) {
-                        document.getElementById('reupload_title').innerHTML = result.data.title;
+                        // document.getElementById('reupload_title').innerHTML = result.data.title;
                         $('#reupload_id').val(result.data.id);
+                        $('#reupload_title').val(result.data.title);
+                        $('#reupload_meeting_point').val(result.data.meeting_point);
+                        $('#reupload_category_trip').val(result.data.category_trip);
                         $('#reupload_quota').val(result.data.quota);
                         $('#reupload_price').val(result.data.price);
                         $('#reupload_discount').val(result.data.discount);
@@ -192,7 +195,7 @@
                             "hideMethod": "fadeOut"
                         }
                         // this.reset();
-                        $('#buat').modal('hide');
+                        $('#reupload_paket').modal('hide');
                         table.ajax.reload(null, false);
                     }else{
                         toastr["error"](result.error);

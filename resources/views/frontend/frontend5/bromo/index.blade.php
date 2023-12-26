@@ -188,498 +188,69 @@
                 @php
                     $bromos = \App\Models\Bromo::where('tanggal','LIKE','%'.$i.'%')->get();
                 @endphp
+                {{-- @foreach ($bromos as $bromo)
+                    <p>{{ $bromo->tanggal }}</p>
+                @endforeach --}}
+                <div class="tab-pane fade content {{ \Carbon\Carbon::today()->format('Y-m-d') == $i ? 'show active' : null }} text-center" id="schedule{{ $i }}" role="tabpanel" aria-labelledby="nav-schedule{{ $i }}-tab">
                     @forelse ($bromos as $bromo)
-                    <div class="tab-pane fade content {{ \Carbon\Carbon::today()->format('Y-m-d') == $i ? 'show active' : null }} text-center" id="schedule{{ $i }}" role="tabpanel" aria-labelledby="nav-schedule{{ $i }}-tab">
-                        <div class="flight-full">
+                    <div class="flight-full">
     
-                            <div class="item mb-2 border-all p-2 px-4 rounded">
-                                <div class="row d-flex align-items-center justify-content-between">
-                                    <div class="col-lg-3 col-md-3 col-sm-12">
-                                        <div class="item-inner-image text-start">
-                                            {{-- <img src="images/flights/flight_grid_3.png" alt="image"> --}}
-                                            <h5 class="mb-0">{{ $bromo->title }}</h5>
-                                            <small>Meeting Point: {{ $bromo->meeting_point }}</small>
-                                            <div style="font-size: 10pt; font-weight: bold">Include:</div>
-                                            <ul>
-                                                @foreach (json_decode($bromo->include) as $include)
-                                                    <li style="font-size: 8pt">+ {{ $include->include }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>    
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <div class="item-inner">
-                                        <div class="content">
-                                            <h5 class="mb-0" style="text-transform: uppercase">{{ \Carbon\Carbon::create($bromo->tanggal)->isoformat('dddd, D MMMM YYYY') }}</h5>
-                                            <p class="mb-0 text-uppercase">Departure Date</p>
-                                        </div>
-                                        </div>
-                                    </div>    
-                                    <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                        <div class="item-inner">
-                                            <div class="content">
-                                                <h3 class="mb-0">{{ \Carbon\Carbon::create($bromo->tanggal)->format('H:i') }}</h3>
-                                                <p class="mb-0 text-uppercase">Departure Time</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <div class="item-inner flight-time">
-                                        <p class="mb-0">{{ $bromo->category_trip == 'Publik' ? 'Open Trip' : 'Private Trip' }} <br>Kuota: {{ $bromo->quota }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <div class="item-inner text-end">
-                                            <p class="theme fs-4 fw-bold">Rp. {{ number_format($bromo->price,0,',','.') }}</p>
-                                            @php
-                                                $date_booking = \Carbon\Carbon::create($bromo->tanggal)->format('Y-m-d H:i');
-                                                // dd($date_booking.' '.\Carbon\Carbon::now()->format('Y-m-d H:i'));
-                                            @endphp
-                                            @if ($date_booking >= \Carbon\Carbon::now()->format('Y-m-d H:i'))
-                                            <a href="{{ route('frontend.bromo.booking',['id' => $bromo->id, 'tanggal' => $i]) }}" class="nir-btn">BOOKING NOW</a>
-                                            @else
-                                            <a href="javascript:void()" class="nir-btn-black">CLOSE</a>
-                                            @endif
-                                        </div>
+                        <div class="item mb-2 border-all p-2 px-4 rounded">
+                            <div class="row d-flex align-items-center justify-content-between">
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="item-inner-image text-start">
+                                        <h5 class="mb-0">{{ $bromo->title }}</h5>
+                                        <small>Meeting Point: {{ $bromo->meeting_point }}</small>
+                                        <div style="font-size: 10pt; font-weight: bold">Include:</div>
+                                        <ul>
+                                            @foreach (json_decode($bromo->include) as $include)
+                                                <li style="font-size: 8pt">+ {{ $include->include }}</li>
+                                            @endforeach
+                                        </ul>
                                     </div>
                                 </div>    
-                            </div>
-    
-                            {{-- <div class="item mb-2 border-all p-2 px-4 rounded">
-                                <div class="row d-flex align-items-center justify-content-between">
-                                    <div class="col-lg-3 col-md-3 col-sm-12">
-                                        <div class="item-inner-image text-start">
-                                            <img src="images/flights/flight_grid_4.png" alt="image">
-                                            <h5 class="mb-0">Turkish Airlines</h5>
-                                            <small>Operated by Turkey</small>
-                                        </div>
-                                    </div>    
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <div class="item-inner">
-                                        <div class="content">
-                                            <h4 class="mb-0">Thursday Feb 15, 2022</h4>
-                                        </div>
-                                        </div>
-                                    </div>    
-                                    <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                        <div class="item-inner">
-                                            <div class="content">
-                                                <h3 class="mb-0">7:30</h3>
-                                                <p class="mb-0 text-uppercase">DAC</p>
-                                            </div>
-                                        </div>
+                                <div class="col-lg-2 col-md-2 col-sm-12">
+                                    <div class="item-inner">
+                                    <div class="content">
+                                        <h5 class="mb-0" style="text-transform: uppercase">{{ \Carbon\Carbon::create($bromo->tanggal)->isoformat('dddd, D MMMM YYYY') }}</h5>
+                                        <p class="mb-0 text-uppercase">Departure Date</p>
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <div class="item-inner flight-time">
-                                        <p class="mb-0">12H 35M <br>2 Stops</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <div class="item-inner text-end">
-                                            <p class="theme2 fs-4 fw-bold">$2,345</p>
-                                            <a href="flight-detail" class="nir-btn-black">View Deals</a>
-                                        </div>
                                     </div>
                                 </div>    
-                            </div>
-    
-                            <div class="item mb-2 border-all p-2 px-4 rounded">
-                                <div class="row d-flex align-items-center justify-content-between">
-                                    <div class="col-lg-3 col-md-3 col-sm-12">
-                                        <div class="item-inner-image text-start">
-                                            <img src="images/flights/flight_grid_2.png" alt="image">
-                                            <h5 class="mb-0">Thai Airlines</h5>
-                                            <small>Operated by Emirates</small>
-                                        </div>
-                                    </div>    
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <div class="item-inner">
+                                <div class="col-lg-3 col-md-3 col-sm-12"> 
+                                    <div class="item-inner">
                                         <div class="content">
-                                            <h4 class="mb-0">Friday Apr 18, 2022</h4>
-                                        </div>
-                                        </div>
-                                    </div>    
-                                    <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                        <div class="item-inner">
-                                            <div class="content">
-                                                <h3 class="mb-0">11:30</h3>
-                                                <p class="mb-0 text-uppercase">DAC</p>
-                                            </div>
+                                            <h3 class="mb-0">{{ \Carbon\Carbon::create($bromo->tanggal)->format('H:i') }}</h3>
+                                            <p class="mb-0 text-uppercase">Departure Time</p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <div class="item-inner flight-time">
-                                        <p class="mb-0">22H 45M <br>1 Stops</p>
-                                        </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-12">
+                                    <div class="item-inner flight-time">
+                                    <p class="mb-0">{{ $bromo->category_trip == 'Publik' ? 'Open Trip' : 'Private Trip' }} <br>Kuota: {{ $bromo->quota }}</p>
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <div class="item-inner text-end">
-                                            <p class="theme2 fs-4 fw-bold">$2,345</p>
-                                            <a href="flight-detail" class="nir-btn-black">View Deals</a>
-                                        </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-12">
+                                    <div class="item-inner text-end">
+                                        <p class="theme fs-4 fw-bold">Rp. {{ number_format($bromo->price,0,',','.') }}</p>
+                                        @php
+                                            $date_booking = \Carbon\Carbon::create($bromo->tanggal)->format('Y-m-d H:i');
+                                        @endphp
+                                        @if ($date_booking >= \Carbon\Carbon::now()->format('Y-m-d H:i'))
+                                        <a href="{{ route('frontend.bromo.booking',['id' => $bromo->id, 'tanggal' => $i]) }}" class="nir-btn">BOOKING NOW</a>
+                                        @else
+                                        <a href="javascript:void()" class="nir-btn-black">CLOSE</a>
+                                        @endif
                                     </div>
-                                </div>    
-                            </div>
-    
-                            <div class="item mb-2 border-all p-2 px-4 rounded">
-                                <div class="row d-flex align-items-center justify-content-between">
-                                    <div class="col-lg-3 col-md-3 col-sm-12">
-                                        <div class="item-inner-image text-start">
-                                            <img src="images/flights/flight_grid_5.png" alt="image">
-                                            <h5 class="mb-0">Dragon Airlines</h5>
-                                            <small>Operated by China</small>
-                                        </div>
-                                    </div>    
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <div class="item-inner">
-                                        <div class="content">
-                                            <h4 class="mb-0">Saturday Jun 10, 2022</h4>
-                                        </div>
-                                        </div>
-                                    </div>    
-                                    <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                        <div class="item-inner">
-                                            <div class="content">
-                                                <h3 class="mb-0">8:00</h3>
-                                                <p class="mb-0 text-uppercase">DAC</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <div class="item-inner flight-time">
-                                        <p class="mb-0">02H 45M <br>2 Stops</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-12">
-                                        <div class="item-inner text-end">
-                                            <p class="theme2 fs-4 fw-bold">$2,345</p>
-                                            <a href="flight-detail" class="nir-btn-black">View Deals</a>
-                                        </div>
-                                    </div>
-                                </div>    
-                            </div> --}}
-    
-                        </div>  
+                                </div>
+                            </div>    
+                        </div>
                     </div>
                     @empty
-                    <div class="tab-pane fade content {{ \Carbon\Carbon::today()->format('Y-m-d') == $i ? 'show active' : null }} text-center" id="schedule{{ $i }}" role="tabpanel" aria-labelledby="nav-schedule{{ $i }}-tab">
-                        <p>Data Tidak Tersedia</p>
-                    </div>
+                    <p>Data Paket Belum Tersedia</p>
                     @endforelse
-                @endfor
-                {{-- <div class="tab-pane fade show active text-center" id="schedule1" role="tabpanel" aria-labelledby="nav-schedule1-tab">
-                    <div class="flight-full">
-                        <div class="item mb-2 border-all p-2 px-4 rounded">
-                            <div class="row d-flex align-items-center justify-content-between">
-                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                    <div class="item-inner-image text-start">
-                                        <img src="images/flights/flight_grid_2.png" alt="image">
-                                        <h5 class="mb-0">Thai Airlines</h5>
-                                        <small>Operated by Emirates</small>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner">
-                                    <div class="content">
-                                        <h4 class="mb-0">Thursday Feb 15, 2022</h4>
-                                    </div>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                    <div class="item-inner">
-                                        <div class="content">
-                                            <h3 class="mb-0">7:30</h3>
-                                            <p class="mb-0 text-uppercase">DAC</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner flight-time">
-                                    <p class="mb-0">02H 45M <br>2 Stops</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner text-end">
-                                        <p class="theme2 fs-4 fw-bold">$2,345</p>
-                                        <a href="flight-detail" class="nir-btn-black">View Deals</a>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-
-                        <div class="item mb-2 border-all p-2 px-4 rounded">
-                            <div class="row d-flex align-items-center justify-content-between">
-                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                    <div class="item-inner-image text-start">
-                                        <img src="images/flights/flight_grid_3.png" alt="image">
-                                        <h5 class="mb-0">Air Asia Airlines</h5>
-                                        <small>Operated by Asia</small>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner">
-                                    <div class="content">
-                                        <h4 class="mb-0">Friday Apr 18, 2022</h4>
-                                    </div>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                    <div class="item-inner">
-                                        <div class="content">
-                                            <h3 class="mb-0">9:30</h3>
-                                            <p class="mb-0 text-uppercase">DAC</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner flight-time">
-                                    <p class="mb-0">22H 45M <br>1 Stops</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner text-end">
-                                        <p class="theme fs-4 fw-bold">$1,445</p>
-                                        <a href="flight-detail" class="nir-btn">View Deals</a>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-
-                        <div class="item mb-2 border-all p-2 px-4 rounded">
-                            <div class="row d-flex align-items-center justify-content-between">
-                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                    <div class="item-inner-image text-start">
-                                        <img src="images/flights/flight_grid_4.png" alt="image">
-                                        <h5 class="mb-0">Turkish Airlines</h5>
-                                        <small>Operated by Turkey</small>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner">
-                                    <div class="content">
-                                        <h4 class="mb-0">Saturday Jun 11, 2022</h4>
-                                    </div>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                    <div class="item-inner">
-                                        <div class="content">
-                                            <h3 class="mb-0">18:30</h3>
-                                            <p class="mb-0 text-uppercase">DAC</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner flight-time">
-                                    <p class="mb-0">12H 45M <br>2 Stops</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner text-end">
-                                        <p class="theme2 fs-4 fw-bold">$2,445</p>
-                                        <a href="flight-detail" class="nir-btn-black">View Deals</a>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-
-                        <div class="item mb-2 border-all p-2 px-4 rounded">
-                            <div class="row d-flex align-items-center justify-content-between">
-                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                    <div class="item-inner-image text-start">
-                                        <img src="images/flights/flight_grid_5.png" alt="image">
-                                        <h5 class="mb-0">Dragon Airlines</h5>
-                                        <small>Operated by China</small>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner">
-                                    <div class="content">
-                                        <h4 class="mb-0">Sunday May 15, 2022</h4>
-                                    </div>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                    <div class="item-inner">
-                                        <div class="content">
-                                            <h3 class="mb-0">12:30</h3>
-                                            <p class="mb-0 text-uppercase">DAC</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner flight-time">
-                                    <p class="mb-0">16H 45M <br>2 Stops</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner text-end">
-                                        <p class="theme2 fs-4 fw-bold">$2,045</p>
-                                        <a href="flight-detail" class="nir-btn-black">View Deals</a>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-
-                    </div>  
                 </div>
-                <div class="tab-pane fade content text-center" id="schedule2" role="tabpanel" aria-labelledby="nav-schedule2-tab">
-                    <div class="flight-full">
-
-                        <div class="item mb-2 border-all p-2 px-4 rounded">
-                            <div class="row d-flex align-items-center justify-content-between">
-                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                    <div class="item-inner-image text-start">
-                                        <img src="images/flights/flight_grid_3.png" alt="image">
-                                        <h5 class="mb-0">Air Asia Airlines</h5>
-                                        <small>Operated by Asia</small>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner">
-                                    <div class="content">
-                                        <h4 class="mb-0">Thursday Feb 15, 2022</h4>
-                                    </div>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                    <div class="item-inner">
-                                        <div class="content">
-                                            <h3 class="mb-0">14:30</h3>
-                                            <p class="mb-0 text-uppercase">DAC</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner flight-time">
-                                    <p class="mb-0">20H 45M <br>2 Stops</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner text-end">
-                                        <p class="theme fs-4 fw-bold">$2,345</p>
-                                        <a href="flight-detail" class="nir-btn">View Deals</a>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-
-                        <div class="item mb-2 border-all p-2 px-4 rounded">
-                            <div class="row d-flex align-items-center justify-content-between">
-                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                    <div class="item-inner-image text-start">
-                                        <img src="images/flights/flight_grid_4.png" alt="image">
-                                        <h5 class="mb-0">Turkish Airlines</h5>
-                                        <small>Operated by Turkey</small>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner">
-                                    <div class="content">
-                                        <h4 class="mb-0">Thursday Feb 15, 2022</h4>
-                                    </div>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                    <div class="item-inner">
-                                        <div class="content">
-                                            <h3 class="mb-0">7:30</h3>
-                                            <p class="mb-0 text-uppercase">DAC</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner flight-time">
-                                    <p class="mb-0">12H 35M <br>2 Stops</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner text-end">
-                                        <p class="theme2 fs-4 fw-bold">$2,345</p>
-                                        <a href="flight-detail" class="nir-btn-black">View Deals</a>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-
-                        <div class="item mb-2 border-all p-2 px-4 rounded">
-                            <div class="row d-flex align-items-center justify-content-between">
-                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                    <div class="item-inner-image text-start">
-                                        <img src="images/flights/flight_grid_2.png" alt="image">
-                                        <h5 class="mb-0">Thai Airlines</h5>
-                                        <small>Operated by Emirates</small>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner">
-                                    <div class="content">
-                                        <h4 class="mb-0">Friday Apr 18, 2022</h4>
-                                    </div>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                    <div class="item-inner">
-                                        <div class="content">
-                                            <h3 class="mb-0">11:30</h3>
-                                            <p class="mb-0 text-uppercase">DAC</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner flight-time">
-                                    <p class="mb-0">22H 45M <br>1 Stops</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner text-end">
-                                        <p class="theme2 fs-4 fw-bold">$2,345</p>
-                                        <a href="flight-detail" class="nir-btn-black">View Deals</a>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-
-                        <div class="item mb-2 border-all p-2 px-4 rounded">
-                            <div class="row d-flex align-items-center justify-content-between">
-                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                    <div class="item-inner-image text-start">
-                                        <img src="images/flights/flight_grid_5.png" alt="image">
-                                        <h5 class="mb-0">Dragon Airlines</h5>
-                                        <small>Operated by China</small>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner">
-                                    <div class="content">
-                                        <h4 class="mb-0">Saturday Jun 10, 2022</h4>
-                                    </div>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                    <div class="item-inner">
-                                        <div class="content">
-                                            <h3 class="mb-0">8:00</h3>
-                                            <p class="mb-0 text-uppercase">DAC</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner flight-time">
-                                    <p class="mb-0">02H 45M <br>2 Stops</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner text-end">
-                                        <p class="theme2 fs-4 fw-bold">$2,345</p>
-                                        <a href="flight-detail" class="nir-btn-black">View Deals</a>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-
-                    </div>  
-                </div> --}}
+                @endfor
             </div>
             {{-- <div class="flight-btn text-center"><a href="flight-grid.html" class="nir-btn">View More</a></div> --}}
         </div>

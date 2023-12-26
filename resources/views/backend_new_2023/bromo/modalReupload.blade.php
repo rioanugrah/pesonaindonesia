@@ -11,7 +11,20 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="">Nama Paket</label>
-                        <div id="reupload_title"></div>
+                        <input type="text" name="reupload_title" class="form-control" id="reupload_title">
+                        {{-- <div id="reupload_title"></div> --}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Meeting Point</label>
+                        <input type="text" name="reupload_meeting_point" class="form-control" id="reupload_meeting_point">
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Kategori Trip</label>
+                        <select name="reupload_category_trip" class="form-control" id="reupload_category_trip">
+                            <option value="">-- Pilih Kategori --</option>
+                            <option value="Private">Private</option>
+                            <option value="Publik">Open Trip</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="">Tanggal Dibuka</label>
