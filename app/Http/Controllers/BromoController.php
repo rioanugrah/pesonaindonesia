@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\OrderList;
 use App\Models\Transactions;
 use App\Models\TransactionList;
+use App\Models\BuktiPembayaran;
 
 use App\Models\VerifikasiTiket;
 use App\Models\VerifikasiTiketList;
@@ -203,6 +204,8 @@ class BromoController extends Controller
                         'publish' => $transactions->created_at,
                     ];
                     Notification::send($user,new NotificationNotif($notif));
+                    $data['id'] = $bromo->id;
+                    $data['tanggal'] = $tanggal;
                     $data['kode_order'] = $input['transaction_code'];
                     $data['first_name'] = $request->first_name;
                     $data['last_name'] = $request->last_name;
@@ -210,6 +213,11 @@ class BromoController extends Controller
                     $data['title'] = $bromo->title;
                     $data['qty'] = $input['transaction_qty'];
                     $data['price'] = $input['transaction_price'];
+                    BuktiPembayaran::create([
+                        'id' => Str::uuid()->toString(),
+                        'id_transaksi' => $id,
+                        'kode_transaksi' => $input['transaction_code']
+                    ]);
                     return view('frontend.frontend5.bromo.payment_manual',$data);
                 }
             }
@@ -371,6 +379,27 @@ class BromoController extends Controller
                 return redirect()->back();
             }
         }
+    }
+
+    public function f_booking_payment_manual(Request $request, $id, $tanggal)
+    {
+        $bukti_pembayaran = BuktiPembayaran::where('id_transaksi',$id)->first();
+        // dd($bukti_pembayaran);
+        if (empty($bukti_pembayaran)) {
+            return redirect()->back();
+        }
+
+        $image = $request->file('images');
+        $img = \Image::make($image->path());
+        $img = $img->encode('webp', 75);
+        $input['images'] = time().'.webp';
+        $img->save(public_path('bukti_pembayaran/').$input['images']);
+
+        $bukti_pembayaran->update([
+            'images' => $input['images']
+        ]);
+        // return view('frontend.frontend5.invoice.index');
+        return redirect()->route('invoice',['kode_order' => $bukti_pembayaran->kode_transaksi]);
     }
 
     // public function f_order_payment($id)

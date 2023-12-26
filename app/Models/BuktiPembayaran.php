@@ -14,6 +14,8 @@ class BuktiPembayaran extends Model
     protected $dates = ['deleted_at'];
     public $fillable = [
         'id',
+        'id_transaksi',
+        'kode_transaksi',
         'images',
     ];
 }

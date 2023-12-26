@@ -53,33 +53,52 @@
                             </table>
                         </div> --}}
                         <div class="travellers-info mb-4">
-                            <h4>Informasi Wisatawan</h4>
+                            <h4>Booking Reservation</h4>
+                            <form id="form-form" action="{{ route('frontend.bromo.payment_manual',['id' => $id, 'tanggal' => $tanggal]) }}" method="post" enctype="multipart/form-data">
+                            @csrf
                             <table>
                                 <tr>
-                                    <td>Nomor Pesanan</td>
+                                    <td>Order Number</td>
                                     <td>{{ $kode_order }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Nama Depan</td>
+                                    <td>First Name</td>
                                     <td>{{ $first_name }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Nama Belakang</td>
+                                    <td>Last Name</td>
                                     <td>{{ $last_name }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Alamat Email</td>
+                                    <td>Email</td>
                                     <td>{{ $email }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Total Harga</td>
+                                    <td>Amount</td>
                                     <td>{{ 'Rp. ' . number_format($price, 0, ',', '.') }}</td>
                                 </tr>
                                 <tr>
+                                    <td>Payment Methode</td>
+                                    <td>{{ env('PAYMENT_METHODE') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Payment Name</td>
+                                    <td>{{ env('PAYMENT_NAME') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Account Number</td>
+                                    <td>{{ env('PAYMENT_REKENING') }}</td>
+                                </tr>
+                                <tr>
                                     <td>Bukti Pembayaran</td>
-                                    <td><input type="file" name="" class="form-control" id=""></td>
+                                    <td><input type="file" name="images" class="form-control" id=""></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><button class="nir-btn w-25" onclick="event.preventDefault(); document.getElementById('form-form').submit();" type="submit">KIRIM</button></td>
                                 </tr>
                             </table>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
+use \App\Models\BuktiPembayaran;
 use \App\Models\Transactions;
 use \App\Models\OrderList;
 
@@ -95,9 +96,14 @@ class OrderController extends Controller
                         //             <i class="fas fa-trash"></i>
                         //         </button>';
                         // return $btn;
+                        $bukti_pembayaran = BuktiPembayaran::where('kode_transaksi',$row->transaction_code)->first();
+                        // dd($bukti_pembayaran);
                         $btn = '<div class="btn-group">';
                         $btn .= '<a href='.route('b.invoice.detail',['kode_order' => $row->transaction_code]).' target="_blank" class="btn btn-xs btn-primary"><i class="uil-file-alt"></i> Invoice</a>';
                         $btn .= '<button class="btn btn-xs btn-success"><i class="uil-eye"></i> Detail Pembelian</button>';
+                        if (!empty($bukti_pembayaran)) {
+                            $btn .= '<button class="btn btn-xs btn-info"><i class="uil-eye"></i> Bukti Pembayaran</button>';
+                        }
                         $btn .= '<a href='.route('b.invoice.print_pos',['kode_order' => $row->transaction_code]).' class="btn btn-xs btn-primary"><i class="uil-print"></i> Print POS</a>';
                         $btn .= '</div>';
                         return $btn;

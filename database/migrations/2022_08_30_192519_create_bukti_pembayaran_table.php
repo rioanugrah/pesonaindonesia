@@ -15,6 +15,8 @@ class CreateBuktiPembayaranTable extends Migration
     {
         Schema::create('bukti_pembayaran', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('id_transaksi');
+            $table->text('kode_transaksi');
             $table->text('images')->nullable();
             $table->timestamps();
             $table->softDeletes();

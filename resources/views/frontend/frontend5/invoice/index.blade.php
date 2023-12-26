@@ -1,6 +1,6 @@
 @extends('layouts.frontend_5.app')
 @section('title')
-    Invoice #{{ $order->kode_order }}
+    Invoice #{{ $order->transaction_code }}
 @endsection
 @section('content')
 <section class="trending pt-6 pb-0 bg-lgrey">
