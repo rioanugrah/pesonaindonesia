@@ -245,6 +245,8 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             
             Route::prefix('transaction')->group(function(){
                 Route::get('/', 'v2\OrderController@index')->name('b.order')->middleware('verified');
+                Route::get('bukti_pembayaran/{kode_transaksi}', 'v2\OrderController@detail_bukti_pembayaran')->name('b.order.detail_bukti_pembayaran')->middleware('verified');
+                Route::post('bukti_pembayaran/simpan', 'v2\OrderController@bukti_pembayaran_simpan')->name('b.order.bukti_pembayaran.simpan')->middleware('verified');
             });
 
             Route::prefix('finance')->group(function(){

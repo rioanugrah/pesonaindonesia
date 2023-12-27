@@ -54,7 +54,7 @@
                         </div> --}}
                         <div class="travellers-info mb-4">
                             <h4>Booking Reservation</h4>
-                            <form id="form-form" action="{{ route('frontend.bromo.payment_manual',['id' => $id, 'tanggal' => $tanggal]) }}" method="post" enctype="multipart/form-data">
+                            <form id="form-form" action="{{ route('frontend.bromo.payment_manual',['id' => $id, 'id_transaksi' => $id_transaksi,'tanggal' => $tanggal]) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <table>
                                 <tr>

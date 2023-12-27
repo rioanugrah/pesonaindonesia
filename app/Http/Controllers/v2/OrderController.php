@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use \App\Models\BuktiPembayaran;
 use \App\Models\Transactions;
+use \App\Models\VerifikasiTiket;
 use \App\Models\OrderList;
 
 use DataTables;
@@ -102,7 +103,7 @@ class OrderController extends Controller
                         $btn .= '<a href='.route('b.invoice.detail',['kode_order' => $row->transaction_code]).' target="_blank" class="btn btn-xs btn-primary"><i class="uil-file-alt"></i> Invoice</a>';
                         $btn .= '<button class="btn btn-xs btn-success"><i class="uil-eye"></i> Detail Pembelian</button>';
                         if (!empty($bukti_pembayaran)) {
-                            $btn .= '<button class="btn btn-xs btn-info"><i class="uil-eye"></i> Bukti Pembayaran</button>';
+                            $btn .= '<button class="btn btn-xs btn-info" onclick="bukti_pembayaran(`'.$row->transaction_code.'`)"><i class="uil-eye"></i> Bukti Pembayaran</button>';
                         }
                         $btn .= '<a href='.route('b.invoice.print_pos',['kode_order' => $row->transaction_code]).' class="btn btn-xs btn-primary"><i class="uil-print"></i> Print POS</a>';
                         $btn .= '</div>';
@@ -112,5 +113,46 @@ class OrderController extends Controller
                     ->make(true);
         }
         return view('backend_new_2023.order.index');
+    }
+
+    public function detail_bukti_pembayaran($kode_transaksi)
+    {
+        $bukti_pembayaran = BuktiPembayaran::where('kode_transaksi',$kode_transaksi)->first();
+        if(empty($bukti_pembayaran)){
+            return response()->json([
+                'success' => false,
+                'message_title' => 'Data tidak ditemukan'
+            ]);
+        }
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'id' => $bukti_pembayaran->id,
+                'kode_transaksi' => $bukti_pembayaran->kode_transaksi,
+                'images' => asset('bukti_pembayaran/'.$bukti_pembayaran->images),
+            ]
+        ]);
+    }
+
+    public function bukti_pembayaran_simpan(Request $request)
+    {
+        $transaction = Transactions::where('transaction_code',$request->bukti_pembayaran_kode_transaksi)->first();
+        if (empty($transaction)) {
+            return response()->json([
+                'success' => false,
+                'message_title' => 'Data tidak ditemukan'
+            ]);
+        }
+        $transaction->update([
+            'status' => $request->bukti_pembayaran_status
+        ]);
+        $verifikasi_tiket = VerifikasiTiket::where('transaction_id',$transaction->id)->update([
+            'status' => $request->bukti_pembayaran_status
+        ]);
+        
+        return response()->json([
+            'success' => true,
+            'message_content' => 'Bukti Pembayaran Berhasil'
+        ]);
     }
 }
