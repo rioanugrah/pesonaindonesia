@@ -21,6 +21,7 @@ class Bromo extends Model
         'meeting_point',
         'category_trip',
         'quota',
+        'max_quota',
         // 'description',
         'include',
         'exclude',

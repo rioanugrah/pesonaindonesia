@@ -236,34 +236,39 @@
                 document.getElementById('orderTotal').innerHTML = 'Rp. ' + rupiah;
                 // $('#order_total').val(penjumlahan);
             } else if ('{{ $bromo->category_trip }}' == 'Private') {
-                var price = {{ $bromo->price - ($bromo->discount / 100) * $bromo->price }};
-                if ($('.jumlah').val() == 0) {
-                    var penjumlahan = 1 * price;
-                    var jumlah = 1;
-                } else {
-                    var jumlah = parseInt($('.jumlah').val()) + parseInt(1);
-                    var penjumlahan = jumlah * price;
+                if (($('.jumlah').val() + parseInt(1)) > '{{ $bromo->max_quota }}') {
+                    alert('Jumlah anggota maksimal ' + {{ $bromo->max_quota }} + ' orang');
+                    $('.jumlah').val('');
+                }else{
+                    var price = {{ $bromo->price - ($bromo->discount / 100) * $bromo->price }};
+                    if ($('.jumlah').val() == 0) {
+                        var penjumlahan = 1 * price;
+                        var jumlah = 1;
+                    } else {
+                        var jumlah = parseInt($('.jumlah').val()) + parseInt(1);
+                        var penjumlahan = jumlah * price;
+                    }
+    
+                    $('#qty').val(jumlah);
+    
+                    var bilangan = price;
+    
+                    var number_string = bilangan.toString(),
+                        sisa = number_string.length % 3,
+                        rupiah = number_string.substr(0, sisa),
+                        ribuan = number_string.substr(sisa).match(/\d{3}/g);
+    
+                    if (ribuan) {
+                        separator = sisa ? '.' : '';
+                        rupiah += separator + ribuan.join('.');
+                    }
+    
+                    document.getElementById('jumlah_diskon').innerHTML = '0 %';
+                    document.getElementById('booking_fee').innerHTML = 'Free';
+                    document.getElementById('jumlah_order').innerHTML = jumlah + ' pax';
+                    document.getElementById('subTotal').innerHTML = 'Rp. ' + rupiah;
+                    document.getElementById('orderTotal').innerHTML = 'Rp. ' + rupiah;
                 }
-
-                $('#qty').val(jumlah);
-
-                var bilangan = price;
-
-                var number_string = bilangan.toString(),
-                    sisa = number_string.length % 3,
-                    rupiah = number_string.substr(0, sisa),
-                    ribuan = number_string.substr(sisa).match(/\d{3}/g);
-
-                if (ribuan) {
-                    separator = sisa ? '.' : '';
-                    rupiah += separator + ribuan.join('.');
-                }
-
-                document.getElementById('jumlah_diskon').innerHTML = '0 %';
-                document.getElementById('booking_fee').innerHTML = 'Free';
-                document.getElementById('jumlah_order').innerHTML = jumlah + ' pax';
-                document.getElementById('subTotal').innerHTML = 'Rp. ' + rupiah;
-                document.getElementById('orderTotal').innerHTML = 'Rp. ' + rupiah;
             }
         });
 

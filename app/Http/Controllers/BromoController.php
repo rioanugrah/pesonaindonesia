@@ -69,7 +69,7 @@ class BromoController extends Controller
         // dd($tanggal_live);
         $data['bromo'] = Bromo::where('id',$id)
                                 ->where('tanggal','LIKE','%'.$tanggal.'%')
-                                ->whereTime('tanggal','>=',$tanggal_live)
+                                // ->whereTime('tanggal','>=',$tanggal_live)
                                 // ->whereYear('tanggal','>=',$tanggal->format('Y'))
                                 // ->whereMonth('tanggal','>=',$tanggal->format('m'))
                                 // ->whereDate('tanggal','>=',$tanggal->format('d'))
@@ -534,6 +534,7 @@ class BromoController extends Controller
             'meeting_point'  => 'required',
             'category_trip'  => 'required',
             'quota'  => 'required',
+            'max_quota'  => 'required',
             'price'  => 'required',
             'discount'  => 'required',
             'group_include'  => 'required',
@@ -546,6 +547,7 @@ class BromoController extends Controller
             'meeting_point.required'   => 'Meeting Point wajib diisi.',
             'category_trip.required'  => 'Kategori Trip wajib diisi.',
             'quota.required'   => 'Kuota wajib diisi.',
+            'max_quota.required'   => 'Maksimal Kuota wajib diisi.',
             'price.required'   => 'Harga wajib diisi.',
             'discount.required'   => 'Diskon wajib diisi.',
             'group_include.required'   => 'Include wajib diisi.',
@@ -561,6 +563,7 @@ class BromoController extends Controller
             $input['meeting_point'] = $request->meeting_point;
             $input['category_trip'] = $request->category_trip;
             $input['quota'] = $request->quota;
+            $input['max_quota'] = $request->max_quota;
             $input['include'] = json_encode($request->group_include);
             $input['exclude'] = json_encode($request->group_exclude);
             $input['price'] = $request->price;
@@ -616,6 +619,7 @@ class BromoController extends Controller
         $input['meeting_point'] = $request->reupload_meeting_point;
         $input['category_trip'] = $request->reupload_category_trip;
         $input['quota'] = $request->reupload_quota;
+        $input['max_quota'] = $request->reupload_max_quota;
         $input['include'] = $bromo->include;
         $input['exclude'] = $bromo->exclude;
         $input['price'] = $request->reupload_price;

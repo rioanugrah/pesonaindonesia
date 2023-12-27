@@ -35,6 +35,10 @@
                         <input type="text" name="reupload_quota" class="form-control" id="reupload_quota">
                     </div>
                     <div class="mb-3">
+                        <label for="">Max Kuota</label>
+                        <input type="text" name="reupload_max_quota" class="form-control" id="reupload_max_quota">
+                    </div>
+                    <div class="mb-3">
                         <label for="">Harga</label>
                         <input type="text" name="reupload_price" class="form-control" id="reupload_price">
                     </div>

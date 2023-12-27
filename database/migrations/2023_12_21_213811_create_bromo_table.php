@@ -22,6 +22,7 @@ class CreateBromoTable extends Migration
             $table->string('category_trip');
             $table->string('quota',5);
             // $table->text('description');
+            $table->integer('max_quota');
             $table->text('include');
             $table->text('exclude');
             $table->string('price');

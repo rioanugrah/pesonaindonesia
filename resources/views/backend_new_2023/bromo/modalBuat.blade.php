@@ -45,6 +45,12 @@
                         </div>
                         <div class="col-md-2">
                             <div class="mb-3">
+                                <label for="">Max Kuota</label>
+                                <input type="text" name="max_quota" class="form-control" id="">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="mb-3">
                                 <label for="">Harga</label>
                                 <input type="text" name="price" class="form-control" id="">
                             </div>
