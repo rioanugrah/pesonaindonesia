@@ -42,8 +42,10 @@
                         <thead>
                             <tr>
                                 <th>Kode Invoice</th>
-                                <th>Unit</th>
+                                <th>Nama Barang</th>
+                                <th>Nama Pembeli</th>
                                 <th>Total</th>
+                                <th>Email Pengirim</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -67,17 +69,26 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('b.invoice') }}",
-            columns: [{
-                    data: 'transaction_code',
-                    name: 'transaction_code'
+            columns: [
+                {
+                    data: 'kode_invoice',
+                    name: 'kode_invoice'
                 },
                 {
-                    data: 'transaction_unit',
-                    name: 'transaction_unit'
+                    data: 'nama_invoice',
+                    name: 'nama_invoice'
                 },
                 {
-                    data: 'transaction_price',
-                    name: 'transaction_price'
+                    data: 'nama_pembeli',
+                    name: 'nama_pembeli'
+                },
+                {
+                    data: 'total',
+                    name: 'total'
+                },
+                {
+                    data: 'email_pembeli',
+                    name: 'email_pembeli'
                 },
                 {
                     data: 'action',
@@ -85,65 +96,10 @@
                     orderable: false,
                     searchable: false
                 },
-            ],
-            order: [0,'desc']
+            ]
         });
-
         function reload() {
             table.ajax.reload();
-        }
-
-        function send_invoice(transaction_code) {
-            $.ajax({
-                type: 'GET',
-                url: "{{ url('invoice/') }}"+'/'+transaction_code+'/'+'send',
-                contentType: "application/json;  charset=utf-8",
-                cache: false,
-                beforeSend: function() {
-                    // $("#status").fadeIn();
-                    // $("#preloader").delay(100).fadeIn("slow");
-                },
-                success: (result) => {
-                    toastr["success"](result.message_title);
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": true,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": 300,
-                        "hideDuration": 1000,
-                        "timeOut": 5000,
-                        "extendedTimeOut": 1000,
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    }
-                },
-                error: function(request, status, error) {
-                    toastr["error"](error);
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": true,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": 300,
-                        "hideDuration": 1000,
-                        "timeOut": 5000,
-                        "extendedTimeOut": 1000,
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    }
-                }
-            });
         }
     </script>
 @endsection

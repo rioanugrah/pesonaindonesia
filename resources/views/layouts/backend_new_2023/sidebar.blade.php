@@ -121,6 +121,12 @@
                         <span>Laporan Keuangan</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('b.invoice') }}">
+                        <i class="uil-home-alt"></i>
+                        <span>Invoice</span>
+                    </a>
+                </li>
                 @can('kt-operating')
                 <li class="menu-title">Operating Officer</li>
                 
