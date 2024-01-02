@@ -22,6 +22,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
 
     Route::get('coba','TestingController@coba');
     Route::get('testinfomail','TestingController@testInfoMail');
+    Route::get('log-viewers', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
     
     Route::get('/', 'FrontendController@index')->name('frontend');
     // Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');

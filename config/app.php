@@ -167,6 +167,7 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         Shetabit\Visitor\Provider\VisitorServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         /*
          * Package Service Providers...
          */
