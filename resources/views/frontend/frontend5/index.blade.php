@@ -135,9 +135,6 @@
 <?php $asset_new_backend = asset('backend_2023/'); ?>
 <?php $assets = asset('frontend/assets5/'); ?>
 @section('content')
-<section style="text-align: center">
-    <img src="{{ $asset }}/HNYPPI2024LSCP111.jpg" style="width: 90%; border-radius: 40px">
-</section>
 {{-- <section class="banner overflow-hidden">
     <div class="slider top50">
         <div class="swiper-container">
