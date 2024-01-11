@@ -105,10 +105,15 @@ class FrontendController extends Controller
     }
     public function frontend_testing()
     {
-        $data['menus'] = $this->menu;
-        $data['paket_privates'] = PaketList::where('kategori_paket_id',1)->get();
-        $data['paket_trips'] = PaketList::where('kategori_paket_id',2)->orderBy('created_at','desc')->paginate(5);
-        return view('frontend.frontend_2022.index', $data);
+        // $data['menus'] = $this->menu;
+        // $data['paket_privates'] = PaketList::where('kategori_paket_id',1)->get();
+        // $data['paket_trips'] = PaketList::where('kategori_paket_id',2)->orderBy('created_at','desc')->paginate(5);
+        // return view('frontend.frontend_2022.index', $data);
+        // return Carbon::now()->dayOfWeek;
+        $live_date = Carbon::now()->addWeek()->format('Y-m-d');
+        dd($live_date);
+        $cek_paket_bromo = \App\Models\Bromo::where('tanggal','LIKE','%'.$live_date.'%')->get();
+        return $cek_paket_bromo;
     }
 
     public function index(Request $request)
