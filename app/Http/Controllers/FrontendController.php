@@ -141,11 +141,11 @@ class FrontendController extends Controller
                 ['image' => 'frontend/assets4/images/batubengkung_vertikal.jpg', 'title' => 'Pantai Batu Bengkung'],
                 ['image' => 'frontend/assets4/images/jatimpark2_vertikal.jpg', 'title' => 'Jatim Park 2'],
             ];
-            $data['hotels'] = Hotel::paginate(9);
+            // $data['hotels'] = Hotel::paginate(9);
             $data['informasi'] = 'info@plesiranindonesia.com';
             $data['whatsapp'] = $this->whatsapp;
-            $data['jumlah_hotel'] = Hotel::count();
-            $data['event'] = Events::count();
+            // $data['jumlah_hotel'] = Hotel::count();
+            // $data['event'] = Events::count();
             $searchTermJawa = 'Jawa';
             // $searchTermJogja = 'Di Yogyakarta';
             // $data['provinsis'] = Provinsi::select('nama AS provinsi','id')
@@ -153,14 +153,14 @@ class FrontendController extends Controller
             //                         // ->orWhere('nama','LIKE',"%{$searchTermJogja}%")
             //                         ->get();
 
-            $data['provinsis'] = Provinsi::all();
-            $data['jumlah_paket_wisata'] = PaketList::count();
+            // $data['provinsis'] = Provinsi::all();
+            // $data['jumlah_paket_wisata'] = PaketList::count();
             // $data['pakets'] = Paket::all();
-            $data['pakets'] = Paket::all();
-            $data['paket_privates'] = PaketList::where('kategori_paket_id',1)->get();
-            $data['paket_trips'] = PaketList::where('status','!=',0)
-                                            ->orderBy('created_at','desc')->paginate(6);
-            $data['travellings'] = Tour::orderBy('created_at','desc')->paginate(6);
+            // $data['pakets'] = Paket::all();
+            // $data['paket_privates'] = PaketList::where('kategori_paket_id',1)->get();
+            // $data['paket_trips'] = PaketList::where('status','!=',0)
+            //                                 ->orderBy('created_at','desc')->paginate(6);
+            // $data['travellings'] = Tour::orderBy('created_at','desc')->paginate(6);
             // $data['travellings'] = Travelling::orderBy('created_at','desc')->paginate(6);
             $data['coupons'] = Coupons::orderBy('created_at','desc')
                                     ->where('coupons_expired','>=',Carbon::now()->format('Y-m-d'))
@@ -319,6 +319,11 @@ class FrontendController extends Controller
             visitor()->visit();
             $data['honeymoons'] = Honeymoon::all();
             $data['promosis'] = Promosi::all();
+
+            $data['today'] = Carbon::today();
+            $data['week_start'] = $data['today']->startOfWeek()->format('Y-m-d');
+            $data['week_end'] = $data['today']->endOfWeek()->format('Y-m-d');
+
             return view('frontend.frontend5.index', $data);
             // return view('frontend.frontend4.index', $data);
             // return view('layouts.frontend_4.app',$data);
