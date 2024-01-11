@@ -767,6 +767,15 @@ class BromoController extends Controller
             $data = Bromo::all();
             return DataTables::of($data)
                     ->addIndexColumn()
+                    ->addColumn('status', function($row){
+                        // return 'Rp. '.number_format($row->price,0,',','.');
+                        if ($row->tanggal >= Carbon::now()) {
+                            $status = '<span class="badge bg-success">OPEN</span>';
+                        }else{
+                            $status = '<span class="badge bg-danger">CLOSED</span>';
+                        }
+                        return $status;
+                    })
                     ->addColumn('price', function($row){
                         return 'Rp. '.number_format($row->price,0,',','.');
                     })
@@ -778,7 +787,7 @@ class BromoController extends Controller
                         $btn .= '</div>';
                         return $btn;
                     })
-                    ->rawColumns(['action'])
+                    ->rawColumns(['action','status'])
                     ->make(true);
         }
 

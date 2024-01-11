@@ -33,6 +33,7 @@
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
+                                <th>Status</th>
                                 <th>Tanggal Dibuka</th>
                                 <th>Nama Paket</th>
                                 <th>Jenis Travel</th>
@@ -66,6 +67,10 @@
             ajax: "{{ route('b.bromo') }}",
             columns: [
                 {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
                     data: 'tanggal',
                     name: 'tanggal'
                 },
@@ -96,7 +101,7 @@
                     searchable: false
                 },
             ],
-            order: [0,'desc']
+            order: [1,'desc']
         });
 
         function reload() {
