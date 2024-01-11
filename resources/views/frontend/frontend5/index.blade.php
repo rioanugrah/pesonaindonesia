@@ -425,7 +425,7 @@
                     <div class="trend-item1 rounded box-shadow">
                         <div class="trend-image position-relative">
                             <a href="{{ route('frontend.detailPromosi',['generate' => $promosi->id_generate, 'slug' => $promosi->slug]) }}">
-                                <img src="{{ asset('frontend/assets5/promosi/'.$promosi->images) }}" alt="{{ $promosi->nama_promosi }}" style="width: 700px; height: 250px; object-fit: cover;" class="">
+                                <img src="{{ asset('frontend/assets5/promosi/'.$promosi->images) }}" alt="{{ $promosi->nama_promosi }}">
                             </a>
                         </div>
                     </div>
