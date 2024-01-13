@@ -107,20 +107,15 @@ try {
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                {{-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="footer-links">
                         <h3 class="white">Produk</h3>
                         <ul>
-                            {{-- <li><a href="{{ route('frontend.paket') }}">Paket</a></li> --}}
                             <li><a href="{{ route('frontend.travelling') }}">Travelling</a></li>
                             <li><a href="#">Honeymoon</a></li>
-                            {{-- <li><a href="{{ route('frontend.sewa_bus') }}">Sewa Bus / Bus Pariwisata</a></li> --}}
-                            {{-- <li><a href="#">Rental Mobil</a></li> --}}
-                            {{-- <li><a href="javascript:void()">Gallery</a></li>
-                          <li><a href="javascript:void()">Syarat & Ketentuan</a></li> --}}
                         </ul>
                     </div>
-                </div>
+                </div> --}}
                 {{-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="footer-links">
                         <h3 class="white">Newsletter</h3>
@@ -143,14 +138,14 @@ try {
                 <div class="col-lg-8 footer-payment-nav mb-4">
                     <ul class="">
                         <li class="me-2">Payment Partner:</li>
-                        <li class="me-2"><img src="{{ $assets }}/images/logo_payment/bca.webp" alt="bca"
+                        <li class="me-2"><img src="{{ $assets }}/images/logo_payment/bca.webp"
                                 width="80" style="filter: brightness(0) invert(1);" srcset=""></li>
-                        <li class="me-2"><img src="{{ $assets }}/images/logo_payment/bni.webp" alt="bni"
+                        <li class="me-2"><img src="{{ $assets }}/images/logo_payment/bni.webp"
                                 width="80" style="filter: brightness(0) invert(1);" srcset=""></li>
-                        <li class="me-2"><img src="{{ $assets }}/images/logo_payment/bri.webp" alt="bri"
+                        <li class="me-2"><img src="{{ $assets }}/images/logo_payment/bri.webp"
                                 width="80" style="filter: brightness(0) invert(1);" srcset=""></li>
                         <li class="me-2"><img src="{{ $assets }}/images/logo_payment/mandiri.webp"
-                                alt="mandiri" width="80" style="filter: brightness(0) invert(1);" srcset="">
+                                width="80" style="filter: brightness(0) invert(1);" srcset="">
                         </li>
                     </ul>
                 </div>
