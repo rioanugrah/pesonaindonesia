@@ -805,6 +805,7 @@ class BromoController extends Controller
             'max_quota'  => 'required',
             'price'  => 'required',
             'discount'  => 'required',
+            'group_destination'  => 'required',
             'group_include'  => 'required',
             'group_exclude'  => 'required',
         ];
@@ -818,6 +819,7 @@ class BromoController extends Controller
             'max_quota.required'   => 'Maksimal Kuota wajib diisi.',
             'price.required'   => 'Harga wajib diisi.',
             'discount.required'   => 'Diskon wajib diisi.',
+            'group_destination.required'   => 'Destination wajib diisi.',
             'group_include.required'   => 'Include wajib diisi.',
             'group_exlude.required'   => 'Exclude wajib diisi.',
         ];
@@ -832,6 +834,7 @@ class BromoController extends Controller
             $input['category_trip'] = $request->category_trip;
             $input['quota'] = $request->quota;
             $input['max_quota'] = $request->max_quota;
+            $input['destination'] = json_encode($request->group_destination);
             $input['include'] = json_encode($request->group_include);
             $input['exclude'] = json_encode($request->group_exclude);
             $input['price'] = $request->price;

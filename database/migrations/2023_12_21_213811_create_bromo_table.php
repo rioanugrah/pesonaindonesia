@@ -23,6 +23,7 @@ class CreateBromoTable extends Migration
             $table->string('quota',5);
             // $table->text('description');
             $table->integer('max_quota');
+            $table->text('destination');
             $table->text('include');
             $table->text('exclude');
             $table->string('price');

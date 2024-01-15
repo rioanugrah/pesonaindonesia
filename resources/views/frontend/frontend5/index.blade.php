@@ -347,12 +347,14 @@
                                     <div class="item-inner-image text-start">
                                         <h5 class="mb-0">{{ $bromo->title }}</h5>
                                         <small>Meeting Point: {{ $bromo->meeting_point }}</small>
+                                        <div style="font-size: 10pt; font-weight: bold">Destination:</div>
+                                        @foreach (json_decode($bromo->destination) as $destination)
+                                            <div style="font-size: 8pt">✔ {{ $destination->destination }}</div>
+                                        @endforeach
                                         <div style="font-size: 10pt; font-weight: bold">Include:</div>
-                                        <ul>
-                                            @foreach (json_decode($bromo->include) as $include)
-                                                <li style="font-size: 8pt">+ {{ $include->include }}</li>
-                                            @endforeach
-                                        </ul>
+                                        @foreach (json_decode($bromo->include) as $include)
+                                            <div style="font-size: 8pt">+ {{ $include->include }}</div>
+                                        @endforeach
                                     </div>
                                 </div>    
                                 <div class="col-lg-2 col-md-2 col-sm-12">

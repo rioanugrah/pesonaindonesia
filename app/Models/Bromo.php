@@ -23,6 +23,7 @@ class Bromo extends Model
         'quota',
         'max_quota',
         // 'description',
+        'destination',
         'include',
         'exclude',
         'price',
