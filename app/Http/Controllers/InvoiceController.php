@@ -28,7 +28,8 @@ class InvoiceController extends Controller
         $data['order'] = Transactions::where('transaction_code',$kode_order)->first();
         $data['verifikasi_tiket'] = VerifikasiTiket::select('kode_tiket')->where('transaction_id',$data['order']['id'])->first();
         
-        $pdf = PDF::loadView('emails.InvoiceTravellingNew',$data);
+        $pdf = PDF::loadView('emails.invoice.invoicepdf',$data);
+        // $pdf = PDF::loadView('emails.InvoiceTravellingNew',$data);
         $pdf->setPaper('A4', 'portrait');
 
         $data['pemesan'] = json_decode($data['order']['transaction_order']);
@@ -57,6 +58,20 @@ class InvoiceController extends Controller
         //     'success' => false,
         //     'message_title' => 'Invoice tidak berhasil terkirim ke email tujuan'
         // ]);
+    }
+
+    public function invoice_testing($kode_order)
+    {
+        // $data['kode_order'] = $kode_order;
+        $data['order'] = Transactions::where('transaction_code',$kode_order)->first();
+        $data['verifikasi_tiket'] = VerifikasiTiket::select('kode_tiket')->where('transaction_id',$data['order']['id'])->first();
+        // $pdf = PDF::loadView('emails.InvoiceTravellingNew',$data);
+        // $pdf->setPaper('A4', 'portrait');
+        // $pdf->stream();
+        $pdf = PDF::loadView('emails.invoice.invoicepdf',$data)->stream();
+        // $pdf;
+        return $pdf;
+        // return PDF::loadView('emails.invoice.invoicepdf')->stream();
     }
 
     public function invoice_order($kode_order)

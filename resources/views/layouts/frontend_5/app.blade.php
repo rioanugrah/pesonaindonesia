@@ -16,7 +16,7 @@
     <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
     <meta property="og:locale:alternate" content="{{ str_replace('_', '-', app()->getLocale()) }}">
     <meta property="og:type" content="Biro Perjalanan">
-    <meta property="og:title" content="Pesona Plesiran Indonesia">
+    <meta property="og:title" content="@yield('title')">
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:site_name" content="Pesona Plesiran Indonesia">
     <meta property="og:description" content="@yield('description')">

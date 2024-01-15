@@ -137,8 +137,23 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     Route::get('invoice/{kode_order}', 'InvoiceController@invoice_order')->name('invoice');
     Route::get('invoice/{kode_order}/send', 'InvoiceController@invoice_send')->name('invoice.send');
     
+    Route::get('invoice_testing/{kode_order}', 'InvoiceController@invoice_testing');
     Route::get('testings', 'FrontendController@frontend_testing');
     
+    // Route::get('invoice_testing/{kode_order}', function($kode_order){
+    //     return view('emails.InvoiceTravelling',[
+    //         'details' => [
+    //             'invoice' => $kode_order,
+    //             'nama_pembayaran' => 'Rio',
+    //             'alamat' => 'Rio',
+    //             'phone' => '082233684670',
+    //             'email' => 'rioanugrah999@gmail.com',
+    //             'total' => '350000',
+    //             'created_at' => '2024-01-03 21:00:00',
+    //             'updated_at' => '2024-01-03 21:00:00',
+    //         ]
+    //     ]);
+    // });
     
     // Route::get('testing_wa', function(){
     //     $nohp = "082233684670";
