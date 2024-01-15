@@ -200,7 +200,7 @@
                             "hideMethod": "fadeOut"
                         }
                         // this.reset();
-                        $('#reupload_paket').modal('hide');
+                        $('#buat').modal('hide');
                         table.ajax.reload(null, false);
                     }else{
                         toastr["error"](result.error);
@@ -283,7 +283,7 @@
                             "hideMethod": "fadeOut"
                         }
                         // this.reset();
-                        $('#buat').modal('hide');
+                        $('#reupload_paket').modal('hide');
                         table.ajax.reload(null, false);
                     }else{
                         toastr["error"](result.error);

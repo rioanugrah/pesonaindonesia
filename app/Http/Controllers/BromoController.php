@@ -891,6 +891,7 @@ class BromoController extends Controller
         $input['category_trip'] = $request->reupload_category_trip;
         $input['quota'] = $request->reupload_quota;
         $input['max_quota'] = $request->reupload_max_quota;
+        $input['destination'] = $bromo->destination;
         $input['include'] = $bromo->include;
         $input['exclude'] = $bromo->exclude;
         $input['price'] = $request->reupload_price;
