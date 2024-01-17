@@ -46,6 +46,7 @@
     <link rel="stylesheet" href="{{ $assets . '/css/scroll.css' }}">
     @yield('css')
     @yield('head')
+    {!! Adsense::javascript() !!}
 </head>
 
 <body oncontextmenu="return false;">
@@ -54,8 +55,9 @@
     </div>
     @include('layouts.frontend_5.header')
     @yield('content')
-    <amp-auto-ads type="adsense" data-ad-client="{{ env('ADSENSE_CLIENT_ID') }}">
-    </amp-auto-ads>
+    {{-- <amp-auto-ads type="adsense" data-ad-client="{{ env('ADSENSE_CLIENT_ID') }}">
+    </amp-auto-ads> --}}
+    {!! Adsense::ads('ads_unit') !!}
     @include('layouts.frontend_5.footer')
     <div id="back-to-top">
         <a href="#"></a>

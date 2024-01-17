@@ -1,5 +1,9 @@
 @extends('layouts.frontend_5.app')
 
+@section('css')
+    
+@endsection
+
 @section('title')
     Pesona Plesiran Indonesia
 @endsection
@@ -14,13 +18,14 @@
 
 @section('css')
     <style>
-        .box{
+        .box {
             max-width: 280px;
             width: 100%;
             padding: 0 15px;
         }
+
         .skeleton {
-            padding:15px;
+            padding: 15px;
             max-width: 300px;
             width: 100%;
             background: #fff;
@@ -31,6 +36,7 @@
             align-items: center;
             box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12);
         }
+
         .skeleton .square {
             height: 80px;
             border-radius: 5px;
@@ -40,9 +46,10 @@
             background-size: 800px 100px;
             animation: wave-squares 2s infinite ease-out;
         }
+
         .skeleton .line {
             height: 12px;
-            margin-bottom:6px;
+            margin-bottom: 6px;
             border-radius: 2px;
             background: rgba(130, 130, 130, 0.2);
             background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(130, 130, 130, 0.2)), color-stop(18%, rgba(130, 130, 130, 0.3)), color-stop(33%, rgba(130, 130, 130, 0.2)));
@@ -50,75 +57,97 @@
             background-size: 800px 100px;
             animation: wave-lines 2s infinite ease-out;
         }
-        .skeleton-right{
-            flex:1;
-        }
-        .skeleton-left{
-            flex:2;
-            padding-right:15px;
-        }
-        .flex1{
+
+        .skeleton-right {
             flex: 1;
         }
-        .flex2{
+
+        .skeleton-left {
+            flex: 2;
+            padding-right: 15px;
+        }
+
+        .flex1 {
+            flex: 1;
+        }
+
+        .flex2 {
             flex: 2;
         }
-        .skeleton .line:last-child{
+
+        .skeleton .line:last-child {
             margin-bottom: 0;
         }
-        .h8{
+
+        .h8 {
             height: 8px !important;
         }
-        .h10{
+
+        .h10 {
             height: 10px !important;
         }
-        .h12{
+
+        .h12 {
             height: 12px !important;
         }
-        .h15{
+
+        .h15 {
             height: 15px !important;
         }
-        .h17{
+
+        .h17 {
             height: 17px !important;
         }
-        .h20{
+
+        .h20 {
             height: 20px !important;
         }
-        .h25{
+
+        .h25 {
             height: 25px !important;
         }
-        .w25{
+
+        .w25 {
             width: 25% !important
         }
-        .w40{
-            width:40% !important;
+
+        .w40 {
+            width: 40% !important;
         }
-        .w50{
+
+        .w50 {
             width: 50% !important
         }
-        .w75{
+
+        .w75 {
             width: 75% !important
         }
-        .m10{
+
+        .m10 {
             margin-bottom: 10px !important;
         }
-        .circle{
+
+        .circle {
             border-radius: 50% !important;
             height: 80px !important;
             width: 80px;
         }
+
         @keyframes wave-lines {
             0% {
                 background-position: -468px 0;
             }
+
             100% {
                 background-position: 468px 0;
             }
         }
+
         @keyframes wave-squares {
             0% {
                 background-position: -468px 0;
             }
+
             100% {
                 background-position: 468px 0;
             }
@@ -135,7 +164,7 @@
 <?php $asset_new_backend = asset('backend_2023/'); ?>
 <?php $assets = asset('frontend/assets5/'); ?>
 @section('content')
-{{-- <section class="banner overflow-hidden">
+    {{-- <section class="banner overflow-hidden">
     <div class="slider top50">
         <div class="swiper-container">
             <div class="swiper-wrapper">
@@ -158,7 +187,7 @@
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
 </section> --}}
-{{-- <section class="about-us pb-6 pt-10" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
+    {{-- <section class="about-us pb-6 pt-10" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
     <div class="container">
         
         <div class="section-title mb-6 w-50 mx-auto text-center">
@@ -206,7 +235,7 @@
     </div>
     <div class="white-overlay"></div>
 </section> --}}
-{{-- @if (!$travellings->isEmpty())
+    {{-- @if (!$travellings->isEmpty())
 <section class="trending pb-9" style="margin-top: -2.5%">
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">
@@ -270,7 +299,7 @@
 </section>
 @endif --}}
 
-{{-- <section class="trending pb-9" style="margin-top: -2.5%">
+    {{-- <section class="trending pb-9" style="margin-top: -2.5%">
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">
             <h2 class="mb-1">Jelajahi <span class="theme">Hotel</span></h2>
@@ -283,7 +312,7 @@
     </div>
 </section> --}}
 
-{{-- <section class="trending pb-9" style="margin-top: -2.5%">
+    {{-- <section class="trending pb-9" style="margin-top: -2.5%">
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">
             <h2 class="mb-1">Jelajahi <span class="theme">Hotel</span></h2>
@@ -314,251 +343,277 @@
     </div>
 </section> --}}
 
-<section class="flight-list pt-0" style="margin-top: 5%">
-    <div class="container">
-        <div class="section-title mb-6 w-50 mx-auto text-center">
-            {{-- <h4 class="mb-1 theme1">Recommended Flights</h4> --}}
-            <h2 class="mb-1">Find Your <span class="theme">Bromo Scheduled</span></h2>
-            {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+    <section class="flight-list pt-0" style="margin-top: 5%">
+        <div class="container">
+            <div class="section-title mb-6 w-50 mx-auto text-center">
+                {{-- <h4 class="mb-1 theme1">Recommended Flights</h4> --}}
+                <h2 class="mb-1">Find Your <span class="theme">Bromo Scheduled</span></h2>
+                {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                 labore.</p> --}}
-        </div>
-
-        <div class="flight-list">
-            <div class="flight-navtab text-center">
-                <div class="nav nav-tabs mb-0" id="nav-tab" role="tablist">
-                    @for ($i=$week_start; $i <= $week_end; $i++)
-                    <button class="nav-link {{ \Carbon\Carbon::today()->format('Y-m-d') == $i ? 'active' : null }}" id="nav-schedule{{ $i }}-tab" data-bs-toggle="tab" data-bs-target="#schedule{{ $i }}" 
-                    type="button" role="tab" aria-selected="true">{{ \Carbon\Carbon::create($i)->isoFormat('dddd') }}<span>{{ \Carbon\Carbon::create($i)->isoFormat('D-MM-YYYY') }}</span></button>
-                    @endfor
-                </div>
             </div>
-            <div class="tab-content" id="nav-tabContent">
-                @for ($i=$week_start; $i <= $week_end; $i++)
-                @php
-                    $bromos = \App\Models\Bromo::where('tanggal','LIKE','%'.$i.'%')->get();
-                @endphp
-                <div class="tab-pane fade content {{ \Carbon\Carbon::today()->format('Y-m-d') == $i ? 'show active' : null }} text-center" id="schedule{{ $i }}" role="tabpanel" aria-labelledby="nav-schedule{{ $i }}-tab">
-                    @forelse ($bromos as $bromo)
-                    <div class="flight-full">
-    
-                        <div class="item mb-2 border-all p-2 px-4 rounded">
-                            <div class="row d-flex align-items-center justify-content-between">
-                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                    <div class="item-inner-image text-start">
-                                        <h5 class="mb-0">{{ $bromo->title }}</h5>
-                                        <small>Meeting Point: {{ $bromo->meeting_point }}</small>
-                                        <div style="font-size: 10pt; font-weight: bold">Destination:</div>
-                                        @foreach (json_decode($bromo->destination) as $destination)
-                                            <div style="font-size: 8pt">✔ {{ $destination->destination }}</div>
-                                        @endforeach
-                                        <div style="font-size: 10pt; font-weight: bold">Include:</div>
-                                        @foreach (json_decode($bromo->include) as $include)
-                                            <div style="font-size: 8pt">+ {{ $include->include }}</div>
-                                        @endforeach
-                                    </div>
-                                </div>    
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner">
-                                    <div class="content">
-                                        <h5 class="mb-0" style="text-transform: uppercase">{{ \Carbon\Carbon::create($bromo->tanggal)->isoformat('dddd, D MMMM YYYY') }}</h5>
-                                        <p class="mb-0 text-uppercase">Departure Date</p>
-                                    </div>
-                                    </div>
-                                </div>    
-                                <div class="col-lg-3 col-md-3 col-sm-12"> 
-                                    <div class="item-inner">
-                                        <div class="content">
-                                            <h3 class="mb-0">{{ \Carbon\Carbon::create($bromo->tanggal)->format('H:i') }}</h3>
-                                            <p class="mb-0 text-uppercase">Departure Time</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner flight-time">
-                                    <p class="mb-0">{{ $bromo->category_trip == 'Publik' ? 'Open Trip' : 'Private Trip' }} <br>Kuota: {{ $bromo->quota }}</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12">
-                                    <div class="item-inner text-end">
-                                        <p class="theme fs-4 fw-bold">Rp. {{ number_format($bromo->price,0,',','.') }}</p>
-                                        @php
-                                            $date_booking = \Carbon\Carbon::create($bromo->tanggal)->format('Y-m-d H:i');
-                                        @endphp
-                                        @if ($date_booking >= \Carbon\Carbon::now()->format('Y-m-d H:i'))
-                                        <a href="{{ route('frontend.bromo.booking',['id' => $bromo->id, 'tanggal' => $i]) }}" class="nir-btn">BOOKING NOW</a>
-                                        @else
-                                        <a href="javascript:void()" class="nir-btn-black">CLOSE</a>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
+
+            <div class="flight-list">
+                <div class="flight-navtab text-center">
+                    <div class="nav nav-tabs mb-0" id="nav-tab" role="tablist">
+                        @for ($i = $week_start; $i <= $week_end; $i++)
+                            <button class="nav-link {{ \Carbon\Carbon::today()->format('Y-m-d') == $i ? 'active' : null }}"
+                                id="nav-schedule{{ $i }}-tab" data-bs-toggle="tab"
+                                data-bs-target="#schedule{{ $i }}" type="button" role="tab"
+                                aria-selected="true">{{ \Carbon\Carbon::create($i)->isoFormat('dddd') }}<span>{{ \Carbon\Carbon::create($i)->isoFormat('D-MM-YYYY') }}</span></button>
+                        @endfor
                     </div>
-                    @empty
-                    <p>Data Paket Belum Tersedia</p>
-                    @endforelse
                 </div>
-                @endfor
-            </div>
-            {{-- <div class="flight-btn text-center"><a href="flight-grid.html" class="nir-btn">View More</a></div> --}}
-        </div>
-    </div>
-</section>
+                <div class="tab-content" id="nav-tabContent">
+                    @for ($i = $week_start; $i <= $week_end; $i++)
+                        @php
+                            $bromos = \App\Models\Bromo::where('tanggal', 'LIKE', '%' . $i . '%')->get();
+                        @endphp
+                        <div class="tab-pane fade content {{ \Carbon\Carbon::today()->format('Y-m-d') == $i ? 'show active' : null }} text-center"
+                            id="schedule{{ $i }}" role="tabpanel"
+                            aria-labelledby="nav-schedule{{ $i }}-tab">
+                            @forelse ($bromos as $bromo)
+                                <div class="flight-full">
 
-@if (!$honeymoons->isEmpty())
-<section class="trending pb-9" style="margin-top: -5%">
-    <div class="container">
-        <div class="section-title mb-6 w-75 mx-auto text-center">
-            <h2 class="mb-1">Jelajahi <span class="theme">Honeymoon</span></h2>
-        </div>
-        <div class="trend-box">
-            <div class="row">
-                @forelse ($honeymoons as $honeymoon)
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <a href="#">
-                            <div class="trend-item1 rounded box-shadow">
-                                <div class="trend-image position-relative">
-                                    <img src="{{ $asset }}/img/honeymoon/{{ $honeymoon->images }}" alt="{{ $honeymoon->nama_paket }}" style="width: 700px; height: 250px; object-fit: cover;" class="">
-                                    <div class="trend-content1 p-4">
-                                        {{-- <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h5> --}}
-                                        <h3 class="mb-1 white"><a href="{{ route('frontend.honeymoon_detail',['slug' => $honeymoon->slug]) }}" class="white">{{ $honeymoon->nama_paket }}</a></h3>
-                                        <div class="entry-meta d-flex align-items-center justify-content-between">
-                                            <div class="entry-author d-flex align-items-center">
-                                                <p class="mb-0 white"><span class="theme1 fw-bold fs-4"> Rp. {{ number_format($honeymoon->price,0,",",".") }}</span></p>
+                                    <div class="item mb-2 border-all p-2 px-4 rounded">
+                                        <div class="row d-flex align-items-center justify-content-between">
+                                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                                <div class="item-inner-image text-start">
+                                                    <h5 class="mb-0">{{ $bromo->title }}</h5>
+                                                    <small>Meeting Point: {{ $bromo->meeting_point }}</small>
+                                                    <div style="font-size: 10pt; font-weight: bold">Destination:</div>
+                                                    @foreach (json_decode($bromo->destination) as $destination)
+                                                        <div style="font-size: 8pt">✔ {{ $destination->destination }}</div>
+                                                    @endforeach
+                                                    <div style="font-size: 10pt; font-weight: bold">Include:</div>
+                                                    @foreach (json_decode($bromo->include) as $include)
+                                                        <div style="font-size: 8pt">+ {{ $include->include }}</div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                                <div class="item-inner">
+                                                    <div class="content">
+                                                        <h5 class="mb-0" style="text-transform: uppercase">
+                                                            {{ \Carbon\Carbon::create($bromo->tanggal)->isoformat('dddd, D MMMM YYYY') }}
+                                                        </h5>
+                                                        <p class="mb-0 text-uppercase">Departure Date</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                                <div class="item-inner">
+                                                    <div class="content">
+                                                        <h3 class="mb-0">
+                                                            {{ \Carbon\Carbon::create($bromo->tanggal)->format('H:i') }}
+                                                        </h3>
+                                                        <p class="mb-0 text-uppercase">Departure Time</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                                <div class="item-inner flight-time">
+                                                    <p class="mb-0">
+                                                        {{ $bromo->category_trip == 'Publik' ? 'Open Trip' : 'Private Trip' }}
+                                                        <br>Kuota: {{ $bromo->quota }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                                <div class="item-inner text-end">
+                                                    <p class="theme fs-4 fw-bold">Rp.
+                                                        {{ number_format($bromo->price, 0, ',', '.') }}</p>
+                                                    @php
+                                                        $date_booking = \Carbon\Carbon::create($bromo->tanggal)->format('Y-m-d H:i');
+                                                    @endphp
+                                                    @if ($date_booking >= \Carbon\Carbon::now()->format('Y-m-d H:i'))
+                                                        <a href="{{ route('frontend.bromo.booking', ['id' => $bromo->id, 'tanggal' => $i]) }}"
+                                                            class="nir-btn">BOOKING NOW</a>
+                                                    @else
+                                                        <a href="javascript:void()" class="nir-btn-black">CLOSE</a>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="overlay"></div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                @empty
-                <div class="col-lg-12">
-                    <div class="text-center">Paket Honeymoon Belum Tersedia</div>
+                            @empty
+                                <p>Data Paket Belum Tersedia</p>
+                            @endforelse
+                        </div>
+                    @endfor
                 </div>
-                @endforelse
+                {{-- <div class="flight-btn text-center"><a href="flight-grid.html" class="nir-btn">View More</a></div> --}}
             </div>
         </div>
-    </div>
-</section>
-@endif
+    </section>
 
-<section class="about-us pb-2 pt-2" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
-    <div class="container">
-        <div class="row align-items-center d-flex">
-            <div class="col-lg-6 mb-4">
-                <div class="section-title">
-                    <h2 class="mb-4"><span class="theme">Pesona</span> Plesiran Indonesia</h2>
-                    <p class="mb-4">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi, Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.
-                    </p>
+    @if (!$honeymoons->isEmpty())
+        <section class="trending pb-9" style="margin-top: -5%">
+            <div class="container">
+                <div class="section-title mb-6 w-75 mx-auto text-center">
+                    <h2 class="mb-1">Jelajahi <span class="theme">Honeymoon</span></h2>
                 </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <!-- why us starts -->
-        <div class="why-us">
-            <div class="why-us-box">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 mb-4">
-                        <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
-                            <div class="why-us-content">
-                                <div class="why-us-icon mb-1">
-                                    <i class="icon-directions theme"></i>
-                                </div>
-                                <h4><a href="javascript:void()">Bagikan Preferensi Perjalanan Anda</a></h4>
-                                {{-- <p class="mb-0 theme">100+ Reviews</p> --}}
+                <div class="trend-box">
+                    <div class="row">
+                        @forelse ($honeymoons as $honeymoon)
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <a href="#">
+                                    <div class="trend-item1 rounded box-shadow">
+                                        <div class="trend-image position-relative">
+                                            <img src="{{ $asset }}/img/honeymoon/{{ $honeymoon->images }}"
+                                                alt="{{ $honeymoon->nama_paket }}"
+                                                style="width: 700px; height: 250px; object-fit: cover;" class="">
+                                            <div class="trend-content1 p-4">
+                                                {{-- <h5 class="theme1 mb-1"><i class="flaticon-location-pin"></i> Meeting Point : {{ $travelling->meeting_point }}</h5> --}}
+                                                <h3 class="mb-1 white"><a
+                                                        href="{{ route('frontend.honeymoon_detail', ['slug' => $honeymoon->slug]) }}"
+                                                        class="white">{{ $honeymoon->nama_paket }}</a></h3>
+                                                <div class="entry-meta d-flex align-items-center justify-content-between">
+                                                    <div class="entry-author d-flex align-items-center">
+                                                        <p class="mb-0 white"><span class="theme1 fw-bold fs-4"> Rp.
+                                                                {{ number_format($honeymoon->price, 0, ',', '.') }}</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="overlay"></div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 mb-4">
-                        <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
-                            <div class="why-us-content">
-                                <div class="why-us-icon mb-1">
-                                    <i class="icon-location-pin theme"></i>
-                                </div>
-                                <h4><a href="javascript:void()">Bagikan Lokasi Perjalanan Anda</a></h4>
-                                {{-- <p class="mb-0 theme">100+ Reviews</p> --}}
+                        @empty
+                            <div class="col-lg-12">
+                                <div class="text-center">Paket Honeymoon Belum Tersedia</div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 mb-4">
-                        <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
-                            <div class="why-us-content">
-                                <div class="why-us-icon mb-1">
-                                    <i class="icon-compass theme"></i>
-                                </div>
-                                <h4><a href="javascript:void()">Di Sini 100% Agen Tur Terpercaya</a></h4>
-                                {{-- <p class="mb-0 theme">100+ Reviews</p> --}}
-                            </div>
-                        </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- why us ends -->
-            </div>
-        </div>
+        </section>
+    @endif
 
-    </div>
-    <div class="white-overlay"></div>
-</section>
-
-@if (!$promosis->isEmpty())
-<section class="trending pb-9" style="margin-top: -2.5%">
-    <div class="container">
-        <div class="section-title mb-6 mx-auto text-center">
-            <h2 class="mb-1">Jelajahi <span class="theme">Promo</span></h2>
-        </div>
-        <div class="trend-box">
-            <div class="row">
-                @forelse ($promosis as $promosi)
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="trend-item1 rounded box-shadow">
-                        <div class="trend-image position-relative">
-                            <a href="{{ route('frontend.detailPromosi',['generate' => $promosi->id_generate, 'slug' => $promosi->slug]) }}">
-                                <img src="{{ asset('frontend/assets5/promosi/'.$promosi->images) }}" alt="{{ $promosi->nama_promosi }}">
-                            </a>
-                        </div>
+    <section class="about-us pb-2 pt-2"
+        style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
+        <div class="container">
+            <div class="row align-items-center d-flex">
+                <div class="col-lg-6 mb-4">
+                    <div class="section-title">
+                        <h2 class="mb-4"><span class="theme">Pesona</span> Plesiran Indonesia</h2>
+                        <p class="mb-4">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang
+                            menyediakan kemudahan dalam mendapat informasi dan pemesanan Akomodasi, Destinasi, Restoran,
+                            Transportasi, Travel dan MICE se-Indonesia.
+                        </p>
                     </div>
                 </div>
-                @empty
-                    
-                @endforelse
+                <div class="col-lg-6 mb-4">
+                    <!-- why us starts -->
+                    <div class="why-us">
+                        <div class="why-us-box">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 mb-4">
+                                    <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
+                                        <div class="why-us-content">
+                                            <div class="why-us-icon mb-1">
+                                                <i class="icon-directions theme"></i>
+                                            </div>
+                                            <h4><a href="javascript:void()">Bagikan Preferensi Perjalanan Anda</a></h4>
+                                            {{-- <p class="mb-0 theme">100+ Reviews</p> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 mb-4">
+                                    <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
+                                        <div class="why-us-content">
+                                            <div class="why-us-icon mb-1">
+                                                <i class="icon-location-pin theme"></i>
+                                            </div>
+                                            <h4><a href="javascript:void()">Bagikan Lokasi Perjalanan Anda</a></h4>
+                                            {{-- <p class="mb-0 theme">100+ Reviews</p> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 mb-4">
+                                    <div class="why-us-item text-center p-4 py-5 border rounded bg-white">
+                                        <div class="why-us-content">
+                                            <div class="why-us-icon mb-1">
+                                                <i class="icon-compass theme"></i>
+                                            </div>
+                                            <h4><a href="javascript:void()">Di Sini 100% Agen Tur Terpercaya</a></h4>
+                                            {{-- <p class="mb-0 theme">100+ Reviews</p> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- why us ends -->
+                </div>
+            </div>
+
+        </div>
+        <div class="white-overlay"></div>
+    </section>
+
+    @if (!$promosis->isEmpty())
+        <section class="trending pb-9" style="margin-top: -2.5%">
+            <div class="container">
+                <div class="section-title mb-6 mx-auto text-center">
+                    <h2 class="mb-1">Jelajahi <span class="theme">Promo</span></h2>
+                </div>
+                <div class="trend-box">
+                    <div class="row">
+                        @forelse ($promosis as $promosi)
+                            <div class="col-lg-3 col-md-6 mb-4">
+                                <div class="trend-item1 rounded box-shadow">
+                                    <div class="trend-image position-relative">
+                                        <a
+                                            href="{{ route('frontend.detailPromosi', ['generate' => $promosi->id_generate, 'slug' => $promosi->slug]) }}">
+                                            <img src="{{ asset('frontend/assets5/promosi/' . $promosi->images) }}"
+                                                alt="{{ $promosi->nama_promosi }}">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+    <section class="trending pb-3 pt-0">
+        <div class="container">
+            <div class="section-title mb-6 w-50 mx-auto text-center">
+                {{-- <h4 class="mb-1 theme1">Jelajahi</h4> --}}
+                <h2 class="mb-1">Jelajahi <span class="theme">Destinasi</span></h2>
+                {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p> --}}
+            </div>
+            <div class="row align-items-center">
+                @foreach ($jelajahins as $jelajahi)
+                    <div class="{{ $jelajahi['column'] }}">
+                        <div class="trend-item1">
+                            <div class="trend-image position-relative rounded">
+                                <img src="{{ $jelajahi['image'] }}"
+                                    style="width: 1800px; height: 220px; object-fit: cover;">
+                                <div
+                                    class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
+                                    <div class="trend-content-title">
+                                        <h5 class="mb-0"><a href="#"
+                                                class="theme1">{{ $jelajahi['country'] }}</a></h5>
+                                        <h3 class="mb-0 white">{{ $jelajahi['title'] }}</h3>
+                                    </div>
+                                    {{-- <span class="white bg-theme p-1 px-2 rounded">{{ $jlh['tour'] }} Tours</span> --}}
+                                </div>
+                                <div class="color-overlay"></div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
-    </div>
-</section> 
-@endif
-
-<section class="trending pb-3 pt-0">
-    <div class="container">
-        <div class="section-title mb-6 w-50 mx-auto text-center">
-            {{-- <h4 class="mb-1 theme1">Jelajahi</h4> --}}
-            <h2 class="mb-1">Jelajahi <span class="theme">Destinasi</span></h2>
-            {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p> --}}
-        </div>
-        <div class="row align-items-center">
-            @foreach ($jelajahins as $jelajahi)
-                <div class="{{ $jelajahi['column'] }}">
-                    <div class="trend-item1">
-                        <div class="trend-image position-relative rounded">
-                            <img src="{{ $jelajahi['image'] }}" style="width: 1800px; height: 220px; object-fit: cover;">
-                            <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
-                                <div class="trend-content-title">
-                                    <h5 class="mb-0"><a href="#" class="theme1">{{ $jelajahi['country'] }}</a></h5>
-                                    <h3 class="mb-0 white">{{ $jelajahi['title'] }}</h3>
-                                </div>
-                                {{-- <span class="white bg-theme p-1 px-2 rounded">{{ $jlh['tour'] }} Tours</span> --}}
-                            </div>
-                            <div class="color-overlay"></div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-{{-- <section class="trending bg-grey pt-17 pb-6">
+    </section>
+    {{-- <section class="trending bg-grey pt-17 pb-6">
     <div class="section-shape top-0" style="background-image: url({{ $assets }}/images/shape8.png);"></div>
     <div class="container">
         <div class="row align-items-center justify-content-between mb-6 ">
@@ -607,7 +662,7 @@
         </div>
     </div>
 </section> --}}
-{{-- <section class="trending pb-0">
+    {{-- <section class="trending pb-0">
     <div class="container">
         <div class="trend-box">
             <div class="row">
@@ -628,44 +683,45 @@
         </div>    
     </div>
 </section> --}}
-@if (!$coupons->isEmpty())
-<section class="trending pb-3 pt-0">
-    <div class="container">
-        <div class="section-title mb-6 w-75 mx-auto text-center">
-            <h4 class="mb-1 theme1">Promo</h4>
-            <h2 class="mb-1">Yuk cek promo <span class="theme">sebelum booking</span></h2>
-        </div>
-        <div class="row align-items-center">
-            <div class="row">
-                @forelse ($coupons as $coupon)
-                <div class="col-md-4 mb-4">
-                    <a href="{{ route('frontend.promosi',['id'=>$coupon->id]) }}">
-                        <div class="trend-item1">
-                            <div class="trend-image position-relative rounded">
-                                <img src="{{ $assets }}/images/kupon/{{ $coupon->coupons_images }}" alt="image">
-                            </div>
-                        </div>
-                    </a>
+    @if (!$coupons->isEmpty())
+        <section class="trending pb-3 pt-0">
+            <div class="container">
+                <div class="section-title mb-6 w-75 mx-auto text-center">
+                    <h4 class="mb-1 theme1">Promo</h4>
+                    <h2 class="mb-1">Yuk cek promo <span class="theme">sebelum booking</span></h2>
                 </div>
-                @empty
-                <div class="trend-item1">
-                    <div class="trend-image position-relative rounded">
-                        <p class="text-center">Promo belum tersedia</p>
+                <div class="row align-items-center">
+                    <div class="row">
+                        @forelse ($coupons as $coupon)
+                            <div class="col-md-4 mb-4">
+                                <a href="{{ route('frontend.promosi', ['id' => $coupon->id]) }}">
+                                    <div class="trend-item1">
+                                        <div class="trend-image position-relative rounded">
+                                            <img src="{{ $assets }}/images/kupon/{{ $coupon->coupons_images }}"
+                                                alt="image">
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @empty
+                            <div class="trend-item1">
+                                <div class="trend-image position-relative rounded">
+                                    <p class="text-center">Promo belum tersedia</p>
+                                </div>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
-                @endforelse
-            </div>
-        </div>
-        {{-- <div class="row">
+                {{-- <div class="row">
             <div class="col-md-4">
             </div>
             <div class="col-md-8">
             </div>
         </div> --}}
-    </div>
-</section>
-@endif
-{{-- <section class="testimonial pt-10 pb-10"  style="background-image: url({{ $assets }}/images/image/bromo.webp);">   
+            </div>
+        </section>
+    @endif
+    {{-- <section class="testimonial pt-10 pb-10"  style="background-image: url({{ $assets }}/images/image/bromo.webp);">   
     <div class="container">
         <div class="testimonial-in">
             <div class="row align-items-center">
@@ -703,7 +759,7 @@
 
     <div class="dot-overlay"></div>   
 </section> --}}
-{{-- <section class="discount-action pt-8 pb-8" style="background-image: url({{ $assets }}/images/shape-1.png); background-attachment:unset">
+    {{-- <section class="discount-action pt-8 pb-8" style="background-image: url({{ $assets }}/images/shape-1.png); background-attachment:unset">
     <div class="container">
         <div class="call-banner1 rounded" style="background-image: url({{ $assets }}/images/image/about.webp); background-position:right;">
             <div class="row d-flex align-items-center">
@@ -729,48 +785,51 @@
         </div>
     </div>    
 </section> --}}
-<section class="discount-action" style="background-image:url({{ $assets }}/images/section-bg3.jpg); background-position:center; background-color: #f1f1f1;"> 
-    <div class="container">
-        <div class="call-banner rounded pt-0 py-5 overflow-visible">
-            <div class="call-banner-inner w-75 px-5">
-                <div class="trend-content-main">
-                    <div class="trend-content mb-5 pb-2">
-                        <h2><a href="javascript:void()">There is always a way <span class="theme1"> for a way</span></a></h2>
-                        {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+    <section class="discount-action"
+        style="background-image:url({{ $assets }}/images/section-bg3.jpg); background-position:center; background-color: #f1f1f1;">
+        <div class="container">
+            <div class="call-banner rounded pt-0 py-5 overflow-visible">
+                <div class="call-banner-inner w-75 px-5">
+                    <div class="trend-content-main">
+                        <div class="trend-content mb-5 pb-2">
+                            <h2><a href="javascript:void()">There is always a way <span class="theme1"> for a
+                                        way</span></a></h2>
+                            {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                             ut labore et dolore magna aliqua.</p> --}}
-                    </div>
-                    <div class="video-button position-relative ms-lg-5 text-center text-lg-start">
-                        <div class="call-button">
-                            <button type="button" class="play-btn js-video-button" data-video-id="LpOdL5eS5xo" data-channel="youtube">
-                                <i class="fa fa-play bg-blue"></i>
-                            </button>
                         </div>
-                        <div class="video-figure"></div>
+                        <div class="video-button position-relative ms-lg-5 text-center text-lg-start">
+                            <div class="call-button">
+                                <button type="button" class="play-btn js-video-button" data-video-id="LpOdL5eS5xo"
+                                    data-channel="youtube">
+                                    <i class="fa fa-play bg-blue"></i>
+                                </button>
+                            </div>
+                            <div class="video-figure"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="white-overlay"></div>
-</section>
-<section class="our-partner pb-5 pt-5">
-    <div class="container">
-        <div class="section-title mb-6 w-75 mx-auto text-center">
-            {{-- <h4 class="mb-1 theme1">Our Partners</h4> --}}
-            <h2 class="mb-1">Partner <span class="theme">Kami</span></h2>
-            <p>Kami bekerja sama dengan</p>
-        </div>
-        <div class="row align-items-center partner-in partner-slider">
-            @foreach ($mitras as $mitra)
-            <div class="col-md-3 col-sm-6">
-                <div class="partner-item p-4 py-2 rounded bg-lgrey">
-                    <img src="{{ $mitra['image'] }}" alt="">
-                </div>
+        <div class="white-overlay"></div>
+    </section>
+    <section class="our-partner pb-5 pt-5">
+        <div class="container">
+            <div class="section-title mb-6 w-75 mx-auto text-center">
+                {{-- <h4 class="mb-1 theme1">Our Partners</h4> --}}
+                <h2 class="mb-1">Partner <span class="theme">Kami</span></h2>
+                <p>Kami bekerja sama dengan</p>
             </div>
-            @endforeach
+            <div class="row align-items-center partner-in partner-slider">
+                @foreach ($mitras as $mitra)
+                    <div class="col-md-3 col-sm-6">
+                        <div class="partner-item p-4 py-2 rounded bg-lgrey">
+                            <img src="{{ $mitra['image'] }}" alt="">
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 @endsection
 @section('js')
     {{-- <script src="{{ asset('frontend/axios.min.js') }}"></script> --}}
