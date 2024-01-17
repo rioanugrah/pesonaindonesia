@@ -58,6 +58,7 @@
     {{-- <amp-auto-ads type="adsense" data-ad-client="{{ env('ADSENSE_CLIENT_ID') }}">
     </amp-auto-ads> --}}
     {!! Adsense::ads('ads_unit') !!}
+    {!! Adsense::ads('responsive') !!}
     @include('layouts.frontend_5.footer')
     <div id="back-to-top">
         <a href="#"></a>
