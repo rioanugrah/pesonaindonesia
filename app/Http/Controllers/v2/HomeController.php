@@ -5,7 +5,7 @@ namespace App\Http\Controllers\v2;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\v2\TourOrder;
+// use App\Models\v2\TourOrder;
 use \Carbon\Carbon;
 use DataTables;
 use HTTP_Request2;
@@ -100,13 +100,13 @@ class HomeController extends Controller
             //     'month' => $date->shortMonthName,
             //     'year' => $date->year,
             // ];
-            $data['total_sales_tour'][] = TourOrder::where(\DB::raw("DATE_FORMAT(created_at, '%Y-m')"),$date->format('Y-m'))->count();
+            // $data['total_sales_tour'][] = TourOrder::where(\DB::raw("DATE_FORMAT(created_at, '%Y-m')"),$date->format('Y-m'))->count();
             $data['periode'][] = $date->format('m/d/Y');
         }
-        $data['label_total_sales_tour'] = json_encode($data['total_sales_tour']);
+        // $data['label_total_sales_tour'] = json_encode($data['total_sales_tour']);
         $data['label_periode'] = json_encode($data['periode']);
-        $total_sales_income = TourOrder::all();
-        $data['sales_income'] = $total_sales_income;
+        // $total_sales_income = TourOrder::all();
+        // $data['sales_income'] = $total_sales_income;
         // dd($data);
         // dd(json_encode($data['periode']));
         // dd(json_decode(json_encode($data['periode']),false));

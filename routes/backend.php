@@ -13,28 +13,33 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('balance', 'v2\HomeController@balance')->name('balance')->middleware('verified');
                 Route::get('ajax_booking', 'v2\HomeController@ajax_booking_travelling')->name('home.ajax_booking_travelling')->middleware('verified');
             });
+
+            // Route::prefix('tour')->group(function() {
+            //     Route::get('/', 'v2\TourController@all_tour')->name('tour')->middleware('verified');
+            //     Route::get('create', 'v2\TourController@all_tour_create')->name('tour.create')->middleware('verified');
+            //     Route::post('simpan', 'v2\TourController@all_tour_simpan')->name('tour.create.simpan')->middleware('verified');
+            //     Route::get('{id}/edit', 'v2\TourController@all_tour_edit')->name('tour.edit')->middleware('verified');
+            //     Route::post('{id}/update', 'v2\TourController@all_tour_update')->name('tour.update')->middleware('verified');
+            //     Route::get('{id}/delete', 'v2\TourController@all_tour_delete')->name('tour.delete')->middleware('verified');
+            //     Route::get('order', 'v2\TourController@tour_order_view')->name('tour.order')->middleware('verified');
+            //     Route::prefix('category')->group(function() {
+            //         Route::get('/', 'v2\TourController@tour_category')->name('tour.category')->middleware('verified');
+            //         Route::post('simpan', 'v2\TourController@tour_category_simpan')->name('tour.category.simpan')->middleware('verified');
+            //     });
+            //     Route::prefix('attribute')->group(function() {
+            //         Route::get('/', 'v2\TourController@tour_attribute')->name('tour.attribute')->middleware('verified');
+            //         Route::post('simpan', 'v2\TourController@tour_attribute_simpan')->name('tour.attribute.simpan')->middleware('verified');
+            //         Route::prefix('manage')->group(function() {
+            //             Route::get('{id}', 'v2\TourController@tour_attribute_manage')->name('tour.attribute.manage')->middleware('verified');
+            //             Route::post('{id}/simpan', 'v2\TourController@tour_attribute_manage_simpan')->name('tour.attribute.manage.simpan')->middleware('verified');
+            //             Route::get('{id}/detail/{tour_manage_id}', 'v2\TourController@tour_attribute_manage_detail')->name('tour.attribute.manage.detail')->middleware('verified');
+            //             Route::post('{id}/update', 'v2\TourController@tour_attribute_manage_update')->name('tour.attribute.manage.update')->middleware('verified');
+            //         });
+            //     });
+            // });
+
             Route::prefix('tour')->group(function() {
-                Route::get('/', 'v2\TourController@all_tour')->name('tour')->middleware('verified');
-                Route::get('create', 'v2\TourController@all_tour_create')->name('tour.create')->middleware('verified');
-                Route::post('simpan', 'v2\TourController@all_tour_simpan')->name('tour.create.simpan')->middleware('verified');
-                Route::get('{id}/edit', 'v2\TourController@all_tour_edit')->name('tour.edit')->middleware('verified');
-                Route::post('{id}/update', 'v2\TourController@all_tour_update')->name('tour.update')->middleware('verified');
-                Route::get('{id}/delete', 'v2\TourController@all_tour_delete')->name('tour.delete')->middleware('verified');
-                Route::get('order', 'v2\TourController@tour_order_view')->name('tour.order')->middleware('verified');
-                Route::prefix('category')->group(function() {
-                    Route::get('/', 'v2\TourController@tour_category')->name('tour.category')->middleware('verified');
-                    Route::post('simpan', 'v2\TourController@tour_category_simpan')->name('tour.category.simpan')->middleware('verified');
-                });
-                Route::prefix('attribute')->group(function() {
-                    Route::get('/', 'v2\TourController@tour_attribute')->name('tour.attribute')->middleware('verified');
-                    Route::post('simpan', 'v2\TourController@tour_attribute_simpan')->name('tour.attribute.simpan')->middleware('verified');
-                    Route::prefix('manage')->group(function() {
-                        Route::get('{id}', 'v2\TourController@tour_attribute_manage')->name('tour.attribute.manage')->middleware('verified');
-                        Route::post('{id}/simpan', 'v2\TourController@tour_attribute_manage_simpan')->name('tour.attribute.manage.simpan')->middleware('verified');
-                        Route::get('{id}/detail/{tour_manage_id}', 'v2\TourController@tour_attribute_manage_detail')->name('tour.attribute.manage.detail')->middleware('verified');
-                        Route::post('{id}/update', 'v2\TourController@tour_attribute_manage_update')->name('tour.attribute.manage.update')->middleware('verified');
-                    });
-                });
+                Route::get('/', 'v2\TourController@index')->name('b.tour')->middleware('verified');
             });
             // Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
             // Route::get('home/balance', 'HomeController@balance')->name('home.balance')->middleware('verified');

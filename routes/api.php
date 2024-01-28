@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
+// Route::prefix('packet_bromo')->group(function () {
+//     Route::get('/', 'API\BromoController@index');
+// });
 Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     Route::prefix('payment')->group(function(){
         Route::post('callback', 'Payment\PaymentMidtransController@payment_callback');
@@ -59,8 +61,13 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::post('login', 'API\UserController@login');
         Route::post('logout', 'API\UserController@logout');
         Route::post('register', 'API\UserController@register');
-        
+        Route::prefix('packet_bromo')->group(function () {
+            Route::get('/', 'API\BromoController@index');
+        });
         Route::group(['middleware' => 'auth:api'], function () {
+            Route::prefix('packet_bromo')->group(function () {
+                Route::get('/', 'API\BromoController@index');
+            });
             Route::prefix('paket')->group(function () {
                 Route::get('/', 'API\PaketController@paket');
             });

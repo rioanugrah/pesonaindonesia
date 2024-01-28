@@ -85,8 +85,14 @@
                         <span>Honeymoon</span>
                     </a>
                 </li>
-                
                 <li>
+                    <a href="{{ route('b.tour') }}">
+                        <i class="uil-home-alt"></i>
+                        <span>Tour</span>
+                    </a>
+                </li>
+                
+                {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="uil-window-section"></i>
                         <span>Travel</span>
@@ -99,7 +105,7 @@
                             <a href="{{ route('tour.order') }}">All Booking</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
                 <li>
                     <a href="{{ route('b.bromo') }}">

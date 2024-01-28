@@ -39,26 +39,26 @@ class FrontendNewController extends Controller
         }
     }
 
-    public function tour()
-    {
-        $data['menus'] = $this->menu;
-        $data['paket_trips'] = PaketList::where('kategori_paket_id',2)->where('status','!=',0)
-                                        ->orderBy('created_at','desc')->paginate(9);
-        return view('frontend.frontend_2022.tour',$data);
-    }
+    // public function tour()
+    // {
+    //     $data['menus'] = $this->menu;
+    //     $data['paket_trips'] = PaketList::where('kategori_paket_id',2)->where('status','!=',0)
+    //                                     ->orderBy('created_at','desc')->paginate(9);
+    //     return view('frontend.frontend_2022.tour',$data);
+    // }
 
-    public function tour_detail($id,$paket_id)
-    {
-        $data['menus'] = $this->menu;
-        $data['payments'] = [
-            ['kode_bank' => '014','nama_bank' => 'BCA','fee' => '4500','time' => '24 Jam'],
-            ['kode_bank' => '008','nama_bank' => 'Mandiri','fee' => '4000','time' => '24 Jam'],
-            ['kode_bank' => '002','nama_bank' => 'BRI','fee' => '4000','time' => '24 Jam'],
-            ['kode_bank' => '009','nama_bank' => 'BNI','fee' => '4000','time' => '24 Jam'],
-        ];
-        $data['trip_detail'] = PaketList::where('id',$id)->where('paket_id',$paket_id)->first();
-        return view('frontend.frontend_2022.tour_detail',$data);
-    }
+    // public function tour_detail($id,$paket_id)
+    // {
+    //     $data['menus'] = $this->menu;
+    //     $data['payments'] = [
+    //         ['kode_bank' => '014','nama_bank' => 'BCA','fee' => '4500','time' => '24 Jam'],
+    //         ['kode_bank' => '008','nama_bank' => 'Mandiri','fee' => '4000','time' => '24 Jam'],
+    //         ['kode_bank' => '002','nama_bank' => 'BRI','fee' => '4000','time' => '24 Jam'],
+    //         ['kode_bank' => '009','nama_bank' => 'BNI','fee' => '4000','time' => '24 Jam'],
+    //     ];
+    //     $data['trip_detail'] = PaketList::where('id',$id)->where('paket_id',$paket_id)->first();
+    //     return view('frontend.frontend_2022.tour_detail',$data);
+    // }
 
     public function paket_list_order_payment($id)
     {
