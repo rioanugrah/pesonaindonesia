@@ -355,12 +355,6 @@
             <div class="flight-list">
                 <div class="flight-navtab text-center">
                     <div class="nav nav-tabs mb-0" id="nav-tab" role="tablist">
-                        {{-- @for ($i = $week_start; $i <= $week_end; $i++)
-                            <button class="nav-link {{ \Carbon\Carbon::today()->format('Y-m-d') == $i ? 'active' : null }}"
-                                id="nav-schedule{{ $i }}-tab" data-bs-toggle="tab"
-                                data-bs-target="#schedule{{ $i }}" type="button" role="tab"
-                                aria-selected="true">{{ \Carbon\Carbon::create($i)->isoFormat('dddd') }}<span>{{ \Carbon\Carbon::create($i)->isoFormat('D-MM-YYYY') }}</span></button>
-                        @endfor --}}
                         @foreach ($schedule_bromos as $schedule_bromo)
                         <button class="nav-link {{ \Carbon\Carbon::today()->format('Y-m-d') == $schedule_bromo->format('Y-m-d') ? 'active' : null }}"
                             id="nav-schedule{{ $schedule_bromo->format('Y-m-d') }}-tab" data-bs-toggle="tab"
@@ -432,7 +426,7 @@
                                                     $date_booking = \Carbon\Carbon::create($bromo->tanggal)->format('Y-m-d H:i');
                                                 @endphp
                                                 @if ($date_booking >= \Carbon\Carbon::now()->format('Y-m-d H:i'))
-                                                    <a href="{{ route('frontend.bromo.booking', ['id' => $bromo->id, 'tanggal' => $schedule_bromo]) }}"
+                                                    <a href="{{ route('frontend.bromo.booking', ['id' => $bromo->id, 'tanggal' => $schedule_bromo->format('Y-m-d')]) }}"
                                                         class="nir-btn">BOOKING NOW</a>
                                                 @else
                                                     <a href="javascript:void()" class="nir-btn-black">CLOSE</a>
@@ -447,83 +441,6 @@
                         @endforelse
                     </div>
                     @endforeach
-                    {{-- @for ($i = $week_start; $i <= $week_end; $i++)
-                        @php
-                            $bromos = \App\Models\Bromo::where('tanggal', 'LIKE', '%' . $i . '%')->get();
-                        @endphp
-                        <div class="tab-pane fade content {{ \Carbon\Carbon::today()->format('Y-m-d') == $i ? 'show active' : null }} text-center"
-                            id="schedule{{ $i }}" role="tabpanel"
-                            aria-labelledby="nav-schedule{{ $i }}-tab">
-                            @forelse ($bromos as $bromo)
-                                <div class="flight-full">
-
-                                    <div class="item mb-2 border-all p-2 px-4 rounded">
-                                        <div class="row d-flex align-items-center justify-content-between">
-                                            <div class="col-lg-3 col-md-3 col-sm-12">
-                                                <div class="item-inner-image text-start">
-                                                    <h5 class="mb-0">{{ $bromo->title }}</h5>
-                                                    <small>Meeting Point: {{ $bromo->meeting_point }}</small>
-                                                    <div style="font-size: 10pt; font-weight: bold">Destination:</div>
-                                                    @foreach (json_decode($bromo->destination) as $destination)
-                                                        <div style="font-size: 8pt">✔ {{ $destination->destination }}</div>
-                                                    @endforeach
-                                                    <div style="font-size: 10pt; font-weight: bold">Include:</div>
-                                                    @foreach (json_decode($bromo->include) as $include)
-                                                        <div style="font-size: 8pt">+ {{ $include->include }}</div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2 col-md-2 col-sm-12">
-                                                <div class="item-inner">
-                                                    <div class="content">
-                                                        <h5 class="mb-0" style="text-transform: uppercase">
-                                                            {{ \Carbon\Carbon::create($bromo->tanggal)->isoformat('dddd, D MMMM YYYY') }}
-                                                        </h5>
-                                                        <p class="mb-0 text-uppercase">Departure Date</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-sm-12">
-                                                <div class="item-inner">
-                                                    <div class="content">
-                                                        <h3 class="mb-0">
-                                                            {{ \Carbon\Carbon::create($bromo->tanggal)->format('H:i') }}
-                                                        </h3>
-                                                        <p class="mb-0 text-uppercase">Departure Time</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2 col-md-2 col-sm-12">
-                                                <div class="item-inner flight-time">
-                                                    <p class="mb-0">
-                                                        {{ $bromo->category_trip == 'Publik' ? 'Open Trip' : 'Private Trip' }}
-                                                        <br>Kuota: {{ $bromo->quota }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2 col-md-2 col-sm-12">
-                                                <div class="item-inner text-end">
-                                                    <p class="theme fs-4 fw-bold">Rp.
-                                                        {{ number_format($bromo->price, 0, ',', '.') }}</p>
-                                                    @php
-                                                        $date_booking = \Carbon\Carbon::create($bromo->tanggal)->format('Y-m-d H:i');
-                                                    @endphp
-                                                    @if ($date_booking >= \Carbon\Carbon::now()->format('Y-m-d H:i'))
-                                                        <a href="{{ route('frontend.bromo.booking', ['id' => $bromo->id, 'tanggal' => $i]) }}"
-                                                            class="nir-btn">BOOKING NOW</a>
-                                                    @else
-                                                        <a href="javascript:void()" class="nir-btn-black">CLOSE</a>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @empty
-                                <p>Data Paket Belum Tersedia</p>
-                            @endforelse
-                        </div>
-                    @endfor --}}
                 </div>
                 {{-- <div class="flight-btn text-center"><a href="flight-grid.html" class="nir-btn">View More</a></div> --}}
             </div>

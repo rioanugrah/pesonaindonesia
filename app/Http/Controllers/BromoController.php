@@ -22,6 +22,7 @@ use App\Mail\Pembayaran;
 use App\Mail\InvoiceTravelling;
 
 use \Carbon\Carbon;
+use \Carbon\CarbonPeriod;
 use DataTables;
 use Notification;
 use Validator;
@@ -49,6 +50,8 @@ class BromoController extends Controller
         $data['today'] = Carbon::today();
         $data['week_start'] = $data['today']->startOfWeek()->format('Y-m-d');
         $data['week_end'] = $data['today']->endOfWeek()->format('Y-m-d');
+        $data['schedule_bromos']=CarbonPeriod::create($data['week_start'],$data['week_end']);
+       
         // dd(date('Y-m-d'));
         // dd(Carbon::today()->format('Y-m-d'));
         // for ($i=$data['week_start']; $i <= $data['week_end']; $i++) { 
