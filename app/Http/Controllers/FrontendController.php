@@ -42,6 +42,7 @@ use App\Models\VerifikasiTiketList;
 
 use App\Models\KabupatenKota;
 use \Carbon\Carbon;
+use \Carbon\CarbonPeriod;
 
 // use App\Notifications\WisataNotification;
 use App\Events\EventRegisterEvent;
@@ -323,6 +324,8 @@ class FrontendController extends Controller
             $data['today'] = Carbon::today();
             $data['week_start'] = $data['today']->startOfWeek()->format('Y-m-d');
             $data['week_end'] = $data['today']->endOfWeek()->format('Y-m-d');
+            $data['schedule_bromos']=CarbonPeriod::create($data['week_start'],$data['week_end']);
+            // dd(CarbonPeriod::create($data['week_start'],$data['week_end']));
 
             return view('frontend.frontend5.index', $data);
             // return view('frontend.frontend4.index', $data);
