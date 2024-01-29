@@ -33,7 +33,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         //     Route::get('/', 'API\BromoController@index');
         // });
         Route::group(['middleware' => 'auth:api'], function () {
-            Route::prefix('packet_bromos')->group(function () {
+            Route::prefix('packet_bromo')->group(function () {
                 Route::get('/', 'API\BromoController@index');
             });
             Route::prefix('paket')->group(function () {
