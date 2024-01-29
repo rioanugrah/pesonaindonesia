@@ -29,9 +29,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::post('login', 'API\UserController@login');
         Route::post('logout', 'API\UserController@logout');
         Route::post('register', 'API\UserController@register');
-        Route::prefix('packet_bromo')->group(function () {
-            Route::get('/', 'API\BromoController@index');
-        });
+        // Route::prefix('packet_bromo')->group(function () {
+        //     Route::get('/', 'API\BromoController@index');
+        // });
         Route::group(['middleware' => 'auth:api'], function () {
             Route::prefix('packet_bromo')->group(function () {
                 Route::get('/', 'API\BromoController@index');
