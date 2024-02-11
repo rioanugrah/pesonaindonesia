@@ -205,6 +205,10 @@ Route::get('testing_new/{code}', function ($code) {
     return view('emails.InvoiceTesting',compact('invoice'));
 });
 
+// Route::get('new_test', function(){
+//     return env('MIDTRANS_CLIENT_KEY_DEMO');
+// });
+
 // Route::any('{page?}',function(){
 //     return View::make('layouts.status.404');
 //     // return View::make('pages.error.404');

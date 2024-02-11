@@ -35,6 +35,8 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::group(['middleware' => 'auth:api'], function () {
             Route::prefix('packet_bromo')->group(function () {
                 Route::get('/', 'API\BromoController@index');
+                Route::get('{id}', 'API\BromoController@detail');
+                Route::post('{id}/booking', 'API\BromoController@booking');
             });
             Route::prefix('paket')->group(function () {
                 Route::get('/', 'API\PaketController@paket');
@@ -46,6 +48,12 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::prefix('tour')->group(function () {
                 Route::get('/', 'API\TourController@list_tour');
                 Route::get('{id}', 'API\TourController@tour_detail');
+            });
+            Route::prefix('booking')->group(function () {
+                Route::get('/', 'API\BookingController@booking');
+                Route::get('{id}/payment', 'API\BookingController@booking_detail_payment');
+                Route::get('process', 'API\BookingController@booking_process');
+                Route::get('complete', 'API\BookingController@booking_complete');
             });
         });
     });

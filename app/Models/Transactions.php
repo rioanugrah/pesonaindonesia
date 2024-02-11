@@ -28,6 +28,6 @@ class Transactions extends Model
 
     public function verifikasi_tiket()
     {
-        return $this->belongsTo(\App\Models\VerifikasiTiket::class, 'id');
+        return $this->belongsTo(\App\Models\VerifikasiTiket::class, 'id', 'transaction_id');
     }
 }
