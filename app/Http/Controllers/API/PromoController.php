@@ -4,13 +4,14 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\v2\Promosi;
 use DB;
 
 class PromoController extends Controller
 {
     public function index()
     {
-        $datas = DB::table('promosi')->get();
+        $datas = Promosi::get();
         foreach ($datas as $key => $data) {
             $promo[] = [
                 'id' => $data->id,
