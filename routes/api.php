@@ -44,6 +44,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::prefix('event')->group(function () {
                 Route::get('/', 'API\EventController@index');
             });
+            Route::prefix('promosi')->group(function () {
+                Route::get('/', 'API\PromoController@index');
+            });
             Route::get('list_hotel', 'API\HotelController@list_hotel')->name('api.list_hotel');
             Route::prefix('tour')->group(function () {
                 Route::get('/', 'API\TourController@list_tour');

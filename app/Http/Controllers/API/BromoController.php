@@ -57,6 +57,7 @@ class BromoController extends Controller
                     'id' => $jadwal_bromo->id,
                     'date' => Carbon::create($jadwal_bromo->tanggal)->isoFormat('LL'),
                     'time' => Carbon::create($jadwal_bromo->tanggal)->format('H:i'),
+                    'schedule' => Carbon::create($jadwal_bromo->tanggal)->format('Y-m-d'),
                     'slug' => $jadwal_bromo->slug,
                     'title' => $jadwal_bromo->title,
                     'meeting_point' => $jadwal_bromo->meeting_point,
