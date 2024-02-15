@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Transactions;
 
 use \Carbon\Carbon;
+use DNS1D;
 
 class BookingController extends Controller
 {
@@ -87,6 +88,7 @@ class BookingController extends Controller
                 'transaction_price' => $booking->transaction_price,
                 'user' => $booking->user,
                 'status' => $booking->status,
+                'barcode' => DNS1D::getBarcodeSVG('4445645656', 'PHARMA2T',3,33)
             ]
         ];
     }
