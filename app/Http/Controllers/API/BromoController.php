@@ -53,6 +53,11 @@ class BromoController extends Controller
         foreach ($schedule_bromos as $schedule_bromo) {
             $jadwal_bromos = $this->bromo->whereDate('tanggal',$schedule_bromo->format('Y-m-d'))->get();
             foreach ($jadwal_bromos as $jadwal_bromo) {
+                if ($jadwal_bromo->tanggal >= Carbon::now()->format('Y-m-d H:i') ) {
+                    $status = 'open';
+                }else{
+                    $status = 'close';
+                }
                 $data['data'][] = [
                     'id' => $jadwal_bromo->id,
                     'date' => Carbon::create($jadwal_bromo->tanggal)->isoFormat('LL'),
@@ -67,6 +72,7 @@ class BromoController extends Controller
                     // 'price' => 'Rp. '.number_format($jadwal_bromo->price,0,',','.'),
                     'price' => number_format($jadwal_bromo->price,0,',','.'),
                     'discount' => $jadwal_bromo->discount,
+                    'status' => $status
                 ];
             }
         }
