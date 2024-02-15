@@ -89,7 +89,7 @@ class BromoController extends Controller
             ];
         }
 
-        if ($detail_packet_bromo->tanggal >= Carbon::now()->format('Y-m-d H:i') ) {
+        if ($detail_packet_bromo->tanggal >= Carbon::now() ) {
             $status = 'open';
         }else{
             $status = 'close';
