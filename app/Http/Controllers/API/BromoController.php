@@ -88,6 +88,13 @@ class BromoController extends Controller
                 'message_content' => 'Data tidak ditemukan'
             ];
         }
+
+        if ($detail_packet_bromo->tanggal >= Carbon::now()->format('Y-m-d H:i') ) {
+            $status = 'open';
+        }else{
+            $status = 'close';
+        }
+
         return [
             'success' => true,
             'data' => [
@@ -106,6 +113,7 @@ class BromoController extends Controller
                 'price' => $detail_packet_bromo->price,
                 'accounting' => number_format($detail_packet_bromo->price,0,',','.'),
                 'discount' => $detail_packet_bromo->discount,
+                'status' => $status,
             ]
         ];
     }
