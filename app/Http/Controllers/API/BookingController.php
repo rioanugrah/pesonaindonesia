@@ -84,6 +84,7 @@ class BookingController extends Controller
                 'first_name' => $transaction_order->first_name,
                 'last_name' => $transaction_order->last_name,
                 'phone' => $transaction_order->phone,
+                'tickets' => $booking->verifikasi_tiket,
                 'transaction_qty' => $booking->transaction_qty,
                 'transaction_price' => $booking->transaction_price,
                 'user' => $booking->user,
