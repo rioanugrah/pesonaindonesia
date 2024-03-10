@@ -116,7 +116,7 @@
         document.onkeydown = function(event) {
             if (event.keyCode == 123) { // Prevent F12
                 return false;
-            } else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) { // Prevent Ctrl+Shift+I        
+            } else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) { // Prevent Ctrl+Shift+I
                 return false;
             }
         };
@@ -124,6 +124,17 @@
     <script src="{{ $assets }}/js/custom-swiper.js"></script>
     <script src="{{ $assets }}/js/custom-nav.js"></script>
     @yield('js')
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/{!! env('TAWTALK_ID') !!}/{!! env('TAWTALK_SRC') !!}';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
 </body>
 
 </html>
