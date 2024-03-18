@@ -37,8 +37,12 @@ class TransaksiPaketWisataController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('durasi_wisata', function($row){
-                        $explode_durasi_wisata = explode('|',$row->durasi_wisata);
-                        return $explode_durasi_wisata[0].' Hari '.$explode_durasi_wisata[1].' Malam';
+                        if (empty($row->durasi_wisata)) {
+                            return '-';
+                        }else{
+                            $explode_durasi_wisata = explode('|',$row->durasi_wisata);
+                            return $explode_durasi_wisata[0].' Hari '.$explode_durasi_wisata[1].' Malam';
+                        }
                     })
                     ->addColumn('status', function($row){
 
