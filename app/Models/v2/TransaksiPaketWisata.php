@@ -23,7 +23,7 @@ class TransaksiPaketWisata extends Model
         'tour_leader',
         'objek_wisata',
         'waktu_keberangkatan',
-        'dunia_wisata',
+        'durasi_wisata',
         'kuota_peserta',
         'remaks',
         'status',
