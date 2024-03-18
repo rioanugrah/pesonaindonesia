@@ -91,7 +91,7 @@
                         <span>Tour</span>
                     </a>
                 </li>
-                
+
                 {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="uil-window-section"></i>
@@ -114,6 +114,13 @@
                     </a>
                 </li>
                 @endcan
+                <li class="menu-title">Management Administrasi</li>
+                <li>
+                    <a href="{{ route('b.transaksi_paket_wisata') }}">
+                        <i class="uil-home-alt"></i>
+                        <span>Paket Wisata</span>
+                    </a>
+                </li>
                 <li class="menu-title">Finance Officer</li>
                 <li>
                     <a href="{{ route('b.laporan_transaksi') }}">
@@ -135,21 +142,21 @@
                 </li>
                 @can('kt-operating')
                 <li class="menu-title">Operating Officer</li>
-                
+
                 <li>
                     <a href="{{ route('cooperation') }}">
                         <i class="uil-home-alt"></i>
                         <span>Kerjasama</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="{{ route('events') }}">
                         <i class="uil-home-alt"></i>
                         <span>Event</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="#">
                         <i class="uil-home-alt"></i>

@@ -43,13 +43,13 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             });
             // Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
             // Route::get('home/balance', 'HomeController@balance')->name('home.balance')->middleware('verified');
-            
+
             Route::get('wisatas', 'WisataController@index')->name('wisata')->middleware('verified');
             Route::post('wisata/simpan', 'WisataController@simpan')->name('wisata.simpan')->middleware('verified');
-            
+
             Route::get('kategori_kota', 'KategoriKotaController@index')->name('ktkota')->middleware('verified');
             Route::post('kategori_kota/simpan', 'KategoriKotaController@simpan')->name('ktkota.simpan')->middleware('verified');
-            
+
             Route::prefix('kategori')->group(function() {
                 Route::prefix('bidang_usaha')->group(function() {
                     Route::get('/', 'KategoriController@bidang_usaha')->name('kategori.bidang_usaha')->middleware('verified');
@@ -85,7 +85,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::post('data/upload', 'v2\CooperationController@berkas')->name('cooperation.berkas')->middleware('verified');
                 Route::post('status', 'v2\CooperationController@status')->name('cooperation.status')->middleware('verified');
             });
-    
+
             Route::prefix('paket')->group(function(){
                 Route::get('/', 'PaketController@index')->name('paket')->middleware('verified');
                 Route::post('simpan', 'PaketController@simpan')->name('paket.simpan')->middleware('verified');
@@ -107,14 +107,14 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('{id}/bukti_pembayaran', 'PaketOrderController@bukti_pembayaran')->name('paket.order.bukti_pembayaran')->middleware('verified');
                 Route::post('bukti_pembayaran/update', 'PaketOrderController@bukti_pembayaran_update')->name('paket.order.bukti_pembayaran.update')->middleware('verified');
             });
-            
+
             Route::prefix('coupons')->group(function(){
                 Route::get('/', 'CouponController@index')->name('coupon')->middleware('verified');
                 Route::post('simpan', 'CouponController@simpan')->name('coupon.simpan')->middleware('verified');
                 Route::get('{id}/used', 'CouponController@kupon_used')->name('coupon.used')->middleware('verified');
                 Route::post('{id}/used/simpan', 'CouponController@kupon_used_simpan')->name('coupon.used.simpan')->middleware('verified');
             });
-    
+
             Route::prefix('travelling')->group(function(){
                 Route::get('/', 'TravellingController@b_index')->name('travelling')->middleware('verified');
                 Route::get('create', 'TravellingController@b_create')->name('travelling.create')->middleware('verified');
@@ -123,7 +123,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::post('{id}/update', 'TravellingController@update')->name('travelling.update')->middleware('verified');
                 Route::get('{id}/delete', 'TravellingController@delete')->name('travelling.delete')->middleware('verified');
             });
-    
+
             Route::prefix('vendors')->group(function(){
                 Route::get('/', 'VendorsController@index')->name('vendors')->middleware('verified');
                 Route::post('simpan', 'VendorsController@simpan')->name('vendors.simpan')->middleware('verified');
@@ -133,7 +133,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('produk/{kode_vendor}/create', 'VendorsController@detail_create')->name('vendors.detail_produk.create')->middleware('verified');
                 Route::post('produk/{kode_vendor}/simpan', 'VendorsController@detail_simpan')->name('vendors.detail_produk.simpan')->middleware('verified');
             });
-    
+
             Route::prefix('pengguna')->group(function(){
                 Route::get('/', 'v2\PenggunaController@index')->name('pengguna')->middleware('verified');
                 Route::post('simpan', 'v2\PenggunaController@simpan')->name('pengguna.simpan')->middleware('verified');
@@ -141,7 +141,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('{id}', 'v2\PenggunaController@detail')->name('pengguna.detail')->middleware('verified');
                 Route::get('{id}/reset', 'v2\PenggunaController@reset')->name('pengguna.reset')->middleware('verified');
             });
-            
+
             Route::resource('users','v2\UsersController');
             Route::prefix('permissions')->group(function(){
                 Route::get('/', 'v2\PermissionsController@index')->name('permissions')->middleware('verified');
@@ -149,7 +149,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             });
 
             Route::get('profile', 'v2\UsersController@profile')->name('pengguna.profile')->middleware('verified');
-    
+
             Route::prefix('visitor')->group(function(){
                 Route::get('/', 'v2\VisitorController@index')->name('visitor')->middleware('verified');
             });
@@ -158,7 +158,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('/', 'v2\GalleryController@index')->name('b.gallery')->middleware('verified');
                 Route::post('simpan', 'v2\GalleryController@simpan')->name('b.gallery.simpan')->middleware('verified');
             });
-            
+
             // Route::prefix('roles')->group(function(){
             //     Route::get('/', 'RolesController@index')->name('roles')->middleware('verified');
             //     Route::post('simpan', 'RolesController@simpan')->name('roles.simpan')->middleware('verified');
@@ -167,9 +167,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             //     Route::post('update', 'RolesController@update')->name('roles.update')->middleware('verified');
             // });
             Route::resource('roles','v2\RolesController');
-            
+
             Route::get('status', 'StatusController@index')->name('status')->middleware('verified');
-            
+
             Route::prefix('slider')->group(function(){
                 Route::get('/', 'SliderController@index')->name('slider')->middleware('verified');
                 Route::get('{id}/edit', 'SliderController@edit')->name('slider.edit')->middleware('verified');
@@ -177,7 +177,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::post('update', 'SliderController@update')->name('slider.update')->middleware('verified');
                 Route::get('{id}/hapus', 'SliderController@delete')->name('slider.hapus')->middleware('verified');
             });
-    
+
             Route::prefix('posting')->group(function() {
                 Route::get('/', 'v2\PostingController@index')->name('posting')->middleware('verified');
                 Route::get('buat', 'v2\PostingController@create')->name('posting.create')->middleware('verified');
@@ -187,11 +187,11 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('{id}/delete', 'v2\PostingController@delete')->name('posting.delete')->middleware('verified');
             });
             // Route::prefix('paket')->group(function(){
-    
+
             // });
-    
+
             Route::get('tiket_wisata', 'TiketWisataController@index_tiket_wisata')->name('tiket_wisata')->middleware('verified');
-            
+
             Route::prefix('hotel')->group(function() {
                 Route::get('/', 'HotelController@index')->name('hotel')->middleware('verified');
                 Route::post('/simpan', 'HotelController@simpan')->name('hotel.simpan')->middleware('verified');
@@ -226,7 +226,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             });
 
             Route::get('log', 'LogController@index')->name('log')->middleware('verified');
-            
+
             Route::prefix('events')->group(function(){
                 Route::get('/', 'v2\EventController@index')->name('events')->middleware('verified');
                 Route::get('buat', 'v2\EventController@create')->name('events.buat')->middleware('verified');
@@ -235,19 +235,19 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('{id}/register', 'v2\EventController@detailEventRegister')->name('events.detailRegister')->middleware('verified');
                 Route::get('delete/{id}', 'v2\EventController@destroy')->name('events.delete')->middleware('verified');
             });
-            
+
             Route::prefix('seo')->group(function(){
                 Route::get('/', 'v2\SeoController@index')->name('seo')->middleware('verified');
-                Route::post('simpan', 'v2\SeoController@simpan')->name('seo.simpan')->middleware('verified');                
+                Route::post('simpan', 'v2\SeoController@simpan')->name('seo.simpan')->middleware('verified');
             });
-            
+
             Route::prefix('invoice')->group(function(){
                 Route::get('/', 'v2\InvoiceController@index')->name('b.invoice')->middleware('verified');
                 Route::get('create', 'v2\InvoiceController@create')->name('b.invoice.create')->middleware('verified');
                 Route::get('{kode_order}', 'v2\InvoiceController@detail')->name('b.invoice.detail')->middleware('verified');
                 Route::get('{kode_order}/print', 'v2\InvoiceController@print_pos')->name('b.invoice.print_pos')->middleware('verified');
             });
-            
+
             Route::prefix('transaction')->group(function(){
                 Route::get('/', 'v2\OrderController@index')->name('b.order')->middleware('verified');
                 Route::get('bukti_pembayaran/{kode_transaksi}', 'v2\OrderController@detail_bukti_pembayaran')->name('b.order.detail_bukti_pembayaran')->middleware('verified');
@@ -266,14 +266,42 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::post('{id_generate}/update', 'v2\PromosiController@update')->name('b.promosi.update')->middleware('verified');
                 Route::get('{id_generate}/delete', 'v2\PromosiController@delete')->name('b.promosi.delete')->middleware('verified');
             });
-            
+
             Route::prefix('bromo')->group(function(){
                 Route::get('/', 'BromoController@b_index')->name('b.bromo')->middleware('verified');
                 Route::post('simpan', 'BromoController@b_simpan')->name('b.bromo.simpan')->middleware('verified');
                 Route::get('{id}', 'BromoController@b_detail')->name('b.bromo.detail')->middleware('verified');
                 Route::post('reupload/simpan', 'BromoController@b_reupload_simpan')->name('b.bromo.reupload_simpan')->middleware('verified');
             });
-    
+
+            Route::prefix('management_administrasi')->group(function(){
+                Route::prefix('transaksi_paket_wisata')->group(function(){
+                    Route::get('/', 'v2\TransaksiPaketWisataController@index')->name('b.transaksi_paket_wisata')->middleware('verified');
+                    Route::post('simpan', 'v2\TransaksiPaketWisataController@simpan')->name('b.transaksi_paket_wisata.simpan')->middleware('verified');
+                    Route::get('{kode}/{id}', 'v2\TransaksiPaketWisataController@detail')->name('b.transaksi_paket_wisata.detail')->middleware('verified');
+                    Route::get('{kode}/{id}/edit', 'v2\TransaksiPaketWisataController@edit')->name('b.transaksi_paket_wisata.edit')->middleware('verified');
+                    Route::post('{kode}/{id}/update', 'v2\TransaksiPaketWisataController@update')->name('b.transaksi_paket_wisata.update')->middleware('verified');
+
+                    Route::prefix('{kode}/{id}/hotel')->group(function(){
+                        Route::get('/', 'v2\TransaksiPaketWisataController@detail_wisata_hotel')->name('b.transaksi_paket_wisata.detail_wisata_hotel')->middleware('verified');
+                        Route::post('simpan', 'v2\TransaksiPaketWisataController@simpan_hotel_wisata')->name('b.transaksi_paket_wisata.simpan_hotel_wisata')->middleware('verified');
+                        Route::get('{t_paket_wisata_id}/edit', 'v2\TransaksiPaketWisataController@edit_wisata_hotel')->name('b.transaksi_paket_wisata.edit_wisata_hotel')->middleware('verified');
+                        Route::post('update', 'v2\TransaksiPaketWisataController@update_hotel_wisata')->name('b.transaksi_paket_wisata.update_hotel_wisata')->middleware('verified');
+                        Route::get('{t_paket_wisata_id}/delete', 'v2\TransaksiPaketWisataController@delete_hotel_wisata')->name('b.transaksi_paket_wisata.delete_hotel_wisata')->middleware('verified');
+                    });
+
+                    Route::prefix('{kode}/{id}/maskapai')->group(function(){
+                        Route::get('/', 'v2\TransaksiPaketWisataController@detail_wisata_maskapai')->name('b.transaksi_paket_wisata.detail_wisata_maskapai')->middleware('verified');
+                        Route::post('simpan', 'v2\TransaksiPaketWisataController@simpan_maskapai_wisata')->name('b.transaksi_paket_wisata.simpan_maskapai_wisata')->middleware('verified');
+                        Route::get('{t_paket_wisata_id}/edit', 'v2\TransaksiPaketWisataController@edit_wisata_maskapai')->name('b.transaksi_paket_wisata.edit_wisata_maskapai')->middleware('verified');
+                        Route::post('update', 'v2\TransaksiPaketWisataController@update_maskapai_wisata')->name('b.transaksi_paket_wisata.update_maskapai_wisata')->middleware('verified');
+                        Route::get('{t_paket_wisata_id}/delete', 'v2\TransaksiPaketWisataController@delete_maskapai_wisata')->name('b.transaksi_paket_wisata.delete_maskapai_wisata')->middleware('verified');
+
+                    });
+                });
+
+            });
+
             // Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');
             // Route::get('pengguna/delete/{id}', 'UsersController@delete')->middleware('verified');
             // Route::post('pengguna/simpan', 'UsersController@simpan')->name('pengguna.simpan')->middleware('verified');
@@ -288,12 +316,12 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             });
         });
     });
-    
+
     Route::post('cooperation/kab_kota', 'CooperationController@select_kab_kota')->name('select.kota');
-    
+
     Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login_google');
     Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
-    
+
     Route::get('save-token1', 'TestingController@save')->name('save.token1');
     Route::post('save-token', 'TestingController@save')->name('save.token');
     Route::post('send-notification', 'TestingController@send_notif')->name('send.notification');

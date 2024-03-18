@@ -13,6 +13,7 @@
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
+                    @include('layouts.backend_new_2023.modalLoading')
                     @yield('content')
                 </div>
             </div>
