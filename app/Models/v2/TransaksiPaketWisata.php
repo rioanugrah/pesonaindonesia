@@ -38,4 +38,9 @@ class TransaksiPaketWisata extends Model
     {
         return $this->hasMany(\App\Models\v2\TransaksiPaketWisataMaskapai::class, 't_paket_wisata_id');
     }
+
+    public function detail_wisata_peserta()
+    {
+        return $this->hasMany(\App\Models\v2\TransaksiPaketWisataPeserta::class, 't_paket_wisata_id');
+    }
 }

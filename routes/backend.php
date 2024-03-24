@@ -296,6 +296,13 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                         Route::get('{t_paket_wisata_id}/edit', 'v2\TransaksiPaketWisataController@edit_wisata_maskapai')->name('b.transaksi_paket_wisata.edit_wisata_maskapai')->middleware('verified');
                         Route::post('update', 'v2\TransaksiPaketWisataController@update_maskapai_wisata')->name('b.transaksi_paket_wisata.update_maskapai_wisata')->middleware('verified');
                         Route::get('{t_paket_wisata_id}/delete', 'v2\TransaksiPaketWisataController@delete_maskapai_wisata')->name('b.transaksi_paket_wisata.delete_maskapai_wisata')->middleware('verified');
+                    });
+
+                    Route::prefix('{kode}/{id}/peserta')->group(function(){
+                        Route::get('/', 'v2\TransaksiPaketWisataController@detail_wisata_peserta')->name('b.transaksi_paket_wisata.detail_wisata_peserta')->middleware('verified');
+                        Route::post('simpan', 'v2\TransaksiPaketWisataController@simpan_peserta_wisata')->name('b.transaksi_paket_wisata.simpan_peserta_wisata')->middleware('verified');
+                        Route::get('{t_paket_wisata_id}/edit', 'v2\TransaksiPaketWisataController@edit_wisata_peserta')->name('b.transaksi_paket_wisata.edit_wisata_peserta')->middleware('verified');
+                        Route::post('update', 'v2\TransaksiPaketWisataController@update_peserta_wisata')->name('b.transaksi_paket_wisata.update_peserta_wisata')->middleware('verified');
 
                     });
                 });

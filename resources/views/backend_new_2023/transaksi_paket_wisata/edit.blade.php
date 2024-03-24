@@ -3,6 +3,7 @@
     Detail {{ $transaksi_paket_wisata->kode . ' - ' . $transaksi_paket_wisata->nama_keberangkatan }}
 @endsection
 @section('css')
+    <link href="{{ URL::asset('backend_new/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('backend_new/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('backend_new/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
@@ -20,6 +21,9 @@
 
     @include('backend_new_2023.transaksi_paket_wisata.maskapai.modalBuatMaskapai')
     @include('backend_new_2023.transaksi_paket_wisata.maskapai.modalEditMaskapai')
+
+    @include('backend_new_2023.transaksi_paket_wisata.peserta.modalBuatPeserta')
+    @include('backend_new_2023.transaksi_paket_wisata.peserta.modalEditPeserta')
     <div class="row">
         <div class="col-12">
             <form id="update-form" method="post" enctype="multipart/form-data">
@@ -220,6 +224,28 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
+                        <label class="col-md-3">Daftar Peserta</label>
+                        <div class="col-md-9">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-responsive peserta">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center" style="background-color: #891652; color: white">No</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Nama Peserta</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Email</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">No.Telepon</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="daftar_peserta">
+                                    </tbody>
+                                </table>
+                                <button type="button" onclick="buatPeserta()" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Peserta</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="mb-3 row">
                         <label class="col-md-3 col-form-label">Catatan</label>
                         <div class="col-md-9">
                             <textarea name="remaks" class="form-control" id="" cols="30" rows="2">{{ $transaksi_paket_wisata->remaks }}</textarea>
@@ -236,6 +262,7 @@
     </div>
 @endsection
 @section('script')
+    <script src="{{ URL::asset('backend_new/libs/datatables/datatables.min.js') }}"></script>
     <script src="{{ URL::asset('backend_new/libs/toastr/toastr.min.js') }}"></script>
     <script src="{{ URL::asset('backend_new/libs/jquery-repeater/jquery-repeater.min.js') }}"></script>
     <script src="{{ URL::asset('backend_new/libs/sweetalert2/sweetalert2.min.js') }}"></script>
@@ -259,6 +286,10 @@
 
         function buatMaskapai() {
             $('#buatMaskapai').modal('show');
+        };
+
+        function buatPeserta() {
+            $('#buatPeserta').modal('show');
         };
 
         function detailHotel() {
@@ -1080,9 +1111,283 @@
             });
         });
 
+        function detailPeserta() {
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('b.transaksi_paket_wisata.detail_wisata_peserta',['kode'=>$transaksi_paket_wisata->kode, 'id' => $transaksi_paket_wisata->id]) }}",
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                beforeSend: function(){
+                    document.getElementById('daftar_hotel').innerHtml = "<tr>"+
+                                                                            "<td colspan='6'>Loading...</td>"+
+                                                                        "</tr>";
+                },
+                success: function(result){
+                    if (result.success == true) {
+                        var dataPeserta = result.data;
+                        var txt = "";
+                        dataPeserta.forEach(hasil_peserta);
+                        function hasil_peserta(value, index)
+                        {
+                            txt = txt+"<tr>";
+                            txt = txt+  "<td class='text-center'>"+value.no+"</td>";
+                            txt = txt+  "<td class='text-center'>"+value.nama_peserta+"</td>";
+                            txt = txt+  "<td class='text-center'>"+value.email+"</td>";
+                            txt = txt+  "<td class='text-center'>"+value.no_telp+"</td>";
+                            txt = txt+  "<td class='text-center'>"+
+                                            "<div class='btn-group'>"+
+                                                "<button type='button' onclick='editPeserta(`"+value.id+"`)' class='btn btn-warning btn-sm'><i class='fa fa-edit'></i></button>"+
+                                                "<button type='button' onclick='deletePeserta(`"+value.id+"`)' class='btn btn-danger btn-sm'><i class='fa fa-trash'></i></button>"
+                                            "</div>"+
+                                        +"</td>";
+                            txt = txt+"</tr>";
+                        }
+                        document.getElementById('daftar_peserta').innerHTML = txt;
+                    }else{
+                        document.getElementById('daftar_peserta').innerHtml = "<tr>"+
+                                                                                "<td colspan='6'>Data Peserta Belum Tersedia</td>"+
+                                                                            "</tr>";
+                    }
+                },
+                error: function (request, status, error) {
+                    toastr["error"](error);
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": 300,
+                        "hideDuration": 1000,
+                        "timeOut": 5000,
+                        "extendedTimeOut": 1000,
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                }
+            })
+        };
+
+        function editPeserta(t_paket_wisata_id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('b/management_administrasi/transaksi_paket_wisata/'.$transaksi_paket_wisata->kode.'/'.$transaksi_paket_wisata->id.'/peserta/') }}"+'/'+t_paket_wisata_id+'/'+'edit',
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                beforeSend: function(){
+                    // document.getElementById('daftar_hotel').innerHtml = "<tr>"+
+                    //                                                         "<td colspan='6'>Loading...</td>"+
+                    //                                                     "</tr>";
+                },
+                success: function(result){
+                    if (result.success == true) {
+                        $('#edit_peserta_id').val(result.data.id);
+                        $('#edit_peserta_nama_peserta').val(result.data.nama_peserta);
+                        $('#edit_peserta_email').val(result.data.email);
+                        $('#edit_peserta_no_telepon').val(result.data.no_telp);
+                        $('#editPeserta').modal('show');
+                    } else {
+
+                    }
+                },
+                error: function (request, status, error) {
+                    toastr["error"](error);
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": 300,
+                        "hideDuration": 1000,
+                        "timeOut": 5000,
+                        "extendedTimeOut": 1000,
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                }
+            })
+        };
+
+        $('#upload-form-peserta').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            // $('#image-input-error').text('');
+            $.ajax({
+                type:'POST',
+                url: "{{ route('b.transaksi_paket_wisata.simpan_peserta_wisata',['kode'=>$transaksi_paket_wisata->kode, 'id' => $transaksi_paket_wisata->id]) }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    if(result.success != false){
+                        toastr["success"](result.message_content);
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": 300,
+                            "hideDuration": 1000,
+                            "timeOut": 5000,
+                            "extendedTimeOut": 1000,
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                        // this.reset();
+                        $('#buatPeserta').modal('hide');
+                        this.reset();
+                        detailPeserta();
+                    }else{
+                        toastr["error"](result.error);
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": 300,
+                            "hideDuration": 1000,
+                            "timeOut": 5000,
+                            "extendedTimeOut": 1000,
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                        // alert('test');
+                        // iziToast.error({
+                        //     title: result.success,
+                        //     message: result.error
+                        // });
+                    }
+                },
+                error: function (request, status, error) {
+                    toastr["error"](error);
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": 300,
+                        "hideDuration": 1000,
+                        "timeOut": 5000,
+                        "extendedTimeOut": 1000,
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                }
+            });
+        });
+
+        $('#update-form-peserta').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            // $('#image-input-error').text('');
+            $.ajax({
+                type:'POST',
+                url: "{{ route('b.transaksi_paket_wisata.update_peserta_wisata',['kode'=>$transaksi_paket_wisata->kode, 'id' => $transaksi_paket_wisata->id]) }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function(){
+                },
+                success: (result) => {
+                    if(result.success != false){
+                        toastr["success"](result.message_content);
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": 300,
+                            "hideDuration": 1000,
+                            "timeOut": 5000,
+                            "extendedTimeOut": 1000,
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                        // this.reset();
+                        $('#editPeserta').modal('hide');
+                        detailPeserta();
+                    }else{
+                        toastr["error"](result.error);
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": 300,
+                            "hideDuration": 1000,
+                            "timeOut": 5000,
+                            "extendedTimeOut": 1000,
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                        // alert('test');
+                        // iziToast.error({
+                        //     title: result.success,
+                        //     message: result.error
+                        // });
+                    }
+                },
+                error: function (request, status, error) {
+                    toastr["error"](error);
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": 300,
+                        "hideDuration": 1000,
+                        "timeOut": 5000,
+                        "extendedTimeOut": 1000,
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                }
+            });
+        });
+
         $(document).ready(function(){
             detailHotel();
             detailMaskapai();
+            detailPeserta();
         })
     </script>
 @endsection

@@ -23,7 +23,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     Route::get('coba','TestingController@coba');
     Route::get('testinfomail','TestingController@testInfoMail');
     Route::get('log-viewers', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
-    
+
     Route::get('/', 'FrontendController@index')->name('frontend');
     // Route::get('struktur-organisasi', 'FrontendController@struktur')->name('struktur');
     Route::get('tentang-kami', 'FrontendController@tentang_kami')->name('tentang_kami');
@@ -39,22 +39,22 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     Route::post('event_register', 'FrontendController@eventRegister')->name('frontend.eventRegister');
     Route::get('promosi/{generate}/{slug}', 'FrontendController@detail_promosi')->name('frontend.detailPromosi');
     Route::get('kebijakan-pemesanan-perjalanan', 'FrontendController@info')->name('frontend.info');
-    
+
     Route::get('tracking_order', 'FrontendController@tracking_order')->name('frontend.tracking');
     Route::post('tracking_order/cari', 'FrontendController@tracking_order_search')->name('frontend.tracking.cari');
-    
+
     Route::get('cart', 'CartController@index')->name('cart')->middleware('verified');
-    
+
     Route::get('instagram', 'InstagramController@instagram');
     Route::get('servers', 'HomeController@servers');
-    
+
     Route::get('kebijakan-privasi', 'FrontendController@kebijakan_privasi')->name('frontend.kebijakan_privasi');
-    
+
     Route::prefix('wisata')->group(function () {
         Route::get('/', 'FrontendController@wisata')->name('frontend.wisata');
         Route::get('{slug}', 'FrontendController@wisata_detail')->name('frontend.wisataDetail');
     });
-    
+
     Route::prefix('paket')->group(function () {
         Route::get('/', 'FrontendController@paket')->name('frontend.paket');
         Route::get('{slug}', 'FrontendController@paket_detail')->name('frontend.paket.detail');
@@ -65,14 +65,14 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::post('{id}/upload', 'PaketController@paket_bukti_pembayaran')->name('frontend.paket.transfer');
         Route::get('{slug}/pages/{id}', 'PagesFrontendController@detail')->name('frontend.pagesDetail');
     });
-    
+
     // Route::prefix('tour')->group(function () {
     //     Route::get('/', 'FrontendNewController@tour')->name('frontend_new.tour');
     //     Route::get('{id}/{paket_id}', 'FrontendNewController@tour_detail')->name('frontend_new.tour_detail');
     //     Route::post('{slug}/{id}/checkout', 'FrontendNewController@paket_list_order_payment')->name('frontend_new.paket.checkout');
-    
+
     // });
-    
+
     Route::prefix('hotel')->group(function () {
         Route::get('/', 'FrontendController@hotel')->name('frontend.hotel');
         Route::get('search', 'FrontendController@search_hotel')->name('frontend.hotel_search');
@@ -83,7 +83,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::get('/', 'FrontendController@event')->name('frontend.event');
         Route::get('{slug}', 'FrontendController@eventDetail')->name('frontend.eventDetail');
     });
-    
+
     Route::prefix('blog')->group(function () {
         Route::get('/', 'FrontendController@blog')->name('frontend.blog');
         Route::get('{slug}', 'FrontendController@blog_detail')->name('frontend.blog_detail');
@@ -94,25 +94,25 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::post('{slug}/buy_now', 'FrontendController@honeymoon_buy')->name('frontend.honeymoon_buy');
         Route::get('{slug}/payment/{id}', 'FrontendController@honeymoon_confirm')->name('frontend.honeymoon_confirm');
     });
-    
+
     // Route::prefix('partner')->group(function(){
     //     Route::get('/', 'FrontendController@partnership')->name('frontend.partnership');
     //     Route::post('simpan', 'CooperationController@simpan_frontend')->name('frontend.partnership.simpan');
     // });
-    
+
     // Route::prefix('gallery')->group(function () {
     //     Route::get('/', 'GalleryController@index')->name('frontend.gallery');
     // });
-    
+
     Route::prefix('dokumentasi')->group(function () {
         Route::get('/', 'GalleryController@dokumentasi')->name('frontend.dokumentasi');
     });
-    
+
     Route::prefix('promosi')->group(function () {
         Route::get('{id}', 'CouponController@promosi')->name('frontend.promosi');
         Route::post('{id}/cek_kode', 'CouponController@cek_kupon_used')->name('cek_kode');
     });
-    
+
     Route::prefix('travelling')->group(function(){
         Route::get('/', 'TravellingController@f_index')->name('frontend.travelling');
         Route::get('{id}/order', 'TravellingController@f_detail_order')->name('frontend.travelling_detail_order');
@@ -121,25 +121,28 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::post('order/{id}/checkout', 'TravellingController@buy_order')->name('frontend.travelling.checkout');
         Route::get('payment/{id}', 'TravellingController@order_payment')->name('frontend.travelling.payment');
     });
-    
+
     Route::prefix('bromo')->group(function(){
         Route::get('/', 'BromoController@f_index')->name('frontend.bromo');
         Route::get('reservasi/{id}/{tanggal}', 'BromoController@f_booking')->name('frontend.bromo.booking');
         Route::post('reservasi/{id}/{tanggal}/ckeckout', 'BromoController@f_booking_payment_checkout')->name('frontend.bromo.checkout');
         Route::post('reservasi/{id}/{tanggal}/{id_transaksi}/payment', 'BromoController@f_booking_payment_manual')->name('frontend.bromo.payment_manual');
     });
+    Route::prefix('tour')->group(function(){
+        Route::get('/', 'Frontend\v2\TourController@index')->name('frontend.tour');
+    });
 
     Route::prefix('sewa-bus')->group(function () {
         Route::get('/', 'FrontendController@sewa_bus')->name('frontend.sewa_bus');
     });
-    
+
     Route::get('invoice/{id}/tiket_wisata', 'InvoiceController@tiket_wisata')->name('invoice.tiket_wisata');
     Route::get('invoice/{kode_order}', 'InvoiceController@invoice_order')->name('invoice');
     Route::get('invoice/{kode_order}/send', 'InvoiceController@invoice_send')->name('invoice.send');
-    
+
     Route::get('invoice_testing/{kode_order}', 'InvoiceController@invoice_testing');
     Route::get('testings', 'FrontendController@frontend_testing');
-    
+
     // Route::get('invoice_testing/{kode_order}', function($kode_order){
     //     return view('emails.InvoiceTravelling',[
     //         'details' => [
@@ -154,7 +157,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     //         ]
     //     ]);
     // });
-    
+
     // Route::get('testing_wa', function(){
     //     $nohp = "082233684670";
     //     if(!preg_match("/[^+0-9]/",trim($nohp))){
@@ -186,24 +189,27 @@ Route::domain('partner.'.parse_url(env('APP_URL'), PHP_URL_HOST))->group(functio
 // Route::get('test', function () {
 //     // event(new App\Events\TravellingEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
 //     // event(new App\Events\NotificationEvent('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
-    
+
 //     // new App\Notifications\NotificationNotif;
 //     $user = auth()->user();
 //     new Notification::send($user,new App\Notifications\NotificationNotif('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21'));
 //     // NotificationNotif::send(send(auth()->user(),('1','http://localhost:8000','Notif Baru','data masuk','primary','uil-angle-down','21')));
-    
+
 //         // event(new App\Events\TravellingEvent('1'));
 //     return "Event has been sent!";
 // });
-Route::get('test/{code}', 'TestingController@sendNotif');
+
+// Route::get('test/{code}', 'TestingController@sendNotif');
+
 // Route::get('send-notif/{name}', function ($name) {
 //     event(new \App\Events\TravellingEvent($name));
 //     return "Event has been sent!";
 // });
-Route::get('testing_new/{code}', function ($code) {
-    $invoice = \App\Models\Transactions::where('transaction_code',$code)->first();
-    return view('emails.InvoiceTesting',compact('invoice'));
-});
+
+// Route::get('testing_new/{code}', function ($code) {
+//     $invoice = \App\Models\Transactions::where('transaction_code',$code)->first();
+//     return view('emails.InvoiceTesting',compact('invoice'));
+// });
 
 // Route::get('new_test', function(){
 //     return env('MIDTRANS_CLIENT_KEY_DEMO');

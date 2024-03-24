@@ -21,5 +21,6 @@ class TransaksiPaketWisataMaskapai extends Model
         'arah',
         'jam_berangkat',
         'remaks',
+        'harga',
     ];
 }

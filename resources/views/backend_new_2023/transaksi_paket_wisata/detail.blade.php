@@ -3,6 +3,11 @@
     Detail {{ $transaksi_paket_wisata->kode.' - '.$transaksi_paket_wisata->nama_keberangkatan }}
 @endsection
 
+@section('css')
+    <link href="{{ URL::asset('backend_new/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('backend_new/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css">
+@endsection
+
 @section('content')
     {{-- @component('common-components.breadcrumb')
         @slot('pagetitle')
@@ -90,7 +95,7 @@
                     <div class="mb-3 row">
                         <label class="col-md-3">Jumlah Pax</label>
                         <div class="col-md-9">
-                            <div></div>
+                            <div>{{ $transaksi_paket_wisata->detail_wisata_peserta->count() }}</div>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -142,59 +147,91 @@
                     <div class="mb-3 row">
                         <label class="col-md-3">Daftar Hotel</label>
                         <div class="col-md-9">
-                            <table class="table table-bordered table-striped table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center" style="background-color: #891652; color: white">No</th>
-                                        <th class="text-center" style="background-color: #891652; color: white">Hotel</th>
-                                        <th class="text-center" style="background-color: #891652; color: white">Lokasi</th>
-                                        <th class="text-center" style="background-color: #891652; color: white">Jumlah Malam</th>
-                                        <th class="text-center" style="background-color: #891652; color: white">Check-In</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($transaksi_paket_wisata->detail_wisata_hotel as $key => $detail_wisata_hotel)
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-responsive hotel">
+                                    <thead>
                                         <tr>
-                                            <td class="text-center">{{ $key+1 }}</td>
-                                            <td class="text-center">{{ $detail_wisata_hotel->nama_hotel }}</td>
-                                            <td class="text-center">{{ $detail_wisata_hotel->lokasi }}</td>
-                                            <td class="text-center">{{ $detail_wisata_hotel->jumlah_malam }}</td>
-                                            <td class="text-center">{{ $detail_wisata_hotel->check_in }}</td>
+                                            <th class="text-center" style="background-color: #891652; color: white">No</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Hotel</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Lokasi</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Jumlah Malam</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Check-In</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($transaksi_paket_wisata->detail_wisata_hotel as $key => $detail_wisata_hotel)
+                                            <tr>
+                                                <td class="text-center">{{ $key+1 }}</td>
+                                                <td class="text-center">{{ $detail_wisata_hotel->nama_hotel }}</td>
+                                                <td class="text-center">{{ $detail_wisata_hotel->lokasi }}</td>
+                                                <td class="text-center">{{ $detail_wisata_hotel->jumlah_malam }}</td>
+                                                <td class="text-center">{{ $detail_wisata_hotel->check_in }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-md-3">Daftar Maskapai</label>
                         <div class="col-md-9">
-                            <table class="table table-bordered table-striped table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center" style="background-color: #891652; color: white">No</th>
-                                        <th class="text-center" style="background-color: #891652; color: white">Nama Maskapai</th>
-                                        <th class="text-center" style="background-color: #891652; color: white">No. Penerbangan</th>
-                                        <th class="text-center" style="background-color: #891652; color: white">Arah</th>
-                                        <th class="text-center" style="background-color: #891652; color: white">Waktu Penerbangan</th>
-                                        <th class="text-center" style="background-color: #891652; color: white">Catatan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($transaksi_paket_wisata->detail_wisata_maskapai as $key => $detail_wisata_maskapai)
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-responsive maskapai">
+                                    <thead>
                                         <tr>
-                                            <td class="text-center">{{ $key+1 }}</td>
-                                            <td class="text-center">{{ $detail_wisata_maskapai->nama_maskapai }}</td>
-                                            <td class="text-center">{{ $detail_wisata_maskapai->no_penerbangan }}</td>
-                                            <td class="text-center">{{ $detail_wisata_maskapai->arah }}</td>
-                                            <td class="text-center">{{ $detail_wisata_maskapai->jam_berangkat }}</td>
-                                            <td class="text-center">{{ $detail_wisata_maskapai->remaks }}</td>
+                                            <th class="text-center" style="background-color: #891652; color: white">No</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Nama Maskapai</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">No. Penerbangan</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Arah</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Waktu Penerbangan</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Catatan</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($transaksi_paket_wisata->detail_wisata_maskapai as $key => $detail_wisata_maskapai)
+                                            <tr>
+                                                <td class="text-center">{{ $key+1 }}</td>
+                                                <td class="text-center">{{ $detail_wisata_maskapai->nama_maskapai }}</td>
+                                                <td class="text-center">{{ $detail_wisata_maskapai->no_penerbangan }}</td>
+                                                <td class="text-center">{{ $detail_wisata_maskapai->arah }}</td>
+                                                <td class="text-center">{{ $detail_wisata_maskapai->jam_berangkat }}</td>
+                                                <td class="text-center">{{ $detail_wisata_maskapai->remaks }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
+                    <div class="mb-3 row">
+                        <label class="col-md-3">Daftar Peserta</label>
+                        <div class="col-md-9">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-responsive peserta">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center" style="background-color: #891652; color: white">No</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Nama Peserta</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">Email</th>
+                                            <th class="text-center" style="background-color: #891652; color: white">No.Telepon</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($transaksi_paket_wisata->detail_wisata_peserta as $key => $detail_wisata_peserta)
+                                            <tr>
+                                                <td class="text-center">{{ $key+1 }}</td>
+                                                <td class="text-center">{{ $detail_wisata_peserta->nama_peserta }}</td>
+                                                <td class="text-center">{{ $detail_wisata_peserta->email }}</td>
+                                                <td class="text-center">{{ $detail_wisata_peserta->no_telp }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
                     <div class="mb-3 row">
                         <label class="col-md-3">Catatan</label>
                         <div class="col-md-9">
@@ -220,4 +257,16 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script src="{{ URL::asset('backend_new/libs/datatables/datatables.min.js') }}"></script>
+<script src="{{ URL::asset('backend_new/libs/toastr/toastr.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('.hotel').DataTable();
+        $('.maskapai').DataTable();
+        $('.peserta').DataTable();
+    })
+</script>
 @endsection

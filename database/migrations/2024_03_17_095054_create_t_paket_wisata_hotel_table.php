@@ -20,6 +20,7 @@ class CreateTPaketWisataHotelTable extends Migration
             $table->string('lokasi')->nullable();
             $table->string('jumlah_malam',3)->nullable();
             $table->dateTime('check_in')->nullable();
+            $table->string('harga')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

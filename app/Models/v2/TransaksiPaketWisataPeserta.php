@@ -5,10 +5,10 @@ namespace App\Models\v2;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TransaksiPaketWisataHotel extends Model
+class TransaksiPaketWisataPeserta extends Model
 {
     use SoftDeletes;
-    public $table = 't_paket_wisata_hotel';
+    public $table = 't_paket_wisata_peserta';
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $dates = ['deleted_at'];
@@ -16,10 +16,8 @@ class TransaksiPaketWisataHotel extends Model
     public $fillable = [
         'id',
         't_paket_wisata_id',
-        'nama_hotel',
-        'lokasi',
-        'jumlah_malam',
-        'check_in',
-        'harga',
+        'nama_peserta',
+        'email',
+        'no_telp',
     ];
 }

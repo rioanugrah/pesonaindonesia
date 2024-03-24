@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Models\v2\TransaksiPaketWisata;
 use App\Models\v2\TransaksiPaketWisataHotel;
 use App\Models\v2\TransaksiPaketWisataMaskapai;
+use App\Models\v2\TransaksiPaketWisataPeserta;
 
 use \Carbon\Carbon;
 use \Carbon\CarbonPeriod;
@@ -23,11 +24,13 @@ class TransaksiPaketWisataController extends Controller
     function __construct(
         TransaksiPaketWisata $transaksi_paket_wisata,
         TransaksiPaketWisataHotel $transaksi_paket_wisata_hotel,
-        TransaksiPaketWisataMaskapai $transaksi_paket_wisata_maskapai
+        TransaksiPaketWisataMaskapai $transaksi_paket_wisata_maskapai,
+        TransaksiPaketWisataPeserta $transaksi_paket_wisata_peserta
     ){
         $this->transaksi_paket_wisata = $transaksi_paket_wisata;
         $this->transaksi_paket_wisata_hotel = $transaksi_paket_wisata_hotel;
         $this->transaksi_paket_wisata_maskapai = $transaksi_paket_wisata_maskapai;
+        $this->transaksi_paket_wisata_peserta = $transaksi_paket_wisata_peserta;
     }
 
     public function index(Request $request)
@@ -45,17 +48,25 @@ class TransaksiPaketWisataController extends Controller
                         }
                     })
                     ->addColumn('status', function($row){
-
+                        if (Carbon::today() <= $row->waktu_keberangkatan) {
+                            return '<span class="badge bg-primary">Belum Berangkat</span>';
+                        }else{
+                            return '<span class="badge bg-success">Sudah Berangkat</span>';
+                        }
                     })
                     ->addColumn('kuota_tersedia', function($row){
-
+                        $total_peserta = $row->detail_wisata_peserta->count();
+                        $hitung_kuota_tersedia = $row->kuota_peserta - $total_peserta;
+                        return $hitung_kuota_tersedia;
                     })
                     ->addColumn('jumlah_pax', function($row){
-
+                        $total_peserta = $row->detail_wisata_peserta->count();
+                        return $total_peserta;
                     })
                     ->addColumn('action', function($row){
                         $btn = '<div class="btn-group">';
                         $btn .= '<a href='.route('b.transaksi_paket_wisata.detail',['kode' => $row->kode, 'id' => $row->id]).' class="btn btn-info btn-xs"><i class="fas fa-eye"></i> Detail</a>';
+                        $btn .= '<a href='.route('b.transaksi_paket_wisata.edit',['kode' => $row->kode, 'id' => $row->id]).' class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Ubah Data Pemberangkatan</a>';
                         // $btn .= '<a href='.route('tour.edit',['id' => $row->id]).' class="btn btn-warning btn-xs"><i class="fas fa-edit"></i></a>';
                         // $btn .= '<button onclick="hapus(`'.$row->id.'`)" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></button>';
                         $btn .= '</div>';
@@ -220,6 +231,7 @@ class TransaksiPaketWisataController extends Controller
             'hotel_nama_hotel' => 'required',
             'hotel_jumlah_malam' => 'required',
             'hotel_checkin' => 'required',
+            'hotel_harga' => 'required',
         ];
 
         $messages = [
@@ -227,6 +239,7 @@ class TransaksiPaketWisataController extends Controller
             'hotel_nama_hotel.required'   => 'Nama Hotel wajib diisi.',
             'hotel_jumlah_malam.required'   => 'Jumlah Malam wajib diisi.',
             'hotel_checkin.required'   => 'Check In wajib diisi.',
+            'hotel_harga.required'   => 'Harga Tiket Booking wajib diisi.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -238,6 +251,7 @@ class TransaksiPaketWisataController extends Controller
             $input['lokasi'] = $request->hotel_lokasi;
             $input['jumlah_malam'] = $request->hotel_jumlah_malam;
             $input['check_in'] = $request->hotel_checkin;
+            $input['harga'] = $request->hotel_harga;
 
             $save_transaksi_paket_wisata_hotel = $this->transaksi_paket_wisata_hotel->create($input);
             if ($save_transaksi_paket_wisata_hotel) {
@@ -279,6 +293,7 @@ class TransaksiPaketWisataController extends Controller
                     'lokasi' => $data->lokasi,
                     'jumlah_malam' => $data->jumlah_malam,
                     'check_in' => $data->check_in,
+                    'harga' => $data->harga,
                 ];
             }
             return response()->json([
@@ -311,6 +326,7 @@ class TransaksiPaketWisataController extends Controller
             'edit_hotel_nama_hotel' => 'required',
             'edit_hotel_jumlah_malam' => 'required',
             'edit_hotel_checkin' => 'required',
+            'edit_hotel_harga' => 'required',
         ];
 
         $messages = [
@@ -318,6 +334,7 @@ class TransaksiPaketWisataController extends Controller
             'edit_hotel_nama_hotel.required'   => 'Nama Hotel wajib diisi.',
             'edit_hotel_jumlah_malam.required'   => 'Jumlah Malam wajib diisi.',
             'edit_hotel_checkin.required'   => 'Check In wajib diisi.',
+            'edit_hotel_harga.required'   => 'Harga Tiket Booking wajib diisi.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -328,6 +345,7 @@ class TransaksiPaketWisataController extends Controller
             $input['lokasi'] = $request->edit_hotel_lokasi;
             $input['jumlah_malam'] = $request->edit_hotel_jumlah_malam;
             $input['check_in'] = $request->edit_hotel_checkin;
+            $input['harga'] = $request->edit_hotel_harga;
             $update_transaksi_paket_wisata_hotel->update($input);
             // $save_transaksi_paket_wisata_hotel = $this->transaksi_paket_wisata_hotel->create($input);
             if ($update_transaksi_paket_wisata_hotel) {
@@ -388,6 +406,7 @@ class TransaksiPaketWisataController extends Controller
                     'arah' => $data->arah,
                     'jam_berangkat' => $data->jam_berangkat,
                     'remaks' => $data->remaks,
+                    'harga' => $data->harga,
                 ];
             }
             return response()->json([
@@ -405,6 +424,7 @@ class TransaksiPaketWisataController extends Controller
             'maskapai_no_penerbangan' => 'required',
             'maskapai_arah' => 'required',
             'maskapai_jam_berangkat' => 'required',
+            'maskapai_harga' => 'required',
         ];
 
         $messages = [
@@ -412,6 +432,7 @@ class TransaksiPaketWisataController extends Controller
             'maskapai_no_penerbangan.required'   => 'No. Penerbangan wajib diisi.',
             'maskapai_arah.required'   => 'Arah Keberangkatan wajib diisi.',
             'maskapai_jam_berangkat.required'   => 'Jam Keberangkatan wajib diisi.',
+            'maskapai_jam_harga.required'   => 'Harga Tiket Pesawat wajib diisi.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -423,7 +444,8 @@ class TransaksiPaketWisataController extends Controller
             $input['no_penerbangan'] = $request->maskapai_no_penerbangan;
             $input['arah'] = $request->maskapai_arah;
             $input['jam_berangkat'] = $request->maskapai_jam_berangkat;
-            $input['remaks'] = $request->remaks;
+            $input['remaks'] = $request->maskapai_remaks;
+            $input['harga'] = $request->maskapai_harga;
 
             $save_transaksi_paket_wisata_maskapai = $this->transaksi_paket_wisata_maskapai->create($input);
             if ($save_transaksi_paket_wisata_maskapai) {
@@ -471,6 +493,7 @@ class TransaksiPaketWisataController extends Controller
             'edit_maskapai_no_penerbangan' => 'required',
             'edit_maskapai_arah' => 'required',
             'edit_maskapai_jam_berangkat' => 'required',
+            'edit_maskapai_harga' => 'required',
         ];
 
         $messages = [
@@ -478,6 +501,7 @@ class TransaksiPaketWisataController extends Controller
             'edit_maskapai_no_penerbangan.required'   => 'No. Penerbangan wajib diisi.',
             'edit_maskapai_arah.required'   => 'Arah Keberangkatan wajib diisi.',
             'edit_maskapai_jam_berangkat.required'   => 'Jam Keberangkatan wajib diisi.',
+            'edit_maskapai_harga.required'   => 'Harga Tiket Pesawat wajib diisi.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -489,6 +513,7 @@ class TransaksiPaketWisataController extends Controller
             $input['arah'] = $request->edit_maskapai_arah;
             $input['jam_berangkat'] = $request->edit_maskapai_jam_berangkat;
             $input['remaks'] = $request->edit_maskapai_remaks;
+            $input['harga'] = $request->edit_maskapai_harga;
             $update_transaksi_paket_wisata_maskapai->update($input);
             // $save_transaksi_paket_wisata_hotel = $this->transaksi_paket_wisata_hotel->create($input);
             if ($update_transaksi_paket_wisata_maskapai) {
@@ -529,6 +554,138 @@ class TransaksiPaketWisataController extends Controller
             'success' => true,
             'message_title' => 'Berhasil',
             'message_content' => $data->nama_maskapai.' berhasil dihapus'
+        ]);
+    }
+
+    public function detail_wisata_peserta($kode,$id)
+    {
+        $datas = $this->transaksi_paket_wisata_peserta->where('t_paket_wisata_id',$id)->get();
+        if ($datas->isEmpty()) {
+            return response()->json([
+                'success' => false
+            ]);
+        }else{
+            foreach ($datas as $key => $data) {
+                $transaksi_paket_wisata_peserta[] = [
+                    'no' => $key+1,
+                    'id' => $data->id,
+                    'nama_peserta' => $data->nama_peserta,
+                    'email' => $data->email,
+                    'no_telp' => $data->no_telp,
+                ];
+            }
+            return response()->json([
+                'success' => true,
+                'data' => $transaksi_paket_wisata_peserta
+            ]);
+        }
+    }
+
+    public function simpan_peserta_wisata(Request $request, $kode,$id)
+    {
+        $rules = [
+            'peserta_nama_peserta' => 'required',
+            // 'peserta_email' => 'required',
+            // 'peserta_no_telepon' => 'required',
+        ];
+
+        $messages = [
+            'peserta_nama_peserta.required'   => 'Nama Maskapai wajib diisi.',
+            // 'peserta_email.required'   => 'No. Penerbangan wajib diisi.',
+            // 'peserta_no_telepon.required'   => 'No. Telepon wajib diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+            $input['id'] = Str::uuid()->toString();
+            $input['t_paket_wisata_id'] = $id;
+            $input['nama_peserta'] = $request->peserta_nama_peserta;
+            $input['email'] = $request->peserta_email;
+            $input['no_telp'] = $request->peserta_no_telepon;
+
+            $save_transaksi_paket_wisata_peserta = $this->transaksi_paket_wisata_peserta->create($input);
+            if ($save_transaksi_paket_wisata_peserta) {
+                $message_title="Berhasil !";
+                $message_content=$input['nama_peserta']." Berhasil Dibuat";
+                $message_type="success";
+                $message_succes = true;
+            }
+
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+
+            return $array_message;
+        }
+
+        return response()->json([
+            'success' => false,
+            'error' => $validator->errors()->all()
+        ]);
+    }
+
+    public function edit_wisata_peserta($kode,$id,$t_paket_wisata_id)
+    {
+        $data = $this->transaksi_paket_wisata_peserta->where('id',$t_paket_wisata_id)->where('t_paket_wisata_id',$id)->first();
+        if (empty($data)) {
+            return response()->json([
+                'success' => false,
+                'message_title' => 'Data tidak ditemukan'
+            ]);
+        }
+        return response()->json([
+            'success' => true,
+            'data' => $data
+        ]);
+    }
+
+    public function update_peserta_wisata(Request $request,$kode,$id)
+    {
+        $rules = [
+            'edit_peserta_nama_peserta' => 'required',
+            'edit_peserta_email' => 'required',
+            'edit_peserta_no_telepon' => 'required',
+        ];
+
+        $messages = [
+            'edit_peserta_nama_peserta.required'   => 'Nama Peserta wajib diisi.',
+            'edit_peserta_email.required'   => 'Email wajib diisi.',
+            'edit_peserta_no_telepon.required'   => 'No. Telpon wajib diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+            $update_transaksi_paket_wisata_peserta = $this->transaksi_paket_wisata_peserta->where('id',$request->edit_peserta_id)->where('t_paket_wisata_id',$id)->first();
+            $input['nama_peserta'] = $request->edit_peserta_nama_peserta;
+            $input['email'] = $request->edit_peserta_email;
+            $input['no_telp'] = $request->edit_peserta_no_telepon;
+            $update_transaksi_paket_wisata_peserta->update($input);
+            // $save_transaksi_paket_wisata_hotel = $this->transaksi_paket_wisata_hotel->create($input);
+            if ($update_transaksi_paket_wisata_peserta) {
+                $message_title="Berhasil !";
+                $message_content=$input['nama_peserta']." Berhasil Diperbarui";
+                $message_type="success";
+                $message_succes = true;
+            }
+
+            $array_message = array(
+                'success' => $message_succes,
+                'message_title' => $message_title,
+                'message_content' => $message_content,
+                'message_type' => $message_type,
+            );
+
+            return $array_message;
+        }
+
+        return response()->json([
+            'success' => false,
+            'error' => $validator->errors()->all()
         ]);
     }
 }

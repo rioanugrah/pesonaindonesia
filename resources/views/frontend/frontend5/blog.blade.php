@@ -38,18 +38,18 @@ Referensi Wisata
                         <div class="col-lg-5 col-md-4 blog-height">
                             <div class="blog-image rounded">
                                 <a href="{{ route('frontend.blog_detail',['slug' => $posting->slug]) }}" style="background-image: url({{ asset('frontend/assets4/img/blog/'.$posting->image) }});"></a>
-                            </div> 
+                            </div>
                         </div>
                         <div class="col-lg-7 col-md-8">
                             <div class="blog-content">
                                 <h5 class="theme mb-1">{{ $posting->kategori }}</h5>
-                                
+
                                 <h3 class="mb-2"><a href="{{ route('frontend.blog_detail',['slug' => $posting->slug]) }}" class="">{{ $posting->title }}</a></h3>
                                 <p class="date-cats mb-2">
                                     <a href="{{ route('frontend.blog_detail',['slug' => $posting->slug]) }}" class="me-2"><i class="fa fa-calendar-alt"></i> {{ \Carbon\Carbon::create($posting->created_at)->isoFormat('LL') }}</a>
-                                </p> 
-                                <p class="mb-0">{!! Str::limit($posting->description,350) !!}</p>  
-                                
+                                </p>
+                                <p class="mb-0">{!! Str::limit($posting->description,350) !!}</p>
+
                             </div>
                         </div>
                     </div>
@@ -63,15 +63,15 @@ Referensi Wisata
                                 <h3 class="mb-2"><a href="{{ route('frontend.blog_detail',['slug' => $posting->slug]) }}" class="">{{ $posting->title }}</a></h3>
                                 <p class="date-cats mb-2">
                                     <a href="{{ route('frontend.blog_detail',['slug' => $posting->slug]) }}" class="me-2"><i class="fa fa-calendar-alt"></i> {{ \Carbon\Carbon::create($posting->created_at)->isoFormat('LL') }}</a>
-                                </p> 
+                                </p>
                                 <p class="mb-0">{!! Str::limit($posting->description,350) !!}</p>
-                                
+
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-4 blog-height">
                             <div class="blog-image rounded">
                                 <a href="{{ route('frontend.blog_detail',['slug' => $posting->slug]) }}" style="background-image: url({{ asset('frontend/assets4/img/blog/'.$posting->image) }});"></a>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                 </div>

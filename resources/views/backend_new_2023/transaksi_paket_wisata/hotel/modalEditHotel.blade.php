@@ -31,6 +31,12 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
+                        <label class="col-md-4 col-form-label">Harga Booking</label>
+                        <div class="col-md-8">
+                            <input type="text" name="edit_hotel_harga" class="form-control" placeholder="Harga Booking" id="edit_hotel_harga" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
                         <label class="col-md-4 col-form-label">Waktu Check In</label>
                         <div class="col-md-8">
                             <input type="datetime-local" name="edit_hotel_checkin" class="form-control" id="edit_hotel_checkin" placeholder="Check-In" required>
