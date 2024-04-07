@@ -346,7 +346,7 @@
     <section>
         <div class="container">
             @foreach ($announcements as $announcement)
-            <div class="border-b bg-white box-shadow p-4 rounded border-all">
+            <div class="border-b bg-white box-shadow p-4 rounded border-all mb-3">
                 <b>Information :</b> <span class="theme">{{ $announcement->title }}</span>
                 <p>{{ $announcement->description }}</p>
             </div>

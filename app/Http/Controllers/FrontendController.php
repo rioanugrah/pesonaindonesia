@@ -334,7 +334,7 @@ class FrontendController extends Controller
             visitor()->visit();
             $data['honeymoons'] = $this->honeymoon->all();
             $data['promosis'] = $this->promosi->all();
-            $data['announcements'] = $this->announcement->where('status','O')->get();
+            $data['announcements'] = $this->announcement->where('status','O')->orderBy('created_at','asc')->get();
 
             $data['today'] = Carbon::today();
             $data['week_start'] = $data['today']->startOfWeek()->format('Y-m-d');
