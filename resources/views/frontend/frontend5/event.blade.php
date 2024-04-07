@@ -38,17 +38,17 @@
                         <div class="col-lg-5 col-md-4 blog-height">
                             <div class="blog-image rounded">
                                 <a href="{{ route('frontend.eventDetail',['slug' => $event->slug]) }}" style="background-image: url({{ asset('frontend/assets4/img/events/'.$event->image) }});"></a>
-                            </div> 
+                            </div>
                         </div>
                         <div class="col-lg-7 col-md-8">
                             <div class="blog-content">
-                                
+
                                 <h3 class="mb-2"><a href="{{ route('frontend.eventDetail',['slug' => $event->slug]) }}" class="">{{ $event->title }}</a></h3>
                                 <p class="date-cats mb-2">
                                     <a href="{{ route('frontend.eventDetail',['slug' => $event->slug]) }}" class="me-2"><i class="fa fa-calendar-alt"></i> {{ \Carbon\Carbon::create($event->created_at)->isoFormat('LL') }}</a>
-                                </p> 
-                                <p class="mb-0">{!! Str::limit($event->deskripsi,350) !!}</p>  
-                                
+                                </p>
+                                <p class="mb-0">{!! Str::limit($event->deskripsi,350) !!}</p>
+
                             </div>
                         </div>
                     </div>
@@ -61,15 +61,15 @@
                                 <h3 class="mb-2"><a href="{{ route('frontend.eventDetail',['slug' => $event->slug]) }}" class="">{{ $event->title }}</a></h3>
                                 <p class="date-cats mb-2">
                                     <a href="{{ route('frontend.eventDetail',['slug' => $event->slug]) }}" class="me-2"><i class="fa fa-calendar-alt"></i> {{ \Carbon\Carbon::create($event->created_at)->isoFormat('LL') }}</a>
-                                </p> 
+                                </p>
                                 <p class="mb-0">{!! Str::limit($event->deskripsi,350) !!}</p>
-                                
+
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-4 blog-height">
                             <div class="blog-image rounded">
                                 <a href="{{ route('frontend.eventDetail',['slug' => $event->slug]) }}" style="background-image: url({{ asset('frontend/assets4/img/events/'.$event->image) }});"></a>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                 </div>

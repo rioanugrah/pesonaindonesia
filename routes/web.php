@@ -81,7 +81,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     });
     Route::prefix('event')->group(function () {
         Route::get('/', 'FrontendController@event')->name('frontend.event');
-        Route::get('{slug}', 'FrontendController@eventDetail')->name('frontend.eventDetail');
+        Route::get('{id}/{slug}', 'FrontendController@eventDetail')->name('frontend.eventDetail');
     });
 
     Route::prefix('blog')->group(function () {

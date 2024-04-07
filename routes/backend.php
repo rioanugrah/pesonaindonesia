@@ -227,14 +227,14 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
 
             Route::get('log', 'LogController@index')->name('log')->middleware('verified');
 
-            Route::prefix('events')->group(function(){
-                Route::get('/', 'v2\EventController@index')->name('events')->middleware('verified');
-                Route::get('buat', 'v2\EventController@create')->name('events.buat')->middleware('verified');
-                Route::post('simpan', 'v2\EventController@simpan')->name('events.simpan')->middleware('verified');
-                Route::get('{id}', 'v2\EventController@detail')->name('events.detail')->middleware('verified');
-                Route::get('{id}/register', 'v2\EventController@detailEventRegister')->name('events.detailRegister')->middleware('verified');
-                Route::get('delete/{id}', 'v2\EventController@destroy')->name('events.delete')->middleware('verified');
-            });
+            // Route::prefix('events')->group(function(){
+            //     Route::get('/', 'v2\EventController@index')->name('events')->middleware('verified');
+            //     Route::get('buat', 'v2\EventController@create')->name('events.buat')->middleware('verified');
+            //     Route::post('simpan', 'v2\EventController@simpan')->name('events.simpan')->middleware('verified');
+            //     Route::get('{id}', 'v2\EventController@detail')->name('events.detail')->middleware('verified');
+            //     Route::get('{id}/register', 'v2\EventController@detailEventRegister')->name('events.detailRegister')->middleware('verified');
+            //     Route::get('delete/{id}', 'v2\EventController@destroy')->name('events.delete')->middleware('verified');
+            // });
 
             Route::prefix('seo')->group(function(){
                 Route::get('/', 'v2\SeoController@index')->name('seo')->middleware('verified');
@@ -306,7 +306,25 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
 
                     });
                 });
+                Route::prefix('events')->group(function(){
+                    Route::get('/', 'v2\EventController@index')->name('b.events')->middleware('verified');
+                    Route::get('create', 'v2\EventController@create')->name('b.events.create')->middleware('verified');
+                    Route::post('simpan', 'v2\EventController@simpan')->name('b.events.simpan')->middleware('verified');
+                    Route::get('{id}', 'v2\EventController@detail')->name('b.events.detail')->middleware('verified');
+                    Route::get('{id}/edit', 'v2\EventController@edit')->name('b.events.edit')->middleware('verified');
+                    Route::post('{id}/update', 'v2\EventController@update')->name('b.events.update')->middleware('verified');
 
+                    Route::prefix('{id}/products')->group(function(){
+                        Route::get('/', 'v2\EventController@event_product')->name('b.events.product')->middleware('verified');
+                        Route::post('simpan', 'v2\EventController@event_product_simpan')->name('b.events.product_simpan')->middleware('verified');
+                    });
+                });
+            });
+            Route::prefix('announcement')->group(function(){
+                Route::get('/', 'AnnouncementController@index')->name('b.announcement')->middleware('verified');
+                Route::post('simpan', 'AnnouncementController@simpan')->name('b.announcement.simpan')->middleware('verified');
+                Route::get('{id}', 'AnnouncementController@detail')->name('b.announcement.detail')->middleware('verified');
+                Route::post('update', 'AnnouncementController@update')->name('b.announcement.update')->middleware('verified');
             });
 
             // Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');

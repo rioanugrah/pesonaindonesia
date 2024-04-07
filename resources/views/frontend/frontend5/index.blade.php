@@ -1,7 +1,7 @@
 @extends('layouts.frontend_5.app')
 
 @section('css')
-    
+
 @endsection
 
 @section('title')
@@ -178,7 +178,7 @@
                             </div>
                         </div>
                         <div class="dot-overlay"></div>
-                    </div> 
+                    </div>
                 </div>
                 @endforeach
             </div>
@@ -189,7 +189,7 @@
 </section> --}}
     {{-- <section class="about-us pb-6 pt-10" style="background-image:url({{ $assets }}/images/shape4.png); background-position:center;">
     <div class="container">
-        
+
         <div class="section-title mb-6 w-50 mx-auto text-center">
             <h2 class="mb-1">Temukan <span class="theme">Kesempurnaan Perjalanan</span></h2>
         </div>
@@ -240,7 +240,7 @@
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">
             <h2 class="mb-1">Jelajahi <span class="theme">Travelling</span></h2>
-        </div>  
+        </div>
         <div class="trend-box">
             <div class="row">
                 @foreach ($travellings as $travelling)
@@ -294,7 +294,7 @@
                     <a href="{{ route('frontend.travelling') }}" class="nir-btn">Lihat lainnya</a>
                 </div>
             </div>
-        </div>    
+        </div>
     </div>
 </section>
 @endif --}}
@@ -316,7 +316,7 @@
     <div class="container">
         <div class="section-title mb-6 w-75 mx-auto text-center">
             <h2 class="mb-1">Jelajahi <span class="theme">Hotel</span></h2>
-        </div>  
+        </div>
         <div class="trend-box">
             <div class="row">
                 @foreach ($list_hotels as $list_hotel)
@@ -342,7 +342,18 @@
         </div>
     </div>
 </section> --}}
-
+    @if (!$announcements->isEmpty())
+    <section>
+        <div class="container">
+            @foreach ($announcements as $announcement)
+            <div class="border-b bg-white box-shadow p-4 rounded border-all">
+                <b>Information :</b> <span class="theme">{{ $announcement->title }}</span>
+                <p>{{ $announcement->description }}</p>
+            </div>
+            @endforeach
+        </div>
+    </section>
+    @endif
     <section class="flight-list pt-0" style="margin-top: 5%">
         <div class="container">
             <div class="section-title mb-6 w-50 mx-auto text-center">
@@ -623,7 +634,7 @@
                     <h2 class="mb-1">Paket <span class="theme">Wisata Terbaik</span></h2>
                 </div>
             </div>
-            <div class="col-lg-5">  
+            <div class="col-lg-5">
             </div>
         </div>
         <div class="trend-box">
@@ -656,7 +667,7 @@
                     </div>
                 </div>
                 @empty
-                    
+
                 @endforelse
             </div>
         </div>
@@ -677,10 +688,10 @@
                     </div>
                 </a>
                 @empty
-                    
+
                 @endforelse
             </div>
-        </div>    
+        </div>
     </div>
 </section> --}}
     @if (!$coupons->isEmpty())
@@ -721,7 +732,7 @@
             </div>
         </section>
     @endif
-    {{-- <section class="testimonial pt-10 pb-10"  style="background-image: url({{ $assets }}/images/image/bromo.webp);">   
+    {{-- <section class="testimonial pt-10 pb-10"  style="background-image: url({{ $assets }}/images/image/bromo.webp);">
     <div class="container">
         <div class="testimonial-in">
             <div class="row align-items-center">
@@ -754,10 +765,10 @@
                     </div>
                 </div>
             </div>
-        </div> 
-    </div> 
+        </div>
+    </div>
 
-    <div class="dot-overlay"></div>   
+    <div class="dot-overlay"></div>
 </section> --}}
     {{-- <section class="discount-action pt-8 pb-8" style="background-image: url({{ $assets }}/images/shape-1.png); background-attachment:unset">
     <div class="container">
@@ -770,7 +781,7 @@
                         <p class="white mb-3">Pesona Plesiran Indonesia adalah Platform Digital Marketing milenial yang menyediakan kemudahan dalam mendapat informasi
                             dan pemesanan Akomodasi, Destinasi, Restoran, Transportasi, Travel dan MICE se-Indonesia.</p>
                     </div>
-                </div>  
+                </div>
                 <div class="col-lg-6 col-md-6 p-0">
                     <div class="video-button text-center position-relative z-index2">
                         <div class="call-button text-center">
@@ -780,10 +791,10 @@
                         </div>
                         <div class="video-figure"></div>
                     </div>
-                </div> 
-            </div> 
+                </div>
+            </div>
         </div>
-    </div>    
+    </div>
 </section> --}}
     <section class="discount-action"
         style="background-image:url({{ $assets }}/images/section-bg3.jpg); background-position:center; background-color: #f1f1f1;">
@@ -923,7 +934,7 @@
         //         document.getElementById('datas').innerHTML = txt_hotel;
         //     },
         //     error: function(request, status, error) {
-                
+
         //     }
         // });
 

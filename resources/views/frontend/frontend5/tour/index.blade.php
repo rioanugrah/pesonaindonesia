@@ -69,7 +69,9 @@
                                 <p class="theme">Kuota Tersisa</p>
                                 <div>{{ $paket_wisata->kuota_peserta - $paket_wisata->detail_wisata_peserta->count() }}
                                 </div>
+                                @if (\Carbon\Carbon::today() <= $paket_wisata->waktu_keberangkatan)
                                 <button class="nir-btn" style="text-transform: uppercase">Booking Now</button>
+                                @endif
 
                             </div>
                         </div>

@@ -121,6 +121,12 @@
                         <span>Paket Wisata</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('b.events') }}">
+                        <i class="uil-home-alt"></i>
+                        <span>Event</span>
+                    </a>
+                </li>
                 <li class="menu-title">Finance Officer</li>
                 <li>
                     <a href="{{ route('b.laporan_transaksi') }}">
@@ -150,19 +156,19 @@
                     </a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a href="{{ route('events') }}">
                         <i class="uil-home-alt"></i>
                         <span>Event</span>
                     </a>
-                </li>
+                </li> --}}
 
-                <li>
+                {{-- <li>
                     <a href="#">
                         <i class="uil-home-alt"></i>
                         <span>Vendor</span>
                     </a>
-                </li>
+                </li> --}}
                 @endcan
                 @can('kt-it')
                 <li class="menu-title">IT Officer</li>
@@ -188,6 +194,12 @@
                     <a href="{{ route('visitor') }}">
                         <i class="uil-book-reader"></i>
                         <span>Visitor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('b.announcement') }}">
+                        <i class="uil-book-reader"></i>
+                        <span>Announcement</span>
                     </a>
                 </li>
                 @can('permission-list')

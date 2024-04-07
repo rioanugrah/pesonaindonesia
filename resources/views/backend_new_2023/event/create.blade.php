@@ -1,91 +1,225 @@
 @extends('layouts.backend_new_2023.master')
-
 @section('title')
     Buat Event
 @endsection
-
+@section('css')
+<link href="{{ URL::asset('backend_new/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css">
+@endsection
 @section('content')
-    @component('common-components.breadcrumb')
-        @slot('pagetitle')
-            @yield('title')
-        @endslot
-        @slot('title')
-            @yield('title')
-        @endslot
-    @endcomponent
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="card">
-                <form action="{{ route('events.simpan') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Title</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" name="title" type="text" placeholder="Title">
-                            </div>
+                <form id="upload-form" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="card-body">
+                    <h4 class="card-title">@yield('title')</h4>
+                    <hr>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="title" placeholder="Title">
                         </div>
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Deskripsi</label>
-                            <div class="col-sm-10">
-                                <textarea name="deskripsi" class="form-control editor" rows="5"></textarea>
-                                {{-- <input class="form-control" name="title" type="text" placeholder="Title"> --}}
-                            </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Description</label>
+                        <div class="col-sm-10">
+                            <textarea name="description" class="form-control editor" cols="30" rows="5"></textarea>
                         </div>
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Lokasi</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" name="location" type="text" placeholder="Lokasi Event">
-                            </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Team Leader</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="team_lead" placeholder="Team Leader">
                         </div>
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Start Event</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" name="start_event" type="datetime-local"
-                                    placeholder="Start Event">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Finish Event</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" name="finish_event" type="datetime-local"
-                                    placeholder="Finish Event">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Kuota</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" name="kuota" type="text" placeholder="Kuota">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Upload Image</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" name="image" type="file">
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-md-2 col-form-label">Committee Event</label>
+                        <div class="col-md-9">
+                            <div class="repeater">
+                                <div data-repeater-list="group_committee">
+                                    <div data-repeater-item class="row mb-3">
+                                        <div class="col-4">
+                                            <input type="text" name="team" class="form-control" placeholder="Team" id="">
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="text" name="position" class="form-control" placeholder="Position" id="">
+                                        </div>
+                                        <div class="col-1">
+                                            <button data-repeater-delete type="button" class="btn btn-danger"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button data-repeater-create type="button" class="btn btn-success mt-3 mt-lg-0"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <a href="{{ route('events') }}" class="btn btn-secondary">Back</a>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="mb-3 row">
+                        <label class="col-md-2 col-form-label">Schedule Event</label>
+                        <div class="col-md-9">
+                            <div class="repeater">
+                                <div data-repeater-list="group_schedule">
+                                    <div data-repeater-item class="row mb-3">
+                                        <div class="col-4">
+                                            <input type="text" name="day" class="form-control" placeholder="Day" id="">
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="datetime-local" name="time" class="form-control" placeholder="Time" id="">
+                                        </div>
+                                        <div class="col-1">
+                                            <button data-repeater-delete type="button" class="btn btn-danger"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button data-repeater-create type="button" class="btn btn-success mt-3 mt-lg-0"><i class="fa fa-plus"></i></button>
+                            </div>
+                        </div>
                     </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Cover Image</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" name="cover_image" placeholder="Title">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-md-2 col-form-label">Images</label>
+                        <div class="col-md-9">
+                            <div class="repeater">
+                                <div data-repeater-list="group_images">
+                                    <div data-repeater-item class="row mb-3">
+                                        <div class="col-11">
+                                            <input type="file" name="image" class="form-control" id="">
+                                        </div>
+                                        <div class="col-1">
+                                            <button data-repeater-delete type="button" class="btn btn-danger"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button data-repeater-create type="button" class="btn btn-success mt-3 mt-lg-0"><i class="fa fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Location Event</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="location" placeholder="Title">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
                 </form>
             </div>
         </div>
     </div>
 @endsection
 @section('script')
+    <script src="{{ URL::asset('backend_new/libs/jquery-repeater/jquery-repeater.min.js') }}"></script>
     <script src="{{ URL::asset('backend_new/libs/ckeditor/ckeditor.min.js') }}"></script>
+    <script src="{{ URL::asset('backend_new/libs/toastr/toastr.min.js') }}"></script>
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         ClassicEditor
             .create(document.querySelector('.editor'))
             .catch(error => {
                 console.error(error);
             });
+
+        $('.repeater').repeater({
+            show: function show() {
+                $(this).slideDown();
+            },
+            hide: function hide(deleteElement) {
+                if (confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+                }
+            },
+            ready: function ready(setIndexes) {}
+        });
+
+        $('#upload-form').submit(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $.ajax({
+                type:'POST',
+                url: "{{ route('b.events.simpan') }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function(){
+                    $('.modalloading').modal('show');
+                },
+                success: (result) => {
+                    if(result.success != false){
+                        toastr["success"](result.message_content);
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": 300,
+                            "hideDuration": 1000,
+                            "timeOut": 5000,
+                            "extendedTimeOut": 1000,
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                        setInterval(() => {
+                            window.location=result.url;
+                        }, 3000);
+                    }else{
+                        toastr["error"](result.error);
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": 300,
+                            "hideDuration": 1000,
+                            "timeOut": 5000,
+                            "extendedTimeOut": 1000,
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                        $('.modalloading').modal('hide');
+                    }
+                },
+                error: function (request, status, error) {
+                    toastr["error"](error);
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": 300,
+                        "hideDuration": 1000,
+                        "timeOut": 5000,
+                        "extendedTimeOut": 1000,
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                    $('.modalloading').modal('hide');
+                }
+            });
+        });
     </script>
 @endsection
-
-{{-- @section('js')
-    <script src="{{ asset('backend/assets2/js/pages/form-editor.init.js') }}"></script>
-    <script src="{{ asset('backend/assets2/libs/tinymce/tinymce.min.js') }}"></script>
-@endsection --}}

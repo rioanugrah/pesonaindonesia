@@ -12,7 +12,7 @@ use App\Models\ContactUs;
 use App\Models\Transaksi;
 use App\Models\Provinsi;
 use App\Models\CheckRoom;
-use App\Models\Events;
+// use App\Models\Events;
 use App\Models\EventRegister;
 use App\Models\Wisata;
 use App\Models\Paket;
@@ -30,6 +30,8 @@ use App\Models\Gallery;
 
 use App\Models\v2\Tour;
 use App\Models\v2\Promosi;
+use App\Models\v2\Events;
+use App\Models\v2\EventsProduct;
 
 use App\User;
 
@@ -39,6 +41,8 @@ use App\Models\KategoriBidangUsaha;
 use App\Models\Transactions;
 use App\Models\VerifikasiTiket;
 use App\Models\VerifikasiTiketList;
+
+use App\Models\Announcement;
 
 use App\Models\KabupatenKota;
 use \Carbon\Carbon;
@@ -65,7 +69,11 @@ class FrontendController extends Controller
         VerifikasiTiket $verifikasi_tiket,
         VerifikasiTiketList $verifikasi_tiket_list,
         Transactions $transactions,
-        Promosi $promosi
+        Promosi $promosi,
+        Events $events,
+        EventsProduct $events_product,
+        Honeymoon $honeymoon,
+        Announcement $announcement
     )
     {
         $this->gallery = $gallery;
@@ -73,6 +81,12 @@ class FrontendController extends Controller
         $this->verifikasi_tiket_list = $verifikasi_tiket_list;
         $this->transactions = $transactions;
         $this->promosi = $promosi;
+        $this->events = $events;
+        $this->events_product = $events_product;
+        $this->honeymoon = $honeymoon;
+        $this->announcement = $announcement;
+
+
         $this->whatsapp = ['nomor' => env('WA_BUSINESS'), 'message' => env('WA_MESSAGE')];
         $this->teams = [
             [ 'image' => 'pras.webp', 'name' => 'Prasetyo Aji Prakoso S.E, M.M', 'posisi' => 'Advisor' ],
@@ -269,8 +283,8 @@ class FrontendController extends Controller
             // dd($data['jelajahins']);
             $data['testimonis'] = [
                 [
-                    'name' => 'Shella', 
-                    'deskripsi' => 'Excellent, Terima kasih Pesona Plesiran Indonesia membuat pengalaman yang tidak terlupakan. Tour guide yang handal yang tau spot-spot foto yang luar biasa.', 
+                    'name' => 'Shella',
+                    'deskripsi' => 'Excellent, Terima kasih Pesona Plesiran Indonesia membuat pengalaman yang tidak terlupakan. Tour guide yang handal yang tau spot-spot foto yang luar biasa.',
                     'image' => asset('frontend/assets5/images/mitra/logo_plesiran_malang.png')],
             ];
             $data['mitras'] = [
@@ -278,15 +292,15 @@ class FrontendController extends Controller
             ];
 
             // $client = new HTTP_Request2();
-            
+
             // $client->setUrl('https://booking-com.p.rapidapi.com/v1/static/hotels');
-            
+
             // $client->setMethod(HTTP_Request2::METHOD_GET);
-            
+
             // $client->setConfig(array(
             // 'follow_redirects' => TRUE
             // ));
-            
+
             // $client->setHeader(array(
             // 'X-RapidAPI-Host' => env('X_RAPIDAPI_HOST'),
             // 'X-RapidAPI-Key' => env('X_RAPIDAPI_KEY'),
@@ -318,8 +332,9 @@ class FrontendController extends Controller
             // return view('frontend.frontend_2022.index', $data);
             // dd(visitor()->visit());
             visitor()->visit();
-            $data['honeymoons'] = Honeymoon::all();
-            $data['promosis'] = Promosi::all();
+            $data['honeymoons'] = $this->honeymoon->all();
+            $data['promosis'] = $this->promosi->all();
+            $data['announcements'] = $this->announcement->where('status','O')->get();
 
             $data['today'] = Carbon::today();
             $data['week_start'] = $data['today']->startOfWeek()->format('Y-m-d');
@@ -339,7 +354,7 @@ class FrontendController extends Controller
                 ['image' => 'coming_soon/images/slides/bromo.png'],
                 ['image' => 'coming_soon/images/slides/museum_angkut.png'],
             ];
-            
+
             $data['year'] = $years;
             $data['month'] = $months;
             $data['date'] = $dates;
@@ -382,7 +397,7 @@ class FrontendController extends Controller
         // if ($date_live >= $buy_open_one && $date_live <= $buy_close_one) {
         //     dd('Oke1');
         // }
-        
+
         // if ($date_live >= $buy_open_two && $date_live <= $buy_close_two) {
         //     dd('Oke2');
         // }
@@ -401,7 +416,7 @@ class FrontendController extends Controller
     {
         $data['whatsapp'] = $this->whatsapp;
         $data['search'] = $request->all();
-        
+
         if($request->in != null){
             $checkIn = $request->in;
         }else{
@@ -529,7 +544,7 @@ class FrontendController extends Controller
             'subject'  => 'required',
             'message'  => 'required',
         ];
- 
+
         $messages = [
             'name.required'  => 'Nama wajib diisi.',
             'email.required'  => 'Email wajib diisi.',
@@ -635,7 +650,7 @@ class FrontendController extends Controller
             $input['slug'] = Str::slug($request->nama_perusahaan);
             $input['negara'] = 'Indonesia';
             $input['status'] = 0;
-            
+
             $norut = Cooperation::max('kode_corporate');
             if($norut == null){
                 // $explode_norut = explode("-",$norut);
@@ -647,7 +662,7 @@ class FrontendController extends Controller
             }
 
             $input['kode_corporate'] = 'C-'.sprintf("%03s",$nomor_urut+1).'-'.date('m-Y');
-            
+
             // dd($input['kode_corporate']);
             // dd($norut);
             $cooperation = Cooperation::create($input);
@@ -789,30 +804,44 @@ class FrontendController extends Controller
 
     public function event()
     {
-        $data['whatsapp'] = $this->whatsapp;
+        // $data['whatsapp'] = $this->whatsapp;
         visitor()->visit();
-        $data['events'] = Events::orderBy('id','desc')->paginate(10);
-
-        return view('frontend.frontend5.event',$data);
+        $data['events'] = $this->events->with('event_product')->orderBy('id','desc')->paginate(10);
+        // dd($data);
+        return view('frontend.frontend5.event.index',$data);
+        // return view('frontend.frontend5.event',$data);
     }
 
-    public function eventDetail($slug)
+    public function eventDetail($id,$slug)
     {
-        $data['whatsapp'] = $this->whatsapp;
-        $data['event'] = Events::where('slug',$slug)->first();
-        $data['count'] = DB::table('event')->where('id',$data['event']['id'])->count();
+        // $data['whatsapp'] = $this->whatsapp;
+        // $data['event'] = Events::where('slug',$slug)->first();
+        // $data['count'] = DB::table('event')->where('id',$data['event']['id'])->count();
 
-        $carbon = Carbon::parse($data['event']['start_event']);
-        $setCarbon = Carbon::setTestNow($carbon);
+        // $carbon = Carbon::parse($data['event']['start_event']);
+        // $setCarbon = Carbon::setTestNow($carbon);
 
-        $data['pendaftaran_terakhir'] = Carbon::yesterday()->isoFormat('LLLL');
+        // $data['pendaftaran_terakhir'] = Carbon::yesterday()->isoFormat('LLLL');
         visitor()->visit();
-        // dd($data); 
+        // dd($data);
         // dd(Carbon::parse($data['event']['start_event']));
 
-        return view('frontend.frontend5.event_detail',$data);
+        // return view('frontend.frontend5.event_detail',$data);
         // return view('frontend.frontend4.eventsDetail',$data);
-
+        $data['event'] = $this->events->with('event_product')->where('id',$id)->where('slug',$slug)->first();
+        // $data['event_products'] = $this->events_product->where('event_id',$id)->get();
+        // dd($data);
+        DB::table('event_view')->insert([
+            'id' => Str::uuid()->toString(),
+            'event_id' => $id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        if (empty($data['event'])) {
+            return redirect()->back();
+        }
+        // dd($data);
+        return view('frontend.frontend5.event.detail',$data);
     }
 
     public function eventRegister(Request $request)
@@ -825,7 +854,7 @@ class FrontendController extends Controller
             'asal' => 'required',
             'alamat' => 'required',
         ];
- 
+
         $messages = [
             'first_name.required' => 'Nama Depan wajib diisi.',
             'last_name.required' => 'Nama Belakang wajib diisi.',
@@ -864,7 +893,7 @@ class FrontendController extends Controller
                     $message_content = "Mohon maaf kuota event ".$events->title." sudah terpenuhi. Silahkan coba lagi di event selanjutnya. Terima Kasih 😊";
                     $message_type = "success";
                     $message_succes = true;
-    
+
                     $array_message = array(
                         'success' => $message_succes,
                         'title' => $message_title,
@@ -873,7 +902,7 @@ class FrontendController extends Controller
                     );
                     return response()->json($array_message);
                 }
-                
+
                 $input['event_id'] = $events->id;
                 $input['kode_tiket'] = 'ETIKET-'.rand(10000,99999);
                 $input['first_name'] = $request->first_name;
@@ -884,26 +913,26 @@ class FrontendController extends Controller
                 $input['no_telp'] = $request->no_telp;
                 $input['alamat'] = $request->alamat;
                 $input['is_event_register'] = 'W';
-    
+
                 $eventRegister = EventRegister::create($input);
-    
+
                 $stockEvent = (int)$events->kuota - 1;
                 $events->kuota = $stockEvent;
                 $events->save();
-    
+
                 if($eventRegister){
                     $details = [
                         'title' => 'Konfirmasi Pendaftaran '.$events->title,
                         'body' => 'Terima kasih Bapak/Ibu/Saudara/i '.$request->first_name.' '.$request->last_name.' telah melakukan pendaftaran event '.$events->title.'. Kode tiket anda '.$input['kode_tiket'].'. '
                     ];
                     \Mail::to($input['email'])->send(new \App\Mail\RegisterEvent($details));
-    
+
                     $message_title = "Pendaftaran Berhasil";
                     $message_content = "Terima kasih telah melakukan pendaftaran event. Silahkan cek email kembali";
                     $message_type = "success";
                     $message_succes = true;
                 }
-    
+
                 $array_message = array(
                     'success' => $message_succes,
                     'title' => $message_title,
@@ -912,7 +941,7 @@ class FrontendController extends Controller
                 );
                 return response()->json($array_message);
             }
-            
+
         }
 
         return response()->json(
@@ -1027,7 +1056,7 @@ class FrontendController extends Controller
     //                 // return $dataPayment;
     //                 $dataPayment = json_decode($response->getBody(),true);
     //                 // return $dataPayment['data']['status'];
-    
+
     //                 $data['dataPayment'] = $dataPayment;
     //                 if($dataPayment['va_status'] == 'WAITING_PAYMENT'){
     //                     $data['status_pembayaran'] = 1;
@@ -1053,9 +1082,9 @@ class FrontendController extends Controller
     //                     //     'status' => $data['status_pembayaran']
     //                     // ]);
     //                 }
-    
+
     //                 return view('frontend.frontend4.payment_paket',$data);
-                    
+
     //                 // if($data['paket']['status'] == 1){
     //                 //     $data['status'] = 'Menunggu Pembayaran';
     //                 // }
@@ -1067,7 +1096,7 @@ class FrontendController extends Controller
     //                 // }else{
     //                 //     $data['status'] = 'Pembayaran Ditolak';
     //                 // }
-                    
+
     //                 // return view('frontend.frontend4.payment_paket',$data);
     //             }
     //             else {
@@ -1130,9 +1159,9 @@ class FrontendController extends Controller
     //                     //     'status' => $data['status_pembayaran']
     //                     // ]);
     //                 }
-    
+
     //                 return view('frontend.frontend4.payment_paket',$data);
-                    
+
     //             }
     //             else {
     //             echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
@@ -1141,7 +1170,7 @@ class FrontendController extends Controller
     //         } catch (\HTTP_Request2_Exception $th) {
     //             echo 'Error: ' . $th->getMessage();
     //         }
-            
+
     //         return view('frontend.frontend4.payment_paket',$data);
     //     }
     // }
@@ -1162,7 +1191,7 @@ class FrontendController extends Controller
             $banks = $bank;
             $data['bankss'] = $bank;
         }
-        
+
         $paymentLink = new HTTP_Request2();
         // $paymentLink->setUrl($this->payment_production.'/payment-checkout/status?partner_tx_id='.$id);
         $paymentLink->setUrl($this->payment_production.'/static-virtual-account/'.$banks->id_trx);
@@ -1217,7 +1246,7 @@ class FrontendController extends Controller
 
                 // return view('frontend.frontend4.payment_paket',$data);
                 return view('frontend.frontend5.paket_wisata_payment',$data);
-                
+
             }
             else {
             echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
@@ -1226,7 +1255,7 @@ class FrontendController extends Controller
         } catch (\HTTP_Request2_Exception $th) {
             echo 'Error: ' . $th->getMessage();
         }
-        
+
         // return view('frontend.frontend4.payment_paket',$data);
         return view('frontend.frontend5.paket_wisata_payment',$data);
     }
@@ -1256,7 +1285,7 @@ class FrontendController extends Controller
         }elseif($verifikasi_tiket->status == 'Paid'){
             $status_tiket = 'success';
         }
-        
+
         return response()->json([
             'success' => true,
             'data' => [
@@ -1373,7 +1402,7 @@ class FrontendController extends Controller
     public function honeymoon_buy(Request $request, $slug)
     {
         $honeymoon = Honeymoon::where('slug',$slug)->first();
-        
+
         // $norut = Honeymoon::max('kode_paket');
         // if($norut == null){
         //     $norut = 0;
@@ -1541,18 +1570,18 @@ class FrontendController extends Controller
                     // );
                     // curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
-                    // $data = '{ 
-                    //     "messaging_product": "whatsapp", 
-                    //     "to": "'.$hp.'", 
-                    //     "type": "template", 
-                    //     "template": 
-                    //         { 
-                    //             "name": "hello_world", 
-                    //             "language": 
-                    //                 { 
-                    //                     "code": "en_US" 
-                    //                 } 
-                    //             } 
+                    // $data = '{
+                    //     "messaging_product": "whatsapp",
+                    //     "to": "'.$hp.'",
+                    //     "type": "template",
+                    //     "template":
+                    //         {
+                    //             "name": "hello_world",
+                    //             "language":
+                    //                 {
+                    //                     "code": "en_US"
+                    //                 }
+                    //             }
                     //         }
                     //     ';
 
@@ -1587,7 +1616,7 @@ class FrontendController extends Controller
                                 ->subject($data['honeymoon_order']['honeymoon']['nama_paket'])
                                 ->attachData($pdf->output(), $data['honeymoon_order']["kode_invoice"].'.pdf');
                     });
-                    
+
 
                 }elseif($data['dataPayment']['va_status'] == 'EXPIRED'){
                     $data['status_pembayaran'] = 4;
@@ -1606,7 +1635,7 @@ class FrontendController extends Controller
 
     public function tour()
     {
-        
+
     }
 
 }
