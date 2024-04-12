@@ -4,10 +4,16 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Response;
+use Illuminate\Support\Facades\Response;
+use App\Models\Transactions;
 
 class TripayController extends Controller
 {
+
+    function __construct(Transactions $transactions)
+    {
+        $this->transactions = $transactions;
+    }
 
     public function getPayment()
     {
@@ -76,6 +82,8 @@ class TripayController extends Controller
                         ]
                     ],
                     // 'return_url'   => 'https://domainanda.com/redirect',
+                    'callback_url'   => env('APP_URL').'/api/callback',
+                    'return_url'   => env('APP_URL'),
                     'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
                     'signature'    => hash_hmac('sha256', $merchantCode.$merchantRef.$amount, $privateKey)
                 ];
@@ -167,24 +175,13 @@ class TripayController extends Controller
             ]);
         }
 
-        // $invoiceId = $data->merchant_ref;
+        $invoiceId = $data->merchant_ref;
         $tripayReference = $data->reference;
         $status = strtoupper((string) $data->status);
 
         if ($data->is_closed_payment === 1) {
-            // $invoice = Invoice::where('id', $invoiceId)
-            //     ->where('tripay_reference', $tripayReference)
-            //     ->where('status', '=', 'UNPAID')
-            //     ->first();
-
-            // if (! $invoice) {
-            //     return Response::json([
-            //         'success' => false,
-            //         'message' => 'No invoice found or already paid: ' . $invoiceId,
-            //     ]);
-            // }
             $transaction = $this->transactions->where('transaction_code',$data->merchant_ref)
-                                            ->where('status','Unpaid')
+                                            // ->where('status','Unpaid')
                                             ->first();
             if (!$transaction) {
                 return Response::json([
@@ -215,4 +212,75 @@ class TripayController extends Controller
             return Response::json(['success' => true]);
         }
     }
+
+    // public function handle(Request $request)
+    // {
+    //     dd($request->all());
+    //     $callbackSignature = $request->server('HTTP_X_CALLBACK_SIGNATURE');
+    //     $json = $request->getContent();
+    //     $signature = hash_hmac('sha256', $json, $this->privateKey);
+
+    //     if ($signature !== (string) $callbackSignature) {
+    //         return Response::json([
+    //             'success' => false,
+    //             'message' => 'Invalid signature',
+    //         ]);
+    //     }
+
+    //     if ('payment_status' !== (string) $request->server('HTTP_X_CALLBACK_EVENT')) {
+    //         return Response::json([
+    //             'success' => false,
+    //             'message' => 'Unrecognized callback event, no action was taken',
+    //         ]);
+    //     }
+
+    //     $data = json_decode($json);
+
+    //     if (JSON_ERROR_NONE !== json_last_error()) {
+    //         return Response::json([
+    //             'success' => false,
+    //             'message' => 'Invalid data sent by tripay',
+    //         ]);
+    //     }
+
+    //     $invoiceId = $data->merchant_ref;
+    //     $tripayReference = $data->reference;
+    //     $status = strtoupper((string) $data->status);
+
+    //     if ($data->is_closed_payment === 1) {
+    //         $invoice = Invoice::where('id', $invoiceId)
+    //             ->where('tripay_reference', $tripayReference)
+    //             ->where('status', '=', 'UNPAID')
+    //             ->first();
+
+    //         if (! $invoice) {
+    //             return Response::json([
+    //                 'success' => false,
+    //                 'message' => 'No invoice found or already paid: ' . $invoiceId,
+    //             ]);
+    //         }
+
+    //         switch ($status) {
+    //             case 'PAID':
+    //                 $invoice->update(['status' => 'PAID']);
+    //                 break;
+
+    //             case 'EXPIRED':
+    //                 $invoice->update(['status' => 'EXPIRED']);
+    //                 break;
+
+    //             case 'FAILED':
+    //                 $invoice->update(['status' => 'FAILED']);
+    //                 break;
+
+    //             default:
+    //                 return Response::json([
+    //                     'success' => false,
+    //                     'message' => 'Unrecognized payment status',
+    //                 ]);
+    //         }
+
+    //         return Response::json(['success' => true]);
+    //     }
+    // }
 }

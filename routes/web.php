@@ -178,7 +178,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     // Route::get('callback',function(){
     //     return 'Oke';
     // });
-    Route::post('callbacks','Payment\TripayController@handle')->name('transaction.callback');
+    // Route::post('callback','Payment\TripayController@handle');
 
 });
 

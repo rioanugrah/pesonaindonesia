@@ -44,7 +44,7 @@
                                         <td>{{ $detail_payment->data->merchant_ref }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Customer Name</td>
+                                        <td>Nama Custome</td>
                                         <td>{{ $detail_payment->data->customer_name }}</td>
                                     </tr>
                                     <tr>
@@ -52,7 +52,7 @@
                                         <td>{{ $detail_payment->data->customer_email }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Amount</td>
+                                        <td>Harga</td>
                                         <td>{{ 'Rp. ' . number_format($detail_payment->data->amount, 0, ',', '.') }}</td>
                                     </tr>
                                     <tr>
@@ -60,7 +60,7 @@
                                         <td>
                                             @switch($detail_payment->data->status)
                                                 @case('UNPAID')
-                                                    <span style="color: yellow; font-weight: bold">{{ $detail_payment->data->status }}</span>
+                                                    <span style="color: orange; font-weight: bold">{{ $detail_payment->data->status }}</span>
                                                     @break
                                                 @case('PAID')
                                                     <span style="color: green; font-weight: bold">{{ $detail_payment->data->status }}</span>
@@ -74,6 +74,20 @@
                                         </td>
                                     </tr>
                                 </table>
+                            </div>
+                            <div class="travellers-info mb-4">
+                                <h4>Detail Pesanan</h4>
+                                <table>
+                                    <tr>
+                                        <td>Item</td>
+                                        <td>{{ $transaction->transaction_unit }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jumlah</td>
+                                        <td>{{ $transaction->transaction_qty }}</td>
+                                    </tr>
+                                </table>
+                                <a href="{{ $detail_payment->data->checkout_url }}" class="nir-btn float-lg-end w-25">PAY NOW</a>
                             </div>
                             <div class="travellers-info mb-4">
                                 <h4>Cara Pembayaran</h4>
@@ -100,13 +114,6 @@
                                     </div>
                                     @endforeach
                                 </div>
-                                {{-- <table>
-                                    @foreach ($detail_payment->data->instructions as $instruction)
-                                    <tr>
-                                        <td>Nomor Pesanan</td>
-                                        <td>{{ $detail_payment->data->merchant_ref }}</td>
-                                    </tr>
-                                    @endforeach --}}
                             </div>
                         </div>
                     </div>
@@ -129,10 +136,6 @@
                                 <h4>Mengapa Memesan Dengan Kami?</h4>
                                 <div class="sidebar-module-inner">
                                     <ul class="featured-list-sm">
-                                        <li class="border-b pb-2 mb-2">
-                                            <h6 class="mb-0">Tanpa Biaya Pemesanan</h6>
-                                            Kami tidak membebankan biaya tambahan untuk pemesanan
-                                        </li>
                                         <li class="border-b pb-2 mb-2">
                                             <h6 class="mb-0">Tidak Terlihat Pembatalan</h6>
                                             Kami tidak membebankan biaya pembatalan atau modifikasi jika rencana berubah
@@ -239,4 +242,11 @@
             </div>
         </div>
     </section> --}}
+@endsection
+@section('js')
+    <script>
+        function payment() {
+            $('#payment').modal('show');
+        }
+    </script>
 @endsection

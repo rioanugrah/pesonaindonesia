@@ -24,6 +24,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     Route::prefix('payment')->group(function(){
         Route::post('callback', 'Payment\PaymentMidtransController@payment_callback');
     });
+    Route::post('callback','Payment\TripayController@handle');
 
     Route::prefix('v1')->group(function(){
         Route::post('login', 'API\UserController@login');
