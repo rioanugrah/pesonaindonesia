@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // for ($i=0; $i < 5 ; $i++) { 
+        // for ($i=0; $i < 5 ; $i++) {
         //     $data[] = [
         //         'key' => $i+1,
         //         'name' => 'Rio'
@@ -87,14 +87,14 @@ class HomeController extends Controller
         //     $wisatas = Wisata::all();
 
         //     // $data1 = array();
-    
+
         //     foreach ($wisatas as $key => $wisata) {
         //         $data1[] = [
         //             'nama_wisata' => $wisata['nama_wisata'],
         //             'image' => asset('image/'.$wisata['image'])
         //         ];
         //     };
-    
+
         //     return response()->json([
         //         'data' => $data1,
         //         // 'wisata' => $wisatas

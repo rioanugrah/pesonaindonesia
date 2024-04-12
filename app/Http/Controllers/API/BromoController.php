@@ -52,31 +52,42 @@ class BromoController extends Controller
         $schedule_bromos = CarbonPeriod::create($week_start,$week_end);
         foreach ($schedule_bromos as $schedule_bromo) {
             $jadwal_bromos = $this->bromo->whereDate('tanggal',$schedule_bromo->format('Y-m-d'))->get();
-            foreach ($jadwal_bromos as $jadwal_bromo) {
-                if ($jadwal_bromo->tanggal >= Carbon::now()->format('Y-m-d H:i') ) {
-                    $status = 'open';
-                }else{
-                    $status = 'close';
+            if (!$jadwal_bromos->isEmpty()) {
+                foreach ($jadwal_bromos as $jadwal_bromo) {
+                    if ($jadwal_bromo->tanggal >= Carbon::now()->format('Y-m-d H:i') ) {
+                        $status = 'open';
+                    }else{
+                        $status = 'close';
+                    }
+                    $data[] = [
+                        'id' => $jadwal_bromo->id,
+                        'date' => Carbon::create($jadwal_bromo->tanggal)->isoFormat('LL'),
+                        'time' => Carbon::create($jadwal_bromo->tanggal)->format('H:i'),
+                        'schedule' => Carbon::create($jadwal_bromo->tanggal)->format('Y-m-d'),
+                        'slug' => $jadwal_bromo->slug,
+                        'title' => $jadwal_bromo->title,
+                        'meeting_point' => $jadwal_bromo->meeting_point,
+                        'category_trip' => $jadwal_bromo->category_trip,
+                        'quota' => $jadwal_bromo->quota,
+                        'max_quota' => $jadwal_bromo->max_quota,
+                        // 'price' => 'Rp. '.number_format($jadwal_bromo->price,0,',','.'),
+                        'price' => number_format($jadwal_bromo->price,0,',','.'),
+                        'discount' => $jadwal_bromo->discount,
+                        'status' => $status
+                    ];
                 }
-                $data['data'][] = [
-                    'id' => $jadwal_bromo->id,
-                    'date' => Carbon::create($jadwal_bromo->tanggal)->isoFormat('LL'),
-                    'time' => Carbon::create($jadwal_bromo->tanggal)->format('H:i'),
-                    'schedule' => Carbon::create($jadwal_bromo->tanggal)->format('Y-m-d'),
-                    'slug' => $jadwal_bromo->slug,
-                    'title' => $jadwal_bromo->title,
-                    'meeting_point' => $jadwal_bromo->meeting_point,
-                    'category_trip' => $jadwal_bromo->category_trip,
-                    'quota' => $jadwal_bromo->quota,
-                    'max_quota' => $jadwal_bromo->max_quota,
-                    // 'price' => 'Rp. '.number_format($jadwal_bromo->price,0,',','.'),
-                    'price' => number_format($jadwal_bromo->price,0,',','.'),
-                    'discount' => $jadwal_bromo->discount,
-                    'status' => $status
-                ];
             }
         }
-        return $data;
+
+        if (empty($data)) {
+            return response()->json([
+                'success' => false,
+            ]);
+        }
+        return response()->json([
+            'success' => true,
+            'data' => $data
+        ]);
     }
 
     public function detail($id)
@@ -147,7 +158,7 @@ class BromoController extends Controller
                     'price' => $transaction_price,
                     'status' => 'Unpaid'
                 ]);
-                
+
                 if($request->qty == 0 and $request->qty == null){
                     $input['transaction_qty'] = 1;
                 }else{
@@ -234,9 +245,9 @@ class BromoController extends Controller
                     'error' => "Booking Gagal"
                 ]);
             }
-            
+
         }
-        
+
         // $input['transaction_order'] = [
         //     'first_name' => $request->first_name,
         //     'last_name' => $request->last_name,

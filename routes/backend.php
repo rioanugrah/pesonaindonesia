@@ -326,6 +326,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('{id}', 'AnnouncementController@detail')->name('b.announcement.detail')->middleware('verified');
                 Route::post('update', 'AnnouncementController@update')->name('b.announcement.update')->middleware('verified');
             });
+            Route::prefix('testing_payment_tripay')->group(function(){
+                Route::get('/', 'Payment\TripayController@getPayment')->middleware('verified');
+            });
 
             // Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');
             // Route::get('pengguna/delete/{id}', 'UsersController@delete')->middleware('verified');

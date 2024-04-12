@@ -126,8 +126,10 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::get('/', 'BromoController@f_index')->name('frontend.bromo');
         Route::get('reservasi/{id}/{tanggal}', 'BromoController@f_booking')->name('frontend.bromo.booking');
         Route::post('reservasi/{id}/{tanggal}/ckeckout', 'BromoController@f_booking_payment_checkout')->name('frontend.bromo.checkout');
-        Route::post('reservasi/{id}/{tanggal}/{id_transaksi}/payment', 'BromoController@f_booking_payment_manual')->name('frontend.bromo.payment_manual');
+        // Route::post('reservasi/{id}/{tanggal}/{id_transaksi}/payment', 'BromoController@f_booking_payment_manual')->name('frontend.bromo.payment_manual');
     });
+    Route::get('reservasi/payment/{reference}', 'BromoController@f_checkout_detail')->name('frontend.bromo.f_checkout_detail');
+
     Route::prefix('tour')->group(function(){
         Route::get('/', 'Frontend\v2\TourController@index')->name('frontend.tour');
     });
@@ -172,6 +174,11 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
     //     }
     //     return $hp;
     // });
+
+    // Route::get('callback',function(){
+    //     return 'Oke';
+    // });
+    Route::post('callbacks','Payment\TripayController@handle')->name('transaction.callback');
 
 });
 
