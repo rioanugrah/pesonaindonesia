@@ -132,33 +132,33 @@ class TicketBromoController extends Controller
 
     public function create()
     {
-        $bromos = $this->bromo->whereYear('tanggal','>=',Carbon::today()->format('Y'))
+        $data['bromos'] = $this->bromo->whereYear('tanggal','>=',Carbon::today()->format('Y'))
                                         ->whereMonth('tanggal','>=',Carbon::today()->format('m'))
                                         // ->whereDate('tanggal',Carbon::today()->format('d'))
                                         ->latest()
                                         ->get();
-        foreach ($bromos as $key => $bromo) {
-            $schedule_bromo = strtotime($bromo->tanggal);
-            $date_now = strtotime(Carbon::now());
-            if ($schedule_bromo >= $date_now) {
-                $data['bromos'][] = [
-                    'id' => $bromo->id,
-                    'tanggal' => Carbon::create($bromo->tanggal)->isoFormat('LLL'),
-                    'time' => Carbon::create($bromo->tanggal)->format('H:i'),
-                    // 'slug' => $bromo->slug,
-                    // 'title' => $bromo->title,
-                    // 'meeting_point' => $bromo->meeting_point,
-                    'category_trip' => $bromo->category_trip == 'Publik' ? 'Open Trip' : 'Private Trip',
-                    // 'quota' => $bromo->quota,
-                    // 'max_quota' => $bromo->max_quota,
-                    // 'destination' => $bromo->destination,
-                    // 'include' => $bromo->include,
-                    // 'exclude' => $bromo->exclude,
-                    // 'price' => $bromo->price,
-                    // 'discount' => $bromo->discount,
-                ];
-            }
-        }
+        // foreach ($bromos as $key => $bromo) {
+        //     $schedule_bromo = strtotime($bromo->tanggal);
+        //     $date_now = strtotime(Carbon::now());
+        //     if ($schedule_bromo >= $date_now) {
+        //         $data['bromos'][] = [
+        //             'id' => $bromo->id,
+        //             'tanggal' => Carbon::create($bromo->tanggal)->isoFormat('LLL'),
+        //             'time' => Carbon::create($bromo->tanggal)->format('H:i'),
+        //             // 'slug' => $bromo->slug,
+        //             // 'title' => $bromo->title,
+        //             // 'meeting_point' => $bromo->meeting_point,
+        //             'category_trip' => $bromo->category_trip == 'Publik' ? 'Open Trip' : 'Private Trip',
+        //             // 'quota' => $bromo->quota,
+        //             // 'max_quota' => $bromo->max_quota,
+        //             // 'destination' => $bromo->destination,
+        //             // 'include' => $bromo->include,
+        //             // 'exclude' => $bromo->exclude,
+        //             // 'price' => $bromo->price,
+        //             // 'discount' => $bromo->discount,
+        //         ];
+        //     }
+        // }
         $tripay = $this->tripay_payment;
         $data['channels'] = json_decode($tripay->getPayment())->data;
         return view('backend_new_2023.ticket_bromo.create',$data);

@@ -27,7 +27,13 @@
                             <select name="booking_date_id" class="form-control booking_date" id="">
                                 <option value="">-- Select Booking Date--</option>
                                 @foreach ($bromos as $key_bromo => $bromo)
+                                @php
+                                    $schedule_bromo = strtotime($bromo->tanggal);
+                                    $date_now = strtotime(\Carbon\Carbon::now());
+                                @endphp
+                                @if ($schedule_bromo >= $date_now)
                                 <option value="{{ $bromo['id'] }}">{{ $bromo['tanggal'] . ' - ' . $bromo['category_trip'] }}</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>
