@@ -61,25 +61,28 @@ class TicketBromoController extends Controller
         //     }
         //     dd($data);
         if ($request->ajax()) {
-            $data_transactions = $this->transactions->with('verifikasi_tiket')->where('user',auth()->user()->generate)->get();
-            foreach ($data_transactions as $key => $data_transaction) {
-                $explode_transaction_code_bromo = explode('-',$data_transaction->transaction_code);
-                if ($explode_transaction_code_bromo[1] == 'BRMO') {
-                    $data[] = [
-                        'id' => $data_transaction->id,
-                        'transaction_code' => $data_transaction->transaction_code,
-                        'transaction_unit' => $data_transaction->transaction_unit,
-                        'transaction_reference' => $data_transaction->transaction_reference,
-                        'transaction_qty' => $data_transaction->transaction_qty,
-                        'transaction_price' => $data_transaction->transaction_price,
-                        'code_ticket' => $data_transaction->verifikasi_tiket->kode_tiket,
-                        'booking_date' => $data_transaction->verifikasi_tiket->tanggal_booking,
-                        'status' => $data_transaction->status,
-                    ];
-                }
-            }
+            $data_transactions = $this->transactions->with('verifikasi_tiket')
+                                                    ->where('transaction_code','LIKE','%BRMO%')
+                                                    ->where('user',auth()->user()->generate)
+                                                    ->get();
+            // foreach ($data_transactions as $key => $data_transaction) {
+            //     $explode_transaction_code_bromo = explode('-',$data_transaction->transaction_code);
+            //     if ($explode_transaction_code_bromo[1] == 'BRMO') {
+            //         $data[] = [
+            //             'id' => $data_transaction->id,
+            //             'transaction_code' => $data_transaction->transaction_code,
+            //             'transaction_unit' => $data_transaction->transaction_unit,
+            //             'transaction_reference' => $data_transaction->transaction_reference,
+            //             'transaction_qty' => $data_transaction->transaction_qty,
+            //             'transaction_price' => $data_transaction->transaction_price,
+            //             'code_ticket' => $data_transaction->verifikasi_tiket->kode_tiket,
+            //             'booking_date' => $data_transaction->verifikasi_tiket->tanggal_booking,
+            //             'status' => $data_transaction->status,
+            //         ];
+            //     }
+            // }
 
-            return DataTables::of($data)
+            return DataTables::of($data_transactions)
                     ->addIndexColumn()
                     ->addColumn('status', function($row){
                         switch ($row['status']) {
@@ -97,6 +100,9 @@ class TicketBromoController extends Controller
                                 # code...
                                 break;
                         }
+                    })
+                    ->addColumn('code_ticket', function($row){
+                        return $row->verifikasi_tiket->kode_tiket;
                     })
                     ->addColumn('transaction_unit', function($row){
                         return ucwords($row['transaction_unit']);
