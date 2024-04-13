@@ -10,6 +10,7 @@ use \App\Models\BuktiPembayaran;
 use \App\Models\Transactions;
 use \App\Models\VerifikasiTiket;
 use \App\Models\OrderList;
+use App\Models\Roles;
 
 use DataTables;
 use Validator;
@@ -18,17 +19,22 @@ use File;
 use PDF;
 use \Carbon\Carbon;
 
-class OrderController extends Controller
+class TransactionController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:transaksi-list', ['only' => ['index']]);
+        // $this->middleware('permission:transaksi-list', ['only' => ['index']]);
         // $this->middleware('permission:posting-create', ['only' => ['create']]);
     }
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Transactions::all();
+            $role = DB::table('model_has_roles')->where('model_id',auth()->user()->id)->first();
+            if ($role->role_id == 1) {
+                $data = Transactions::all();
+            }else{
+                $data = Transactions::where('user',auth()->user()->generate)->get();
+            }
             return DataTables::of($data)
                     ->addIndexColumn()
                     // ->addColumn('kategori_paket_id', function($row){
@@ -101,7 +107,7 @@ class OrderController extends Controller
                         // dd($bukti_pembayaran);
                         $btn = '<div class="btn-group">';
                         $btn .= '<a href='.route('b.invoice.detail',['kode_order' => $row->transaction_code]).' target="_blank" class="btn btn-xs btn-primary"><i class="uil-file-alt"></i> Invoice</a>';
-                        $btn .= '<button class="btn btn-xs btn-success"><i class="uil-eye"></i> Detail Pembelian</button>';
+                        // $btn .= '<button class="btn btn-xs btn-success"><i class="uil-eye"></i> Detail Pembelian</button>';
                         if (!empty($bukti_pembayaran)) {
                             $btn .= '<button class="btn btn-xs btn-info" onclick="bukti_pembayaran(`'.$row->transaction_code.'`)"><i class="uil-eye"></i> Bukti Pembayaran</button>';
                         }
@@ -149,7 +155,7 @@ class OrderController extends Controller
         $verifikasi_tiket = VerifikasiTiket::where('transaction_id',$transaction->id)->update([
             'status' => $request->bukti_pembayaran_status
         ]);
-        
+
         return response()->json([
             'success' => true,
             'message_content' => 'Bukti Pembayaran Berhasil'

@@ -28,8 +28,15 @@
 
         <div id="sidebar-menu">
             <ul class="metismenu list-unstyled" id="side-menu">
+                {{-- <li class="menu-title">Mode</li>
+                <li>
+                    <select name="mode" class="form-control" id="">
+                        <option value="production">Production</option>
+                        <option value="sandbox">Sandbox</option>
+                    </select>
+                </li> --}}
                 @can('dashboard')
-                <li class="menu-title">Dashboard</li>
+                {{-- <li class="menu-title">Dashboard</li> --}}
                 <li>
                     <a href="{{route('home')}}">
                         <i class="uil-home-alt"></i>
@@ -53,9 +60,9 @@
                 @can('transaksi-list')
                 <li class="menu-title">Payment</li>
                 <li>
-                    <a href="{{ route('b.order') }}">
-                        <i class="uil-home-alt"></i>
-                        <span>Transactions</span>
+                    <a href="{{ route('b.transaction') }}">
+                        <i class="uil-card-atm"></i>
+                        <span>Transaction</span>
                     </a>
                 </li>
                 @endcan
@@ -114,6 +121,7 @@
                     </a>
                 </li>
                 @endcan
+                @can('management-administrasi')
                 <li class="menu-title">Management Administrasi</li>
                 <li>
                     <a href="{{ route('b.transaksi_paket_wisata') }}">
@@ -127,6 +135,8 @@
                         <span>Event</span>
                     </a>
                 </li>
+                @endcan
+                @can('finance-officer')
                 <li class="menu-title">Finance Officer</li>
                 <li>
                     <a href="{{ route('b.laporan_transaksi') }}">
@@ -146,6 +156,7 @@
                         <span>Invoice</span>
                     </a>
                 </li>
+                @endcan
                 @can('kt-operating')
                 <li class="menu-title">Operating Officer</li>
 
@@ -234,7 +245,15 @@
                     </a>
                 </li>
                 @endcan
-
+                @can('order')
+                <li class="menu-title">Order</li>
+                <li>
+                    <a href="{{ route('b.ticket_bromo') }}">
+                        <i class="uil-ticket"></i>
+                        <span>Ticket Bromo</span>
+                    </a>
+                </li>
+                @endcan
                 {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="uil-window-section"></i>

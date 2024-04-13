@@ -61,56 +61,7 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        // $data['start_month'] = Carbon::now()->startOfYear();
-        // $data['now_month'] = Carbon::now();
-
-        // try {
-        //     $data['balances'] = json_decode((new HomeController)->balance(),true);
-        // } catch (\Throwable $th) {
-        //     $data['balances']['balance']=0;
-        // }
-
-        // if ($request->ajax()) {
-        //     $get_balance = new HTTP_Request2();
-        //     $get_balance->setUrl($this->payment_production.'/v1/balance');
-        //     $get_balance->setMethod(HTTP_Request2::METHOD_GET);
-        //     $get_balance->setConfig(array(
-        //     'follow_redirects' => TRUE
-        //     ));
-        //     $get_balance->setHeader(array(
-        //     'Content-Type' => 'application/json',
-        //     'Accept' => 'application/json',
-        //     'Authorization' => env('MIDTRANS_SERVER_KEY').':'
-        //     ));
-
-        //     try {
-        //         $response = $request->send();
-        //         if ($response->getStatus() == 200) {
-        //             return $response->getBody();
-        //         }
-        //     } catch (\Throwable $th) {
-        //         //throw $th;
-        //     }
-        // }
-
-        $data['periode'] = [];
-        $data['tanggals'] = now()->subMonths(12)->monthsUntil(now());
-        foreach ($data['tanggals'] as $key => $date) {
-            // $data['periode'][] = [
-            //     'month' => $date->shortMonthName,
-            //     'year' => $date->year,
-            // ];
-            // $data['total_sales_tour'][] = TourOrder::where(\DB::raw("DATE_FORMAT(created_at, '%Y-m')"),$date->format('Y-m'))->count();
-            $data['periode'][] = $date->format('m/d/Y');
-        }
-        // $data['label_total_sales_tour'] = json_encode($data['total_sales_tour']);
-        $data['label_periode'] = json_encode($data['periode']);
-        // $total_sales_income = TourOrder::all();
-        // $data['sales_income'] = $total_sales_income;
-        // dd($data);
-        // dd(json_encode($data['periode']));
-        // dd(json_decode(json_encode($data['periode']),false));
-        return view('backend_new_2023.dashboard.index',$data);
+        return view('backend_new_2023.dashboard.index');
     }
 
     public function ajax_booking_travelling(Request $request)

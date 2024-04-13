@@ -23,7 +23,7 @@ class UsersController extends Controller
         return view('backend_new_2023.users_new.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +34,7 @@ class UsersController extends Controller
         $roles = Role::pluck('name','name')->all();
         return view('backend_new_2023.users_new.create',compact('roles'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -49,18 +49,18 @@ class UsersController extends Controller
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
-    
+
         $input = $request->all();
         $input['generate'] = Str::uuid()->toString();
         $input['password'] = Hash::make($input['password']);
-    
+
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
-    
+
         return redirect()->route('users.index')
                         ->with('success','User created successfully');
     }
-    
+
     /**
      * Display the specified resource.
      *
@@ -72,7 +72,7 @@ class UsersController extends Controller
         $user = User::find($id);
         return view('backend_new_2023.users_new.show',compact('user'));
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -84,10 +84,10 @@ class UsersController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-    
+
         return view('backend_new_2023.users_new.edit',compact('user','roles','userRole'));
     }
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -103,24 +103,24 @@ class UsersController extends Controller
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
-    
+
         $input = $request->all();
-        if(!empty($input['password'])){ 
+        if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
         }else{
-            $input = array_except($input,array('password'));    
+            $input = array_except($input,array('password'));
         }
-    
+
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
-    
+
         $user->assignRole($request->input('roles'));
-    
+
         return redirect()->route('users.index')
                         ->with('success','User updated successfully');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *
@@ -132,5 +132,13 @@ class UsersController extends Controller
         User::find($id)->delete();
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
+    }
+
+    public function profile()
+    {
+        $data['profile'] = User::where('generate',auth()->user()->generate)->first();
+        $data['devices'] = visitor();
+        // dd($data);
+        return view('backend_new_2023.users.profile.index',$data);
     }
 }

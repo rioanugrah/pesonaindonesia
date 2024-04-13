@@ -18,18 +18,18 @@
 
     @include('backend_new_2023.order.detail_bukti_pembayaran')
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-md-6 col-xl-3">
             <div class="card">
                 <div class="card-body">
-                    {{-- <div>
+                    <div>
                         <h4 class="mb-1 mt-1">Rp. <span data-plugin="counterup">{{ number_format($balances['balance'] == null ? 0 : $balances['balance'],0,'.',',') }}</span></h4>
                         <p class="text-muted mb-0">Balance</p>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- <div class="row">
         <div class="col-12">
@@ -66,25 +66,17 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Booking Travelling</h4>
+                    <h4 class="card-title">Transaction</h4>
                     <table id="datatable_tour_booking" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
-                            {{-- <tr>
-                                <th>Kode Booking</th>
-                                <th>Nama Order</th>
-                                <th>Tanggal Booking</th>
-                                <th>Payment Metode</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr> --}}
                             <tr>
-                                <th>Kode Order</th>
-                                <th>Nama Order</th>
-                                <th>Pemesan</th>
-                                <th>Jumlah</th>
-                                <th>Harga</th>
-                                <th>TGL.Pembelian</th>
+                                <th>Transaction Code</th>
+                                <th>Transaction Unit</th>
+                                <th>Recipient User</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Purchase Date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -137,7 +129,7 @@
             //         searchable: false
             //     },
             // ]
-            ajax: "{{ route('b.order') }}",
+            ajax: "{{ route('b.transaction') }}",
             columns: [{
                     data: 'kode_order',
                     name: 'kode_order'
@@ -225,7 +217,7 @@
             // $('#image-input-error').text('');
             $.ajax({
                 type:'POST',
-                url: "{{ route('b.order.bukti_pembayaran.simpan') }}",
+                url: "{{ route('b.transaction.bukti_pembayaran.simpan') }}",
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -311,7 +303,7 @@
         //             console.log(result);
         //         },
         //         error: function (request, status, error) {
-                    
+
         //         }
         //     })
         // }

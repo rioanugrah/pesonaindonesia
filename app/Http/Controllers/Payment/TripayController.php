@@ -13,18 +13,24 @@ class TripayController extends Controller
     function __construct(Transactions $transactions)
     {
         $this->transactions = $transactions;
+
+        if (env('TRIPAY_IS_PRODUCTION') == false) {
+            $this->tripay_api_key = env('TRIPAY_API_KEY_SANDBOX');
+            $this->tripay_private_key = env('TRIPAY_PRIVATE_KEY_SANDBOX');
+            $this->tripay_merchant = env('TRIPAY_MERCHANT_SANDBOX');
+            $this->tripay_url = env('TRIPAY_SANDBOX');
+        }else{
+            $this->tripay_api_key = env('TRIPAY_API_KEY_PRODUCTION');
+            $this->tripay_private_key = env('TRIPAY_PRIVATE_KEY_PRODUCTION');
+            $this->tripay_merchant = env('TRIPAY_MERCHANT_PRODUCTION');
+            $this->tripay_url = env('TRIPAY_PRODUCTION');
+        }
     }
 
     public function getPayment()
     {
-        $apiKey = env('TRIPAY_API_KEY');
-        // dd($apiKey);
-        if (env('TRIPAY_IS_PRODUCTION') == false) {
-            $url_tripay = env('TRIPAY_SANDBOX');
-        }else{
-            $url_tripay = env('TRIPAY_PRODUCTION');
-        }
-        // dd($url_tripay);
+        $apiKey = $this->tripay_api_key;
+        $url_tripay = $this->tripay_url;
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -54,16 +60,12 @@ class TripayController extends Controller
         $merchantRef
         )
         {
-            $apiKey       = env('TRIPAY_API_KEY');
-            $privateKey   = env('TRIPAY_PRIVATE_KEY');
-            $merchantCode = env('TRIPAY_MERCHANT');
+            $apiKey       = $this->tripay_api_key;
+            $privateKey   = $this->tripay_private_key;
+            $merchantCode = $this->tripay_merchant;
             $merchantRef  = $merchantRef;
             $amount       = $amount;
-            if (env('TRIPAY_IS_PRODUCTION') == false) {
-                $url_tripay = env('TRIPAY_SANDBOX');
-            }else{
-                $url_tripay = env('TRIPAY_PRODUCTION');
-            }
+            $url_tripay   = $this->tripay_url;
 
             $data = [
                 'method'         => $method,
@@ -113,17 +115,13 @@ class TripayController extends Controller
 
     public function detailTransaction($reference)
     {
-        $apiKey = env('TRIPAY_API_KEY');
+        $apiKey = $this->tripay_api_key;
 
         $payload = ['reference'	=> $reference];
 
         $curl = curl_init();
 
-        if (env('TRIPAY_IS_PRODUCTION') == false) {
-            $url_tripay = env('TRIPAY_SANDBOX');
-        }else{
-            $url_tripay = env('TRIPAY_PRODUCTION');
-        }
+        $url_tripay = $this->tripay_url;
 
         curl_setopt_array($curl, [
             CURLOPT_FRESH_CONNECT  => true,
@@ -147,7 +145,7 @@ class TripayController extends Controller
     public function handle(Request $request)
     {
         // dd($request->all());
-        $privateKey = env('TRIPAY_PRIVATE_KEY');
+        $privateKey = $this->tripay_private_key;
         $callbackSignature = $request->server('HTTP_X_CALLBACK_SIGNATURE');
         // dd($callbackSignature);
         $json = $request->getContent();

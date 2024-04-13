@@ -34,13 +34,12 @@
                     style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
-                            <th>Kode Order</th>
-                            <th>Nama Order</th>
-                            <th>Pemesan</th>
-                            <th>Jumlah</th>
-                            <th>Harga</th>
-                            {{-- <th>Status</th> --}}
-                            <th>TGL.Pembelian</th>
+                            <th>Transaction Code</th>
+                            <th>Transaction Unit</th>
+                            <th>Recipient User</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Purchase Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -62,7 +61,7 @@
         var table = $('#datatable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('b.order') }}",
+            ajax: "{{ route('b.transaction') }}",
             columns: [{
                     data: 'kode_order',
                     name: 'kode_order'
@@ -146,7 +145,7 @@
             // $('#image-input-error').text('');
             $.ajax({
                 type:'POST',
-                url: "{{ route('b.order.bukti_pembayaran.simpan') }}",
+                url: "{{ route('b.transaction.bukti_pembayaran.simpan') }}",
                 data: formData,
                 contentType: false,
                 processData: false,

@@ -249,9 +249,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             });
 
             Route::prefix('transaction')->group(function(){
-                Route::get('/', 'v2\OrderController@index')->name('b.order')->middleware('verified');
-                Route::get('bukti_pembayaran/{kode_transaksi}', 'v2\OrderController@detail_bukti_pembayaran')->name('b.order.detail_bukti_pembayaran')->middleware('verified');
-                Route::post('bukti_pembayaran/simpan', 'v2\OrderController@bukti_pembayaran_simpan')->name('b.order.bukti_pembayaran.simpan')->middleware('verified');
+                Route::get('/', 'v2\TransactionController@index')->name('b.transaction')->middleware('verified');
+                Route::get('bukti_pembayaran/{kode_transaksi}', 'v2\TransactionController@detail_bukti_pembayaran')->name('b.transaction.detail_bukti_pembayaran')->middleware('verified');
+                Route::post('bukti_pembayaran/simpan', 'v2\TransactionController@bukti_pembayaran_simpan')->name('b.transaction.bukti_pembayaran.simpan')->middleware('verified');
             });
 
             Route::prefix('finance')->group(function(){
@@ -326,6 +326,19 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::get('{id}', 'AnnouncementController@detail')->name('b.announcement.detail')->middleware('verified');
                 Route::post('update', 'AnnouncementController@update')->name('b.announcement.update')->middleware('verified');
             });
+
+            Route::prefix('ticket_bromo')->group(function(){
+                Route::get('/', 'TicketBromoController@index')->name('b.ticket_bromo')->middleware('verified');
+                Route::get('order', 'TicketBromoController@create')->name('b.ticket_bromo.create')->middleware('verified');
+                Route::post('order/buy', 'TicketBromoController@buy')->name('b.ticket_bromo.buy')->middleware('verified');
+                Route::get('detail_bromo/{id}', 'TicketBromoController@detail_bromo')->middleware('verified');
+                Route::prefix('checkout')->group(function(){
+                    Route::get('{reference}', 'TicketBromoController@checkout')->name('b.ticket_bromo.checkout')->middleware('verified');
+                    Route::get('{reference}/check_payment', 'TicketBromoController@check_payment')->name('b.ticket_bromo.check_payment')->middleware('verified');
+                });
+                Route::get('{reference}/invoice', 'TicketBromoController@invoice')->name('b.ticket_bromo.invoice')->middleware('verified');
+            });
+
             Route::prefix('testing_payment_tripay')->group(function(){
                 Route::get('/', 'Payment\TripayController@getPayment')->middleware('verified');
             });

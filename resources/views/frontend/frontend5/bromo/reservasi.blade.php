@@ -3,21 +3,6 @@
     {{ $bromo->title }}
 @endsection
 
-@auth
-    <?php
-    $user = auth()->user()->name;
-    $name = explode(' ', $user);
-    $first_name = $name[0];
-    $last_name = $name[1];
-    ?>
-@else
-    <?php
-    $user = null;
-    $first_name = '';
-    $last_name = '';
-    ?>
-@endauth
-
 @section('content')
     <form action="{{ route('frontend.bromo.checkout',['id' => $bromo->id, 'tanggal' => \Carbon\Carbon::create($bromo->tanggal)->format('Y-m-d')]) }}" id="form-form" method="post" enctype="multipart/form-data">
         @csrf
@@ -33,14 +18,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group mb-2">
                                                 <label>First Name</label>
-                                                <input type="text" name="first_name" value="{{ $first_name }}"
+                                                <input type="text" name="first_name"
                                                     placeholder="First Name" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-2">
                                                 <label>Last Name</label>
-                                                <input type="text" name="last_name" value="{{ $last_name }}"
+                                                <input type="text" name="last_name"
                                                     placeholder="Last Name" required>
                                             </div>
                                         </div>

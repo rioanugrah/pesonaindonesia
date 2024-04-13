@@ -18,6 +18,8 @@ class Transactions extends Model
     public $fillable = [
         'id',
         'transaction_code',
+        'transaction_reference',
+        'transaction_merchant',
         'transaction_unit',
         'transaction_order',
         'transaction_qty',

@@ -184,7 +184,7 @@
                     {{-- <div data-simplebar style="max-height: 230px;" class="dropdown-notifications"> --}}
                     <div data-simplebar style="max-height: 230px;">
                         {{-- <a href="{{ $notification->data['url'] }}" class="text-reset notification-item mark-as-read" data-id="{{ $notification->id }}"> --}}
-                        
+
                         {{-- <div data-toggle="dropdown">
                             <a href="#" class="text-reset notification-item mark-as-read notification-items" data-id="">
                             </a>
@@ -211,7 +211,7 @@
                             </div>
                         </a>
                         @endforeach
-                        
+
                         {{-- @forelse (auth()->user()->unreadNotifications->take(5) as $notification)
                         <a href="{{ $notification->data['url'] }}" class="text-reset notification-item mark-as-read" data-id="{{ $notification->id }}">
                             <div class="d-flex align-items-start">
@@ -263,6 +263,7 @@
                     <a class="dropdown-item" href="#"><i class="uil uil-wallet font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">@lang('translation.My_Wallet')</span></a>
                     <a class="dropdown-item d-block" href="#"><i class="uil uil-cog font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">@lang('translation.Settings')</span> <span class="badge bg-soft-success rounded-pill mt-1 ms-2">03</span></a>
                     <a class="dropdown-item" href="#"><i class="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">@lang('translation.Lock_screen')</span></a> --}}
+                    <a class="dropdown-item" href="{{ route('pengguna.profile') }}"><i class="uil-chat-bubble-user font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Profile</span></a>
                     <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Logout</span></a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
