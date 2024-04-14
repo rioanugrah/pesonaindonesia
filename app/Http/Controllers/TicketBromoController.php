@@ -115,10 +115,10 @@ class TicketBromoController extends Controller
                     })
                     ->addColumn('action', function($row){
                         $btn = '<div class="btn-group">';
-                        $btn .= '<a href='.route('b.ticket_bromo.checkout',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-success"><i class="uil-eye"></i> Purchase Detail</a>';
-                        if ($row['status'] == 'Paid') {
-                            $btn .= '<a href='.route('b.ticket_bromo.invoice',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-info"><i class="uil-file-download-alt"></i> Invoice</a>';
-                        }
+                        // $btn .= '<a href='.route('b.ticket_bromo.checkout',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-success"><i class="uil-eye"></i> Purchase Detail</a>';
+                        // if ($row['status'] == 'Paid') {
+                        //     $btn .= '<a href='.route('b.ticket_bromo.invoice',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-info"><i class="uil-file-download-alt"></i> Invoice</a>';
+                        // }
                         $btn .= '</div>';
                         return $btn;
                     })
@@ -282,13 +282,17 @@ class TicketBromoController extends Controller
             $input['status'] = 'Unpaid';
 
             $tripay = $this->tripay_payment;
+            // $url_return = '';
             $paymentDetail = $tripay->requestTransaction(
                 $bromo->title,
                 $request->method,$input['transaction_price'],
                 $request->first_name,$request->last_name,$request->email,$request->phone,
-                $input['transaction_code']
+                $input['transaction_code'],
+                // $url_return
+                route('b.ticket_bromo.invoice',['transaction_code' => $input['transaction_code']])
             );
-            // dd($paymentDetail);
+            // dd($url_return);
+            // dd(json_decode($paymentDetail)->data->reference);
             $input['transaction_reference'] = json_decode($paymentDetail)->data->reference;
             $transactions = $this->transactions->create($input);
             $bromo->quota = $bromo->quota - ($request->qty_team+1);
@@ -312,7 +316,8 @@ class TicketBromoController extends Controller
                     'success' => true,
                     'message_title' => 'Success',
                     'message_content' => 'The purchase has been successful, please wait',
-                    'link' => route('b.ticket_bromo.checkout',['reference' => $payment_reference->data->reference])
+                    'link' => json_decode($paymentDetail)->data->checkout_url
+                    // 'link' => route('b.ticket_bromo.checkout',['reference' => $payment_reference->data->reference])
                 ]);
                 // return redirect()->route('b.ticket_bromo.checkout',['reference' => $payment_reference->data->reference]);
             }
@@ -473,14 +478,22 @@ class TicketBromoController extends Controller
         ]);
     }
 
-    public function invoice($reference)
+    public function detail($reference)
     {
+        $tripay = $this->tripay_payment;
+        $data['detail_payment'] = json_decode($tripay->detailTransaction($reference));
         $data['transaction'] = $this->transactions->where('transaction_reference',$reference)->first();
+        return view('backend_new_2023.ticket_bromo.detail',$data);
+    }
+
+    public function invoice($transaction_code)
+    {
+        $data['transaction'] = $this->transactions->where('transaction_code',$transaction_code)->first();
         if (empty($data['transaction'])) {
             return redirect()->back();
         }
         $tripay = $this->tripay_payment;
-        $data['detail_payment'] = json_decode($tripay->detailTransaction($reference));
+        $data['detail_payment'] = json_decode($tripay->detailTransaction($data['transaction']['transaction_reference']));
         return view('backend_new_2023.ticket_bromo.invoice',$data);
     }
 }

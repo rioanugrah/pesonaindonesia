@@ -95,6 +95,11 @@
                                         <td class="border-0 text-end">Rp. {{ number_format($detail_payment->data->fee_customer,0,',','.') }}</td>
                                     </tr>
                                     <tr>
+                                        <th scope="row" colspan="4" class="border-0 text-end">
+                                            Fee :</th>
+                                        <td class="border-0 text-end">Rp. {{ number_format($detail_payment->data->fee_customer,0,',','.') }}</td>
+                                    </tr>
+                                    <tr>
                                         <th scope="row" colspan="4" class="border-0 text-end">Total</th>
                                         <td class="border-0 text-end">
                                             <h4 class="m-0">Rp. {{ number_format($transaction->transaction_price+$detail_payment->data->fee_customer,0,',','.') }}</h4>

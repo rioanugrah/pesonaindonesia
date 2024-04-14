@@ -57,7 +57,7 @@ class TripayController extends Controller
         $product,
         $method,$amount,
         $first_name,$last_name,$email,$phone,
-        $merchantRef
+        $merchantRef,$url
         )
         {
             $apiKey       = $this->tripay_api_key;
@@ -66,6 +66,7 @@ class TripayController extends Controller
             $merchantRef  = $merchantRef;
             $amount       = $amount;
             $url_tripay   = $this->tripay_url;
+            $return_url   = $url;
 
             $data = [
                 'method'         => $method,
@@ -85,7 +86,7 @@ class TripayController extends Controller
                     ],
                     // 'return_url'   => 'https://domainanda.com/redirect',
                     'callback_url'   => env('APP_URL').'/api/callback',
-                    'return_url'   => env('APP_URL'),
+                    'return_url'   => $return_url,
                     'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
                     'signature'    => hash_hmac('sha256', $merchantCode.$merchantRef.$amount, $privateKey)
                 ];
@@ -189,15 +190,24 @@ class TripayController extends Controller
             }
             switch ($status) {
                 case 'PAID':
-                    $transaction->update(['status' => 'Paid']);
+                    $transaction->update([
+                        // 'transaction_reference' => $data->reference,
+                        'status' => 'Paid'
+                    ]);
                     break;
 
                 case 'EXPIRED':
-                    $transaction->update(['status' => 'Expired']);
+                    $transaction->update([
+                        // 'transaction_reference' => $data->reference,
+                        'status' => 'Expired'
+                    ]);
                     break;
 
                 case 'FAILED':
-                    $transaction->update(['status' => 'Failed']);
+                    $transaction->update([
+                        // 'transaction_reference' => $data->reference,
+                        'status' => 'Failed'
+                    ]);
                     break;
 
                 default:

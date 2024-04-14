@@ -336,7 +336,8 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                     Route::get('{reference}', 'TicketBromoController@checkout')->name('b.ticket_bromo.checkout')->middleware('verified');
                     Route::get('{reference}/check_payment', 'TicketBromoController@check_payment')->name('b.ticket_bromo.check_payment')->middleware('verified');
                 });
-                Route::get('{reference}/invoice', 'TicketBromoController@invoice')->name('b.ticket_bromo.invoice')->middleware('verified');
+                Route::get('{reference}', 'TicketBromoController@detail')->name('b.ticket_bromo.detail')->middleware('verified');
+                Route::get('{transaction_code}/invoice', 'TicketBromoController@invoice')->name('b.ticket_bromo.invoice')->middleware('verified');
             });
 
             Route::prefix('testing_payment_tripay')->group(function(){
