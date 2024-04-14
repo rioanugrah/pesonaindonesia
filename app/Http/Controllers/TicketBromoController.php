@@ -115,10 +115,11 @@ class TicketBromoController extends Controller
                     })
                     ->addColumn('action', function($row){
                         $btn = '<div class="btn-group">';
-                        // $btn .= '<a href='.route('b.ticket_bromo.checkout',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-success"><i class="uil-eye"></i> Purchase Detail</a>';
-                        // if ($row['status'] == 'Paid') {
-                        //     $btn .= '<a href='.route('b.ticket_bromo.invoice',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-info"><i class="uil-file-download-alt"></i> Invoice</a>';
-                        // }
+                        // $btn .= '<a href='.url('b/ticket_bromo/checkout/'.$row->transaction_reference).' class="btn btn-sm btn-success"><i class="uil-eye"></i> Purchase Detail</a>';
+                        $btn .= '<a href='.route('b.ticket_bromo.checkout',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-success"><i class="uil-eye"></i> Purchase Detail</a>';
+                        if ($row['status'] == 'Paid') {
+                            $btn .= '<a href='.route('b.ticket_bromo.invoice',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-info"><i class="uil-file-download-alt"></i> Invoice</a>';
+                        }
                         $btn .= '</div>';
                         return $btn;
                     })
