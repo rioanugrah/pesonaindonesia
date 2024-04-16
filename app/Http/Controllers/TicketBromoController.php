@@ -127,7 +127,7 @@ class TicketBromoController extends Controller
                             $btn .= '<a href='.route('b.ticket_bromo.checkout',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-success"><i class="uil-eye"></i> Purchase Detail</a>';
                         }
                         if ($row['status'] == 'Paid') {
-                            $btn .= '<a href='.route('b.ticket_bromo.invoice',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-info"><i class="uil-file-download-alt"></i> Invoice</a>';
+                            $btn .= '<a href='.route('b.ticket_bromo.invoice',['transaction_code' => $row['transaction_code']]).' class="btn btn-sm btn-info"><i class="uil-file-download-alt"></i> Invoice</a>';
                         }
 
                         $btn .= '</div>';
