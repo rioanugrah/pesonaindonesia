@@ -129,6 +129,8 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         // Route::post('reservasi/{id}/{tanggal}/{id_transaksi}/payment', 'BromoController@f_booking_payment_manual')->name('frontend.bromo.payment_manual');
     });
     Route::get('reservasi/payment/{reference}', 'BromoController@f_checkout_detail')->name('frontend.bromo.f_checkout_detail');
+    Route::get('reservasi/invoice/{transaction_code}', 'BromoController@f_booking_invoice')->name('frontend.bromo.f_reservasi_invoice');
+    Route::get('reservasi/sendEmail/{transaction_code}', 'BromoController@f_send_mail')->name('frontend.bromo.sendEmail')->middleware('verified');
 
     Route::prefix('tour')->group(function(){
         Route::get('/', 'Frontend\v2\TourController@index')->name('frontend.tour');

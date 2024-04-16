@@ -11,12 +11,12 @@
     <div class="container">
         <div class="banner-in">
             <div class="row align-items-center">
-                
+
                 <div class="col-lg-6 mb-4">
                     <div class="banner-content text-lg-start text-center">
                         <h4 class="theme mb-0">Nikmati Perjalananmu</h4>
                         <h1>Explore The Bromo</h1>
-                            
+
                         {{-- <div class="book-form position-absolute w-100 bg-white box-shadow p-4 pb-1 z-index1 rounded">
                             <div class="row d-flex align-items-center justify-content-between">
                                 <div class="col-lg mb-2">
@@ -271,5 +271,5 @@
 @endsection
 
 @section('script')
-    
+
 @endsection

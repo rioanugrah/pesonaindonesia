@@ -28,7 +28,7 @@ class MailController extends Controller
         $tripay = $this->tripay_payment;
         $data['detail_payment'] = json_decode($tripay->detailTransaction($reference));
 
-        $email = 'rioanugrah999@gmail.com';
+        $email = $bill_email;
 
         $body = [
             'date' => \Carbon\Carbon::now()->format('d-m-Y H:i'),

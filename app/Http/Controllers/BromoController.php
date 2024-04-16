@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Payment\TripayController;
+use App\Http\Controllers\MailController;
 use App\User;
 use App\Models\Bromo;
 use App\Models\Order;
@@ -35,6 +36,7 @@ class BromoController extends Controller
 {
     public function __construct(
             TripayController $tripay_payment,
+            MailController $sendMail,
             User $user,
             Bromo $bromo,
             Transactions $transactions,
@@ -54,6 +56,7 @@ class BromoController extends Controller
         }
 
         $this->tripay_payment = $tripay_payment;
+        $this->sendMail = $sendMail;
         $this->user = $user;
         $this->bromo = $bromo;
         $this->transactions = $transactions;
@@ -113,7 +116,7 @@ class BromoController extends Controller
             $kode_random_transaksi = Carbon::now()->format('Ym').rand(100,999);
             $input['id'] = Str::uuid()->toString();
             $input['transaction_code'] = $kode_jenis_transaksi.'-'.$kode_random_transaksi;
-            $input['transaction_unit'] = $bromo->title;
+            $input['transaction_unit'] = $bromo->title.' - Booking Date '.$bromo->tanggal;
             $transaction_price = $bromo->category_trip == 'Publik' ? ($bromo->price - (($bromo->discount/100) * $bromo->price)) * $request->qty : $bromo->price - (($bromo->discount/100) * $bromo->price);
 
             if (!empty($request->nama_anggota)) {
@@ -200,11 +203,13 @@ class BromoController extends Controller
                 $bromo->title,
                 $request->method,$input['transaction_price'],
                 $request->first_name,$request->last_name,$request->email,$request->phone,
-                $input['transaction_code']
+                $input['transaction_code'],
+                route('frontend.bromo.f_reservasi_invoice',['transaction_code' => $input['transaction_code']])
             );
 
+            $input['transaction_reference'] = json_decode($paymentDetail)->data->reference;
             $transactions = $this->transactions->create($input);
-            $bromo->quota = $bromo->quota - $request->qty;
+            $bromo->quota = $bromo->quota - $request->qty+1;
             $bromo->update();
             DB::commit();
 
@@ -227,8 +232,8 @@ class BromoController extends Controller
                 // $data['title'] = $bromo->title;
                 // $data['qty'] = $input['transaction_qty'];
                 // $data['price'] = $input['transaction_price'];
-                $payment_reference = json_decode($paymentDetail);
-                return redirect()->route('frontend.bromo.f_checkout_detail',['reference' => $payment_reference->data->reference]);
+                return redirect(json_decode($paymentDetail)->data->checkout_url);
+                // return redirect()->route('frontend.bromo.f_checkout_detail',['reference' => $payment_reference->data->reference]);
                 // return view('frontend.frontend5.bromo.payment',$data);
             }
         } catch (\Throwable $th) {
@@ -270,15 +275,41 @@ class BromoController extends Controller
         return redirect()->route('invoice',['kode_order' => $bukti_pembayaran->kode_transaksi]);
     }
 
-    public function f_booking_invoice($reference)
+    public function f_booking_invoice($transaction_code)
     {
-        $data['transaction'] = $this->transactions->where('transaction_reference',$reference)->first();
+        $data['transaction'] = $this->transactions->where('transaction_code',$transaction_code)->first();
         if (empty($data['transaction'])) {
             return redirect()->back();
         }
         $tripay = $this->tripay_payment;
         $data['detail_payment'] = json_decode($tripay->detailTransaction($data['transaction']['transaction_reference']));
         return view('frontend.frontend5.bromo.invoice',$data);
+    }
+
+    public function f_send_mail($transaction_code)
+    {
+        $notifMail = $this->sendMail;
+        $transaction = $this->transactions->where('transaction_code',$transaction_code)->first();
+        if (empty($transaction)) {
+            return response()->json([
+                'success' => false,
+                'message_title' => 'Failed',
+                'message_content' => 'Invoice not send'
+            ]);
+        }
+
+        $notifMail->sendMail(
+            $transaction->status,$transaction->transaction_code,$transaction->transaction_price,
+            json_decode($transaction->transaction_order)->first_name.' '.json_decode($transaction->transaction_order)->last_name,
+            json_decode($transaction->transaction_order)->email,json_decode($transaction->transaction_order)->phone,json_decode($transaction->transaction_order)->address,
+            $transaction->transaction_qty,$transaction->transaction_reference,$transaction->verifikasi_tiket->kode_tiket
+        );
+
+        return response()->json([
+            'success' => true,
+            'message_title' => 'Success',
+            'message_content' => 'Invoice send'
+        ]);
     }
 
     // public function f_order_payment($id)

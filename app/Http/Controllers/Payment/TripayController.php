@@ -11,9 +11,13 @@ use App\Models\Transactions;
 class TripayController extends Controller
 {
 
-    function __construct(Transactions $transactions)
+    function __construct(
+        Transactions $transactions
+        // MailController $send_mail
+        )
     {
         $this->transactions = $transactions;
+        // $this->send_mail = $send_mail;
 
         if (env('TRIPAY_IS_PRODUCTION') == false) {
             $this->tripay_api_key = env('TRIPAY_API_KEY_SANDBOX');
@@ -195,7 +199,7 @@ class TripayController extends Controller
                         // 'transaction_reference' => $data->reference,
                         'status' => 'Paid'
                     ]);
-                    // $notifMail = new MailController;
+                    // $notifMail = $this->sendMail;
                     // $notifMail->sendMail(
                     //     $transaction->status,$transaction->transaction_code,$transaction->transaction_price,
                     //     json_decode($transaction->transaction_order)->first_name.' '.json_decode($transaction->transaction_order)->last_name,

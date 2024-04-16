@@ -325,7 +325,6 @@ class TicketBromoController extends Controller
                     'publish' => $transactions->created_at,
                 ];
                 Notification::send($user,new NotificationNotif($notif));
-                $payment_reference = json_decode($paymentDetail);
                 return response()->json([
                     'success' => true,
                     'message_title' => 'Success',
