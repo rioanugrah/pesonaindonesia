@@ -175,7 +175,7 @@ class BromoController extends Controller
                     'address' => $request->alamat,
                     'email' => $request->email,
                     'phone' => $request->phone,
-                    'qty' => $request->qty,
+                    'qty' => $request->qty+1,
                     'price' => $transaction_price,
                     'status' => 'Unpaid'
                 ]);
@@ -195,19 +195,20 @@ class BromoController extends Controller
             }
             $input['status'] = 'Unpaid';
 
+            $tripay = $this->tripay_payment;
+            $paymentDetail = $tripay->requestTransaction(
+                $bromo->title,
+                $request->method,$input['transaction_price'],
+                $request->first_name,$request->last_name,$request->email,$request->phone,
+                $input['transaction_code']
+            );
+
             $transactions = $this->transactions->create($input);
             $bromo->quota = $bromo->quota - $request->qty;
             $bromo->update();
             DB::commit();
 
             if ($transactions) {
-                $tripay = $this->tripay_payment;
-                $paymentDetail = $tripay->requestTransaction(
-                    $bromo->title,
-                    $request->method,$input['transaction_price'],
-                    $request->first_name,$request->last_name,$request->email,$request->phone,
-                    $input['transaction_code']
-                );
                 $user = $this->user->where('role',1)->get();
                 $notif = [
                     'id' => $input['id'],
@@ -267,6 +268,17 @@ class BromoController extends Controller
         ]);
         // return view('frontend.frontend5.invoice.index');
         return redirect()->route('invoice',['kode_order' => $bukti_pembayaran->kode_transaksi]);
+    }
+
+    public function f_booking_invoice($reference)
+    {
+        $data['transaction'] = $this->transactions->where('transaction_reference',$reference)->first();
+        if (empty($data['transaction'])) {
+            return redirect()->back();
+        }
+        $tripay = $this->tripay_payment;
+        $data['detail_payment'] = json_decode($tripay->detailTransaction($data['transaction']['transaction_reference']));
+        return view('frontend.frontend5.bromo.invoice',$data);
     }
 
     // public function f_order_payment($id)

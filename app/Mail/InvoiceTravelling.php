@@ -43,7 +43,7 @@ class InvoiceTravelling extends Mailable
         // return $this->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
         //             ->subject($this->details['title'])
         //             ->markdown('emails.InvoiceTravelling')->with('details', $this->details);
-        
+
         // $pdf = PDF::loadView('emails.invoiceTravelling', ['details' => $this->details]);
         return $this->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
                     ->subject($this->details['title'])

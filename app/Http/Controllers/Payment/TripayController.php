@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Models\Transactions;
@@ -194,6 +195,13 @@ class TripayController extends Controller
                         // 'transaction_reference' => $data->reference,
                         'status' => 'Paid'
                     ]);
+                    $notifMail = new MailController;
+                    $notifMail->sendMail(
+                        $transaction->status,$transaction->transaction_code,$transaction->transaction_price,
+                        json_decode($transaction->transaction_order)->first_name.' '.json_decode($transaction->transaction_order)->last_name,
+                        json_decode($transaction->transaction_order)->email,json_decode($transaction->transaction_order)->phone,json_decode($transaction->transaction_order)->address,
+                        $transaction->transaction_qty,$transaction->transaction_reference,$transaction->verifikasi_tiket->kode_tiket
+                    );
                     break;
 
                 case 'EXPIRED':

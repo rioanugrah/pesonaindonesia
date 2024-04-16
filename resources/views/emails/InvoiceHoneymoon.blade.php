@@ -141,7 +141,7 @@
         <script src="{{ public_path('invoice/assets/js/jspdf.min.js') }}"></script>
         <script src="{{ public_path('invoice/assets/js/html2canvas.min.js') }}"></script>
         <script src="{{ public_path('invoice/assets/js/main.js') }}"></script>
-        
+
 </body>
 
 </html>

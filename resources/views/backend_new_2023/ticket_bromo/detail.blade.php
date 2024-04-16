@@ -30,6 +30,13 @@
                         <div class="col-md-12">
                             <table class="table">
                                 <tr>
+                                    <td colspan="3" class="text-center">
+                                        <div>
+                                            {!! DNS1D::getBarcodeHTML($transaction->verifikasi_tiket->kode_tiket,'C39+',1) !!}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>Code Ticket</td>
                                     <td>:</td>
                                     <td>{{ $transaction->verifikasi_tiket->kode_tiket }}</td>
@@ -38,6 +45,11 @@
                                     <td>Ticket Order</td>
                                     <td>:</td>
                                     <td>{{ $transaction->transaction_unit }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Booking Date</td>
+                                    <td>:</td>
+                                    <td>{{ \Carbon\Carbon::create($transaction->verifikasi_tiket->tanggal_booking)->isoFormat('LLLL') }}</td>
                                 </tr>
                                 <tr>
                                     <td>Customer</td>
@@ -74,14 +86,14 @@
                                     <td>Payment Status</td>
                                     <td>:</td>
                                     <td>
-                                        @switch($detail_payment->data->status)
-                                            @case('PAID')
+                                        @switch($transaction->status)
+                                            @case('Paid')
                                                 <span class="badge bg-success" style="font-weight: bold">{{ $detail_payment->data->status }}</span>
                                                 @break
-                                            @case('UNPAID')
+                                            @case('Unpaid')
                                                 <span class="badge bg-warning" style="font-weight: bold">{{ $detail_payment->data->status }}</span>
                                                 @break
-                                            @case('FAILED')
+                                            @case('Non Paid')
                                                 <span class="badge bg-danger" style="font-weight: bold">{{ $detail_payment->data->status }}</span>
                                                 @break
                                             @default

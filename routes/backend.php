@@ -337,12 +337,12 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                     Route::get('{reference}/check_payment', 'TicketBromoController@check_payment')->name('b.ticket_bromo.check_payment')->middleware('verified');
                 });
                 Route::get('{reference}', 'TicketBromoController@detail')->name('b.ticket_bromo.detail')->middleware('verified');
-                Route::get('{reference}/invoice', 'TicketBromoController@invoice')->name('b.ticket_bromo.invoice')->middleware('verified');
+                Route::get('{transaction_code}/invoice', 'TicketBromoController@invoice')->name('b.ticket_bromo.invoice')->middleware('verified');
             });
 
-            Route::prefix('testing_payment_tripay')->group(function(){
-                Route::get('/', 'Payment\TripayController@getPayment')->middleware('verified');
-            });
+            // Route::prefix('testing_payment_tripay')->group(function(){
+            //     Route::get('/', 'Payment\TripayController@getPayment')->middleware('verified');
+            // });
 
             // Route::get('pengguna/{id}', 'UsersController@detail')->middleware('verified');
             // Route::get('pengguna/delete/{id}', 'UsersController@delete')->middleware('verified');
@@ -357,6 +357,21 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
                 Route::post('simpan', 'PlesiranMalang\TourController@tour_simpan')->name('b.plesiran_malang.tour_simpan');
             });
         });
+
+        // Route::get('testing_email_invoice',function(){
+        //     $body = [
+        //         'date' => \Carbon\Carbon::now()->format('d-m-Y H:i').' WIB',
+        //         'status' => 'Paid',
+        //         'transaction_code' => '1285292123',
+        //         'amount' => '100000',
+        //         'bill_name' => 'Rio',
+        //         'bill_email' => 'rio',
+        //         'bill_phone' => '0812',
+        //     ];
+        //     return view('backend_new_2023.emails.invoiceTiketBromo',compact('body'));
+        // });
+        Route::get('testing_email_invoice', 'MailController@sendMail2');
+
     });
 
     Route::post('cooperation/kab_kota', 'CooperationController@select_kab_kota')->name('select.kota');

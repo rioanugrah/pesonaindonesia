@@ -20,6 +20,7 @@ use DataTables;
 use Notification;
 use Validator;
 use DB;
+// use DNS1D;
 use Mail;
 class TicketBromoController extends Controller
 {
@@ -108,7 +109,11 @@ class TicketBromoController extends Controller
                         return ucwords($row['transaction_unit']);
                     })
                     ->addColumn('booking_date', function($row){
-                        return Carbon::create($row['booking_date'])->isoFormat('LLLL');
+                        if (empty($row->verifikasi_tiket->tanggal_booking)) {
+                            return '-';
+                        }else{
+                            return Carbon::create($row->verifikasi_tiket->tanggal_booking)->isoFormat('LLLL');
+                        }
                     })
                     ->addColumn('transaction_price', function($row){
                         return 'Rp. '.number_format($row['transaction_price'],0,',','.');
@@ -116,10 +121,15 @@ class TicketBromoController extends Controller
                     ->addColumn('action', function($row){
                         $btn = '<div class="btn-group">';
                         // $btn .= '<a href='.url('b/ticket_bromo/checkout/'.$row->transaction_reference).' class="btn btn-sm btn-success"><i class="uil-eye"></i> Purchase Detail</a>';
-                        $btn .= '<a href='.route('b.ticket_bromo.checkout',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-success"><i class="uil-eye"></i> Purchase Detail</a>';
+                        if ($row['status'] == 'Paid') {
+                            $btn .= '<a href='.route('b.ticket_bromo.detail',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-success"><i class="uil-eye"></i> Purchase Detail</a>';
+                        }else{
+                            $btn .= '<a href='.route('b.ticket_bromo.checkout',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-success"><i class="uil-eye"></i> Purchase Detail</a>';
+                        }
                         if ($row['status'] == 'Paid') {
                             $btn .= '<a href='.route('b.ticket_bromo.invoice',['reference' => $row['transaction_reference']]).' class="btn btn-sm btn-info"><i class="uil-file-download-alt"></i> Invoice</a>';
                         }
+
                         $btn .= '</div>';
                         return $btn;
                     })
