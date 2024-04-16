@@ -80,7 +80,10 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: center; padding:15px;">{!! DNS2D::getBarcodeHTML($body['barcode'],'QRCODE',5,5) !!}</td>
+                <td colspan="2" style="text-align: center; padding:15px;">
+                    <div>Code Ticket Online :</div>
+                    <div style="font-weight: bold">{{ $body['barcode'] }}</div>
+                </td>
             </tr>
         </tbody>
         <tfooter>
