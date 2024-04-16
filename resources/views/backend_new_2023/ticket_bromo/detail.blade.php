@@ -121,7 +121,7 @@
                             <hr>
                             @switch($detail_payment->data->status)
                                 @case('PAID')
-                                    <a href="{{ route('b.ticket_bromo.invoice',['reference' => $transaction->transaction_reference]) }}" class="btn btn-info mt-3"><i class="fas fa-file"></i> Invoice</a>
+                                    <a href="{{ route('b.ticket_bromo.invoice',['transaction_code' => $transaction->transaction_code]) }}" class="btn btn-info mt-3"><i class="fas fa-file"></i> Invoice</a>
                                     @break
                                 @case('FAILED')
                                     <span class="badge bg-danger" style="font-weight: bold">{{ $detail_payment->data->status }}</span>

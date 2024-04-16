@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\MailController;
+// use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Models\Transactions;
