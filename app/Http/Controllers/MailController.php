@@ -31,7 +31,7 @@ class MailController extends Controller
         $email = 'rioanugrah999@gmail.com';
 
         $body = [
-            'date' => \Carbon\Carbon::now()->format('d-m-Y'),
+            'date' => \Carbon\Carbon::now()->format('d-m-Y H:i'),
             'status' => $status,
             'transaction_code' => $transaction_code,
             'amount' => $amount,

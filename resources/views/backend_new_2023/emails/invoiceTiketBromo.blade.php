@@ -8,7 +8,10 @@
             <tr>
                 <th style="text-align:left;"><img style="max-width: 150px;"
                         src="{{ asset('logo_perusahaan/logo_plesiran_indonesia.png') }}"></th>
-                <th style="text-align:right;font-weight:400;">{{ $body['date'] }}</th>
+                <th style="text-align:right;font-weight:400;">
+                    <div>Date</div>
+                    <div>{{ $body['date'] }}</div>
+                </th>
             </tr>
         </thead>
         <tbody>

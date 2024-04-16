@@ -2,6 +2,9 @@
 @section('title')
     Ticket Bromo - {{ $transaction->transaction_unit }}
 @endsection
+@section('css')
+<link href="{{ URL::asset('backend_new/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css">
+@endsection
 @section('content')
     @component('common-components.breadcrumb')
         @slot('pagetitle')
@@ -122,6 +125,7 @@
                             @switch($detail_payment->data->status)
                                 @case('PAID')
                                     <a href="{{ route('b.ticket_bromo.invoice',['transaction_code' => $transaction->transaction_code]) }}" class="btn btn-info mt-3"><i class="fas fa-file"></i> Invoice</a>
+                                    <button type="button" class="btn btn-primary mt-3" onclick="sendEmail(`{{ $transaction->transaction_code }}`)"><i class="mdi mdi-email"></i> Send Email</button>
                                     @break
                                 @case('FAILED')
                                     <span class="badge bg-danger" style="font-weight: bold">{{ $detail_payment->data->status }}</span>
@@ -137,4 +141,84 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+<script src="{{ URL::asset('backend_new/libs/toastr/toastr.min.js') }}"></script>
+    <script>
+        function sendEmail(transaction_code) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('b.ticket_bromo.sendEmail',['transaction_code' => $transaction->transaction_code]) }}",
+                contentType: "application/json;  charset=utf-8",
+                cache: false,
+                beforeSend: function(){
+                    $('.modalloading').modal('show');
+                },
+                success: function(result){
+                    if (result.success == true) {
+                        toastr["success"](result.message_title);
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": 300,
+                            "hideDuration": 1000,
+                            "timeOut": 5000,
+                            "extendedTimeOut": 1000,
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                        $('.modalloading').modal('hide');
+                    }else{
+                        toastr["error"](result.message_title);
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": 300,
+                            "hideDuration": 1000,
+                            "timeOut": 5000,
+                            "extendedTimeOut": 1000,
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                        $('.modalloading').modal('hide');
+                    }
+                },
+                error: function (request, status, error) {
+                    toastr["error"](error);
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": 300,
+                        "hideDuration": 1000,
+                        "timeOut": 5000,
+                        "extendedTimeOut": 1000,
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                    $('.modalloading').modal('hide');
+                }
+            });
+        }
+    </script>
 @endsection
