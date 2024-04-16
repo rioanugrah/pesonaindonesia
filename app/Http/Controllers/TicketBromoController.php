@@ -65,10 +65,16 @@ class TicketBromoController extends Controller
         //     }
         //     dd($data);
         if ($request->ajax()) {
-            $data_transactions = $this->transactions->with('verifikasi_tiket')
-                                                    ->where('transaction_code','LIKE','%BRMO%')
-                                                    ->where('user',auth()->user()->generate)
-                                                    ->get();
+            if (auth()->user()->id == 1) {
+                $data_transactions = $this->transactions->with('verifikasi_tiket')
+                                                        ->where('transaction_code','LIKE','%BRMO%')
+                                                        ->get();
+            }else{
+                $data_transactions = $this->transactions->with('verifikasi_tiket')
+                                                        ->where('transaction_code','LIKE','%BRMO%')
+                                                        ->where('user',auth()->user()->generate)
+                                                        ->get();
+            }
             // foreach ($data_transactions as $key => $data_transaction) {
             //     $explode_transaction_code_bromo = explode('-',$data_transaction->transaction_code);
             //     if ($explode_transaction_code_bromo[1] == 'BRMO') {
