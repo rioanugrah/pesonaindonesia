@@ -195,13 +195,13 @@ class TripayController extends Controller
                         // 'transaction_reference' => $data->reference,
                         'status' => 'Paid'
                     ]);
-                    $notifMail = new MailController;
-                    $notifMail->sendMail(
-                        $transaction->status,$transaction->transaction_code,$transaction->transaction_price,
-                        json_decode($transaction->transaction_order)->first_name.' '.json_decode($transaction->transaction_order)->last_name,
-                        json_decode($transaction->transaction_order)->email,json_decode($transaction->transaction_order)->phone,json_decode($transaction->transaction_order)->address,
-                        $transaction->transaction_qty,$transaction->transaction_reference,$transaction->verifikasi_tiket->kode_tiket
-                    );
+                    // $notifMail = new MailController;
+                    // $notifMail->sendMail(
+                    //     $transaction->status,$transaction->transaction_code,$transaction->transaction_price,
+                    //     json_decode($transaction->transaction_order)->first_name.' '.json_decode($transaction->transaction_order)->last_name,
+                    //     json_decode($transaction->transaction_order)->email,json_decode($transaction->transaction_order)->phone,json_decode($transaction->transaction_order)->address,
+                    //     $transaction->transaction_qty,$transaction->transaction_reference,$transaction->verifikasi_tiket->kode_tiket
+                    // );
                     break;
 
                 case 'EXPIRED':
