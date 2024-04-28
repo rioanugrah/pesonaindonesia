@@ -54,6 +54,7 @@ class ScheduleBromo extends Command
                 'category_trip' => $cek_paket_bromo->category_trip,
                 'quota' => $cek_paket_bromo->quota,
                 'max_quota' => $cek_paket_bromo->max_quota,
+                'destination' => $cek_paket_bromo->destination,
                 'include' => $cek_paket_bromo->include,
                 'exclude' => $cek_paket_bromo->exclude,
                 'price' => $cek_paket_bromo->price,
