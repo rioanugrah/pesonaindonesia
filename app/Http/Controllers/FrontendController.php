@@ -338,7 +338,10 @@ class FrontendController extends Controller
 
             $data['today'] = Carbon::today();
             $data['week_start'] = $data['today']->startOfWeek()->format('Y-m-d');
-            $data['week_end'] = $data['today']->endOfWeek()->format('Y-m-d');
+            $data['week_end'] = $data['today']->addDays(13)->format('Y-m-d');
+            // $data['week_end'] = $data['today']->endOfWeek()->format('Y-m-d');
+            // $data['week_start'] = $data['today']->startOfMonth()->format('Y-m-d');
+            // $data['week_end'] = $data['today']->endOfMonth()->format('Y-m-d');
             $data['schedule_bromos']=CarbonPeriod::create($data['week_start'],$data['week_end']);
             // dd(CarbonPeriod::create($data['week_start'],$data['week_end']));
 
