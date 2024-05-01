@@ -48,7 +48,8 @@ class BromoController extends Controller
     {
         $today = Carbon::today();
         $week_start = $today->startOfWeek()->format('Y-m-d');
-        $week_end= $today->endOfWeek()->format('Y-m-d');
+        $week_end= $today->addDays(13)->format('Y-m-d');
+        // $week_end= $today->endOfWeek()->format('Y-m-d');
         $schedule_bromos = CarbonPeriod::create($week_start,$week_end);
         foreach ($schedule_bromos as $schedule_bromo) {
             $jadwal_bromos = $this->bromo->whereDate('tanggal',$schedule_bromo->format('Y-m-d'))->get();
