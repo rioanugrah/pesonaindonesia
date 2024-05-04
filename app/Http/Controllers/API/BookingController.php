@@ -20,7 +20,7 @@ class BookingController extends Controller
     public function booking()
     {
         $booking = $this->transaction->with('verifikasi_tiket')
-                                            ->where('user',auth()->user()->generate)
+                                            ->where('user',auth()->user()->id)
                                             // ->where('status','Unpaid')
                                             ->orderBy('created_at','desc')
                                             ->get();
