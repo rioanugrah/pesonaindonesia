@@ -97,7 +97,7 @@ class BookingController extends Controller
     public function booking_process()
     {
         $booking_process = $this->transaction->with('verifikasi_tiket')
-                                            ->where('user',auth()->user()->generate)
+                                            ->where('user',auth()->user()->id)
                                             ->where('status','Unpaid')
                                             ->orderBy('created_at','desc')
                                             ->get();
@@ -117,7 +117,7 @@ class BookingController extends Controller
     public function booking_complete()
     {
         $booking_process = $this->transaction->with('verifikasi_tiket')
-                                            ->where('user',auth()->user()->generate)
+                                            ->where('user',auth()->user()->id)
                                             ->where('status','Paid')
                                             ->orderBy('created_at','desc')
                                             ->get();
