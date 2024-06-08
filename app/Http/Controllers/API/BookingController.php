@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Payment\TripayController;
 use Illuminate\Http\Request;
 use App\Models\Transactions;
 
@@ -12,9 +13,11 @@ use DNS1D;
 class BookingController extends Controller
 {
     function __construct(
-        Transactions $transaction
+        Transactions $transaction,
+        TripayController $tripay_payment
     ){
         $this->transaction = $transaction;
+        $this->tripay_payment = $tripay_payment;
     }
 
     public function booking()
@@ -75,6 +78,8 @@ class BookingController extends Controller
             ];
         }
         $transaction_order = json_decode($booking->transaction_order);
+        $tripay = $this->tripay_payment;
+        $channels = json_decode($tripay->getPayment())->data;
         return [
             'success' => true,
             'data' => [
@@ -89,6 +94,7 @@ class BookingController extends Controller
                 'transaction_price' => $booking->transaction_price,
                 'user' => $booking->user,
                 'status' => $booking->status,
+                'method' => $channels
                 // 'barcode' => DNS1D::getBarcodeHTML('4445645656', 'PHARMA2T',3,33)
             ]
         ];

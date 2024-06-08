@@ -63,7 +63,7 @@
         notificationsWrapper.show();
         // alert(data.message);
     });
-    
+
 </script>
 <script>
     $(function() {

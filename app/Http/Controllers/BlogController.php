@@ -112,7 +112,7 @@ class BlogController extends Controller
     public function edit($slug)
     {
         $data['blog'] = Blog::where('slug',$slug)->first();
-        
+
         if(empty($data['blog'])){
             return redirect()->back()->with('error','Data Tidak Ditemukan');
         }
@@ -149,12 +149,12 @@ class BlogController extends Controller
                 $img = $img->encode('webp', 75);
                 $input['image'] = time().'.webp';
                 $img->save(public_path('frontend/assets4/img/blog/').$input['edit_image']);
-                
+
                 $image_path = public_path('frontend/assets4/img/blog/'.$input['image']);
                 File::delete($image_path);
                 $input['image'] = $input['image'];
             }
-    
+
             $input['slug'] = Str::slug($request->title);
             $input['title'] = $request->title;
             $input['kategori'] = $request->kategori;
@@ -162,23 +162,23 @@ class BlogController extends Controller
             $input['author'] = $perusahaan->nama_perusahaan;
             $input['description'] = $request->description;
             $input['keyword'] = $request->keyword;
-    
+
             $blog->update($input);
-    
+
             if($blog){
                 $message_title="Berhasil !";
                 $message_content= $request->title." Berhasil Diupdate";
                 $message_type="success";
                 $message_succes = true;
             }
-    
+
             $array_message = array(
                 'success' => $message_succes,
                 'message_title' => $message_title,
                 'message_content' => $message_content,
                 'message_type' => $message_type,
             );
-    
+
             return redirect()->route('posting')->with($message_type,$message_content);
         }
 
@@ -196,7 +196,7 @@ class BlogController extends Controller
             $image_path = public_path('frontend/assets4/img/blog/'.$blog->image);
             File::delete($image_path);
             $blog->delete();
-            
+
             $array_message = array(
                 'success' => $message_succes,
                 'message_title' => $message_title,
