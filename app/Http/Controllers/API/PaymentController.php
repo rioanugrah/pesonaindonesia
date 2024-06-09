@@ -50,7 +50,8 @@ class PaymentController extends Controller
                 'transaction_price' => $dataTransaction->transaction_price,
                 'transaction_status' => $dataTransaction->status,
                 'payment_method' => json_decode($payment)->data->payment_method,
-                'payment_code' => json_decode($payment)->data->payment_method != 'QRISC' ? json_decode($payment)->data->pay_code : null,
+                'payment_code' => json_decode($payment)->data->payment_method != 'QRISC' || 'QRIS2' ? json_decode($payment)->data->pay_code : null,
+                'qr_url' => json_decode($payment)->data->payment_method == 'QRISC' || 'QRIS2' ? json_decode($payment)->data->qr_url : null,
                 'instruction_payment' => json_decode($payment)->data
             ]
         ]);
