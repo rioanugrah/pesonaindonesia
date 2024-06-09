@@ -39,6 +39,7 @@ class BookingController extends Controller
                 'id' => $book->id,
                 'transaction_code' => $book->transaction_code,
                 'transaction_unit' => $book->transaction_unit,
+                'transaction_reference' => $book->transaction_reference,
                 'transaction_order' => json_decode($book->transaction_order),
                 'transaction_qty' => $book->transaction_qty,
                 'transaction_price' => $book->transaction_price,

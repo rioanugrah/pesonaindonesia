@@ -66,6 +66,10 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::prefix('payment_method')->group(function () {
                 Route::get('/', 'API\PaymentGatewayTripayController@payment_method');
             });
+
+            Route::prefix('payment')->group(function () {
+                Route::get('{id}', 'API\PaymentController@payment_detail');
+            });
         });
     });
 });

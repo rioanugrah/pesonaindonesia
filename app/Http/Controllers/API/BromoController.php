@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Payment\TripayController;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use \Carbon\Carbon;
@@ -28,6 +29,7 @@ use HTTP_Request2;
 class BromoController extends Controller
 {
     function __construct(
+        TripayController $tripay_payment,
         Bromo $bromo,
         Transactions $transaction,
         // TransactionList $transaction_list,
@@ -36,6 +38,17 @@ class BromoController extends Controller
         VerifikasiTiketList $verifikasi_tiket_list,
         User $user
     ){
+        if (env('MIDTRANS_IS_PRODUCTION') == true) {
+            $this->midtrans_client_key = env('MIDTRANS_CLIENT_KEY_LIVE');
+            $this->midtrans_server_key = env('MIDTRANS_SERVER_KEY_LIVE');
+            $this->url_payment = 'https://app.midtrans.com/snap/snap.js';
+        }else{
+            $this->midtrans_client_key = env('MIDTRANS_CLIENT_KEY_DEMO');
+            $this->midtrans_server_key = env('MIDTRANS_SERVER_KEY_DEMO');
+            $this->url_payment = 'https://app.sandbox.midtrans.com/snap/snap.js';
+        }
+
+        $this->tripay_payment = $tripay_payment;
         $this->bromo = $bromo;
         $this->transaction = $transaction;
         // $this->transaction_list = $transaction_list;
@@ -208,7 +221,7 @@ class BromoController extends Controller
                         'icon' => 'uil-clipboard-alt',
                         'publish' => $transactions->created_at,
                     ];
-                    Notification::send($user,new NotificationNotif($notif));
+                    // Notification::send($user,new NotificationNotif($notif));
                     // $data['id'] = $bromo->id;
                     // $data['id_transaksi'] = $input['id'];
                     // $data['tanggal'] = $tanggal;
@@ -247,6 +260,130 @@ class BromoController extends Controller
                 ]);
             }
 
+        }else{
+            try {
+                $bromo = $this->bromo->find($id);
+                $kode_jenis_transaksi = 'TRX-BRMO-M';
+                $kode_random_transaksi = Carbon::now()->format('Ym').rand(100,999);
+                $input['id'] = Str::uuid()->toString();
+                $input['transaction_code'] = $kode_jenis_transaksi.'-'.$kode_random_transaksi;
+                $input['transaction_unit'] = $bromo->title;
+                $transaction_price = $bromo->category_trip == 'Publik' ? ($bromo->price - (($bromo->discount/100) * $bromo->price)) * $request->qty : $bromo->price - (($bromo->discount/100) * $bromo->price);
+                $this->verifikasi_tiket->create([
+                    'id' => Str::uuid()->toString(),
+                    'transaction_id' => $input['id'],
+                    'kode_tiket' => 'E-TIKET-'.$kode_random_transaksi,
+                    'tanggal_booking' => $bromo->tanggal,
+                    'nama_tiket' => $bromo->title,
+                    'nama_order' => $request->first_name.' '.$request->last_name,
+                    'address' => $request->alamat,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'qty' => $request->qty,
+                    'price' => $transaction_price,
+                    'status' => 'Unpaid'
+                ]);
+
+                if($request->qty == 0 and $request->qty == null){
+                    $input['transaction_qty'] = 1;
+                }else{
+                    $input['transaction_qty'] = $request->qty;
+                }
+                $input['transaction_price'] = $transaction_price;
+                if (auth()->user()) {
+                    $input['user'] = auth()->user()->id;
+                }else{
+                    $input['user'] = null;
+                }
+                $input['status'] = 'Unpaid';
+                $tripay = $this->tripay_payment;
+                $paymentDetail = $tripay->requestTransaction(
+                    $bromo->title,
+                    $request->method,$input['transaction_price'],
+                    $request->first_name,$request->last_name,$request->email,$request->phone,
+                    $input['transaction_code'],
+                    null
+                    // route('frontend.bromo.f_reservasi_invoice',['transaction_code' => $input['transaction_code']])
+                );
+                $input['transaction_reference'] = json_decode($paymentDetail)->data->reference;
+                $input['transaction_order'] = json_encode([
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'address' => $request->address,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    // 'payment_method' => env('PAYMENT_METHODE'),
+                    // 'payment_name' => env('PAYMENT_NAME'),
+                    // 'payment_rekening' => env('PAYMENT_REKENING'),
+                    // 'prof_payment' => null,
+                    // 'item_details' => $data['item_details']
+                ]);
+
+                if ($bromo->quota == 0) {
+                    return response()->json([
+                        'success' => false,
+                        'error' => "Kuota Booking Habis"
+                    ]);
+                }else{
+                    $bromo->quota = $bromo->quota - $request->qty+1;
+                }
+                $transactions = $this->transaction->create($input);
+                $bromo->update();
+                DB::commit();
+
+                if ($transactions) {
+                    $user = $this->user->where('role',1)->get();
+                    $notif = [
+                        'id' => $input['id'],
+                        // 'url' => route('b.invoice.detail',$input['transaction_code']),
+                        'title' => $input['transaction_unit'],
+                        'message' => 'Pesanan Baru - Sedang Melakukan Pembayaran',
+                        'color_icon' => 'warning',
+                        'icon' => 'uil-clipboard-alt',
+                        'publish' => $transactions->created_at,
+                    ];
+                    // Notification::send($user,new NotificationNotif($notif));
+                    // $data['id'] = $bromo->id;
+                    // $data['id_transaksi'] = $input['id'];
+                    // $data['tanggal'] = $tanggal;
+                    // $data['kode_order'] = $input['transaction_code'];
+                    // $data['first_name'] = $request->first_name;
+                    // $data['last_name'] = $request->last_name;
+                    // $data['email'] = $request->email;
+                    // $data['title'] = $bromo->title;
+                    // $data['qty'] = $input['transaction_qty'];
+                    // $data['price'] = $input['transaction_price'];
+
+                    // $this->bukti_pembayaran->create([
+                    //     'id' => Str::uuid()->toString(),
+                    //     'id_transaksi' => $input['id'],
+                    //     'kode_transaksi' => $input['transaction_code']
+                    // ]);
+
+                    $message_title="Berhasil !";
+                    $message_content="Booking ".$bromo->title." Berhasil Dibuat";
+                    $message_type="success";
+                    $message_succes = true;
+                }
+
+                $array_message = array(
+                    'success' => $message_succes,
+                    'message_title' => $message_title,
+                    'message_content' => $message_content,
+                    'message_type' => $message_type,
+                    'transaction_id' => $input['id'],
+                    'transaction_code' => $input['transaction_code'],
+                    'transaction_reference' => $input['transaction_reference']
+                );
+
+                return $array_message;
+            } catch (\Throwable $th) {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'error' => "Booking Gagal"
+                ]);
+            }
         }
 
         // $input['transaction_order'] = [
