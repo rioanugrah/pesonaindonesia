@@ -45,7 +45,10 @@ class BookingController extends Controller
                 'transaction_price' => $book->transaction_price,
                 'user' => $book->user,
                 'status' => $book->status,
-                'verifikasi_tiket' => $book->verifikasi_tiket
+                'verifikasi_tiket' => $book->verifikasi_tiket,
+                'group_date' => $book->created_at->isoFormat('DD MMMM YYYY'),
+                'created_at' => $book->created_at->isoFormat('LLL'),
+                'updated_at' => $book->updated_at->isoFormat('LLL'),
                 // 'verifikasi_tiket' => [
                 //     'id' => $book->verifikasi_tiket,
                 //     // 'transaction_id' => $book->verifikasi_tiket->transaction_id,
@@ -66,6 +69,32 @@ class BookingController extends Controller
             'success' => true,
             'data' => $data
         ];
+
+        // $group_orderDate = \DB::table('transaction')->select(\DB::raw('DATE(created_at) as date'))
+        //                                             ->groupBy('date')
+        //                                             ->orderBy('date','desc')
+        //                                             ->get();
+        //                                             // dd($group_orderDate);
+        // foreach ($group_orderDate as $key => $god) {
+        //     $transactions = $this->transaction->with('verifikasi_tiket')
+        //                                 ->where('user',auth()->user()->id)
+        //                                 ->where('created_at','like','%'.$god->date.'%')
+        //                                 ->orderBy('created_at','desc')
+        //                                 ->get();
+        //     foreach ($transactions as $key_transaction => $transaction) {
+        //         $data[] = [
+        //             'group_date' => $god->date,
+        //             'id' => $transaction->id,
+        //             'transaction_code' => $transaction->transaction_code,
+        //             'transaction_unit' => $transaction->transaction_unit,
+        //         ];
+        //     }
+        // }
+
+        // return response()->json([
+        //     'success' => true,
+        //     'data' => $data
+        // ]);
     }
 
     public function booking_detail_payment($id)

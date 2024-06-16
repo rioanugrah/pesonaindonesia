@@ -31,12 +31,14 @@ class PaymentController extends Controller
     public function payment_detail($id)
     {
         $dataTransaction = $this->transaction->find($id);
+        // dd($dataTransaction);
         if (empty($dataTransaction)) {
             return response()->json([
                 'success' => false,
                 'message_title' => 'Payment Not Found',
             ]);
         }
+
         $payment = $this->tripay_payment->detailTransaction($dataTransaction->transaction_reference);
 
         return response()->json([
@@ -51,7 +53,7 @@ class PaymentController extends Controller
                 'transaction_status' => $dataTransaction->status,
                 'payment_method' => json_decode($payment)->data->payment_method,
                 'payment_code' => json_decode($payment)->data->payment_method != 'QRISC' || 'QRIS2' ? json_decode($payment)->data->pay_code : null,
-                'qr_url' => json_decode($payment)->data->payment_method == 'QRISC' || 'QRIS2' ? json_decode($payment)->data->qr_url : null,
+                'qr_url' => json_decode($payment)->data->payment_method == 'QRISC' || json_decode($payment)->data->payment_method == 'QRIS2' ? json_decode($payment)->data->qr_url : null,
                 'instruction_payment' => json_decode($payment)->data
             ]
         ]);
